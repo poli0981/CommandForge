@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AppTitle" xml:space="preserve">
+    <value>CommandForge</value>
+  </data>
+  <data name="LegalGateTitle" xml:space="preserve">
+    <value>Welcome to CommandForge</value>
+  </data>
+  <data name="LegalGateIntro" xml:space="preserve">
+    <value>CommandForge runs system-level Windows commands. Please review and accept the terms before continuing.</value>
+  </data>
+  <data name="LegalGateReadOnGitHub" xml:space="preserve">
+    <value>Read the full text on GitHub</value>
+  </data>
+  <data name="LegalGateAgree" xml:space="preserve">
+    <value>I have read and agree to all of the terms</value>
+  </data>
+  <data name="LegalGateContinue" xml:space="preserve">
+    <value>Continue</value>
+  </data>
+  <data name="LegalGateExit" xml:space="preserve">
+    <value>Exit</value>
+  </data>
+  <data name="TabEula" xml:space="preserve">
+    <value>EULA</value>
+  </data>
+  <data name="TabGpl" xml:space="preserve">
+    <value>GPLv3</value>
+  </data>
+  <data name="TabDisclaimer" xml:space="preserve">
+    <value>Disclaimer</value>
+  </data>
+  <data name="TabPrivacy" xml:space="preserve">
+    <value>Privacy</value>
+  </data>
+  <data name="MenuFile" xml:space="preserve">
+    <value>File</value>
+  </data>
+  <data name="MenuView" xml:space="preserve">
+    <value>View</value>
+  </data>
+  <data name="MenuTools" xml:space="preserve">
+    <value>Tools</value>
+  </data>
+  <data name="MenuAbout" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="MenuHelp" xml:space="preserve">
+    <value>Help</value>
+  </data>
+  <data name="MenuExit" xml:space="preserve">
+    <value>Exit</value>
+  </data>
+  <data name="MenuToggleSidebar" xml:space="preserve">
+    <value>Collapse sidebar</value>
+  </data>
+  <data name="SidebarHome" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="SidebarFavorites" xml:space="preserve">
+    <value>Favorites</value>
+  </data>
+  <data name="SidebarSettings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="PaneCommands" xml:space="preserve">
+    <value>Commands</value>
+  </data>
+  <data name="PaneDetails" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="PaneConsole" xml:space="preserve">
+    <value>Console</value>
+  </data>
+  <data name="ComingSoon" xml:space="preserve">
+    <value>Coming soon</value>
+  </data>
+</root>

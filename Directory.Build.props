@@ -1,0 +1,26 @@
+<Project>
+
+  <!--
+    Shared build settings for all CommandForge projects.
+    Target frameworks are declared per-project (Domain/Application = net10.0 pure,
+    the Windows-facing projects = net10.0-windows) to hard-enforce the Clean
+    Architecture boundary (see docs/architectures.md, golden rule #4).
+  -->
+  <PropertyGroup>
+    <Nullable>enable</Nullable>
+    <LangVersion>latest</LangVersion>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <AnalysisLevel>latest</AnalysisLevel>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    <Deterministic>true</Deterministic>
+
+    <!-- Required so IDE0005 (remove unnecessary usings) runs at build time
+         (see dotnet/roslyn#41640). CS1591 (missing XML doc) is suppressed so we
+         don't force XML docs on every public member. -->
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);CS1591</NoWarn>
+  </PropertyGroup>
+
+</Project>

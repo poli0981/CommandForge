@@ -1,0 +1,80 @@
+# ── Build results ────────────────────────────────────────────────
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Ww][Ii][Nn]32/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]uild/
+[Oo]ut/
+gen/
+msbuild.log
+msbuild.err
+msbuild.wrn
+
+# ── Publish / Velopack output ───────────────────────────────────
+publish/
+[Pp]ublish/
+AppPackages/
+*.nupkg
+*.snupkg
+
+# ── .NET / NuGet ────────────────────────────────────────────────
+project.lock.json
+project.fragment.lock.json
+artifacts/
+.packages/
+*.binlog
+
+# ── Visual Studio ───────────────────────────────────────────────
+.vs/
+*.user
+*.userosscache
+*.suo
+*.userprefs
+*.rsuser
+*_i.c
+*_p.c
+*.ncb
+*.aps
+
+# ── JetBrains Rider ─────────────────────────────────────────────
+.idea/
+*.iml
+*.sln.iml
+
+# ── VS Code (keep shared workspace config) ──────────────────────
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/*.code-snippets
+.history/
+*.vsix
+
+# ── Test / coverage ─────────────────────────────────────────────
+[Tt]est[Rr]esults/
+[Cc]overage*/
+*.trx
+*.coverage
+*.coveragexml
+
+# ── OS noise ────────────────────────────────────────────────────
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+.DS_Store
+
+# ── Local-only (NOT committed) ──────────────────────────────────
+# Internal design/spec docs: read locally, never committed.
+docs/
+# Claude Code workspace (worktrees, settings, plans).
+.claude/

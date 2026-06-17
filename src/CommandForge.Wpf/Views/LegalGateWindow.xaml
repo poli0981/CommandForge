@@ -1,0 +1,60 @@
+<Window x:Class="CommandForge.Wpf.Views.LegalGateWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:res="clr-namespace:CommandForge.Wpf.Resources"
+        Title="{x:Static res:Strings.LegalGateTitle}"
+        Width="700" Height="560"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontSize="13"
+        Background="{DynamicResource MaterialDesignPaper}">
+    <Grid Margin="24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0"
+                   Text="{x:Static res:Strings.LegalGateTitle}"
+                   FontSize="24" FontWeight="Bold" Margin="0,0,0,8" />
+
+        <TextBlock Grid.Row="1"
+                   Text="{x:Static res:Strings.LegalGateIntro}"
+                   TextWrapping="Wrap" Opacity="0.8" Margin="0,0,0,16" />
+
+        <TabControl Grid.Row="2">
+            <TabItem Header="{x:Static res:Strings.TabEula}">
+                <TextBlock Margin="16" TextWrapping="Wrap" Text="{x:Static res:Strings.LegalGateReadOnGitHub}" />
+            </TabItem>
+            <TabItem Header="{x:Static res:Strings.TabGpl}">
+                <TextBlock Margin="16" TextWrapping="Wrap" Text="{x:Static res:Strings.LegalGateReadOnGitHub}" />
+            </TabItem>
+            <TabItem Header="{x:Static res:Strings.TabDisclaimer}">
+                <TextBlock Margin="16" TextWrapping="Wrap" Text="{x:Static res:Strings.LegalGateReadOnGitHub}" />
+            </TabItem>
+            <TabItem Header="{x:Static res:Strings.TabPrivacy}">
+                <TextBlock Margin="16" TextWrapping="Wrap" Text="{x:Static res:Strings.LegalGateReadOnGitHub}" />
+            </TabItem>
+        </TabControl>
+
+        <CheckBox Grid.Row="3" Margin="0,16,0,0"
+                  IsChecked="{Binding IsAgreed}"
+                  Content="{x:Static res:Strings.LegalGateAgree}" />
+
+        <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,16,0,0">
+            <Button Content="{x:Static res:Strings.LegalGateExit}"
+                    Command="{Binding ExitCommand}"
+                    Style="{StaticResource MaterialDesignOutlinedButton}"
+                    Margin="0,0,8,0" />
+            <Button Content="{x:Static res:Strings.LegalGateContinue}"
+                    Command="{Binding AcceptCommand}"
+                    Style="{StaticResource MaterialDesignRaisedButton}" />
+        </StackPanel>
+    </Grid>
+</Window>

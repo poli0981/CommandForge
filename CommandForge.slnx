@@ -1,0 +1,14 @@
+<Solution>
+  <Folder Name="/helper/">
+    <Project Path="helper/CommandForge.Elevator/CommandForge.Elevator.csproj" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/CommandForge.Application/CommandForge.Application.csproj" />
+    <Project Path="src/CommandForge.Domain/CommandForge.Domain.csproj" />
+    <Project Path="src/CommandForge.Infrastructure/CommandForge.Infrastructure.csproj" />
+    <Project Path="src/CommandForge.Wpf/CommandForge.Wpf.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/CommandForge.Tests/CommandForge.Tests.csproj" />
+  </Folder>
+</Solution>

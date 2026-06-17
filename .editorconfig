@@ -1,0 +1,34 @@
+root = true
+
+[*.cs]
+indent_style = space
+indent_size = 4
+end_of_line = crlf
+charset = utf-8-bom
+dotnet_sort_system_directives_first = true
+
+# Nullable & quality
+dotnet_diagnostic.CS8600.severity = error
+dotnet_diagnostic.CS8602.severity = error
+dotnet_diagnostic.CS8618.severity = error
+
+# Dead/unused code (equivalent to "knip")
+dotnet_diagnostic.IDE0051.severity = warning   # unused private member
+dotnet_diagnostic.IDE0052.severity = warning   # private member only written
+dotnet_diagnostic.CA1823.severity  = warning   # unused field
+dotnet_diagnostic.IDE0005.severity = warning   # redundant using
+
+# Modern style
+csharp_style_namespace_declarations = file_scoped:warning
+csharp_prefer_braces = true:warning
+dotnet_style_require_accessibility_modifiers = always:warning
+
+[*.{xaml,axaml}]
+indent_size = 4
+
+[*.{json,yml,yaml}]
+indent_size = 2
+
+# Generated files: relax style enforcement
+[*.{g,g.i,Designer}.cs]
+generated_code = true

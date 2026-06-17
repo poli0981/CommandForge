@@ -1,0 +1,4 @@
+// CsWin32 P/Invoke generation list.
+// Add Win32 APIs/constants here as they are needed (e.g. process-tree termination
+// in the execution engine). One harmless symbol keeps the generator wired up.
+GetCurrentProcessId

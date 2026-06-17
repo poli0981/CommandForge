@@ -9,8 +9,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <!-- Lets the test project drive ProcessCommandExecutor with a fake IProcessRunner. -->
+    <!-- Lets the test project drive ProcessCommandExecutor with a fake IProcessRunner,
+         and the Elevator helper reuse the catalog + executor + pipe protocol. -->
     <InternalsVisibleTo Include="CommandForge.Tests" />
+    <InternalsVisibleTo Include="CommandForge.Elevator" />
   </ItemGroup>
 
   <ItemGroup>

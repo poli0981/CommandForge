@@ -2,7 +2,7 @@ using System.Collections.ObjectModel;
 using System.Runtime.InteropServices;
 using System.Threading.Channels;
 using System.Windows;
-using CommandForge.Application.Ports;
+using CommandForge.Application.UseCases;
 using CommandForge.Domain;
 using CommandForge.Wpf.Resources;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -16,10 +16,10 @@ namespace CommandForge.Wpf.ViewModels;
 /// </summary>
 public sealed partial class ExecutionViewModel : ObservableObject
 {
-    private readonly ICommandExecutor _executor;
+    private readonly RunCommandUseCase _run;
     private CancellationTokenSource? _cancellation;
 
-    public ExecutionViewModel(ICommandExecutor executor) => _executor = executor;
+    public ExecutionViewModel(RunCommandUseCase run) => _run = run;
 
     /// <summary>Live output lines (stdout + stderr).</summary>
     public ObservableCollection<OutputLine> OutputLines { get; } = [];
@@ -76,7 +76,7 @@ public sealed partial class ExecutionViewModel : ObservableObject
         var token = _cancellation.Token;
 
         // Executor runs off the UI thread; we consume on the UI thread (safe to touch the collection).
-        var execution = Task.Run(() => _executor.ExecuteAsync(command, channel.Writer, token), CancellationToken.None);
+        var execution = Task.Run(() => _run.RunAsync(command, channel.Writer, token), CancellationToken.None);
 
         try
         {

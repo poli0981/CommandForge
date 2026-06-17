@@ -27,6 +27,10 @@ internal sealed class SystemProcessRunner : IProcessRunner
                 RedirectStandardError = true,
                 UseShellExecute = false,
                 CreateNoWindow = true,
+                // Pin the working directory to System32 so the CreateProcess search order can't
+                // resolve a bare executable name (e.g. "dism") from an attacker-controlled CWD —
+                // important because this runner also executes elevated commands via the broker.
+                WorkingDirectory = Environment.SystemDirectory,
             },
         };
 

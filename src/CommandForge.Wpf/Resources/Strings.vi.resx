@@ -385,4 +385,40 @@
   <data name="Cmd_dev.wsl.list_Desc" xml:space="preserve">
     <value>Liệt kê các bản phân phối WSL đã cài.</value>
   </data>
+  <data name="Cmd_dism.checkhealth_Title" xml:space="preserve">
+    <value>DISM CheckHealth</value>
+  </data>
+  <data name="Cmd_dism.checkhealth_Desc" xml:space="preserve">
+    <value>Kiểm tra nhanh image Windows có hỏng không (chỉ đọc).</value>
+  </data>
+  <data name="Cmd_dism.scanhealth_Title" xml:space="preserve">
+    <value>DISM ScanHealth</value>
+  </data>
+  <data name="Cmd_dism.scanhealth_Desc" xml:space="preserve">
+    <value>Quét sâu image Windows tìm hỏng hóc (chỉ đọc, lâu).</value>
+  </data>
+  <data name="Cmd_dism.analyzecomponentstore_Title" xml:space="preserve">
+    <value>Phân tích component store</value>
+  </data>
+  <data name="Cmd_dism.analyzecomponentstore_Desc" xml:space="preserve">
+    <value>Phân tích WinSxS và cho biết có nên dọn dẹp không.</value>
+  </data>
+  <data name="Cmd_chkdsk.read_Title" xml:space="preserve">
+    <value>Kiểm tra ổ đĩa (chỉ đọc)</value>
+  </data>
+  <data name="Cmd_chkdsk.read_Desc" xml:space="preserve">
+    <value>Kiểm tra lỗi ổ C: (chỉ đọc).</value>
+  </data>
+  <data name="Cmd_sec.bitlocker.status_Title" xml:space="preserve">
+    <value>Trạng thái BitLocker</value>
+  </data>
+  <data name="Cmd_sec.bitlocker.status_Desc" xml:space="preserve">
+    <value>Xem trạng thái mã hóa BitLocker của tất cả ổ đĩa.</value>
+  </data>
+  <data name="Cmd_dev.features.list_Title" xml:space="preserve">
+    <value>Liệt kê tính năng Windows</value>
+  </data>
+  <data name="Cmd_dev.features.list_Desc" xml:space="preserve">
+    <value>Liệt kê các tính năng tùy chọn Windows đang bật.</value>
+  </data>
 </root>

@@ -1,6 +1,8 @@
 using CommandForge.Application;
 using CommandForge.Application.Ports;
+using CommandForge.Application.UseCases;
 using CommandForge.Infrastructure.Catalog;
+using CommandForge.Infrastructure.Elevation;
 using CommandForge.Infrastructure.Execution;
 using CommandForge.Infrastructure.Logging;
 using Microsoft.Extensions.DependencyInjection;
@@ -30,6 +32,8 @@ public static class ServiceCollectionExtensions
         services.AddSingleton<ICatalogProvider, JsonCatalogProvider>();
         services.AddSingleton<IProcessRunner, SystemProcessRunner>();
         services.AddSingleton<ICommandExecutor, ProcessCommandExecutor>();
+        services.AddSingleton<IElevationService, BrokerElevationService>();
+        services.AddSingleton<RunCommandUseCase>();
 
         services.AddSingleton<LegalGateService>();
 

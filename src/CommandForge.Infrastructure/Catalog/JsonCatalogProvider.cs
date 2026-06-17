@@ -83,6 +83,7 @@ public static class CatalogLoader
                 Icon = dto.Icon,
                 Executable = dto.Executable,
                 ArgsTemplate = dto.ArgsTemplate ?? string.Empty,
+                ExecutionMode = dto.ExecutionMode,
                 RequiresAdmin = dto.RequiresAdmin,
                 DangerLevel = dto.DangerLevel,
                 ConfirmBeforeRun = dto.ConfirmBeforeRun,

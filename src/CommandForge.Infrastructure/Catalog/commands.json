@@ -20,6 +20,7 @@
   },
   {
     "id": "info.winver",
+    "executionMode": "Launch",
     "categoryId": "system-info",
     "titleKey": "Cmd_info.winver_Title",
     "descriptionKey": "Cmd_info.winver_Desc",
@@ -210,6 +211,7 @@
   },
   {
     "id": "tweak.godmode",
+    "executionMode": "Launch",
     "categoryId": "tweaks-shortcuts",
     "titleKey": "Cmd_tweak.godmode_Title",
     "descriptionKey": "Cmd_tweak.godmode_Desc",
@@ -267,6 +269,7 @@
   },
   {
     "id": "cleanup.cleanmgr",
+    "executionMode": "Launch",
     "categoryId": "cleanup",
     "titleKey": "Cmd_cleanup.cleanmgr_Title",
     "descriptionKey": "Cmd_cleanup.cleanmgr_Desc",
@@ -324,6 +327,7 @@
   },
   {
     "id": "diag.reliability",
+    "executionMode": "Launch",
     "categoryId": "diagnostics",
     "titleKey": "Cmd_diag.reliability_Title",
     "descriptionKey": "Cmd_diag.reliability_Desc",
@@ -343,6 +347,7 @@
   },
   {
     "id": "diag.eventviewer",
+    "executionMode": "Launch",
     "categoryId": "diagnostics",
     "titleKey": "Cmd_diag.eventviewer_Title",
     "descriptionKey": "Cmd_diag.eventviewer_Desc",
@@ -362,6 +367,7 @@
   },
   {
     "id": "diag.resmon",
+    "executionMode": "Launch",
     "categoryId": "diagnostics",
     "titleKey": "Cmd_diag.resmon_Title",
     "descriptionKey": "Cmd_diag.resmon_Desc",
@@ -381,6 +387,7 @@
   },
   {
     "id": "diag.dxdiag",
+    "executionMode": "Launch",
     "categoryId": "diagnostics",
     "titleKey": "Cmd_diag.dxdiag_Title",
     "descriptionKey": "Cmd_diag.dxdiag_Desc",

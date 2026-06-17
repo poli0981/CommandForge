@@ -1,6 +1,7 @@
 using CommandForge.Application;
 using CommandForge.Application.Ports;
 using CommandForge.Infrastructure.Catalog;
+using CommandForge.Infrastructure.Execution;
 using CommandForge.Infrastructure.Logging;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -27,6 +28,8 @@ public static class ServiceCollectionExtensions
         services.AddSingleton<IClock, SystemClock>();
         services.AddSingleton<ISettingsService, JsonSettingsService>();
         services.AddSingleton<ICatalogProvider, JsonCatalogProvider>();
+        services.AddSingleton<IProcessRunner, SystemProcessRunner>();
+        services.AddSingleton<ICommandExecutor, ProcessCommandExecutor>();
 
         services.AddSingleton<LegalGateService>();
 

@@ -17,9 +17,19 @@ public sealed partial class MainViewModel : ObservableObject
     private readonly IReadOnlyDictionary<string, string> _categoryTitles;
     private readonly Dictionary<string, CommandItemViewModel> _itemsById;
 
-    public MainViewModel(ICatalogProvider catalog)
+    public MainViewModel(ICatalogProvider catalog, ExecutionViewModel execution)
     {
         ArgumentNullException.ThrowIfNull(catalog);
+        ArgumentNullException.ThrowIfNull(execution);
+
+        Execution = execution;
+        Execution.PropertyChanged += (_, e) =>
+        {
+            if (e.PropertyName == nameof(ExecutionViewModel.IsRunning))
+            {
+                RunSelectedCommand.NotifyCanExecuteChanged();
+            }
+        };
 
         var vms = CatalogViewModelBuilder.Build(catalog);
         _searchable = vms.Searchable;
@@ -36,6 +46,8 @@ public sealed partial class MainViewModel : ObservableObject
         SelectedCategory = Categories[0];
     }
 
+    public ExecutionViewModel Execution { get; }
+
     public ObservableCollection<CategoryViewModel> Categories { get; } = [];
 
     public ObservableCollection<CommandItemViewModel> FilteredCommands { get; } = [];
@@ -50,6 +62,7 @@ public sealed partial class MainViewModel : ObservableObject
     private string _searchText = string.Empty;
 
     [ObservableProperty]
+    [NotifyCanExecuteChangedFor(nameof(RunSelectedCommand))]
     private CommandItemViewModel? _selectedCommand;
 
     [ObservableProperty]
@@ -60,6 +73,12 @@ public sealed partial class MainViewModel : ObservableObject
 
     [RelayCommand]
     private void ToggleSidebar() => IsSidebarCollapsed = !IsSidebarCollapsed;
+
+    [RelayCommand(CanExecute = nameof(CanRunSelected))]
+    private Task RunSelectedAsync()
+        => SelectedCommand is null ? Task.CompletedTask : Execution.RunAsync(SelectedCommand.Command);
+
+    private bool CanRunSelected() => SelectedCommand is not null && !Execution.IsRunning;
 
     /// <summary>Selects a command by id (used by the palette), clearing filters so it is visible.</summary>
     public void SelectCommandById(string commandId)

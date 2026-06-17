@@ -29,6 +29,9 @@ public sealed record CommandDefinition
     /// <summary>Fixed argument template (no uncontrolled interpolation).</summary>
     public string ArgsTemplate { get; init; } = string.Empty;
 
+    /// <summary>How the command is run: capture console output, or launch a GUI/shell target.</summary>
+    public ExecutionMode ExecutionMode { get; init; } = ExecutionMode.Capture;
+
     /// <summary>Whether the command must run elevated (through the Elevator broker).</summary>
     public bool RequiresAdmin { get; init; }
 

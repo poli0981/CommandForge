@@ -46,6 +46,6 @@ vpk pack `
     --packId CommandForge `
     --packVersion $Version `
     --packDir $publishDir `
-    --mainExe CommandForge.exe
+    --mainExe CommandForge.Wpf.exe
 
 Write-Host "Done. Artifacts are in $(Join-Path $repoRoot 'Releases')." -ForegroundColor Green

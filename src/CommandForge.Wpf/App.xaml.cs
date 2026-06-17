@@ -6,11 +6,11 @@ using CommandForge.Application.UseCases;
 using CommandForge.Infrastructure;
 using CommandForge.Infrastructure.DependencyInjection;
 using CommandForge.Infrastructure.Logging;
-using CommandForge.Infrastructure.Updates;
 using CommandForge.Wpf.Views;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Serilog;
+using Velopack;
 
 namespace CommandForge.Wpf;
 
@@ -26,7 +26,8 @@ public partial class App : System.Windows.Application
     protected override void OnStartup(StartupEventArgs e)
     {
         // Velopack install/update lifecycle hooks. Must run before the host/UI; may exit the process.
-        VelopackBootstrap.Run();
+        // Called directly in the main assembly so the vpk packager can verify its presence.
+        VelopackApp.Build().Run();
 
         base.OnStartup(e);
 

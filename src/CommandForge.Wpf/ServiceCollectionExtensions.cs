@@ -14,6 +14,7 @@ public static class ServiceCollectionExtensions
         ArgumentNullException.ThrowIfNull(services);
 
         services.AddSingleton<IConfirmationService, ConfirmationService>();
+        services.AddSingleton<IUpdateDialogService, UpdateDialogService>();
 
         services.AddTransient<LegalGateViewModel>();
         services.AddTransient<MainViewModel>();

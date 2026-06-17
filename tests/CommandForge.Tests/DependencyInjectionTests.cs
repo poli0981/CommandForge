@@ -1,5 +1,6 @@
 using CommandForge.Application;
 using CommandForge.Application.Ports;
+using CommandForge.Application.UseCases;
 using CommandForge.Infrastructure.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -19,6 +20,8 @@ public sealed class DependencyInjectionTests
         Assert.NotNull(provider.GetRequiredService<IClock>());
         Assert.NotNull(provider.GetRequiredService<ILogReader>());
         Assert.NotNull(provider.GetRequiredService<ICatalogProvider>());
+        Assert.NotNull(provider.GetRequiredService<IUpdateService>());
+        Assert.NotNull(provider.GetRequiredService<CheckForUpdateUseCase>());
         Assert.NotNull(provider.GetRequiredService<LegalGateService>());
     }
 }

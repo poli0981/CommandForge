@@ -46,6 +46,8 @@
             </MenuItem>
             <MenuItem Header="{res:Loc MenuTools}">
                 <MenuItem Header="{res:Loc Palette_Placeholder}" Click="OnOpenPaletteClick" InputGestureText="Ctrl+K" />
+                <Separator />
+                <MenuItem Header="{res:Loc Menu_CheckForUpdates}" Command="{Binding CheckForUpdatesCommand}" />
             </MenuItem>
             <MenuItem Header="{res:Loc MenuAbout}" />
             <MenuItem Header="{res:Loc MenuHelp}" />

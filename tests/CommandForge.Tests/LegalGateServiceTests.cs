@@ -41,6 +41,8 @@ public sealed class LegalGateServiceTests
     {
         public string? AcceptedTermsVersion { get; set; }
 
+        public bool AutoCheckForUpdates { get; set; } = true;
+
         public int SaveCount { get; private set; }
 
         public void Save() => SaveCount++;

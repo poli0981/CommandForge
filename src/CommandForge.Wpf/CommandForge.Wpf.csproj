@@ -25,6 +25,7 @@
     <PackageReference Include="Serilog.Extensions.Hosting" Version="10.0.0" />
     <PackageReference Include="Serilog.Sinks.Async" Version="2.1.0" />
     <PackageReference Include="Serilog.Sinks.File" Version="7.0.0" />
+    <PackageReference Include="Velopack" Version="1.2.0" />
   </ItemGroup>
 
   <!-- Copy the Elevator helper next to the app so BrokerElevationService can spawn it. -->
@@ -40,9 +41,17 @@
           Condition="Exists('%(ElevatorFile.Identity)')" />
   </Target>
 
-  <Target Name="CopyElevatorOnPublish" AfterTargets="Publish">
-    <Copy SourceFiles="@(ElevatorFile)" DestinationFolder="$(PublishDir)" SkipUnchangedFiles="true"
-          Condition="Exists('%(ElevatorFile.Identity)')" />
+  <!-- Publish (not merely build) the Elevator INTO the app's publish folder, inheriting the app's
+       Configuration / TargetFramework / RuntimeIdentifier / SelfContained. A copy from the plain
+       build output is fragile: a RID publish writes the Elevator under a win-x64 subfolder (so a
+       non-RID glob misses it on a clean/CI build), and a RID *build* is framework-dependent (it
+       would fail next to a self-contained app on a machine without a system .NET). Publishing it
+       guarantees a RID-correct, self-contained Elevator alongside CommandForge.Wpf.exe, which is
+       where BrokerElevationService spawns it from (AppContext.BaseDirectory). -->
+  <Target Name="PublishElevatorOnPublish" AfterTargets="Publish">
+    <MSBuild Projects="$(MSBuildThisFileDirectory)..\..\helper\CommandForge.Elevator\CommandForge.Elevator.csproj"
+             Targets="Publish"
+             Properties="Configuration=$(Configuration);TargetFramework=$(TargetFramework);RuntimeIdentifier=$(RuntimeIdentifier);SelfContained=$(SelfContained);PublishDir=$(PublishDir)" />
   </Target>
 
 </Project>

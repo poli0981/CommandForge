@@ -17,18 +17,21 @@ public sealed partial class MainViewModel : ObservableObject
     private const string RestorePointCommandId = "system.restorepoint";
 
     private readonly IConfirmationService _confirmation;
+    private readonly IUpdateDialogService _updateDialog;
     private readonly IReadOnlyList<SearchableCommand> _searchable;
     private readonly IReadOnlyDictionary<string, string> _categoryTitles;
     private readonly Dictionary<string, CommandItemViewModel> _itemsById;
     private readonly CommandDefinition? _restorePointCommand;
 
-    public MainViewModel(ICatalogProvider catalog, ExecutionViewModel execution, IConfirmationService confirmation)
+    public MainViewModel(ICatalogProvider catalog, ExecutionViewModel execution, IConfirmationService confirmation, IUpdateDialogService updateDialog)
     {
         ArgumentNullException.ThrowIfNull(catalog);
         ArgumentNullException.ThrowIfNull(execution);
         ArgumentNullException.ThrowIfNull(confirmation);
+        ArgumentNullException.ThrowIfNull(updateDialog);
 
         _confirmation = confirmation;
+        _updateDialog = updateDialog;
         Execution = execution;
         Execution.PropertyChanged += (_, e) =>
         {
@@ -83,6 +86,9 @@ public sealed partial class MainViewModel : ObservableObject
 
     [RelayCommand]
     private void ToggleSidebar() => IsSidebarCollapsed = !IsSidebarCollapsed;
+
+    [RelayCommand]
+    private Task CheckForUpdatesAsync() => _updateDialog.ShowAsync(startedFromStartup: false);
 
     [RelayCommand(CanExecute = nameof(CanRunSelected))]
     private Task RunSelectedAsync()

@@ -9,6 +9,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <!-- Vetted, read-only command catalog (golden rule #1). Logical names:
+         CommandForge.Infrastructure.Catalog.categories.json / .commands.json -->
+    <EmbeddedResource Include="Catalog\categories.json" />
+    <EmbeddedResource Include="Catalog\commands.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="10.0.9" />
     <PackageReference Include="Microsoft.Windows.CsWin32" Version="0.3.296">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

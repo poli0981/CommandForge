@@ -18,6 +18,7 @@ public sealed class DependencyInjectionTests
         Assert.NotNull(provider.GetRequiredService<ISettingsService>());
         Assert.NotNull(provider.GetRequiredService<IClock>());
         Assert.NotNull(provider.GetRequiredService<ILogReader>());
+        Assert.NotNull(provider.GetRequiredService<ICatalogProvider>());
         Assert.NotNull(provider.GetRequiredService<LegalGateService>());
     }
 }

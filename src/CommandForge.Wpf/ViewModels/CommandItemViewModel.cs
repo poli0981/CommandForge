@@ -1,4 +1,5 @@
 using CommandForge.Domain;
+using CommandForge.Wpf.Resources;
 using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace CommandForge.Wpf.ViewModels;
@@ -9,15 +10,17 @@ public sealed partial class CommandItemViewModel : ObservableObject
     public CommandItemViewModel(CommandDefinition command, string title, string description)
     {
         Command = command;
-        Title = title;
-        Description = description;
+        _title = title;
+        _description = description;
     }
 
     public CommandDefinition Command { get; }
 
-    public string Title { get; }
+    [ObservableProperty]
+    private string _title;
 
-    public string Description { get; }
+    [ObservableProperty]
+    private string _description;
 
     public string? Icon => Command.Icon;
 
@@ -32,4 +35,11 @@ public sealed partial class CommandItemViewModel : ObservableObject
     /// <summary>Indices of fuzzy-matched characters in <see cref="Title"/> for highlighting.</summary>
     [ObservableProperty]
     private IReadOnlyList<int> _titleMatches = [];
+
+    /// <summary>Re-resolves the localized title/description (after a culture change).</summary>
+    public void Refresh()
+    {
+        Title = Strings.Get(Command.TitleKey);
+        Description = Strings.Get(Command.DescriptionKey);
+    }
 }

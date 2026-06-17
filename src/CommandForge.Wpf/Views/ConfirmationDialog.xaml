@@ -8,7 +8,7 @@
         WindowStartupLocation="CenterOwner" ShowInTaskbar="False"
         FontFamily="{DynamicResource MaterialDesignFont}"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-        TextElement.FontSize="13"
+        TextElement.FontSize="{DynamicResource AppFontSize}"
         Background="{DynamicResource MaterialDesignPaper}">
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVis" />

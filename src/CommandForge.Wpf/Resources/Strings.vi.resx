@@ -772,4 +772,94 @@
   <data name="Update_Error_CommandRunning" xml:space="preserve">
     <value>Hãy hoàn tất hoặc hủy lệnh đang chạy trước khi cập nhật.</value>
   </data>
+  <data name="Menu_OpenSettings" xml:space="preserve">
+    <value>Cài đặt</value>
+  </data>
+  <data name="LanguageOption_System" xml:space="preserve">
+    <value>Theo hệ thống</value>
+  </data>
+  <data name="Settings_Appearance" xml:space="preserve">
+    <value>Giao diện</value>
+  </data>
+  <data name="Settings_Behavior" xml:space="preserve">
+    <value>Hành vi &amp; An toàn</value>
+  </data>
+  <data name="Settings_Updates" xml:space="preserve">
+    <value>Cập nhật</value>
+  </data>
+  <data name="Settings_About" xml:space="preserve">
+    <value>Giới thiệu</value>
+  </data>
+  <data name="Settings_Theme" xml:space="preserve">
+    <value>Chủ đề</value>
+  </data>
+  <data name="Settings_ThemeSystem" xml:space="preserve">
+    <value>Theo hệ thống</value>
+  </data>
+  <data name="Settings_ThemeLight" xml:space="preserve">
+    <value>Sáng</value>
+  </data>
+  <data name="Settings_ThemeDark" xml:space="preserve">
+    <value>Tối</value>
+  </data>
+  <data name="Settings_Language" xml:space="preserve">
+    <value>Ngôn ngữ</value>
+  </data>
+  <data name="Settings_FontSize" xml:space="preserve">
+    <value>Cỡ chữ</value>
+  </data>
+  <data name="Settings_FontSmall" xml:space="preserve">
+    <value>Nhỏ</value>
+  </data>
+  <data name="Settings_FontMedium" xml:space="preserve">
+    <value>Vừa</value>
+  </data>
+  <data name="Settings_FontLarge" xml:space="preserve">
+    <value>Lớn</value>
+  </data>
+  <data name="Settings_CollapseSidebar" xml:space="preserve">
+    <value>Thu gọn thanh bên mặc định</value>
+  </data>
+  <data name="Settings_ShowBadges" xml:space="preserve">
+    <value>Hiện nhãn Admin/Khởi động lại trong danh sách</value>
+  </data>
+  <data name="Settings_ConfirmCaution" xml:space="preserve">
+    <value>Xác nhận trước lệnh Thận trọng</value>
+  </data>
+  <data name="Settings_ConfirmDangerous" xml:space="preserve">
+    <value>Xác nhận trước lệnh Nguy hiểm</value>
+  </data>
+  <data name="Settings_DangerousLockedTooltip" xml:space="preserve">
+    <value>Luôn bật — không thể tắt kiểm tra an toàn này.</value>
+  </data>
+  <data name="Settings_AutoRestorePoint" xml:space="preserve">
+    <value>Đề nghị tạo điểm khôi phục trước lệnh rủi ro</value>
+  </data>
+  <data name="Settings_AutoScroll" xml:space="preserve">
+    <value>Tự cuộn console</value>
+  </data>
+  <data name="Settings_WarnOnCancel" xml:space="preserve">
+    <value>Cảnh báo khi đóng lúc lệnh đang chạy</value>
+  </data>
+  <data name="Settings_AutoCheckUpdates" xml:space="preserve">
+    <value>Kiểm tra cập nhật khi khởi động</value>
+  </data>
+  <data name="Settings_CurrentVersion" xml:space="preserve">
+    <value>Phiên bản hiện tại:</value>
+  </data>
+  <data name="Settings_LastChecked" xml:space="preserve">
+    <value>Kiểm tra lần cuối:</value>
+  </data>
+  <data name="Settings_CheckNow" xml:space="preserve">
+    <value>Kiểm tra ngay</value>
+  </data>
+  <data name="Settings_NoDataCollected" xml:space="preserve">
+    <value>Ứng dụng này không thu thập bất kỳ dữ liệu nào của bạn.</value>
+  </data>
+  <data name="Settings_License" xml:space="preserve">
+    <value>Giấy phép (GPLv3)</value>
+  </data>
+  <data name="Settings_GitHub" xml:space="preserve">
+    <value>GitHub</value>
+  </data>
 </root>

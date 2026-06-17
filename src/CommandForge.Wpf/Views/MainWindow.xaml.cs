@@ -1,5 +1,4 @@
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Windows;
 using System.Windows.Input;
 using CommandForge.Wpf.Resources;
@@ -8,7 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace CommandForge.Wpf.Views;
 
-/// <summary>The main application shell (menu bar + collapsible sidebar + catalog browse + console).</summary>
+/// <summary>The main application shell (menu bar + collapsible sidebar + Catalog/Settings content).</summary>
 public partial class MainWindow : Window
 {
     private readonly MainViewModel _viewModel;
@@ -28,6 +27,12 @@ public partial class MainWindow : Window
     {
         if (!_viewModel.Execution.IsRunning)
         {
+            return;
+        }
+
+        if (!_viewModel.Settings.WarnOnCancel)
+        {
+            _viewModel.Execution.CancelCommand.Execute(null);
             return;
         }
 
@@ -57,20 +62,10 @@ public partial class MainWindow : Window
             OpenPalette();
             e.Handled = true;
         }
-    }
-
-    private void OnRestartClick(object sender, RoutedEventArgs e)
-    {
-        var confirm = MessageBox.Show(
-            this,
-            Strings.Get("Restart_ConfirmMessage"),
-            Strings.Get("Restart_ConfirmTitle"),
-            MessageBoxButton.OKCancel,
-            MessageBoxImage.Warning);
-
-        if (confirm == MessageBoxResult.OK)
+        else if (e.Key == Key.OemComma && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
         {
-            Process.Start(new ProcessStartInfo("shutdown", "/r /t 0") { UseShellExecute = false, CreateNoWindow = true });
+            _viewModel.ShowSettingsCommand.Execute(null);
+            e.Handled = true;
         }
     }
 

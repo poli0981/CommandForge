@@ -1,4 +1,5 @@
 using CommandForge.Application.Ports;
+using CommandForge.Wpf.Theming;
 using CommandForge.Wpf.ViewModels;
 using CommandForge.Wpf.Views;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,11 +16,15 @@ public static class ServiceCollectionExtensions
 
         services.AddSingleton<IConfirmationService, ConfirmationService>();
         services.AddSingleton<IUpdateDialogService, UpdateDialogService>();
+        services.AddSingleton<IThemeService, ThemeService>();
+        services.AddSingleton<IFontScaleService, FontScaleService>();
 
         services.AddTransient<LegalGateViewModel>();
-        services.AddTransient<MainViewModel>();
+        // Singleton: a single shell instance whose CultureChanged subscription lives for the app.
+        services.AddSingleton<MainViewModel>();
         services.AddTransient<ExecutionViewModel>();
         services.AddTransient<CommandPaletteViewModel>();
+        services.AddTransient<SettingsViewModel>();
 
         services.AddTransient<LegalGateWindow>();
         services.AddTransient<MainWindow>();

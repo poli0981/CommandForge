@@ -1,5 +1,7 @@
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using CommandForge.Application.Ports;
+using CommandForge.Application.Settings;
 
 namespace CommandForge.Infrastructure;
 
@@ -9,7 +11,11 @@ namespace CommandForge.Infrastructure;
 /// </summary>
 public sealed class JsonSettingsService : ISettingsService
 {
-    private static readonly JsonSerializerOptions SerializerOptions = new() { WriteIndented = true };
+    private static readonly JsonSerializerOptions SerializerOptions = new()
+    {
+        WriteIndented = true,
+        Converters = { new JsonStringEnumConverter() }, // human-readable enum values in config.json
+    };
 
     private readonly string _configPath;
     private SettingsModel _model;
@@ -42,6 +48,69 @@ public sealed class JsonSettingsService : ISettingsService
     }
 
     /// <inheritdoc />
+    public AppTheme Theme
+    {
+        get => _model.Theme;
+        set => _model = _model with { Theme = value };
+    }
+
+    /// <inheritdoc />
+    public string Language
+    {
+        get => _model.Language;
+        set => _model = _model with { Language = value };
+    }
+
+    /// <inheritdoc />
+    public FontScale FontSize
+    {
+        get => _model.FontSize;
+        set => _model = _model with { FontSize = value };
+    }
+
+    /// <inheritdoc />
+    public bool CollapseSidebarByDefault
+    {
+        get => _model.CollapseSidebarByDefault;
+        set => _model = _model with { CollapseSidebarByDefault = value };
+    }
+
+    /// <inheritdoc />
+    public bool ShowAdminRestartBadges
+    {
+        get => _model.ShowAdminRestartBadges;
+        set => _model = _model with { ShowAdminRestartBadges = value };
+    }
+
+    /// <inheritdoc />
+    public bool ConfirmCaution
+    {
+        get => _model.ConfirmCaution;
+        set => _model = _model with { ConfirmCaution = value };
+    }
+
+    /// <inheritdoc />
+    public bool AutoCreateRestorePoint
+    {
+        get => _model.AutoCreateRestorePoint;
+        set => _model = _model with { AutoCreateRestorePoint = value };
+    }
+
+    /// <inheritdoc />
+    public bool AutoScrollConsole
+    {
+        get => _model.AutoScrollConsole;
+        set => _model = _model with { AutoScrollConsole = value };
+    }
+
+    /// <inheritdoc />
+    public bool WarnOnCancel
+    {
+        get => _model.WarnOnCancel;
+        set => _model = _model with { WarnOnCancel = value };
+    }
+
+    /// <inheritdoc />
     public void Save()
     {
         var directory = Path.GetDirectoryName(_configPath);
@@ -64,7 +133,7 @@ public sealed class JsonSettingsService : ISettingsService
         try
         {
             var json = File.ReadAllText(path);
-            return JsonSerializer.Deserialize<SettingsModel>(json) ?? new SettingsModel();
+            return JsonSerializer.Deserialize<SettingsModel>(json, SerializerOptions) ?? new SettingsModel();
         }
         catch (JsonException)
         {
@@ -79,5 +148,23 @@ public sealed class JsonSettingsService : ISettingsService
 
         // Default true so existing or freshly-created configs opt in to startup update checks.
         public bool AutoCheckForUpdates { get; init; } = true;
+
+        public AppTheme Theme { get; init; } = AppTheme.System;
+
+        public string Language { get; init; } = ""; // follow OS
+
+        public FontScale FontSize { get; init; } = FontScale.Medium;
+
+        public bool CollapseSidebarByDefault { get; init; }
+
+        public bool ShowAdminRestartBadges { get; init; } = true;
+
+        public bool ConfirmCaution { get; init; } = true;
+
+        public bool AutoCreateRestorePoint { get; init; } = true;
+
+        public bool AutoScrollConsole { get; init; } = true;
+
+        public bool WarnOnCancel { get; init; } = true;
     }
 }

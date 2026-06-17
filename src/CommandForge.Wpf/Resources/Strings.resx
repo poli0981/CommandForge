@@ -172,6 +172,30 @@
   <data name="Detail_SelectPrompt" xml:space="preserve">
     <value>Select a command to see its details.</value>
   </data>
+  <data name="Detail_Revert" xml:space="preserve">
+    <value>Revert</value>
+  </data>
+  <data name="Confirm_TypeToConfirm" xml:space="preserve">
+    <value>Type the command name to confirm:</value>
+  </data>
+  <data name="Confirm_CreateRestorePoint" xml:space="preserve">
+    <value>Create a System Restore Point first (recommended)</value>
+  </data>
+  <data name="Exit_RunningTitle" xml:space="preserve">
+    <value>Command running</value>
+  </data>
+  <data name="Exit_RunningMessage" xml:space="preserve">
+    <value>A command is still running. Cancel it and exit?</value>
+  </data>
+  <data name="Restore_Creating" xml:space="preserve">
+    <value>Creating restore point…</value>
+  </data>
+  <data name="Restore_Created" xml:space="preserve">
+    <value>Restore point created.</value>
+  </data>
+  <data name="Restore_Failed" xml:space="preserve">
+    <value>Could not create a restore point (continuing anyway).</value>
+  </data>
   <data name="Detail_CommandLine" xml:space="preserve">
     <value>Command to run</value>
   </data>
@@ -420,5 +444,65 @@
   </data>
   <data name="Cmd_dev.features.list_Desc" xml:space="preserve">
     <value>List the enabled Windows optional features.</value>
+  </data>
+  <data name="Cmd_system.restorepoint_Title" xml:space="preserve">
+    <value>Create restore point</value>
+  </data>
+  <data name="Cmd_system.restorepoint_Desc" xml:space="preserve">
+    <value>Create a System Restore Point.</value>
+  </data>
+  <data name="Cmd_dism.restorehealth_Title" xml:space="preserve">
+    <value>DISM RestoreHealth</value>
+  </data>
+  <data name="Cmd_dism.restorehealth_Desc" xml:space="preserve">
+    <value>Repair the Windows image (can take a while; may require a restart).</value>
+  </data>
+  <data name="Cmd_sfc.scannow_Title" xml:space="preserve">
+    <value>SFC scannow</value>
+  </data>
+  <data name="Cmd_sfc.scannow_Desc" xml:space="preserve">
+    <value>Scan and repair protected system files (may require a restart).</value>
+  </data>
+  <data name="Cmd_net.winsock.reset_Title" xml:space="preserve">
+    <value>Reset Winsock</value>
+  </data>
+  <data name="Cmd_net.winsock.reset_Desc" xml:space="preserve">
+    <value>Reset the Winsock catalog (a restart is required afterwards).</value>
+  </data>
+  <data name="Cmd_sec.defender.quickscan_Title" xml:space="preserve">
+    <value>Defender quick scan</value>
+  </data>
+  <data name="Cmd_sec.defender.quickscan_Desc" xml:space="preserve">
+    <value>Run a Microsoft Defender quick scan.</value>
+  </data>
+  <data name="Cmd_power.hibernate.off_Title" xml:space="preserve">
+    <value>Turn off hibernation</value>
+  </data>
+  <data name="Cmd_power.hibernate.off_Desc" xml:space="preserve">
+    <value>Disable hibernation and free the disk space it uses.</value>
+  </data>
+  <data name="Cmd_power.hibernate.on_Title" xml:space="preserve">
+    <value>Turn on hibernation</value>
+  </data>
+  <data name="Cmd_power.hibernate.on_Desc" xml:space="preserve">
+    <value>Re-enable hibernation.</value>
+  </data>
+  <data name="Cmd_tweak.hideext_Title" xml:space="preserve">
+    <value>Hide file extensions</value>
+  </data>
+  <data name="Cmd_tweak.hideext_Desc" xml:space="preserve">
+    <value>Hide known file name extensions in Explorer.</value>
+  </data>
+  <data name="Cmd_sec.telemetry.basic_Title" xml:space="preserve">
+    <value>Minimize telemetry</value>
+  </data>
+  <data name="Cmd_sec.telemetry.basic_Desc" xml:space="preserve">
+    <value>Set the telemetry policy to the lowest level. May affect Windows Update on some editions; reversible.</value>
+  </data>
+  <data name="Cmd_sec.telemetry.restore_Title" xml:space="preserve">
+    <value>Restore telemetry policy</value>
+  </data>
+  <data name="Cmd_sec.telemetry.restore_Desc" xml:space="preserve">
+    <value>Remove the telemetry policy override (back to the system default).</value>
   </data>
 </root>

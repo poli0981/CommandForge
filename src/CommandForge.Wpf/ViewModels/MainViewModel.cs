@@ -1,6 +1,7 @@
 using System.Collections.ObjectModel;
 using CommandForge.Application.Ports;
 using CommandForge.Application.Search;
+using CommandForge.Domain;
 using CommandForge.Wpf.Resources;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -13,21 +14,28 @@ namespace CommandForge.Wpf.ViewModels;
 /// </summary>
 public sealed partial class MainViewModel : ObservableObject
 {
+    private const string RestorePointCommandId = "system.restorepoint";
+
+    private readonly IConfirmationService _confirmation;
     private readonly IReadOnlyList<SearchableCommand> _searchable;
     private readonly IReadOnlyDictionary<string, string> _categoryTitles;
     private readonly Dictionary<string, CommandItemViewModel> _itemsById;
+    private readonly CommandDefinition? _restorePointCommand;
 
-    public MainViewModel(ICatalogProvider catalog, ExecutionViewModel execution)
+    public MainViewModel(ICatalogProvider catalog, ExecutionViewModel execution, IConfirmationService confirmation)
     {
         ArgumentNullException.ThrowIfNull(catalog);
         ArgumentNullException.ThrowIfNull(execution);
+        ArgumentNullException.ThrowIfNull(confirmation);
 
+        _confirmation = confirmation;
         Execution = execution;
         Execution.PropertyChanged += (_, e) =>
         {
             if (e.PropertyName == nameof(ExecutionViewModel.IsRunning))
             {
                 RunSelectedCommand.NotifyCanExecuteChanged();
+                RevertSelectedCommand.NotifyCanExecuteChanged();
             }
         };
 
@@ -35,6 +43,7 @@ public sealed partial class MainViewModel : ObservableObject
         _searchable = vms.Searchable;
         _categoryTitles = vms.CategoryTitles;
         _itemsById = vms.Items.ToDictionary(i => i.Command.Id, StringComparer.Ordinal);
+        _restorePointCommand = _itemsById.GetValueOrDefault(RestorePointCommandId)?.Command;
 
         Categories.Add(new CategoryViewModel(null, Strings.Get("Sidebar_AllCommands"), "ViewGridOutline", vms.Items.Count));
         foreach (var category in catalog.GetCategories())
@@ -63,6 +72,7 @@ public sealed partial class MainViewModel : ObservableObject
 
     [ObservableProperty]
     [NotifyCanExecuteChangedFor(nameof(RunSelectedCommand))]
+    [NotifyCanExecuteChangedFor(nameof(RevertSelectedCommand))]
     private CommandItemViewModel? _selectedCommand;
 
     [ObservableProperty]
@@ -76,9 +86,45 @@ public sealed partial class MainViewModel : ObservableObject
 
     [RelayCommand(CanExecute = nameof(CanRunSelected))]
     private Task RunSelectedAsync()
-        => SelectedCommand is null ? Task.CompletedTask : Execution.RunAsync(SelectedCommand.Command);
+        => SelectedCommand is null ? Task.CompletedTask : ConfirmAndRunAsync(SelectedCommand.Command);
 
     private bool CanRunSelected() => SelectedCommand is not null && !Execution.IsRunning;
+
+    [RelayCommand(CanExecute = nameof(CanRevertSelected))]
+    private Task RevertSelectedAsync()
+    {
+        if (SelectedCommand?.Command.RevertCommandId is not { } revertId
+            || !_itemsById.TryGetValue(revertId, out var revertItem))
+        {
+            return Task.CompletedTask;
+        }
+
+        return ConfirmAndRunAsync(revertItem.Command);
+    }
+
+    private bool CanRevertSelected()
+        => SelectedCommand?.Command.RevertCommandId is not null && !Execution.IsRunning;
+
+    /// <summary>Confirms a Caution/Dangerous command, optionally creating a restore point, then runs it.</summary>
+    private async Task ConfirmAndRunAsync(CommandDefinition command)
+    {
+        CommandDefinition? restorePoint = null;
+        if (command.DangerLevel != DangerLevel.Safe)
+        {
+            var outcome = await _confirmation.ConfirmAsync(command, defaultCreateRestorePoint: true);
+            if (outcome is null)
+            {
+                return;
+            }
+
+            if (outcome.CreateRestorePoint)
+            {
+                restorePoint = _restorePointCommand;
+            }
+        }
+
+        await Execution.RunAsync(command, restorePoint);
+    }
 
     /// <summary>Selects a command by id (used by the palette), clearing filters so it is visible.</summary>
     public void SelectCommandById(string commandId)

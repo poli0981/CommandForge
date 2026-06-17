@@ -9,6 +9,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <!-- Lets the test project drive ProcessCommandExecutor with a fake IProcessRunner. -->
+    <InternalsVisibleTo Include="CommandForge.Tests" />
+  </ItemGroup>
+
+  <ItemGroup>
     <!-- Vetted, read-only command catalog (golden rule #1). Logical names:
          CommandForge.Infrastructure.Catalog.categories.json / .commands.json -->
     <EmbeddedResource Include="Catalog\categories.json" />

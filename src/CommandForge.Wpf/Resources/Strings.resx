@@ -133,6 +133,30 @@
   <data name="PaneConsole" xml:space="preserve">
     <value>Console</value>
   </data>
+  <data name="Console_Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Result_Success" xml:space="preserve">
+    <value>Success</value>
+  </data>
+  <data name="Result_Failed" xml:space="preserve">
+    <value>Failed</value>
+  </data>
+  <data name="Result_Cancelled" xml:space="preserve">
+    <value>Cancelled</value>
+  </data>
+  <data name="Result_ExitCode" xml:space="preserve">
+    <value>Exit code</value>
+  </data>
+  <data name="Result_Restart" xml:space="preserve">
+    <value>Restart now</value>
+  </data>
+  <data name="Restart_ConfirmTitle" xml:space="preserve">
+    <value>Restart required</value>
+  </data>
+  <data name="Restart_ConfirmMessage" xml:space="preserve">
+    <value>Some changes need a restart to complete. Restart now?</value>
+  </data>
   <data name="ComingSoon" xml:space="preserve">
     <value>Coming soon</value>
   </data>

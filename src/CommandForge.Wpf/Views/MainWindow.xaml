@@ -134,7 +134,7 @@
                              materialDesign:HintAssist.Hint="{res:Loc Search_Placeholder}" />
                 </Grid>
 
-                <!-- Body: command list + detail -->
+                <!-- Body: command list + detail/console -->
                 <Grid Grid.Row="1" Margin="8,0,8,8">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" MinWidth="220" />
@@ -208,79 +208,142 @@
                     <GridSplitter Grid.Column="1" Width="4" HorizontalAlignment="Center" VerticalAlignment="Stretch"
                                   Background="Transparent" />
 
-                    <!-- Detail panel -->
-                    <materialDesign:Card Grid.Column="2" Margin="4" Padding="16">
-                        <Grid>
-                            <ScrollViewer DataContext="{Binding Detail}" VerticalScrollBarVisibility="Auto">
-                                <ScrollViewer.Style>
-                                    <Style TargetType="ScrollViewer">
-                                        <Setter Property="Visibility" Value="Visible" />
-                                        <Style.Triggers>
-                                            <DataTrigger Binding="{Binding}" Value="{x:Null}">
-                                                <Setter Property="Visibility" Value="Collapsed" />
-                                            </DataTrigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </ScrollViewer.Style>
-                                <StackPanel>
-                                    <DockPanel>
-                                        <Border DockPanel.Dock="Right" CornerRadius="4" Padding="8,2" VerticalAlignment="Top"
-                                                Background="{Binding DangerLevel, Converter={StaticResource DangerBrush}}">
-                                            <TextBlock Text="{Binding DangerLevel, Converter={StaticResource DangerText}}"
-                                                       Foreground="White" FontSize="11" />
+                    <!-- Right column: detail (top) + console/result (bottom) -->
+                    <Grid Grid.Column="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <materialDesign:Card Grid.Row="0" Margin="4" Padding="16">
+                            <Grid>
+                                <ScrollViewer DataContext="{Binding Detail}" VerticalScrollBarVisibility="Auto">
+                                    <ScrollViewer.Style>
+                                        <Style TargetType="ScrollViewer">
+                                            <Setter Property="Visibility" Value="Visible" />
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding}" Value="{x:Null}">
+                                                    <Setter Property="Visibility" Value="Collapsed" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </ScrollViewer.Style>
+                                    <StackPanel>
+                                        <DockPanel>
+                                            <Border DockPanel.Dock="Right" CornerRadius="4" Padding="8,2" VerticalAlignment="Top"
+                                                    Background="{Binding DangerLevel, Converter={StaticResource DangerBrush}}">
+                                                <TextBlock Text="{Binding DangerLevel, Converter={StaticResource DangerText}}"
+                                                           Foreground="White" FontSize="11" />
+                                            </Border>
+                                            <TextBlock Text="{Binding Title}" FontSize="20" FontWeight="Bold" TextWrapping="Wrap" />
+                                        </DockPanel>
+
+                                        <StackPanel Orientation="Horizontal" Margin="0,6,0,0">
+                                            <TextBlock Text="{Binding CategoryTitle}" Opacity="0.7" />
+                                            <TextBlock Text="·" Margin="8,0" Opacity="0.5"
+                                                       Visibility="{Binding RequiresAdmin, Converter={StaticResource BoolToVis}}" />
+                                            <TextBlock Text="{res:Loc Detail_RequiresAdmin}" Opacity="0.7"
+                                                       Visibility="{Binding RequiresAdmin, Converter={StaticResource BoolToVis}}" />
+                                            <TextBlock Text="·" Margin="8,0" Opacity="0.5"
+                                                       Visibility="{Binding RequiresRestart, Converter={StaticResource BoolToVis}}" />
+                                            <TextBlock Text="{res:Loc Detail_MayRestart}" Opacity="0.7"
+                                                       Visibility="{Binding RequiresRestart, Converter={StaticResource BoolToVis}}" />
+                                        </StackPanel>
+
+                                        <TextBlock Text="{Binding Description}" TextWrapping="Wrap" Margin="0,12,0,0" />
+
+                                        <TextBlock Text="{res:Loc Detail_CommandLine}" FontWeight="Medium" Margin="0,16,0,4" />
+                                        <Border Background="{DynamicResource MaterialDesignTextFieldBoxBackground}" CornerRadius="4" Padding="10">
+                                            <TextBox Text="{Binding PreviewCommandLine, Mode=OneWay}" IsReadOnly="True"
+                                                     BorderThickness="0" Background="Transparent" TextWrapping="Wrap"
+                                                     FontFamily="Cascadia Mono, Consolas, Courier New" />
                                         </Border>
-                                        <TextBlock Text="{Binding Title}" FontSize="20" FontWeight="Bold" TextWrapping="Wrap" />
-                                    </DockPanel>
 
-                                    <StackPanel Orientation="Horizontal" Margin="0,6,0,0">
-                                        <TextBlock Text="{Binding CategoryTitle}" Opacity="0.7" />
-                                        <TextBlock Text="·" Margin="8,0" Opacity="0.5"
-                                                   Visibility="{Binding RequiresAdmin, Converter={StaticResource BoolToVis}}" />
-                                        <TextBlock Text="{res:Loc Detail_RequiresAdmin}" Opacity="0.7"
-                                                   Visibility="{Binding RequiresAdmin, Converter={StaticResource BoolToVis}}" />
-                                        <TextBlock Text="·" Margin="8,0" Opacity="0.5"
-                                                   Visibility="{Binding RequiresRestart, Converter={StaticResource BoolToVis}}" />
-                                        <TextBlock Text="{res:Loc Detail_MayRestart}" Opacity="0.7"
-                                                   Visibility="{Binding RequiresRestart, Converter={StaticResource BoolToVis}}" />
+                                        <StackPanel Orientation="Horizontal" Margin="0,16,0,0">
+                                            <Button Content="{res:Loc Detail_Run}"
+                                                    Command="{Binding DataContext.RunSelectedCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                                                    Style="{StaticResource MaterialDesignRaisedButton}" Margin="0,0,8,0" />
+                                            <Button Content="{res:Loc Detail_Copy}" Command="{Binding CopyCommand}"
+                                                    Style="{StaticResource MaterialDesignOutlinedButton}" Margin="0,0,8,0" />
+                                            <Button Content="{res:Loc Detail_Doc}" Command="{Binding OpenDocCommand}"
+                                                    Style="{StaticResource MaterialDesignOutlinedButton}"
+                                                    Visibility="{Binding HasDoc, Converter={StaticResource BoolToVis}}" />
+                                        </StackPanel>
                                     </StackPanel>
+                                </ScrollViewer>
 
-                                    <TextBlock Text="{Binding Description}" TextWrapping="Wrap" Margin="0,12,0,0" />
+                                <TextBlock Text="{res:Loc Detail_SelectPrompt}" Opacity="0.5"
+                                           HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center">
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="Visibility" Value="Collapsed" />
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Detail}" Value="{x:Null}">
+                                                    <Setter Property="Visibility" Value="Visible" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                            </Grid>
+                        </materialDesign:Card>
 
-                                    <TextBlock Text="{res:Loc Detail_CommandLine}" FontWeight="Medium" Margin="0,16,0,4" />
-                                    <Border Background="{DynamicResource MaterialDesignTextFieldBoxBackground}" CornerRadius="4" Padding="10">
-                                        <TextBox Text="{Binding PreviewCommandLine, Mode=OneWay}" IsReadOnly="True"
-                                                 BorderThickness="0" Background="Transparent" TextWrapping="Wrap"
-                                                 FontFamily="Cascadia Mono, Consolas, Courier New" />
-                                    </Border>
-
-                                    <StackPanel Orientation="Horizontal" Margin="0,16,0,0">
-                                        <Button Content="{res:Loc Detail_Run}" IsEnabled="False"
-                                                ToolTip="{res:Loc Detail_RunDisabledHint}"
-                                                Style="{StaticResource MaterialDesignRaisedButton}" Margin="0,0,8,0" />
-                                        <Button Content="{res:Loc Detail_Copy}" Command="{Binding CopyCommand}"
-                                                Style="{StaticResource MaterialDesignOutlinedButton}" Margin="0,0,8,0" />
-                                        <Button Content="{res:Loc Detail_Doc}" Command="{Binding OpenDocCommand}"
-                                                Style="{StaticResource MaterialDesignOutlinedButton}"
-                                                Visibility="{Binding HasDoc, Converter={StaticResource BoolToVis}}" />
+                        <!-- Console + result -->
+                        <materialDesign:Card Grid.Row="1" Margin="4" Padding="12" MaxHeight="360"
+                                             Visibility="{Binding Execution.ShowConsole, Converter={StaticResource BoolToVis}}">
+                            <DockPanel>
+                                <Grid DockPanel.Dock="Top">
+                                    <TextBlock Text="{res:Loc PaneConsole}" FontWeight="Bold" VerticalAlignment="Center" />
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right"
+                                                Visibility="{Binding Execution.IsRunning, Converter={StaticResource BoolToVis}}">
+                                        <ProgressBar IsIndeterminate="True" Width="90" Height="4" VerticalAlignment="Center" Margin="0,0,8,0" />
+                                        <Button Content="{res:Loc Console_Cancel}" Command="{Binding Execution.CancelCommand}"
+                                                Style="{StaticResource MaterialDesignOutlinedButton}" Padding="8,2" Height="28" MinWidth="0" />
                                     </StackPanel>
-                                </StackPanel>
-                            </ScrollViewer>
+                                </Grid>
 
-                            <TextBlock Text="{res:Loc Detail_SelectPrompt}" Opacity="0.5"
-                                       HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center">
-                                <TextBlock.Style>
-                                    <Style TargetType="TextBlock">
-                                        <Setter Property="Visibility" Value="Collapsed" />
-                                        <Style.Triggers>
-                                            <DataTrigger Binding="{Binding Detail}" Value="{x:Null}">
-                                                <Setter Property="Visibility" Value="Visible" />
-                                            </DataTrigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </TextBlock.Style>
-                            </TextBlock>
-                        </Grid>
-                    </materialDesign:Card>
+                                <Grid DockPanel.Dock="Bottom" Margin="0,8,0,0"
+                                      Visibility="{Binding Execution.HasResult, Converter={StaticResource BoolToVis}}">
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                        <TextBlock Text="{Binding Execution.StatusText}" FontWeight="Medium" />
+                                        <TextBlock Text="{res:Loc Result_ExitCode}" Opacity="0.7" Margin="14,0,4,0" />
+                                        <TextBlock Text="{Binding Execution.ExitCode}" Opacity="0.7" />
+                                        <TextBlock Text="{Binding Execution.DurationText}" Opacity="0.7" Margin="14,0,0,0" />
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                        <Button Content="{res:Loc Detail_Copy}" Command="{Binding Execution.CopyOutputCommand}"
+                                                Style="{StaticResource MaterialDesignFlatButton}" Padding="8,2" Height="28" MinWidth="0" />
+                                        <Button Content="{res:Loc Result_Restart}" Click="OnRestartClick" Margin="6,0,0,0"
+                                                Style="{StaticResource MaterialDesignRaisedButton}" Padding="8,2" Height="28" MinWidth="0"
+                                                Visibility="{Binding Execution.RequiresRestart, Converter={StaticResource BoolToVis}}" />
+                                    </StackPanel>
+                                </Grid>
+
+                                <Border Background="{DynamicResource MaterialDesignTextFieldBoxBackground}" CornerRadius="4" Margin="0,8,0,0">
+                                    <ScrollViewer beh:AutoScroll.Enabled="True" VerticalScrollBarVisibility="Auto" MaxHeight="240" Padding="8">
+                                        <ItemsControl ItemsSource="{Binding Execution.OutputLines}">
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Text="{Binding Text}" TextWrapping="Wrap"
+                                                               FontFamily="Cascadia Mono, Consolas, Courier New" FontSize="12">
+                                                        <TextBlock.Style>
+                                                            <Style TargetType="TextBlock">
+                                                                <Style.Triggers>
+                                                                    <DataTrigger Binding="{Binding IsError}" Value="True">
+                                                                        <Setter Property="Foreground" Value="#E0884D" />
+                                                                    </DataTrigger>
+                                                                </Style.Triggers>
+                                                            </Style>
+                                                        </TextBlock.Style>
+                                                    </TextBlock>
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
+                                    </ScrollViewer>
+                                </Border>
+                            </DockPanel>
+                        </materialDesign:Card>
+                    </Grid>
                 </Grid>
             </Grid>
         </Grid>

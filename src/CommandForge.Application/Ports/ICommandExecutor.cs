@@ -1,17 +1,17 @@
+using System.Threading.Channels;
 using CommandForge.Domain;
 
 namespace CommandForge.Application.Ports;
 
 /// <summary>
-/// Runs a command in the current (non-elevated) process, streaming output lines.
+/// Runs a command in the current (non-elevated) process, streaming each output line to the
+/// supplied channel (the executor completes the writer when the process exits).
 /// </summary>
 public interface ICommandExecutor
 {
-    /// <summary>
-    /// Executes <paramref name="command"/>, reporting each output line via <paramref name="output"/>.
-    /// </summary>
+    /// <summary>Executes <paramref name="command"/>, streaming output and returning the result.</summary>
     public Task<ExecutionResult> ExecuteAsync(
         CommandDefinition command,
-        IProgress<string>? output = null,
+        ChannelWriter<OutputLine> output,
         CancellationToken cancellationToken = default);
 }

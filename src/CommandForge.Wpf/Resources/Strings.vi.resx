@@ -133,6 +133,30 @@
   <data name="PaneConsole" xml:space="preserve">
     <value>Bảng điều khiển</value>
   </data>
+  <data name="Console_Cancel" xml:space="preserve">
+    <value>Hủy</value>
+  </data>
+  <data name="Result_Success" xml:space="preserve">
+    <value>Thành công</value>
+  </data>
+  <data name="Result_Failed" xml:space="preserve">
+    <value>Thất bại</value>
+  </data>
+  <data name="Result_Cancelled" xml:space="preserve">
+    <value>Đã hủy</value>
+  </data>
+  <data name="Result_ExitCode" xml:space="preserve">
+    <value>Mã thoát</value>
+  </data>
+  <data name="Result_Restart" xml:space="preserve">
+    <value>Khởi động lại ngay</value>
+  </data>
+  <data name="Restart_ConfirmTitle" xml:space="preserve">
+    <value>Cần khởi động lại</value>
+  </data>
+  <data name="Restart_ConfirmMessage" xml:space="preserve">
+    <value>Một số thay đổi cần khởi động lại để hoàn tất. Khởi động lại ngay?</value>
+  </data>
   <data name="ComingSoon" xml:space="preserve">
     <value>Sắp có</value>
   </data>

@@ -21,6 +21,7 @@ internal sealed record CommandDto
     public string? Icon { get; init; }
     public string? Executable { get; init; }
     public string? ArgsTemplate { get; init; }
+    public ExecutionMode ExecutionMode { get; init; }
     public bool RequiresAdmin { get; init; }
     public DangerLevel DangerLevel { get; init; }
     public bool ConfirmBeforeRun { get; init; }

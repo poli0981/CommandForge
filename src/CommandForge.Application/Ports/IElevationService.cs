@@ -1,3 +1,4 @@
+using System.Threading.Channels;
 using CommandForge.Domain;
 
 namespace CommandForge.Application.Ports;
@@ -11,11 +12,9 @@ public interface IElevationService
     /// <summary>Whether elevation is currently available (broker reachable).</summary>
     public bool IsElevationAvailable { get; }
 
-    /// <summary>
-    /// Runs <paramref name="command"/> elevated via the broker, streaming output lines.
-    /// </summary>
+    /// <summary>Runs <paramref name="command"/> elevated via the broker, streaming output lines.</summary>
     public Task<ExecutionResult> RunElevatedAsync(
         CommandDefinition command,
-        IProgress<string>? output = null,
+        ChannelWriter<OutputLine> output,
         CancellationToken cancellationToken = default);
 }

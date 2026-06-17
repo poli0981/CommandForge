@@ -505,4 +505,226 @@
   <data name="Cmd_sec.telemetry.restore_Desc" xml:space="preserve">
     <value>Remove the telemetry policy override (back to the system default).</value>
   </data>
+  <data name="Cmd_dism.startcomponentcleanup_Title" xml:space="preserve">
+    <value>Clean up component store</value>
+  </data>
+  <data name="Cmd_dism.startcomponentcleanup_Desc" xml:space="preserve">
+    <value>Remove superseded components from WinSxS to free disk space. May require a restart.</value>
+  </data>
+  <data name="Cmd_chkdsk.fix_Title" xml:space="preserve">
+    <value>Repair disk (chkdsk /f /r)</value>
+  </data>
+  <data name="Cmd_chkdsk.fix_Desc" xml:space="preserve">
+    <value>Schedule a full disk check with repair on the system drive at the next restart.</value>
+  </data>
+  <data name="Cmd_winget.upgrade.all_Title" xml:space="preserve">
+    <value>Upgrade all packages</value>
+  </data>
+  <data name="Cmd_winget.upgrade.all_Desc" xml:space="preserve">
+    <value>Upgrade every installed app that winget can update.</value>
+  </data>
+  <data name="Cmd_winget.source.reset_Title" xml:space="preserve">
+    <value>Reset winget sources</value>
+  </data>
+  <data name="Cmd_winget.source.reset_Desc" xml:space="preserve">
+    <value>Reset the winget package sources to their defaults.</value>
+  </data>
+  <data name="Cmd_wu.scan_Title" xml:space="preserve">
+    <value>Scan for Windows updates</value>
+  </data>
+  <data name="Cmd_wu.scan_Desc" xml:space="preserve">
+    <value>Trigger Windows Update to check for new updates now.</value>
+  </data>
+  <data name="Cmd_wu.reset.components_Title" xml:space="preserve">
+    <value>Reset Windows Update</value>
+  </data>
+  <data name="Cmd_wu.reset.components_Desc" xml:space="preserve">
+    <value>Stop the update services, clear their caches, and restart them. Often fixes stuck updates.</value>
+  </data>
+  <data name="Cmd_tweak.win11.classicmenu_Title" xml:space="preserve">
+    <value>Classic context menu (Win11)</value>
+  </data>
+  <data name="Cmd_tweak.win11.classicmenu_Desc" xml:space="preserve">
+    <value>Restore the full right-click menu in Windows 11. Restart Explorer to apply.</value>
+  </data>
+  <data name="Cmd_tweak.win11.modernmenu_Title" xml:space="preserve">
+    <value>Modern context menu (Win11)</value>
+  </data>
+  <data name="Cmd_tweak.win11.modernmenu_Desc" xml:space="preserve">
+    <value>Restore the default Windows 11 right-click menu. Restart Explorer to apply.</value>
+  </data>
+  <data name="Cmd_tweak.restartexplorer_Title" xml:space="preserve">
+    <value>Restart Explorer</value>
+  </data>
+  <data name="Cmd_tweak.restartexplorer_Desc" xml:space="preserve">
+    <value>Restart the Windows Explorer shell (taskbar and desktop).</value>
+  </data>
+  <data name="Cmd_tweak.cleariconcache_Title" xml:space="preserve">
+    <value>Clear icon cache</value>
+  </data>
+  <data name="Cmd_tweak.cleariconcache_Desc" xml:space="preserve">
+    <value>Rebuild the icon cache to fix broken or outdated icons.</value>
+  </data>
+  <data name="Cmd_net.registerdns_Title" xml:space="preserve">
+    <value>Register DNS</value>
+  </data>
+  <data name="Cmd_net.registerdns_Desc" xml:space="preserve">
+    <value>Refresh DHCP leases and re-register DNS names.</value>
+  </data>
+  <data name="Cmd_net.release_Title" xml:space="preserve">
+    <value>Release IP address</value>
+  </data>
+  <data name="Cmd_net.release_Desc" xml:space="preserve">
+    <value>Release the current DHCP IP lease.</value>
+  </data>
+  <data name="Cmd_net.renew_Title" xml:space="preserve">
+    <value>Renew IP address</value>
+  </data>
+  <data name="Cmd_net.renew_Desc" xml:space="preserve">
+    <value>Request a new DHCP IP lease.</value>
+  </data>
+  <data name="Cmd_net.ip.reset_Title" xml:space="preserve">
+    <value>Reset TCP/IP stack</value>
+  </data>
+  <data name="Cmd_net.ip.reset_Desc" xml:space="preserve">
+    <value>Reset the TCP/IP stack to its defaults. Requires a restart.</value>
+  </data>
+  <data name="Cmd_net.full.reset_Title" xml:space="preserve">
+    <value>Full network reset</value>
+  </data>
+  <data name="Cmd_net.full.reset_Desc" xml:space="preserve">
+    <value>Reset Winsock and TCP/IP and flush the DNS cache. Requires a restart.</value>
+  </data>
+  <data name="Cmd_clean.cleanmgr.auto_Title" xml:space="preserve">
+    <value>Automatic Disk Cleanup</value>
+  </data>
+  <data name="Cmd_clean.cleanmgr.auto_Desc" xml:space="preserve">
+    <value>Run Disk Cleanup across all categories without prompting.</value>
+  </data>
+  <data name="Cmd_clean.recyclebin_Title" xml:space="preserve">
+    <value>Empty Recycle Bin</value>
+  </data>
+  <data name="Cmd_clean.recyclebin_Desc" xml:space="preserve">
+    <value>Permanently delete everything in the Recycle Bin.</value>
+  </data>
+  <data name="Cmd_clean.usertemp_Title" xml:space="preserve">
+    <value>Clear user temp files</value>
+  </data>
+  <data name="Cmd_clean.usertemp_Desc" xml:space="preserve">
+    <value>Delete the contents of your user temporary folder.</value>
+  </data>
+  <data name="Cmd_clean.wintemp_Title" xml:space="preserve">
+    <value>Clear Windows temp files</value>
+  </data>
+  <data name="Cmd_clean.wintemp_Desc" xml:space="preserve">
+    <value>Delete the contents of the Windows temporary folder.</value>
+  </data>
+  <data name="Cmd_clean.windowsold_Title" xml:space="preserve">
+    <value>Remove Windows.old</value>
+  </data>
+  <data name="Cmd_clean.windowsold_Desc" xml:space="preserve">
+    <value>Delete the previous Windows installation folder. You will lose the option to roll back.</value>
+  </data>
+  <data name="Cmd_clean.wucache_Title" xml:space="preserve">
+    <value>Clear Windows Update cache</value>
+  </data>
+  <data name="Cmd_clean.wucache_Desc" xml:space="preserve">
+    <value>Stop the update service, delete downloaded update files, and restart it.</value>
+  </data>
+  <data name="Cmd_clean.deliveryopt_Title" xml:space="preserve">
+    <value>Clear Delivery Optimization cache</value>
+  </data>
+  <data name="Cmd_clean.deliveryopt_Desc" xml:space="preserve">
+    <value>Delete cached Delivery Optimization update files.</value>
+  </data>
+  <data name="Cmd_power.set.highperf_Title" xml:space="preserve">
+    <value>Activate High performance</value>
+  </data>
+  <data name="Cmd_power.set.highperf_Desc" xml:space="preserve">
+    <value>Switch the active power plan to High performance.</value>
+  </data>
+  <data name="Cmd_power.add.ultimate_Title" xml:space="preserve">
+    <value>Add Ultimate Performance</value>
+  </data>
+  <data name="Cmd_power.add.ultimate_Desc" xml:space="preserve">
+    <value>Create the Ultimate Performance power plan.</value>
+  </data>
+  <data name="Cmd_power.energy_Title" xml:space="preserve">
+    <value>Energy report</value>
+  </data>
+  <data name="Cmd_power.energy_Desc" xml:space="preserve">
+    <value>Analyze energy efficiency for 60 seconds and save an HTML report to your profile.</value>
+  </data>
+  <data name="Cmd_power.sleepstudy_Title" xml:space="preserve">
+    <value>Sleep study report</value>
+  </data>
+  <data name="Cmd_power.sleepstudy_Desc" xml:space="preserve">
+    <value>Save an HTML sleep study report to your profile.</value>
+  </data>
+  <data name="Cmd_diag.msinfo_Title" xml:space="preserve">
+    <value>System Information</value>
+  </data>
+  <data name="Cmd_diag.msinfo_Desc" xml:space="preserve">
+    <value>Open the System Information (msinfo32) tool.</value>
+  </data>
+  <data name="Cmd_diag.memtest_Title" xml:space="preserve">
+    <value>Windows Memory Diagnostic</value>
+  </data>
+  <data name="Cmd_diag.memtest_Desc" xml:space="preserve">
+    <value>Schedule a RAM test to run at the next restart.</value>
+  </data>
+  <data name="Cmd_sec.defender.update_Title" xml:space="preserve">
+    <value>Update Defender signatures</value>
+  </data>
+  <data name="Cmd_sec.defender.update_Desc" xml:space="preserve">
+    <value>Download the latest Microsoft Defender definitions.</value>
+  </data>
+  <data name="Cmd_dev.devmode.on_Title" xml:space="preserve">
+    <value>Enable Developer Mode</value>
+  </data>
+  <data name="Cmd_dev.devmode.on_Desc" xml:space="preserve">
+    <value>Turn on Windows Developer Mode (allows sideloading).</value>
+  </data>
+  <data name="Cmd_dev.devmode.off_Title" xml:space="preserve">
+    <value>Disable Developer Mode</value>
+  </data>
+  <data name="Cmd_dev.devmode.off_Desc" xml:space="preserve">
+    <value>Turn off Windows Developer Mode.</value>
+  </data>
+  <data name="Cmd_dev.wsl.install_Title" xml:space="preserve">
+    <value>Install WSL</value>
+  </data>
+  <data name="Cmd_dev.wsl.install_Desc" xml:space="preserve">
+    <value>Install the Windows Subsystem for Linux. Requires a restart.</value>
+  </data>
+  <data name="Cmd_dev.wsl.update_Title" xml:space="preserve">
+    <value>Update WSL</value>
+  </data>
+  <data name="Cmd_dev.wsl.update_Desc" xml:space="preserve">
+    <value>Update the Windows Subsystem for Linux kernel.</value>
+  </data>
+  <data name="Cmd_dev.hyperv.on_Title" xml:space="preserve">
+    <value>Enable Hyper-V</value>
+  </data>
+  <data name="Cmd_dev.hyperv.on_Desc" xml:space="preserve">
+    <value>Turn on the Hyper-V virtualization feature. Requires a restart.</value>
+  </data>
+  <data name="Cmd_dev.hyperv.off_Title" xml:space="preserve">
+    <value>Disable Hyper-V</value>
+  </data>
+  <data name="Cmd_dev.hyperv.off_Desc" xml:space="preserve">
+    <value>Turn off the Hyper-V virtualization feature. Requires a restart.</value>
+  </data>
+  <data name="Cmd_dev.sandbox.on_Title" xml:space="preserve">
+    <value>Enable Windows Sandbox</value>
+  </data>
+  <data name="Cmd_dev.sandbox.on_Desc" xml:space="preserve">
+    <value>Turn on the Windows Sandbox feature. Requires a restart.</value>
+  </data>
+  <data name="Cmd_dev.netfx3.on_Title" xml:space="preserve">
+    <value>Enable .NET Framework 3.5</value>
+  </data>
+  <data name="Cmd_dev.netfx3.on_Desc" xml:space="preserve">
+    <value>Install the .NET Framework 3.5 feature. May require a restart.</value>
+  </data>
 </root>

@@ -505,4 +505,226 @@
   <data name="Cmd_sec.telemetry.restore_Desc" xml:space="preserve">
     <value>Xóa chính sách telemetry đã đặt (về mặc định hệ thống).</value>
   </data>
+  <data name="Cmd_dism.startcomponentcleanup_Title" xml:space="preserve">
+    <value>Dọn component store</value>
+  </data>
+  <data name="Cmd_dism.startcomponentcleanup_Desc" xml:space="preserve">
+    <value>Xóa các thành phần cũ trong WinSxS để giải phóng dung lượng. Có thể cần khởi động lại.</value>
+  </data>
+  <data name="Cmd_chkdsk.fix_Title" xml:space="preserve">
+    <value>Sửa lỗi đĩa (chkdsk /f /r)</value>
+  </data>
+  <data name="Cmd_chkdsk.fix_Desc" xml:space="preserve">
+    <value>Lên lịch kiểm tra và sửa lỗi toàn bộ ổ hệ thống ở lần khởi động kế tiếp.</value>
+  </data>
+  <data name="Cmd_winget.upgrade.all_Title" xml:space="preserve">
+    <value>Nâng cấp tất cả gói</value>
+  </data>
+  <data name="Cmd_winget.upgrade.all_Desc" xml:space="preserve">
+    <value>Nâng cấp mọi ứng dụng đã cài mà winget có thể cập nhật.</value>
+  </data>
+  <data name="Cmd_winget.source.reset_Title" xml:space="preserve">
+    <value>Đặt lại nguồn winget</value>
+  </data>
+  <data name="Cmd_winget.source.reset_Desc" xml:space="preserve">
+    <value>Đặt lại các nguồn gói winget về mặc định.</value>
+  </data>
+  <data name="Cmd_wu.scan_Title" xml:space="preserve">
+    <value>Quét cập nhật Windows</value>
+  </data>
+  <data name="Cmd_wu.scan_Desc" xml:space="preserve">
+    <value>Yêu cầu Windows Update kiểm tra bản cập nhật mới ngay.</value>
+  </data>
+  <data name="Cmd_wu.reset.components_Title" xml:space="preserve">
+    <value>Đặt lại Windows Update</value>
+  </data>
+  <data name="Cmd_wu.reset.components_Desc" xml:space="preserve">
+    <value>Dừng dịch vụ cập nhật, xóa cache và khởi động lại. Thường khắc phục cập nhật bị treo.</value>
+  </data>
+  <data name="Cmd_tweak.win11.classicmenu_Title" xml:space="preserve">
+    <value>Menu chuột phải cổ điển (Win11)</value>
+  </data>
+  <data name="Cmd_tweak.win11.classicmenu_Desc" xml:space="preserve">
+    <value>Khôi phục menu chuột phải đầy đủ trên Windows 11. Khởi động lại Explorer để áp dụng.</value>
+  </data>
+  <data name="Cmd_tweak.win11.modernmenu_Title" xml:space="preserve">
+    <value>Menu chuột phải hiện đại (Win11)</value>
+  </data>
+  <data name="Cmd_tweak.win11.modernmenu_Desc" xml:space="preserve">
+    <value>Khôi phục menu chuột phải mặc định của Windows 11. Khởi động lại Explorer để áp dụng.</value>
+  </data>
+  <data name="Cmd_tweak.restartexplorer_Title" xml:space="preserve">
+    <value>Khởi động lại Explorer</value>
+  </data>
+  <data name="Cmd_tweak.restartexplorer_Desc" xml:space="preserve">
+    <value>Khởi động lại shell Windows Explorer (thanh tác vụ và màn hình nền).</value>
+  </data>
+  <data name="Cmd_tweak.cleariconcache_Title" xml:space="preserve">
+    <value>Xóa cache biểu tượng</value>
+  </data>
+  <data name="Cmd_tweak.cleariconcache_Desc" xml:space="preserve">
+    <value>Dựng lại cache biểu tượng để sửa các icon lỗi hoặc cũ.</value>
+  </data>
+  <data name="Cmd_net.registerdns_Title" xml:space="preserve">
+    <value>Đăng ký DNS</value>
+  </data>
+  <data name="Cmd_net.registerdns_Desc" xml:space="preserve">
+    <value>Làm mới lease DHCP và đăng ký lại tên DNS.</value>
+  </data>
+  <data name="Cmd_net.release_Title" xml:space="preserve">
+    <value>Giải phóng địa chỉ IP</value>
+  </data>
+  <data name="Cmd_net.release_Desc" xml:space="preserve">
+    <value>Giải phóng lease IP DHCP hiện tại.</value>
+  </data>
+  <data name="Cmd_net.renew_Title" xml:space="preserve">
+    <value>Làm mới địa chỉ IP</value>
+  </data>
+  <data name="Cmd_net.renew_Desc" xml:space="preserve">
+    <value>Yêu cầu lease IP DHCP mới.</value>
+  </data>
+  <data name="Cmd_net.ip.reset_Title" xml:space="preserve">
+    <value>Đặt lại TCP/IP</value>
+  </data>
+  <data name="Cmd_net.ip.reset_Desc" xml:space="preserve">
+    <value>Đặt lại ngăn xếp TCP/IP về mặc định. Cần khởi động lại.</value>
+  </data>
+  <data name="Cmd_net.full.reset_Title" xml:space="preserve">
+    <value>Đặt lại mạng toàn bộ</value>
+  </data>
+  <data name="Cmd_net.full.reset_Desc" xml:space="preserve">
+    <value>Đặt lại Winsock, TCP/IP và xóa cache DNS. Cần khởi động lại.</value>
+  </data>
+  <data name="Cmd_clean.cleanmgr.auto_Title" xml:space="preserve">
+    <value>Dọn đĩa tự động</value>
+  </data>
+  <data name="Cmd_clean.cleanmgr.auto_Desc" xml:space="preserve">
+    <value>Chạy Disk Cleanup cho mọi mục mà không cần hỏi.</value>
+  </data>
+  <data name="Cmd_clean.recyclebin_Title" xml:space="preserve">
+    <value>Dọn thùng rác</value>
+  </data>
+  <data name="Cmd_clean.recyclebin_Desc" xml:space="preserve">
+    <value>Xóa vĩnh viễn mọi thứ trong Thùng rác.</value>
+  </data>
+  <data name="Cmd_clean.usertemp_Title" xml:space="preserve">
+    <value>Xóa file tạm người dùng</value>
+  </data>
+  <data name="Cmd_clean.usertemp_Desc" xml:space="preserve">
+    <value>Xóa nội dung thư mục tạm của người dùng.</value>
+  </data>
+  <data name="Cmd_clean.wintemp_Title" xml:space="preserve">
+    <value>Xóa file tạm Windows</value>
+  </data>
+  <data name="Cmd_clean.wintemp_Desc" xml:space="preserve">
+    <value>Xóa nội dung thư mục tạm của Windows.</value>
+  </data>
+  <data name="Cmd_clean.windowsold_Title" xml:space="preserve">
+    <value>Xóa Windows.old</value>
+  </data>
+  <data name="Cmd_clean.windowsold_Desc" xml:space="preserve">
+    <value>Xóa thư mục bản Windows cũ. Bạn sẽ mất khả năng quay lui.</value>
+  </data>
+  <data name="Cmd_clean.wucache_Title" xml:space="preserve">
+    <value>Xóa cache Windows Update</value>
+  </data>
+  <data name="Cmd_clean.wucache_Desc" xml:space="preserve">
+    <value>Dừng dịch vụ cập nhật, xóa file đã tải và khởi động lại.</value>
+  </data>
+  <data name="Cmd_clean.deliveryopt_Title" xml:space="preserve">
+    <value>Xóa cache Delivery Optimization</value>
+  </data>
+  <data name="Cmd_clean.deliveryopt_Desc" xml:space="preserve">
+    <value>Xóa các file cập nhật cache của Delivery Optimization.</value>
+  </data>
+  <data name="Cmd_power.set.highperf_Title" xml:space="preserve">
+    <value>Bật High performance</value>
+  </data>
+  <data name="Cmd_power.set.highperf_Desc" xml:space="preserve">
+    <value>Chuyển gói điện đang dùng sang High performance.</value>
+  </data>
+  <data name="Cmd_power.add.ultimate_Title" xml:space="preserve">
+    <value>Thêm Ultimate Performance</value>
+  </data>
+  <data name="Cmd_power.add.ultimate_Desc" xml:space="preserve">
+    <value>Tạo gói điện Ultimate Performance.</value>
+  </data>
+  <data name="Cmd_power.energy_Title" xml:space="preserve">
+    <value>Báo cáo năng lượng</value>
+  </data>
+  <data name="Cmd_power.energy_Desc" xml:space="preserve">
+    <value>Phân tích hiệu suất năng lượng trong 60 giây và lưu báo cáo HTML vào hồ sơ người dùng.</value>
+  </data>
+  <data name="Cmd_power.sleepstudy_Title" xml:space="preserve">
+    <value>Báo cáo sleep study</value>
+  </data>
+  <data name="Cmd_power.sleepstudy_Desc" xml:space="preserve">
+    <value>Lưu báo cáo HTML sleep study vào hồ sơ người dùng.</value>
+  </data>
+  <data name="Cmd_diag.msinfo_Title" xml:space="preserve">
+    <value>Thông tin hệ thống</value>
+  </data>
+  <data name="Cmd_diag.msinfo_Desc" xml:space="preserve">
+    <value>Mở công cụ System Information (msinfo32).</value>
+  </data>
+  <data name="Cmd_diag.memtest_Title" xml:space="preserve">
+    <value>Chẩn đoán bộ nhớ Windows</value>
+  </data>
+  <data name="Cmd_diag.memtest_Desc" xml:space="preserve">
+    <value>Lên lịch kiểm tra RAM ở lần khởi động kế tiếp.</value>
+  </data>
+  <data name="Cmd_sec.defender.update_Title" xml:space="preserve">
+    <value>Cập nhật Defender</value>
+  </data>
+  <data name="Cmd_sec.defender.update_Desc" xml:space="preserve">
+    <value>Tải bản định nghĩa Microsoft Defender mới nhất.</value>
+  </data>
+  <data name="Cmd_dev.devmode.on_Title" xml:space="preserve">
+    <value>Bật Developer Mode</value>
+  </data>
+  <data name="Cmd_dev.devmode.on_Desc" xml:space="preserve">
+    <value>Bật Chế độ nhà phát triển Windows (cho phép sideload).</value>
+  </data>
+  <data name="Cmd_dev.devmode.off_Title" xml:space="preserve">
+    <value>Tắt Developer Mode</value>
+  </data>
+  <data name="Cmd_dev.devmode.off_Desc" xml:space="preserve">
+    <value>Tắt Chế độ nhà phát triển Windows.</value>
+  </data>
+  <data name="Cmd_dev.wsl.install_Title" xml:space="preserve">
+    <value>Cài WSL</value>
+  </data>
+  <data name="Cmd_dev.wsl.install_Desc" xml:space="preserve">
+    <value>Cài Windows Subsystem for Linux. Cần khởi động lại.</value>
+  </data>
+  <data name="Cmd_dev.wsl.update_Title" xml:space="preserve">
+    <value>Cập nhật WSL</value>
+  </data>
+  <data name="Cmd_dev.wsl.update_Desc" xml:space="preserve">
+    <value>Cập nhật kernel Windows Subsystem for Linux.</value>
+  </data>
+  <data name="Cmd_dev.hyperv.on_Title" xml:space="preserve">
+    <value>Bật Hyper-V</value>
+  </data>
+  <data name="Cmd_dev.hyperv.on_Desc" xml:space="preserve">
+    <value>Bật tính năng ảo hóa Hyper-V. Cần khởi động lại.</value>
+  </data>
+  <data name="Cmd_dev.hyperv.off_Title" xml:space="preserve">
+    <value>Tắt Hyper-V</value>
+  </data>
+  <data name="Cmd_dev.hyperv.off_Desc" xml:space="preserve">
+    <value>Tắt tính năng ảo hóa Hyper-V. Cần khởi động lại.</value>
+  </data>
+  <data name="Cmd_dev.sandbox.on_Title" xml:space="preserve">
+    <value>Bật Windows Sandbox</value>
+  </data>
+  <data name="Cmd_dev.sandbox.on_Desc" xml:space="preserve">
+    <value>Bật tính năng Windows Sandbox. Cần khởi động lại.</value>
+  </data>
+  <data name="Cmd_dev.netfx3.on_Title" xml:space="preserve">
+    <value>Bật .NET Framework 3.5</value>
+  </data>
+  <data name="Cmd_dev.netfx3.on_Desc" xml:space="preserve">
+    <value>Cài tính năng .NET Framework 3.5. Có thể cần khởi động lại.</value>
+  </data>
 </root>

@@ -1,3 +1,4 @@
+using CommandForge.Application.Ports;
 using CommandForge.Wpf.ViewModels;
 using CommandForge.Wpf.Views;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,6 +12,8 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection AddCommandForgeWpf(this IServiceCollection services)
     {
         ArgumentNullException.ThrowIfNull(services);
+
+        services.AddSingleton<IConfirmationService, ConfirmationService>();
 
         services.AddTransient<LegalGateViewModel>();
         services.AddTransient<MainViewModel>();

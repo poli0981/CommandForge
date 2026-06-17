@@ -12,7 +12,8 @@
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontSize="13"
         Background="{DynamicResource MaterialDesignPaper}"
-        PreviewKeyDown="OnWindowPreviewKeyDown">
+        PreviewKeyDown="OnWindowPreviewKeyDown"
+        Closing="OnWindowClosing">
     <Window.Resources>
         <conv:DangerLevelToBrushConverter x:Key="DangerBrush" />
         <conv:DangerLevelToTextConverter x:Key="DangerText" />
@@ -263,6 +264,10 @@
                                             <Button Content="{res:Loc Detail_Run}"
                                                     Command="{Binding DataContext.RunSelectedCommand, RelativeSource={RelativeSource AncestorType=Window}}"
                                                     Style="{StaticResource MaterialDesignRaisedButton}" Margin="0,0,8,0" />
+                                            <Button Content="{res:Loc Detail_Revert}"
+                                                    Command="{Binding DataContext.RevertSelectedCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                                                    Style="{StaticResource MaterialDesignOutlinedButton}" Margin="0,0,8,0"
+                                                    Visibility="{Binding HasRevert, Converter={StaticResource BoolToVis}}" />
                                             <Button Content="{res:Loc Detail_Copy}" Command="{Binding CopyCommand}"
                                                     Style="{StaticResource MaterialDesignOutlinedButton}" Margin="0,0,8,0" />
                                             <Button Content="{res:Loc Detail_Doc}" Command="{Binding OpenDocCommand}"

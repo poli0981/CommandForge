@@ -172,6 +172,30 @@
   <data name="Detail_SelectPrompt" xml:space="preserve">
     <value>Chọn một lệnh để xem chi tiết.</value>
   </data>
+  <data name="Detail_Revert" xml:space="preserve">
+    <value>Hoàn tác</value>
+  </data>
+  <data name="Confirm_TypeToConfirm" xml:space="preserve">
+    <value>Gõ tên lệnh để xác nhận:</value>
+  </data>
+  <data name="Confirm_CreateRestorePoint" xml:space="preserve">
+    <value>Tạo điểm khôi phục hệ thống trước (khuyến nghị)</value>
+  </data>
+  <data name="Exit_RunningTitle" xml:space="preserve">
+    <value>Đang chạy lệnh</value>
+  </data>
+  <data name="Exit_RunningMessage" xml:space="preserve">
+    <value>Một lệnh vẫn đang chạy. Hủy và thoát?</value>
+  </data>
+  <data name="Restore_Creating" xml:space="preserve">
+    <value>Đang tạo điểm khôi phục…</value>
+  </data>
+  <data name="Restore_Created" xml:space="preserve">
+    <value>Đã tạo điểm khôi phục.</value>
+  </data>
+  <data name="Restore_Failed" xml:space="preserve">
+    <value>Không tạo được điểm khôi phục (vẫn tiếp tục).</value>
+  </data>
   <data name="Detail_CommandLine" xml:space="preserve">
     <value>Lệnh sẽ chạy</value>
   </data>
@@ -420,5 +444,65 @@
   </data>
   <data name="Cmd_dev.features.list_Desc" xml:space="preserve">
     <value>Liệt kê các tính năng tùy chọn Windows đang bật.</value>
+  </data>
+  <data name="Cmd_system.restorepoint_Title" xml:space="preserve">
+    <value>Tạo điểm khôi phục</value>
+  </data>
+  <data name="Cmd_system.restorepoint_Desc" xml:space="preserve">
+    <value>Tạo một điểm khôi phục hệ thống.</value>
+  </data>
+  <data name="Cmd_dism.restorehealth_Title" xml:space="preserve">
+    <value>DISM RestoreHealth</value>
+  </data>
+  <data name="Cmd_dism.restorehealth_Desc" xml:space="preserve">
+    <value>Sửa image Windows (có thể lâu; có thể cần khởi động lại).</value>
+  </data>
+  <data name="Cmd_sfc.scannow_Title" xml:space="preserve">
+    <value>SFC scannow</value>
+  </data>
+  <data name="Cmd_sfc.scannow_Desc" xml:space="preserve">
+    <value>Quét và sửa các file hệ thống được bảo vệ (có thể cần khởi động lại).</value>
+  </data>
+  <data name="Cmd_net.winsock.reset_Title" xml:space="preserve">
+    <value>Reset Winsock</value>
+  </data>
+  <data name="Cmd_net.winsock.reset_Desc" xml:space="preserve">
+    <value>Đặt lại catalog Winsock (cần khởi động lại sau đó).</value>
+  </data>
+  <data name="Cmd_sec.defender.quickscan_Title" xml:space="preserve">
+    <value>Defender quét nhanh</value>
+  </data>
+  <data name="Cmd_sec.defender.quickscan_Desc" xml:space="preserve">
+    <value>Chạy quét nhanh Microsoft Defender.</value>
+  </data>
+  <data name="Cmd_power.hibernate.off_Title" xml:space="preserve">
+    <value>Tắt hibernate</value>
+  </data>
+  <data name="Cmd_power.hibernate.off_Desc" xml:space="preserve">
+    <value>Tắt hibernate và giải phóng dung lượng đĩa nó dùng.</value>
+  </data>
+  <data name="Cmd_power.hibernate.on_Title" xml:space="preserve">
+    <value>Bật hibernate</value>
+  </data>
+  <data name="Cmd_power.hibernate.on_Desc" xml:space="preserve">
+    <value>Bật lại hibernate.</value>
+  </data>
+  <data name="Cmd_tweak.hideext_Title" xml:space="preserve">
+    <value>Ẩn đuôi file</value>
+  </data>
+  <data name="Cmd_tweak.hideext_Desc" xml:space="preserve">
+    <value>Ẩn phần mở rộng tên file đã biết trong Explorer.</value>
+  </data>
+  <data name="Cmd_sec.telemetry.basic_Title" xml:space="preserve">
+    <value>Hạ telemetry</value>
+  </data>
+  <data name="Cmd_sec.telemetry.basic_Desc" xml:space="preserve">
+    <value>Đặt chính sách telemetry xuống mức thấp nhất. Có thể ảnh hưởng Windows Update ở vài bản; hoàn tác được.</value>
+  </data>
+  <data name="Cmd_sec.telemetry.restore_Title" xml:space="preserve">
+    <value>Khôi phục telemetry</value>
+  </data>
+  <data name="Cmd_sec.telemetry.restore_Desc" xml:space="preserve">
+    <value>Xóa chính sách telemetry đã đặt (về mặc định hệ thống).</value>
   </data>
 </root>

@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Input;
@@ -22,6 +23,30 @@ public partial class MainWindow : Window
     }
 
     private void OnExitClick(object sender, RoutedEventArgs e) => Close();
+
+    private void OnWindowClosing(object sender, CancelEventArgs e)
+    {
+        if (!_viewModel.Execution.IsRunning)
+        {
+            return;
+        }
+
+        var confirm = MessageBox.Show(
+            this,
+            Strings.Get("Exit_RunningMessage"),
+            Strings.Get("Exit_RunningTitle"),
+            MessageBoxButton.YesNo,
+            MessageBoxImage.Warning);
+
+        if (confirm == MessageBoxResult.Yes)
+        {
+            _viewModel.Execution.CancelCommand.Execute(null);
+        }
+        else
+        {
+            e.Cancel = true;
+        }
+    }
 
     private void OnOpenPaletteClick(object sender, RoutedEventArgs e) => OpenPalette();
 

@@ -121,6 +121,9 @@
   <data name="SidebarSettings" xml:space="preserve">
     <value>Settings</value>
   </data>
+  <data name="Sidebar_AllCommands" xml:space="preserve">
+    <value>All commands</value>
+  </data>
   <data name="PaneCommands" xml:space="preserve">
     <value>Commands</value>
   </data>
@@ -132,5 +135,230 @@
   </data>
   <data name="ComingSoon" xml:space="preserve">
     <value>Coming soon</value>
+  </data>
+  <data name="NoCommandsInCategory" xml:space="preserve">
+    <value>No commands in this category yet.</value>
+  </data>
+  <data name="NoSearchResults" xml:space="preserve">
+    <value>No commands match your search.</value>
+  </data>
+  <data name="Detail_RunDisabledHint" xml:space="preserve">
+    <value>Running commands arrives in the next phase.</value>
+  </data>
+  <data name="Detail_SelectPrompt" xml:space="preserve">
+    <value>Select a command to see its details.</value>
+  </data>
+  <data name="Detail_CommandLine" xml:space="preserve">
+    <value>Command to run</value>
+  </data>
+  <data name="Detail_Copy" xml:space="preserve">
+    <value>Copy</value>
+  </data>
+  <data name="Detail_Run" xml:space="preserve">
+    <value>Run</value>
+  </data>
+  <data name="Detail_Doc" xml:space="preserve">
+    <value>Docs</value>
+  </data>
+  <data name="Detail_RequiresAdmin" xml:space="preserve">
+    <value>Requires admin</value>
+  </data>
+  <data name="Detail_MayRestart" xml:space="preserve">
+    <value>May require restart</value>
+  </data>
+  <data name="Search_Placeholder" xml:space="preserve">
+    <value>Search commands… (Ctrl+K)</value>
+  </data>
+  <data name="Palette_Placeholder" xml:space="preserve">
+    <value>Type to search the whole catalog…</value>
+  </data>
+  <data name="Danger_Safe" xml:space="preserve">
+    <value>Safe</value>
+  </data>
+  <data name="Danger_Caution" xml:space="preserve">
+    <value>Caution</value>
+  </data>
+  <data name="Danger_Dangerous" xml:space="preserve">
+    <value>Dangerous</value>
+  </data>
+  <data name="Cat_system-maintenance" xml:space="preserve">
+    <value>System &amp; Maintenance</value>
+  </data>
+  <data name="Cat_updates-packages" xml:space="preserve">
+    <value>Updates &amp; Packages</value>
+  </data>
+  <data name="Cat_tweaks-shortcuts" xml:space="preserve">
+    <value>Tweaks &amp; Shortcuts</value>
+  </data>
+  <data name="Cat_network" xml:space="preserve">
+    <value>Network</value>
+  </data>
+  <data name="Cat_cleanup" xml:space="preserve">
+    <value>Cleanup</value>
+  </data>
+  <data name="Cat_power" xml:space="preserve">
+    <value>Power</value>
+  </data>
+  <data name="Cat_system-info" xml:space="preserve">
+    <value>System Info</value>
+  </data>
+  <data name="Cat_diagnostics" xml:space="preserve">
+    <value>Diagnostics</value>
+  </data>
+  <data name="Cat_security-privacy" xml:space="preserve">
+    <value>Security &amp; Privacy</value>
+  </data>
+  <data name="Cat_developer" xml:space="preserve">
+    <value>Developer</value>
+  </data>
+  <data name="Cmd_info.systeminfo_Title" xml:space="preserve">
+    <value>System information</value>
+  </data>
+  <data name="Cmd_info.systeminfo_Desc" xml:space="preserve">
+    <value>Show a full overview of this system.</value>
+  </data>
+  <data name="Cmd_info.winver_Title" xml:space="preserve">
+    <value>Windows version</value>
+  </data>
+  <data name="Cmd_info.winver_Desc" xml:space="preserve">
+    <value>Show the Windows edition, version and build.</value>
+  </data>
+  <data name="Cmd_info.cpu_Title" xml:space="preserve">
+    <value>CPU information</value>
+  </data>
+  <data name="Cmd_info.cpu_Desc" xml:space="preserve">
+    <value>Show the processor name, cores and clock speed.</value>
+  </data>
+  <data name="Cmd_info.gpu_Title" xml:space="preserve">
+    <value>GPU information</value>
+  </data>
+  <data name="Cmd_info.gpu_Desc" xml:space="preserve">
+    <value>Show the graphics card name and driver version.</value>
+  </data>
+  <data name="Cmd_info.ram_Title" xml:space="preserve">
+    <value>Memory information</value>
+  </data>
+  <data name="Cmd_info.ram_Desc" xml:space="preserve">
+    <value>Show the installed RAM modules.</value>
+  </data>
+  <data name="Cmd_info.disk_Title" xml:space="preserve">
+    <value>Disk information</value>
+  </data>
+  <data name="Cmd_info.disk_Desc" xml:space="preserve">
+    <value>List physical disks and their media types.</value>
+  </data>
+  <data name="Cmd_info.uptime_Title" xml:space="preserve">
+    <value>System uptime</value>
+  </data>
+  <data name="Cmd_info.uptime_Desc" xml:space="preserve">
+    <value>Show how long the system has been running.</value>
+  </data>
+  <data name="Cmd_info.activation_Title" xml:space="preserve">
+    <value>Activation status</value>
+  </data>
+  <data name="Cmd_info.activation_Desc" xml:space="preserve">
+    <value>Show the Windows activation status.</value>
+  </data>
+  <data name="Cmd_net.ipconfig.all_Title" xml:space="preserve">
+    <value>Network configuration</value>
+  </data>
+  <data name="Cmd_net.ipconfig.all_Desc" xml:space="preserve">
+    <value>Show the full IP configuration for all adapters.</value>
+  </data>
+  <data name="Cmd_net.flushdns_Title" xml:space="preserve">
+    <value>Flush DNS cache</value>
+  </data>
+  <data name="Cmd_net.flushdns_Desc" xml:space="preserve">
+    <value>Clear the DNS resolver cache.</value>
+  </data>
+  <data name="Cmd_net.showadapters_Title" xml:space="preserve">
+    <value>Show network adapters</value>
+  </data>
+  <data name="Cmd_net.showadapters_Desc" xml:space="preserve">
+    <value>List network interfaces and their state.</value>
+  </data>
+  <data name="Cmd_tweak.godmode_Title" xml:space="preserve">
+    <value>Open God Mode</value>
+  </data>
+  <data name="Cmd_tweak.godmode_Desc" xml:space="preserve">
+    <value>Open the all-tasks (God Mode) control panel view.</value>
+  </data>
+  <data name="Cmd_tweak.showext_Title" xml:space="preserve">
+    <value>Show file extensions</value>
+  </data>
+  <data name="Cmd_tweak.showext_Desc" xml:space="preserve">
+    <value>Always show file name extensions in Explorer.</value>
+  </data>
+  <data name="Cmd_tweak.showhidden_Title" xml:space="preserve">
+    <value>Show hidden files</value>
+  </data>
+  <data name="Cmd_tweak.showhidden_Desc" xml:space="preserve">
+    <value>Show hidden files and folders in Explorer.</value>
+  </data>
+  <data name="Cmd_cleanup.cleanmgr_Title" xml:space="preserve">
+    <value>Disk Cleanup</value>
+  </data>
+  <data name="Cmd_cleanup.cleanmgr_Desc" xml:space="preserve">
+    <value>Open the Windows Disk Cleanup tool.</value>
+  </data>
+  <data name="Cmd_power.list_Title" xml:space="preserve">
+    <value>List power plans</value>
+  </data>
+  <data name="Cmd_power.list_Desc" xml:space="preserve">
+    <value>Show the available power plans.</value>
+  </data>
+  <data name="Cmd_power.batteryreport_Title" xml:space="preserve">
+    <value>Battery report</value>
+  </data>
+  <data name="Cmd_power.batteryreport_Desc" xml:space="preserve">
+    <value>Generate an HTML battery health report.</value>
+  </data>
+  <data name="Cmd_diag.reliability_Title" xml:space="preserve">
+    <value>Reliability Monitor</value>
+  </data>
+  <data name="Cmd_diag.reliability_Desc" xml:space="preserve">
+    <value>Open the Windows Reliability Monitor.</value>
+  </data>
+  <data name="Cmd_diag.eventviewer_Title" xml:space="preserve">
+    <value>Event Viewer</value>
+  </data>
+  <data name="Cmd_diag.eventviewer_Desc" xml:space="preserve">
+    <value>Open the Windows Event Viewer.</value>
+  </data>
+  <data name="Cmd_diag.resmon_Title" xml:space="preserve">
+    <value>Resource Monitor</value>
+  </data>
+  <data name="Cmd_diag.resmon_Desc" xml:space="preserve">
+    <value>Open the Windows Resource Monitor.</value>
+  </data>
+  <data name="Cmd_diag.dxdiag_Title" xml:space="preserve">
+    <value>DirectX Diagnostics</value>
+  </data>
+  <data name="Cmd_diag.dxdiag_Desc" xml:space="preserve">
+    <value>Open the DirectX diagnostic tool.</value>
+  </data>
+  <data name="Cmd_winget.list_Title" xml:space="preserve">
+    <value>List installed apps</value>
+  </data>
+  <data name="Cmd_winget.list_Desc" xml:space="preserve">
+    <value>List apps installed via winget.</value>
+  </data>
+  <data name="Cmd_winget.upgrade.list_Title" xml:space="preserve">
+    <value>Check app updates</value>
+  </data>
+  <data name="Cmd_winget.upgrade.list_Desc" xml:space="preserve">
+    <value>Show apps that have newer versions available.</value>
+  </data>
+  <data name="Cmd_sec.firewall.status_Title" xml:space="preserve">
+    <value>Firewall status</value>
+  </data>
+  <data name="Cmd_sec.firewall.status_Desc" xml:space="preserve">
+    <value>Show the status of all firewall profiles.</value>
+  </data>
+  <data name="Cmd_dev.wsl.list_Title" xml:space="preserve">
+    <value>List WSL distros</value>
+  </data>
+  <data name="Cmd_dev.wsl.list_Desc" xml:space="preserve">
+    <value>List installed WSL distributions.</value>
   </data>
 </root>

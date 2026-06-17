@@ -1,0 +1,12 @@
+[
+  { "id": "system-maintenance", "titleKey": "Cat_system-maintenance", "icon": "Wrench", "order": 1 },
+  { "id": "updates-packages",   "titleKey": "Cat_updates-packages",   "icon": "Update", "order": 2 },
+  { "id": "tweaks-shortcuts",   "titleKey": "Cat_tweaks-shortcuts",   "icon": "Tune", "order": 3 },
+  { "id": "network",            "titleKey": "Cat_network",            "icon": "Lan", "order": 4 },
+  { "id": "cleanup",            "titleKey": "Cat_cleanup",            "icon": "Broom", "order": 5 },
+  { "id": "power",              "titleKey": "Cat_power",              "icon": "PowerPlug", "order": 6 },
+  { "id": "system-info",        "titleKey": "Cat_system-info",        "icon": "Information", "order": 7 },
+  { "id": "diagnostics",        "titleKey": "Cat_diagnostics",        "icon": "Stethoscope", "order": 8 },
+  { "id": "security-privacy",   "titleKey": "Cat_security-privacy",   "icon": "ShieldLock", "order": 9 },
+  { "id": "developer",          "titleKey": "Cat_developer",          "icon": "CodeBraces", "order": 10 }
+]

@@ -14,9 +14,11 @@ public static class ServiceCollectionExtensions
 
         services.AddTransient<LegalGateViewModel>();
         services.AddTransient<MainViewModel>();
+        services.AddTransient<CommandPaletteViewModel>();
 
         services.AddTransient<LegalGateWindow>();
         services.AddTransient<MainWindow>();
+        services.AddTransient<CommandPaletteWindow>();
 
         return services;
     }

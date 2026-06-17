@@ -21,6 +21,8 @@
     <ProjectReference Include="..\..\src\CommandForge.Domain\CommandForge.Domain.csproj" />
     <ProjectReference Include="..\..\src\CommandForge.Application\CommandForge.Application.csproj" />
     <ProjectReference Include="..\..\src\CommandForge.Infrastructure\CommandForge.Infrastructure.csproj" />
+    <!-- Referenced so the catalog-keys test can verify titles/descriptions exist in the .resx (EN+VI). -->
+    <ProjectReference Include="..\..\src\CommandForge.Wpf\CommandForge.Wpf.csproj" />
   </ItemGroup>
 
 </Project>

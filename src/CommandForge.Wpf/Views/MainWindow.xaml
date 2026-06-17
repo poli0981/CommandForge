@@ -3,42 +3,51 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:res="clr-namespace:CommandForge.Wpf.Resources"
-        Title="{x:Static res:Strings.AppTitle}"
+        xmlns:conv="clr-namespace:CommandForge.Wpf.Converters"
+        xmlns:beh="clr-namespace:CommandForge.Wpf.Behaviors"
+        Title="{res:Loc AppTitle}"
         Width="1100" Height="720" MinWidth="900" MinHeight="600"
         WindowStartupLocation="CenterScreen"
         FontFamily="{DynamicResource MaterialDesignFont}"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontSize="13"
-        Background="{DynamicResource MaterialDesignPaper}">
+        Background="{DynamicResource MaterialDesignPaper}"
+        PreviewKeyDown="OnWindowPreviewKeyDown">
     <Window.Resources>
+        <conv:DangerLevelToBrushConverter x:Key="DangerBrush" />
+        <conv:DangerLevelToTextConverter x:Key="DangerText" />
+        <conv:StringToPackIconKindConverter x:Key="IconConverter" />
+        <BooleanToVisibilityConverter x:Key="BoolToVis" />
+
         <Style x:Key="SidebarLabelStyle" TargetType="TextBlock">
             <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="Margin" Value="16,0,0,0" />
+            <Setter Property="Margin" Value="14,0,0,0" />
             <Style.Triggers>
-                <DataTrigger Binding="{Binding IsSidebarCollapsed}" Value="True">
+                <DataTrigger Binding="{Binding DataContext.IsSidebarCollapsed, RelativeSource={RelativeSource AncestorType=Window}}" Value="True">
                     <Setter Property="Visibility" Value="Collapsed" />
                 </DataTrigger>
             </Style.Triggers>
         </Style>
         <Style x:Key="SidebarButtonStyle" TargetType="Button" BasedOn="{StaticResource MaterialDesignFlatButton}">
             <Setter Property="HorizontalContentAlignment" Value="Left" />
-            <Setter Property="Padding" Value="16,8" />
+            <Setter Property="Padding" Value="14,8" />
             <Setter Property="Height" Value="44" />
         </Style>
     </Window.Resources>
 
     <DockPanel>
         <Menu DockPanel.Dock="Top">
-            <MenuItem Header="{x:Static res:Strings.MenuFile}">
-                <MenuItem Header="{x:Static res:Strings.MenuExit}" Click="OnExitClick" />
+            <MenuItem Header="{res:Loc MenuFile}">
+                <MenuItem Header="{res:Loc MenuExit}" Click="OnExitClick" />
             </MenuItem>
-            <MenuItem Header="{x:Static res:Strings.MenuView}">
-                <MenuItem Header="{x:Static res:Strings.MenuToggleSidebar}"
-                          Command="{Binding ToggleSidebarCommand}" />
+            <MenuItem Header="{res:Loc MenuView}">
+                <MenuItem Header="{res:Loc MenuToggleSidebar}" Command="{Binding ToggleSidebarCommand}" InputGestureText="Ctrl+B" />
             </MenuItem>
-            <MenuItem Header="{x:Static res:Strings.MenuTools}" />
-            <MenuItem Header="{x:Static res:Strings.MenuAbout}" />
-            <MenuItem Header="{x:Static res:Strings.MenuHelp}" />
+            <MenuItem Header="{res:Loc MenuTools}">
+                <MenuItem Header="{res:Loc Palette_Placeholder}" Click="OnOpenPaletteClick" InputGestureText="Ctrl+K" />
+            </MenuItem>
+            <MenuItem Header="{res:Loc MenuAbout}" />
+            <MenuItem Header="{res:Loc MenuHelp}" />
         </Menu>
 
         <Grid>
@@ -47,11 +56,11 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <!-- Collapsible sidebar -->
+            <!-- Sidebar: categories -->
             <Border Grid.Column="0" Background="{DynamicResource MaterialDesignToolBarBackground}">
                 <Border.Style>
                     <Style TargetType="Border">
-                        <Setter Property="Width" Value="220" />
+                        <Setter Property="Width" Value="230" />
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding IsSidebarCollapsed}" Value="True">
                                 <Setter Property="Width" Value="56" />
@@ -60,77 +69,217 @@
                     </Style>
                 </Border.Style>
                 <DockPanel>
-                    <Button DockPanel.Dock="Top"
-                            Style="{StaticResource SidebarButtonStyle}"
+                    <Button DockPanel.Dock="Top" Style="{StaticResource SidebarButtonStyle}"
                             Command="{Binding ToggleSidebarCommand}"
-                            ToolTip="{x:Static res:Strings.MenuToggleSidebar}">
+                            ToolTip="{res:Loc MenuToggleSidebar}">
                         <materialDesign:PackIcon Kind="Menu" Width="22" Height="22" />
                     </Button>
 
                     <Button DockPanel.Dock="Bottom" Style="{StaticResource SidebarButtonStyle}">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="Cog" Width="22" Height="22" />
-                            <TextBlock Text="{x:Static res:Strings.SidebarSettings}" Style="{StaticResource SidebarLabelStyle}" />
+                            <TextBlock Text="{res:Loc SidebarSettings}" Style="{StaticResource SidebarLabelStyle}" />
                         </StackPanel>
                     </Button>
 
-                    <StackPanel DockPanel.Dock="Top">
-                        <Button Style="{StaticResource SidebarButtonStyle}">
-                            <StackPanel Orientation="Horizontal">
-                                <materialDesign:PackIcon Kind="Home" Width="22" Height="22" />
-                                <TextBlock Text="{x:Static res:Strings.SidebarHome}" Style="{StaticResource SidebarLabelStyle}" />
-                            </StackPanel>
-                        </Button>
-                        <Button Style="{StaticResource SidebarButtonStyle}">
-                            <StackPanel Orientation="Horizontal">
-                                <materialDesign:PackIcon Kind="Star" Width="22" Height="22" />
-                                <TextBlock Text="{x:Static res:Strings.SidebarFavorites}" Style="{StaticResource SidebarLabelStyle}" />
-                            </StackPanel>
-                        </Button>
-                        <Separator Margin="8,8" />
-                    </StackPanel>
+                    <ListBox ItemsSource="{Binding Categories}" SelectedItem="{Binding SelectedCategory}"
+                             Background="Transparent" BorderThickness="0" Padding="4,4"
+                             HorizontalContentAlignment="Stretch"
+                             ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                        <ListBox.ItemContainerStyle>
+                            <Style TargetType="ListBoxItem" BasedOn="{StaticResource {x:Type ListBoxItem}}">
+                                <Setter Property="Padding" Value="12,8" />
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                            </Style>
+                        </ListBox.ItemContainerStyle>
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <materialDesign:PackIcon Grid.Column="0"
+                                                             Kind="{Binding Icon, Converter={StaticResource IconConverter}}"
+                                                             Width="22" Height="22" VerticalAlignment="Center" />
+                                    <TextBlock Grid.Column="1" Text="{Binding Title}" TextTrimming="CharacterEllipsis"
+                                               Style="{StaticResource SidebarLabelStyle}" />
+                                    <TextBlock Grid.Column="2" Text="{Binding Count}" Opacity="0.6"
+                                               Style="{StaticResource SidebarLabelStyle}" />
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
                 </DockPanel>
             </Border>
 
-            <!-- Content: three placeholder panes (list / details / console) -->
-            <Grid Grid.Column="1" Margin="8">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" MinWidth="180" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="2*" MinWidth="240" />
-                </Grid.ColumnDefinitions>
+            <!-- Content -->
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
 
-                <materialDesign:Card Grid.Column="0" Margin="4" Padding="12">
-                    <DockPanel>
-                        <TextBlock DockPanel.Dock="Top" Text="{x:Static res:Strings.PaneCommands}" FontWeight="Bold" Margin="0,0,0,8" />
-                        <TextBlock Text="{x:Static res:Strings.ComingSoon}" Opacity="0.6" />
-                    </DockPanel>
-                </materialDesign:Card>
+                <!-- Search bar -->
+                <Grid Grid.Row="0" Margin="14,12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <materialDesign:PackIcon Grid.Column="0" Kind="Magnify" Width="22" Height="22"
+                                             VerticalAlignment="Center" Opacity="0.7" Margin="0,0,8,0" />
+                    <TextBox Grid.Column="1" VerticalAlignment="Center"
+                             Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
+                             materialDesign:HintAssist.Hint="{res:Loc Search_Placeholder}" />
+                </Grid>
 
-                <GridSplitter Grid.Column="1" Width="4" HorizontalAlignment="Center" VerticalAlignment="Stretch" />
+                <!-- Body: command list + detail -->
+                <Grid Grid.Row="1" Margin="8,0,8,8">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" MinWidth="220" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="1.6*" MinWidth="300" />
+                    </Grid.ColumnDefinitions>
 
-                <Grid Grid.Column="2">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
+                    <!-- Command list -->
+                    <Grid Grid.Column="0">
+                        <ListBox ItemsSource="{Binding FilteredCommands}" SelectedItem="{Binding SelectedCommand}"
+                                 Background="Transparent" BorderThickness="0"
+                                 HorizontalContentAlignment="Stretch"
+                                 VirtualizingPanel.IsVirtualizing="True"
+                                 ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                            <ListBox.ItemContainerStyle>
+                                <Style TargetType="ListBoxItem" BasedOn="{StaticResource {x:Type ListBoxItem}}">
+                                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                </Style>
+                            </ListBox.ItemContainerStyle>
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Margin="2,4">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <materialDesign:PackIcon Grid.Column="0"
+                                                                 Kind="{Binding Icon, Converter={StaticResource IconConverter}}"
+                                                                 Width="22" Height="22" VerticalAlignment="Center" Margin="2,0,10,0" />
+                                        <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                            <TextBlock FontWeight="Medium" TextTrimming="CharacterEllipsis"
+                                                       beh:TextHighlight.Text="{Binding Title}"
+                                                       beh:TextHighlight.Matches="{Binding TitleMatches}" />
+                                            <TextBlock Text="{Binding Description}" Opacity="0.6" FontSize="12"
+                                                       TextTrimming="CharacterEllipsis" />
+                                        </StackPanel>
+                                        <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
+                                            <materialDesign:PackIcon Kind="ShieldAccount" Width="16" Height="16" Margin="3,0" Opacity="0.7"
+                                                                     ToolTip="{res:Loc Detail_RequiresAdmin}"
+                                                                     Visibility="{Binding RequiresAdmin, Converter={StaticResource BoolToVis}}" />
+                                            <materialDesign:PackIcon Kind="Restart" Width="16" Height="16" Margin="3,0" Opacity="0.7"
+                                                                     ToolTip="{res:Loc Detail_MayRestart}"
+                                                                     Visibility="{Binding RequiresRestart, Converter={StaticResource BoolToVis}}" />
+                                            <materialDesign:PackIcon Kind="UndoVariant" Width="16" Height="16" Margin="3,0" Opacity="0.7"
+                                                                     Visibility="{Binding IsRevertable, Converter={StaticResource BoolToVis}}" />
+                                            <Ellipse Width="9" Height="9" Margin="6,0,2,0"
+                                                     Fill="{Binding DangerLevel, Converter={StaticResource DangerBrush}}" />
+                                        </StackPanel>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
 
-                    <materialDesign:Card Grid.Row="0" Margin="4" Padding="12">
-                        <DockPanel>
-                            <TextBlock DockPanel.Dock="Top" Text="{x:Static res:Strings.PaneDetails}" FontWeight="Bold" Margin="0,0,0,8" />
-                            <TextBlock Text="{x:Static res:Strings.ComingSoon}" Opacity="0.6" />
-                        </DockPanel>
-                    </materialDesign:Card>
+                        <TextBlock Text="{res:Loc NoSearchResults}" Opacity="0.6"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"
+                                   TextWrapping="Wrap" TextAlignment="Center" Margin="16">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Visibility" Value="Collapsed" />
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding HasResults}" Value="False">
+                                            <Setter Property="Visibility" Value="Visible" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </Grid>
 
-                    <GridSplitter Grid.Row="1" Height="4" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
+                    <GridSplitter Grid.Column="1" Width="4" HorizontalAlignment="Center" VerticalAlignment="Stretch"
+                                  Background="Transparent" />
 
-                    <materialDesign:Card Grid.Row="2" Margin="4" Padding="12">
-                        <DockPanel>
-                            <TextBlock DockPanel.Dock="Top" Text="{x:Static res:Strings.PaneConsole}" FontWeight="Bold" Margin="0,0,0,8" />
-                            <TextBlock Text="{x:Static res:Strings.ComingSoon}" Opacity="0.6"
-                                       FontFamily="Cascadia Mono, Consolas, Courier New" />
-                        </DockPanel>
+                    <!-- Detail panel -->
+                    <materialDesign:Card Grid.Column="2" Margin="4" Padding="16">
+                        <Grid>
+                            <ScrollViewer DataContext="{Binding Detail}" VerticalScrollBarVisibility="Auto">
+                                <ScrollViewer.Style>
+                                    <Style TargetType="ScrollViewer">
+                                        <Setter Property="Visibility" Value="Visible" />
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding}" Value="{x:Null}">
+                                                <Setter Property="Visibility" Value="Collapsed" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </ScrollViewer.Style>
+                                <StackPanel>
+                                    <DockPanel>
+                                        <Border DockPanel.Dock="Right" CornerRadius="4" Padding="8,2" VerticalAlignment="Top"
+                                                Background="{Binding DangerLevel, Converter={StaticResource DangerBrush}}">
+                                            <TextBlock Text="{Binding DangerLevel, Converter={StaticResource DangerText}}"
+                                                       Foreground="White" FontSize="11" />
+                                        </Border>
+                                        <TextBlock Text="{Binding Title}" FontSize="20" FontWeight="Bold" TextWrapping="Wrap" />
+                                    </DockPanel>
+
+                                    <StackPanel Orientation="Horizontal" Margin="0,6,0,0">
+                                        <TextBlock Text="{Binding CategoryTitle}" Opacity="0.7" />
+                                        <TextBlock Text="·" Margin="8,0" Opacity="0.5"
+                                                   Visibility="{Binding RequiresAdmin, Converter={StaticResource BoolToVis}}" />
+                                        <TextBlock Text="{res:Loc Detail_RequiresAdmin}" Opacity="0.7"
+                                                   Visibility="{Binding RequiresAdmin, Converter={StaticResource BoolToVis}}" />
+                                        <TextBlock Text="·" Margin="8,0" Opacity="0.5"
+                                                   Visibility="{Binding RequiresRestart, Converter={StaticResource BoolToVis}}" />
+                                        <TextBlock Text="{res:Loc Detail_MayRestart}" Opacity="0.7"
+                                                   Visibility="{Binding RequiresRestart, Converter={StaticResource BoolToVis}}" />
+                                    </StackPanel>
+
+                                    <TextBlock Text="{Binding Description}" TextWrapping="Wrap" Margin="0,12,0,0" />
+
+                                    <TextBlock Text="{res:Loc Detail_CommandLine}" FontWeight="Medium" Margin="0,16,0,4" />
+                                    <Border Background="{DynamicResource MaterialDesignTextFieldBoxBackground}" CornerRadius="4" Padding="10">
+                                        <TextBox Text="{Binding PreviewCommandLine, Mode=OneWay}" IsReadOnly="True"
+                                                 BorderThickness="0" Background="Transparent" TextWrapping="Wrap"
+                                                 FontFamily="Cascadia Mono, Consolas, Courier New" />
+                                    </Border>
+
+                                    <StackPanel Orientation="Horizontal" Margin="0,16,0,0">
+                                        <Button Content="{res:Loc Detail_Run}" IsEnabled="False"
+                                                ToolTip="{res:Loc Detail_RunDisabledHint}"
+                                                Style="{StaticResource MaterialDesignRaisedButton}" Margin="0,0,8,0" />
+                                        <Button Content="{res:Loc Detail_Copy}" Command="{Binding CopyCommand}"
+                                                Style="{StaticResource MaterialDesignOutlinedButton}" Margin="0,0,8,0" />
+                                        <Button Content="{res:Loc Detail_Doc}" Command="{Binding OpenDocCommand}"
+                                                Style="{StaticResource MaterialDesignOutlinedButton}"
+                                                Visibility="{Binding HasDoc, Converter={StaticResource BoolToVis}}" />
+                                    </StackPanel>
+                                </StackPanel>
+                            </ScrollViewer>
+
+                            <TextBlock Text="{res:Loc Detail_SelectPrompt}" Opacity="0.5"
+                                       HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="Visibility" Value="Collapsed" />
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Detail}" Value="{x:Null}">
+                                                <Setter Property="Visibility" Value="Visible" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                        </Grid>
                     </materialDesign:Card>
                 </Grid>
             </Grid>

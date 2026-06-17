@@ -385,4 +385,40 @@
   <data name="Cmd_dev.wsl.list_Desc" xml:space="preserve">
     <value>List installed WSL distributions.</value>
   </data>
+  <data name="Cmd_dism.checkhealth_Title" xml:space="preserve">
+    <value>DISM CheckHealth</value>
+  </data>
+  <data name="Cmd_dism.checkhealth_Desc" xml:space="preserve">
+    <value>Quickly check the Windows image for corruption (read-only).</value>
+  </data>
+  <data name="Cmd_dism.scanhealth_Title" xml:space="preserve">
+    <value>DISM ScanHealth</value>
+  </data>
+  <data name="Cmd_dism.scanhealth_Desc" xml:space="preserve">
+    <value>Deep-scan the Windows image for corruption (read-only, slow).</value>
+  </data>
+  <data name="Cmd_dism.analyzecomponentstore_Title" xml:space="preserve">
+    <value>Analyze component store</value>
+  </data>
+  <data name="Cmd_dism.analyzecomponentstore_Desc" xml:space="preserve">
+    <value>Analyze WinSxS and report whether a cleanup is recommended.</value>
+  </data>
+  <data name="Cmd_chkdsk.read_Title" xml:space="preserve">
+    <value>Check disk (read-only)</value>
+  </data>
+  <data name="Cmd_chkdsk.read_Desc" xml:space="preserve">
+    <value>Check the C: drive for errors (read-only).</value>
+  </data>
+  <data name="Cmd_sec.bitlocker.status_Title" xml:space="preserve">
+    <value>BitLocker status</value>
+  </data>
+  <data name="Cmd_sec.bitlocker.status_Desc" xml:space="preserve">
+    <value>Show BitLocker encryption status for all volumes.</value>
+  </data>
+  <data name="Cmd_dev.features.list_Title" xml:space="preserve">
+    <value>List Windows features</value>
+  </data>
+  <data name="Cmd_dev.features.list_Desc" xml:space="preserve">
+    <value>List the enabled Windows optional features.</value>
+  </data>
 </root>

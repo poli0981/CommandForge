@@ -11,6 +11,10 @@
   <ItemGroup>
     <ProjectReference Include="..\CommandForge.Application\CommandForge.Application.csproj" />
     <ProjectReference Include="..\CommandForge.Infrastructure\CommandForge.Infrastructure.csproj" />
+    <!-- Build the Elevator first; its exe is copied next to the app by the target below
+         (ReferenceOutputAssembly=false: we spawn it as a process, we don't link it). -->
+    <ProjectReference Include="..\..\helper\CommandForge.Elevator\CommandForge.Elevator.csproj"
+                      ReferenceOutputAssembly="false" />
   </ItemGroup>
 
   <ItemGroup>
@@ -22,5 +26,23 @@
     <PackageReference Include="Serilog.Sinks.Async" Version="2.1.0" />
     <PackageReference Include="Serilog.Sinks.File" Version="7.0.0" />
   </ItemGroup>
+
+  <!-- Copy the Elevator helper next to the app so BrokerElevationService can spawn it. -->
+  <ItemGroup>
+    <ElevatorFile Include="$(MSBuildThisFileDirectory)..\..\helper\CommandForge.Elevator\bin\$(Configuration)\$(TargetFramework)\CommandForge.Elevator.exe" />
+    <ElevatorFile Include="$(MSBuildThisFileDirectory)..\..\helper\CommandForge.Elevator\bin\$(Configuration)\$(TargetFramework)\CommandForge.Elevator.dll" />
+    <ElevatorFile Include="$(MSBuildThisFileDirectory)..\..\helper\CommandForge.Elevator\bin\$(Configuration)\$(TargetFramework)\CommandForge.Elevator.deps.json" />
+    <ElevatorFile Include="$(MSBuildThisFileDirectory)..\..\helper\CommandForge.Elevator\bin\$(Configuration)\$(TargetFramework)\CommandForge.Elevator.runtimeconfig.json" />
+  </ItemGroup>
+
+  <Target Name="CopyElevator" AfterTargets="Build">
+    <Copy SourceFiles="@(ElevatorFile)" DestinationFolder="$(OutDir)" SkipUnchangedFiles="true"
+          Condition="Exists('%(ElevatorFile.Identity)')" />
+  </Target>
+
+  <Target Name="CopyElevatorOnPublish" AfterTargets="Publish">
+    <Copy SourceFiles="@(ElevatorFile)" DestinationFolder="$(PublishDir)" SkipUnchangedFiles="true"
+          Condition="Exists('%(ElevatorFile.Identity)')" />
+  </Target>
 
 </Project>

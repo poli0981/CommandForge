@@ -1,10 +1,16 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
+    <!-- WinExe so no empty console window flashes when the UI spawns it elevated. -->
+    <OutputType>WinExe</OutputType>
     <TargetFramework>net10.0-windows</TargetFramework>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <RootNamespace>CommandForge.Elevator</RootNamespace>
   </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Reuse the embedded catalog + process executor + pipe protocol (internals visible). -->
+    <ProjectReference Include="..\..\src\CommandForge.Infrastructure\CommandForge.Infrastructure.csproj" />
+  </ItemGroup>
 
 </Project>

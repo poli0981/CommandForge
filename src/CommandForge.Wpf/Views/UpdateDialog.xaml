@@ -1,0 +1,68 @@
+<Window x:Class="CommandForge.Wpf.Views.UpdateDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:res="clr-namespace:CommandForge.Wpf.Resources"
+        Title="{res:Loc Update_Title}"
+        Width="460" SizeToContent="Height" ResizeMode="NoResize"
+        WindowStartupLocation="CenterOwner" ShowInTaskbar="False"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontSize="13"
+        Background="{DynamicResource MaterialDesignPaper}">
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis" />
+    </Window.Resources>
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <DockPanel Grid.Row="0" Margin="0,0,0,16">
+            <materialDesign:PackIcon DockPanel.Dock="Left" Kind="Update" Width="26" Height="26"
+                                     VerticalAlignment="Center" Margin="0,0,10,0" />
+            <TextBlock Text="{res:Loc Update_Title}" FontSize="18" FontWeight="Bold" VerticalAlignment="Center" />
+        </DockPanel>
+
+        <StackPanel Grid.Row="1">
+            <!-- Checking -->
+            <StackPanel Visibility="{Binding IsChecking, Converter={StaticResource BoolToVis}}">
+                <TextBlock Text="{res:Loc Update_Checking}" Margin="0,0,0,12" TextWrapping="Wrap" />
+                <ProgressBar IsIndeterminate="True" Height="4" />
+            </StackPanel>
+
+            <!-- Up to date -->
+            <TextBlock Text="{Binding Message}" TextWrapping="Wrap"
+                       Visibility="{Binding IsUpToDate, Converter={StaticResource BoolToVis}}" />
+
+            <!-- Update available -->
+            <TextBlock Text="{Binding Message}" TextWrapping="Wrap"
+                       Visibility="{Binding IsAvailable, Converter={StaticResource BoolToVis}}" />
+
+            <!-- Downloading -->
+            <StackPanel Visibility="{Binding IsDownloading, Converter={StaticResource BoolToVis}}">
+                <TextBlock Text="{res:Loc Update_Downloading}" Margin="0,0,0,12" TextWrapping="Wrap" />
+                <ProgressBar Minimum="0" Maximum="100" Value="{Binding Percent}" Height="6" />
+                <TextBlock Text="{Binding Percent, StringFormat={}{0}%}" HorizontalAlignment="Right"
+                           Opacity="0.7" Margin="0,6,0,0" />
+            </StackPanel>
+
+            <!-- Error -->
+            <DockPanel Visibility="{Binding IsError, Converter={StaticResource BoolToVis}}">
+                <materialDesign:PackIcon DockPanel.Dock="Left" Kind="AlertCircleOutline" Width="22" Height="22"
+                                         VerticalAlignment="Top" Margin="0,2,8,0" />
+                <TextBlock Text="{Binding Message}" TextWrapping="Wrap" />
+            </DockPanel>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,20,0,0">
+            <Button Content="{res:Loc Update_Close}" Command="{Binding CloseCommand}"
+                    Style="{StaticResource MaterialDesignOutlinedButton}" Margin="0,0,8,0" />
+            <Button Content="{res:Loc Update_DownloadRestart}" Command="{Binding DownloadAndRestartCommand}"
+                    Style="{StaticResource MaterialDesignRaisedButton}"
+                    Visibility="{Binding IsAvailable, Converter={StaticResource BoolToVis}}" />
+        </StackPanel>
+    </Grid>
+</Window>

@@ -35,6 +35,13 @@ public sealed class JsonSettingsService : ISettingsService
     }
 
     /// <inheritdoc />
+    public bool AutoCheckForUpdates
+    {
+        get => _model.AutoCheckForUpdates;
+        set => _model = _model with { AutoCheckForUpdates = value };
+    }
+
+    /// <inheritdoc />
     public void Save()
     {
         var directory = Path.GetDirectoryName(_configPath);
@@ -69,5 +76,8 @@ public sealed class JsonSettingsService : ISettingsService
     private sealed record SettingsModel
     {
         public string? AcceptedTermsVersion { get; init; }
+
+        // Default true so existing or freshly-created configs opt in to startup update checks.
+        public bool AutoCheckForUpdates { get; init; } = true;
     }
 }

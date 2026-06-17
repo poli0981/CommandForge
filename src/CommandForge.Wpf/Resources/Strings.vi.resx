@@ -727,4 +727,49 @@
   <data name="Cmd_dev.netfx3.on_Desc" xml:space="preserve">
     <value>Cài tính năng .NET Framework 3.5. Có thể cần khởi động lại.</value>
   </data>
+  <data name="Menu_CheckForUpdates" xml:space="preserve">
+    <value>Kiểm tra cập nhật</value>
+  </data>
+  <data name="Update_Title" xml:space="preserve">
+    <value>Cập nhật</value>
+  </data>
+  <data name="Update_Checking" xml:space="preserve">
+    <value>Đang kiểm tra cập nhật…</value>
+  </data>
+  <data name="Update_UpToDate" xml:space="preserve">
+    <value>Bạn đang dùng phiên bản mới nhất.</value>
+  </data>
+  <data name="Update_Available" xml:space="preserve">
+    <value>Đã có phiên bản {0}. Tải về và khởi động lại ngay?</value>
+  </data>
+  <data name="Update_Downloading" xml:space="preserve">
+    <value>Đang tải bản cập nhật…</value>
+  </data>
+  <data name="Update_DownloadRestart" xml:space="preserve">
+    <value>Tải &amp; khởi động lại</value>
+  </data>
+  <data name="Update_Close" xml:space="preserve">
+    <value>Đóng</value>
+  </data>
+  <data name="Update_Error_Offline" xml:space="preserve">
+    <value>Không kết nối được GitHub. Kiểm tra mạng và thử lại.</value>
+  </data>
+  <data name="Update_Error_NotFound" xml:space="preserve">
+    <value>Không tìm thấy nguồn phát hành cho ứng dụng.</value>
+  </data>
+  <data name="Update_Error_RateLimited" xml:space="preserve">
+    <value>Đã đạt giới hạn truy vấn GitHub. Vui lòng thử lại sau.</value>
+  </data>
+  <data name="Update_Error_ServerError" xml:space="preserve">
+    <value>GitHub gặp lỗi máy chủ. Vui lòng thử lại sau.</value>
+  </data>
+  <data name="Update_Error_NotInstalled" xml:space="preserve">
+    <value>Cập nhật chỉ khả dụng ở bản đã cài đặt.</value>
+  </data>
+  <data name="Update_Error_Unknown" xml:space="preserve">
+    <value>Kiểm tra cập nhật thất bại. Vui lòng thử lại sau.</value>
+  </data>
+  <data name="Update_Error_CommandRunning" xml:space="preserve">
+    <value>Hãy hoàn tất hoặc hủy lệnh đang chạy trước khi cập nhật.</value>
+  </data>
 </root>

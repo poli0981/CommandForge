@@ -5,6 +5,7 @@ using CommandForge.Infrastructure.Catalog;
 using CommandForge.Infrastructure.Elevation;
 using CommandForge.Infrastructure.Execution;
 using CommandForge.Infrastructure.Logging;
+using CommandForge.Infrastructure.Updates;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace CommandForge.Infrastructure.DependencyInjection;
@@ -33,7 +34,9 @@ public static class ServiceCollectionExtensions
         services.AddSingleton<IProcessRunner, SystemProcessRunner>();
         services.AddSingleton<ICommandExecutor, ProcessCommandExecutor>();
         services.AddSingleton<IElevationService, BrokerElevationService>();
+        services.AddSingleton<IUpdateService, VelopackUpdateService>();
         services.AddSingleton<RunCommandUseCase>();
+        services.AddSingleton<CheckForUpdateUseCase>();
 
         services.AddSingleton<LegalGateService>();
 

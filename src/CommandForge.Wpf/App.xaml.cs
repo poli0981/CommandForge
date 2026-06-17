@@ -1,9 +1,12 @@
 using System.IO;
 using System.Windows;
 using CommandForge.Application;
+using CommandForge.Application.Ports;
+using CommandForge.Application.UseCases;
 using CommandForge.Infrastructure;
 using CommandForge.Infrastructure.DependencyInjection;
 using CommandForge.Infrastructure.Logging;
+using CommandForge.Infrastructure.Updates;
 using CommandForge.Wpf.Views;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -22,6 +25,9 @@ public partial class App : System.Windows.Application
     /// <inheritdoc />
     protected override void OnStartup(StartupEventArgs e)
     {
+        // Velopack install/update lifecycle hooks. Must run before the host/UI; may exit the process.
+        VelopackBootstrap.Run();
+
         base.OnStartup(e);
 
         // The Legal Gate is shown as a modal dialog before the main window exists.
@@ -82,6 +88,29 @@ public partial class App : System.Windows.Application
         MainWindow = window;
         ShutdownMode = ShutdownMode.OnMainWindowClose;
         window.Show();
+
+        // Non-blocking startup update check (configurable; no-op in dev/unpackaged builds).
+        _ = TryAutoCheckForUpdatesAsync();
+    }
+
+    private async Task TryAutoCheckForUpdatesAsync()
+    {
+        try
+        {
+            var settings = _host!.Services.GetRequiredService<ISettingsService>();
+            var updates = _host.Services.GetRequiredService<CheckForUpdateUseCase>();
+            if (!settings.AutoCheckForUpdates || !updates.IsSupported)
+            {
+                return;
+            }
+
+            var dialog = _host.Services.GetRequiredService<IUpdateDialogService>();
+            await dialog.ShowAsync(startedFromStartup: true);
+        }
+        catch (Exception ex)
+        {
+            Log.Warning(ex, "Startup update check failed.");
+        }
     }
 
     /// <inheritdoc />

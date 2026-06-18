@@ -24,9 +24,9 @@ jobs:
       REPO_URL: https://github.com/poli0981/CommandForge
       VT_API_KEY: ${{ secrets.VT_API_KEY }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
-      - uses: actions/setup-dotnet@v4
+      - uses: actions/setup-dotnet@v5
         with:
           dotnet-version: '10.0.x'
 
@@ -74,17 +74,21 @@ jobs:
         shell: pwsh
         run: |
           $rel = Join-Path (Get-Location) 'Releases'
-          Get-ChildItem $rel -File -Exclude 'checksums.txt' |
+          $checksums = Join-Path $rel 'checksums.txt'
+          # NOTE: filter with Where-Object, not Get-ChildItem -Exclude — the latter returns nothing
+          # without a trailing wildcard/-Recurse, which produced an empty checksums.txt (HTTP 400).
+          Get-ChildItem -Path $rel -File |
+            Where-Object { $_.Name -ne 'checksums.txt' } |
             Get-FileHash -Algorithm SHA256 |
             ForEach-Object { '{0}  {1}' -f $_.Hash.ToLower(), (Split-Path $_.Path -Leaf) } |
-            Out-File (Join-Path $rel 'checksums.txt') -Encoding ascii
-          gh release upload ${{ steps.ver.outputs.tag }} (Join-Path $rel 'checksums.txt') --clobber
+            Out-File $checksums -Encoding ascii
+          gh release upload ${{ steps.ver.outputs.tag }} $checksums --clobber
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: VirusTotal scan (optional)
         if: env.VT_API_KEY != ''
-        uses: crazy-max/ghaction-virustotal@v4
+        uses: crazy-max/ghaction-virustotal@v5
         with:
           vt_api_key: ${{ env.VT_API_KEY }}
           update_release_body: true

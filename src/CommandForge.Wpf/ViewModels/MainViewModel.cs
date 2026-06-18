@@ -1,4 +1,5 @@
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using CommandForge.Application.Ports;
 using CommandForge.Application.Search;
 using CommandForge.Application.Settings;
@@ -16,6 +17,7 @@ namespace CommandForge.Wpf.ViewModels;
 public sealed partial class MainViewModel : ObservableObject
 {
     private const string RestorePointCommandId = "system.restorepoint";
+    private const string WikiUrl = "https://github.com/poli0981/CommandForge/wiki";
 
     private readonly ICatalogProvider _catalog;
     private readonly IConfirmationService _confirmation;
@@ -163,6 +165,18 @@ public sealed partial class MainViewModel : ObservableObject
 
     [RelayCommand]
     private void ShowSettings() => CurrentSection = ShellSection.Settings;
+
+    /// <summary>Shows the About information (the Settings screen on its About section).</summary>
+    [RelayCommand]
+    private void ShowAbout()
+    {
+        Settings.SelectedSection = SettingsSection.About;
+        CurrentSection = ShellSection.Settings;
+    }
+
+    [RelayCommand]
+    private void OpenWiki()
+        => Process.Start(new ProcessStartInfo(WikiUrl) { UseShellExecute = true });
 
     [RelayCommand]
     private void ShowCatalog() => CurrentSection = ShellSection.Catalog;

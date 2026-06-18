@@ -1072,4 +1072,19 @@
   <data name="Favorite_Toggle" xml:space="preserve">
     <value>Bật/tắt yêu thích</value>
   </data>
+  <data name="Menu_OpenConfigFolder" xml:space="preserve">
+    <value>Mở thư mục cấu hình</value>
+  </data>
+  <data name="Menu_OpenLogFolder" xml:space="preserve">
+    <value>Mở thư mục nhật ký</value>
+  </data>
+  <data name="Menu_FullScreen" xml:space="preserve">
+    <value>Toàn màn hình</value>
+  </data>
+  <data name="Menu_About" xml:space="preserve">
+    <value>Giới thiệu CommandForge</value>
+  </data>
+  <data name="Menu_Wiki" xml:space="preserve">
+    <value>Hướng dẫn / Wiki</value>
+  </data>
 </root>

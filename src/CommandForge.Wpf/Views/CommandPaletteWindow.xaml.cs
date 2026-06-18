@@ -8,6 +8,7 @@ namespace CommandForge.Wpf.Views;
 public partial class CommandPaletteWindow : Window
 {
     private readonly CommandPaletteViewModel _viewModel;
+    private bool _closing;
 
     public CommandPaletteWindow(CommandPaletteViewModel viewModel)
     {
@@ -16,7 +17,9 @@ public partial class CommandPaletteWindow : Window
         DataContext = viewModel;
         viewModel.CommandChosen += OnCommandChosen;
         Loaded += (_, _) => SearchBox.Focus();
-        Deactivated += (_, _) => Close();
+        // Close on focus loss — but guard against re-entrancy: Close() itself deactivates the window,
+        // which would re-enter here and throw "Cannot ... while a Window is closing".
+        Deactivated += (_, _) => RequestClose();
     }
 
     /// <summary>The command id the user accepted, or <see langword="null"/> if dismissed.</summary>
@@ -25,6 +28,17 @@ public partial class CommandPaletteWindow : Window
     private void OnCommandChosen(string commandId)
     {
         ChosenCommandId = commandId;
+        RequestClose();
+    }
+
+    private void RequestClose()
+    {
+        if (_closing)
+        {
+            return;
+        }
+
+        _closing = true;
         Close();
     }
 
@@ -35,7 +49,7 @@ public partial class CommandPaletteWindow : Window
         switch (e.Key)
         {
             case Key.Escape:
-                Close();
+                RequestClose();
                 e.Handled = true;
                 break;
             case Key.Enter:

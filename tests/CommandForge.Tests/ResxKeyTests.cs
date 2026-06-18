@@ -124,4 +124,29 @@ public sealed class ResxKeyTests
             Assert.True(vietnamese!.GetString(key) is not null, $"Missing VI resource for key '{key}'.");
         }
     }
+
+    [Fact]
+    public void MenuUiKeys_ExistInResx_EN_and_VI()
+    {
+        var manager = new ResourceManager("CommandForge.Wpf.Resources.Strings", typeof(Strings).Assembly);
+        var english = manager.GetResourceSet(CultureInfo.InvariantCulture, createIfNotExists: true, tryParents: true);
+        var vietnamese = manager.GetResourceSet(new CultureInfo("vi"), createIfNotExists: true, tryParents: false);
+
+        Assert.NotNull(english);
+        Assert.NotNull(vietnamese);
+
+        string[] keys =
+        [
+            "MenuFile", "MenuView", "MenuTools", "MenuAbout", "MenuHelp", "MenuExit", "MenuToggleSidebar",
+            "Menu_OpenConfigFolder", "Menu_OpenLogFolder", "Menu_FullScreen", "Menu_About", "Menu_Wiki",
+            "Menu_OpenSettings", "Menu_LogViewer", "Menu_ExportLogs", "Menu_DebugPanel",
+            "Menu_CheckForUpdates", "Menu_ReportBug", "Palette_Placeholder",
+        ];
+
+        foreach (var key in keys)
+        {
+            Assert.True(english!.GetString(key) is not null, $"Missing EN resource for key '{key}'.");
+            Assert.True(vietnamese!.GetString(key) is not null, $"Missing VI resource for key '{key}'.");
+        }
+    }
 }

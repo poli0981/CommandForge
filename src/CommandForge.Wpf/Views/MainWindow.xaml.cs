@@ -18,6 +18,9 @@ public partial class MainWindow : Window
     private readonly IServiceProvider _services;
     private readonly ISettingsService _settings;
 
+    private bool _isFullScreen;
+    private WindowState _preFullScreenState = WindowState.Normal;
+
     public MainWindow(MainViewModel viewModel, IServiceProvider services, ISettingsService settings)
     {
         InitializeComponent();
@@ -139,6 +142,44 @@ public partial class MainWindow : Window
         {
             _viewModel.ShowHomeCommand.Execute(null);
             e.Handled = true;
+        }
+        else if (e.Key == Key.Q && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
+        {
+            Close();
+            e.Handled = true;
+        }
+        else if (e.Key == Key.F5)
+        {
+            _viewModel.CheckForUpdatesCommand.Execute(null);
+            e.Handled = true;
+        }
+        else if (e.Key == Key.F11)
+        {
+            ToggleFullScreen();
+            e.Handled = true;
+        }
+    }
+
+    private void OnToggleFullScreenClick(object sender, RoutedEventArgs e) => ToggleFullScreen();
+
+    private void ToggleFullScreen()
+    {
+        if (_isFullScreen)
+        {
+            WindowStyle = WindowStyle.SingleBorderWindow;
+            ResizeMode = ResizeMode.CanResize;
+            WindowState = _preFullScreenState;
+            _isFullScreen = false;
+        }
+        else
+        {
+            _preFullScreenState = WindowState;
+            WindowStyle = WindowStyle.None;
+            ResizeMode = ResizeMode.NoResize;
+            // Re-enter Maximized from Normal so the borderless window covers the whole screen.
+            WindowState = WindowState.Normal;
+            WindowState = WindowState.Maximized;
+            _isFullScreen = true;
         }
     }
 

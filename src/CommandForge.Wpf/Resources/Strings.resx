@@ -1072,4 +1072,19 @@
   <data name="Favorite_Toggle" xml:space="preserve">
     <value>Toggle favorite</value>
   </data>
+  <data name="Menu_OpenConfigFolder" xml:space="preserve">
+    <value>Open config folder</value>
+  </data>
+  <data name="Menu_OpenLogFolder" xml:space="preserve">
+    <value>Open log folder</value>
+  </data>
+  <data name="Menu_FullScreen" xml:space="preserve">
+    <value>Full screen</value>
+  </data>
+  <data name="Menu_About" xml:space="preserve">
+    <value>About CommandForge</value>
+  </data>
+  <data name="Menu_Wiki" xml:space="preserve">
+    <value>Guide / Wiki</value>
+  </data>
 </root>

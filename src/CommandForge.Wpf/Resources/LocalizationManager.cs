@@ -23,6 +23,13 @@ public sealed class LocalizationManager : INotifyPropertyChanged
     /// <summary>The active UI culture.</summary>
     public CultureInfo CurrentCulture { get; private set; } = CultureInfo.CurrentUICulture;
 
+    /// <summary>
+    /// The OS UI culture captured at first access (before any <see cref="SetCulture"/> override).
+    /// Use this for the "follow OS" option — <see cref="CultureInfo.CurrentUICulture"/> can't be used
+    /// because <see cref="SetCulture"/> overwrites it process-wide.
+    /// </summary>
+    public CultureInfo SystemCulture { get; } = CultureInfo.CurrentUICulture;
+
     /// <summary>Raised after the culture changes (for strings built in C#, which bindings can't refresh).</summary>
     public event EventHandler? CultureChanged;
 

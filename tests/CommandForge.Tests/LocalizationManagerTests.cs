@@ -30,6 +30,23 @@ public sealed class LocalizationManagerTests
     }
 
     [Fact]
+    public void SystemCulture_IsStable_AfterCultureChange()
+    {
+        var original = LocalizationManager.Instance.CurrentCulture;
+        try
+        {
+            // "Follow OS" must keep resolving to the OS culture, not the last-selected language.
+            var systemBefore = LocalizationManager.Instance.SystemCulture.Name;
+            LocalizationManager.Instance.SetCulture(new CultureInfo("vi"));
+            Assert.Equal(systemBefore, LocalizationManager.Instance.SystemCulture.Name);
+        }
+        finally
+        {
+            LocalizationManager.Instance.SetCulture(original);
+        }
+    }
+
+    [Fact]
     public void SetCulture_RaisesItemBracketPropertyChanged()
     {
         var original = LocalizationManager.Instance.CurrentCulture;

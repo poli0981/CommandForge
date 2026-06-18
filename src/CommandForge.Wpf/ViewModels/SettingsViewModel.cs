@@ -90,7 +90,7 @@ public sealed partial class SettingsViewModel : ObservableObject
         }
 
         LocalizationManager.Instance.SetCulture(
-            string.IsNullOrEmpty(value.Code) ? CultureInfo.CurrentUICulture : new CultureInfo(value.Code));
+            string.IsNullOrEmpty(value.Code) ? LocalizationManager.Instance.SystemCulture : new CultureInfo(value.Code));
         _settings.Language = value.Code;
         _settings.Save();
     }

@@ -84,7 +84,7 @@ public partial class App : System.Windows.Application
     }
 
     private static CultureInfo ResolveCulture(string language)
-        => string.IsNullOrEmpty(language) ? CultureInfo.CurrentUICulture : new CultureInfo(language);
+        => string.IsNullOrEmpty(language) ? LocalizationManager.Instance.SystemCulture : new CultureInfo(language);
 
     private void ShowLegalGate()
     {

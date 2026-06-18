@@ -118,11 +118,19 @@
                     <CheckBox Content="{res:Loc Settings_ConfirmCaution}" Margin="0,4"
                               AutomationProperties.Name="{res:Loc Settings_ConfirmCaution}"
                               IsChecked="{Binding ConfirmCaution}" />
-                    <CheckBox Content="{res:Loc Settings_ConfirmDangerous}" Margin="0,4" IsEnabled="False"
-                              ToolTip="{res:Loc Settings_DangerousLockedTooltip}"
-                              AutomationProperties.HelpText="{res:Loc Settings_DangerousLockedTooltip}"
-                              AutomationProperties.Name="{res:Loc Settings_ConfirmDangerous}"
-                              IsChecked="{Binding ConfirmDangerous, Mode=OneWay}" />
+                    <StackPanel Orientation="Horizontal" Margin="0,4">
+                        <!-- Locked (always on) but kept at full contrast: non-interactive instead of
+                             IsEnabled=False, which dims the text to near-unreadable in dark mode. -->
+                        <CheckBox Content="{res:Loc Settings_ConfirmDangerous}"
+                                  IsHitTestVisible="False" Focusable="False"
+                                  ToolTip="{res:Loc Settings_DangerousLockedTooltip}"
+                                  AutomationProperties.HelpText="{res:Loc Settings_DangerousLockedTooltip}"
+                                  AutomationProperties.Name="{res:Loc Settings_ConfirmDangerous}"
+                                  IsChecked="{Binding ConfirmDangerous, Mode=OneWay}" />
+                        <materialDesign:PackIcon Kind="LockOutline" Width="15" Height="15" Opacity="0.6"
+                                                 VerticalAlignment="Center" Margin="8,0,0,0"
+                                                 ToolTip="{res:Loc Settings_DangerousLockedTooltip}" />
+                    </StackPanel>
                     <CheckBox Content="{res:Loc Settings_AutoRestorePoint}" Margin="0,4"
                               AutomationProperties.Name="{res:Loc Settings_AutoRestorePoint}"
                               IsChecked="{Binding AutoCreateRestorePoint}" />

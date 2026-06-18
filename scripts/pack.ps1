@@ -32,9 +32,13 @@ $publishDir = Join-Path $repoRoot "publish/$Runtime"
 $wpfProject = Join-Path $repoRoot 'src/CommandForge.Wpf'
 
 Write-Host "Publishing CommandForge $Version ($Runtime, $Configuration)..." -ForegroundColor Cyan
+# Stamp the assembly version so the in-app "App version" (Settings -> About, Report Bug) matches
+# the released package version; otherwise it stays at the 1.0.0 default regardless of the tag.
 dotnet publish $wpfProject `
     -c $Configuration -r $Runtime --self-contained true `
-    -p:PublishSingleFile=false -o $publishDir
+    -p:PublishSingleFile=false `
+    -p:Version=$Version -p:InformationalVersion=$Version `
+    -o $publishDir
 
 # vpk is the Velopack CLI: dotnet tool install -g vpk
 if (-not (Get-Command vpk -ErrorAction SilentlyContinue)) {

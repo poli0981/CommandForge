@@ -1,0 +1,23 @@
+name: Announce Release
+
+# Posts a release announcement to Discord (reuses the shared workflow in poli0981/.github).
+# Requires repo/org secret DISCORD_RELEASES_WEBHOOK (or DISCORD_REPO_WEBHOOK); optional
+# DISCORD_PING_ROLE_ID. No-op effect if those secrets are unset (the job will error — set them
+# or disable this workflow).
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Release tag to announce (e.g. v0.3.0)
+        required: true
+        type: string
+
+jobs:
+  announce:
+    uses: poli0981/.github/.github/workflows/announce-release.yml@main
+    with:
+      tag_override: ${{ github.event.inputs.tag || '' }}
+    secrets: inherit

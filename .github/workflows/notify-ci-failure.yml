@@ -1,0 +1,14 @@
+name: Notify CI Failure
+
+# Posts a Discord alert when the Build workflow fails on main (reuses the shared workflow in
+# poli0981/.github). Requires repo/org secret DISCORD_CI_WEBHOOK.
+
+on:
+  workflow_run:
+    workflows: ["Build"]
+    types: [completed]
+
+jobs:
+  notify:
+    uses: poli0981/.github/.github/workflows/notify-ci-failure.yml@main
+    secrets: inherit

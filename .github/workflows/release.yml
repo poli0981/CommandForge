@@ -1,0 +1,93 @@
+name: Release
+
+# Triggered by pushing a SemVer tag (vX.Y.Z). Builds a self-contained, Velopack-packaged
+# release and publishes it to GitHub Releases with SHA-256 checksums and (optionally) a
+# VirusTotal scan. No code signing yet (see SECURITY.md).
+
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version without the leading v (e.g. 0.3.0)'
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: windows-latest
+    env:
+      REPO_URL: https://github.com/poli0981/CommandForge
+      VT_API_KEY: ${{ secrets.VT_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Resolve version and tag
+        id: ver
+        shell: pwsh
+        run: |
+          if ('${{ github.event_name }}' -eq 'workflow_dispatch') {
+            $version = '${{ github.event.inputs.version }}'
+            $tag = "v$version"
+          } else {
+            $tag = '${{ github.ref_name }}'
+            $version = $tag -replace '^v', ''
+          }
+          "version=$version" >> $env:GITHUB_OUTPUT
+          "tag=$tag" >> $env:GITHUB_OUTPUT
+          Write-Host "Releasing $version (tag $tag)"
+
+      - name: Install Velopack CLI (vpk)
+        shell: pwsh
+        run: |
+          dotnet tool install -g vpk
+          "$env:USERPROFILE\.dotnet\tools" >> $env:GITHUB_PATH
+
+      - name: Download previous release (delta base)
+        continue-on-error: true  # first release has nothing to download
+        run: vpk download github --repoUrl $env:REPO_URL --token ${{ secrets.GITHUB_TOKEN }}
+        shell: pwsh
+
+      - name: Publish + pack (Velopack)
+        run: ./scripts/pack.ps1 -Version ${{ steps.ver.outputs.version }}
+        shell: pwsh
+
+      - name: Publish GitHub Release (Velopack)
+        run: >
+          vpk upload github
+          --repoUrl $env:REPO_URL
+          --token ${{ secrets.GITHUB_TOKEN }}
+          --publish
+          --releaseName "CommandForge ${{ steps.ver.outputs.version }}"
+          --tag ${{ steps.ver.outputs.tag }}
+        shell: pwsh
+
+      - name: SHA-256 checksums
+        shell: pwsh
+        run: |
+          $rel = Join-Path (Get-Location) 'Releases'
+          Get-ChildItem $rel -File -Exclude 'checksums.txt' |
+            Get-FileHash -Algorithm SHA256 |
+            ForEach-Object { '{0}  {1}' -f $_.Hash.ToLower(), (Split-Path $_.Path -Leaf) } |
+            Out-File (Join-Path $rel 'checksums.txt') -Encoding ascii
+          gh release upload ${{ steps.ver.outputs.tag }} (Join-Path $rel 'checksums.txt') --clobber
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: VirusTotal scan (optional)
+        if: env.VT_API_KEY != ''
+        uses: crazy-max/ghaction-virustotal@v4
+        with:
+          vt_api_key: ${{ env.VT_API_KEY }}
+          update_release_body: true
+          files: |
+            Releases/*-Setup.exe
+            Releases/*-full.nupkg

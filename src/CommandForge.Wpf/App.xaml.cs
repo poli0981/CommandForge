@@ -1,3 +1,4 @@
+using System.Globalization;
 using System.IO;
 using System.Windows;
 using CommandForge.Application;
@@ -6,6 +7,8 @@ using CommandForge.Application.UseCases;
 using CommandForge.Infrastructure;
 using CommandForge.Infrastructure.DependencyInjection;
 using CommandForge.Infrastructure.Logging;
+using CommandForge.Wpf.Resources;
+using CommandForge.Wpf.Theming;
 using CommandForge.Wpf.Views;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -58,6 +61,8 @@ public partial class App : System.Windows.Application
 
         Log.Information("CommandForge starting up");
 
+        ApplyUserPreferences();
+
         var legalGate = _host.Services.GetRequiredService<LegalGateService>();
         if (legalGate.HasAcceptedCurrentTerms())
         {
@@ -68,6 +73,18 @@ public partial class App : System.Windows.Application
             ShowLegalGate();
         }
     }
+
+    /// <summary>Applies the persisted language, font size and theme before any window is shown.</summary>
+    private void ApplyUserPreferences()
+    {
+        var settings = _host!.Services.GetRequiredService<ISettingsService>();
+        LocalizationManager.Instance.SetCulture(ResolveCulture(settings.Language));
+        _host.Services.GetRequiredService<IFontScaleService>().Apply(settings.FontSize);
+        _host.Services.GetRequiredService<IThemeService>().Apply(settings.Theme);
+    }
+
+    private static CultureInfo ResolveCulture(string language)
+        => string.IsNullOrEmpty(language) ? LocalizationManager.Instance.SystemCulture : new CultureInfo(language);
 
     private void ShowLegalGate()
     {

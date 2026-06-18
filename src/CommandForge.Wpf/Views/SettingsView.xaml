@@ -1,0 +1,207 @@
+<UserControl x:Class="CommandForge.Wpf.Views.SettingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:res="clr-namespace:CommandForge.Wpf.Resources"
+             xmlns:conv="clr-namespace:CommandForge.Wpf.Converters">
+    <UserControl.Resources>
+        <conv:EnumToBooleanConverter x:Key="EnumBool" />
+
+        <Style x:Key="SectionHeader" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Margin" Value="0,0,0,16" />
+        </Style>
+        <Style x:Key="RowLabel" TargetType="TextBlock">
+            <Setter Property="FontWeight" Value="Medium" />
+            <Setter Property="Margin" Value="0,12,0,4" />
+        </Style>
+        <Style x:Key="NavRadio" TargetType="RadioButton">
+            <Setter Property="Margin" Value="0,2" />
+            <Setter Property="Padding" Value="8,6" />
+        </Style>
+    </UserControl.Resources>
+
+    <Grid Margin="16">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="190" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- Section nav -->
+        <StackPanel Grid.Column="0" Margin="0,8,12,0">
+            <RadioButton Content="{res:Loc Settings_Appearance}" GroupName="Section" Style="{StaticResource NavRadio}"
+                         AutomationProperties.Name="{res:Loc Settings_Appearance}"
+                         IsChecked="{Binding SelectedSection, Converter={StaticResource EnumBool}, ConverterParameter=Appearance}" />
+            <RadioButton Content="{res:Loc Settings_Behavior}" GroupName="Section" Style="{StaticResource NavRadio}"
+                         AutomationProperties.Name="{res:Loc Settings_Behavior}"
+                         IsChecked="{Binding SelectedSection, Converter={StaticResource EnumBool}, ConverterParameter=Behavior}" />
+            <RadioButton Content="{res:Loc Settings_Updates}" GroupName="Section" Style="{StaticResource NavRadio}"
+                         AutomationProperties.Name="{res:Loc Settings_Updates}"
+                         IsChecked="{Binding SelectedSection, Converter={StaticResource EnumBool}, ConverterParameter=Updates}" />
+            <RadioButton Content="{res:Loc Settings_About}" GroupName="Section" Style="{StaticResource NavRadio}"
+                         AutomationProperties.Name="{res:Loc Settings_About}"
+                         IsChecked="{Binding SelectedSection, Converter={StaticResource EnumBool}, ConverterParameter=About}" />
+        </StackPanel>
+
+        <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Auto" Padding="8,0,8,0">
+            <Grid>
+                <!-- Appearance -->
+                <StackPanel>
+                    <StackPanel.Style>
+                        <Style TargetType="StackPanel">
+                            <Setter Property="Visibility" Value="Collapsed" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding SelectedSection}" Value="Appearance">
+                                    <Setter Property="Visibility" Value="Visible" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </StackPanel.Style>
+
+                    <TextBlock Text="{res:Loc Settings_Appearance}" Style="{StaticResource SectionHeader}" />
+
+                    <TextBlock Text="{res:Loc Settings_Theme}" Style="{StaticResource RowLabel}" />
+                    <StackPanel Orientation="Horizontal">
+                        <RadioButton Content="{res:Loc Settings_ThemeSystem}" GroupName="Theme" Margin="0,0,16,0"
+                                     AutomationProperties.Name="{res:Loc Settings_ThemeSystem}"
+                                     IsChecked="{Binding SelectedTheme, Converter={StaticResource EnumBool}, ConverterParameter=System}" />
+                        <RadioButton Content="{res:Loc Settings_ThemeLight}" GroupName="Theme" Margin="0,0,16,0"
+                                     AutomationProperties.Name="{res:Loc Settings_ThemeLight}"
+                                     IsChecked="{Binding SelectedTheme, Converter={StaticResource EnumBool}, ConverterParameter=Light}" />
+                        <RadioButton Content="{res:Loc Settings_ThemeDark}" GroupName="Theme"
+                                     AutomationProperties.Name="{res:Loc Settings_ThemeDark}"
+                                     IsChecked="{Binding SelectedTheme, Converter={StaticResource EnumBool}, ConverterParameter=Dark}" />
+                    </StackPanel>
+
+                    <TextBlock Text="{res:Loc Settings_Language}" Style="{StaticResource RowLabel}" />
+                    <ComboBox Width="220" HorizontalAlignment="Left"
+                              AutomationProperties.Name="{res:Loc Settings_Language}"
+                              ItemsSource="{Binding Languages}" DisplayMemberPath="DisplayName"
+                              SelectedItem="{Binding SelectedLanguage}" />
+
+                    <TextBlock Text="{res:Loc Settings_FontSize}" Style="{StaticResource RowLabel}" />
+                    <StackPanel Orientation="Horizontal">
+                        <RadioButton Content="{res:Loc Settings_FontSmall}" GroupName="Font" Margin="0,0,16,0"
+                                     AutomationProperties.Name="{res:Loc Settings_FontSmall}"
+                                     IsChecked="{Binding SelectedFontSize, Converter={StaticResource EnumBool}, ConverterParameter=Small}" />
+                        <RadioButton Content="{res:Loc Settings_FontMedium}" GroupName="Font" Margin="0,0,16,0"
+                                     AutomationProperties.Name="{res:Loc Settings_FontMedium}"
+                                     IsChecked="{Binding SelectedFontSize, Converter={StaticResource EnumBool}, ConverterParameter=Medium}" />
+                        <RadioButton Content="{res:Loc Settings_FontLarge}" GroupName="Font"
+                                     AutomationProperties.Name="{res:Loc Settings_FontLarge}"
+                                     IsChecked="{Binding SelectedFontSize, Converter={StaticResource EnumBool}, ConverterParameter=Large}" />
+                    </StackPanel>
+
+                    <CheckBox Content="{res:Loc Settings_CollapseSidebar}" Margin="0,16,0,0"
+                              AutomationProperties.Name="{res:Loc Settings_CollapseSidebar}"
+                              IsChecked="{Binding CollapseSidebarByDefault}" />
+                    <CheckBox Content="{res:Loc Settings_ShowBadges}" Margin="0,8,0,0"
+                              AutomationProperties.Name="{res:Loc Settings_ShowBadges}"
+                              IsChecked="{Binding ShowAdminRestartBadges}" />
+                </StackPanel>
+
+                <!-- Behavior & Safety -->
+                <StackPanel>
+                    <StackPanel.Style>
+                        <Style TargetType="StackPanel">
+                            <Setter Property="Visibility" Value="Collapsed" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding SelectedSection}" Value="Behavior">
+                                    <Setter Property="Visibility" Value="Visible" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </StackPanel.Style>
+
+                    <TextBlock Text="{res:Loc Settings_Behavior}" Style="{StaticResource SectionHeader}" />
+                    <CheckBox Content="{res:Loc Settings_ConfirmCaution}" Margin="0,4"
+                              AutomationProperties.Name="{res:Loc Settings_ConfirmCaution}"
+                              IsChecked="{Binding ConfirmCaution}" />
+                    <StackPanel Orientation="Horizontal" Margin="0,4">
+                        <!-- Locked (always on) but kept at full contrast: non-interactive instead of
+                             IsEnabled=False, which dims the text to near-unreadable in dark mode. -->
+                        <CheckBox Content="{res:Loc Settings_ConfirmDangerous}"
+                                  IsHitTestVisible="False" Focusable="False"
+                                  ToolTip="{res:Loc Settings_DangerousLockedTooltip}"
+                                  AutomationProperties.HelpText="{res:Loc Settings_DangerousLockedTooltip}"
+                                  AutomationProperties.Name="{res:Loc Settings_ConfirmDangerous}"
+                                  IsChecked="{Binding ConfirmDangerous, Mode=OneWay}" />
+                        <materialDesign:PackIcon Kind="LockOutline" Width="15" Height="15" Opacity="0.6"
+                                                 VerticalAlignment="Center" Margin="8,0,0,0"
+                                                 ToolTip="{res:Loc Settings_DangerousLockedTooltip}" />
+                    </StackPanel>
+                    <CheckBox Content="{res:Loc Settings_AutoRestorePoint}" Margin="0,4"
+                              AutomationProperties.Name="{res:Loc Settings_AutoRestorePoint}"
+                              IsChecked="{Binding AutoCreateRestorePoint}" />
+                    <CheckBox Content="{res:Loc Settings_AutoScroll}" Margin="0,4"
+                              AutomationProperties.Name="{res:Loc Settings_AutoScroll}"
+                              IsChecked="{Binding AutoScrollConsole}" />
+                    <CheckBox Content="{res:Loc Settings_WarnOnCancel}" Margin="0,4"
+                              AutomationProperties.Name="{res:Loc Settings_WarnOnCancel}"
+                              IsChecked="{Binding WarnOnCancel}" />
+                </StackPanel>
+
+                <!-- Updates -->
+                <StackPanel>
+                    <StackPanel.Style>
+                        <Style TargetType="StackPanel">
+                            <Setter Property="Visibility" Value="Collapsed" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding SelectedSection}" Value="Updates">
+                                    <Setter Property="Visibility" Value="Visible" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </StackPanel.Style>
+
+                    <TextBlock Text="{res:Loc Settings_Updates}" Style="{StaticResource SectionHeader}" />
+                    <CheckBox Content="{res:Loc Settings_AutoCheckUpdates}" Margin="0,4"
+                              AutomationProperties.Name="{res:Loc Settings_AutoCheckUpdates}"
+                              IsChecked="{Binding AutoCheckForUpdates}" />
+                    <StackPanel Orientation="Horizontal" Margin="0,12,0,0">
+                        <TextBlock Text="{res:Loc Settings_CurrentVersion}" Opacity="0.7" />
+                        <TextBlock Text="{Binding CurrentVersionText}" Margin="8,0,0,0" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,4,0,0">
+                        <TextBlock Text="{res:Loc Settings_LastChecked}" Opacity="0.7" />
+                        <TextBlock Text="{Binding LastCheckedText}" Margin="8,0,0,0" />
+                    </StackPanel>
+                    <Button Content="{res:Loc Settings_CheckNow}" Command="{Binding CheckNowCommand}"
+                            HorizontalAlignment="Left" Margin="0,16,0,0"
+                            AutomationProperties.Name="{res:Loc Settings_CheckNow}"
+                            Style="{StaticResource MaterialDesignOutlinedButton}" />
+                </StackPanel>
+
+                <!-- About -->
+                <StackPanel>
+                    <StackPanel.Style>
+                        <Style TargetType="StackPanel">
+                            <Setter Property="Visibility" Value="Collapsed" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding SelectedSection}" Value="About">
+                                    <Setter Property="Visibility" Value="Visible" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </StackPanel.Style>
+
+                    <TextBlock Text="{res:Loc Settings_About}" Style="{StaticResource SectionHeader}" />
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{res:Loc AppTitle}" FontWeight="Medium" />
+                        <TextBlock Text="{Binding CurrentVersionText}" Margin="8,0,0,0" Opacity="0.8" />
+                    </StackPanel>
+                    <TextBlock Text="{res:Loc Settings_NoDataCollected}" TextWrapping="Wrap" Opacity="0.8" Margin="0,12,0,0" />
+                    <StackPanel Orientation="Horizontal" Margin="0,16,0,0">
+                        <Button Content="{res:Loc Settings_License}" Command="{Binding OpenLicenseCommand}"
+                                AutomationProperties.Name="{res:Loc Settings_License}"
+                                Style="{StaticResource MaterialDesignOutlinedButton}" Margin="0,0,8,0" />
+                        <Button Content="{res:Loc Settings_GitHub}" Command="{Binding OpenRepoCommand}"
+                                AutomationProperties.Name="{res:Loc Settings_GitHub}"
+                                Style="{StaticResource MaterialDesignOutlinedButton}" />
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

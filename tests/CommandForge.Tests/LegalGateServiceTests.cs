@@ -1,5 +1,6 @@
 using CommandForge.Application;
 using CommandForge.Application.Ports;
+using CommandForge.Application.Settings;
 
 namespace CommandForge.Tests;
 
@@ -42,6 +43,24 @@ public sealed class LegalGateServiceTests
         public string? AcceptedTermsVersion { get; set; }
 
         public bool AutoCheckForUpdates { get; set; } = true;
+
+        public AppTheme Theme { get; set; } = AppTheme.System;
+
+        public string Language { get; set; } = "";
+
+        public FontScale FontSize { get; set; } = FontScale.Medium;
+
+        public bool CollapseSidebarByDefault { get; set; }
+
+        public bool ShowAdminRestartBadges { get; set; } = true;
+
+        public bool ConfirmCaution { get; set; } = true;
+
+        public bool AutoCreateRestorePoint { get; set; } = true;
+
+        public bool AutoScrollConsole { get; set; } = true;
+
+        public bool WarnOnCancel { get; set; } = true;
 
         public int SaveCount { get; private set; }
 

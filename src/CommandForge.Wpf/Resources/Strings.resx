@@ -772,4 +772,94 @@
   <data name="Update_Error_CommandRunning" xml:space="preserve">
     <value>Finish or cancel the running command before updating.</value>
   </data>
+  <data name="Menu_OpenSettings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="LanguageOption_System" xml:space="preserve">
+    <value>System default</value>
+  </data>
+  <data name="Settings_Appearance" xml:space="preserve">
+    <value>Appearance</value>
+  </data>
+  <data name="Settings_Behavior" xml:space="preserve">
+    <value>Behavior &amp; Safety</value>
+  </data>
+  <data name="Settings_Updates" xml:space="preserve">
+    <value>Updates</value>
+  </data>
+  <data name="Settings_About" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="Settings_Theme" xml:space="preserve">
+    <value>Theme</value>
+  </data>
+  <data name="Settings_ThemeSystem" xml:space="preserve">
+    <value>System</value>
+  </data>
+  <data name="Settings_ThemeLight" xml:space="preserve">
+    <value>Light</value>
+  </data>
+  <data name="Settings_ThemeDark" xml:space="preserve">
+    <value>Dark</value>
+  </data>
+  <data name="Settings_Language" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="Settings_FontSize" xml:space="preserve">
+    <value>Font size</value>
+  </data>
+  <data name="Settings_FontSmall" xml:space="preserve">
+    <value>Small</value>
+  </data>
+  <data name="Settings_FontMedium" xml:space="preserve">
+    <value>Medium</value>
+  </data>
+  <data name="Settings_FontLarge" xml:space="preserve">
+    <value>Large</value>
+  </data>
+  <data name="Settings_CollapseSidebar" xml:space="preserve">
+    <value>Collapse sidebar by default</value>
+  </data>
+  <data name="Settings_ShowBadges" xml:space="preserve">
+    <value>Show Admin/Restart badges in the list</value>
+  </data>
+  <data name="Settings_ConfirmCaution" xml:space="preserve">
+    <value>Confirm before Caution commands</value>
+  </data>
+  <data name="Settings_ConfirmDangerous" xml:space="preserve">
+    <value>Confirm before Dangerous commands</value>
+  </data>
+  <data name="Settings_DangerousLockedTooltip" xml:space="preserve">
+    <value>Always on — this safety check cannot be disabled.</value>
+  </data>
+  <data name="Settings_AutoRestorePoint" xml:space="preserve">
+    <value>Offer a System Restore Point before risky commands</value>
+  </data>
+  <data name="Settings_AutoScroll" xml:space="preserve">
+    <value>Auto-scroll the console</value>
+  </data>
+  <data name="Settings_WarnOnCancel" xml:space="preserve">
+    <value>Warn before closing while a command is running</value>
+  </data>
+  <data name="Settings_AutoCheckUpdates" xml:space="preserve">
+    <value>Check for updates on startup</value>
+  </data>
+  <data name="Settings_CurrentVersion" xml:space="preserve">
+    <value>Current version:</value>
+  </data>
+  <data name="Settings_LastChecked" xml:space="preserve">
+    <value>Last checked:</value>
+  </data>
+  <data name="Settings_CheckNow" xml:space="preserve">
+    <value>Check now</value>
+  </data>
+  <data name="Settings_NoDataCollected" xml:space="preserve">
+    <value>This app does not collect any of your data.</value>
+  </data>
+  <data name="Settings_License" xml:space="preserve">
+    <value>License (GPLv3)</value>
+  </data>
+  <data name="Settings_GitHub" xml:space="preserve">
+    <value>GitHub</value>
+  </data>
 </root>

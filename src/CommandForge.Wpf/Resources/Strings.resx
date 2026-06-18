@@ -1105,4 +1105,31 @@
   <data name="LegalViewer_Title" xml:space="preserve">
     <value>Terms &amp; Privacy</value>
   </data>
+  <data name="Menu_KeyboardShortcuts" xml:space="preserve">
+    <value>Keyboard shortcuts</value>
+  </data>
+  <data name="Menu_PortableInfo" xml:space="preserve">
+    <value>Portable info</value>
+  </data>
+  <data name="Menu_RestorePoint" xml:space="preserve">
+    <value>Create System Restore Point</value>
+  </data>
+  <data name="Shortcuts_Palette" xml:space="preserve">
+    <value>Open Command Palette / focus search</value>
+  </data>
+  <data name="Shortcuts_ListNav" xml:space="preserve">
+    <value>Move selection (lists &amp; palette)</value>
+  </data>
+  <data name="Shortcuts_OpenSelected" xml:space="preserve">
+    <value>Open the selected command</value>
+  </data>
+  <data name="Shortcuts_CloseDialog" xml:space="preserve">
+    <value>Close dialog / cancel</value>
+  </data>
+  <data name="PortableInfo_ConfigFolder" xml:space="preserve">
+    <value>Configuration folder</value>
+  </data>
+  <data name="PortableInfo_LogFolder" xml:space="preserve">
+    <value>Log folder</value>
+  </data>
 </root>

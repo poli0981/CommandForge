@@ -67,6 +67,7 @@ public sealed partial class MainViewModel : ObservableObject
             {
                 RunSelectedCommand.NotifyCanExecuteChanged();
                 RevertSelectedCommand.NotifyCanExecuteChanged();
+                CreateRestorePointCommand.NotifyCanExecuteChanged();
             }
         };
 
@@ -166,14 +167,6 @@ public sealed partial class MainViewModel : ObservableObject
     [RelayCommand]
     private void ShowSettings() => CurrentSection = ShellSection.Settings;
 
-    /// <summary>Shows the About information (the Settings screen on its About section).</summary>
-    [RelayCommand]
-    private void ShowAbout()
-    {
-        Settings.SelectedSection = SettingsSection.About;
-        CurrentSection = ShellSection.Settings;
-    }
-
     [RelayCommand]
     private void OpenWiki()
         => Process.Start(new ProcessStartInfo(WikiUrl) { UseShellExecute = true });
@@ -225,6 +218,21 @@ public sealed partial class MainViewModel : ObservableObject
 
     [RelayCommand]
     private Task CheckForUpdatesAsync() => _updateDialog.ShowAsync(startedFromStartup: false);
+
+    /// <summary>Creates a System Restore Point by running the vetted catalog command (elevated via the broker).</summary>
+    [RelayCommand(CanExecute = nameof(CanCreateRestorePoint))]
+    private Task CreateRestorePointAsync()
+    {
+        if (_restorePointCommand is null)
+        {
+            return Task.CompletedTask;
+        }
+
+        SelectCommandById(_restorePointCommand.Id); // show it in the catalog so its console output is visible
+        return ConfirmAndRunAsync(_restorePointCommand);
+    }
+
+    private bool CanCreateRestorePoint() => _restorePointCommand is not null && !Execution.IsRunning;
 
     [RelayCommand(CanExecute = nameof(CanRunSelected))]
     private Task RunSelectedAsync()

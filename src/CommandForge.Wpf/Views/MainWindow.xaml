@@ -18,6 +18,7 @@
     <Window.Resources>
         <conv:StringToPackIconKindConverter x:Key="IconConverter" />
         <conv:EnumToBooleanConverter x:Key="EnumBool" />
+        <conv:StringEqualsConverter x:Key="StringEquals" />
 
         <DataTemplate x:Key="HomeTemplate">
             <views:HomeView DataContext="{Binding Home}" />
@@ -57,6 +58,8 @@
                 <MenuItem Header="{res:Loc Menu_OpenConfigFolder}" Command="{Binding Settings.OpenConfigFolderCommand}" />
                 <MenuItem Header="{res:Loc Menu_OpenLogFolder}" Command="{Binding Settings.OpenLogFolderCommand}" />
                 <Separator />
+                <MenuItem Header="{res:Loc Menu_PortableInfo}" Click="OnShowPortableInfoClick" />
+                <Separator />
                 <MenuItem Header="{res:Loc MenuExit}" Click="OnExitClick" InputGestureText="Ctrl+Q" />
             </MenuItem>
             <MenuItem Header="{res:Loc MenuView}">
@@ -85,6 +88,17 @@
                               CommandParameter="{x:Static appset:FontScale.Large}"
                               IsChecked="{Binding Settings.SelectedFontSize, Converter={StaticResource EnumBool}, ConverterParameter=Large, Mode=OneWay}" />
                 </MenuItem>
+                <MenuItem Header="{res:Loc Settings_Language}">
+                    <MenuItem Header="{res:Loc LanguageOption_System}" Command="{Binding Settings.SetLanguageCommand}"
+                              CommandParameter=""
+                              IsChecked="{Binding Settings.SelectedLanguage.Code, Converter={StaticResource StringEquals}, Mode=OneWay}" />
+                    <MenuItem Header="English" Command="{Binding Settings.SetLanguageCommand}"
+                              CommandParameter="en"
+                              IsChecked="{Binding Settings.SelectedLanguage.Code, Converter={StaticResource StringEquals}, ConverterParameter=en, Mode=OneWay}" />
+                    <MenuItem Header="Tiếng Việt" Command="{Binding Settings.SetLanguageCommand}"
+                              CommandParameter="vi"
+                              IsChecked="{Binding Settings.SelectedLanguage.Code, Converter={StaticResource StringEquals}, ConverterParameter=vi, Mode=OneWay}" />
+                </MenuItem>
                 <Separator />
                 <MenuItem Header="{res:Loc MenuToggleSidebar}" Command="{Binding ToggleSidebarCommand}" InputGestureText="Ctrl+B" />
                 <MenuItem Header="{res:Loc Menu_FullScreen}" Click="OnToggleFullScreenClick" InputGestureText="F11" />
@@ -96,15 +110,19 @@
                 <MenuItem Header="{res:Loc Menu_LogViewer}" Command="{Binding ShowLogViewerCommand}" InputGestureText="Ctrl+L" />
                 <MenuItem Header="{res:Loc Menu_ExportLogs}" Command="{Binding LogViewer.ExportZipCommand}" />
                 <MenuItem Header="{res:Loc Menu_DebugPanel}" Command="{Binding ShowDebugCommand}" />
+                <Separator />
+                <MenuItem Header="{res:Loc Menu_RestorePoint}" Command="{Binding CreateRestorePointCommand}" />
             </MenuItem>
             <MenuItem Header="{res:Loc MenuAbout}">
-                <MenuItem Header="{res:Loc Menu_About}" Command="{Binding ShowAboutCommand}" />
+                <MenuItem Header="{res:Loc Menu_About}" Click="OnShowAboutClick" />
+                <MenuItem Header="{res:Loc Menu_Terms}" Click="OnShowTermsClick" />
                 <Separator />
                 <MenuItem Header="{res:Loc Settings_License}" Command="{Binding Settings.OpenLicenseCommand}" />
                 <MenuItem Header="{res:Loc Settings_GitHub}" Command="{Binding Settings.OpenRepoCommand}" />
             </MenuItem>
             <MenuItem Header="{res:Loc MenuHelp}">
                 <MenuItem Header="{res:Loc Menu_Wiki}" Command="{Binding OpenWikiCommand}" />
+                <MenuItem Header="{res:Loc Menu_KeyboardShortcuts}" Click="OnShowKeyboardShortcutsClick" />
                 <MenuItem Header="{res:Loc Menu_ReportBug}" Command="{Binding ReportBugCommand}" />
                 <Separator />
                 <MenuItem Header="{res:Loc Menu_CheckForUpdates}" Command="{Binding CheckForUpdatesCommand}" InputGestureText="F5" />

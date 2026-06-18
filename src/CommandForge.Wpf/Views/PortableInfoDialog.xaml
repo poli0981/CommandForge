@@ -1,0 +1,48 @@
+<Window x:Class="CommandForge.Wpf.Views.PortableInfoDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:res="clr-namespace:CommandForge.Wpf.Resources"
+        Title="{res:Loc Menu_PortableInfo}"
+        Width="540" SizeToContent="Height" ResizeMode="NoResize"
+        WindowStartupLocation="CenterOwner" ShowInTaskbar="False"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontSize="{DynamicResource AppFontSize}"
+        Background="{DynamicResource MaterialDesignPaper}">
+    <StackPanel Margin="24">
+        <TextBlock Text="{res:Loc Menu_PortableInfo}" FontSize="18" FontWeight="Bold" Margin="0,0,0,12" />
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="{res:Loc Settings_RunMode}" Opacity="0.7" Margin="0,0,16,8" />
+            <TextBlock Grid.Row="0" Grid.Column="1" x:Name="ModeValue" Margin="0,0,0,8" FontWeight="Medium" />
+
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="{res:Loc Settings_CurrentVersion}" Opacity="0.7" Margin="0,0,16,8" />
+            <TextBlock Grid.Row="1" Grid.Column="1" x:Name="VersionValue" Margin="0,0,0,8" />
+
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="{res:Loc PortableInfo_ConfigFolder}" Opacity="0.7" Margin="0,0,16,8" />
+            <TextBox Grid.Row="2" Grid.Column="1" x:Name="ConfigValue" Margin="0,0,0,8" IsReadOnly="True"
+                     BorderThickness="0" Background="Transparent" TextWrapping="Wrap"
+                     FontFamily="Cascadia Mono, Consolas, Courier New" FontSize="12" />
+
+            <TextBlock Grid.Row="3" Grid.Column="0" Text="{res:Loc PortableInfo_LogFolder}" Opacity="0.7" Margin="0,0,16,0" />
+            <TextBox Grid.Row="3" Grid.Column="1" x:Name="LogValue" IsReadOnly="True"
+                     BorderThickness="0" Background="Transparent" TextWrapping="Wrap"
+                     FontFamily="Cascadia Mono, Consolas, Courier New" FontSize="12" />
+        </Grid>
+
+        <Button Content="{res:Loc ReportBug_Close}" Click="OnCloseClick"
+                HorizontalAlignment="Right" Margin="0,20,0,0"
+                Style="{StaticResource MaterialDesignRaisedButton}" />
+    </StackPanel>
+</Window>

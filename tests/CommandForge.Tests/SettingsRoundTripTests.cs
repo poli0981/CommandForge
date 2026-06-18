@@ -27,6 +27,13 @@ public sealed class SettingsRoundTripTests
                 AutoScrollConsole = false,
                 WarnOnCancel = false,
                 LogLevel = LogLevel.Verbose,
+                FavoriteCommandIds = ["info.systeminfo", "net.flushdns"],
+                RecentCommandIds = ["dism.restorehealth"],
+                WindowWidth = 1280,
+                WindowHeight = 800,
+                WindowLeft = 120,
+                WindowTop = 64,
+                WindowMaximized = true,
             };
             writer.Save();
 
@@ -43,6 +50,13 @@ public sealed class SettingsRoundTripTests
             Assert.False(reader.AutoScrollConsole);
             Assert.False(reader.WarnOnCancel);
             Assert.Equal(LogLevel.Verbose, reader.LogLevel);
+            Assert.Equal(["info.systeminfo", "net.flushdns"], reader.FavoriteCommandIds);
+            Assert.Equal(["dism.restorehealth"], reader.RecentCommandIds);
+            Assert.Equal(1280, reader.WindowWidth);
+            Assert.Equal(800, reader.WindowHeight);
+            Assert.Equal(120, reader.WindowLeft);
+            Assert.Equal(64, reader.WindowTop);
+            Assert.True(reader.WindowMaximized);
         }
         finally
         {
@@ -72,6 +86,13 @@ public sealed class SettingsRoundTripTests
             Assert.True(settings.AutoScrollConsole);
             Assert.True(settings.WarnOnCancel);
             Assert.Equal(LogLevel.Information, settings.LogLevel);
+            Assert.Empty(settings.FavoriteCommandIds);
+            Assert.Empty(settings.RecentCommandIds);
+            Assert.Null(settings.WindowWidth);
+            Assert.Null(settings.WindowHeight);
+            Assert.Null(settings.WindowLeft);
+            Assert.Null(settings.WindowTop);
+            Assert.False(settings.WindowMaximized);
         }
         finally
         {

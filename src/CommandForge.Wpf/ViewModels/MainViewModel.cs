@@ -1,6 +1,7 @@
 using System.Collections.ObjectModel;
 using CommandForge.Application.Ports;
 using CommandForge.Application.Search;
+using CommandForge.Application.Settings;
 using CommandForge.Domain;
 using CommandForge.Wpf.Resources;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -33,6 +34,7 @@ public sealed partial class MainViewModel : ObservableObject
         IUpdateDialogService updateDialog,
         IReportBugDialogService reportBug,
         ISettingsService settings,
+        ISystemInfoService systemInfo,
         SettingsViewModel settingsViewModel,
         LogViewerViewModel logViewer,
         DebugViewModel debug)
@@ -43,6 +45,7 @@ public sealed partial class MainViewModel : ObservableObject
         ArgumentNullException.ThrowIfNull(updateDialog);
         ArgumentNullException.ThrowIfNull(reportBug);
         ArgumentNullException.ThrowIfNull(settings);
+        ArgumentNullException.ThrowIfNull(systemInfo);
         ArgumentNullException.ThrowIfNull(settingsViewModel);
         ArgumentNullException.ThrowIfNull(logViewer);
         ArgumentNullException.ThrowIfNull(debug);
@@ -71,6 +74,15 @@ public sealed partial class MainViewModel : ObservableObject
         _itemsById = vms.Items.ToDictionary(i => i.Command.Id, StringComparer.Ordinal);
         _restorePointCommand = _itemsById.GetValueOrDefault(RestorePointCommandId)?.Command;
 
+        // Reflect persisted favorites on the shared item view-models (drives the star icon everywhere).
+        var favoriteIds = new HashSet<string>(settings.FavoriteCommandIds, StringComparer.Ordinal);
+        foreach (var item in _itemsById.Values)
+        {
+            item.IsFavorite = favoriteIds.Contains(item.Command.Id);
+        }
+
+        Home = new HomeViewModel(_itemsById, settings, systemInfo, item => SelectCommandById(item.Command.Id));
+
         Categories.Add(new CategoryViewModel(null, "Sidebar_AllCommands", "ViewGridOutline", vms.Items.Count));
         foreach (var category in catalog.GetCategories())
         {
@@ -81,9 +93,16 @@ public sealed partial class MainViewModel : ObservableObject
         _isSidebarCollapsed = settings.CollapseSidebarByDefault;
         SelectedCategory = Categories[0];
 
+        // Open on the Home dashboard (the SelectedCategory assignment above forces Catalog, so set last).
+        Home.Refresh();
+        CurrentSection = ShellSection.Home;
+
         // Live language switching: re-resolve catalog display strings in place (keeps selection/scroll).
         LocalizationManager.Instance.CultureChanged += OnCultureChanged;
     }
+
+    /// <summary>The Home dashboard view-model (shown when <see cref="CurrentSection"/> is Home).</summary>
+    public HomeViewModel Home { get; }
 
     /// <summary>The Settings screen view-model (shown when <see cref="CurrentSection"/> is Settings).</summary>
     public SettingsViewModel Settings { get; }
@@ -100,8 +119,17 @@ public sealed partial class MainViewModel : ObservableObject
 
     public ObservableCollection<CommandItemViewModel> FilteredCommands { get; } = [];
 
+    /// <summary>Whether the command list is filtered by the selected category or by Favorites.</summary>
+    private enum BrowseMode
+    {
+        Category,
+        Favorites,
+    }
+
+    private BrowseMode _browseMode = BrowseMode.Category;
+
     [ObservableProperty]
-    private ShellSection _currentSection = ShellSection.Catalog;
+    private ShellSection _currentSection = ShellSection.Home;
 
     [ObservableProperty]
     private bool _isSidebarCollapsed;
@@ -127,10 +155,50 @@ public sealed partial class MainViewModel : ObservableObject
     private void ToggleSidebar() => IsSidebarCollapsed = !IsSidebarCollapsed;
 
     [RelayCommand]
+    private void ShowHome()
+    {
+        Home.Refresh();
+        CurrentSection = ShellSection.Home;
+    }
+
+    [RelayCommand]
     private void ShowSettings() => CurrentSection = ShellSection.Settings;
 
     [RelayCommand]
     private void ShowCatalog() => CurrentSection = ShellSection.Catalog;
+
+    /// <summary>Shows the catalog filtered to pinned favorites.</summary>
+    [RelayCommand]
+    private void ShowFavorites()
+    {
+        _browseMode = BrowseMode.Favorites;
+        SearchText = string.Empty;
+        SelectedCategory = null; // clears the category highlight; stays in Favorites mode (see OnSelectedCategoryChanged)
+        CurrentSection = ShellSection.Catalog;
+        ApplyFilter();
+    }
+
+    /// <summary>Pins or unpins a command from Favorites and persists the change.</summary>
+    [RelayCommand]
+    private void ToggleFavorite(CommandItemViewModel? item)
+    {
+        if (item is null)
+        {
+            return;
+        }
+
+        _settings.FavoriteCommandIds = Favorites.Toggle(_settings.FavoriteCommandIds, item.Command.Id);
+
+        // Update the shared item before persisting so the UI matches the in-memory list even if Save() fails.
+        item.IsFavorite = _settings.FavoriteCommandIds.Contains(item.Command.Id, StringComparer.Ordinal);
+        _settings.Save();
+
+        // When viewing the Favorites filter, drop a just-unpinned command from the list immediately.
+        if (_browseMode == BrowseMode.Favorites)
+        {
+            ApplyFilter();
+        }
+    }
 
     [RelayCommand]
     private void ShowLogViewer() => CurrentSection = ShellSection.LogViewer;
@@ -195,11 +263,19 @@ public sealed partial class MainViewModel : ObservableObject
         }
 
         await Execution.RunAsync(command, restorePoint);
+
+        // Record the run for the Home "recent commands" list (skip user-cancelled runs).
+        if (!Execution.Cancelled)
+        {
+            _settings.RecentCommandIds = RecentCommands.Add(_settings.RecentCommandIds, command.Id);
+            _settings.Save();
+        }
     }
 
-    /// <summary>Selects a command by id (used by the palette), clearing filters so it is visible.</summary>
+    /// <summary>Selects a command by id (used by the palette and Home), clearing filters so it is visible.</summary>
     public void SelectCommandById(string commandId)
     {
+        _browseMode = BrowseMode.Category;
         CurrentSection = ShellSection.Catalog;
         if (Categories.Count > 0)
         {
@@ -217,6 +293,13 @@ public sealed partial class MainViewModel : ObservableObject
 
     partial void OnSelectedCategoryChanged(CategoryViewModel? value)
     {
+        // Picking a category leaves Favorites mode; clearing the selection (value is null) keeps the
+        // current mode, so ShowFavorites can deselect the category without flipping back to Category.
+        if (value is not null)
+        {
+            _browseMode = BrowseMode.Category;
+        }
+
         CurrentSection = ShellSection.Catalog;
         ApplyFilter();
     }
@@ -242,11 +325,16 @@ public sealed partial class MainViewModel : ObservableObject
         }
 
         UpdateDetail();
+        Home.Refresh();
     }
 
     private void ApplyFilter()
     {
-        var filter = SelectedCategory?.Id is { } categoryId
+        var inFavorites = _browseMode == BrowseMode.Favorites;
+        var favoriteIds = inFavorites
+            ? new HashSet<string>(_settings.FavoriteCommandIds, StringComparer.Ordinal)
+            : null;
+        var filter = !inFavorites && SelectedCategory?.Id is { } categoryId
             ? new CommandSearchFilter { CategoryId = categoryId }
             : null;
         var hits = SearchCommandsUseCase.Search(_searchable, SearchText, filter);
@@ -254,6 +342,11 @@ public sealed partial class MainViewModel : ObservableObject
         FilteredCommands.Clear();
         foreach (var hit in hits)
         {
+            if (favoriteIds is not null && !favoriteIds.Contains(hit.Command.Id))
+            {
+                continue;
+            }
+
             var item = _itemsById[hit.Command.Id];
             item.TitleMatches = hit.TitleMatches;
             FilteredCommands.Add(item);

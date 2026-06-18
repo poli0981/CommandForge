@@ -35,6 +35,7 @@
         <Border Grid.Row="1" Background="{DynamicResource MaterialDesignToolBarBackground}"
                 CornerRadius="4" Padding="10" Margin="0,0,0,12">
             <TextBox Text="{Binding CommandLine, Mode=OneWay}" IsReadOnly="True" BorderThickness="0"
+                     AutomationProperties.Name="{res:Loc Detail_CommandLine}"
                      Background="Transparent" TextWrapping="Wrap" FontFamily="Cascadia Mono, Consolas, Courier New" />
         </Border>
 
@@ -44,6 +45,7 @@
                     Visibility="{Binding IsDangerous, Converter={StaticResource BoolToVis}}">
             <TextBlock Text="{res:Loc Confirm_TypeToConfirm}" Margin="0,0,0,6" />
             <TextBox Text="{Binding ConfirmationInput, UpdateSourceTrigger=PropertyChanged}"
+                     AutomationProperties.Name="{res:Loc Confirm_TypeToConfirm}"
                      materialDesign:HintAssist.Hint="{Binding Title}" />
         </StackPanel>
 

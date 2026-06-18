@@ -2,3 +2,5 @@
 // Add Win32 APIs/constants here as they are needed (e.g. process-tree termination
 // in the execution engine). One harmless symbol keeps the generator wired up.
 GetCurrentProcessId
+// Read-only physical-memory query for the Home dashboard (ISystemInfoService).
+GlobalMemoryStatusEx

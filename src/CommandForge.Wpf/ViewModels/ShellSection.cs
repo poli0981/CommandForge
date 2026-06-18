@@ -1,8 +1,11 @@
 namespace CommandForge.Wpf.ViewModels;
 
-/// <summary>The active section of the main shell content area. Home is added in Phase 5c.</summary>
+/// <summary>The active section of the main shell content area.</summary>
 public enum ShellSection
 {
+    /// <summary>The Home dashboard (recent commands, favorites, system status).</summary>
+    Home,
+
     /// <summary>The command catalog (browse/search/run).</summary>
     Catalog,
 

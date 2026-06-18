@@ -17,6 +17,9 @@
     <Window.Resources>
         <conv:StringToPackIconKindConverter x:Key="IconConverter" />
 
+        <DataTemplate x:Key="HomeTemplate">
+            <views:HomeView DataContext="{Binding Home}" />
+        </DataTemplate>
         <DataTemplate x:Key="CatalogTemplate">
             <views:CatalogView />
         </DataTemplate>
@@ -52,6 +55,9 @@
                 <MenuItem Header="{res:Loc MenuExit}" Click="OnExitClick" />
             </MenuItem>
             <MenuItem Header="{res:Loc MenuView}">
+                <MenuItem Header="{res:Loc SidebarHome}" Command="{Binding ShowHomeCommand}" InputGestureText="Ctrl+H" />
+                <MenuItem Header="{res:Loc SidebarFavorites}" Command="{Binding ShowFavoritesCommand}" />
+                <Separator />
                 <MenuItem Header="{res:Loc MenuToggleSidebar}" Command="{Binding ToggleSidebarCommand}" InputGestureText="Ctrl+B" />
                 <MenuItem Header="{res:Loc Menu_OpenSettings}" Command="{Binding ShowSettingsCommand}" InputGestureText="Ctrl+," />
             </MenuItem>
@@ -93,6 +99,26 @@
                             AutomationProperties.Name="{res:Loc MenuToggleSidebar}"
                             ToolTip="{res:Loc MenuToggleSidebar}">
                         <materialDesign:PackIcon Kind="Menu" Width="22" Height="22" />
+                    </Button>
+
+                    <Button DockPanel.Dock="Top" Style="{StaticResource SidebarButtonStyle}"
+                            Command="{Binding ShowHomeCommand}"
+                            AutomationProperties.Name="{res:Loc SidebarHome}"
+                            ToolTip="{res:Loc SidebarHome}">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Home" Width="22" Height="22" />
+                            <TextBlock Text="{res:Loc SidebarHome}" Style="{StaticResource SidebarLabelStyle}" />
+                        </StackPanel>
+                    </Button>
+
+                    <Button DockPanel.Dock="Top" Style="{StaticResource SidebarButtonStyle}"
+                            Command="{Binding ShowFavoritesCommand}"
+                            AutomationProperties.Name="{res:Loc SidebarFavorites}"
+                            ToolTip="{res:Loc SidebarFavorites}">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Star" Width="22" Height="22" />
+                            <TextBlock Text="{res:Loc SidebarFavorites}" Style="{StaticResource SidebarLabelStyle}" />
+                        </StackPanel>
                     </Button>
 
                     <Button DockPanel.Dock="Bottom" Style="{StaticResource SidebarButtonStyle}"
@@ -143,6 +169,9 @@
                     <Style TargetType="ContentControl">
                         <Setter Property="ContentTemplate" Value="{StaticResource CatalogTemplate}" />
                         <Style.Triggers>
+                            <DataTrigger Binding="{Binding CurrentSection}" Value="Home">
+                                <Setter Property="ContentTemplate" Value="{StaticResource HomeTemplate}" />
+                            </DataTrigger>
                             <DataTrigger Binding="{Binding CurrentSection}" Value="Settings">
                                 <Setter Property="ContentTemplate" Value="{StaticResource SettingsTemplate}" />
                             </DataTrigger>

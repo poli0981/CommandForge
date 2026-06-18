@@ -119,6 +119,55 @@ public sealed class JsonSettingsService : ISettingsService
     }
 
     /// <inheritdoc />
+    public IReadOnlyList<string> FavoriteCommandIds
+    {
+        get => _model.FavoriteCommandIds;
+        set => _model = _model with { FavoriteCommandIds = value };
+    }
+
+    /// <inheritdoc />
+    public IReadOnlyList<string> RecentCommandIds
+    {
+        get => _model.RecentCommandIds;
+        set => _model = _model with { RecentCommandIds = value };
+    }
+
+    /// <inheritdoc />
+    public double? WindowWidth
+    {
+        get => _model.WindowWidth;
+        set => _model = _model with { WindowWidth = value };
+    }
+
+    /// <inheritdoc />
+    public double? WindowHeight
+    {
+        get => _model.WindowHeight;
+        set => _model = _model with { WindowHeight = value };
+    }
+
+    /// <inheritdoc />
+    public double? WindowLeft
+    {
+        get => _model.WindowLeft;
+        set => _model = _model with { WindowLeft = value };
+    }
+
+    /// <inheritdoc />
+    public double? WindowTop
+    {
+        get => _model.WindowTop;
+        set => _model = _model with { WindowTop = value };
+    }
+
+    /// <inheritdoc />
+    public bool WindowMaximized
+    {
+        get => _model.WindowMaximized;
+        set => _model = _model with { WindowMaximized = value };
+    }
+
+    /// <inheritdoc />
     public void Save()
     {
         var directory = Path.GetDirectoryName(_configPath);
@@ -176,5 +225,19 @@ public sealed class JsonSettingsService : ISettingsService
         public bool WarnOnCancel { get; init; } = true;
 
         public LogLevel LogLevel { get; init; } = LogLevel.Information;
+
+        public IReadOnlyList<string> FavoriteCommandIds { get; init; } = [];
+
+        public IReadOnlyList<string> RecentCommandIds { get; init; } = [];
+
+        public double? WindowWidth { get; init; }
+
+        public double? WindowHeight { get; init; }
+
+        public double? WindowLeft { get; init; }
+
+        public double? WindowTop { get; init; }
+
+        public bool WindowMaximized { get; init; }
     }
 }

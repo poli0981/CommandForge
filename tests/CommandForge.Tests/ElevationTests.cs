@@ -148,6 +148,8 @@ public sealed class ElevationTests
         public IReadOnlyList<CommandCategory> GetCategories() => [];
 
         public IReadOnlyList<CommandDefinition> GetCommands() => _commands;
+
+        public IReadOnlyList<string> ValidationErrors => [];
     }
 
     private sealed class FakeExecutor : ICommandExecutor

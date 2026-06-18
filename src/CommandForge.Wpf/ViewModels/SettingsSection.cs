@@ -12,6 +12,12 @@ public enum SettingsSection
     /// <summary>Update preferences and manual check.</summary>
     Updates,
 
+    /// <summary>Log level, size, open/export/clear.</summary>
+    Logs,
+
+    /// <summary>Run mode, config path, debug panel, reset.</summary>
+    Advanced,
+
     /// <summary>Version, license, links.</summary>
     About,
 }

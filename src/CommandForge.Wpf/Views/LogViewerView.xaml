@@ -1,0 +1,81 @@
+<UserControl x:Class="CommandForge.Wpf.Views.LogViewerView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:res="clr-namespace:CommandForge.Wpf.Resources"
+             xmlns:conv="clr-namespace:CommandForge.Wpf.Converters"
+             xmlns:beh="clr-namespace:CommandForge.Wpf.Behaviors">
+    <UserControl.Resources>
+        <conv:LogLevelToBrushConverter x:Key="LogBrush" />
+    </UserControl.Resources>
+
+    <Grid Margin="12">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- Toolbar -->
+        <Grid Grid.Row="0" Margin="0,0,0,8">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <ComboBox Grid.Column="0" Width="150" VerticalAlignment="Center"
+                      AutomationProperties.Name="{res:Loc LogViewer_Level}"
+                      ItemsSource="{Binding LevelOptions}" DisplayMemberPath="DisplayName"
+                      SelectedValuePath="Value" SelectedValue="{Binding SelectedLevel}" />
+            <TextBox Grid.Column="1" Margin="8,0" VerticalAlignment="Center"
+                     AutomationProperties.Name="{res:Loc LogViewer_FilterHint}"
+                     materialDesign:HintAssist.Hint="{res:Loc LogViewer_FilterHint}"
+                     Text="{Binding FilterText, UpdateSourceTrigger=PropertyChanged}" />
+            <CheckBox Grid.Column="2" VerticalAlignment="Center" Margin="0,0,8,0"
+                      Content="{res:Loc LogViewer_AutoScroll}" IsChecked="{Binding AutoScroll}"
+                      AutomationProperties.Name="{res:Loc LogViewer_AutoScroll}" />
+            <StackPanel Grid.Column="3" Orientation="Horizontal">
+                <Button Style="{StaticResource MaterialDesignIconButton}" Command="{Binding OpenFolderCommand}"
+                        ToolTip="{res:Loc LogViewer_OpenFolder}" AutomationProperties.Name="{res:Loc LogViewer_OpenFolder}">
+                    <materialDesign:PackIcon Kind="FolderOpenOutline" />
+                </Button>
+                <Button Style="{StaticResource MaterialDesignIconButton}" Command="{Binding ExportZipCommand}"
+                        ToolTip="{res:Loc LogViewer_Export}" AutomationProperties.Name="{res:Loc LogViewer_Export}">
+                    <materialDesign:PackIcon Kind="ZipBoxOutline" />
+                </Button>
+                <Button Style="{StaticResource MaterialDesignIconButton}" Command="{Binding ClearCommand}"
+                        ToolTip="{res:Loc LogViewer_Clear}" AutomationProperties.Name="{res:Loc LogViewer_Clear}">
+                    <materialDesign:PackIcon Kind="DeleteOutline" />
+                </Button>
+            </StackPanel>
+        </Grid>
+
+        <!-- Body -->
+        <Border Grid.Row="1" Background="{DynamicResource MaterialDesignToolBarBackground}" CornerRadius="4">
+            <ScrollViewer beh:AutoScroll.Enabled="{Binding AutoScroll}" VerticalScrollBarVisibility="Auto"
+                          HorizontalScrollBarVisibility="Auto" Padding="8">
+                <ItemsControl ItemsSource="{Binding View}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="{Binding Time}" Opacity="0.7"
+                                           FontFamily="Cascadia Mono, Consolas, Courier New" FontSize="12" Margin="0,0,8,0" />
+                                <TextBlock Grid.Column="1" Text="{Binding LevelTag}" Width="32"
+                                           Foreground="{Binding Level, Converter={StaticResource LogBrush}}"
+                                           FontFamily="Cascadia Mono, Consolas, Courier New" FontSize="12" FontWeight="Medium" Margin="0,0,8,0" />
+                                <TextBlock Grid.Column="2" Text="{Binding Message}" TextWrapping="Wrap"
+                                           Foreground="{Binding Level, Converter={StaticResource LogBrush}}"
+                                           FontFamily="Cascadia Mono, Consolas, Courier New" FontSize="12" />
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+        </Border>
+    </Grid>
+</UserControl>

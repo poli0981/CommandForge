@@ -1,0 +1,45 @@
+<Window x:Class="CommandForge.Wpf.Views.ErrorDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:res="clr-namespace:CommandForge.Wpf.Resources"
+        Title="{res:Loc Error_Title}"
+        Width="520" SizeToContent="Height" ResizeMode="NoResize"
+        WindowStartupLocation="CenterOwner" ShowInTaskbar="False"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontSize="{DynamicResource AppFontSize}"
+        Background="{DynamicResource MaterialDesignPaper}">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <DockPanel Grid.Row="0" Margin="0,0,0,12">
+            <materialDesign:PackIcon DockPanel.Dock="Left" Kind="AlertCircleOutline" Width="28" Height="28"
+                                     VerticalAlignment="Top" Margin="0,2,12,0" />
+            <TextBlock Text="{res:Loc Error_Message}" TextWrapping="Wrap" FontSize="15" />
+        </DockPanel>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,16">
+            <TextBlock Text="{res:Loc Error_Code}" Opacity="0.7" />
+            <TextBox Text="{Binding ErrorCode, Mode=OneWay}" IsReadOnly="True" BorderThickness="0"
+                     Background="Transparent" Margin="6,0,0,0"
+                     FontFamily="Cascadia Mono, Consolas, Courier New" />
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Content="{res:Loc Error_CopyDetails}" Command="{Binding CopyDetailsCommand}"
+                    Style="{StaticResource MaterialDesignOutlinedButton}" Margin="0,0,8,0"
+                    AutomationProperties.Name="{res:Loc Error_CopyDetails}" />
+            <Button Content="{res:Loc Error_ReportBug}" Command="{Binding ReportBugCommand}"
+                    Style="{StaticResource MaterialDesignOutlinedButton}" Margin="0,0,8,0"
+                    AutomationProperties.Name="{res:Loc Error_ReportBug}" />
+            <Button Content="{res:Loc Error_Close}" Command="{Binding CloseCommand}"
+                    Style="{StaticResource MaterialDesignRaisedButton}"
+                    AutomationProperties.Name="{res:Loc Error_Close}" />
+        </StackPanel>
+    </Grid>
+</Window>

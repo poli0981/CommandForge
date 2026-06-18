@@ -1,5 +1,6 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using CommandForge.Application.Logging;
 using CommandForge.Application.Ports;
 using CommandForge.Application.Settings;
 
@@ -111,6 +112,13 @@ public sealed class JsonSettingsService : ISettingsService
     }
 
     /// <inheritdoc />
+    public LogLevel LogLevel
+    {
+        get => _model.LogLevel;
+        set => _model = _model with { LogLevel = value };
+    }
+
+    /// <inheritdoc />
     public void Save()
     {
         var directory = Path.GetDirectoryName(_configPath);
@@ -166,5 +174,7 @@ public sealed class JsonSettingsService : ISettingsService
         public bool AutoScrollConsole { get; init; } = true;
 
         public bool WarnOnCancel { get; init; } = true;
+
+        public LogLevel LogLevel { get; init; } = LogLevel.Information;
     }
 }

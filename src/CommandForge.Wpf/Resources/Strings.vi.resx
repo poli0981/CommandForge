@@ -862,4 +862,169 @@
   <data name="Settings_GitHub" xml:space="preserve">
     <value>GitHub</value>
   </data>
+  <data name="Menu_LogViewer" xml:space="preserve">
+    <value>Xem nhật ký</value>
+  </data>
+  <data name="Menu_ExportLogs" xml:space="preserve">
+    <value>Xuất nhật ký (.zip)</value>
+  </data>
+  <data name="Menu_DebugPanel" xml:space="preserve">
+    <value>Bảng Debug</value>
+  </data>
+  <data name="Menu_ReportBug" xml:space="preserve">
+    <value>Báo lỗi</value>
+  </data>
+  <data name="LogViewer_Title" xml:space="preserve">
+    <value>Nhật ký</value>
+  </data>
+  <data name="LogViewer_Level" xml:space="preserve">
+    <value>Mức</value>
+  </data>
+  <data name="LogViewer_FilterHint" xml:space="preserve">
+    <value>Lọc văn bản</value>
+  </data>
+  <data name="LogViewer_AutoScroll" xml:space="preserve">
+    <value>Tự cuộn</value>
+  </data>
+  <data name="LogViewer_OpenFolder" xml:space="preserve">
+    <value>Mở thư mục log</value>
+  </data>
+  <data name="LogViewer_Export" xml:space="preserve">
+    <value>Xuất nhật ký (.zip)</value>
+  </data>
+  <data name="LogViewer_Clear" xml:space="preserve">
+    <value>Xóa</value>
+  </data>
+  <data name="LogLevel_All" xml:space="preserve">
+    <value>Tất cả</value>
+  </data>
+  <data name="LogLevel_Info" xml:space="preserve">
+    <value>Thông tin</value>
+  </data>
+  <data name="LogLevel_Warning" xml:space="preserve">
+    <value>Cảnh báo</value>
+  </data>
+  <data name="LogLevel_Error" xml:space="preserve">
+    <value>Lỗi</value>
+  </data>
+  <data name="LogLevel_Debug" xml:space="preserve">
+    <value>Debug</value>
+  </data>
+  <data name="Log_ExportSuccess" xml:space="preserve">
+    <value>Đã xuất nhật ký ra {0}. Hãy rà nội dung trước khi chia sẻ.</value>
+  </data>
+  <data name="Debug_TabVerbose" xml:space="preserve">
+    <value>Nhật ký</value>
+  </data>
+  <data name="Debug_TabCatalog" xml:space="preserve">
+    <value>Catalog</value>
+  </data>
+  <data name="Debug_TabSystemInfo" xml:space="preserve">
+    <value>Thông tin hệ thống</value>
+  </data>
+  <data name="Debug_CategoryCount" xml:space="preserve">
+    <value>Nhóm:</value>
+  </data>
+  <data name="Debug_CommandCount" xml:space="preserve">
+    <value>Lệnh:</value>
+  </data>
+  <data name="Debug_ValidationErrors" xml:space="preserve">
+    <value>Lỗi kiểm tra catalog</value>
+  </data>
+  <data name="Debug_NoValidationErrors" xml:space="preserve">
+    <value>Không có lỗi kiểm tra.</value>
+  </data>
+  <data name="Debug_CopySystemInfo" xml:space="preserve">
+    <value>Sao chép</value>
+  </data>
+  <data name="Debug_Refresh" xml:space="preserve">
+    <value>Làm mới</value>
+  </data>
+  <data name="Error_Title" xml:space="preserve">
+    <value>Lỗi không mong muốn</value>
+  </data>
+  <data name="Error_Message" xml:space="preserve">
+    <value>Đã xảy ra lỗi. Bạn có thể sao chép chi tiết hoặc báo lỗi trên GitHub.</value>
+  </data>
+  <data name="Error_Code" xml:space="preserve">
+    <value>Mã lỗi:</value>
+  </data>
+  <data name="Error_CopyDetails" xml:space="preserve">
+    <value>Sao chép chi tiết</value>
+  </data>
+  <data name="Error_ReportBug" xml:space="preserve">
+    <value>Báo lỗi</value>
+  </data>
+  <data name="Error_Close" xml:space="preserve">
+    <value>Đóng</value>
+  </data>
+  <data name="ReportBug_Title" xml:space="preserve">
+    <value>Báo lỗi</value>
+  </data>
+  <data name="ReportBug_Environment" xml:space="preserve">
+    <value>Môi trường</value>
+  </data>
+  <data name="ReportBug_ExportLog" xml:space="preserve">
+    <value>Xuất log (.zip)</value>
+  </data>
+  <data name="ReportBug_OpenIssue" xml:space="preserve">
+    <value>Mở issue trên GitHub</value>
+  </data>
+  <data name="ReportBug_Close" xml:space="preserve">
+    <value>Đóng</value>
+  </data>
+  <data name="ReportBug_DescriptionHint" xml:space="preserve">
+    <value>Mô tả vấn đề (tùy chọn)</value>
+  </data>
+  <data name="ReportBug_ReviewReminder" xml:space="preserve">
+    <value>Hãy rà nội dung file .zip trước khi đính kèm vào issue.</value>
+  </data>
+  <data name="Settings_Logs" xml:space="preserve">
+    <value>Nhật ký</value>
+  </data>
+  <data name="Settings_LogLevel" xml:space="preserve">
+    <value>Mức log</value>
+  </data>
+  <data name="Settings_LogsSize" xml:space="preserve">
+    <value>Dung lượng log:</value>
+  </data>
+  <data name="Settings_OpenLogFolder" xml:space="preserve">
+    <value>Mở thư mục log</value>
+  </data>
+  <data name="Settings_ExportLogs" xml:space="preserve">
+    <value>Xuất nhật ký (.zip)</value>
+  </data>
+  <data name="Settings_ClearOldLogs" xml:space="preserve">
+    <value>Xóa log cũ</value>
+  </data>
+  <data name="Settings_ClearLogsConfirm" xml:space="preserve">
+    <value>Xóa các file log cũ? Log hôm nay được giữ lại.</value>
+  </data>
+  <data name="Settings_Advanced" xml:space="preserve">
+    <value>Nâng cao</value>
+  </data>
+  <data name="Settings_RunMode" xml:space="preserve">
+    <value>Chế độ chạy:</value>
+  </data>
+  <data name="Settings_RunModeInstalled" xml:space="preserve">
+    <value>Đã cài đặt</value>
+  </data>
+  <data name="Settings_RunModePortable" xml:space="preserve">
+    <value>Portable / dev</value>
+  </data>
+  <data name="Settings_ConfigPath" xml:space="preserve">
+    <value>File cấu hình</value>
+  </data>
+  <data name="Settings_OpenConfig" xml:space="preserve">
+    <value>Mở thư mục</value>
+  </data>
+  <data name="Settings_OpenDebugPanel" xml:space="preserve">
+    <value>Mở bảng Debug</value>
+  </data>
+  <data name="Settings_ResetDefaults" xml:space="preserve">
+    <value>Đặt lại mặc định</value>
+  </data>
+  <data name="Settings_ResetConfirm" xml:space="preserve">
+    <value>Đặt lại tất cả thiết lập về mặc định? Điều khoản đã chấp nhận và nhật ký được giữ lại.</value>
+  </data>
 </root>

@@ -22,6 +22,8 @@ public sealed class DependencyInjectionTests
         Assert.NotNull(provider.GetRequiredService<ICatalogProvider>());
         Assert.NotNull(provider.GetRequiredService<IUpdateService>());
         Assert.NotNull(provider.GetRequiredService<CheckForUpdateUseCase>());
+        Assert.NotNull(provider.GetRequiredService<ILogMaintenance>());
+        Assert.NotNull(provider.GetRequiredService<ILogLevelController>());
         Assert.NotNull(provider.GetRequiredService<LegalGateService>());
     }
 }

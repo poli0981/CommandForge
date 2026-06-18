@@ -23,6 +23,12 @@
         <DataTemplate x:Key="SettingsTemplate">
             <views:SettingsView DataContext="{Binding Settings}" />
         </DataTemplate>
+        <DataTemplate x:Key="LogViewerTemplate">
+            <views:LogViewerView DataContext="{Binding LogViewer}" />
+        </DataTemplate>
+        <DataTemplate x:Key="DebugTemplate">
+            <views:DebugView DataContext="{Binding Debug}" />
+        </DataTemplate>
 
         <Style x:Key="SidebarLabelStyle" TargetType="TextBlock">
             <Setter Property="VerticalAlignment" Value="Center" />
@@ -51,11 +57,16 @@
             </MenuItem>
             <MenuItem Header="{res:Loc MenuTools}">
                 <MenuItem Header="{res:Loc Palette_Placeholder}" Click="OnOpenPaletteClick" InputGestureText="Ctrl+K" />
+                <MenuItem Header="{res:Loc Menu_LogViewer}" Command="{Binding ShowLogViewerCommand}" InputGestureText="Ctrl+L" />
+                <MenuItem Header="{res:Loc Menu_ExportLogs}" Command="{Binding LogViewer.ExportZipCommand}" />
+                <MenuItem Header="{res:Loc Menu_DebugPanel}" Command="{Binding ShowDebugCommand}" />
                 <Separator />
                 <MenuItem Header="{res:Loc Menu_CheckForUpdates}" Command="{Binding CheckForUpdatesCommand}" />
             </MenuItem>
             <MenuItem Header="{res:Loc MenuAbout}" />
-            <MenuItem Header="{res:Loc MenuHelp}" />
+            <MenuItem Header="{res:Loc MenuHelp}">
+                <MenuItem Header="{res:Loc Menu_ReportBug}" Command="{Binding ReportBugCommand}" />
+            </MenuItem>
         </Menu>
 
         <Grid>
@@ -134,6 +145,12 @@
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding CurrentSection}" Value="Settings">
                                 <Setter Property="ContentTemplate" Value="{StaticResource SettingsTemplate}" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding CurrentSection}" Value="LogViewer">
+                                <Setter Property="ContentTemplate" Value="{StaticResource LogViewerTemplate}" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding CurrentSection}" Value="Debug">
+                                <Setter Property="ContentTemplate" Value="{StaticResource DebugTemplate}" />
                             </DataTrigger>
                         </Style.Triggers>
                     </Style>

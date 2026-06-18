@@ -1,4 +1,5 @@
 using CommandForge.Application;
+using CommandForge.Application.Logging;
 using CommandForge.Application.Ports;
 using CommandForge.Application.Settings;
 
@@ -61,6 +62,8 @@ public sealed class LegalGateServiceTests
         public bool AutoScrollConsole { get; set; } = true;
 
         public bool WarnOnCancel { get; set; } = true;
+
+        public LogLevel LogLevel { get; set; } = LogLevel.Information;
 
         public int SaveCount { get; private set; }
 

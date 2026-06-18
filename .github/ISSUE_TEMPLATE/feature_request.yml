@@ -1,0 +1,30 @@
+name: Feature request
+description: Suggest a feature or a new command for the catalog
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for the idea. Keep it concise and specific. For a **new command**, note that every
+        command must be a vetted, read-only catalog entry (no arbitrary execution) — see
+        [CONTRIBUTING.md](../blob/main/.github/CONTRIBUTING.md).
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem / motivation
+      description: What are you trying to do, and why is it hard today?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: What should CommandForge do? For a new command, give the exact command line and its danger level.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+    validations:
+      required: false

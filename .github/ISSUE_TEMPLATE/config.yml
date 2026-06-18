@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Security vulnerability (private)
+    url: https://github.com/poli0981/CommandForge/security/advisories/new
+    about: Report security vulnerabilities privately — do NOT open a public issue.
+  - name: Question / discussion
+    url: https://github.com/poli0981/CommandForge/discussions
+    about: Ask a question or discuss ideas before filing an issue.

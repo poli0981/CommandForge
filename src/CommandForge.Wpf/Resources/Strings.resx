@@ -1087,4 +1087,22 @@
   <data name="Menu_Wiki" xml:space="preserve">
     <value>Guide / Wiki</value>
   </data>
+  <data name="Legal_EulaSummary" xml:space="preserve">
+    <value>By using CommandForge you accept that it runs system-level commands at your own risk, with no warranty. The GNU GPL v3 governs your rights; this only adds a risk acknowledgement and warranty disclaimer.</value>
+  </data>
+  <data name="Legal_GplSummary" xml:space="preserve">
+    <value>CommandForge is free software under the GNU General Public License v3.0. You may use, study, modify, and redistribute it under the terms of the GPLv3.</value>
+  </data>
+  <data name="Legal_DisclaimerSummary" xml:space="preserve">
+    <value>Use at your own risk. System-level commands can change configuration or cause data loss — back up your data and create a restore point before risky operations. CommandForge is not affiliated with Microsoft.</value>
+  </data>
+  <data name="Legal_PrivacySummary" xml:space="preserve">
+    <value>Offline-first. CommandForge collects no personal data and has no telemetry; the only network connection is the GitHub update check.</value>
+  </data>
+  <data name="Menu_Terms" xml:space="preserve">
+    <value>Terms &amp; Privacy</value>
+  </data>
+  <data name="LegalViewer_Title" xml:space="preserve">
+    <value>Terms &amp; Privacy</value>
+  </data>
 </root>

@@ -1,0 +1,51 @@
+<UserControl x:Class="CommandForge.Wpf.Views.LegalDocumentsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:res="clr-namespace:CommandForge.Wpf.Resources">
+    <TabControl>
+        <TabItem Header="{res:Loc TabEula}">
+            <StackPanel Margin="16">
+                <TextBlock Text="{res:Loc Legal_EulaSummary}" TextWrapping="Wrap" />
+                <TextBlock Margin="0,12,0,0">
+                    <Hyperlink NavigateUri="https://github.com/poli0981/CommandForge/blob/main/EULA.md"
+                               RequestNavigate="OnRequestNavigate">
+                        <Run Text="{res:Loc LegalGateReadOnGitHub}" />
+                    </Hyperlink>
+                </TextBlock>
+            </StackPanel>
+        </TabItem>
+        <TabItem Header="{res:Loc TabGpl}">
+            <StackPanel Margin="16">
+                <TextBlock Text="{res:Loc Legal_GplSummary}" TextWrapping="Wrap" />
+                <TextBlock Margin="0,12,0,0">
+                    <Hyperlink NavigateUri="https://github.com/poli0981/CommandForge/blob/main/LICENSE"
+                               RequestNavigate="OnRequestNavigate">
+                        <Run Text="{res:Loc LegalGateReadOnGitHub}" />
+                    </Hyperlink>
+                </TextBlock>
+            </StackPanel>
+        </TabItem>
+        <TabItem Header="{res:Loc TabDisclaimer}">
+            <StackPanel Margin="16">
+                <TextBlock Text="{res:Loc Legal_DisclaimerSummary}" TextWrapping="Wrap" />
+                <TextBlock Margin="0,12,0,0">
+                    <Hyperlink NavigateUri="https://github.com/poli0981/CommandForge/blob/main/DISCLAIMER.md"
+                               RequestNavigate="OnRequestNavigate">
+                        <Run Text="{res:Loc LegalGateReadOnGitHub}" />
+                    </Hyperlink>
+                </TextBlock>
+            </StackPanel>
+        </TabItem>
+        <TabItem Header="{res:Loc TabPrivacy}">
+            <StackPanel Margin="16">
+                <TextBlock Text="{res:Loc Legal_PrivacySummary}" TextWrapping="Wrap" />
+                <TextBlock Margin="0,12,0,0">
+                    <Hyperlink NavigateUri="https://github.com/poli0981/CommandForge/blob/main/PRIVACY.md"
+                               RequestNavigate="OnRequestNavigate">
+                        <Run Text="{res:Loc LegalGateReadOnGitHub}" />
+                    </Hyperlink>
+                </TextBlock>
+            </StackPanel>
+        </TabItem>
+    </TabControl>
+</UserControl>

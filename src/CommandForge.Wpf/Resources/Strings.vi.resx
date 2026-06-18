@@ -1087,4 +1087,22 @@
   <data name="Menu_Wiki" xml:space="preserve">
     <value>Hướng dẫn / Wiki</value>
   </data>
+  <data name="Legal_EulaSummary" xml:space="preserve">
+    <value>Khi dùng CommandForge, bạn chấp nhận ứng dụng chạy các lệnh cấp hệ thống với rủi ro của riêng bạn và không kèm bảo hành. Giấy phép GNU GPL v3 điều chỉnh quyền của bạn; tài liệu này chỉ bổ sung xác nhận rủi ro và miễn trừ bảo hành.</value>
+  </data>
+  <data name="Legal_GplSummary" xml:space="preserve">
+    <value>CommandForge là phần mềm tự do theo GNU General Public License v3.0. Bạn được sử dụng, nghiên cứu, sửa đổi và phân phối lại theo các điều khoản của GPLv3.</value>
+  </data>
+  <data name="Legal_DisclaimerSummary" xml:space="preserve">
+    <value>Sử dụng với rủi ro của riêng bạn. Lệnh cấp hệ thống có thể thay đổi cấu hình hoặc gây mất dữ liệu — hãy sao lưu và tạo điểm khôi phục trước các thao tác rủi ro. CommandForge không liên kết với Microsoft.</value>
+  </data>
+  <data name="Legal_PrivacySummary" xml:space="preserve">
+    <value>Ưu tiên offline. CommandForge không thu thập dữ liệu cá nhân và không có telemetry; kết nối mạng duy nhất là kiểm tra cập nhật từ GitHub.</value>
+  </data>
+  <data name="Menu_Terms" xml:space="preserve">
+    <value>Điều khoản &amp; Quyền riêng tư</value>
+  </data>
+  <data name="LegalViewer_Title" xml:space="preserve">
+    <value>Điều khoản &amp; Quyền riêng tư</value>
+  </data>
 </root>

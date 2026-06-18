@@ -3,7 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:res="clr-namespace:CommandForge.Wpf.Resources"
-        Title="{x:Static res:Strings.LegalGateTitle}"
+        xmlns:views="clr-namespace:CommandForge.Wpf.Views"
+        Title="{res:Loc LegalGateTitle}"
         Width="700" Height="560"
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
@@ -21,38 +22,25 @@
         </Grid.RowDefinitions>
 
         <TextBlock Grid.Row="0"
-                   Text="{x:Static res:Strings.LegalGateTitle}"
+                   Text="{res:Loc LegalGateTitle}"
                    FontSize="24" FontWeight="Bold" Margin="0,0,0,8" />
 
         <TextBlock Grid.Row="1"
-                   Text="{x:Static res:Strings.LegalGateIntro}"
+                   Text="{res:Loc LegalGateIntro}"
                    TextWrapping="Wrap" Opacity="0.8" Margin="0,0,0,16" />
 
-        <TabControl Grid.Row="2">
-            <TabItem Header="{x:Static res:Strings.TabEula}">
-                <TextBlock Margin="16" TextWrapping="Wrap" Text="{x:Static res:Strings.LegalGateReadOnGitHub}" />
-            </TabItem>
-            <TabItem Header="{x:Static res:Strings.TabGpl}">
-                <TextBlock Margin="16" TextWrapping="Wrap" Text="{x:Static res:Strings.LegalGateReadOnGitHub}" />
-            </TabItem>
-            <TabItem Header="{x:Static res:Strings.TabDisclaimer}">
-                <TextBlock Margin="16" TextWrapping="Wrap" Text="{x:Static res:Strings.LegalGateReadOnGitHub}" />
-            </TabItem>
-            <TabItem Header="{x:Static res:Strings.TabPrivacy}">
-                <TextBlock Margin="16" TextWrapping="Wrap" Text="{x:Static res:Strings.LegalGateReadOnGitHub}" />
-            </TabItem>
-        </TabControl>
+        <views:LegalDocumentsView Grid.Row="2" />
 
         <CheckBox Grid.Row="3" Margin="0,16,0,0"
                   IsChecked="{Binding IsAgreed}"
-                  Content="{x:Static res:Strings.LegalGateAgree}" />
+                  Content="{res:Loc LegalGateAgree}" />
 
         <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,16,0,0">
-            <Button Content="{x:Static res:Strings.LegalGateExit}"
+            <Button Content="{res:Loc LegalGateExit}"
                     Command="{Binding ExitCommand}"
                     Style="{StaticResource MaterialDesignOutlinedButton}"
                     Margin="0,0,8,0" />
-            <Button Content="{x:Static res:Strings.LegalGateContinue}"
+            <Button Content="{res:Loc LegalGateContinue}"
                     Command="{Binding AcceptCommand}"
                     Style="{StaticResource MaterialDesignRaisedButton}" />
         </StackPanel>

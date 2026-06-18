@@ -13,7 +13,7 @@ public sealed class LegalGateService(ISettingsService settings)
     /// The current terms version. Bump this when the legal terms change so the gate
     /// is shown again.
     /// </summary>
-    public const string CurrentTermsVersion = "1.0";
+    public const string CurrentTermsVersion = "1.1";
 
     /// <summary>Whether the user has already accepted the current terms version.</summary>
     public bool HasAcceptedCurrentTerms()

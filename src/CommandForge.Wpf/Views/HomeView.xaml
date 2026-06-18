@@ -13,8 +13,10 @@
         <DataTemplate x:Key="HomeCommandItem">
             <!-- No explicit AutomationProperties.Name: the button auto-names from its content
                  (title + description), giving screen-reader users the same context as sighted users. -->
+            <!-- Height=Auto/MinHeight: the Material flat-button style fixes a short height that would
+                 otherwise clip the two-line (title + description) content. -->
             <Button Style="{StaticResource MaterialDesignFlatButton}" HorizontalContentAlignment="Stretch"
-                    Padding="10,8" Margin="0,1"
+                    Padding="10,8" Margin="0,1" Height="Auto" MinHeight="52" VerticalContentAlignment="Center"
                     Command="{Binding DataContext.OpenCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
                     CommandParameter="{Binding}">
                 <Grid>
@@ -51,7 +53,7 @@
         </Style>
     </UserControl.Resources>
 
-    <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="24,18">
+    <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="28,20,28,24">
         <StackPanel MaxWidth="1000" HorizontalAlignment="Left">
             <TextBlock Text="{res:Loc SidebarHome}" FontSize="24" FontWeight="Bold"
                        AutomationProperties.HeadingLevel="Level1" />

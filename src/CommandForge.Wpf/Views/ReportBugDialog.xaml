@@ -29,7 +29,7 @@
         </Border>
 
         <TextBox Grid.Row="3" Margin="0,0,0,16" MinHeight="70" TextWrapping="Wrap" AcceptsReturn="True"
-                 VerticalScrollBarVisibility="Auto"
+                 VerticalScrollBarVisibility="Auto" VerticalContentAlignment="Top"
                  AutomationProperties.Name="{res:Loc ReportBug_DescriptionHint}"
                  materialDesign:HintAssist.Hint="{res:Loc ReportBug_DescriptionHint}"
                  Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}" />

@@ -4,6 +4,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:res="clr-namespace:CommandForge.Wpf.Resources"
         xmlns:conv="clr-namespace:CommandForge.Wpf.Converters"
+        xmlns:appset="clr-namespace:CommandForge.Application.Settings;assembly=CommandForge.Application"
         xmlns:views="clr-namespace:CommandForge.Wpf.Views"
         Title="{res:Loc AppTitle}"
         Width="1100" Height="720" MinWidth="900" MinHeight="600"
@@ -16,7 +17,11 @@
         Closing="OnWindowClosing">
     <Window.Resources>
         <conv:StringToPackIconKindConverter x:Key="IconConverter" />
+        <conv:EnumToBooleanConverter x:Key="EnumBool" />
 
+        <DataTemplate x:Key="HomeTemplate">
+            <views:HomeView DataContext="{Binding Home}" />
+        </DataTemplate>
         <DataTemplate x:Key="CatalogTemplate">
             <views:CatalogView />
         </DataTemplate>
@@ -49,10 +54,41 @@
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="{res:Loc MenuFile}">
-                <MenuItem Header="{res:Loc MenuExit}" Click="OnExitClick" />
+                <MenuItem Header="{res:Loc Menu_OpenConfigFolder}" Command="{Binding Settings.OpenConfigFolderCommand}" />
+                <MenuItem Header="{res:Loc Menu_OpenLogFolder}" Command="{Binding Settings.OpenLogFolderCommand}" />
+                <Separator />
+                <MenuItem Header="{res:Loc MenuExit}" Click="OnExitClick" InputGestureText="Ctrl+Q" />
             </MenuItem>
             <MenuItem Header="{res:Loc MenuView}">
+                <MenuItem Header="{res:Loc SidebarHome}" Command="{Binding ShowHomeCommand}" InputGestureText="Ctrl+H" />
+                <MenuItem Header="{res:Loc SidebarFavorites}" Command="{Binding ShowFavoritesCommand}" />
+                <Separator />
+                <MenuItem Header="{res:Loc Settings_Theme}">
+                    <MenuItem Header="{res:Loc Settings_ThemeSystem}" Command="{Binding Settings.SetThemeCommand}"
+                              CommandParameter="{x:Static appset:AppTheme.System}"
+                              IsChecked="{Binding Settings.SelectedTheme, Converter={StaticResource EnumBool}, ConverterParameter=System, Mode=OneWay}" />
+                    <MenuItem Header="{res:Loc Settings_ThemeLight}" Command="{Binding Settings.SetThemeCommand}"
+                              CommandParameter="{x:Static appset:AppTheme.Light}"
+                              IsChecked="{Binding Settings.SelectedTheme, Converter={StaticResource EnumBool}, ConverterParameter=Light, Mode=OneWay}" />
+                    <MenuItem Header="{res:Loc Settings_ThemeDark}" Command="{Binding Settings.SetThemeCommand}"
+                              CommandParameter="{x:Static appset:AppTheme.Dark}"
+                              IsChecked="{Binding Settings.SelectedTheme, Converter={StaticResource EnumBool}, ConverterParameter=Dark, Mode=OneWay}" />
+                </MenuItem>
+                <MenuItem Header="{res:Loc Settings_FontSize}">
+                    <MenuItem Header="{res:Loc Settings_FontSmall}" Command="{Binding Settings.SetFontSizeCommand}"
+                              CommandParameter="{x:Static appset:FontScale.Small}"
+                              IsChecked="{Binding Settings.SelectedFontSize, Converter={StaticResource EnumBool}, ConverterParameter=Small, Mode=OneWay}" />
+                    <MenuItem Header="{res:Loc Settings_FontMedium}" Command="{Binding Settings.SetFontSizeCommand}"
+                              CommandParameter="{x:Static appset:FontScale.Medium}"
+                              IsChecked="{Binding Settings.SelectedFontSize, Converter={StaticResource EnumBool}, ConverterParameter=Medium, Mode=OneWay}" />
+                    <MenuItem Header="{res:Loc Settings_FontLarge}" Command="{Binding Settings.SetFontSizeCommand}"
+                              CommandParameter="{x:Static appset:FontScale.Large}"
+                              IsChecked="{Binding Settings.SelectedFontSize, Converter={StaticResource EnumBool}, ConverterParameter=Large, Mode=OneWay}" />
+                </MenuItem>
+                <Separator />
                 <MenuItem Header="{res:Loc MenuToggleSidebar}" Command="{Binding ToggleSidebarCommand}" InputGestureText="Ctrl+B" />
+                <MenuItem Header="{res:Loc Menu_FullScreen}" Click="OnToggleFullScreenClick" InputGestureText="F11" />
+                <Separator />
                 <MenuItem Header="{res:Loc Menu_OpenSettings}" Command="{Binding ShowSettingsCommand}" InputGestureText="Ctrl+," />
             </MenuItem>
             <MenuItem Header="{res:Loc MenuTools}">
@@ -60,12 +96,18 @@
                 <MenuItem Header="{res:Loc Menu_LogViewer}" Command="{Binding ShowLogViewerCommand}" InputGestureText="Ctrl+L" />
                 <MenuItem Header="{res:Loc Menu_ExportLogs}" Command="{Binding LogViewer.ExportZipCommand}" />
                 <MenuItem Header="{res:Loc Menu_DebugPanel}" Command="{Binding ShowDebugCommand}" />
-                <Separator />
-                <MenuItem Header="{res:Loc Menu_CheckForUpdates}" Command="{Binding CheckForUpdatesCommand}" />
             </MenuItem>
-            <MenuItem Header="{res:Loc MenuAbout}" />
+            <MenuItem Header="{res:Loc MenuAbout}">
+                <MenuItem Header="{res:Loc Menu_About}" Command="{Binding ShowAboutCommand}" />
+                <Separator />
+                <MenuItem Header="{res:Loc Settings_License}" Command="{Binding Settings.OpenLicenseCommand}" />
+                <MenuItem Header="{res:Loc Settings_GitHub}" Command="{Binding Settings.OpenRepoCommand}" />
+            </MenuItem>
             <MenuItem Header="{res:Loc MenuHelp}">
+                <MenuItem Header="{res:Loc Menu_Wiki}" Command="{Binding OpenWikiCommand}" />
                 <MenuItem Header="{res:Loc Menu_ReportBug}" Command="{Binding ReportBugCommand}" />
+                <Separator />
+                <MenuItem Header="{res:Loc Menu_CheckForUpdates}" Command="{Binding CheckForUpdatesCommand}" InputGestureText="F5" />
             </MenuItem>
         </Menu>
 
@@ -95,7 +137,28 @@
                         <materialDesign:PackIcon Kind="Menu" Width="22" Height="22" />
                     </Button>
 
+                    <Button DockPanel.Dock="Top" Style="{StaticResource SidebarButtonStyle}"
+                            Command="{Binding ShowHomeCommand}"
+                            AutomationProperties.Name="{res:Loc SidebarHome}"
+                            ToolTip="{res:Loc SidebarHome}">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Home" Width="22" Height="22" />
+                            <TextBlock Text="{res:Loc SidebarHome}" Style="{StaticResource SidebarLabelStyle}" />
+                        </StackPanel>
+                    </Button>
+
+                    <Button DockPanel.Dock="Top" Style="{StaticResource SidebarButtonStyle}"
+                            Command="{Binding ShowFavoritesCommand}"
+                            AutomationProperties.Name="{res:Loc SidebarFavorites}"
+                            ToolTip="{res:Loc SidebarFavorites}">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Star" Width="22" Height="22" />
+                            <TextBlock Text="{res:Loc SidebarFavorites}" Style="{StaticResource SidebarLabelStyle}" />
+                        </StackPanel>
+                    </Button>
+
                     <Button DockPanel.Dock="Bottom" Style="{StaticResource SidebarButtonStyle}"
+                            Margin="0,0,0,10"
                             Command="{Binding ShowSettingsCommand}"
                             AutomationProperties.Name="{res:Loc SidebarSettings}"
                             ToolTip="{res:Loc SidebarSettings}">
@@ -143,6 +206,9 @@
                     <Style TargetType="ContentControl">
                         <Setter Property="ContentTemplate" Value="{StaticResource CatalogTemplate}" />
                         <Style.Triggers>
+                            <DataTrigger Binding="{Binding CurrentSection}" Value="Home">
+                                <Setter Property="ContentTemplate" Value="{StaticResource HomeTemplate}" />
+                            </DataTrigger>
                             <DataTrigger Binding="{Binding CurrentSection}" Value="Settings">
                                 <Setter Property="ContentTemplate" Value="{StaticResource SettingsTemplate}" />
                             </DataTrigger>

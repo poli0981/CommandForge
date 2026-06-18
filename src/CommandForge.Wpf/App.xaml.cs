@@ -83,6 +83,13 @@ public partial class App : System.Windows.Application
     private void ApplyUserPreferences()
     {
         var settings = _host!.Services.GetRequiredService<ISettingsService>();
+
+        // Recreate config.json with defaults if it was deleted while the app was closed.
+        if (!File.Exists(AppPaths.ConfigFilePath))
+        {
+            settings.Save();
+        }
+
         LocalizationManager.Instance.SetCulture(ResolveCulture(settings.Language));
         _host.Services.GetRequiredService<IFontScaleService>().Apply(settings.FontSize);
         _host.Services.GetRequiredService<IThemeService>().Apply(settings.Theme);

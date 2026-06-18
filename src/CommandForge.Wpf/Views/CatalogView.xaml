@@ -72,6 +72,28 @@
                                                TextTrimming="CharacterEllipsis" />
                                 </StackPanel>
                                 <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
+                                    <Button Command="{Binding DataContext.ToggleFavoriteCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                            CommandParameter="{Binding}"
+                                            Style="{StaticResource MaterialDesignFlatButton}"
+                                            Padding="0" MinWidth="0" Width="28" Height="28" Margin="0,0,2,0"
+                                            AutomationProperties.Name="{res:Loc Favorite_Toggle}"
+                                            ToolTip="{res:Loc Favorite_Toggle}">
+                                        <materialDesign:PackIcon Width="16" Height="16">
+                                            <materialDesign:PackIcon.Style>
+                                                <Style TargetType="materialDesign:PackIcon">
+                                                    <Setter Property="Kind" Value="StarOutline" />
+                                                    <Setter Property="Opacity" Value="0.55" />
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding IsFavorite}" Value="True">
+                                                            <Setter Property="Kind" Value="Star" />
+                                                            <Setter Property="Opacity" Value="1" />
+                                                            <Setter Property="Foreground" Value="{DynamicResource PrimaryHueMidBrush}" />
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </materialDesign:PackIcon.Style>
+                                        </materialDesign:PackIcon>
+                                    </Button>
                                     <materialDesign:PackIcon Kind="ShieldAccount" Width="16" Height="16" Margin="3,0" Opacity="0.7"
                                                              ToolTip="{res:Loc Detail_RequiresAdmin}">
                                         <materialDesign:PackIcon.Visibility>
@@ -148,6 +170,29 @@
                                         <TextBlock Text="{Binding DangerLevel, Converter={StaticResource DangerText}}"
                                                    Foreground="#FF1B1B1B" FontSize="11" FontWeight="Medium" />
                                     </Border>
+                                    <Button DockPanel.Dock="Right" VerticalAlignment="Top" Margin="0,0,8,0"
+                                            Command="{Binding DataContext.ToggleFavoriteCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                            CommandParameter="{Binding DataContext.SelectedCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                            Style="{StaticResource MaterialDesignFlatButton}"
+                                            Padding="0" MinWidth="0" Width="32" Height="32"
+                                            AutomationProperties.Name="{res:Loc Favorite_Toggle}"
+                                            ToolTip="{res:Loc Favorite_Toggle}">
+                                        <materialDesign:PackIcon Width="20" Height="20">
+                                            <materialDesign:PackIcon.Style>
+                                                <Style TargetType="materialDesign:PackIcon">
+                                                    <Setter Property="Kind" Value="StarOutline" />
+                                                    <Setter Property="Opacity" Value="0.6" />
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding DataContext.SelectedCommand.IsFavorite, RelativeSource={RelativeSource AncestorType=UserControl}}" Value="True">
+                                                            <Setter Property="Kind" Value="Star" />
+                                                            <Setter Property="Opacity" Value="1" />
+                                                            <Setter Property="Foreground" Value="{DynamicResource PrimaryHueMidBrush}" />
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </materialDesign:PackIcon.Style>
+                                        </materialDesign:PackIcon>
+                                    </Button>
                                     <TextBlock Text="{Binding Title}" FontSize="20" FontWeight="Bold" TextWrapping="Wrap" />
                                 </DockPanel>
 

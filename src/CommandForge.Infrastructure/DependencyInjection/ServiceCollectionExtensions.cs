@@ -5,6 +5,7 @@ using CommandForge.Infrastructure.Catalog;
 using CommandForge.Infrastructure.Elevation;
 using CommandForge.Infrastructure.Execution;
 using CommandForge.Infrastructure.Logging;
+using CommandForge.Infrastructure.SystemInfo;
 using CommandForge.Infrastructure.Updates;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog.Core;
@@ -35,6 +36,7 @@ public static class ServiceCollectionExtensions
         services.AddSingleton<ILogMaintenance, LogMaintenance>();
         services.AddSingleton<IClock, SystemClock>();
         services.AddSingleton<ISettingsService, JsonSettingsService>();
+        services.AddSingleton<ISystemInfoService, WindowsSystemInfoService>();
         services.AddSingleton<ICatalogProvider, JsonCatalogProvider>();
         services.AddSingleton<IProcessRunner, SystemProcessRunner>();
         services.AddSingleton<ICommandExecutor, ProcessCommandExecutor>();

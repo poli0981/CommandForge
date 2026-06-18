@@ -65,6 +65,20 @@ public sealed class LegalGateServiceTests
 
         public LogLevel LogLevel { get; set; } = LogLevel.Information;
 
+        public IReadOnlyList<string> FavoriteCommandIds { get; set; } = [];
+
+        public IReadOnlyList<string> RecentCommandIds { get; set; } = [];
+
+        public double? WindowWidth { get; set; }
+
+        public double? WindowHeight { get; set; }
+
+        public double? WindowLeft { get; set; }
+
+        public double? WindowTop { get; set; }
+
+        public bool WindowMaximized { get; set; }
+
         public int SaveCount { get; private set; }
 
         public void Save() => SaveCount++;

@@ -33,6 +33,7 @@
                 <TextBox x:Name="SearchBox" Grid.Column="1"
                          Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
                          FontSize="16" BorderThickness="0"
+                         AutomationProperties.Name="{res:Loc Palette_Placeholder}"
                          materialDesign:HintAssist.Hint="{res:Loc Palette_Placeholder}"
                          materialDesign:TextFieldAssist.DecorationVisibility="Collapsed" />
             </Grid>

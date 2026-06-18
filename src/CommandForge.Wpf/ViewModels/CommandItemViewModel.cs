@@ -36,6 +36,10 @@ public sealed partial class CommandItemViewModel : ObservableObject
     [ObservableProperty]
     private IReadOnlyList<int> _titleMatches = [];
 
+    /// <summary>Whether this command is pinned to Favorites (drives the star icon's filled/outline state).</summary>
+    [ObservableProperty]
+    private bool _isFavorite;
+
     /// <summary>Re-resolves the localized title/description (after a culture change).</summary>
     public void Refresh()
     {

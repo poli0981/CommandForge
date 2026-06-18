@@ -98,6 +98,10 @@ public sealed partial class SettingsViewModel : ObservableObject
         _settings.Save();
     }
 
+    /// <summary>Sets the theme (used by the View menu); routes through <see cref="SelectedTheme"/> to apply + persist.</summary>
+    [RelayCommand]
+    private void SetTheme(AppTheme theme) => SelectedTheme = theme;
+
     public IReadOnlyList<LanguageOption> Languages { get; }
 
     [ObservableProperty]
@@ -125,6 +129,10 @@ public sealed partial class SettingsViewModel : ObservableObject
         _settings.FontSize = value;
         _settings.Save();
     }
+
+    /// <summary>Sets the font size (used by the View menu); routes through <see cref="SelectedFontSize"/>.</summary>
+    [RelayCommand]
+    private void SetFontSize(FontScale size) => SelectedFontSize = size;
 
     [ObservableProperty]
     private bool _collapseSidebarByDefault;

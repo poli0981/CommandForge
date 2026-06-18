@@ -1,3 +1,4 @@
+using System.Windows.Media;
 using CommandForge.Application.Settings;
 using MaterialDesignThemes.Wpf;
 using Microsoft.Win32;
@@ -11,6 +12,11 @@ namespace CommandForge.Wpf.Theming;
 /// </summary>
 public sealed class ThemeService : IThemeService, IDisposable
 {
+    // Deep Purple 500 reads well on light backgrounds; a lighter Deep Purple 200 keeps the accent
+    // legible on dark backgrounds (the mid hue drives flat-button text, tabs, selection and the star).
+    private static readonly Color LightPrimary = Color.FromRgb(0x67, 0x3A, 0xB7);
+    private static readonly Color DarkPrimary = Color.FromRgb(0xB3, 0x9D, 0xDB);
+
     private AppTheme _current = AppTheme.System;
     private bool _subscribed;
 
@@ -29,6 +35,7 @@ public sealed class ThemeService : IThemeService, IDisposable
         var palette = new PaletteHelper();
         var current = palette.GetTheme();
         current.SetBaseTheme(baseTheme);
+        current.SetPrimaryColor(baseTheme == BaseTheme.Dark ? DarkPrimary : LightPrimary);
         palette.SetTheme(current);
 
         if (theme == AppTheme.System)

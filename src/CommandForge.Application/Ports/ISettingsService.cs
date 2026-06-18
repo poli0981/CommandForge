@@ -45,6 +45,27 @@ public interface ISettingsService
     /// <summary>The minimum log level captured by the logging pipeline (default <see cref="LogLevel.Information"/>).</summary>
     public LogLevel LogLevel { get; set; }
 
+    /// <summary>Command ids the user has pinned to Favorites, in display order (default empty).</summary>
+    public IReadOnlyList<string> FavoriteCommandIds { get; set; }
+
+    /// <summary>Recently-run command ids, most-recent first (default empty). Capped by the caller.</summary>
+    public IReadOnlyList<string> RecentCommandIds { get; set; }
+
+    /// <summary>Last main-window width in device-independent pixels, or <see langword="null"/> if never saved.</summary>
+    public double? WindowWidth { get; set; }
+
+    /// <summary>Last main-window height in device-independent pixels, or <see langword="null"/> if never saved.</summary>
+    public double? WindowHeight { get; set; }
+
+    /// <summary>Last main-window left position, or <see langword="null"/> if never saved (centre on launch).</summary>
+    public double? WindowLeft { get; set; }
+
+    /// <summary>Last main-window top position, or <see langword="null"/> if never saved (centre on launch).</summary>
+    public double? WindowTop { get; set; }
+
+    /// <summary>Whether the main window was maximized when last closed (default <see langword="false"/>).</summary>
+    public bool WindowMaximized { get; set; }
+
     /// <summary>Persists the current settings to disk.</summary>
     public void Save();
 }

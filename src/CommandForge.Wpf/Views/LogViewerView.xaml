@@ -53,8 +53,8 @@
         <!-- Body -->
         <Border Grid.Row="1" Background="{DynamicResource MaterialDesignToolBarBackground}" CornerRadius="4">
             <ScrollViewer beh:AutoScroll.Enabled="{Binding AutoScroll}" VerticalScrollBarVisibility="Auto"
-                          HorizontalScrollBarVisibility="Auto" Padding="8">
-                <ItemsControl ItemsSource="{Binding View}">
+                          HorizontalScrollBarVisibility="Auto" Padding="8" VerticalContentAlignment="Top">
+                <ItemsControl ItemsSource="{Binding View}" VerticalAlignment="Top">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <Grid>

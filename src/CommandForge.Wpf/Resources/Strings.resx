@@ -1027,4 +1027,64 @@
   <data name="Settings_ResetConfirm" xml:space="preserve">
     <value>Reset all settings to their defaults? Your accepted terms and logs are kept.</value>
   </data>
+  <data name="Home_SystemStatus" xml:space="preserve">
+    <value>System status</value>
+  </data>
+  <data name="Home_StatusOs" xml:space="preserve">
+    <value>Windows</value>
+  </data>
+  <data name="Home_StatusMemory" xml:space="preserve">
+    <value>Memory</value>
+  </data>
+  <data name="Home_StatusDisk" xml:space="preserve">
+    <value>System drive</value>
+  </data>
+  <data name="Home_StatusUptime" xml:space="preserve">
+    <value>Uptime</value>
+  </data>
+  <data name="Home_OsFormat" xml:space="preserve">
+    <value>{0} (Build {1})</value>
+  </data>
+  <data name="Home_StorageFormat" xml:space="preserve">
+    <value>{0} free of {1}</value>
+  </data>
+  <data name="Home_GigabytesFormat" xml:space="preserve">
+    <value>{0:0.0} GB</value>
+  </data>
+  <data name="Home_DiskFormat" xml:space="preserve">
+    <value>{0} · {1}</value>
+  </data>
+  <data name="Home_UptimeWithDays" xml:space="preserve">
+    <value>{0}d {1}h {2}m</value>
+  </data>
+  <data name="Home_UptimeNoDays" xml:space="preserve">
+    <value>{1}h {2}m</value>
+  </data>
+  <data name="Home_Recent" xml:space="preserve">
+    <value>Recent commands</value>
+  </data>
+  <data name="Home_NoRecent" xml:space="preserve">
+    <value>No commands run yet.</value>
+  </data>
+  <data name="Home_NoFavorites" xml:space="preserve">
+    <value>No favorites yet. Pin a command with the star icon.</value>
+  </data>
+  <data name="Favorite_Toggle" xml:space="preserve">
+    <value>Toggle favorite</value>
+  </data>
+  <data name="Menu_OpenConfigFolder" xml:space="preserve">
+    <value>Open config folder</value>
+  </data>
+  <data name="Menu_OpenLogFolder" xml:space="preserve">
+    <value>Open log folder</value>
+  </data>
+  <data name="Menu_FullScreen" xml:space="preserve">
+    <value>Full screen</value>
+  </data>
+  <data name="Menu_About" xml:space="preserve">
+    <value>About CommandForge</value>
+  </data>
+  <data name="Menu_Wiki" xml:space="preserve">
+    <value>Guide / Wiki</value>
+  </data>
 </root>

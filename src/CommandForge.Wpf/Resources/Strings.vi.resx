@@ -1027,4 +1027,64 @@
   <data name="Settings_ResetConfirm" xml:space="preserve">
     <value>Đặt lại tất cả thiết lập về mặc định? Điều khoản đã chấp nhận và nhật ký được giữ lại.</value>
   </data>
+  <data name="Home_SystemStatus" xml:space="preserve">
+    <value>Trạng thái hệ thống</value>
+  </data>
+  <data name="Home_StatusOs" xml:space="preserve">
+    <value>Windows</value>
+  </data>
+  <data name="Home_StatusMemory" xml:space="preserve">
+    <value>Bộ nhớ</value>
+  </data>
+  <data name="Home_StatusDisk" xml:space="preserve">
+    <value>Ổ hệ thống</value>
+  </data>
+  <data name="Home_StatusUptime" xml:space="preserve">
+    <value>Thời gian hoạt động</value>
+  </data>
+  <data name="Home_OsFormat" xml:space="preserve">
+    <value>{0} (Bản dựng {1})</value>
+  </data>
+  <data name="Home_StorageFormat" xml:space="preserve">
+    <value>{0} trống / {1}</value>
+  </data>
+  <data name="Home_GigabytesFormat" xml:space="preserve">
+    <value>{0:0.0} GB</value>
+  </data>
+  <data name="Home_DiskFormat" xml:space="preserve">
+    <value>{0} · {1}</value>
+  </data>
+  <data name="Home_UptimeWithDays" xml:space="preserve">
+    <value>{0} ngày {1} giờ {2} phút</value>
+  </data>
+  <data name="Home_UptimeNoDays" xml:space="preserve">
+    <value>{1} giờ {2} phút</value>
+  </data>
+  <data name="Home_Recent" xml:space="preserve">
+    <value>Lệnh gần đây</value>
+  </data>
+  <data name="Home_NoRecent" xml:space="preserve">
+    <value>Chưa chạy lệnh nào.</value>
+  </data>
+  <data name="Home_NoFavorites" xml:space="preserve">
+    <value>Chưa có mục yêu thích. Ghim lệnh bằng biểu tượng ngôi sao.</value>
+  </data>
+  <data name="Favorite_Toggle" xml:space="preserve">
+    <value>Bật/tắt yêu thích</value>
+  </data>
+  <data name="Menu_OpenConfigFolder" xml:space="preserve">
+    <value>Mở thư mục cấu hình</value>
+  </data>
+  <data name="Menu_OpenLogFolder" xml:space="preserve">
+    <value>Mở thư mục nhật ký</value>
+  </data>
+  <data name="Menu_FullScreen" xml:space="preserve">
+    <value>Toàn màn hình</value>
+  </data>
+  <data name="Menu_About" xml:space="preserve">
+    <value>Giới thiệu CommandForge</value>
+  </data>
+  <data name="Menu_Wiki" xml:space="preserve">
+    <value>Hướng dẫn / Wiki</value>
+  </data>
 </root>

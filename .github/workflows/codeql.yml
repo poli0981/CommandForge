@@ -1,0 +1,45 @@
+name: CodeQL
+
+# Project-specific CodeQL (not the shared reusable codeql-csharp.yml): this is a WPF
+# (net10.0-windows) app that only builds on Windows and uses a .slnx solution, whereas the
+# reusable workflow runs on ubuntu and looks for a .sln.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  schedule:
+    - cron: '37 14 * * 1'  # Mondays 14:37 UTC
+  workflow_dispatch:
+
+permissions:
+  actions: read
+  contents: read
+  security-events: write
+
+jobs:
+  analyze:
+    name: Analyze (csharp)
+    runs-on: windows-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: csharp
+          queries: security-extended
+
+      - name: Build
+        run: dotnet build CommandForge.slnx -c Release
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v3
+        with:
+          category: "/language:csharp"

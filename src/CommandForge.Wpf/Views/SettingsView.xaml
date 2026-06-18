@@ -39,6 +39,12 @@
             <RadioButton Content="{res:Loc Settings_Updates}" GroupName="Section" Style="{StaticResource NavRadio}"
                          AutomationProperties.Name="{res:Loc Settings_Updates}"
                          IsChecked="{Binding SelectedSection, Converter={StaticResource EnumBool}, ConverterParameter=Updates}" />
+            <RadioButton Content="{res:Loc Settings_Logs}" GroupName="Section" Style="{StaticResource NavRadio}"
+                         AutomationProperties.Name="{res:Loc Settings_Logs}"
+                         IsChecked="{Binding SelectedSection, Converter={StaticResource EnumBool}, ConverterParameter=Logs}" />
+            <RadioButton Content="{res:Loc Settings_Advanced}" GroupName="Section" Style="{StaticResource NavRadio}"
+                         AutomationProperties.Name="{res:Loc Settings_Advanced}"
+                         IsChecked="{Binding SelectedSection, Converter={StaticResource EnumBool}, ConverterParameter=Advanced}" />
             <RadioButton Content="{res:Loc Settings_About}" GroupName="Section" Style="{StaticResource NavRadio}"
                          AutomationProperties.Name="{res:Loc Settings_About}"
                          IsChecked="{Binding SelectedSection, Converter={StaticResource EnumBool}, ConverterParameter=About}" />
@@ -171,6 +177,77 @@
                             HorizontalAlignment="Left" Margin="0,16,0,0"
                             AutomationProperties.Name="{res:Loc Settings_CheckNow}"
                             Style="{StaticResource MaterialDesignOutlinedButton}" />
+                </StackPanel>
+
+                <!-- Logs -->
+                <StackPanel>
+                    <StackPanel.Style>
+                        <Style TargetType="StackPanel">
+                            <Setter Property="Visibility" Value="Collapsed" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding SelectedSection}" Value="Logs">
+                                    <Setter Property="Visibility" Value="Visible" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </StackPanel.Style>
+
+                    <TextBlock Text="{res:Loc Settings_Logs}" Style="{StaticResource SectionHeader}" />
+                    <TextBlock Text="{res:Loc Settings_LogLevel}" Style="{StaticResource RowLabel}" />
+                    <ComboBox Width="220" HorizontalAlignment="Left"
+                              AutomationProperties.Name="{res:Loc Settings_LogLevel}"
+                              ItemsSource="{Binding LogLevels}" SelectedItem="{Binding SelectedLogLevel}" />
+                    <StackPanel Orientation="Horizontal" Margin="0,16,0,0">
+                        <TextBlock Text="{res:Loc Settings_LogsSize}" Opacity="0.7" />
+                        <TextBlock Text="{Binding LogsSizeText}" Margin="8,0,0,0" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,16,0,0">
+                        <Button Content="{res:Loc Settings_OpenLogFolder}" Command="{Binding OpenLogFolderCommand}"
+                                Style="{StaticResource MaterialDesignOutlinedButton}" Margin="0,0,8,0"
+                                AutomationProperties.Name="{res:Loc Settings_OpenLogFolder}" />
+                        <Button Content="{res:Loc Settings_ExportLogs}" Command="{Binding ExportLogsCommand}"
+                                Style="{StaticResource MaterialDesignOutlinedButton}" Margin="0,0,8,0"
+                                AutomationProperties.Name="{res:Loc Settings_ExportLogs}" />
+                        <Button Content="{res:Loc Settings_ClearOldLogs}" Command="{Binding ClearOldLogsCommand}"
+                                Style="{StaticResource MaterialDesignOutlinedButton}"
+                                AutomationProperties.Name="{res:Loc Settings_ClearOldLogs}" />
+                    </StackPanel>
+                </StackPanel>
+
+                <!-- Advanced -->
+                <StackPanel>
+                    <StackPanel.Style>
+                        <Style TargetType="StackPanel">
+                            <Setter Property="Visibility" Value="Collapsed" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding SelectedSection}" Value="Advanced">
+                                    <Setter Property="Visibility" Value="Visible" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </StackPanel.Style>
+
+                    <TextBlock Text="{res:Loc Settings_Advanced}" Style="{StaticResource SectionHeader}" />
+                    <StackPanel Orientation="Horizontal" Margin="0,4">
+                        <TextBlock Text="{res:Loc Settings_RunMode}" Opacity="0.7" />
+                        <TextBlock Text="{Binding RunModeText}" Margin="8,0,0,0" />
+                    </StackPanel>
+                    <TextBlock Text="{res:Loc Settings_ConfigPath}" Style="{StaticResource RowLabel}" />
+                    <TextBox Text="{Binding ConfigPathText, Mode=OneWay}" IsReadOnly="True"
+                             FontFamily="Cascadia Mono, Consolas, Courier New" />
+                    <StackPanel Orientation="Horizontal" Margin="0,16,0,0">
+                        <Button Content="{res:Loc Settings_OpenConfig}" Command="{Binding OpenConfigFolderCommand}"
+                                Style="{StaticResource MaterialDesignOutlinedButton}" Margin="0,0,8,0"
+                                AutomationProperties.Name="{res:Loc Settings_OpenConfig}" />
+                        <Button Content="{res:Loc Settings_OpenDebugPanel}"
+                                Command="{Binding DataContext.ShowDebugCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                                Style="{StaticResource MaterialDesignOutlinedButton}"
+                                AutomationProperties.Name="{res:Loc Settings_OpenDebugPanel}" />
+                    </StackPanel>
+                    <Button Content="{res:Loc Settings_ResetDefaults}" Command="{Binding ResetToDefaultsCommand}"
+                            HorizontalAlignment="Left" Margin="0,16,0,0"
+                            Style="{StaticResource MaterialDesignOutlinedButton}"
+                            AutomationProperties.Name="{res:Loc Settings_ResetDefaults}" />
                 </StackPanel>
 
                 <!-- About -->

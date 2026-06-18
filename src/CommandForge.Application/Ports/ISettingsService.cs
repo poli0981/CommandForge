@@ -1,3 +1,4 @@
+using CommandForge.Application.Logging;
 using CommandForge.Application.Settings;
 
 namespace CommandForge.Application.Ports;
@@ -40,6 +41,9 @@ public interface ISettingsService
 
     /// <summary>Whether to warn before closing/cancelling while a command is running (default <see langword="true"/>).</summary>
     public bool WarnOnCancel { get; set; }
+
+    /// <summary>The minimum log level captured by the logging pipeline (default <see cref="LogLevel.Information"/>).</summary>
+    public LogLevel LogLevel { get; set; }
 
     /// <summary>Persists the current settings to disk.</summary>
     public void Save();

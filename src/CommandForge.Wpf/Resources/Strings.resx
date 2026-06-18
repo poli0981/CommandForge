@@ -862,4 +862,169 @@
   <data name="Settings_GitHub" xml:space="preserve">
     <value>GitHub</value>
   </data>
+  <data name="Menu_LogViewer" xml:space="preserve">
+    <value>Log viewer</value>
+  </data>
+  <data name="Menu_ExportLogs" xml:space="preserve">
+    <value>Export logs (.zip)</value>
+  </data>
+  <data name="Menu_DebugPanel" xml:space="preserve">
+    <value>Debug panel</value>
+  </data>
+  <data name="Menu_ReportBug" xml:space="preserve">
+    <value>Report a bug</value>
+  </data>
+  <data name="LogViewer_Title" xml:space="preserve">
+    <value>Log viewer</value>
+  </data>
+  <data name="LogViewer_Level" xml:space="preserve">
+    <value>Level</value>
+  </data>
+  <data name="LogViewer_FilterHint" xml:space="preserve">
+    <value>Filter text</value>
+  </data>
+  <data name="LogViewer_AutoScroll" xml:space="preserve">
+    <value>Auto-scroll</value>
+  </data>
+  <data name="LogViewer_OpenFolder" xml:space="preserve">
+    <value>Open log folder</value>
+  </data>
+  <data name="LogViewer_Export" xml:space="preserve">
+    <value>Export logs (.zip)</value>
+  </data>
+  <data name="LogViewer_Clear" xml:space="preserve">
+    <value>Clear</value>
+  </data>
+  <data name="LogLevel_All" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="LogLevel_Info" xml:space="preserve">
+    <value>Info</value>
+  </data>
+  <data name="LogLevel_Warning" xml:space="preserve">
+    <value>Warning</value>
+  </data>
+  <data name="LogLevel_Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="LogLevel_Debug" xml:space="preserve">
+    <value>Debug</value>
+  </data>
+  <data name="Log_ExportSuccess" xml:space="preserve">
+    <value>Logs exported to {0}. Review the contents before sharing.</value>
+  </data>
+  <data name="Debug_TabVerbose" xml:space="preserve">
+    <value>Log</value>
+  </data>
+  <data name="Debug_TabCatalog" xml:space="preserve">
+    <value>Catalog</value>
+  </data>
+  <data name="Debug_TabSystemInfo" xml:space="preserve">
+    <value>System info</value>
+  </data>
+  <data name="Debug_CategoryCount" xml:space="preserve">
+    <value>Categories:</value>
+  </data>
+  <data name="Debug_CommandCount" xml:space="preserve">
+    <value>Commands:</value>
+  </data>
+  <data name="Debug_ValidationErrors" xml:space="preserve">
+    <value>Validation errors</value>
+  </data>
+  <data name="Debug_NoValidationErrors" xml:space="preserve">
+    <value>No validation errors.</value>
+  </data>
+  <data name="Debug_CopySystemInfo" xml:space="preserve">
+    <value>Copy</value>
+  </data>
+  <data name="Debug_Refresh" xml:space="preserve">
+    <value>Refresh</value>
+  </data>
+  <data name="Error_Title" xml:space="preserve">
+    <value>Unexpected error</value>
+  </data>
+  <data name="Error_Message" xml:space="preserve">
+    <value>Something went wrong. You can copy the details or report this on GitHub.</value>
+  </data>
+  <data name="Error_Code" xml:space="preserve">
+    <value>Error code:</value>
+  </data>
+  <data name="Error_CopyDetails" xml:space="preserve">
+    <value>Copy details</value>
+  </data>
+  <data name="Error_ReportBug" xml:space="preserve">
+    <value>Report a bug</value>
+  </data>
+  <data name="Error_Close" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="ReportBug_Title" xml:space="preserve">
+    <value>Report a bug</value>
+  </data>
+  <data name="ReportBug_Environment" xml:space="preserve">
+    <value>Environment</value>
+  </data>
+  <data name="ReportBug_ExportLog" xml:space="preserve">
+    <value>Export log (.zip)</value>
+  </data>
+  <data name="ReportBug_OpenIssue" xml:space="preserve">
+    <value>Open issue on GitHub</value>
+  </data>
+  <data name="ReportBug_Close" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="ReportBug_DescriptionHint" xml:space="preserve">
+    <value>Describe what happened (optional)</value>
+  </data>
+  <data name="ReportBug_ReviewReminder" xml:space="preserve">
+    <value>Review the .zip contents before attaching it to the issue.</value>
+  </data>
+  <data name="Settings_Logs" xml:space="preserve">
+    <value>Logs</value>
+  </data>
+  <data name="Settings_LogLevel" xml:space="preserve">
+    <value>Log level</value>
+  </data>
+  <data name="Settings_LogsSize" xml:space="preserve">
+    <value>Log size:</value>
+  </data>
+  <data name="Settings_OpenLogFolder" xml:space="preserve">
+    <value>Open log folder</value>
+  </data>
+  <data name="Settings_ExportLogs" xml:space="preserve">
+    <value>Export logs (.zip)</value>
+  </data>
+  <data name="Settings_ClearOldLogs" xml:space="preserve">
+    <value>Delete old logs</value>
+  </data>
+  <data name="Settings_ClearLogsConfirm" xml:space="preserve">
+    <value>Delete old log files? Today's log is kept.</value>
+  </data>
+  <data name="Settings_Advanced" xml:space="preserve">
+    <value>Advanced</value>
+  </data>
+  <data name="Settings_RunMode" xml:space="preserve">
+    <value>Run mode:</value>
+  </data>
+  <data name="Settings_RunModeInstalled" xml:space="preserve">
+    <value>Installed</value>
+  </data>
+  <data name="Settings_RunModePortable" xml:space="preserve">
+    <value>Portable / dev</value>
+  </data>
+  <data name="Settings_ConfigPath" xml:space="preserve">
+    <value>Config file</value>
+  </data>
+  <data name="Settings_OpenConfig" xml:space="preserve">
+    <value>Open folder</value>
+  </data>
+  <data name="Settings_OpenDebugPanel" xml:space="preserve">
+    <value>Open Debug panel</value>
+  </data>
+  <data name="Settings_ResetDefaults" xml:space="preserve">
+    <value>Reset to defaults</value>
+  </data>
+  <data name="Settings_ResetConfirm" xml:space="preserve">
+    <value>Reset all settings to their defaults? Your accepted terms and logs are kept.</value>
+  </data>
 </root>

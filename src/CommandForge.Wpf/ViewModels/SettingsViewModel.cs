@@ -1,11 +1,15 @@
 using System.Diagnostics;
 using System.Globalization;
+using System.Windows;
+using CommandForge.Application.Logging;
 using CommandForge.Application.Ports;
 using CommandForge.Application.Settings;
+using CommandForge.Infrastructure;
 using CommandForge.Wpf.Resources;
 using CommandForge.Wpf.Theming;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Microsoft.Win32;
 
 namespace CommandForge.Wpf.ViewModels;
 
@@ -22,22 +26,32 @@ public sealed partial class SettingsViewModel : ObservableObject
     private readonly IThemeService _theme;
     private readonly IFontScaleService _fonts;
     private readonly IUpdateDialogService _updateDialog;
+    private readonly ILogLevelController _logLevel;
+    private readonly ILogMaintenance _maintenance;
 
     public SettingsViewModel(
         ISettingsService settings,
         IThemeService theme,
         IFontScaleService fonts,
-        IUpdateDialogService updateDialog)
+        IUpdateDialogService updateDialog,
+        ILogLevelController logLevel,
+        ILogMaintenance maintenance,
+        IUpdateService updates)
     {
         ArgumentNullException.ThrowIfNull(settings);
         ArgumentNullException.ThrowIfNull(theme);
         ArgumentNullException.ThrowIfNull(fonts);
         ArgumentNullException.ThrowIfNull(updateDialog);
+        ArgumentNullException.ThrowIfNull(logLevel);
+        ArgumentNullException.ThrowIfNull(maintenance);
+        ArgumentNullException.ThrowIfNull(updates);
 
         _settings = settings;
         _theme = theme;
         _fonts = fonts;
         _updateDialog = updateDialog;
+        _logLevel = logLevel;
+        _maintenance = maintenance;
 
         Languages =
         [
@@ -57,6 +71,13 @@ public sealed partial class SettingsViewModel : ObservableObject
         _autoScrollConsole = settings.AutoScrollConsole;
         _warnOnCancel = settings.WarnOnCancel;
         _autoCheckForUpdates = settings.AutoCheckForUpdates;
+        _selectedLogLevel = settings.LogLevel;
+        _logsSizeText = FormatSize(maintenance.GetLogsSizeBytes());
+
+        RunModeText = updates.IsUpdateSupported
+            ? Strings.Get("Settings_RunModeInstalled")
+            : Strings.Get("Settings_RunModePortable");
+        ConfigPathText = AppPaths.ConfigFilePath;
 
         var version = typeof(SettingsViewModel).Assembly.GetName().Version;
         CurrentVersionText = version is null ? "—" : $"{version.Major}.{version.Minor}.{version.Build}";
@@ -157,6 +178,101 @@ public sealed partial class SettingsViewModel : ObservableObject
         LastCheckedText = DateTime.Now.ToString("g", CultureInfo.CurrentCulture);
     }
 
+    // ---- Logs ----
+
+    public IReadOnlyList<LogLevel> LogLevels { get; } = [LogLevel.Information, LogLevel.Debug, LogLevel.Verbose];
+
+    [ObservableProperty]
+    private LogLevel _selectedLogLevel;
+
+    partial void OnSelectedLogLevelChanged(LogLevel value)
+    {
+        _logLevel.Current = value;
+        Persist(() => _settings.LogLevel = value);
+    }
+
+    [ObservableProperty]
+    private string _logsSizeText = string.Empty;
+
+    [RelayCommand]
+    private void OpenLogFolder() => OpenPath(_maintenance.LogsDirectoryPath);
+
+    [RelayCommand]
+    private async Task ExportLogsAsync()
+    {
+        var dialog = new SaveFileDialog
+        {
+            Title = Strings.Get("Settings_ExportLogs"),
+            Filter = "Zip archive (*.zip)|*.zip",
+            FileName = $"commandforge-logs-{DateTime.Now:yyyyMMdd-HHmmss}.zip",
+        };
+        if (dialog.ShowDialog() != true)
+        {
+            return;
+        }
+
+        await _maintenance.ExportZipAsync(dialog.FileName);
+        MessageBox.Show(
+            string.Format(CultureInfo.CurrentCulture, Strings.Get("Log_ExportSuccess"), dialog.FileName),
+            Strings.Get("Settings_Logs"),
+            MessageBoxButton.OK,
+            MessageBoxImage.Information);
+    }
+
+    [RelayCommand]
+    private void ClearOldLogs()
+    {
+        var confirm = MessageBox.Show(
+            Strings.Get("Settings_ClearLogsConfirm"),
+            Strings.Get("Settings_ClearOldLogs"),
+            MessageBoxButton.YesNo,
+            MessageBoxImage.Warning);
+        if (confirm != MessageBoxResult.Yes)
+        {
+            return;
+        }
+
+        _maintenance.DeleteRolledLogFiles();
+        LogsSizeText = FormatSize(_maintenance.GetLogsSizeBytes());
+    }
+
+    // ---- Advanced ----
+
+    public string RunModeText { get; }
+
+    public string ConfigPathText { get; }
+
+    [RelayCommand]
+    private void OpenConfigFolder() => OpenPath(AppPaths.DataDirectory);
+
+    [RelayCommand]
+    private void ResetToDefaults()
+    {
+        var confirm = MessageBox.Show(
+            Strings.Get("Settings_ResetConfirm"),
+            Strings.Get("Settings_ResetDefaults"),
+            MessageBoxButton.YesNo,
+            MessageBoxImage.Warning);
+        if (confirm != MessageBoxResult.Yes)
+        {
+            return;
+        }
+
+        // Assigning the observable properties re-applies (theme/font/language/log level) and persists.
+        // AcceptedTermsVersion is intentionally untouched and log files are kept.
+        SelectedTheme = AppTheme.System;
+        SelectedLanguage = Languages[0];
+        SelectedFontSize = FontScale.Medium;
+        CollapseSidebarByDefault = false;
+        ShowAdminRestartBadges = true;
+        ConfirmCaution = true;
+        AutoCreateRestorePoint = true;
+        AutoScrollConsole = true;
+        WarnOnCancel = true;
+        AutoCheckForUpdates = true;
+        SelectedLogLevel = LogLevel.Information;
+    }
+
     // ---- About ----
 
     public string CurrentVersionText { get; }
@@ -175,4 +291,31 @@ public sealed partial class SettingsViewModel : ObservableObject
 
     private static void OpenUrl(string url)
         => Process.Start(new ProcessStartInfo(url) { UseShellExecute = true });
+
+    private static void OpenPath(string path)
+    {
+        try
+        {
+            Process.Start(new ProcessStartInfo(path) { UseShellExecute = true });
+        }
+        catch (Exception ex) when (ex is System.ComponentModel.Win32Exception or InvalidOperationException)
+        {
+            // Path missing / shell failure — ignore.
+        }
+    }
+
+    private static string FormatSize(long bytes)
+    {
+        string[] units = ["B", "KB", "MB", "GB"];
+        double size = bytes;
+        var unit = 0;
+        while (size >= 1024 && unit < units.Length - 1)
+        {
+            size /= 1024;
+            unit++;
+        }
+
+        return string.Format(CultureInfo.CurrentCulture, "{0:0.#} {1}", size, units[unit]);
+    }
 }
+

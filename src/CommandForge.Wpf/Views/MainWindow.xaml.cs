@@ -67,6 +67,11 @@ public partial class MainWindow : Window
             _viewModel.ShowSettingsCommand.Execute(null);
             e.Handled = true;
         }
+        else if (e.Key == Key.L && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
+        {
+            _viewModel.ShowLogViewerCommand.Execute(null);
+            e.Handled = true;
+        }
     }
 
     private void OpenPalette()

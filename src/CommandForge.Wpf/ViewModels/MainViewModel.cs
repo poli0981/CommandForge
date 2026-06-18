@@ -19,6 +19,7 @@ public sealed partial class MainViewModel : ObservableObject
     private readonly ICatalogProvider _catalog;
     private readonly IConfirmationService _confirmation;
     private readonly IUpdateDialogService _updateDialog;
+    private readonly IReportBugDialogService _reportBug;
     private readonly ISettingsService _settings;
     private readonly Dictionary<string, CommandItemViewModel> _itemsById;
     private readonly CommandDefinition? _restorePointCommand;
@@ -30,21 +31,30 @@ public sealed partial class MainViewModel : ObservableObject
         ExecutionViewModel execution,
         IConfirmationService confirmation,
         IUpdateDialogService updateDialog,
+        IReportBugDialogService reportBug,
         ISettingsService settings,
-        SettingsViewModel settingsViewModel)
+        SettingsViewModel settingsViewModel,
+        LogViewerViewModel logViewer,
+        DebugViewModel debug)
     {
         ArgumentNullException.ThrowIfNull(catalog);
         ArgumentNullException.ThrowIfNull(execution);
         ArgumentNullException.ThrowIfNull(confirmation);
         ArgumentNullException.ThrowIfNull(updateDialog);
+        ArgumentNullException.ThrowIfNull(reportBug);
         ArgumentNullException.ThrowIfNull(settings);
         ArgumentNullException.ThrowIfNull(settingsViewModel);
+        ArgumentNullException.ThrowIfNull(logViewer);
+        ArgumentNullException.ThrowIfNull(debug);
 
         _catalog = catalog;
         _confirmation = confirmation;
         _updateDialog = updateDialog;
+        _reportBug = reportBug;
         _settings = settings;
         Settings = settingsViewModel;
+        LogViewer = logViewer;
+        Debug = debug;
         Execution = execution;
         Execution.PropertyChanged += (_, e) =>
         {
@@ -77,6 +87,12 @@ public sealed partial class MainViewModel : ObservableObject
 
     /// <summary>The Settings screen view-model (shown when <see cref="CurrentSection"/> is Settings).</summary>
     public SettingsViewModel Settings { get; }
+
+    /// <summary>The Log Viewer view-model (shown when <see cref="CurrentSection"/> is LogViewer).</summary>
+    public LogViewerViewModel LogViewer { get; }
+
+    /// <summary>The Debug panel view-model (shown when <see cref="CurrentSection"/> is Debug).</summary>
+    public DebugViewModel Debug { get; }
 
     public ExecutionViewModel Execution { get; }
 
@@ -115,6 +131,15 @@ public sealed partial class MainViewModel : ObservableObject
 
     [RelayCommand]
     private void ShowCatalog() => CurrentSection = ShellSection.Catalog;
+
+    [RelayCommand]
+    private void ShowLogViewer() => CurrentSection = ShellSection.LogViewer;
+
+    [RelayCommand]
+    private void ShowDebug() => CurrentSection = ShellSection.Debug;
+
+    [RelayCommand]
+    private void ReportBug() => _reportBug.Show();
 
     [RelayCommand]
     private Task CheckForUpdatesAsync() => _updateDialog.ShowAsync(startedFromStartup: false);

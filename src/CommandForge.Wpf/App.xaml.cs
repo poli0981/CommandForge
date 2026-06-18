@@ -13,6 +13,8 @@ using CommandForge.Wpf.Views;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Serilog;
+using Serilog.Core;
+using Serilog.Events;
 using Velopack;
 
 namespace CommandForge.Wpf;
@@ -42,8 +44,9 @@ public partial class App : System.Windows.Application
         AppPaths.EnsureCreated();
 
         var logStore = new InMemoryLogStore();
+        var levelSwitch = new LoggingLevelSwitch(LogEventLevel.Information);
         Log.Logger = new LoggerConfiguration()
-            .MinimumLevel.Information()
+            .MinimumLevel.ControlledBy(levelSwitch)
             .WriteTo.Async(sink => sink.File(
                 Path.Combine(AppPaths.LogsDirectory, "log-.txt"),
                 rollingInterval: RollingInterval.Day))
@@ -54,12 +57,14 @@ public partial class App : System.Windows.Application
             .UseSerilog()
             .ConfigureServices(services =>
             {
-                services.AddCommandForgeInfrastructure(logStore);
+                services.AddCommandForgeInfrastructure(logStore, levelSwitch);
                 services.AddCommandForgeWpf();
             })
             .Build();
 
         Log.Information("CommandForge starting up");
+
+        _host.Services.GetRequiredService<CrashHandlingService>().Hook();
 
         ApplyUserPreferences();
 
@@ -81,6 +86,7 @@ public partial class App : System.Windows.Application
         LocalizationManager.Instance.SetCulture(ResolveCulture(settings.Language));
         _host.Services.GetRequiredService<IFontScaleService>().Apply(settings.FontSize);
         _host.Services.GetRequiredService<IThemeService>().Apply(settings.Theme);
+        _host.Services.GetRequiredService<ILogLevelController>().Current = settings.LogLevel;
     }
 
     private static CultureInfo ResolveCulture(string language)

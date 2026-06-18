@@ -1,3 +1,4 @@
+using CommandForge.Application.Logging;
 using CommandForge.Application.Settings;
 using CommandForge.Infrastructure;
 
@@ -25,6 +26,7 @@ public sealed class SettingsRoundTripTests
                 AutoCreateRestorePoint = false,
                 AutoScrollConsole = false,
                 WarnOnCancel = false,
+                LogLevel = LogLevel.Verbose,
             };
             writer.Save();
 
@@ -40,6 +42,7 @@ public sealed class SettingsRoundTripTests
             Assert.False(reader.AutoCreateRestorePoint);
             Assert.False(reader.AutoScrollConsole);
             Assert.False(reader.WarnOnCancel);
+            Assert.Equal(LogLevel.Verbose, reader.LogLevel);
         }
         finally
         {
@@ -68,6 +71,7 @@ public sealed class SettingsRoundTripTests
             Assert.True(settings.AutoCreateRestorePoint);
             Assert.True(settings.AutoScrollConsole);
             Assert.True(settings.WarnOnCancel);
+            Assert.Equal(LogLevel.Information, settings.LogLevel);
         }
         finally
         {

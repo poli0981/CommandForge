@@ -16,8 +16,10 @@ public static class ServiceCollectionExtensions
 
         services.AddSingleton<IConfirmationService, ConfirmationService>();
         services.AddSingleton<IUpdateDialogService, UpdateDialogService>();
+        services.AddSingleton<IReportBugDialogService, ReportBugDialogService>();
         services.AddSingleton<IThemeService, ThemeService>();
         services.AddSingleton<IFontScaleService, FontScaleService>();
+        services.AddSingleton<CrashHandlingService>();
 
         services.AddTransient<LegalGateViewModel>();
         // Singleton: a single shell instance whose CultureChanged subscription lives for the app.
@@ -25,6 +27,9 @@ public static class ServiceCollectionExtensions
         services.AddTransient<ExecutionViewModel>();
         services.AddTransient<CommandPaletteViewModel>();
         services.AddTransient<SettingsViewModel>();
+        // Singletons: held by the singleton shell; one live ILogReader.EntriesChanged subscription each.
+        services.AddSingleton<LogViewerViewModel>();
+        services.AddSingleton<DebugViewModel>();
 
         services.AddTransient<LegalGateWindow>();
         services.AddTransient<MainWindow>();

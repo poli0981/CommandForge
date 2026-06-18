@@ -1,0 +1,49 @@
+<Window x:Class="CommandForge.Wpf.Views.ReportBugDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:res="clr-namespace:CommandForge.Wpf.Resources"
+        Title="{res:Loc ReportBug_Title}"
+        Width="520" SizeToContent="Height" ResizeMode="NoResize"
+        WindowStartupLocation="CenterOwner" ShowInTaskbar="False"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontSize="{DynamicResource AppFontSize}"
+        Background="{DynamicResource MaterialDesignPaper}">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Text="{res:Loc ReportBug_Title}" FontSize="18" FontWeight="Bold" Margin="0,0,0,12" />
+
+        <TextBlock Grid.Row="1" Text="{res:Loc ReportBug_Environment}" FontWeight="Medium" Margin="0,0,0,4" />
+        <Border Grid.Row="2" Background="{DynamicResource MaterialDesignToolBarBackground}" CornerRadius="4" Padding="10" Margin="0,0,0,12">
+            <TextBox Text="{Binding EnvironmentText, Mode=OneWay}" IsReadOnly="True" BorderThickness="0"
+                     Background="Transparent" TextWrapping="Wrap"
+                     FontFamily="Cascadia Mono, Consolas, Courier New" FontSize="12" />
+        </Border>
+
+        <TextBox Grid.Row="3" Margin="0,0,0,16" MinHeight="70" TextWrapping="Wrap" AcceptsReturn="True"
+                 VerticalScrollBarVisibility="Auto"
+                 AutomationProperties.Name="{res:Loc ReportBug_DescriptionHint}"
+                 materialDesign:HintAssist.Hint="{res:Loc ReportBug_DescriptionHint}"
+                 Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}" />
+
+        <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Content="{res:Loc ReportBug_ExportLog}" Command="{Binding ExportLogCommand}"
+                    Style="{StaticResource MaterialDesignOutlinedButton}" Margin="0,0,8,0"
+                    AutomationProperties.Name="{res:Loc ReportBug_ExportLog}" />
+            <Button Content="{res:Loc ReportBug_OpenIssue}" Command="{Binding OpenIssueCommand}"
+                    Style="{StaticResource MaterialDesignRaisedButton}" Margin="0,0,8,0"
+                    AutomationProperties.Name="{res:Loc ReportBug_OpenIssue}" />
+            <Button Content="{res:Loc ReportBug_Close}" Command="{Binding CloseCommand}"
+                    Style="{StaticResource MaterialDesignFlatButton}"
+                    AutomationProperties.Name="{res:Loc ReportBug_Close}" />
+        </StackPanel>
+    </Grid>
+</Window>

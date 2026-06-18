@@ -8,4 +8,10 @@ public enum ShellSection
 
     /// <summary>The Settings screen.</summary>
     Settings,
+
+    /// <summary>The Log Viewer.</summary>
+    LogViewer,
+
+    /// <summary>The Debug panel.</summary>
+    Debug,
 }

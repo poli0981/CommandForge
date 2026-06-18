@@ -136,6 +136,7 @@ public sealed class JsonCatalogProvider : ICatalogProvider
 {
     private readonly IReadOnlyList<CommandCategory> _categories;
     private readonly IReadOnlyList<CommandDefinition> _commands;
+    private readonly IReadOnlyList<string> _validationErrors;
 
     public JsonCatalogProvider()
     {
@@ -155,6 +156,7 @@ public sealed class JsonCatalogProvider : ICatalogProvider
 
         _categories = result.Categories;
         _commands = result.Commands;
+        _validationErrors = result.Errors;
     }
 
     /// <inheritdoc />
@@ -162,4 +164,7 @@ public sealed class JsonCatalogProvider : ICatalogProvider
 
     /// <inheritdoc />
     public IReadOnlyList<CommandDefinition> GetCommands() => _commands;
+
+    /// <inheritdoc />
+    public IReadOnlyList<string> ValidationErrors => _validationErrors;
 }

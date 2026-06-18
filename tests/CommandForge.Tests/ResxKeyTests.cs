@@ -64,4 +64,38 @@ public sealed class ResxKeyTests
             Assert.True(vietnamese!.GetString(key) is not null, $"Missing VI resource for key '{key}'.");
         }
     }
+
+    [Fact]
+    public void DiagnosticsUiKeys_ExistInResx_EN_and_VI()
+    {
+        var manager = new ResourceManager("CommandForge.Wpf.Resources.Strings", typeof(Strings).Assembly);
+        var english = manager.GetResourceSet(CultureInfo.InvariantCulture, createIfNotExists: true, tryParents: true);
+        var vietnamese = manager.GetResourceSet(new CultureInfo("vi"), createIfNotExists: true, tryParents: false);
+
+        Assert.NotNull(english);
+        Assert.NotNull(vietnamese);
+
+        string[] keys =
+        [
+            "Menu_LogViewer", "Menu_ExportLogs", "Menu_DebugPanel", "Menu_ReportBug",
+            "LogViewer_Title", "LogViewer_Level", "LogViewer_FilterHint", "LogViewer_AutoScroll",
+            "LogViewer_OpenFolder", "LogViewer_Export", "LogViewer_Clear",
+            "LogLevel_All", "LogLevel_Info", "LogLevel_Warning", "LogLevel_Error", "LogLevel_Debug", "Log_ExportSuccess",
+            "Debug_TabVerbose", "Debug_TabCatalog", "Debug_TabSystemInfo", "Debug_CategoryCount", "Debug_CommandCount",
+            "Debug_ValidationErrors", "Debug_NoValidationErrors", "Debug_CopySystemInfo", "Debug_Refresh",
+            "Error_Title", "Error_Message", "Error_Code", "Error_CopyDetails", "Error_ReportBug", "Error_Close",
+            "ReportBug_Title", "ReportBug_Environment", "ReportBug_ExportLog", "ReportBug_OpenIssue",
+            "ReportBug_Close", "ReportBug_DescriptionHint", "ReportBug_ReviewReminder",
+            "Settings_Logs", "Settings_LogLevel", "Settings_LogsSize", "Settings_OpenLogFolder", "Settings_ExportLogs",
+            "Settings_ClearOldLogs", "Settings_ClearLogsConfirm", "Settings_Advanced", "Settings_RunMode",
+            "Settings_RunModeInstalled", "Settings_RunModePortable", "Settings_ConfigPath", "Settings_OpenConfig",
+            "Settings_OpenDebugPanel", "Settings_ResetDefaults", "Settings_ResetConfirm",
+        ];
+
+        foreach (var key in keys)
+        {
+            Assert.True(english!.GetString(key) is not null, $"Missing EN resource for key '{key}'.");
+            Assert.True(vietnamese!.GetString(key) is not null, $"Missing VI resource for key '{key}'.");
+        }
+    }
 }

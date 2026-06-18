@@ -12,4 +12,7 @@ public interface ICatalogProvider
 
     /// <summary>Returns all vetted commands.</summary>
     public IReadOnlyList<CommandDefinition> GetCommands();
+
+    /// <summary>Catalog validation errors detected at load (empty when valid). Surfaced in the Debug panel.</summary>
+    public IReadOnlyList<string> ValidationErrors { get; }
 }

@@ -7,6 +7,7 @@ using CommandForge.Infrastructure.Execution;
 using CommandForge.Infrastructure.Logging;
 using CommandForge.Infrastructure.Updates;
 using Microsoft.Extensions.DependencyInjection;
+using Serilog.Core;
 
 namespace CommandForge.Infrastructure.DependencyInjection;
 
@@ -22,12 +23,16 @@ public static class ServiceCollectionExtensions
     /// </summary>
     public static IServiceCollection AddCommandForgeInfrastructure(
         this IServiceCollection services,
-        InMemoryLogStore? logStore = null)
+        InMemoryLogStore? logStore = null,
+        LoggingLevelSwitch? levelSwitch = null)
     {
         ArgumentNullException.ThrowIfNull(services);
 
         services.AddSingleton(logStore ?? new InMemoryLogStore());
         services.AddSingleton<ILogReader>(sp => sp.GetRequiredService<InMemoryLogStore>());
+        services.AddSingleton(levelSwitch ?? new LoggingLevelSwitch());
+        services.AddSingleton<ILogLevelController, SerilogLevelController>();
+        services.AddSingleton<ILogMaintenance, LogMaintenance>();
         services.AddSingleton<IClock, SystemClock>();
         services.AddSingleton<ISettingsService, JsonSettingsService>();
         services.AddSingleton<ICatalogProvider, JsonCatalogProvider>();

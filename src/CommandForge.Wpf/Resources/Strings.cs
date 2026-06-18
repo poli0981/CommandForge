@@ -4,8 +4,9 @@ using System.Resources;
 namespace CommandForge.Wpf.Resources;
 
 /// <summary>
-/// Strongly-typed access to localized UI strings (EN neutral + VI satellite).
-/// Phase 0 wires the i18n pipeline; full runtime culture switching comes later.
+/// Strongly-typed access to localized UI strings (EN neutral + VI satellite). Most XAML binds via
+/// the <c>{res:Loc Key}</c> markup extension (live culture switching); these typed members back the
+/// few <c>x:Static</c> bindings (the Legal Gate) and code-behind lookups via <see cref="Get"/>.
 /// </summary>
 public static class Strings
 {
@@ -15,8 +16,6 @@ public static class Strings
     /// <summary>Resolves an arbitrary resource key for the current UI culture.</summary>
     public static string Get(string key) =>
         Manager.GetString(key, CultureInfo.CurrentUICulture) ?? key;
-
-    public static string AppTitle => Get(nameof(AppTitle));
 
     public static string LegalGateTitle => Get(nameof(LegalGateTitle));
     public static string LegalGateIntro => Get(nameof(LegalGateIntro));
@@ -28,21 +27,4 @@ public static class Strings
     public static string TabGpl => Get(nameof(TabGpl));
     public static string TabDisclaimer => Get(nameof(TabDisclaimer));
     public static string TabPrivacy => Get(nameof(TabPrivacy));
-
-    public static string MenuFile => Get(nameof(MenuFile));
-    public static string MenuView => Get(nameof(MenuView));
-    public static string MenuTools => Get(nameof(MenuTools));
-    public static string MenuAbout => Get(nameof(MenuAbout));
-    public static string MenuHelp => Get(nameof(MenuHelp));
-    public static string MenuExit => Get(nameof(MenuExit));
-    public static string MenuToggleSidebar => Get(nameof(MenuToggleSidebar));
-
-    public static string SidebarHome => Get(nameof(SidebarHome));
-    public static string SidebarFavorites => Get(nameof(SidebarFavorites));
-    public static string SidebarSettings => Get(nameof(SidebarSettings));
-
-    public static string PaneCommands => Get(nameof(PaneCommands));
-    public static string PaneDetails => Get(nameof(PaneDetails));
-    public static string PaneConsole => Get(nameof(PaneConsole));
-    public static string ComingSoon => Get(nameof(ComingSoon));
 }

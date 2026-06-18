@@ -34,6 +34,7 @@ public static class ServiceCollectionExtensions
         services.AddTransient<LegalGateWindow>();
         services.AddTransient<MainWindow>();
         services.AddTransient<CommandPaletteWindow>();
+        services.AddTransient<PortableInfoDialog>();
 
         return services;
     }

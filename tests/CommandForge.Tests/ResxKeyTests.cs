@@ -168,6 +168,32 @@ public sealed class ResxKeyTests
             "Menu_CheckForUpdates", "Menu_ReportBug", "Palette_Placeholder",
             "Menu_Wiki", "Menu_About", "Menu_OpenConfigFolder", "Menu_OpenLogFolder",
             "Menu_FullScreen", "Menu_Terms",
+            "Menu_KeyboardShortcuts", "Menu_PortableInfo", "Menu_RestorePoint",
+        ];
+
+        foreach (var key in keys)
+        {
+            Assert.True(english!.GetString(key) is not null, $"Missing EN resource for key '{key}'.");
+            Assert.True(vietnamese!.GetString(key) is not null, $"Missing VI resource for key '{key}'.");
+        }
+    }
+
+    [Fact]
+    public void DialogUiKeys_ExistInResx_EN_and_VI()
+    {
+        var manager = new ResourceManager("CommandForge.Wpf.Resources.Strings", typeof(Strings).Assembly);
+        var english = manager.GetResourceSet(CultureInfo.InvariantCulture, createIfNotExists: true, tryParents: true);
+        var vietnamese = manager.GetResourceSet(new CultureInfo("vi"), createIfNotExists: true, tryParents: false);
+
+        Assert.NotNull(english);
+        Assert.NotNull(vietnamese);
+
+        string[] keys =
+        [
+            "Shortcuts_Palette", "Shortcuts_ListNav", "Shortcuts_OpenSelected", "Shortcuts_CloseDialog",
+            "PortableInfo_ConfigFolder", "PortableInfo_LogFolder",
+            "Settings_RunMode", "Settings_RunModeInstalled", "Settings_RunModePortable",
+            "Settings_CurrentVersion", "Settings_NoDataCollected", "LanguageOption_System",
         ];
 
         foreach (var key in keys)

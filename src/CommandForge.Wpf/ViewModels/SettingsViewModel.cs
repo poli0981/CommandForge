@@ -120,6 +120,11 @@ public sealed partial class SettingsViewModel : ObservableObject
         _settings.Save();
     }
 
+    /// <summary>Sets the UI language by culture code (<c>""</c> = system); used by the View menu.</summary>
+    [RelayCommand]
+    private void SetLanguage(string? code)
+        => SelectedLanguage = Languages.FirstOrDefault(l => l.Code == (code ?? string.Empty)) ?? Languages[0];
+
     [ObservableProperty]
     private FontScale _selectedFontSize;
 

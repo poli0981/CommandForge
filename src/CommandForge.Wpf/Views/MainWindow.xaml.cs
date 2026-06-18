@@ -193,4 +193,20 @@ public partial class MainWindow : Window
             _viewModel.SelectCommandById(commandId);
         }
     }
+
+    private void OnShowAboutClick(object sender, RoutedEventArgs e)
+        => new AboutDialog { Owner = this }.ShowDialog();
+
+    private void OnShowTermsClick(object sender, RoutedEventArgs e)
+        => new LegalViewerWindow { Owner = this }.ShowDialog();
+
+    private void OnShowKeyboardShortcutsClick(object sender, RoutedEventArgs e)
+        => new KeyboardShortcutsDialog { Owner = this }.ShowDialog();
+
+    private void OnShowPortableInfoClick(object sender, RoutedEventArgs e)
+    {
+        var dialog = _services.GetRequiredService<PortableInfoDialog>();
+        dialog.Owner = this;
+        dialog.ShowDialog();
+    }
 }

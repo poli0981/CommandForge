@@ -1144,6 +1144,21 @@
   <data name="History_Clear" xml:space="preserve">
     <value>Clear history</value>
   </data>
+  <data name="History_Undo" xml:space="preserve">
+    <value>Undo</value>
+  </data>
+  <data name="Registry_ChangesHeader" xml:space="preserve">
+    <value>— Registry before/after —</value>
+  </data>
+  <data name="Registry_ChangeFormat" xml:space="preserve">
+    <value>{0}: {1} → {2}</value>
+  </data>
+  <data name="Registry_NotSet" xml:space="preserve">
+    <value>(not set)</value>
+  </data>
+  <data name="Registry_NoChanges" xml:space="preserve">
+    <value>No registry changes detected.</value>
+  </data>
   <data name="Recipes_Saved" xml:space="preserve">
     <value>Saved recipes</value>
   </data>

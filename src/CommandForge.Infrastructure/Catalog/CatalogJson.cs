@@ -32,4 +32,12 @@ internal sealed record CommandDto
     public EstimatedDuration EstimatedDuration { get; init; }
     public string? DocUrl { get; init; }
     public string[]? Tags { get; init; }
+    public RegistryValueDto[]? AffectedRegistryValues { get; init; }
+}
+
+/// <summary>JSON shape of a registry-value reference (for before/after comparison).</summary>
+internal sealed record RegistryValueDto
+{
+    public string? Path { get; init; }
+    public string? Name { get; init; }
 }

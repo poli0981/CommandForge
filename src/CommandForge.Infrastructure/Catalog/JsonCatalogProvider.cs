@@ -94,6 +94,12 @@ public static class CatalogLoader
                 EstimatedDuration = dto.EstimatedDuration,
                 DocUrl = dto.DocUrl,
                 Tags = dto.Tags ?? [],
+                AffectedRegistryValues = dto.AffectedRegistryValues is null
+                    ? []
+                    : dto.AffectedRegistryValues
+                        .Where(r => !string.IsNullOrWhiteSpace(r.Path))
+                        .Select(r => new RegistryValueRef { Path = r.Path!, Name = r.Name ?? string.Empty })
+                        .ToList(),
             });
         }
 

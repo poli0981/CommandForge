@@ -53,6 +53,9 @@ public sealed record CommandDefinition
     /// <summary>Id of the command that reverts this one, if reversible.</summary>
     public string? RevertCommandId { get; init; }
 
+    /// <summary>Registry values this command may change, for read-only before/after comparison (optional).</summary>
+    public IReadOnlyList<RegistryValueRef> AffectedRegistryValues { get; init; } = [];
+
     /// <summary>Rough duration hint for the UI.</summary>
     public EstimatedDuration EstimatedDuration { get; init; } = EstimatedDuration.Short;
 

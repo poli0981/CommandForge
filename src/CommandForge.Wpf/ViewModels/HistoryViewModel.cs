@@ -48,7 +48,13 @@ public sealed partial class HistoryViewModel : ObservableObject
         {
             _itemsById.TryGetValue(record.CommandId, out var item);
             var title = item?.Title ?? record.CommandId;
-            Entries.Add(new HistoryEntryViewModel(record, title, item?.Icon, canRun: item is not null));
+
+            // Undo is offered only when the run's command has a vetted revert command in the catalog.
+            var revertCommandId = item?.Command.RevertCommandId is { } revertId && _itemsById.ContainsKey(revertId)
+                ? revertId
+                : null;
+
+            Entries.Add(new HistoryEntryViewModel(record, title, item?.Icon, canRun: item is not null, revertCommandId));
         }
 
         HasEntries = Entries.Count > 0;
@@ -66,6 +72,11 @@ public sealed partial class HistoryViewModel : ObservableObject
     [RelayCommand]
     private Task RunAgain(HistoryEntryViewModel? entry)
         => entry is { CanRun: true } ? _runCommand(entry.CommandId) : Task.CompletedTask;
+
+    /// <summary>Undoes a run by executing its (vetted catalog) revert command. No arbitrary writes.</summary>
+    [RelayCommand]
+    private Task Undo(HistoryEntryViewModel? entry)
+        => entry?.RevertCommandId is { } revertId ? _runCommand(revertId) : Task.CompletedTask;
 
     [RelayCommand]
     private void Clear()

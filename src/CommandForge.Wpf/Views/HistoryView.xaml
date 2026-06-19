@@ -30,11 +30,16 @@
                             <TextBlock Text="{Binding DurationText}" FontSize="12" />
                         </StackPanel>
                     </StackPanel>
-                    <Button Grid.Column="2" Style="{StaticResource MaterialDesignFlatButton}"
-                            VerticalAlignment="Center" Content="{res:Loc History_RunAgain}"
-                            IsEnabled="{Binding CanRun}"
-                            Command="{Binding DataContext.RunAgainCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                            CommandParameter="{Binding}" />
+                    <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
+                        <Button Style="{StaticResource MaterialDesignFlatButton}" Content="{res:Loc History_Undo}"
+                                Visibility="{Binding CanUndo, Converter={StaticResource BoolToVis}}"
+                                Command="{Binding DataContext.UndoCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                CommandParameter="{Binding}" />
+                        <Button Style="{StaticResource MaterialDesignFlatButton}" Content="{res:Loc History_RunAgain}"
+                                IsEnabled="{Binding CanRun}"
+                                Command="{Binding DataContext.RunAgainCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                CommandParameter="{Binding}" />
+                    </StackPanel>
                 </Grid>
             </Border>
         </DataTemplate>

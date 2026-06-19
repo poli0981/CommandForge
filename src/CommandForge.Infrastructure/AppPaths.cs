@@ -26,6 +26,9 @@ public static class AppPaths
     /// <summary><c>%AppData%\CommandForge\profiles.json</c> — named settings/favorites profiles.</summary>
     public static string ProfilesFilePath { get; } = Path.Combine(DataDirectory, "profiles.json");
 
+    /// <summary><c>%AppData%\CommandForge\recipes.json</c> — user-defined recipes (command chains).</summary>
+    public static string RecipesFilePath { get; } = Path.Combine(DataDirectory, "recipes.json");
+
     /// <summary>Ensures the data and logs directories exist.</summary>
     public static void EnsureCreated()
     {

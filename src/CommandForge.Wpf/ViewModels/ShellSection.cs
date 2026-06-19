@@ -12,6 +12,9 @@ public enum ShellSection
     /// <summary>The execution-history screen (past runs, re-run).</summary>
     History,
 
+    /// <summary>The recipes screen (build/run command chains).</summary>
+    Recipes,
+
     /// <summary>The Settings screen.</summary>
     Settings,
 

@@ -39,6 +39,7 @@ public static class ServiceCollectionExtensions
         services.AddSingleton<IExecutionHistoryService, History.JsonExecutionHistoryService>();
         services.AddSingleton<ISettingsFile, Portability.JsonSettingsFile>();
         services.AddSingleton<IProfileService, Portability.JsonProfileService>();
+        services.AddSingleton<IRecipeStore, Recipes.JsonRecipeStore>();
         services.AddSingleton<ISystemInfoService, WindowsSystemInfoService>();
         services.AddSingleton<ICatalogProvider, JsonCatalogProvider>();
         services.AddSingleton<IProcessRunner, SystemProcessRunner>();

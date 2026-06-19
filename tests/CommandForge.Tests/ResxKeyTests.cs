@@ -207,4 +207,30 @@ public sealed class ResxKeyTests
             Assert.True(vietnamese!.GetString(key) is not null, $"Missing VI resource for key '{key}'.");
         }
     }
+
+    [Fact]
+    public void RecipesUiKeys_ExistInResx_EN_and_VI()
+    {
+        var manager = new ResourceManager("CommandForge.Wpf.Resources.Strings", typeof(Strings).Assembly);
+        var english = manager.GetResourceSet(CultureInfo.InvariantCulture, createIfNotExists: true, tryParents: true);
+        var vietnamese = manager.GetResourceSet(new CultureInfo("vi"), createIfNotExists: true, tryParents: false);
+
+        Assert.NotNull(english);
+        Assert.NotNull(vietnamese);
+
+        string[] keys =
+        [
+            "SidebarRecipes", "Recipes_Saved", "Recipes_New", "Recipe_Delete", "Recipes_NameHint",
+            "Recipes_NoSteps", "Recipes_AddHint", "Recipes_AddStep", "Recipes_Save", "Recipes_Run",
+            "Recipes_MoveUp", "Recipes_MoveDown", "Recipes_RemoveStep",
+            "Recipe_StepHeader", "Recipe_StoppedOnError", "Recipe_StoppedRestart", "Recipe_Cancelled",
+            "Recipe_ContainsDangerous", "Recipe_ConfirmTitle", "Recipe_DeleteConfirm",
+        ];
+
+        foreach (var key in keys)
+        {
+            Assert.True(english!.GetString(key) is not null, $"Missing EN resource for key '{key}'.");
+            Assert.True(vietnamese!.GetString(key) is not null, $"Missing VI resource for key '{key}'.");
+        }
+    }
 }

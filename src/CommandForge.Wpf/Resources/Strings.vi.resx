@@ -121,6 +121,9 @@
   <data name="SidebarHistory" xml:space="preserve">
     <value>Lịch sử</value>
   </data>
+  <data name="SidebarRecipes" xml:space="preserve">
+    <value>Chuỗi lệnh</value>
+  </data>
   <data name="SidebarSettings" xml:space="preserve">
     <value>Cài đặt</value>
   </data>
@@ -1137,6 +1140,63 @@
   </data>
   <data name="History_Clear" xml:space="preserve">
     <value>Xóa lịch sử</value>
+  </data>
+  <data name="Recipes_Saved" xml:space="preserve">
+    <value>Chuỗi đã lưu</value>
+  </data>
+  <data name="Recipes_New" xml:space="preserve">
+    <value>Tạo mới</value>
+  </data>
+  <data name="Recipe_Delete" xml:space="preserve">
+    <value>Xóa chuỗi</value>
+  </data>
+  <data name="Recipes_NameHint" xml:space="preserve">
+    <value>Tên chuỗi lệnh</value>
+  </data>
+  <data name="Recipes_NoSteps" xml:space="preserve">
+    <value>Chưa có bước nào. Thêm lệnh bên dưới để dựng chuỗi.</value>
+  </data>
+  <data name="Recipes_AddHint" xml:space="preserve">
+    <value>Thêm lệnh…</value>
+  </data>
+  <data name="Recipes_AddStep" xml:space="preserve">
+    <value>Thêm</value>
+  </data>
+  <data name="Recipes_Save" xml:space="preserve">
+    <value>Lưu</value>
+  </data>
+  <data name="Recipes_Run" xml:space="preserve">
+    <value>Chạy chuỗi</value>
+  </data>
+  <data name="Recipes_MoveUp" xml:space="preserve">
+    <value>Lên</value>
+  </data>
+  <data name="Recipes_MoveDown" xml:space="preserve">
+    <value>Xuống</value>
+  </data>
+  <data name="Recipes_RemoveStep" xml:space="preserve">
+    <value>Bỏ bước</value>
+  </data>
+  <data name="Recipe_StepHeader" xml:space="preserve">
+    <value>▶ Bước {0}/{1}: {2}</value>
+  </data>
+  <data name="Recipe_StoppedOnError" xml:space="preserve">
+    <value>Đã dừng chuỗi: một bước thất bại.</value>
+  </data>
+  <data name="Recipe_StoppedRestart" xml:space="preserve">
+    <value>Tạm dừng chuỗi: cần khởi động lại trước khi tiếp tục.</value>
+  </data>
+  <data name="Recipe_Cancelled" xml:space="preserve">
+    <value>Đã hủy chuỗi.</value>
+  </data>
+  <data name="Recipe_ContainsDangerous" xml:space="preserve">
+    <value>Chuỗi này có các bước nguy hiểm.</value>
+  </data>
+  <data name="Recipe_ConfirmTitle" xml:space="preserve">
+    <value>Chạy chuỗi lệnh?</value>
+  </data>
+  <data name="Recipe_DeleteConfirm" xml:space="preserve">
+    <value>Xóa chuỗi "{0}"?</value>
   </data>
   <data name="Favorite_Toggle" xml:space="preserve">
     <value>Bật/tắt yêu thích</value>

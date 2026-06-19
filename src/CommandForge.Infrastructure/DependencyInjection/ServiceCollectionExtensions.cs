@@ -36,6 +36,7 @@ public static class ServiceCollectionExtensions
         services.AddSingleton<ILogMaintenance, LogMaintenance>();
         services.AddSingleton<IClock, SystemClock>();
         services.AddSingleton<ISettingsService, JsonSettingsService>();
+        services.AddSingleton<IExecutionHistoryService, History.JsonExecutionHistoryService>();
         services.AddSingleton<ISystemInfoService, WindowsSystemInfoService>();
         services.AddSingleton<ICatalogProvider, JsonCatalogProvider>();
         services.AddSingleton<IProcessRunner, SystemProcessRunner>();

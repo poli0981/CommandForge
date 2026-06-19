@@ -52,6 +52,12 @@ public sealed partial class ExecutionViewModel : ObservableObject
     /// <summary>Whether the console panel should be visible (running or has a result).</summary>
     public bool ShowConsole => IsRunning || HasResult;
 
+    /// <summary>
+    /// The result of the most recent finished run (the main command, not the restore point),
+    /// or null if nothing has run yet. Used by callers to record execution history.
+    /// </summary>
+    public ExecutionResult? LastResult { get; private set; }
+
     /// <summary>Localized result status (Success / Failed / Cancelled).</summary>
     public string StatusText => Cancelled
         ? Strings.Get("Result_Cancelled")
@@ -121,6 +127,7 @@ public sealed partial class ExecutionViewModel : ObservableObject
 
     private void ApplyResult(ExecutionResult result)
     {
+        LastResult = result;
         ExitCode = result.ExitCode;
         Success = result.Success;
         Cancelled = result.Cancelled;

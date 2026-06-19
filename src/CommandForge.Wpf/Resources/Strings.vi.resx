@@ -118,6 +118,9 @@
   <data name="SidebarFavorites" xml:space="preserve">
     <value>Yêu thích</value>
   </data>
+  <data name="SidebarHistory" xml:space="preserve">
+    <value>Lịch sử</value>
+  </data>
   <data name="SidebarSettings" xml:space="preserve">
     <value>Cài đặt</value>
   </data>
@@ -1068,6 +1071,18 @@
   </data>
   <data name="Home_NoFavorites" xml:space="preserve">
     <value>Chưa có mục yêu thích. Ghim lệnh bằng biểu tượng ngôi sao.</value>
+  </data>
+  <data name="History_Title" xml:space="preserve">
+    <value>Lịch sử thực thi</value>
+  </data>
+  <data name="History_Empty" xml:space="preserve">
+    <value>Chưa có lệnh nào được chạy.</value>
+  </data>
+  <data name="History_RunAgain" xml:space="preserve">
+    <value>Chạy lại</value>
+  </data>
+  <data name="History_Clear" xml:space="preserve">
+    <value>Xóa lịch sử</value>
   </data>
   <data name="Favorite_Toggle" xml:space="preserve">
     <value>Bật/tắt yêu thích</value>

@@ -279,4 +279,26 @@ public sealed class ResxKeyTests
             Assert.True(vietnamese!.GetString(key) is not null, $"Missing VI resource for key '{key}'.");
         }
     }
+
+    [Fact]
+    public void DashboardAndSearchUiKeys_ExistInResx_EN_and_VI()
+    {
+        var manager = new ResourceManager("CommandForge.Wpf.Resources.Strings", typeof(Strings).Assembly);
+        var english = manager.GetResourceSet(CultureInfo.InvariantCulture, createIfNotExists: true, tryParents: true);
+        var vietnamese = manager.GetResourceSet(new CultureInfo("vi"), createIfNotExists: true, tryParents: false);
+
+        Assert.NotNull(english);
+        Assert.NotNull(vietnamese);
+
+        string[] keys =
+        [
+            "Search_Suggestion", "Home_Suggestions", "Maint_LowDisk", "Maint_HighUptime", "Maint_Open",
+        ];
+
+        foreach (var key in keys)
+        {
+            Assert.True(english!.GetString(key) is not null, $"Missing EN resource for key '{key}'.");
+            Assert.True(vietnamese!.GetString(key) is not null, $"Missing VI resource for key '{key}'.");
+        }
+    }
 }

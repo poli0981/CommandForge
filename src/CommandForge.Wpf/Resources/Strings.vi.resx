@@ -226,6 +226,21 @@
   <data name="Search_Placeholder" xml:space="preserve">
     <value>Tìm lệnh… (Ctrl+K)</value>
   </data>
+  <data name="Search_Suggestion" xml:space="preserve">
+    <value>Gợi ý:</value>
+  </data>
+  <data name="Home_Suggestions" xml:space="preserve">
+    <value>Gợi ý bảo trì</value>
+  </data>
+  <data name="Maint_LowDisk" xml:space="preserve">
+    <value>Ổ hệ thống sắp đầy — cân nhắc dọn dẹp ổ đĩa.</value>
+  </data>
+  <data name="Maint_HighUptime" xml:space="preserve">
+    <value>Máy đã chạy hơn một tuần — khởi động lại có thể giúp ích.</value>
+  </data>
+  <data name="Maint_Open" xml:space="preserve">
+    <value>Mở</value>
+  </data>
   <data name="Palette_Placeholder" xml:space="preserve">
     <value>Gõ để tìm trên toàn bộ catalog…</value>
   </data>

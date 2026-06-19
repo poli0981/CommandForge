@@ -226,6 +226,21 @@
   <data name="Search_Placeholder" xml:space="preserve">
     <value>Search commands… (Ctrl+K)</value>
   </data>
+  <data name="Search_Suggestion" xml:space="preserve">
+    <value>Did you mean:</value>
+  </data>
+  <data name="Home_Suggestions" xml:space="preserve">
+    <value>Maintenance suggestions</value>
+  </data>
+  <data name="Maint_LowDisk" xml:space="preserve">
+    <value>Your system drive is low on free space — consider Disk Cleanup.</value>
+  </data>
+  <data name="Maint_HighUptime" xml:space="preserve">
+    <value>Your PC has been running for over a week — a restart may help.</value>
+  </data>
+  <data name="Maint_Open" xml:space="preserve">
+    <value>Open</value>
+  </data>
   <data name="Palette_Placeholder" xml:space="preserve">
     <value>Type to search the whole catalog…</value>
   </data>

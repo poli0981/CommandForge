@@ -23,6 +23,9 @@ public static class AppPaths
     /// <summary><c>%AppData%\CommandForge\history.json</c> — persisted execution history.</summary>
     public static string HistoryFilePath { get; } = Path.Combine(DataDirectory, "history.json");
 
+    /// <summary><c>%AppData%\CommandForge\profiles.json</c> — named settings/favorites profiles.</summary>
+    public static string ProfilesFilePath { get; } = Path.Combine(DataDirectory, "profiles.json");
+
     /// <summary>Ensures the data and logs directories exist.</summary>
     public static void EnsureCreated()
     {

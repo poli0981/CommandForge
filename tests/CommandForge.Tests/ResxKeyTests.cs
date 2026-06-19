@@ -56,6 +56,11 @@ public sealed class ResxKeyTests
             "Settings_AutoRestorePoint", "Settings_AutoScroll", "Settings_WarnOnCancel",
             "Settings_AutoCheckUpdates", "Settings_CurrentVersion", "Settings_LastChecked", "Settings_CheckNow",
             "Settings_NoDataCollected", "Settings_License", "Settings_GitHub",
+            "Settings_Profiles", "Settings_ExportImport", "Settings_ExportImportHint",
+            "Settings_ExportSettings", "Settings_ImportSettings", "Settings_SavedProfiles", "Settings_ProfilesHint",
+            "Settings_ApplyProfile", "Settings_DeleteProfile", "Settings_SaveCurrentAsProfile",
+            "Settings_ProfileName", "Settings_SaveProfile", "Settings_ExportSuccess", "Settings_ImportConfirm",
+            "Settings_ImportInvalid", "Settings_ImportSuccess", "Settings_ProfileApplied", "Settings_DeleteProfileConfirm",
         ];
 
         foreach (var key in keys)

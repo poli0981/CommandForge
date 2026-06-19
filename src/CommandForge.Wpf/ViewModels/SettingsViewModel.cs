@@ -1,3 +1,4 @@
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Globalization;
 using System.Windows;
@@ -28,6 +29,8 @@ public sealed partial class SettingsViewModel : ObservableObject
     private readonly IUpdateDialogService _updateDialog;
     private readonly ILogLevelController _logLevel;
     private readonly ILogMaintenance _maintenance;
+    private readonly ISettingsFile _settingsFile;
+    private readonly IProfileService _profiles;
 
     public SettingsViewModel(
         ISettingsService settings,
@@ -36,6 +39,8 @@ public sealed partial class SettingsViewModel : ObservableObject
         IUpdateDialogService updateDialog,
         ILogLevelController logLevel,
         ILogMaintenance maintenance,
+        ISettingsFile settingsFile,
+        IProfileService profiles,
         IUpdateService updates)
     {
         ArgumentNullException.ThrowIfNull(settings);
@@ -44,6 +49,8 @@ public sealed partial class SettingsViewModel : ObservableObject
         ArgumentNullException.ThrowIfNull(updateDialog);
         ArgumentNullException.ThrowIfNull(logLevel);
         ArgumentNullException.ThrowIfNull(maintenance);
+        ArgumentNullException.ThrowIfNull(settingsFile);
+        ArgumentNullException.ThrowIfNull(profiles);
         ArgumentNullException.ThrowIfNull(updates);
 
         _settings = settings;
@@ -52,6 +59,8 @@ public sealed partial class SettingsViewModel : ObservableObject
         _updateDialog = updateDialog;
         _logLevel = logLevel;
         _maintenance = maintenance;
+        _settingsFile = settingsFile;
+        _profiles = profiles;
 
         Languages =
         [
@@ -81,7 +90,16 @@ public sealed partial class SettingsViewModel : ObservableObject
 
         var version = typeof(SettingsViewModel).Assembly.GetName().Version;
         CurrentVersionText = version is null ? "—" : $"{version.Major}.{version.Minor}.{version.Build}";
+
+        RefreshProfiles();
     }
+
+    /// <summary>
+    /// Raised after import / apply-profile changes the live settings (incl. favorites), so the shell
+    /// can re-sync favorite stars and dashboards. Appearance/language apply themselves via the
+    /// observable-property setters.
+    /// </summary>
+    public event Action? PortableSettingsApplied;
 
     [ObservableProperty]
     private SettingsSection _selectedSection = SettingsSection.Appearance;
@@ -189,6 +207,172 @@ public sealed partial class SettingsViewModel : ObservableObject
     {
         await _updateDialog.ShowAsync(startedFromStartup: false);
         LastCheckedText = DateTime.Now.ToString("g", CultureInfo.CurrentCulture);
+    }
+
+    // ---- Profiles (import/export + named profiles) ----
+
+    /// <summary>Saved profile names, for the picker.</summary>
+    public ObservableCollection<string> ProfileNames { get; } = [];
+
+    [ObservableProperty]
+    [NotifyCanExecuteChangedFor(nameof(ApplyProfileCommand))]
+    [NotifyCanExecuteChangedFor(nameof(DeleteProfileCommand))]
+    private string? _selectedProfile;
+
+    [ObservableProperty]
+    [NotifyCanExecuteChangedFor(nameof(SaveProfileCommand))]
+    private string _newProfileName = string.Empty;
+
+    [RelayCommand]
+    private void ExportSettings()
+    {
+        var dialog = new SaveFileDialog
+        {
+            Title = Strings.Get("Settings_ExportSettings"),
+            Filter = "JSON (*.json)|*.json",
+            FileName = $"commandforge-settings-{DateTime.Now:yyyyMMdd-HHmmss}.json",
+        };
+        if (dialog.ShowDialog() != true)
+        {
+            return;
+        }
+
+        _settingsFile.Write(dialog.FileName, SettingsTransfer.Capture(_settings));
+        MessageBox.Show(
+            string.Format(CultureInfo.CurrentCulture, Strings.Get("Settings_ExportSuccess"), dialog.FileName),
+            Strings.Get("Settings_Profiles"),
+            MessageBoxButton.OK,
+            MessageBoxImage.Information);
+    }
+
+    [RelayCommand]
+    private void ImportSettings()
+    {
+        var dialog = new OpenFileDialog
+        {
+            Title = Strings.Get("Settings_ImportSettings"),
+            Filter = "JSON (*.json)|*.json",
+        };
+        if (dialog.ShowDialog() != true)
+        {
+            return;
+        }
+
+        var imported = _settingsFile.Read(dialog.FileName);
+        if (imported is null)
+        {
+            MessageBox.Show(
+                Strings.Get("Settings_ImportInvalid"),
+                Strings.Get("Settings_Profiles"),
+                MessageBoxButton.OK,
+                MessageBoxImage.Warning);
+            return;
+        }
+
+        if (MessageBox.Show(
+                Strings.Get("Settings_ImportConfirm"),
+                Strings.Get("Settings_ImportSettings"),
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Question) != MessageBoxResult.Yes)
+        {
+            return;
+        }
+
+        ApplyPortable(imported);
+        MessageBox.Show(
+            Strings.Get("Settings_ImportSuccess"),
+            Strings.Get("Settings_Profiles"),
+            MessageBoxButton.OK,
+            MessageBoxImage.Information);
+    }
+
+    [RelayCommand(CanExecute = nameof(CanSaveProfile))]
+    private void SaveProfile()
+    {
+        var name = NewProfileName.Trim();
+        if (name.Length == 0)
+        {
+            return;
+        }
+
+        _profiles.Save(name, SettingsTransfer.Capture(_settings));
+        NewProfileName = string.Empty;
+        RefreshProfiles();
+        SelectedProfile = name;
+    }
+
+    private bool CanSaveProfile() => !string.IsNullOrWhiteSpace(NewProfileName);
+
+    [RelayCommand(CanExecute = nameof(HasSelectedProfile))]
+    private void ApplyProfile()
+    {
+        if (SelectedProfile is not { } name || _profiles.Get(name) is not { } portable)
+        {
+            return;
+        }
+
+        ApplyPortable(portable);
+        MessageBox.Show(
+            string.Format(CultureInfo.CurrentCulture, Strings.Get("Settings_ProfileApplied"), name),
+            Strings.Get("Settings_Profiles"),
+            MessageBoxButton.OK,
+            MessageBoxImage.Information);
+    }
+
+    [RelayCommand(CanExecute = nameof(HasSelectedProfile))]
+    private void DeleteProfile()
+    {
+        if (SelectedProfile is not { } name)
+        {
+            return;
+        }
+
+        if (MessageBox.Show(
+                string.Format(CultureInfo.CurrentCulture, Strings.Get("Settings_DeleteProfileConfirm"), name),
+                Strings.Get("Settings_DeleteProfile"),
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Warning) != MessageBoxResult.Yes)
+        {
+            return;
+        }
+
+        _profiles.Delete(name);
+        RefreshProfiles();
+    }
+
+    private bool HasSelectedProfile() => SelectedProfile is not null;
+
+    private void RefreshProfiles()
+    {
+        ProfileNames.Clear();
+        foreach (var name in _profiles.GetNames())
+        {
+            ProfileNames.Add(name);
+        }
+    }
+
+    /// <summary>
+    /// Applies a portable payload to the live app: appearance/behavior via the observable setters
+    /// (which apply + persist), favorites straight to settings, then notifies the shell to re-sync.
+    /// </summary>
+    private void ApplyPortable(PortableSettings portable)
+    {
+        SelectedTheme = portable.Theme;
+        SelectedLanguage = Languages.FirstOrDefault(l => l.Code == portable.Language) ?? Languages[0];
+        SelectedFontSize = portable.FontSize;
+        CollapseSidebarByDefault = portable.CollapseSidebarByDefault;
+        ShowAdminRestartBadges = portable.ShowAdminRestartBadges;
+        ConfirmCaution = portable.ConfirmCaution;
+        AutoCreateRestorePoint = portable.AutoCreateRestorePoint;
+        AutoScrollConsole = portable.AutoScrollConsole;
+        WarnOnCancel = portable.WarnOnCancel;
+        AutoCheckForUpdates = portable.AutoCheckForUpdates;
+        SelectedLogLevel = portable.LogLevel;
+
+        // Favorites have no observable property here — write them to settings + notify the shell.
+        _settings.FavoriteCommandIds = portable.FavoriteCommandIds;
+        _settings.Save();
+        PortableSettingsApplied?.Invoke();
     }
 
     // ---- Logs ----

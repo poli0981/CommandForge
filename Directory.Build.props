@@ -23,4 +23,26 @@
     <NoWarn>$(NoWarn);CS1591</NoWarn>
   </PropertyGroup>
 
+  <!--
+    Package / assembly metadata, inherited by every project. Surfaced in Settings -> About
+    and the Report-Bug template (via Assembly.GetName().Version), in the file properties, and
+    in the Velopack installer (scripts/pack.ps1 passes Authors via the packAuthors flag).
+
+    Version here is only the dev-build default; scripts/pack.ps1 overrides it at publish time
+    with the Version/FileVersion/InformationalVersion properties off the git tag. AssemblyVersion is
+    intentionally NOT pinned, so it follows Version and the in-app "App version" stays accurate
+    (binding-redirect churn is a non-issue for a self-contained app, not a shared library).
+  -->
+  <PropertyGroup>
+    <Product>CommandForge</Product>
+    <Authors>poli0981</Authors>
+    <Company>poli0981</Company>
+    <Copyright>Copyright © 2026 poli0981</Copyright>
+    <Description>Run complex Windows system commands through a visual, categorized interface.</Description>
+    <RepositoryUrl>https://github.com/poli0981/CommandForge</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/poli0981/CommandForge</PackageProjectUrl>
+    <RepositoryType>git</RepositoryType>
+    <Version>1.0.0</Version>
+  </PropertyGroup>
+
 </Project>

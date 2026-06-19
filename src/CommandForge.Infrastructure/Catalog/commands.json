@@ -246,7 +246,10 @@
     "revertCommandId": "tweak.hideext",
     "estimatedDuration": "Short",
     "docUrl": null,
-    "tags": ["explorer", "file extension", "registry", "tweak"]
+    "tags": ["explorer", "file extension", "registry", "tweak"],
+    "affectedRegistryValues": [
+      { "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced", "name": "HideFileExt" }
+    ]
   },
   {
     "id": "tweak.showhidden",
@@ -265,7 +268,10 @@
     "revertCommandId": null,
     "estimatedDuration": "Short",
     "docUrl": null,
-    "tags": ["explorer", "hidden files", "registry", "tweak"]
+    "tags": ["explorer", "hidden files", "registry", "tweak"],
+    "affectedRegistryValues": [
+      { "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced", "name": "Hidden" }
+    ]
   },
   {
     "id": "cleanup.cleanmgr",

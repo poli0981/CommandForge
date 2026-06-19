@@ -1,6 +1,8 @@
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Globalization;
 using CommandForge.Application.Ports;
+using CommandForge.Application.Registry;
 using CommandForge.Application.Search;
 using CommandForge.Application.Settings;
 using CommandForge.Domain;
@@ -26,6 +28,7 @@ public sealed partial class MainViewModel : ObservableObject
     private readonly ISettingsService _settings;
     private readonly IExecutionHistoryService _history;
     private readonly IClock _clock;
+    private readonly IRegistryService _registry;
     private readonly Dictionary<string, CommandItemViewModel> _itemsById;
     private readonly CommandDefinition? _restorePointCommand;
     private IReadOnlyList<SearchableCommand> _searchable;
@@ -42,6 +45,7 @@ public sealed partial class MainViewModel : ObservableObject
         IClock clock,
         IRecipeStore recipeStore,
         IUserCommandStore userCommandStore,
+        IRegistryService registry,
         ISystemInfoService systemInfo,
         SettingsViewModel settingsViewModel,
         LogViewerViewModel logViewer,
@@ -57,6 +61,7 @@ public sealed partial class MainViewModel : ObservableObject
         ArgumentNullException.ThrowIfNull(clock);
         ArgumentNullException.ThrowIfNull(recipeStore);
         ArgumentNullException.ThrowIfNull(userCommandStore);
+        ArgumentNullException.ThrowIfNull(registry);
         ArgumentNullException.ThrowIfNull(systemInfo);
         ArgumentNullException.ThrowIfNull(settingsViewModel);
         ArgumentNullException.ThrowIfNull(logViewer);
@@ -69,6 +74,7 @@ public sealed partial class MainViewModel : ObservableObject
         _settings = settings;
         _history = history;
         _clock = clock;
+        _registry = registry;
         Settings = settingsViewModel;
         LogViewer = logViewer;
         Debug = debug;
@@ -332,6 +338,11 @@ public sealed partial class MainViewModel : ObservableObject
             restorePoint = _restorePointCommand;
         }
 
+        // Read-only before snapshot of any registry values this command may change.
+        var registryBefore = command.AffectedRegistryValues.Count > 0
+            ? RegistrySnapshot.Capture(_registry, command.AffectedRegistryValues)
+            : null;
+
         await Execution.RunAsync(command, restorePoint);
 
         // Record the run for the Home "recent commands" list and the execution history
@@ -353,6 +364,42 @@ public sealed partial class MainViewModel : ObservableObject
                     RequiresRestart = result.RequiresRestart,
                 });
             }
+
+            if (registryBefore is not null)
+            {
+                AppendRegistryDiff(command.AffectedRegistryValues, registryBefore);
+            }
+        }
+    }
+
+    /// <summary>Re-reads the affected registry values and appends a before/after summary to the console.</summary>
+    private void AppendRegistryDiff(
+        IReadOnlyList<RegistryValueRef> references,
+        IReadOnlyDictionary<RegistryValueRef, string?> before)
+    {
+        var after = RegistrySnapshot.Capture(_registry, references);
+        var changes = RegistrySnapshot.Diff(references, before, after);
+
+        Execution.OutputLines.Add(new OutputLine(Strings.Get("Registry_ChangesHeader"), IsError: false));
+        if (changes.Count == 0)
+        {
+            Execution.OutputLines.Add(new OutputLine(Strings.Get("Registry_NoChanges"), IsError: false));
+            return;
+        }
+
+        foreach (var change in changes)
+        {
+            var label = string.IsNullOrEmpty(change.Reference.Name)
+                ? change.Reference.Path
+                : change.Reference.Path + "\\" + change.Reference.Name;
+            Execution.OutputLines.Add(new OutputLine(
+                string.Format(
+                    CultureInfo.CurrentCulture,
+                    Strings.Get("Registry_ChangeFormat"),
+                    label,
+                    change.Before ?? Strings.Get("Registry_NotSet"),
+                    change.After ?? Strings.Get("Registry_NotSet")),
+                IsError: false));
         }
     }
 

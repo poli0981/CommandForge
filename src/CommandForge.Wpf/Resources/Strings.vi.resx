@@ -1144,6 +1144,21 @@
   <data name="History_Clear" xml:space="preserve">
     <value>Xóa lịch sử</value>
   </data>
+  <data name="History_Undo" xml:space="preserve">
+    <value>Hoàn tác</value>
+  </data>
+  <data name="Registry_ChangesHeader" xml:space="preserve">
+    <value>— Registry trước/sau —</value>
+  </data>
+  <data name="Registry_ChangeFormat" xml:space="preserve">
+    <value>{0}: {1} → {2}</value>
+  </data>
+  <data name="Registry_NotSet" xml:space="preserve">
+    <value>(chưa đặt)</value>
+  </data>
+  <data name="Registry_NoChanges" xml:space="preserve">
+    <value>Không phát hiện thay đổi registry.</value>
+  </data>
   <data name="Recipes_Saved" xml:space="preserve">
     <value>Chuỗi đã lưu</value>
   </data>

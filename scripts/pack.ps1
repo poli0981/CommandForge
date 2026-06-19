@@ -37,7 +37,7 @@ Write-Host "Publishing CommandForge $Version ($Runtime, $Configuration)..." -For
 dotnet publish $wpfProject `
     -c $Configuration -r $Runtime --self-contained true `
     -p:PublishSingleFile=false `
-    -p:Version=$Version -p:InformationalVersion=$Version `
+    -p:Version=$Version -p:FileVersion=$Version -p:InformationalVersion=$Version `
     -o $publishDir
 
 # vpk is the Velopack CLI: dotnet tool install -g vpk
@@ -48,6 +48,8 @@ if (-not (Get-Command vpk -ErrorAction SilentlyContinue)) {
 Write-Host "Packing with Velopack..." -ForegroundColor Cyan
 vpk pack `
     --packId CommandForge `
+    --packTitle CommandForge `
+    --packAuthors poli0981 `
     --packVersion $Version `
     --packDir $publishDir `
     --mainExe CommandForge.Wpf.exe

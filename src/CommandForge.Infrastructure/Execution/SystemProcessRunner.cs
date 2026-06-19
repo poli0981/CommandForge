@@ -25,6 +25,9 @@ internal sealed class SystemProcessRunner : IProcessRunner
                 Arguments = arguments,
                 RedirectStandardOutput = true,
                 RedirectStandardError = true,
+                // Redirect stdin so we can close it immediately: a process that reads input (e.g. an
+                // interactive "cmd" with no /c) gets EOF and exits instead of hanging forever.
+                RedirectStandardInput = true,
                 UseShellExecute = false,
                 CreateNoWindow = true,
                 // Pin the working directory to System32 so the CreateProcess search order can't
@@ -52,6 +55,11 @@ internal sealed class SystemProcessRunner : IProcessRunner
         try
         {
             process.Start();
+
+            // Signal EOF on the child's stdin right away — nothing here ever feeds it input, and
+            // leaving it open lets an interactive process block indefinitely.
+            process.StandardInput.Close();
+
             process.BeginOutputReadLine();
             process.BeginErrorReadLine();
 

@@ -155,10 +155,12 @@ public sealed partial class UserCommandsViewModel : ObservableObject
             Arguments = EditArguments.Trim(),
         };
 
-        // Transparency (Security.md §3): show the exact command line, and that it runs without admin.
-        var commandLine = string.IsNullOrEmpty(userCommand.Arguments)
+        // Transparency (Security.md §3): show the exact command line that will run (including the
+        // cmd /c normalization applied by ToDefinition) and that it runs without admin.
+        var effectiveArgs = UserCommandFactory.NormalizeArguments(executable, userCommand.Arguments);
+        var commandLine = string.IsNullOrEmpty(effectiveArgs)
             ? executable
-            : executable + " " + userCommand.Arguments;
+            : executable + " " + effectiveArgs;
         if (MessageBox.Show(
                 string.Format(CultureInfo.CurrentCulture, Strings.Get("UserCmd_RunConfirm"), commandLine),
                 Strings.Get("UserCmd_RunTitle"),

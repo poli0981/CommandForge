@@ -78,6 +78,7 @@ Velopack update mechanism works.
 
 | Topic | File |
 |---|---|
+| Release history | [CHANGELOG.md](CHANGELOG.md) |
 | Build, test, publish, release | [BUILD.md](BUILD.md) · [RELEASING.md](RELEASING.md) |
 | Update mechanism (Velopack) | [UPDATES.md](UPDATES.md) |
 | Contributing & contribution rules | [CONTRIBUTING.md](.github/CONTRIBUTING.md) |

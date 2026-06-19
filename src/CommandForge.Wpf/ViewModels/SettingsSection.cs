@@ -12,6 +12,9 @@ public enum SettingsSection
     /// <summary>Update preferences and manual check.</summary>
     Updates,
 
+    /// <summary>Import/export settings + favorites, and named profiles.</summary>
+    Profiles,
+
     /// <summary>Log level, size, open/export/clear.</summary>
     Logs,
 

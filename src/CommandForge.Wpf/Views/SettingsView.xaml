@@ -41,6 +41,9 @@
             <RadioButton Content="{res:Loc Settings_Updates}" GroupName="Section" Style="{StaticResource NavRadio}"
                          AutomationProperties.Name="{res:Loc Settings_Updates}"
                          IsChecked="{Binding SelectedSection, Converter={StaticResource EnumBool}, ConverterParameter=Updates}" />
+            <RadioButton Content="{res:Loc Settings_Profiles}" GroupName="Section" Style="{StaticResource NavRadio}"
+                         AutomationProperties.Name="{res:Loc Settings_Profiles}"
+                         IsChecked="{Binding SelectedSection, Converter={StaticResource EnumBool}, ConverterParameter=Profiles}" />
             <RadioButton Content="{res:Loc Settings_Logs}" GroupName="Section" Style="{StaticResource NavRadio}"
                          AutomationProperties.Name="{res:Loc Settings_Logs}"
                          IsChecked="{Binding SelectedSection, Converter={StaticResource EnumBool}, ConverterParameter=Logs}" />
@@ -179,6 +182,60 @@
                             HorizontalAlignment="Left" Margin="0,16,0,0"
                             AutomationProperties.Name="{res:Loc Settings_CheckNow}"
                             Style="{StaticResource MaterialDesignOutlinedButton}" />
+                </StackPanel>
+
+                <!-- Backup & profiles (import/export + named profiles) -->
+                <StackPanel>
+                    <StackPanel.Style>
+                        <Style TargetType="StackPanel">
+                            <Setter Property="Visibility" Value="Collapsed" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding SelectedSection}" Value="Profiles">
+                                    <Setter Property="Visibility" Value="Visible" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </StackPanel.Style>
+
+                    <TextBlock Text="{res:Loc Settings_Profiles}" Style="{StaticResource SectionHeader}" />
+
+                    <TextBlock Text="{res:Loc Settings_ExportImport}" Style="{StaticResource RowLabel}" />
+                    <TextBlock Text="{res:Loc Settings_ExportImportHint}" Opacity="0.7" TextWrapping="Wrap" Margin="0,0,0,8" />
+                    <StackPanel Orientation="Horizontal">
+                        <Button Content="{res:Loc Settings_ExportSettings}" Command="{Binding ExportSettingsCommand}"
+                                Style="{StaticResource MaterialDesignOutlinedButton}" Margin="0,0,8,0"
+                                AutomationProperties.Name="{res:Loc Settings_ExportSettings}" />
+                        <Button Content="{res:Loc Settings_ImportSettings}" Command="{Binding ImportSettingsCommand}"
+                                Style="{StaticResource MaterialDesignOutlinedButton}"
+                                AutomationProperties.Name="{res:Loc Settings_ImportSettings}" />
+                    </StackPanel>
+
+                    <Separator Margin="0,20,0,0" />
+
+                    <TextBlock Text="{res:Loc Settings_SavedProfiles}" Style="{StaticResource RowLabel}" />
+                    <TextBlock Text="{res:Loc Settings_ProfilesHint}" Opacity="0.7" TextWrapping="Wrap" Margin="0,0,0,8" />
+                    <StackPanel Orientation="Horizontal">
+                        <ComboBox Width="220" HorizontalAlignment="Left" VerticalAlignment="Center"
+                                  AutomationProperties.Name="{res:Loc Settings_SavedProfiles}"
+                                  ItemsSource="{Binding ProfileNames}" SelectedItem="{Binding SelectedProfile}" />
+                        <Button Content="{res:Loc Settings_ApplyProfile}" Command="{Binding ApplyProfileCommand}"
+                                Style="{StaticResource MaterialDesignOutlinedButton}" Margin="8,0,0,0"
+                                AutomationProperties.Name="{res:Loc Settings_ApplyProfile}" />
+                        <Button Content="{res:Loc Settings_DeleteProfile}" Command="{Binding DeleteProfileCommand}"
+                                Style="{StaticResource MaterialDesignOutlinedButton}" Margin="8,0,0,0"
+                                AutomationProperties.Name="{res:Loc Settings_DeleteProfile}" />
+                    </StackPanel>
+
+                    <TextBlock Text="{res:Loc Settings_SaveCurrentAsProfile}" Style="{StaticResource RowLabel}" />
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox Width="220" HorizontalAlignment="Left" VerticalAlignment="Center"
+                                 materialDesign:HintAssist.Hint="{res:Loc Settings_ProfileName}"
+                                 AutomationProperties.Name="{res:Loc Settings_ProfileName}"
+                                 Text="{Binding NewProfileName, UpdateSourceTrigger=PropertyChanged}" />
+                        <Button Content="{res:Loc Settings_SaveProfile}" Command="{Binding SaveProfileCommand}"
+                                Style="{StaticResource MaterialDesignOutlinedButton}" Margin="8,0,0,0"
+                                AutomationProperties.Name="{res:Loc Settings_SaveProfile}" />
+                    </StackPanel>
                 </StackPanel>
 
                 <!-- Logs -->

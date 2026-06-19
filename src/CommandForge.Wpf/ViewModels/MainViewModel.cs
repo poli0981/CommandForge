@@ -111,6 +111,9 @@ public sealed partial class MainViewModel : ObservableObject
 
         // Live language switching: re-resolve catalog display strings in place (keeps selection/scroll).
         LocalizationManager.Instance.CultureChanged += OnCultureChanged;
+
+        // Import / apply-profile can change favorites — re-sync stars and dashboards when it does.
+        Settings.PortableSettingsApplied += OnPortableSettingsApplied;
     }
 
     /// <summary>The Home dashboard view-model (shown when <see cref="CurrentSection"/> is Home).</summary>
@@ -394,6 +397,25 @@ public sealed partial class MainViewModel : ObservableObject
         UpdateDetail();
         Home.Refresh();
         History.Refresh();
+    }
+
+    private void OnPortableSettingsApplied()
+    {
+        // Favorites may have changed (import / apply-profile); re-sync the shared item view-models
+        // (drives the star icon everywhere) and the dashboards. Theme/font/language already applied
+        // live via the Settings observable-property setters.
+        var favoriteIds = new HashSet<string>(_settings.FavoriteCommandIds, StringComparer.Ordinal);
+        foreach (var item in _itemsById.Values)
+        {
+            item.IsFavorite = favoriteIds.Contains(item.Command.Id);
+        }
+
+        Home.Refresh();
+        History.Refresh();
+        if (_browseMode == BrowseMode.Favorites)
+        {
+            ApplyFilter();
+        }
     }
 
     private void ApplyFilter()

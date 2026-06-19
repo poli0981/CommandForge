@@ -856,6 +856,60 @@
   <data name="Settings_CheckNow" xml:space="preserve">
     <value>Check now</value>
   </data>
+  <data name="Settings_Profiles" xml:space="preserve">
+    <value>Backup &amp; profiles</value>
+  </data>
+  <data name="Settings_ExportImport" xml:space="preserve">
+    <value>Import / export</value>
+  </data>
+  <data name="Settings_ExportImportHint" xml:space="preserve">
+    <value>Copy your appearance, behavior and favorites to a file to move them to another machine.</value>
+  </data>
+  <data name="Settings_ExportSettings" xml:space="preserve">
+    <value>Export…</value>
+  </data>
+  <data name="Settings_ImportSettings" xml:space="preserve">
+    <value>Import…</value>
+  </data>
+  <data name="Settings_SavedProfiles" xml:space="preserve">
+    <value>Saved profiles</value>
+  </data>
+  <data name="Settings_ProfilesHint" xml:space="preserve">
+    <value>Save the current settings + favorites as a named profile, then switch between contexts (e.g. Gaming PC, Office).</value>
+  </data>
+  <data name="Settings_ApplyProfile" xml:space="preserve">
+    <value>Apply</value>
+  </data>
+  <data name="Settings_DeleteProfile" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="Settings_SaveCurrentAsProfile" xml:space="preserve">
+    <value>Save current as a new profile</value>
+  </data>
+  <data name="Settings_ProfileName" xml:space="preserve">
+    <value>Profile name</value>
+  </data>
+  <data name="Settings_SaveProfile" xml:space="preserve">
+    <value>Save profile</value>
+  </data>
+  <data name="Settings_ExportSuccess" xml:space="preserve">
+    <value>Settings exported to {0}.</value>
+  </data>
+  <data name="Settings_ImportConfirm" xml:space="preserve">
+    <value>Replace your current appearance, behavior and favorites with the imported values?</value>
+  </data>
+  <data name="Settings_ImportInvalid" xml:space="preserve">
+    <value>The selected file is not a valid CommandForge settings file.</value>
+  </data>
+  <data name="Settings_ImportSuccess" xml:space="preserve">
+    <value>Settings imported.</value>
+  </data>
+  <data name="Settings_ProfileApplied" xml:space="preserve">
+    <value>Applied profile "{0}".</value>
+  </data>
+  <data name="Settings_DeleteProfileConfirm" xml:space="preserve">
+    <value>Delete profile "{0}"?</value>
+  </data>
   <data name="Settings_NoDataCollected" xml:space="preserve">
     <value>This app does not collect any of your data.</value>
   </data>

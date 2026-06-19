@@ -99,6 +99,34 @@
                 </materialDesign:Card>
             </WrapPanel>
 
+            <!-- Maintenance suggestions (local heuristics over the read-only status) -->
+            <StackPanel Visibility="{Binding HasSuggestions, Converter={StaticResource BoolToVis}}">
+                <TextBlock Text="{res:Loc Home_Suggestions}" Style="{StaticResource SectionHeaderStyle}" />
+                <ItemsControl ItemsSource="{Binding Suggestions}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <materialDesign:Card Padding="12,8" Margin="0,0,0,6">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <materialDesign:PackIcon Grid.Column="0" Kind="LightbulbOnOutline" Width="20" Height="20"
+                                                             VerticalAlignment="Center" Margin="0,0,10,0" Opacity="0.8" />
+                                    <TextBlock Grid.Column="1" Text="{Binding Reason}" TextWrapping="Wrap" VerticalAlignment="Center" />
+                                    <Button Grid.Column="2" Content="{res:Loc Maint_Open}"
+                                            Style="{StaticResource MaterialDesignFlatButton}"
+                                            Visibility="{Binding CanOpen, Converter={StaticResource BoolToVis}}"
+                                            Command="{Binding DataContext.OpenCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                            CommandParameter="{Binding Command}" />
+                                </Grid>
+                            </materialDesign:Card>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+
             <!-- Recently-run commands -->
             <TextBlock Text="{res:Loc Home_Recent}" Style="{StaticResource SectionHeaderStyle}" />
             <materialDesign:Card Padding="6">

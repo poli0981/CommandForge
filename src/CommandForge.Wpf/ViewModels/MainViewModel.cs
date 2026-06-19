@@ -187,6 +187,10 @@ public sealed partial class MainViewModel : ObservableObject
     [ObservableProperty]
     private bool _hasResults;
 
+    /// <summary>A natural-language search keyword suggestion for the current query (null if none).</summary>
+    [ObservableProperty]
+    private string? _searchSuggestion;
+
     [RelayCommand]
     private void ToggleSidebar() => IsSidebarCollapsed = !IsSidebarCollapsed;
 
@@ -432,7 +436,22 @@ public sealed partial class MainViewModel : ObservableObject
         }
     }
 
-    partial void OnSearchTextChanged(string value) => ApplyFilter();
+    partial void OnSearchTextChanged(string value)
+    {
+        // Suggest a catalog keyword for natural-language queries (local; no LLM/network).
+        SearchSuggestion = NaturalLanguageSearch.Suggest(value);
+        ApplyFilter();
+    }
+
+    /// <summary>Applies the natural-language keyword suggestion as the search query.</summary>
+    [RelayCommand]
+    private void ApplySuggestion()
+    {
+        if (SearchSuggestion is { } suggestion)
+        {
+            SearchText = suggestion;
+        }
+    }
 
     partial void OnSelectedCategoryChanged(CategoryViewModel? value)
     {

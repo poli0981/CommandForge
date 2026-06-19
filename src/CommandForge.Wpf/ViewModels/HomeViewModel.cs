@@ -1,6 +1,7 @@
 using System.Collections.ObjectModel;
 using System.Globalization;
 using CommandForge.Application.Ports;
+using CommandForge.Application.SystemInfo;
 using CommandForge.Wpf.Resources;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -44,11 +45,17 @@ public sealed partial class HomeViewModel : ObservableObject
     /// <summary>Pinned favorite commands, in pin order.</summary>
     public ObservableCollection<CommandItemViewModel> Favorites { get; } = [];
 
+    /// <summary>Local maintenance suggestions derived from the current system status.</summary>
+    public ObservableCollection<MaintenanceSuggestionViewModel> Suggestions { get; } = [];
+
     [ObservableProperty]
     private bool _hasRecent;
 
     [ObservableProperty]
     private bool _hasFavorites;
+
+    [ObservableProperty]
+    private bool _hasSuggestions;
 
     [ObservableProperty]
     private string _osValue = string.Empty;
@@ -105,6 +112,15 @@ public sealed partial class HomeViewModel : ObservableObject
             FormatGigabytes((ulong)Math.Max(0L, status.SystemDriveTotalBytes)));
         DiskValue = string.Format(culture, Strings.Get("Home_DiskFormat"), status.SystemDriveName, diskStorage);
         UptimeValue = FormatUptime(status.Uptime);
+
+        Suggestions.Clear();
+        foreach (var suggestion in MaintenanceSuggestions.For(status))
+        {
+            var command = suggestion.CommandId is { } id ? _itemsById.GetValueOrDefault(id) : null;
+            Suggestions.Add(new MaintenanceSuggestionViewModel(Strings.Get(suggestion.ReasonKey), command));
+        }
+
+        HasSuggestions = Suggestions.Count > 0;
     }
 
     [RelayCommand]

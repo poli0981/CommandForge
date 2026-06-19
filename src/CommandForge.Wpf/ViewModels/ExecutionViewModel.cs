@@ -1,7 +1,9 @@
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Runtime.InteropServices;
 using System.Threading.Channels;
 using System.Windows;
+using CommandForge.Application.Recipes;
 using CommandForge.Application.UseCases;
 using CommandForge.Domain;
 using CommandForge.Wpf.Resources;
@@ -107,6 +109,73 @@ public sealed partial class ExecutionViewModel : ObservableObject
             _cancellation.Dispose();
             _cancellation = null;
         }
+    }
+
+    /// <summary>
+    /// Runs a recipe's <paramref name="steps"/> sequentially through the same broker session (one
+    /// UAC prompt for an all-admin chain), streaming output with a header per step. Stops on the
+    /// first failure, cancellation, or reboot-required step (see <see cref="RecipeFlow.ShouldStop"/>).
+    /// Returns the (commandId, result) of each executed step, for history recording.
+    /// </summary>
+    public async Task<IReadOnlyList<(string CommandId, ExecutionResult Result)>> RunRecipeAsync(
+        IReadOnlyList<CommandDefinition> steps)
+    {
+        ArgumentNullException.ThrowIfNull(steps);
+
+        var executed = new List<(string CommandId, ExecutionResult Result)>();
+        if (IsRunning || steps.Count == 0)
+        {
+            return executed;
+        }
+
+        OutputLines.Clear();
+        HasResult = false;
+        IsRunning = true;
+        _cancellation = new CancellationTokenSource();
+        var token = _cancellation.Token;
+        ExecutionResult? last = null;
+
+        try
+        {
+            for (var i = 0; i < steps.Count; i++)
+            {
+                var step = steps[i];
+                OutputLines.Add(new OutputLine(
+                    string.Format(
+                        CultureInfo.CurrentCulture,
+                        Strings.Get("Recipe_StepHeader"),
+                        i + 1,
+                        steps.Count,
+                        Strings.Get(step.TitleKey)),
+                    IsError: false));
+
+                var result = await RunOneAsync(step, token);
+                last = result;
+                executed.Add((step.Id, result));
+
+                if (RecipeFlow.ShouldStop(result))
+                {
+                    var key = result.Cancelled ? "Recipe_Cancelled"
+                        : result.RequiresRestart ? "Recipe_StoppedRestart"
+                        : "Recipe_StoppedOnError";
+                    OutputLines.Add(new OutputLine(Strings.Get(key), IsError: !result.Success && !result.Cancelled));
+                    break;
+                }
+            }
+
+            if (last is not null)
+            {
+                ApplyResult(last);
+            }
+        }
+        finally
+        {
+            IsRunning = false;
+            _cancellation.Dispose();
+            _cancellation = null;
+        }
+
+        return executed;
     }
 
     private async Task<ExecutionResult> RunOneAsync(CommandDefinition command, CancellationToken token)

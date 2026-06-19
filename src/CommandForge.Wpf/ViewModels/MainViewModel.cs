@@ -40,6 +40,7 @@ public sealed partial class MainViewModel : ObservableObject
         ISettingsService settings,
         IExecutionHistoryService history,
         IClock clock,
+        IRecipeStore recipeStore,
         ISystemInfoService systemInfo,
         SettingsViewModel settingsViewModel,
         LogViewerViewModel logViewer,
@@ -53,6 +54,7 @@ public sealed partial class MainViewModel : ObservableObject
         ArgumentNullException.ThrowIfNull(settings);
         ArgumentNullException.ThrowIfNull(history);
         ArgumentNullException.ThrowIfNull(clock);
+        ArgumentNullException.ThrowIfNull(recipeStore);
         ArgumentNullException.ThrowIfNull(systemInfo);
         ArgumentNullException.ThrowIfNull(settingsViewModel);
         ArgumentNullException.ThrowIfNull(logViewer);
@@ -94,6 +96,7 @@ public sealed partial class MainViewModel : ObservableObject
 
         Home = new HomeViewModel(_itemsById, settings, systemInfo, item => SelectCommandById(item.Command.Id));
         History = new HistoryViewModel(_itemsById, history, SelectCommandById, RunCommandByIdAsync);
+        Recipes = new RecipesViewModel(_itemsById, execution, recipeStore, history, clock);
 
         Categories.Add(new CategoryViewModel(null, "Sidebar_AllCommands", "ViewGridOutline", vms.Items.Count));
         foreach (var category in catalog.GetCategories())
@@ -121,6 +124,9 @@ public sealed partial class MainViewModel : ObservableObject
 
     /// <summary>The execution-history view-model (shown when <see cref="CurrentSection"/> is History).</summary>
     public HistoryViewModel History { get; }
+
+    /// <summary>The recipes view-model (shown when <see cref="CurrentSection"/> is Recipes).</summary>
+    public RecipesViewModel Recipes { get; }
 
     /// <summary>The Settings screen view-model (shown when <see cref="CurrentSection"/> is Settings).</summary>
     public SettingsViewModel Settings { get; }
@@ -184,6 +190,13 @@ public sealed partial class MainViewModel : ObservableObject
     {
         History.Refresh();
         CurrentSection = ShellSection.History;
+    }
+
+    [RelayCommand]
+    private void ShowRecipes()
+    {
+        Recipes.Refresh();
+        CurrentSection = ShellSection.Recipes;
     }
 
     [RelayCommand]

@@ -29,6 +29,9 @@
         <DataTemplate x:Key="HistoryTemplate">
             <views:HistoryView DataContext="{Binding History}" />
         </DataTemplate>
+        <DataTemplate x:Key="RecipesTemplate">
+            <views:RecipesView DataContext="{Binding Recipes}" />
+        </DataTemplate>
         <DataTemplate x:Key="SettingsTemplate">
             <views:SettingsView DataContext="{Binding Settings}" />
         </DataTemplate>
@@ -69,6 +72,7 @@
                 <MenuItem Header="{res:Loc SidebarHome}" Command="{Binding ShowHomeCommand}" InputGestureText="Ctrl+H" />
                 <MenuItem Header="{res:Loc SidebarFavorites}" Command="{Binding ShowFavoritesCommand}" />
                 <MenuItem Header="{res:Loc SidebarHistory}" Command="{Binding ShowHistoryCommand}" />
+                <MenuItem Header="{res:Loc SidebarRecipes}" Command="{Binding ShowRecipesCommand}" />
                 <Separator />
                 <MenuItem Header="{res:Loc Settings_Theme}">
                     <MenuItem Header="{res:Loc Settings_ThemeSystem}" Command="{Binding Settings.SetThemeCommand}"
@@ -189,6 +193,16 @@
                         </StackPanel>
                     </Button>
 
+                    <Button DockPanel.Dock="Top" Style="{StaticResource SidebarButtonStyle}"
+                            Command="{Binding ShowRecipesCommand}"
+                            AutomationProperties.Name="{res:Loc SidebarRecipes}"
+                            ToolTip="{res:Loc SidebarRecipes}">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="PlaylistPlay" Width="22" Height="22" />
+                            <TextBlock Text="{res:Loc SidebarRecipes}" Style="{StaticResource SidebarLabelStyle}" />
+                        </StackPanel>
+                    </Button>
+
                     <Button DockPanel.Dock="Bottom" Style="{StaticResource SidebarButtonStyle}"
                             Margin="0,0,0,10"
                             Command="{Binding ShowSettingsCommand}"
@@ -243,6 +257,9 @@
                             </DataTrigger>
                             <DataTrigger Binding="{Binding CurrentSection}" Value="History">
                                 <Setter Property="ContentTemplate" Value="{StaticResource HistoryTemplate}" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding CurrentSection}" Value="Recipes">
+                                <Setter Property="ContentTemplate" Value="{StaticResource RecipesTemplate}" />
                             </DataTrigger>
                             <DataTrigger Binding="{Binding CurrentSection}" Value="Settings">
                                 <Setter Property="ContentTemplate" Value="{StaticResource SettingsTemplate}" />

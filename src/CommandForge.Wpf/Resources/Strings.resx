@@ -118,6 +118,9 @@
   <data name="SidebarFavorites" xml:space="preserve">
     <value>Favorites</value>
   </data>
+  <data name="SidebarHistory" xml:space="preserve">
+    <value>History</value>
+  </data>
   <data name="SidebarSettings" xml:space="preserve">
     <value>Settings</value>
   </data>
@@ -1068,6 +1071,18 @@
   </data>
   <data name="Home_NoFavorites" xml:space="preserve">
     <value>No favorites yet. Pin a command with the star icon.</value>
+  </data>
+  <data name="History_Title" xml:space="preserve">
+    <value>Execution history</value>
+  </data>
+  <data name="History_Empty" xml:space="preserve">
+    <value>No commands have been run yet.</value>
+  </data>
+  <data name="History_RunAgain" xml:space="preserve">
+    <value>Run again</value>
+  </data>
+  <data name="History_Clear" xml:space="preserve">
+    <value>Clear history</value>
   </data>
   <data name="Favorite_Toggle" xml:space="preserve">
     <value>Toggle favorite</value>

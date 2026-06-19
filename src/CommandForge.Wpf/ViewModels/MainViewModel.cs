@@ -24,6 +24,8 @@ public sealed partial class MainViewModel : ObservableObject
     private readonly IUpdateDialogService _updateDialog;
     private readonly IReportBugDialogService _reportBug;
     private readonly ISettingsService _settings;
+    private readonly IExecutionHistoryService _history;
+    private readonly IClock _clock;
     private readonly Dictionary<string, CommandItemViewModel> _itemsById;
     private readonly CommandDefinition? _restorePointCommand;
     private IReadOnlyList<SearchableCommand> _searchable;
@@ -36,6 +38,8 @@ public sealed partial class MainViewModel : ObservableObject
         IUpdateDialogService updateDialog,
         IReportBugDialogService reportBug,
         ISettingsService settings,
+        IExecutionHistoryService history,
+        IClock clock,
         ISystemInfoService systemInfo,
         SettingsViewModel settingsViewModel,
         LogViewerViewModel logViewer,
@@ -47,6 +51,8 @@ public sealed partial class MainViewModel : ObservableObject
         ArgumentNullException.ThrowIfNull(updateDialog);
         ArgumentNullException.ThrowIfNull(reportBug);
         ArgumentNullException.ThrowIfNull(settings);
+        ArgumentNullException.ThrowIfNull(history);
+        ArgumentNullException.ThrowIfNull(clock);
         ArgumentNullException.ThrowIfNull(systemInfo);
         ArgumentNullException.ThrowIfNull(settingsViewModel);
         ArgumentNullException.ThrowIfNull(logViewer);
@@ -57,6 +63,8 @@ public sealed partial class MainViewModel : ObservableObject
         _updateDialog = updateDialog;
         _reportBug = reportBug;
         _settings = settings;
+        _history = history;
+        _clock = clock;
         Settings = settingsViewModel;
         LogViewer = logViewer;
         Debug = debug;
@@ -85,6 +93,7 @@ public sealed partial class MainViewModel : ObservableObject
         }
 
         Home = new HomeViewModel(_itemsById, settings, systemInfo, item => SelectCommandById(item.Command.Id));
+        History = new HistoryViewModel(_itemsById, history, SelectCommandById, RunCommandByIdAsync);
 
         Categories.Add(new CategoryViewModel(null, "Sidebar_AllCommands", "ViewGridOutline", vms.Items.Count));
         foreach (var category in catalog.GetCategories())
@@ -106,6 +115,9 @@ public sealed partial class MainViewModel : ObservableObject
 
     /// <summary>The Home dashboard view-model (shown when <see cref="CurrentSection"/> is Home).</summary>
     public HomeViewModel Home { get; }
+
+    /// <summary>The execution-history view-model (shown when <see cref="CurrentSection"/> is History).</summary>
+    public HistoryViewModel History { get; }
 
     /// <summary>The Settings screen view-model (shown when <see cref="CurrentSection"/> is Settings).</summary>
     public SettingsViewModel Settings { get; }
@@ -162,6 +174,13 @@ public sealed partial class MainViewModel : ObservableObject
     {
         Home.Refresh();
         CurrentSection = ShellSection.Home;
+    }
+
+    [RelayCommand]
+    private void ShowHistory()
+    {
+        History.Refresh();
+        CurrentSection = ShellSection.History;
     }
 
     [RelayCommand]
@@ -286,12 +305,38 @@ public sealed partial class MainViewModel : ObservableObject
 
         await Execution.RunAsync(command, restorePoint);
 
-        // Record the run for the Home "recent commands" list (skip user-cancelled runs).
+        // Record the run for the Home "recent commands" list and the execution history
+        // (skip user-cancelled runs, matching the recent-commands behaviour).
         if (!Execution.Cancelled)
         {
             _settings.RecentCommandIds = RecentCommands.Add(_settings.RecentCommandIds, command.Id);
             _settings.Save();
+
+            if (Execution.LastResult is { } result)
+            {
+                _history.Record(new ExecutionRecord
+                {
+                    CommandId = command.Id,
+                    Timestamp = _clock.Now,
+                    ExitCode = result.ExitCode,
+                    Success = result.Success,
+                    DurationMs = (long)result.Duration.TotalMilliseconds,
+                    RequiresRestart = result.RequiresRestart,
+                });
+            }
         }
+    }
+
+    /// <summary>Re-runs a command by id (used by the History view's "Run again"); ignores unknown ids.</summary>
+    public Task RunCommandByIdAsync(string commandId)
+    {
+        if (!_itemsById.TryGetValue(commandId, out var item))
+        {
+            return Task.CompletedTask;
+        }
+
+        SelectCommandById(commandId);
+        return ConfirmAndRunAsync(item.Command);
     }
 
     /// <summary>Selects a command by id (used by the palette and Home), clearing filters so it is visible.</summary>
@@ -348,6 +393,7 @@ public sealed partial class MainViewModel : ObservableObject
 
         UpdateDetail();
         Home.Refresh();
+        History.Refresh();
     }
 
     private void ApplyFilter()

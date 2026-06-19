@@ -9,6 +9,9 @@ public enum ShellSection
     /// <summary>The command catalog (browse/search/run).</summary>
     Catalog,
 
+    /// <summary>The execution-history screen (past runs, re-run).</summary>
+    History,
+
     /// <summary>The Settings screen.</summary>
     Settings,
 

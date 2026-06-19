@@ -26,6 +26,9 @@
         <DataTemplate x:Key="CatalogTemplate">
             <views:CatalogView />
         </DataTemplate>
+        <DataTemplate x:Key="HistoryTemplate">
+            <views:HistoryView DataContext="{Binding History}" />
+        </DataTemplate>
         <DataTemplate x:Key="SettingsTemplate">
             <views:SettingsView DataContext="{Binding Settings}" />
         </DataTemplate>
@@ -65,6 +68,7 @@
             <MenuItem Header="{res:Loc MenuView}">
                 <MenuItem Header="{res:Loc SidebarHome}" Command="{Binding ShowHomeCommand}" InputGestureText="Ctrl+H" />
                 <MenuItem Header="{res:Loc SidebarFavorites}" Command="{Binding ShowFavoritesCommand}" />
+                <MenuItem Header="{res:Loc SidebarHistory}" Command="{Binding ShowHistoryCommand}" />
                 <Separator />
                 <MenuItem Header="{res:Loc Settings_Theme}">
                     <MenuItem Header="{res:Loc Settings_ThemeSystem}" Command="{Binding Settings.SetThemeCommand}"
@@ -175,6 +179,16 @@
                         </StackPanel>
                     </Button>
 
+                    <Button DockPanel.Dock="Top" Style="{StaticResource SidebarButtonStyle}"
+                            Command="{Binding ShowHistoryCommand}"
+                            AutomationProperties.Name="{res:Loc SidebarHistory}"
+                            ToolTip="{res:Loc SidebarHistory}">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="History" Width="22" Height="22" />
+                            <TextBlock Text="{res:Loc SidebarHistory}" Style="{StaticResource SidebarLabelStyle}" />
+                        </StackPanel>
+                    </Button>
+
                     <Button DockPanel.Dock="Bottom" Style="{StaticResource SidebarButtonStyle}"
                             Margin="0,0,0,10"
                             Command="{Binding ShowSettingsCommand}"
@@ -226,6 +240,9 @@
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding CurrentSection}" Value="Home">
                                 <Setter Property="ContentTemplate" Value="{StaticResource HomeTemplate}" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding CurrentSection}" Value="History">
+                                <Setter Property="ContentTemplate" Value="{StaticResource HistoryTemplate}" />
                             </DataTrigger>
                             <DataTrigger Binding="{Binding CurrentSection}" Value="Settings">
                                 <Setter Property="ContentTemplate" Value="{StaticResource SettingsTemplate}" />

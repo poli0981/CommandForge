@@ -135,9 +135,10 @@ public sealed partial class RecipesViewModel : ObservableObject
     [RelayCommand]
     private void AddStep()
     {
-        if (CommandToAdd is not null)
+        // Avoid duplicate steps — a recipe runs each command once (don't run one command N times).
+        if (CommandToAdd is { } command && !Steps.Contains(command))
         {
-            Steps.Add(CommandToAdd);
+            Steps.Add(command);
         }
     }
 

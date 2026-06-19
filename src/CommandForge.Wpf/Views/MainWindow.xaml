@@ -231,7 +231,8 @@
                     <ListBox ItemsSource="{Binding Categories}" SelectedItem="{Binding SelectedCategory}"
                              Background="Transparent" BorderThickness="0" Padding="4,4"
                              HorizontalContentAlignment="Stretch"
-                             ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                             ScrollViewer.VerticalScrollBarVisibility="Hidden">
                         <ListBox.ItemContainerStyle>
                             <Style TargetType="ListBoxItem" BasedOn="{StaticResource {x:Type ListBoxItem}}">
                                 <Setter Property="Padding" Value="12,8" />

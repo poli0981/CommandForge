@@ -32,6 +32,9 @@
         <DataTemplate x:Key="RecipesTemplate">
             <views:RecipesView DataContext="{Binding Recipes}" />
         </DataTemplate>
+        <DataTemplate x:Key="UserCommandsTemplate">
+            <views:UserCommandsView DataContext="{Binding UserCommands}" />
+        </DataTemplate>
         <DataTemplate x:Key="SettingsTemplate">
             <views:SettingsView DataContext="{Binding Settings}" />
         </DataTemplate>
@@ -73,6 +76,7 @@
                 <MenuItem Header="{res:Loc SidebarFavorites}" Command="{Binding ShowFavoritesCommand}" />
                 <MenuItem Header="{res:Loc SidebarHistory}" Command="{Binding ShowHistoryCommand}" />
                 <MenuItem Header="{res:Loc SidebarRecipes}" Command="{Binding ShowRecipesCommand}" />
+                <MenuItem Header="{res:Loc SidebarUserCommands}" Command="{Binding ShowUserCommandsCommand}" />
                 <Separator />
                 <MenuItem Header="{res:Loc Settings_Theme}">
                     <MenuItem Header="{res:Loc Settings_ThemeSystem}" Command="{Binding Settings.SetThemeCommand}"
@@ -203,6 +207,16 @@
                         </StackPanel>
                     </Button>
 
+                    <Button DockPanel.Dock="Top" Style="{StaticResource SidebarButtonStyle}"
+                            Command="{Binding ShowUserCommandsCommand}"
+                            AutomationProperties.Name="{res:Loc SidebarUserCommands}"
+                            ToolTip="{res:Loc SidebarUserCommands}">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="ScriptTextOutline" Width="22" Height="22" />
+                            <TextBlock Text="{res:Loc SidebarUserCommands}" Style="{StaticResource SidebarLabelStyle}" />
+                        </StackPanel>
+                    </Button>
+
                     <Button DockPanel.Dock="Bottom" Style="{StaticResource SidebarButtonStyle}"
                             Margin="0,0,0,10"
                             Command="{Binding ShowSettingsCommand}"
@@ -260,6 +274,9 @@
                             </DataTrigger>
                             <DataTrigger Binding="{Binding CurrentSection}" Value="Recipes">
                                 <Setter Property="ContentTemplate" Value="{StaticResource RecipesTemplate}" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding CurrentSection}" Value="UserCommands">
+                                <Setter Property="ContentTemplate" Value="{StaticResource UserCommandsTemplate}" />
                             </DataTrigger>
                             <DataTrigger Binding="{Binding CurrentSection}" Value="Settings">
                                 <Setter Property="ContentTemplate" Value="{StaticResource SettingsTemplate}" />

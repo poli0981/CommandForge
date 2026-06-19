@@ -233,4 +233,28 @@ public sealed class ResxKeyTests
             Assert.True(vietnamese!.GetString(key) is not null, $"Missing VI resource for key '{key}'.");
         }
     }
+
+    [Fact]
+    public void UserCommandsUiKeys_ExistInResx_EN_and_VI()
+    {
+        var manager = new ResourceManager("CommandForge.Wpf.Resources.Strings", typeof(Strings).Assembly);
+        var english = manager.GetResourceSet(CultureInfo.InvariantCulture, createIfNotExists: true, tryParents: true);
+        var vietnamese = manager.GetResourceSet(new CultureInfo("vi"), createIfNotExists: true, tryParents: false);
+
+        Assert.NotNull(english);
+        Assert.NotNull(vietnamese);
+
+        string[] keys =
+        [
+            "SidebarUserCommands", "UserCmd_Warning", "UserCmd_Saved", "UserCmd_New", "UserCmd_Delete",
+            "UserCmd_NameHint", "UserCmd_ExecutableHint", "UserCmd_ArgumentsHint", "UserCmd_Save", "UserCmd_Run",
+            "UserCmd_NoCommands", "UserCmd_RunTitle", "UserCmd_RunConfirm", "UserCmd_DeleteConfirm",
+        ];
+
+        foreach (var key in keys)
+        {
+            Assert.True(english!.GetString(key) is not null, $"Missing EN resource for key '{key}'.");
+            Assert.True(vietnamese!.GetString(key) is not null, $"Missing VI resource for key '{key}'.");
+        }
+    }
 }

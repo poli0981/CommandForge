@@ -29,6 +29,9 @@ public static class AppPaths
     /// <summary><c>%AppData%\CommandForge\recipes.json</c> — user-defined recipes (command chains).</summary>
     public static string RecipesFilePath { get; } = Path.Combine(DataDirectory, "recipes.json");
 
+    /// <summary><c>%AppData%\CommandForge\user-commands.json</c> — user-defined (non-elevated) commands.</summary>
+    public static string UserCommandsFilePath { get; } = Path.Combine(DataDirectory, "user-commands.json");
+
     /// <summary>Ensures the data and logs directories exist.</summary>
     public static void EnsureCreated()
     {

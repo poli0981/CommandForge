@@ -1,0 +1,157 @@
+<UserControl x:Class="CommandForge.Wpf.Views.UserCommandsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:res="clr-namespace:CommandForge.Wpf.Resources"
+             xmlns:conv="clr-namespace:CommandForge.Wpf.Converters"
+             xmlns:beh="clr-namespace:CommandForge.Wpf.Behaviors">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis" />
+        <Style x:Key="RowLabel" TargetType="TextBlock">
+            <Setter Property="FontWeight" Value="Medium" />
+            <Setter Property="Margin" Value="0,12,0,4" />
+        </Style>
+    </UserControl.Resources>
+
+    <Grid Margin="16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Text="{res:Loc SidebarUserCommands}" FontSize="20" FontWeight="Bold"
+                   AutomationProperties.HeadingLevel="Level1" />
+
+        <!-- Prominent, always-visible warning: these are untrusted and never elevated. -->
+        <Border Grid.Row="1" Margin="0,8,0,4" CornerRadius="4" Padding="12,8"
+                Background="#33E0884D" BorderBrush="#E0884D" BorderThickness="1">
+            <StackPanel Orientation="Horizontal">
+                <materialDesign:PackIcon Kind="AlertOutline" Width="20" Height="20" VerticalAlignment="Center"
+                                         Margin="0,0,10,0" Foreground="#E0884D" />
+                <TextBlock Text="{res:Loc UserCmd_Warning}" TextWrapping="Wrap" VerticalAlignment="Center"
+                           MaxWidth="820" />
+            </StackPanel>
+        </Border>
+
+        <Grid Grid.Row="2" Margin="0,8,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="220" />
+                <ColumnDefinition Width="*" MinWidth="340" />
+            </Grid.ColumnDefinitions>
+
+            <!-- Left: saved commands -->
+            <DockPanel Grid.Column="0" Margin="0,0,12,0">
+                <TextBlock DockPanel.Dock="Top" Text="{res:Loc UserCmd_Saved}" FontWeight="Bold" Margin="0,0,0,8"
+                           AutomationProperties.HeadingLevel="Level2" />
+                <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" Margin="0,8,0,0">
+                    <Button Content="{res:Loc UserCmd_New}" Command="{Binding NewCommand}"
+                            Style="{StaticResource MaterialDesignOutlinedButton}" Margin="0,0,8,0"
+                            AutomationProperties.Name="{res:Loc UserCmd_New}" />
+                    <Button Content="{res:Loc UserCmd_Delete}" Command="{Binding DeleteCommand}"
+                            Style="{StaticResource MaterialDesignOutlinedButton}"
+                            AutomationProperties.Name="{res:Loc UserCmd_Delete}" />
+                </StackPanel>
+                <Grid>
+                    <ListBox ItemsSource="{Binding Commands}" SelectedItem="{Binding SelectedCommand}"
+                             DisplayMemberPath="Name" BorderThickness="0" Background="Transparent"
+                             AutomationProperties.Name="{res:Loc UserCmd_Saved}" />
+                    <TextBlock Text="{res:Loc UserCmd_NoCommands}" Opacity="0.6" Margin="6,8" TextWrapping="Wrap"
+                               VerticalAlignment="Top">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Visibility" Value="Collapsed" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Commands.Count}" Value="0">
+                                        <Setter Property="Visibility" Value="Visible" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                </Grid>
+            </DockPanel>
+
+            <!-- Right: editor + console -->
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <StackPanel Grid.Row="0">
+                    <TextBlock Text="{res:Loc UserCmd_NameHint}" Style="{StaticResource RowLabel}" />
+                    <TextBox Text="{Binding EditName, UpdateSourceTrigger=PropertyChanged}"
+                             AutomationProperties.Name="{res:Loc UserCmd_NameHint}" />
+                    <TextBlock Text="{res:Loc UserCmd_ExecutableHint}" Style="{StaticResource RowLabel}" />
+                    <TextBox Text="{Binding EditExecutable, UpdateSourceTrigger=PropertyChanged}"
+                             FontFamily="Cascadia Mono, Consolas, Courier New"
+                             AutomationProperties.Name="{res:Loc UserCmd_ExecutableHint}" />
+                    <TextBlock Text="{res:Loc UserCmd_ArgumentsHint}" Style="{StaticResource RowLabel}" />
+                    <TextBox Text="{Binding EditArguments, UpdateSourceTrigger=PropertyChanged}"
+                             FontFamily="Cascadia Mono, Consolas, Courier New" TextWrapping="Wrap"
+                             AcceptsReturn="False"
+                             AutomationProperties.Name="{res:Loc UserCmd_ArgumentsHint}" />
+                </StackPanel>
+
+                <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,16,0,0">
+                    <Button Content="{res:Loc UserCmd_Save}" Command="{Binding SaveCommand}"
+                            Style="{StaticResource MaterialDesignOutlinedButton}" Margin="0,0,8,0"
+                            AutomationProperties.Name="{res:Loc UserCmd_Save}" />
+                    <Button Content="{res:Loc UserCmd_Run}" Command="{Binding RunCommand}"
+                            Style="{StaticResource MaterialDesignRaisedButton}"
+                            AutomationProperties.Name="{res:Loc UserCmd_Run}" />
+                </StackPanel>
+
+                <!-- Console + result (shared execution VM) -->
+                <materialDesign:Card Grid.Row="2" Margin="0,12,0,0" Padding="12" MaxHeight="280"
+                                     VerticalAlignment="Top"
+                                     Visibility="{Binding Execution.ShowConsole, Converter={StaticResource BoolToVis}}">
+                    <DockPanel>
+                        <Grid DockPanel.Dock="Top">
+                            <TextBlock Text="{res:Loc PaneConsole}" FontWeight="Bold" VerticalAlignment="Center" />
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right"
+                                        Visibility="{Binding Execution.IsRunning, Converter={StaticResource BoolToVis}}">
+                                <ProgressBar IsIndeterminate="True" Width="90" Height="4" VerticalAlignment="Center" Margin="0,0,8,0" />
+                                <Button Content="{res:Loc Console_Cancel}" Command="{Binding Execution.CancelCommand}"
+                                        Style="{StaticResource MaterialDesignOutlinedButton}" Padding="8,2" Height="28" MinWidth="0" />
+                            </StackPanel>
+                        </Grid>
+
+                        <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" Margin="0,8,0,0"
+                                    Visibility="{Binding Execution.HasResult, Converter={StaticResource BoolToVis}}">
+                            <TextBlock Text="{Binding Execution.StatusText}" FontWeight="Medium" />
+                            <TextBlock Text="{res:Loc Result_ExitCode}" Opacity="0.7" Margin="14,0,4,0" />
+                            <TextBlock Text="{Binding Execution.ExitCode}" Opacity="0.7" />
+                            <TextBlock Text="{Binding Execution.DurationText}" Opacity="0.7" Margin="14,0,0,0" />
+                        </StackPanel>
+
+                        <Border Background="{DynamicResource MaterialDesignToolBarBackground}" CornerRadius="4" Margin="0,8,0,0">
+                            <ScrollViewer beh:AutoScroll.Enabled="True" VerticalScrollBarVisibility="Auto" MaxHeight="180" Padding="8">
+                                <ItemsControl ItemsSource="{Binding Execution.OutputLines}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Text}" TextWrapping="Wrap"
+                                                       FontFamily="Cascadia Mono, Consolas, Courier New" FontSize="12">
+                                                <TextBlock.Style>
+                                                    <Style TargetType="TextBlock">
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding IsError}" Value="True">
+                                                                <Setter Property="Foreground" Value="#E0884D" />
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </TextBlock.Style>
+                                            </TextBlock>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </ScrollViewer>
+                        </Border>
+                    </DockPanel>
+                </materialDesign:Card>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>

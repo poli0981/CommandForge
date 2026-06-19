@@ -40,6 +40,7 @@ public static class ServiceCollectionExtensions
         services.AddSingleton<ISettingsFile, Portability.JsonSettingsFile>();
         services.AddSingleton<IProfileService, Portability.JsonProfileService>();
         services.AddSingleton<IRecipeStore, Recipes.JsonRecipeStore>();
+        services.AddSingleton<IUserCommandStore, UserCommands.JsonUserCommandStore>();
         services.AddSingleton<ISystemInfoService, WindowsSystemInfoService>();
         services.AddSingleton<ICatalogProvider, JsonCatalogProvider>();
         services.AddSingleton<IProcessRunner, SystemProcessRunner>();

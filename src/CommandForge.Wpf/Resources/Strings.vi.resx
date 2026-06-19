@@ -124,6 +124,9 @@
   <data name="SidebarRecipes" xml:space="preserve">
     <value>Chuỗi lệnh</value>
   </data>
+  <data name="SidebarUserCommands" xml:space="preserve">
+    <value>Lệnh của tôi</value>
+  </data>
   <data name="SidebarSettings" xml:space="preserve">
     <value>Cài đặt</value>
   </data>
@@ -1197,6 +1200,49 @@
   </data>
   <data name="Recipe_DeleteConfirm" xml:space="preserve">
     <value>Xóa chuỗi "{0}"?</value>
+  </data>
+  <data name="UserCmd_Warning" xml:space="preserve">
+    <value>Các lệnh này không thuộc catalog đã kiểm duyệt và luôn chạy KHÔNG có quyền quản trị. Bạn hoàn toàn chịu trách nhiệm về những gì chúng thực hiện.</value>
+  </data>
+  <data name="UserCmd_Saved" xml:space="preserve">
+    <value>Lệnh đã lưu</value>
+  </data>
+  <data name="UserCmd_New" xml:space="preserve">
+    <value>Tạo mới</value>
+  </data>
+  <data name="UserCmd_Delete" xml:space="preserve">
+    <value>Xóa</value>
+  </data>
+  <data name="UserCmd_NameHint" xml:space="preserve">
+    <value>Tên</value>
+  </data>
+  <data name="UserCmd_ExecutableHint" xml:space="preserve">
+    <value>Tệp thực thi (vd cmd, powershell)</value>
+  </data>
+  <data name="UserCmd_ArgumentsHint" xml:space="preserve">
+    <value>Đối số</value>
+  </data>
+  <data name="UserCmd_Save" xml:space="preserve">
+    <value>Lưu</value>
+  </data>
+  <data name="UserCmd_Run" xml:space="preserve">
+    <value>Chạy</value>
+  </data>
+  <data name="UserCmd_NoCommands" xml:space="preserve">
+    <value>Chưa có lệnh nào.</value>
+  </data>
+  <data name="UserCmd_RunTitle" xml:space="preserve">
+    <value>Chạy lệnh này?</value>
+  </data>
+  <data name="UserCmd_RunConfirm" xml:space="preserve">
+    <value>Lệnh này chạy KHÔNG có quyền quản trị:
+
+{0}
+
+Tiếp tục?</value>
+  </data>
+  <data name="UserCmd_DeleteConfirm" xml:space="preserve">
+    <value>Xóa "{0}"?</value>
   </data>
   <data name="Favorite_Toggle" xml:space="preserve">
     <value>Bật/tắt yêu thích</value>

@@ -41,6 +41,7 @@ public sealed partial class MainViewModel : ObservableObject
         IExecutionHistoryService history,
         IClock clock,
         IRecipeStore recipeStore,
+        IUserCommandStore userCommandStore,
         ISystemInfoService systemInfo,
         SettingsViewModel settingsViewModel,
         LogViewerViewModel logViewer,
@@ -55,6 +56,7 @@ public sealed partial class MainViewModel : ObservableObject
         ArgumentNullException.ThrowIfNull(history);
         ArgumentNullException.ThrowIfNull(clock);
         ArgumentNullException.ThrowIfNull(recipeStore);
+        ArgumentNullException.ThrowIfNull(userCommandStore);
         ArgumentNullException.ThrowIfNull(systemInfo);
         ArgumentNullException.ThrowIfNull(settingsViewModel);
         ArgumentNullException.ThrowIfNull(logViewer);
@@ -97,6 +99,7 @@ public sealed partial class MainViewModel : ObservableObject
         Home = new HomeViewModel(_itemsById, settings, systemInfo, item => SelectCommandById(item.Command.Id));
         History = new HistoryViewModel(_itemsById, history, SelectCommandById, RunCommandByIdAsync);
         Recipes = new RecipesViewModel(_itemsById, execution, recipeStore, history, clock);
+        UserCommands = new UserCommandsViewModel(userCommandStore, execution);
 
         Categories.Add(new CategoryViewModel(null, "Sidebar_AllCommands", "ViewGridOutline", vms.Items.Count));
         foreach (var category in catalog.GetCategories())
@@ -127,6 +130,9 @@ public sealed partial class MainViewModel : ObservableObject
 
     /// <summary>The recipes view-model (shown when <see cref="CurrentSection"/> is Recipes).</summary>
     public RecipesViewModel Recipes { get; }
+
+    /// <summary>The user-defined commands view-model (shown when <see cref="CurrentSection"/> is UserCommands).</summary>
+    public UserCommandsViewModel UserCommands { get; }
 
     /// <summary>The Settings screen view-model (shown when <see cref="CurrentSection"/> is Settings).</summary>
     public SettingsViewModel Settings { get; }
@@ -197,6 +203,13 @@ public sealed partial class MainViewModel : ObservableObject
     {
         Recipes.Refresh();
         CurrentSection = ShellSection.Recipes;
+    }
+
+    [RelayCommand]
+    private void ShowUserCommands()
+    {
+        UserCommands.Refresh();
+        CurrentSection = ShellSection.UserCommands;
     }
 
     [RelayCommand]

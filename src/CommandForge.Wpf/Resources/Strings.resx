@@ -124,6 +124,9 @@
   <data name="SidebarRecipes" xml:space="preserve">
     <value>Recipes</value>
   </data>
+  <data name="SidebarUserCommands" xml:space="preserve">
+    <value>My commands</value>
+  </data>
   <data name="SidebarSettings" xml:space="preserve">
     <value>Settings</value>
   </data>
@@ -1197,6 +1200,49 @@
   </data>
   <data name="Recipe_DeleteConfirm" xml:space="preserve">
     <value>Delete recipe "{0}"?</value>
+  </data>
+  <data name="UserCmd_Warning" xml:space="preserve">
+    <value>These commands are not part of the vetted catalog and always run without administrator rights. You alone are responsible for what they do.</value>
+  </data>
+  <data name="UserCmd_Saved" xml:space="preserve">
+    <value>Saved commands</value>
+  </data>
+  <data name="UserCmd_New" xml:space="preserve">
+    <value>New</value>
+  </data>
+  <data name="UserCmd_Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="UserCmd_NameHint" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="UserCmd_ExecutableHint" xml:space="preserve">
+    <value>Executable (e.g. cmd, powershell)</value>
+  </data>
+  <data name="UserCmd_ArgumentsHint" xml:space="preserve">
+    <value>Arguments</value>
+  </data>
+  <data name="UserCmd_Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="UserCmd_Run" xml:space="preserve">
+    <value>Run</value>
+  </data>
+  <data name="UserCmd_NoCommands" xml:space="preserve">
+    <value>No commands yet.</value>
+  </data>
+  <data name="UserCmd_RunTitle" xml:space="preserve">
+    <value>Run this command?</value>
+  </data>
+  <data name="UserCmd_RunConfirm" xml:space="preserve">
+    <value>This runs WITHOUT administrator rights:
+
+{0}
+
+Continue?</value>
+  </data>
+  <data name="UserCmd_DeleteConfirm" xml:space="preserve">
+    <value>Delete "{0}"?</value>
   </data>
   <data name="Favorite_Toggle" xml:space="preserve">
     <value>Toggle favorite</value>

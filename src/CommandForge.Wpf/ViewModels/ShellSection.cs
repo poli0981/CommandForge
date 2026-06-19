@@ -15,6 +15,9 @@ public enum ShellSection
     /// <summary>The recipes screen (build/run command chains).</summary>
     Recipes,
 
+    /// <summary>The user-defined commands screen (non-elevated, separate from the catalog).</summary>
+    UserCommands,
+
     /// <summary>The Settings screen.</summary>
     Settings,
 

@@ -64,4 +64,23 @@ public sealed record CommandDefinition
 
     /// <summary>Free-form search tags.</summary>
     public IReadOnlyList<string> Tags { get; init; } = [];
+
+    /// <summary>
+    /// Inclusive lowest Windows build this command applies to (e.g. <c>22000</c> for Windows 11+).
+    /// <see langword="null"/> means no lower bound.
+    /// </summary>
+    public int? MinOsBuild { get; init; }
+
+    /// <summary>
+    /// Inclusive highest Windows build this command applies to (e.g. <c>19045</c> for Windows 10 only).
+    /// <see langword="null"/> means no upper bound.
+    /// </summary>
+    public int? MaxOsBuild { get; init; }
+
+    /// <summary>
+    /// Whether this command applies to the given OS build. Pure logic (no Win32) so the presentation
+    /// layer can hide commands that do not apply to the current Windows version.
+    /// </summary>
+    public bool AppliesToOsBuild(int build)
+        => (MinOsBuild is null || build >= MinOsBuild) && (MaxOsBuild is null || build <= MaxOsBuild);
 }

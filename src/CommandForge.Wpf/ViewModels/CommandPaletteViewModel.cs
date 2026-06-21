@@ -12,10 +12,11 @@ public sealed partial class CommandPaletteViewModel : ObservableObject
     private readonly IReadOnlyList<SearchableCommand> _searchable;
     private readonly Dictionary<string, CommandItemViewModel> _itemsById;
 
-    public CommandPaletteViewModel(ICatalogProvider catalog)
+    public CommandPaletteViewModel(ICatalogProvider catalog, ISystemInfoService systemInfo)
     {
         ArgumentNullException.ThrowIfNull(catalog);
-        var vms = CatalogViewModelBuilder.Build(catalog);
+        ArgumentNullException.ThrowIfNull(systemInfo);
+        var vms = CatalogViewModelBuilder.Build(catalog, systemInfo.GetStatus().OsBuild);
         _searchable = vms.Searchable;
         _itemsById = vms.Items.ToDictionary(i => i.Command.Id, StringComparer.Ordinal);
         ApplyFilter();

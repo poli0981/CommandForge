@@ -67,6 +67,7 @@ public sealed partial class SettingsViewModel : ObservableObject
             new LanguageOption("", Strings.Get("LanguageOption_System")),
             new LanguageOption("en", "English"),
             new LanguageOption("vi", "Tiếng Việt"),
+            new LanguageOption("ja", "日本語"),
         ];
 
         // Initialize from persisted settings directly (field assignment skips the apply/save hooks).

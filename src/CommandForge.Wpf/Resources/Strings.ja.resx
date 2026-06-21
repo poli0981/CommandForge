@@ -1,0 +1,1568 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AppTitle" xml:space="preserve">
+    <value>CommandForge</value>
+  </data>
+  <data name="LegalGateTitle" xml:space="preserve">
+    <value>CommandForge へようこそ</value>
+  </data>
+  <data name="LegalGateIntro" xml:space="preserve">
+    <value>CommandForge はシステムレベルの Windows コマンドを実行します。続行する前に利用規約を確認し、同意してください。</value>
+  </data>
+  <data name="LegalGateReadOnGitHub" xml:space="preserve">
+    <value>GitHub で全文を読む</value>
+  </data>
+  <data name="LegalGateAgree" xml:space="preserve">
+    <value>すべての規約を読み、同意します</value>
+  </data>
+  <data name="LegalGateContinue" xml:space="preserve">
+    <value>続行</value>
+  </data>
+  <data name="LegalGateExit" xml:space="preserve">
+    <value>終了</value>
+  </data>
+  <data name="TabEula" xml:space="preserve">
+    <value>EULA</value>
+  </data>
+  <data name="TabGpl" xml:space="preserve">
+    <value>GPLv3</value>
+  </data>
+  <data name="TabDisclaimer" xml:space="preserve">
+    <value>免責事項</value>
+  </data>
+  <data name="TabPrivacy" xml:space="preserve">
+    <value>プライバシー</value>
+  </data>
+  <data name="MenuFile" xml:space="preserve">
+    <value>ファイル</value>
+  </data>
+  <data name="MenuView" xml:space="preserve">
+    <value>表示</value>
+  </data>
+  <data name="MenuTools" xml:space="preserve">
+    <value>ツール</value>
+  </data>
+  <data name="MenuAbout" xml:space="preserve">
+    <value>情報</value>
+  </data>
+  <data name="MenuHelp" xml:space="preserve">
+    <value>ヘルプ</value>
+  </data>
+  <data name="MenuExit" xml:space="preserve">
+    <value>終了</value>
+  </data>
+  <data name="MenuToggleSidebar" xml:space="preserve">
+    <value>サイドバーを折りたたむ</value>
+  </data>
+  <data name="SidebarHome" xml:space="preserve">
+    <value>ホーム</value>
+  </data>
+  <data name="SidebarFavorites" xml:space="preserve">
+    <value>お気に入り</value>
+  </data>
+  <data name="SidebarHistory" xml:space="preserve">
+    <value>履歴</value>
+  </data>
+  <data name="SidebarRecipes" xml:space="preserve">
+    <value>レシピ</value>
+  </data>
+  <data name="SidebarUserCommands" xml:space="preserve">
+    <value>マイコマンド</value>
+  </data>
+  <data name="SidebarSettings" xml:space="preserve">
+    <value>設定</value>
+  </data>
+  <data name="Sidebar_AllCommands" xml:space="preserve">
+    <value>すべてのコマンド</value>
+  </data>
+  <data name="PaneCommands" xml:space="preserve">
+    <value>コマンド</value>
+  </data>
+  <data name="PaneDetails" xml:space="preserve">
+    <value>詳細</value>
+  </data>
+  <data name="PaneConsole" xml:space="preserve">
+    <value>コンソール</value>
+  </data>
+  <data name="Console_Cancel" xml:space="preserve">
+    <value>キャンセル</value>
+  </data>
+  <data name="Result_Success" xml:space="preserve">
+    <value>成功</value>
+  </data>
+  <data name="Result_Failed" xml:space="preserve">
+    <value>失敗</value>
+  </data>
+  <data name="Result_Cancelled" xml:space="preserve">
+    <value>キャンセル済み</value>
+  </data>
+  <data name="Result_ExitCode" xml:space="preserve">
+    <value>終了コード</value>
+  </data>
+  <data name="Result_Restart" xml:space="preserve">
+    <value>今すぐ再起動</value>
+  </data>
+  <data name="Restart_ConfirmTitle" xml:space="preserve">
+    <value>再起動が必要です</value>
+  </data>
+  <data name="Restart_ConfirmMessage" xml:space="preserve">
+    <value>一部の変更を完了するには再起動が必要です。今すぐ再起動しますか？</value>
+  </data>
+  <data name="ComingSoon" xml:space="preserve">
+    <value>近日公開</value>
+  </data>
+  <data name="NoCommandsInCategory" xml:space="preserve">
+    <value>このカテゴリにはまだコマンドがありません。</value>
+  </data>
+  <data name="NoSearchResults" xml:space="preserve">
+    <value>検索に一致するコマンドがありません。</value>
+  </data>
+  <data name="Detail_RunDisabledHint" xml:space="preserve">
+    <value>コマンドの実行は次のフェーズで利用可能になります。</value>
+  </data>
+  <data name="Detail_SelectPrompt" xml:space="preserve">
+    <value>詳細を表示するにはコマンドを選択してください。</value>
+  </data>
+  <data name="Detail_Revert" xml:space="preserve">
+    <value>元に戻す</value>
+  </data>
+  <data name="Confirm_TypeToConfirm" xml:space="preserve">
+    <value>確認のためコマンド名を入力してください:</value>
+  </data>
+  <data name="Confirm_CreateRestorePoint" xml:space="preserve">
+    <value>先にシステムの復元ポイントを作成する（推奨）</value>
+  </data>
+  <data name="Exit_RunningTitle" xml:space="preserve">
+    <value>コマンド実行中</value>
+  </data>
+  <data name="Exit_RunningMessage" xml:space="preserve">
+    <value>コマンドがまだ実行中です。中止して終了しますか？</value>
+  </data>
+  <data name="Restore_Creating" xml:space="preserve">
+    <value>復元ポイントを作成しています…</value>
+  </data>
+  <data name="Restore_Created" xml:space="preserve">
+    <value>復元ポイントを作成しました。</value>
+  </data>
+  <data name="Restore_Failed" xml:space="preserve">
+    <value>復元ポイントを作成できませんでした（このまま続行します）。</value>
+  </data>
+  <data name="Detail_CommandLine" xml:space="preserve">
+    <value>実行するコマンド</value>
+  </data>
+  <data name="Detail_Copy" xml:space="preserve">
+    <value>コピー</value>
+  </data>
+  <data name="Detail_Run" xml:space="preserve">
+    <value>実行</value>
+  </data>
+  <data name="Detail_Doc" xml:space="preserve">
+    <value>ドキュメント</value>
+  </data>
+  <data name="Detail_RequiresAdmin" xml:space="preserve">
+    <value>管理者権限が必要</value>
+  </data>
+  <data name="Detail_MayRestart" xml:space="preserve">
+    <value>再起動が必要な場合あり</value>
+  </data>
+  <data name="Search_Placeholder" xml:space="preserve">
+    <value>コマンドを検索…（Ctrl+K）</value>
+  </data>
+  <data name="Search_Suggestion" xml:space="preserve">
+    <value>もしかして:</value>
+  </data>
+  <data name="Home_Suggestions" xml:space="preserve">
+    <value>メンテナンスの提案</value>
+  </data>
+  <data name="Maint_LowDisk" xml:space="preserve">
+    <value>システムドライブの空き容量が少なくなっています — ディスク クリーンアップを検討してください。</value>
+  </data>
+  <data name="Maint_HighUptime" xml:space="preserve">
+    <value>PC が 1 週間以上連続稼働しています — 再起動すると改善する場合があります。</value>
+  </data>
+  <data name="Maint_Open" xml:space="preserve">
+    <value>開く</value>
+  </data>
+  <data name="Palette_Placeholder" xml:space="preserve">
+    <value>入力してカタログ全体を検索…</value>
+  </data>
+  <data name="Danger_Safe" xml:space="preserve">
+    <value>安全</value>
+  </data>
+  <data name="Danger_Caution" xml:space="preserve">
+    <value>注意</value>
+  </data>
+  <data name="Danger_Dangerous" xml:space="preserve">
+    <value>危険</value>
+  </data>
+  <data name="Cat_system-maintenance" xml:space="preserve">
+    <value>システムとメンテナンス</value>
+  </data>
+  <data name="Cat_updates-packages" xml:space="preserve">
+    <value>更新とパッケージ</value>
+  </data>
+  <data name="Cat_tweaks-shortcuts" xml:space="preserve">
+    <value>調整とショートカット</value>
+  </data>
+  <data name="Cat_network" xml:space="preserve">
+    <value>ネットワーク</value>
+  </data>
+  <data name="Cat_cleanup" xml:space="preserve">
+    <value>クリーンアップ</value>
+  </data>
+  <data name="Cat_power" xml:space="preserve">
+    <value>電源</value>
+  </data>
+  <data name="Cat_system-info" xml:space="preserve">
+    <value>システム情報</value>
+  </data>
+  <data name="Cat_diagnostics" xml:space="preserve">
+    <value>診断</value>
+  </data>
+  <data name="Cat_security-privacy" xml:space="preserve">
+    <value>セキュリティとプライバシー</value>
+  </data>
+  <data name="Cat_developer" xml:space="preserve">
+    <value>開発者</value>
+  </data>
+  <data name="Cmd_info.systeminfo_Title" xml:space="preserve">
+    <value>システム情報</value>
+  </data>
+  <data name="Cmd_info.systeminfo_Desc" xml:space="preserve">
+    <value>このシステムの概要をすべて表示します。</value>
+  </data>
+  <data name="Cmd_info.winver_Title" xml:space="preserve">
+    <value>Windows のバージョン</value>
+  </data>
+  <data name="Cmd_info.winver_Desc" xml:space="preserve">
+    <value>Windows のエディション、バージョン、ビルドを表示します。</value>
+  </data>
+  <data name="Cmd_info.cpu_Title" xml:space="preserve">
+    <value>CPU 情報</value>
+  </data>
+  <data name="Cmd_info.cpu_Desc" xml:space="preserve">
+    <value>プロセッサ名、コア数、クロック速度を表示します。</value>
+  </data>
+  <data name="Cmd_info.gpu_Title" xml:space="preserve">
+    <value>GPU 情報</value>
+  </data>
+  <data name="Cmd_info.gpu_Desc" xml:space="preserve">
+    <value>グラフィックスカード名とドライバーのバージョンを表示します。</value>
+  </data>
+  <data name="Cmd_info.ram_Title" xml:space="preserve">
+    <value>メモリ情報</value>
+  </data>
+  <data name="Cmd_info.ram_Desc" xml:space="preserve">
+    <value>取り付けられている RAM モジュールを表示します。</value>
+  </data>
+  <data name="Cmd_info.disk_Title" xml:space="preserve">
+    <value>ディスク情報</value>
+  </data>
+  <data name="Cmd_info.disk_Desc" xml:space="preserve">
+    <value>物理ディスクとそのメディアの種類を一覧表示します。</value>
+  </data>
+  <data name="Cmd_info.uptime_Title" xml:space="preserve">
+    <value>システム稼働時間</value>
+  </data>
+  <data name="Cmd_info.uptime_Desc" xml:space="preserve">
+    <value>システムの連続稼働時間を表示します。</value>
+  </data>
+  <data name="Cmd_info.activation_Title" xml:space="preserve">
+    <value>ライセンス認証の状態</value>
+  </data>
+  <data name="Cmd_info.activation_Desc" xml:space="preserve">
+    <value>Windows のライセンス認証状態を表示します。</value>
+  </data>
+  <data name="Cmd_net.ipconfig.all_Title" xml:space="preserve">
+    <value>ネットワーク構成</value>
+  </data>
+  <data name="Cmd_net.ipconfig.all_Desc" xml:space="preserve">
+    <value>すべてのアダプターの完全な IP 構成を表示します。</value>
+  </data>
+  <data name="Cmd_net.flushdns_Title" xml:space="preserve">
+    <value>DNS キャッシュをクリア</value>
+  </data>
+  <data name="Cmd_net.flushdns_Desc" xml:space="preserve">
+    <value>DNS リゾルバーのキャッシュをクリアします。</value>
+  </data>
+  <data name="Cmd_net.showadapters_Title" xml:space="preserve">
+    <value>ネットワークアダプターを表示</value>
+  </data>
+  <data name="Cmd_net.showadapters_Desc" xml:space="preserve">
+    <value>ネットワークインターフェイスとその状態を一覧表示します。</value>
+  </data>
+  <data name="Cmd_tweak.godmode_Title" xml:space="preserve">
+    <value>ゴッドモードを開く</value>
+  </data>
+  <data name="Cmd_tweak.godmode_Desc" xml:space="preserve">
+    <value>すべてのタスク（ゴッドモード）のコントロールパネルビューを開きます。</value>
+  </data>
+  <data name="Cmd_tweak.showext_Title" xml:space="preserve">
+    <value>ファイル拡張子を表示</value>
+  </data>
+  <data name="Cmd_tweak.showext_Desc" xml:space="preserve">
+    <value>エクスプローラーで常にファイル拡張子を表示します。</value>
+  </data>
+  <data name="Cmd_tweak.showhidden_Title" xml:space="preserve">
+    <value>隠しファイルを表示</value>
+  </data>
+  <data name="Cmd_tweak.showhidden_Desc" xml:space="preserve">
+    <value>エクスプローラーで隠しファイルとフォルダーを表示します。</value>
+  </data>
+  <data name="Cmd_cleanup.cleanmgr_Title" xml:space="preserve">
+    <value>ディスク クリーンアップ</value>
+  </data>
+  <data name="Cmd_cleanup.cleanmgr_Desc" xml:space="preserve">
+    <value>Windows のディスク クリーンアップツールを開きます。</value>
+  </data>
+  <data name="Cmd_power.list_Title" xml:space="preserve">
+    <value>電源プランを一覧表示</value>
+  </data>
+  <data name="Cmd_power.list_Desc" xml:space="preserve">
+    <value>利用可能な電源プランを表示します。</value>
+  </data>
+  <data name="Cmd_power.batteryreport_Title" xml:space="preserve">
+    <value>バッテリーレポート</value>
+  </data>
+  <data name="Cmd_power.batteryreport_Desc" xml:space="preserve">
+    <value>バッテリーの状態を示す HTML レポートを生成します。</value>
+  </data>
+  <data name="Cmd_diag.reliability_Title" xml:space="preserve">
+    <value>信頼性モニター</value>
+  </data>
+  <data name="Cmd_diag.reliability_Desc" xml:space="preserve">
+    <value>Windows の信頼性モニターを開きます。</value>
+  </data>
+  <data name="Cmd_diag.eventviewer_Title" xml:space="preserve">
+    <value>イベントビューアー</value>
+  </data>
+  <data name="Cmd_diag.eventviewer_Desc" xml:space="preserve">
+    <value>Windows のイベントビューアーを開きます。</value>
+  </data>
+  <data name="Cmd_diag.resmon_Title" xml:space="preserve">
+    <value>リソースモニター</value>
+  </data>
+  <data name="Cmd_diag.resmon_Desc" xml:space="preserve">
+    <value>Windows のリソースモニターを開きます。</value>
+  </data>
+  <data name="Cmd_diag.dxdiag_Title" xml:space="preserve">
+    <value>DirectX 診断ツール</value>
+  </data>
+  <data name="Cmd_diag.dxdiag_Desc" xml:space="preserve">
+    <value>DirectX 診断ツールを開きます。</value>
+  </data>
+  <data name="Cmd_winget.list_Title" xml:space="preserve">
+    <value>インストール済みアプリを一覧表示</value>
+  </data>
+  <data name="Cmd_winget.list_Desc" xml:space="preserve">
+    <value>winget でインストールされたアプリを一覧表示します。</value>
+  </data>
+  <data name="Cmd_winget.upgrade.list_Title" xml:space="preserve">
+    <value>アプリの更新を確認</value>
+  </data>
+  <data name="Cmd_winget.upgrade.list_Desc" xml:space="preserve">
+    <value>新しいバージョンが利用可能なアプリを表示します。</value>
+  </data>
+  <data name="Cmd_sec.firewall.status_Title" xml:space="preserve">
+    <value>ファイアウォールの状態</value>
+  </data>
+  <data name="Cmd_sec.firewall.status_Desc" xml:space="preserve">
+    <value>すべてのファイアウォールプロファイルの状態を表示します。</value>
+  </data>
+  <data name="Cmd_dev.wsl.list_Title" xml:space="preserve">
+    <value>WSL ディストロを一覧表示</value>
+  </data>
+  <data name="Cmd_dev.wsl.list_Desc" xml:space="preserve">
+    <value>インストール済みの WSL ディストリビューションを一覧表示します。</value>
+  </data>
+  <data name="Cmd_dism.checkhealth_Title" xml:space="preserve">
+    <value>DISM CheckHealth</value>
+  </data>
+  <data name="Cmd_dism.checkhealth_Desc" xml:space="preserve">
+    <value>Windows イメージの破損を素早く確認します（読み取り専用）。</value>
+  </data>
+  <data name="Cmd_dism.scanhealth_Title" xml:space="preserve">
+    <value>DISM ScanHealth</value>
+  </data>
+  <data name="Cmd_dism.scanhealth_Desc" xml:space="preserve">
+    <value>Windows イメージの破損を詳細にスキャンします（読み取り専用・低速）。</value>
+  </data>
+  <data name="Cmd_dism.analyzecomponentstore_Title" xml:space="preserve">
+    <value>コンポーネントストアを分析</value>
+  </data>
+  <data name="Cmd_dism.analyzecomponentstore_Desc" xml:space="preserve">
+    <value>WinSxS を分析し、クリーンアップが推奨されるか報告します。</value>
+  </data>
+  <data name="Cmd_chkdsk.read_Title" xml:space="preserve">
+    <value>ディスクをチェック（読み取り専用）</value>
+  </data>
+  <data name="Cmd_chkdsk.read_Desc" xml:space="preserve">
+    <value>C: ドライブのエラーをチェックします（読み取り専用）。</value>
+  </data>
+  <data name="Cmd_sec.bitlocker.status_Title" xml:space="preserve">
+    <value>BitLocker の状態</value>
+  </data>
+  <data name="Cmd_sec.bitlocker.status_Desc" xml:space="preserve">
+    <value>すべてのボリュームの BitLocker 暗号化状態を表示します。</value>
+  </data>
+  <data name="Cmd_dev.features.list_Title" xml:space="preserve">
+    <value>Windows 機能を一覧表示</value>
+  </data>
+  <data name="Cmd_dev.features.list_Desc" xml:space="preserve">
+    <value>有効になっている Windows のオプション機能を一覧表示します。</value>
+  </data>
+  <data name="Cmd_system.restorepoint_Title" xml:space="preserve">
+    <value>復元ポイントを作成</value>
+  </data>
+  <data name="Cmd_system.restorepoint_Desc" xml:space="preserve">
+    <value>システムの復元ポイントを作成します。</value>
+  </data>
+  <data name="Cmd_dism.restorehealth_Title" xml:space="preserve">
+    <value>DISM RestoreHealth</value>
+  </data>
+  <data name="Cmd_dism.restorehealth_Desc" xml:space="preserve">
+    <value>Windows イメージを修復します（時間がかかる場合があり、再起動が必要なことがあります）。</value>
+  </data>
+  <data name="Cmd_sfc.scannow_Title" xml:space="preserve">
+    <value>SFC scannow</value>
+  </data>
+  <data name="Cmd_sfc.scannow_Desc" xml:space="preserve">
+    <value>保護されたシステムファイルをスキャンして修復します（再起動が必要な場合があります）。</value>
+  </data>
+  <data name="Cmd_net.winsock.reset_Title" xml:space="preserve">
+    <value>Winsock をリセット</value>
+  </data>
+  <data name="Cmd_net.winsock.reset_Desc" xml:space="preserve">
+    <value>Winsock カタログをリセットします（その後の再起動が必要です）。</value>
+  </data>
+  <data name="Cmd_sec.defender.quickscan_Title" xml:space="preserve">
+    <value>Defender クイックスキャン</value>
+  </data>
+  <data name="Cmd_sec.defender.quickscan_Desc" xml:space="preserve">
+    <value>Microsoft Defender のクイックスキャンを実行します。</value>
+  </data>
+  <data name="Cmd_power.hibernate.off_Title" xml:space="preserve">
+    <value>休止状態を無効化</value>
+  </data>
+  <data name="Cmd_power.hibernate.off_Desc" xml:space="preserve">
+    <value>休止状態を無効にし、使用していたディスク領域を解放します。</value>
+  </data>
+  <data name="Cmd_power.hibernate.on_Title" xml:space="preserve">
+    <value>休止状態を有効化</value>
+  </data>
+  <data name="Cmd_power.hibernate.on_Desc" xml:space="preserve">
+    <value>休止状態を再び有効にします。</value>
+  </data>
+  <data name="Cmd_tweak.hideext_Title" xml:space="preserve">
+    <value>ファイル拡張子を隠す</value>
+  </data>
+  <data name="Cmd_tweak.hideext_Desc" xml:space="preserve">
+    <value>エクスプローラーで既知のファイル拡張子を隠します。</value>
+  </data>
+  <data name="Cmd_sec.telemetry.basic_Title" xml:space="preserve">
+    <value>テレメトリを最小化</value>
+  </data>
+  <data name="Cmd_sec.telemetry.basic_Desc" xml:space="preserve">
+    <value>テレメトリポリシーを最小レベルに設定します。一部のエディションでは Windows Update に影響する場合があります。元に戻せます。</value>
+  </data>
+  <data name="Cmd_sec.telemetry.restore_Title" xml:space="preserve">
+    <value>テレメトリポリシーを復元</value>
+  </data>
+  <data name="Cmd_sec.telemetry.restore_Desc" xml:space="preserve">
+    <value>テレメトリポリシーの上書きを削除します（システム既定に戻します）。</value>
+  </data>
+  <data name="Cmd_dism.startcomponentcleanup_Title" xml:space="preserve">
+    <value>コンポーネントストアをクリーンアップ</value>
+  </data>
+  <data name="Cmd_dism.startcomponentcleanup_Desc" xml:space="preserve">
+    <value>置き換えられた古いコンポーネントを WinSxS から削除してディスク領域を解放します。再起動が必要な場合があります。</value>
+  </data>
+  <data name="Cmd_chkdsk.fix_Title" xml:space="preserve">
+    <value>ディスクを修復（chkdsk /f /r）</value>
+  </data>
+  <data name="Cmd_chkdsk.fix_Desc" xml:space="preserve">
+    <value>次回再起動時にシステムドライブの完全なディスクチェックと修復をスケジュールします。</value>
+  </data>
+  <data name="Cmd_winget.upgrade.all_Title" xml:space="preserve">
+    <value>すべてのパッケージを更新</value>
+  </data>
+  <data name="Cmd_winget.upgrade.all_Desc" xml:space="preserve">
+    <value>winget が更新できるインストール済みアプリをすべて更新します。</value>
+  </data>
+  <data name="Cmd_winget.source.reset_Title" xml:space="preserve">
+    <value>winget ソースをリセット</value>
+  </data>
+  <data name="Cmd_winget.source.reset_Desc" xml:space="preserve">
+    <value>winget のパッケージソースを既定にリセットします。</value>
+  </data>
+  <data name="Cmd_wu.scan_Title" xml:space="preserve">
+    <value>Windows Update をスキャン</value>
+  </data>
+  <data name="Cmd_wu.scan_Desc" xml:space="preserve">
+    <value>Windows Update に今すぐ新しい更新プログラムを確認させます。</value>
+  </data>
+  <data name="Cmd_wu.reset.components_Title" xml:space="preserve">
+    <value>Windows Update をリセット</value>
+  </data>
+  <data name="Cmd_wu.reset.components_Desc" xml:space="preserve">
+    <value>更新サービスを停止し、キャッシュをクリアして再起動します。停止した更新の修復によく効きます。</value>
+  </data>
+  <data name="Cmd_tweak.win11.classicmenu_Title" xml:space="preserve">
+    <value>クラシック右クリックメニュー（Win11）</value>
+  </data>
+  <data name="Cmd_tweak.win11.classicmenu_Desc" xml:space="preserve">
+    <value>Windows 11 で従来の右クリックメニューを復元します。適用するにはエクスプローラーを再起動します。</value>
+  </data>
+  <data name="Cmd_tweak.win11.modernmenu_Title" xml:space="preserve">
+    <value>モダン右クリックメニュー（Win11）</value>
+  </data>
+  <data name="Cmd_tweak.win11.modernmenu_Desc" xml:space="preserve">
+    <value>Windows 11 の既定の右クリックメニューを復元します。適用するにはエクスプローラーを再起動します。</value>
+  </data>
+  <data name="Cmd_tweak.restartexplorer_Title" xml:space="preserve">
+    <value>エクスプローラーを再起動</value>
+  </data>
+  <data name="Cmd_tweak.restartexplorer_Desc" xml:space="preserve">
+    <value>Windows エクスプローラーのシェル（タスクバーとデスクトップ）を再起動します。</value>
+  </data>
+  <data name="Cmd_tweak.cleariconcache_Title" xml:space="preserve">
+    <value>アイコンキャッシュをクリア</value>
+  </data>
+  <data name="Cmd_tweak.cleariconcache_Desc" xml:space="preserve">
+    <value>アイコンキャッシュを再構築し、壊れた・古いアイコンを修正します。</value>
+  </data>
+  <data name="Cmd_net.registerdns_Title" xml:space="preserve">
+    <value>DNS を登録</value>
+  </data>
+  <data name="Cmd_net.registerdns_Desc" xml:space="preserve">
+    <value>DHCP リースを更新し、DNS 名を再登録します。</value>
+  </data>
+  <data name="Cmd_net.release_Title" xml:space="preserve">
+    <value>IP アドレスを解放</value>
+  </data>
+  <data name="Cmd_net.release_Desc" xml:space="preserve">
+    <value>現在の DHCP IP リースを解放します。</value>
+  </data>
+  <data name="Cmd_net.renew_Title" xml:space="preserve">
+    <value>IP アドレスを更新</value>
+  </data>
+  <data name="Cmd_net.renew_Desc" xml:space="preserve">
+    <value>新しい DHCP IP リースを要求します。</value>
+  </data>
+  <data name="Cmd_net.ip.reset_Title" xml:space="preserve">
+    <value>TCP/IP スタックをリセット</value>
+  </data>
+  <data name="Cmd_net.ip.reset_Desc" xml:space="preserve">
+    <value>TCP/IP スタックを既定にリセットします。再起動が必要です。</value>
+  </data>
+  <data name="Cmd_net.full.reset_Title" xml:space="preserve">
+    <value>ネットワークを完全リセット</value>
+  </data>
+  <data name="Cmd_net.full.reset_Desc" xml:space="preserve">
+    <value>Winsock と TCP/IP をリセットし、DNS キャッシュをクリアします。再起動が必要です。</value>
+  </data>
+  <data name="Cmd_clean.cleanmgr.auto_Title" xml:space="preserve">
+    <value>自動ディスク クリーンアップ</value>
+  </data>
+  <data name="Cmd_clean.cleanmgr.auto_Desc" xml:space="preserve">
+    <value>確認なしですべてのカテゴリのディスク クリーンアップを実行します。</value>
+  </data>
+  <data name="Cmd_clean.recyclebin_Title" xml:space="preserve">
+    <value>ごみ箱を空にする</value>
+  </data>
+  <data name="Cmd_clean.recyclebin_Desc" xml:space="preserve">
+    <value>ごみ箱の中身をすべて完全に削除します。</value>
+  </data>
+  <data name="Cmd_clean.usertemp_Title" xml:space="preserve">
+    <value>ユーザー一時ファイルをクリア</value>
+  </data>
+  <data name="Cmd_clean.usertemp_Desc" xml:space="preserve">
+    <value>ユーザーの一時フォルダーの中身を削除します。</value>
+  </data>
+  <data name="Cmd_clean.wintemp_Title" xml:space="preserve">
+    <value>Windows 一時ファイルをクリア</value>
+  </data>
+  <data name="Cmd_clean.wintemp_Desc" xml:space="preserve">
+    <value>Windows の一時フォルダーの中身を削除します。</value>
+  </data>
+  <data name="Cmd_clean.windowsold_Title" xml:space="preserve">
+    <value>Windows.old を削除</value>
+  </data>
+  <data name="Cmd_clean.windowsold_Desc" xml:space="preserve">
+    <value>以前の Windows インストールフォルダーを削除します。ロールバックできなくなります。</value>
+  </data>
+  <data name="Cmd_clean.wucache_Title" xml:space="preserve">
+    <value>Windows Update キャッシュをクリア</value>
+  </data>
+  <data name="Cmd_clean.wucache_Desc" xml:space="preserve">
+    <value>更新サービスを停止し、ダウンロード済みの更新ファイルを削除して再起動します。</value>
+  </data>
+  <data name="Cmd_clean.deliveryopt_Title" xml:space="preserve">
+    <value>配信最適化キャッシュをクリア</value>
+  </data>
+  <data name="Cmd_clean.deliveryopt_Desc" xml:space="preserve">
+    <value>キャッシュされた配信最適化の更新ファイルを削除します。</value>
+  </data>
+  <data name="Cmd_power.set.highperf_Title" xml:space="preserve">
+    <value>高パフォーマンスを有効化</value>
+  </data>
+  <data name="Cmd_power.set.highperf_Desc" xml:space="preserve">
+    <value>アクティブな電源プランを高パフォーマンスに切り替えます。</value>
+  </data>
+  <data name="Cmd_power.add.ultimate_Title" xml:space="preserve">
+    <value>究極のパフォーマンスを追加</value>
+  </data>
+  <data name="Cmd_power.add.ultimate_Desc" xml:space="preserve">
+    <value>究極のパフォーマンス電源プランを作成します。</value>
+  </data>
+  <data name="Cmd_power.energy_Title" xml:space="preserve">
+    <value>エネルギーレポート</value>
+  </data>
+  <data name="Cmd_power.energy_Desc" xml:space="preserve">
+    <value>60 秒間エネルギー効率を分析し、HTML レポートをプロファイルに保存します。</value>
+  </data>
+  <data name="Cmd_power.sleepstudy_Title" xml:space="preserve">
+    <value>スリープ詳細レポート</value>
+  </data>
+  <data name="Cmd_power.sleepstudy_Desc" xml:space="preserve">
+    <value>スリープ詳細（sleep study）の HTML レポートをプロファイルに保存します。</value>
+  </data>
+  <data name="Cmd_diag.msinfo_Title" xml:space="preserve">
+    <value>システム情報</value>
+  </data>
+  <data name="Cmd_diag.msinfo_Desc" xml:space="preserve">
+    <value>システム情報（msinfo32）ツールを開きます。</value>
+  </data>
+  <data name="Cmd_diag.memtest_Title" xml:space="preserve">
+    <value>Windows メモリ診断</value>
+  </data>
+  <data name="Cmd_diag.memtest_Desc" xml:space="preserve">
+    <value>次回再起動時に RAM テストを実行するようスケジュールします。</value>
+  </data>
+  <data name="Cmd_sec.defender.update_Title" xml:space="preserve">
+    <value>Defender の定義を更新</value>
+  </data>
+  <data name="Cmd_sec.defender.update_Desc" xml:space="preserve">
+    <value>最新の Microsoft Defender 定義をダウンロードします。</value>
+  </data>
+  <data name="Cmd_dev.devmode.on_Title" xml:space="preserve">
+    <value>開発者モードを有効化</value>
+  </data>
+  <data name="Cmd_dev.devmode.on_Desc" xml:space="preserve">
+    <value>Windows の開発者モードを有効にします（サイドロードが可能になります）。</value>
+  </data>
+  <data name="Cmd_dev.devmode.off_Title" xml:space="preserve">
+    <value>開発者モードを無効化</value>
+  </data>
+  <data name="Cmd_dev.devmode.off_Desc" xml:space="preserve">
+    <value>Windows の開発者モードを無効にします。</value>
+  </data>
+  <data name="Cmd_dev.wsl.install_Title" xml:space="preserve">
+    <value>WSL をインストール</value>
+  </data>
+  <data name="Cmd_dev.wsl.install_Desc" xml:space="preserve">
+    <value>Windows Subsystem for Linux をインストールします。再起動が必要です。</value>
+  </data>
+  <data name="Cmd_dev.wsl.update_Title" xml:space="preserve">
+    <value>WSL を更新</value>
+  </data>
+  <data name="Cmd_dev.wsl.update_Desc" xml:space="preserve">
+    <value>Windows Subsystem for Linux のカーネルを更新します。</value>
+  </data>
+  <data name="Cmd_dev.hyperv.on_Title" xml:space="preserve">
+    <value>Hyper-V を有効化</value>
+  </data>
+  <data name="Cmd_dev.hyperv.on_Desc" xml:space="preserve">
+    <value>Hyper-V 仮想化機能を有効にします。再起動が必要です。</value>
+  </data>
+  <data name="Cmd_dev.hyperv.off_Title" xml:space="preserve">
+    <value>Hyper-V を無効化</value>
+  </data>
+  <data name="Cmd_dev.hyperv.off_Desc" xml:space="preserve">
+    <value>Hyper-V 仮想化機能を無効にします。再起動が必要です。</value>
+  </data>
+  <data name="Cmd_dev.sandbox.on_Title" xml:space="preserve">
+    <value>Windows サンドボックスを有効化</value>
+  </data>
+  <data name="Cmd_dev.sandbox.on_Desc" xml:space="preserve">
+    <value>Windows サンドボックス機能を有効にします。再起動が必要です。</value>
+  </data>
+  <data name="Cmd_dev.netfx3.on_Title" xml:space="preserve">
+    <value>.NET Framework 3.5 を有効化</value>
+  </data>
+  <data name="Cmd_dev.netfx3.on_Desc" xml:space="preserve">
+    <value>.NET Framework 3.5 機能をインストールします。再起動が必要な場合があります。</value>
+  </data>
+  <data name="Menu_CheckForUpdates" xml:space="preserve">
+    <value>更新を確認</value>
+  </data>
+  <data name="Update_Title" xml:space="preserve">
+    <value>更新</value>
+  </data>
+  <data name="Update_Checking" xml:space="preserve">
+    <value>更新を確認しています…</value>
+  </data>
+  <data name="Update_UpToDate" xml:space="preserve">
+    <value>最新バージョンを使用しています。</value>
+  </data>
+  <data name="Update_Available" xml:space="preserve">
+    <value>バージョン {0} が利用可能です。今すぐダウンロードして再起動しますか？</value>
+  </data>
+  <data name="Update_Downloading" xml:space="preserve">
+    <value>更新をダウンロードしています…</value>
+  </data>
+  <data name="Update_DownloadRestart" xml:space="preserve">
+    <value>ダウンロードして再起動</value>
+  </data>
+  <data name="Update_Close" xml:space="preserve">
+    <value>閉じる</value>
+  </data>
+  <data name="Update_Error_Offline" xml:space="preserve">
+    <value>GitHub に接続できませんでした。インターネット接続を確認して再試行してください。</value>
+  </data>
+  <data name="Update_Error_NotFound" xml:space="preserve">
+    <value>このアプリのリリースフィードが見つかりませんでした。</value>
+  </data>
+  <data name="Update_Error_RateLimited" xml:space="preserve">
+    <value>GitHub のレート制限に達しました。しばらくしてから再試行してください。</value>
+  </data>
+  <data name="Update_Error_ServerError" xml:space="preserve">
+    <value>GitHub がサーバーエラーを返しました。しばらくしてから再試行してください。</value>
+  </data>
+  <data name="Update_Error_NotInstalled" xml:space="preserve">
+    <value>更新はインストール版アプリでのみ利用できます。</value>
+  </data>
+  <data name="Update_Error_Unknown" xml:space="preserve">
+    <value>更新の確認に失敗しました。しばらくしてから再試行してください。</value>
+  </data>
+  <data name="Update_Error_CommandRunning" xml:space="preserve">
+    <value>更新する前に、実行中のコマンドを完了するか中止してください。</value>
+  </data>
+  <data name="Menu_OpenSettings" xml:space="preserve">
+    <value>設定</value>
+  </data>
+  <data name="LanguageOption_System" xml:space="preserve">
+    <value>システム既定</value>
+  </data>
+  <data name="Settings_Appearance" xml:space="preserve">
+    <value>外観</value>
+  </data>
+  <data name="Settings_Behavior" xml:space="preserve">
+    <value>動作と安全性</value>
+  </data>
+  <data name="Settings_Updates" xml:space="preserve">
+    <value>更新</value>
+  </data>
+  <data name="Settings_About" xml:space="preserve">
+    <value>情報</value>
+  </data>
+  <data name="Settings_Theme" xml:space="preserve">
+    <value>テーマ</value>
+  </data>
+  <data name="Settings_ThemeSystem" xml:space="preserve">
+    <value>システム</value>
+  </data>
+  <data name="Settings_ThemeLight" xml:space="preserve">
+    <value>ライト</value>
+  </data>
+  <data name="Settings_ThemeDark" xml:space="preserve">
+    <value>ダーク</value>
+  </data>
+  <data name="Settings_Language" xml:space="preserve">
+    <value>言語</value>
+  </data>
+  <data name="Settings_FontSize" xml:space="preserve">
+    <value>フォントサイズ</value>
+  </data>
+  <data name="Settings_FontSmall" xml:space="preserve">
+    <value>小</value>
+  </data>
+  <data name="Settings_FontMedium" xml:space="preserve">
+    <value>中</value>
+  </data>
+  <data name="Settings_FontLarge" xml:space="preserve">
+    <value>大</value>
+  </data>
+  <data name="Settings_CollapseSidebar" xml:space="preserve">
+    <value>既定でサイドバーを折りたたむ</value>
+  </data>
+  <data name="Settings_ShowBadges" xml:space="preserve">
+    <value>一覧に管理者/再起動バッジを表示</value>
+  </data>
+  <data name="Settings_ConfirmCaution" xml:space="preserve">
+    <value>「注意」コマンドの前に確認する</value>
+  </data>
+  <data name="Settings_ConfirmDangerous" xml:space="preserve">
+    <value>「危険」コマンドの前に確認する</value>
+  </data>
+  <data name="Settings_DangerousLockedTooltip" xml:space="preserve">
+    <value>常に有効 — この安全確認は無効にできません。</value>
+  </data>
+  <data name="Settings_AutoRestorePoint" xml:space="preserve">
+    <value>リスクの高いコマンドの前にシステムの復元ポイントを提案する</value>
+  </data>
+  <data name="Settings_AutoScroll" xml:space="preserve">
+    <value>コンソールを自動スクロール</value>
+  </data>
+  <data name="Settings_WarnOnCancel" xml:space="preserve">
+    <value>コマンド実行中に閉じる前に警告する</value>
+  </data>
+  <data name="Settings_AutoCheckUpdates" xml:space="preserve">
+    <value>起動時に更新を確認する</value>
+  </data>
+  <data name="Settings_CurrentVersion" xml:space="preserve">
+    <value>現在のバージョン:</value>
+  </data>
+  <data name="Settings_LastChecked" xml:space="preserve">
+    <value>最終確認:</value>
+  </data>
+  <data name="Settings_CheckNow" xml:space="preserve">
+    <value>今すぐ確認</value>
+  </data>
+  <data name="Settings_Profiles" xml:space="preserve">
+    <value>バックアップとプロファイル</value>
+  </data>
+  <data name="Settings_ExportImport" xml:space="preserve">
+    <value>インポート / エクスポート</value>
+  </data>
+  <data name="Settings_ExportImportHint" xml:space="preserve">
+    <value>外観・動作・お気に入りをファイルにコピーして、別のマシンに移行できます。</value>
+  </data>
+  <data name="Settings_ExportSettings" xml:space="preserve">
+    <value>エクスポート…</value>
+  </data>
+  <data name="Settings_ImportSettings" xml:space="preserve">
+    <value>インポート…</value>
+  </data>
+  <data name="Settings_SavedProfiles" xml:space="preserve">
+    <value>保存済みプロファイル</value>
+  </data>
+  <data name="Settings_ProfilesHint" xml:space="preserve">
+    <value>現在の設定とお気に入りに名前を付けてプロファイルとして保存し、用途（例: ゲーミング PC、オフィス）に応じて切り替えられます。</value>
+  </data>
+  <data name="Settings_ApplyProfile" xml:space="preserve">
+    <value>適用</value>
+  </data>
+  <data name="Settings_DeleteProfile" xml:space="preserve">
+    <value>削除</value>
+  </data>
+  <data name="Settings_SaveCurrentAsProfile" xml:space="preserve">
+    <value>現在の状態を新しいプロファイルとして保存</value>
+  </data>
+  <data name="Settings_ProfileName" xml:space="preserve">
+    <value>プロファイル名</value>
+  </data>
+  <data name="Settings_SaveProfile" xml:space="preserve">
+    <value>プロファイルを保存</value>
+  </data>
+  <data name="Settings_ExportSuccess" xml:space="preserve">
+    <value>設定を {0} にエクスポートしました。</value>
+  </data>
+  <data name="Settings_ImportConfirm" xml:space="preserve">
+    <value>現在の外観・動作・お気に入りをインポートした値で置き換えますか？</value>
+  </data>
+  <data name="Settings_ImportInvalid" xml:space="preserve">
+    <value>選択したファイルは有効な CommandForge 設定ファイルではありません。</value>
+  </data>
+  <data name="Settings_ImportSuccess" xml:space="preserve">
+    <value>設定をインポートしました。</value>
+  </data>
+  <data name="Settings_ProfileApplied" xml:space="preserve">
+    <value>プロファイル「{0}」を適用しました。</value>
+  </data>
+  <data name="Settings_DeleteProfileConfirm" xml:space="preserve">
+    <value>プロファイル「{0}」を削除しますか？</value>
+  </data>
+  <data name="Settings_NoDataCollected" xml:space="preserve">
+    <value>このアプリはあなたのデータを一切収集しません。</value>
+  </data>
+  <data name="Settings_License" xml:space="preserve">
+    <value>ライセンス（GPLv3）</value>
+  </data>
+  <data name="Settings_GitHub" xml:space="preserve">
+    <value>GitHub</value>
+  </data>
+  <data name="Menu_LogViewer" xml:space="preserve">
+    <value>ログビューアー</value>
+  </data>
+  <data name="Menu_ExportLogs" xml:space="preserve">
+    <value>ログをエクスポート（.zip）</value>
+  </data>
+  <data name="Menu_DebugPanel" xml:space="preserve">
+    <value>デバッグパネル</value>
+  </data>
+  <data name="Menu_ReportBug" xml:space="preserve">
+    <value>バグを報告</value>
+  </data>
+  <data name="LogViewer_Title" xml:space="preserve">
+    <value>ログビューアー</value>
+  </data>
+  <data name="LogViewer_Level" xml:space="preserve">
+    <value>レベル</value>
+  </data>
+  <data name="LogViewer_FilterHint" xml:space="preserve">
+    <value>テキストで絞り込み</value>
+  </data>
+  <data name="LogViewer_AutoScroll" xml:space="preserve">
+    <value>自動スクロール</value>
+  </data>
+  <data name="LogViewer_OpenFolder" xml:space="preserve">
+    <value>ログフォルダーを開く</value>
+  </data>
+  <data name="LogViewer_Export" xml:space="preserve">
+    <value>ログをエクスポート（.zip）</value>
+  </data>
+  <data name="LogViewer_Clear" xml:space="preserve">
+    <value>クリア</value>
+  </data>
+  <data name="LogLevel_All" xml:space="preserve">
+    <value>すべて</value>
+  </data>
+  <data name="LogLevel_Info" xml:space="preserve">
+    <value>情報</value>
+  </data>
+  <data name="LogLevel_Warning" xml:space="preserve">
+    <value>警告</value>
+  </data>
+  <data name="LogLevel_Error" xml:space="preserve">
+    <value>エラー</value>
+  </data>
+  <data name="LogLevel_Debug" xml:space="preserve">
+    <value>デバッグ</value>
+  </data>
+  <data name="Log_ExportSuccess" xml:space="preserve">
+    <value>ログを {0} にエクスポートしました。共有する前に内容を確認してください。</value>
+  </data>
+  <data name="Debug_TabVerbose" xml:space="preserve">
+    <value>ログ</value>
+  </data>
+  <data name="Debug_TabCatalog" xml:space="preserve">
+    <value>カタログ</value>
+  </data>
+  <data name="Debug_TabSystemInfo" xml:space="preserve">
+    <value>システム情報</value>
+  </data>
+  <data name="Debug_CategoryCount" xml:space="preserve">
+    <value>カテゴリ:</value>
+  </data>
+  <data name="Debug_CommandCount" xml:space="preserve">
+    <value>コマンド:</value>
+  </data>
+  <data name="Debug_ValidationErrors" xml:space="preserve">
+    <value>検証エラー</value>
+  </data>
+  <data name="Debug_NoValidationErrors" xml:space="preserve">
+    <value>検証エラーはありません。</value>
+  </data>
+  <data name="Debug_CopySystemInfo" xml:space="preserve">
+    <value>コピー</value>
+  </data>
+  <data name="Debug_Refresh" xml:space="preserve">
+    <value>更新</value>
+  </data>
+  <data name="Error_Title" xml:space="preserve">
+    <value>予期しないエラー</value>
+  </data>
+  <data name="Error_Message" xml:space="preserve">
+    <value>問題が発生しました。詳細をコピーするか、GitHub で報告できます。</value>
+  </data>
+  <data name="Error_Code" xml:space="preserve">
+    <value>エラーコード:</value>
+  </data>
+  <data name="Error_CopyDetails" xml:space="preserve">
+    <value>詳細をコピー</value>
+  </data>
+  <data name="Error_ReportBug" xml:space="preserve">
+    <value>バグを報告</value>
+  </data>
+  <data name="Error_Close" xml:space="preserve">
+    <value>閉じる</value>
+  </data>
+  <data name="ReportBug_Title" xml:space="preserve">
+    <value>バグを報告</value>
+  </data>
+  <data name="ReportBug_Environment" xml:space="preserve">
+    <value>環境</value>
+  </data>
+  <data name="ReportBug_ExportLog" xml:space="preserve">
+    <value>ログをエクスポート（.zip）</value>
+  </data>
+  <data name="ReportBug_OpenIssue" xml:space="preserve">
+    <value>GitHub で issue を作成</value>
+  </data>
+  <data name="ReportBug_Close" xml:space="preserve">
+    <value>閉じる</value>
+  </data>
+  <data name="ReportBug_DescriptionHint" xml:space="preserve">
+    <value>何が起きたか説明してください（任意）</value>
+  </data>
+  <data name="ReportBug_ReviewReminder" xml:space="preserve">
+    <value>issue に添付する前に .zip の内容を確認してください。</value>
+  </data>
+  <data name="Settings_Logs" xml:space="preserve">
+    <value>ログ</value>
+  </data>
+  <data name="Settings_LogLevel" xml:space="preserve">
+    <value>ログレベル</value>
+  </data>
+  <data name="Settings_LogsSize" xml:space="preserve">
+    <value>ログサイズ:</value>
+  </data>
+  <data name="Settings_OpenLogFolder" xml:space="preserve">
+    <value>ログフォルダーを開く</value>
+  </data>
+  <data name="Settings_ExportLogs" xml:space="preserve">
+    <value>ログをエクスポート（.zip）</value>
+  </data>
+  <data name="Settings_ClearOldLogs" xml:space="preserve">
+    <value>古いログを削除</value>
+  </data>
+  <data name="Settings_ClearLogsConfirm" xml:space="preserve">
+    <value>古いログファイルを削除しますか？本日のログは保持されます。</value>
+  </data>
+  <data name="Settings_Advanced" xml:space="preserve">
+    <value>詳細設定</value>
+  </data>
+  <data name="Settings_RunMode" xml:space="preserve">
+    <value>実行モード:</value>
+  </data>
+  <data name="Settings_RunModeInstalled" xml:space="preserve">
+    <value>インストール版</value>
+  </data>
+  <data name="Settings_RunModePortable" xml:space="preserve">
+    <value>ポータブル / 開発</value>
+  </data>
+  <data name="Settings_ConfigPath" xml:space="preserve">
+    <value>設定ファイル</value>
+  </data>
+  <data name="Settings_OpenConfig" xml:space="preserve">
+    <value>フォルダーを開く</value>
+  </data>
+  <data name="Settings_OpenDebugPanel" xml:space="preserve">
+    <value>デバッグパネルを開く</value>
+  </data>
+  <data name="Settings_ResetDefaults" xml:space="preserve">
+    <value>既定にリセット</value>
+  </data>
+  <data name="Settings_ResetConfirm" xml:space="preserve">
+    <value>すべての設定を既定にリセットしますか？同意済みの規約とログは保持されます。</value>
+  </data>
+  <data name="Home_SystemStatus" xml:space="preserve">
+    <value>システムの状態</value>
+  </data>
+  <data name="Home_StatusOs" xml:space="preserve">
+    <value>Windows</value>
+  </data>
+  <data name="Home_StatusMemory" xml:space="preserve">
+    <value>メモリ</value>
+  </data>
+  <data name="Home_StatusDisk" xml:space="preserve">
+    <value>システムドライブ</value>
+  </data>
+  <data name="Home_StatusUptime" xml:space="preserve">
+    <value>稼働時間</value>
+  </data>
+  <data name="Home_OsFormat" xml:space="preserve">
+    <value>{0}（ビルド {1}）</value>
+  </data>
+  <data name="Home_StorageFormat" xml:space="preserve">
+    <value>{1} 中 {0} の空き</value>
+  </data>
+  <data name="Home_GigabytesFormat" xml:space="preserve">
+    <value>{0:0.0} GB</value>
+  </data>
+  <data name="Home_DiskFormat" xml:space="preserve">
+    <value>{0} · {1}</value>
+  </data>
+  <data name="Home_UptimeWithDays" xml:space="preserve">
+    <value>{0}日 {1}時間 {2}分</value>
+  </data>
+  <data name="Home_UptimeNoDays" xml:space="preserve">
+    <value>{1}時間 {2}分</value>
+  </data>
+  <data name="Home_Recent" xml:space="preserve">
+    <value>最近のコマンド</value>
+  </data>
+  <data name="Home_NoRecent" xml:space="preserve">
+    <value>まだコマンドを実行していません。</value>
+  </data>
+  <data name="Home_NoFavorites" xml:space="preserve">
+    <value>お気に入りはまだありません。星アイコンでコマンドを固定できます。</value>
+  </data>
+  <data name="History_Title" xml:space="preserve">
+    <value>実行履歴</value>
+  </data>
+  <data name="History_Empty" xml:space="preserve">
+    <value>まだコマンドを実行していません。</value>
+  </data>
+  <data name="History_RunAgain" xml:space="preserve">
+    <value>もう一度実行</value>
+  </data>
+  <data name="History_Clear" xml:space="preserve">
+    <value>履歴をクリア</value>
+  </data>
+  <data name="History_Undo" xml:space="preserve">
+    <value>元に戻す</value>
+  </data>
+  <data name="Registry_ChangesHeader" xml:space="preserve">
+    <value>— レジストリの前後 —</value>
+  </data>
+  <data name="Registry_ChangeFormat" xml:space="preserve">
+    <value>{0}: {1} → {2}</value>
+  </data>
+  <data name="Registry_NotSet" xml:space="preserve">
+    <value>（未設定）</value>
+  </data>
+  <data name="Registry_NoChanges" xml:space="preserve">
+    <value>レジストリの変更は検出されませんでした。</value>
+  </data>
+  <data name="Recipes_Saved" xml:space="preserve">
+    <value>保存済みレシピ</value>
+  </data>
+  <data name="Recipes_New" xml:space="preserve">
+    <value>新規</value>
+  </data>
+  <data name="Recipe_Delete" xml:space="preserve">
+    <value>レシピを削除</value>
+  </data>
+  <data name="Recipes_NameHint" xml:space="preserve">
+    <value>レシピ名</value>
+  </data>
+  <data name="Recipes_NoSteps" xml:space="preserve">
+    <value>まだ手順がありません。下にコマンドを追加してチェーンを作成してください。</value>
+  </data>
+  <data name="Recipes_AddHint" xml:space="preserve">
+    <value>コマンドを追加…</value>
+  </data>
+  <data name="Recipes_AddStep" xml:space="preserve">
+    <value>追加</value>
+  </data>
+  <data name="Recipes_Save" xml:space="preserve">
+    <value>保存</value>
+  </data>
+  <data name="Recipes_Run" xml:space="preserve">
+    <value>レシピを実行</value>
+  </data>
+  <data name="Recipes_MoveUp" xml:space="preserve">
+    <value>上に移動</value>
+  </data>
+  <data name="Recipes_MoveDown" xml:space="preserve">
+    <value>下に移動</value>
+  </data>
+  <data name="Recipes_RemoveStep" xml:space="preserve">
+    <value>手順を削除</value>
+  </data>
+  <data name="Recipe_StepHeader" xml:space="preserve">
+    <value>▶ 手順 {0}/{1}: {2}</value>
+  </data>
+  <data name="Recipe_StoppedOnError" xml:space="preserve">
+    <value>レシピを停止しました: 手順が失敗しました。</value>
+  </data>
+  <data name="Recipe_StoppedRestart" xml:space="preserve">
+    <value>レシピを一時停止しました: 続行する前に再起動が必要です。</value>
+  </data>
+  <data name="Recipe_Cancelled" xml:space="preserve">
+    <value>レシピをキャンセルしました。</value>
+  </data>
+  <data name="Recipe_ContainsDangerous" xml:space="preserve">
+    <value>このレシピには危険な手順が含まれています。</value>
+  </data>
+  <data name="Recipe_ConfirmTitle" xml:space="preserve">
+    <value>レシピを実行しますか？</value>
+  </data>
+  <data name="Recipe_DeleteConfirm" xml:space="preserve">
+    <value>レシピ「{0}」を削除しますか？</value>
+  </data>
+  <data name="UserCmd_Warning" xml:space="preserve">
+    <value>これらのコマンドは検証済みカタログには含まれず、常に管理者権限なしで実行されます。その動作についてはすべてあなたの責任となります。</value>
+  </data>
+  <data name="UserCmd_Saved" xml:space="preserve">
+    <value>保存済みコマンド</value>
+  </data>
+  <data name="UserCmd_New" xml:space="preserve">
+    <value>新規</value>
+  </data>
+  <data name="UserCmd_Delete" xml:space="preserve">
+    <value>削除</value>
+  </data>
+  <data name="UserCmd_NameHint" xml:space="preserve">
+    <value>名前</value>
+  </data>
+  <data name="UserCmd_ExecutableHint" xml:space="preserve">
+    <value>実行ファイル（例: cmd、powershell）</value>
+  </data>
+  <data name="UserCmd_ArgumentsHint" xml:space="preserve">
+    <value>引数</value>
+  </data>
+  <data name="UserCmd_Save" xml:space="preserve">
+    <value>保存</value>
+  </data>
+  <data name="UserCmd_Run" xml:space="preserve">
+    <value>実行</value>
+  </data>
+  <data name="UserCmd_NoCommands" xml:space="preserve">
+    <value>まだコマンドがありません。</value>
+  </data>
+  <data name="UserCmd_RunTitle" xml:space="preserve">
+    <value>このコマンドを実行しますか？</value>
+  </data>
+  <data name="UserCmd_RunConfirm" xml:space="preserve">
+    <value>これは管理者権限なしで実行されます:
+
+{0}
+
+続行しますか？</value>
+  </data>
+  <data name="UserCmd_DeleteConfirm" xml:space="preserve">
+    <value>「{0}」を削除しますか？</value>
+  </data>
+  <data name="Favorite_Toggle" xml:space="preserve">
+    <value>お気に入りの切り替え</value>
+  </data>
+  <data name="Menu_OpenConfigFolder" xml:space="preserve">
+    <value>設定フォルダーを開く</value>
+  </data>
+  <data name="Menu_OpenLogFolder" xml:space="preserve">
+    <value>ログフォルダーを開く</value>
+  </data>
+  <data name="Menu_FullScreen" xml:space="preserve">
+    <value>全画面表示</value>
+  </data>
+  <data name="Menu_About" xml:space="preserve">
+    <value>CommandForge について</value>
+  </data>
+  <data name="Menu_Wiki" xml:space="preserve">
+    <value>ガイド / Wiki</value>
+  </data>
+  <data name="Legal_EulaSummary" xml:space="preserve">
+    <value>CommandForge を使用することで、本ソフトウェアが自己責任のもとシステムレベルのコマンドを無保証で実行することに同意したものとみなされます。あなたの権利は GNU GPL v3 に従います。本規約はリスクの確認と保証の免責を追加するものです。</value>
+  </data>
+  <data name="Legal_GplSummary" xml:space="preserve">
+    <value>CommandForge は GNU General Public License v3.0 に基づくフリーソフトウェアです。GPLv3 の条件のもとで使用・研究・改変・再配布できます。</value>
+  </data>
+  <data name="Legal_DisclaimerSummary" xml:space="preserve">
+    <value>自己責任でご使用ください。システムレベルのコマンドは構成を変更したりデータを失わせたりする可能性があります — リスクの高い操作の前にデータをバックアップし、復元ポイントを作成してください。CommandForge は Microsoft とは関係ありません。</value>
+  </data>
+  <data name="Legal_PrivacySummary" xml:space="preserve">
+    <value>オフラインファースト。CommandForge は個人データを収集せず、テレメトリもありません。唯一のネットワーク接続は GitHub の更新確認です。</value>
+  </data>
+  <data name="Menu_Terms" xml:space="preserve">
+    <value>規約とプライバシー</value>
+  </data>
+  <data name="LegalViewer_Title" xml:space="preserve">
+    <value>規約とプライバシー</value>
+  </data>
+  <data name="Menu_KeyboardShortcuts" xml:space="preserve">
+    <value>キーボードショートカット</value>
+  </data>
+  <data name="Menu_PortableInfo" xml:space="preserve">
+    <value>ポータブル情報</value>
+  </data>
+  <data name="Menu_RestorePoint" xml:space="preserve">
+    <value>システムの復元ポイントを作成</value>
+  </data>
+  <data name="Shortcuts_Palette" xml:space="preserve">
+    <value>コマンドパレットを開く / 検索にフォーカス</value>
+  </data>
+  <data name="Shortcuts_ListNav" xml:space="preserve">
+    <value>選択を移動（一覧とパレット）</value>
+  </data>
+  <data name="Shortcuts_OpenSelected" xml:space="preserve">
+    <value>選択したコマンドを開く</value>
+  </data>
+  <data name="Shortcuts_CloseDialog" xml:space="preserve">
+    <value>ダイアログを閉じる / キャンセル</value>
+  </data>
+  <data name="PortableInfo_ConfigFolder" xml:space="preserve">
+    <value>構成フォルダー</value>
+  </data>
+  <data name="PortableInfo_LogFolder" xml:space="preserve">
+    <value>ログフォルダー</value>
+  </data>
+  <data name="Cmd_info.hotfixes_Title" xml:space="preserve">
+    <value>インストール済みの更新</value>
+  </data>
+  <data name="Cmd_info.hotfixes_Desc" xml:space="preserve">
+    <value>インストール済みの Windows 更新プログラムとホットフィックスを新しい順に一覧表示します。</value>
+  </data>
+  <data name="Cmd_info.drivers_Title" xml:space="preserve">
+    <value>インストール済みドライバー</value>
+  </data>
+  <data name="Cmd_info.drivers_Desc" xml:space="preserve">
+    <value>署名済みのデバイスドライバーをバージョンと提供元とともに一覧表示します。</value>
+  </data>
+  <data name="Cmd_info.bios_Title" xml:space="preserve">
+    <value>BIOS / ファームウェア情報</value>
+  </data>
+  <data name="Cmd_info.bios_Desc" xml:space="preserve">
+    <value>BIOS のメーカー、バージョン、シリアル番号、リリース日を表示します。</value>
+  </data>
+  <data name="Cmd_info.env_Title" xml:space="preserve">
+    <value>環境変数</value>
+  </data>
+  <data name="Cmd_info.env_Desc" xml:space="preserve">
+    <value>現在の環境変数とその値を一覧表示します。</value>
+  </data>
+  <data name="Cmd_info.installedapps_Title" xml:space="preserve">
+    <value>インストール済みプログラム</value>
+  </data>
+  <data name="Cmd_info.installedapps_Desc" xml:space="preserve">
+    <value>レジストリのアンインストールキーからインストール済みプログラムを一覧表示します。</value>
+  </data>
+  <data name="Cmd_info.monitors_Title" xml:space="preserve">
+    <value>ディスプレイ情報</value>
+  </data>
+  <data name="Cmd_info.monitors_Desc" xml:space="preserve">
+    <value>接続中のディスプレイを現在の解像度とリフレッシュレートとともに表示します。</value>
+  </data>
+  <data name="Cmd_net.netstat_Title" xml:space="preserve">
+    <value>アクティブな接続</value>
+  </data>
+  <data name="Cmd_net.netstat_Desc" xml:space="preserve">
+    <value>アクティブな TCP/UDP 接続とリッスン中のポートを PID とともに表示します。</value>
+  </data>
+  <data name="Cmd_net.arp_Title" xml:space="preserve">
+    <value>ARP キャッシュ</value>
+  </data>
+  <data name="Cmd_net.arp_Desc" xml:space="preserve">
+    <value>IP アドレスと MAC アドレスの対応を示す ARP テーブルを表示します。</value>
+  </data>
+  <data name="Cmd_net.route_Title" xml:space="preserve">
+    <value>ルーティングテーブル</value>
+  </data>
+  <data name="Cmd_net.route_Desc" xml:space="preserve">
+    <value>IPv4/IPv6 のルーティングテーブルを表示します。</value>
+  </data>
+  <data name="Cmd_net.wifi.profiles_Title" xml:space="preserve">
+    <value>Wi-Fi プロファイル</value>
+  </data>
+  <data name="Cmd_net.wifi.profiles_Desc" xml:space="preserve">
+    <value>保存済みの Wi-Fi（WLAN）ネットワークプロファイルを一覧表示します。</value>
+  </data>
+  <data name="Cmd_net.proxy.show_Title" xml:space="preserve">
+    <value>WinHTTP プロキシ</value>
+  </data>
+  <data name="Cmd_net.proxy.show_Desc" xml:space="preserve">
+    <value>システムの WinHTTP プロキシ構成を表示します。</value>
+  </data>
+  <data name="Cmd_tweak.darkmode.on_Title" xml:space="preserve">
+    <value>ダークモードを有効化</value>
+  </data>
+  <data name="Cmd_tweak.darkmode.on_Desc" xml:space="preserve">
+    <value>アプリとシステムのテーマをダークモードに切り替えます。</value>
+  </data>
+  <data name="Cmd_tweak.darkmode.off_Title" xml:space="preserve">
+    <value>ライトモードを有効化</value>
+  </data>
+  <data name="Cmd_tweak.darkmode.off_Desc" xml:space="preserve">
+    <value>アプリとシステムのテーマをライトモードに戻します。</value>
+  </data>
+  <data name="Cmd_tweak.win11.taskbarleft_Title" xml:space="preserve">
+    <value>タスクバー: 左揃え（Win11）</value>
+  </data>
+  <data name="Cmd_tweak.win11.taskbarleft_Desc" xml:space="preserve">
+    <value>Windows 11 のタスクバーを左揃えにし、エクスプローラーを再起動します。</value>
+  </data>
+  <data name="Cmd_tweak.win11.taskbarcenter_Title" xml:space="preserve">
+    <value>タスクバー: 中央揃え（Win11）</value>
+  </data>
+  <data name="Cmd_tweak.win11.taskbarcenter_Desc" xml:space="preserve">
+    <value>Windows 11 のタスクバーを中央揃えにし、エクスプローラーを再起動します。</value>
+  </data>
+  <data name="Cmd_tweak.clockseconds.on_Title" xml:space="preserve">
+    <value>時計に秒を表示（Win11）</value>
+  </data>
+  <data name="Cmd_tweak.clockseconds.on_Desc" xml:space="preserve">
+    <value>Windows 11 のタスクバー時計に秒を表示し、エクスプローラーを再起動します。</value>
+  </data>
+  <data name="Cmd_tweak.clockseconds.off_Title" xml:space="preserve">
+    <value>時計の秒を非表示（Win11）</value>
+  </data>
+  <data name="Cmd_tweak.clockseconds.off_Desc" xml:space="preserve">
+    <value>Windows 11 のタスクバー時計から秒を非表示にし、エクスプローラーを再起動します。</value>
+  </data>
+  <data name="Cmd_clean.thumbnailcache_Title" xml:space="preserve">
+    <value>サムネイルキャッシュをクリア</value>
+  </data>
+  <data name="Cmd_clean.thumbnailcache_Desc" xml:space="preserve">
+    <value>キャッシュされたサムネイルを削除し、エクスプローラーを再起動して再構築します。</value>
+  </data>
+  <data name="Cmd_clean.fontcache_Title" xml:space="preserve">
+    <value>フォントキャッシュをクリア</value>
+  </data>
+  <data name="Cmd_clean.fontcache_Desc" xml:space="preserve">
+    <value>Font Cache サービスを停止し、キャッシュをクリアして再起動します。</value>
+  </data>
+  <data name="Cmd_clean.prefetch_Title" xml:space="preserve">
+    <value>Prefetch をクリア</value>
+  </data>
+  <data name="Cmd_clean.prefetch_Desc" xml:space="preserve">
+    <value>Windows の Prefetch フォルダーを空にします（自動的に再構築されます）。</value>
+  </data>
+  <data name="Cmd_power.set.balanced_Title" xml:space="preserve">
+    <value>バランスプランを設定</value>
+  </data>
+  <data name="Cmd_power.set.balanced_Desc" xml:space="preserve">
+    <value>バランス電源プランを有効にします。</value>
+  </data>
+  <data name="Cmd_power.requests_Title" xml:space="preserve">
+    <value>電源要求</value>
+  </data>
+  <data name="Cmd_power.requests_Desc" xml:space="preserve">
+    <value>現在スリープや画面オフを妨げているアプリとドライバーを表示します。</value>
+  </data>
+  <data name="Cmd_power.fastboot.off_Title" xml:space="preserve">
+    <value>高速スタートアップを無効化</value>
+  </data>
+  <data name="Cmd_power.fastboot.off_Desc" xml:space="preserve">
+    <value>高速スタートアップ（ハイブリッドブート）を無効にし、完全シャットダウンにします。</value>
+  </data>
+  <data name="Cmd_power.fastboot.on_Title" xml:space="preserve">
+    <value>高速スタートアップを有効化</value>
+  </data>
+  <data name="Cmd_power.fastboot.on_Desc" xml:space="preserve">
+    <value>高速スタートアップ（ハイブリッドブート）を有効にします。</value>
+  </data>
+  <data name="Cmd_diag.taskmgr_Title" xml:space="preserve">
+    <value>タスクマネージャー</value>
+  </data>
+  <data name="Cmd_diag.taskmgr_Desc" xml:space="preserve">
+    <value>タスクマネージャーを開きます。</value>
+  </data>
+  <data name="Cmd_diag.devmgmt_Title" xml:space="preserve">
+    <value>デバイスマネージャー</value>
+  </data>
+  <data name="Cmd_diag.devmgmt_Desc" xml:space="preserve">
+    <value>デバイスマネージャーを開きます。</value>
+  </data>
+  <data name="Cmd_diag.services_Title" xml:space="preserve">
+    <value>サービス</value>
+  </data>
+  <data name="Cmd_diag.services_Desc" xml:space="preserve">
+    <value>サービス管理コンソールを開きます。</value>
+  </data>
+  <data name="Cmd_diag.gpresult_Title" xml:space="preserve">
+    <value>グループポリシーの結果</value>
+  </data>
+  <data name="Cmd_diag.gpresult_Desc" xml:space="preserve">
+    <value>この PC とユーザーのポリシーの結果セット（RSoP）の概要を表示します。</value>
+  </data>
+  <data name="Cmd_winget.source.list_Title" xml:space="preserve">
+    <value>winget ソースを一覧表示</value>
+  </data>
+  <data name="Cmd_winget.source.list_Desc" xml:space="preserve">
+    <value>構成済みの winget パッケージソースを一覧表示します。</value>
+  </data>
+  <data name="Cmd_store.reset_Title" xml:space="preserve">
+    <value>Microsoft Store をリセット</value>
+  </data>
+  <data name="Cmd_store.reset_Desc" xml:space="preserve">
+    <value>Microsoft Store のキャッシュをクリアします（wsreset）。</value>
+  </data>
+  <data name="Cmd_sec.defender.status_Title" xml:space="preserve">
+    <value>Defender の状態</value>
+  </data>
+  <data name="Cmd_sec.defender.status_Desc" xml:space="preserve">
+    <value>Microsoft Defender の保護状態と定義バージョンを表示します。</value>
+  </data>
+  <data name="Cmd_sec.defender.fullscan_Title" xml:space="preserve">
+    <value>Defender フルスキャン</value>
+  </data>
+  <data name="Cmd_sec.defender.fullscan_Desc" xml:space="preserve">
+    <value>Microsoft Defender のフルスキャンを実行します（時間がかかる場合があります）。</value>
+  </data>
+  <data name="Cmd_sec.firewall.on_Title" xml:space="preserve">
+    <value>ファイアウォールを有効化</value>
+  </data>
+  <data name="Cmd_sec.firewall.on_Desc" xml:space="preserve">
+    <value>すべてのプロファイルで Windows ファイアウォールを有効にします。</value>
+  </data>
+  <data name="Cmd_sec.firewall.off_Title" xml:space="preserve">
+    <value>ファイアウォールを無効化</value>
+  </data>
+  <data name="Cmd_sec.firewall.off_Desc" xml:space="preserve">
+    <value>すべてのプロファイルで Windows ファイアウォールを無効にします。PC が無防備になります — できるだけ早く再び有効にしてください。</value>
+  </data>
+  <data name="Cmd_dev.wsl.shutdown_Title" xml:space="preserve">
+    <value>WSL をシャットダウン</value>
+  </data>
+  <data name="Cmd_dev.wsl.shutdown_Desc" xml:space="preserve">
+    <value>実行中のすべての WSL ディストリビューションと WSL 仮想マシンを停止します。</value>
+  </data>
+  <data name="Cmd_dev.sandbox.off_Title" xml:space="preserve">
+    <value>Windows サンドボックスを無効化</value>
+  </data>
+  <data name="Cmd_dev.sandbox.off_Desc" xml:space="preserve">
+    <value>Windows サンドボックスのオプション機能を無効にします。再起動が必要です。</value>
+  </data>
+  <data name="Cmd_dev.longpaths.on_Title" xml:space="preserve">
+    <value>長いパスを有効化</value>
+  </data>
+  <data name="Cmd_dev.longpaths.on_Desc" xml:space="preserve">
+    <value>Win32 の長いパス（260 文字超）のサポートを有効にします。</value>
+  </data>
+  <data name="Cmd_dev.longpaths.off_Title" xml:space="preserve">
+    <value>長いパスを無効化</value>
+  </data>
+  <data name="Cmd_dev.longpaths.off_Desc" xml:space="preserve">
+    <value>Win32 の長いパスのサポートを無効にします（既定に戻します）。</value>
+  </data>
+</root>

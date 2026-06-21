@@ -6,45 +6,48 @@ using CommandForge.Wpf.Resources;
 namespace CommandForge.Tests;
 
 /// <summary>
-/// Cross-checks that every catalog title/description resource key exists in both the neutral
-/// (EN) resources and the Vietnamese satellite (no parent fallback).
+/// Cross-checks that every catalog title/description and UI resource key exists in the neutral
+/// (EN) resources and in both the Vietnamese and Japanese satellites (no parent fallback), so a
+/// missing translation fails the build rather than silently falling back to English.
 /// </summary>
 public sealed class ResxKeyTests
 {
     private static readonly CatalogLoadResult Catalog = CatalogLoader.LoadEmbedded();
 
-    [Fact]
-    public void Catalog_AllKeys_ExistInResx_EN_and_VI()
+    /// <summary>Asserts every key resolves in EN (neutral) and in the VI and JA satellites without fallback.</summary>
+    private static void AssertKeysExist(IEnumerable<string> keys)
     {
         var manager = new ResourceManager("CommandForge.Wpf.Resources.Strings", typeof(Strings).Assembly);
         var english = manager.GetResourceSet(CultureInfo.InvariantCulture, createIfNotExists: true, tryParents: true);
         var vietnamese = manager.GetResourceSet(new CultureInfo("vi"), createIfNotExists: true, tryParents: false);
+        var japanese = manager.GetResourceSet(new CultureInfo("ja"), createIfNotExists: true, tryParents: false);
 
         Assert.NotNull(english);
         Assert.NotNull(vietnamese);
-
-        var keys = new List<string>();
-        keys.AddRange(Catalog.Categories.Select(c => c.TitleKey));
-        keys.AddRange(Catalog.Commands.Select(c => c.TitleKey));
-        keys.AddRange(Catalog.Commands.Select(c => c.DescriptionKey));
+        Assert.NotNull(japanese);
 
         foreach (var key in keys)
         {
             Assert.True(english!.GetString(key) is not null, $"Missing EN resource for key '{key}'.");
             Assert.True(vietnamese!.GetString(key) is not null, $"Missing VI resource for key '{key}'.");
+            Assert.True(japanese!.GetString(key) is not null, $"Missing JA resource for key '{key}'.");
         }
     }
 
     [Fact]
-    public void SettingsUiKeys_ExistInResx_EN_and_VI()
+    public void Catalog_AllKeys_ExistInResx_AllCultures()
     {
-        var manager = new ResourceManager("CommandForge.Wpf.Resources.Strings", typeof(Strings).Assembly);
-        var english = manager.GetResourceSet(CultureInfo.InvariantCulture, createIfNotExists: true, tryParents: true);
-        var vietnamese = manager.GetResourceSet(new CultureInfo("vi"), createIfNotExists: true, tryParents: false);
+        var keys = new List<string>();
+        keys.AddRange(Catalog.Categories.Select(c => c.TitleKey));
+        keys.AddRange(Catalog.Commands.Select(c => c.TitleKey));
+        keys.AddRange(Catalog.Commands.Select(c => c.DescriptionKey));
 
-        Assert.NotNull(english);
-        Assert.NotNull(vietnamese);
+        AssertKeysExist(keys);
+    }
 
+    [Fact]
+    public void SettingsUiKeys_ExistInResx_AllCultures()
+    {
         string[] keys =
         [
             "Menu_OpenSettings", "LanguageOption_System",
@@ -63,23 +66,12 @@ public sealed class ResxKeyTests
             "Settings_ImportInvalid", "Settings_ImportSuccess", "Settings_ProfileApplied", "Settings_DeleteProfileConfirm",
         ];
 
-        foreach (var key in keys)
-        {
-            Assert.True(english!.GetString(key) is not null, $"Missing EN resource for key '{key}'.");
-            Assert.True(vietnamese!.GetString(key) is not null, $"Missing VI resource for key '{key}'.");
-        }
+        AssertKeysExist(keys);
     }
 
     [Fact]
-    public void DiagnosticsUiKeys_ExistInResx_EN_and_VI()
+    public void DiagnosticsUiKeys_ExistInResx_AllCultures()
     {
-        var manager = new ResourceManager("CommandForge.Wpf.Resources.Strings", typeof(Strings).Assembly);
-        var english = manager.GetResourceSet(CultureInfo.InvariantCulture, createIfNotExists: true, tryParents: true);
-        var vietnamese = manager.GetResourceSet(new CultureInfo("vi"), createIfNotExists: true, tryParents: false);
-
-        Assert.NotNull(english);
-        Assert.NotNull(vietnamese);
-
         string[] keys =
         [
             "Menu_LogViewer", "Menu_ExportLogs", "Menu_DebugPanel", "Menu_ReportBug",
@@ -97,23 +89,12 @@ public sealed class ResxKeyTests
             "Settings_OpenDebugPanel", "Settings_ResetDefaults", "Settings_ResetConfirm",
         ];
 
-        foreach (var key in keys)
-        {
-            Assert.True(english!.GetString(key) is not null, $"Missing EN resource for key '{key}'.");
-            Assert.True(vietnamese!.GetString(key) is not null, $"Missing VI resource for key '{key}'.");
-        }
+        AssertKeysExist(keys);
     }
 
     [Fact]
-    public void HomeUiKeys_ExistInResx_EN_and_VI()
+    public void HomeUiKeys_ExistInResx_AllCultures()
     {
-        var manager = new ResourceManager("CommandForge.Wpf.Resources.Strings", typeof(Strings).Assembly);
-        var english = manager.GetResourceSet(CultureInfo.InvariantCulture, createIfNotExists: true, tryParents: true);
-        var vietnamese = manager.GetResourceSet(new CultureInfo("vi"), createIfNotExists: true, tryParents: false);
-
-        Assert.NotNull(english);
-        Assert.NotNull(vietnamese);
-
         string[] keys =
         [
             "SidebarHome", "SidebarFavorites", "Favorite_Toggle",
@@ -123,23 +104,12 @@ public sealed class ResxKeyTests
             "Home_Recent", "Home_NoRecent", "Home_NoFavorites",
         ];
 
-        foreach (var key in keys)
-        {
-            Assert.True(english!.GetString(key) is not null, $"Missing EN resource for key '{key}'.");
-            Assert.True(vietnamese!.GetString(key) is not null, $"Missing VI resource for key '{key}'.");
-        }
+        AssertKeysExist(keys);
     }
 
     [Fact]
-    public void LegalUiKeys_ExistInResx_EN_and_VI()
+    public void LegalUiKeys_ExistInResx_AllCultures()
     {
-        var manager = new ResourceManager("CommandForge.Wpf.Resources.Strings", typeof(Strings).Assembly);
-        var english = manager.GetResourceSet(CultureInfo.InvariantCulture, createIfNotExists: true, tryParents: true);
-        var vietnamese = manager.GetResourceSet(new CultureInfo("vi"), createIfNotExists: true, tryParents: false);
-
-        Assert.NotNull(english);
-        Assert.NotNull(vietnamese);
-
         string[] keys =
         [
             "LegalGateTitle", "LegalGateIntro", "LegalGateAgree", "LegalGateContinue", "LegalGateExit",
@@ -148,23 +118,12 @@ public sealed class ResxKeyTests
             "LegalViewer_Title",
         ];
 
-        foreach (var key in keys)
-        {
-            Assert.True(english!.GetString(key) is not null, $"Missing EN resource for key '{key}'.");
-            Assert.True(vietnamese!.GetString(key) is not null, $"Missing VI resource for key '{key}'.");
-        }
+        AssertKeysExist(keys);
     }
 
     [Fact]
-    public void MenuUiKeys_ExistInResx_EN_and_VI()
+    public void MenuUiKeys_ExistInResx_AllCultures()
     {
-        var manager = new ResourceManager("CommandForge.Wpf.Resources.Strings", typeof(Strings).Assembly);
-        var english = manager.GetResourceSet(CultureInfo.InvariantCulture, createIfNotExists: true, tryParents: true);
-        var vietnamese = manager.GetResourceSet(new CultureInfo("vi"), createIfNotExists: true, tryParents: false);
-
-        Assert.NotNull(english);
-        Assert.NotNull(vietnamese);
-
         string[] keys =
         [
             "MenuFile", "MenuView", "MenuTools", "MenuAbout", "MenuHelp", "MenuExit", "MenuToggleSidebar",
@@ -176,23 +135,12 @@ public sealed class ResxKeyTests
             "Menu_KeyboardShortcuts", "Menu_PortableInfo", "Menu_RestorePoint",
         ];
 
-        foreach (var key in keys)
-        {
-            Assert.True(english!.GetString(key) is not null, $"Missing EN resource for key '{key}'.");
-            Assert.True(vietnamese!.GetString(key) is not null, $"Missing VI resource for key '{key}'.");
-        }
+        AssertKeysExist(keys);
     }
 
     [Fact]
-    public void DialogUiKeys_ExistInResx_EN_and_VI()
+    public void DialogUiKeys_ExistInResx_AllCultures()
     {
-        var manager = new ResourceManager("CommandForge.Wpf.Resources.Strings", typeof(Strings).Assembly);
-        var english = manager.GetResourceSet(CultureInfo.InvariantCulture, createIfNotExists: true, tryParents: true);
-        var vietnamese = manager.GetResourceSet(new CultureInfo("vi"), createIfNotExists: true, tryParents: false);
-
-        Assert.NotNull(english);
-        Assert.NotNull(vietnamese);
-
         string[] keys =
         [
             "Shortcuts_Palette", "Shortcuts_ListNav", "Shortcuts_OpenSelected", "Shortcuts_CloseDialog",
@@ -201,23 +149,12 @@ public sealed class ResxKeyTests
             "Settings_CurrentVersion", "Settings_NoDataCollected", "LanguageOption_System",
         ];
 
-        foreach (var key in keys)
-        {
-            Assert.True(english!.GetString(key) is not null, $"Missing EN resource for key '{key}'.");
-            Assert.True(vietnamese!.GetString(key) is not null, $"Missing VI resource for key '{key}'.");
-        }
+        AssertKeysExist(keys);
     }
 
     [Fact]
-    public void RecipesUiKeys_ExistInResx_EN_and_VI()
+    public void RecipesUiKeys_ExistInResx_AllCultures()
     {
-        var manager = new ResourceManager("CommandForge.Wpf.Resources.Strings", typeof(Strings).Assembly);
-        var english = manager.GetResourceSet(CultureInfo.InvariantCulture, createIfNotExists: true, tryParents: true);
-        var vietnamese = manager.GetResourceSet(new CultureInfo("vi"), createIfNotExists: true, tryParents: false);
-
-        Assert.NotNull(english);
-        Assert.NotNull(vietnamese);
-
         string[] keys =
         [
             "SidebarRecipes", "Recipes_Saved", "Recipes_New", "Recipe_Delete", "Recipes_NameHint",
@@ -227,23 +164,12 @@ public sealed class ResxKeyTests
             "Recipe_ContainsDangerous", "Recipe_ConfirmTitle", "Recipe_DeleteConfirm",
         ];
 
-        foreach (var key in keys)
-        {
-            Assert.True(english!.GetString(key) is not null, $"Missing EN resource for key '{key}'.");
-            Assert.True(vietnamese!.GetString(key) is not null, $"Missing VI resource for key '{key}'.");
-        }
+        AssertKeysExist(keys);
     }
 
     [Fact]
-    public void UserCommandsUiKeys_ExistInResx_EN_and_VI()
+    public void UserCommandsUiKeys_ExistInResx_AllCultures()
     {
-        var manager = new ResourceManager("CommandForge.Wpf.Resources.Strings", typeof(Strings).Assembly);
-        var english = manager.GetResourceSet(CultureInfo.InvariantCulture, createIfNotExists: true, tryParents: true);
-        var vietnamese = manager.GetResourceSet(new CultureInfo("vi"), createIfNotExists: true, tryParents: false);
-
-        Assert.NotNull(english);
-        Assert.NotNull(vietnamese);
-
         string[] keys =
         [
             "SidebarUserCommands", "UserCmd_Warning", "UserCmd_Saved", "UserCmd_New", "UserCmd_Delete",
@@ -251,54 +177,28 @@ public sealed class ResxKeyTests
             "UserCmd_NoCommands", "UserCmd_RunTitle", "UserCmd_RunConfirm", "UserCmd_DeleteConfirm",
         ];
 
-        foreach (var key in keys)
-        {
-            Assert.True(english!.GetString(key) is not null, $"Missing EN resource for key '{key}'.");
-            Assert.True(vietnamese!.GetString(key) is not null, $"Missing VI resource for key '{key}'.");
-        }
+        AssertKeysExist(keys);
     }
 
     [Fact]
-    public void RegistryAndUndoUiKeys_ExistInResx_EN_and_VI()
+    public void RegistryAndUndoUiKeys_ExistInResx_AllCultures()
     {
-        var manager = new ResourceManager("CommandForge.Wpf.Resources.Strings", typeof(Strings).Assembly);
-        var english = manager.GetResourceSet(CultureInfo.InvariantCulture, createIfNotExists: true, tryParents: true);
-        var vietnamese = manager.GetResourceSet(new CultureInfo("vi"), createIfNotExists: true, tryParents: false);
-
-        Assert.NotNull(english);
-        Assert.NotNull(vietnamese);
-
         string[] keys =
         [
             "History_Undo", "Registry_ChangesHeader", "Registry_ChangeFormat", "Registry_NotSet", "Registry_NoChanges",
         ];
 
-        foreach (var key in keys)
-        {
-            Assert.True(english!.GetString(key) is not null, $"Missing EN resource for key '{key}'.");
-            Assert.True(vietnamese!.GetString(key) is not null, $"Missing VI resource for key '{key}'.");
-        }
+        AssertKeysExist(keys);
     }
 
     [Fact]
-    public void DashboardAndSearchUiKeys_ExistInResx_EN_and_VI()
+    public void DashboardAndSearchUiKeys_ExistInResx_AllCultures()
     {
-        var manager = new ResourceManager("CommandForge.Wpf.Resources.Strings", typeof(Strings).Assembly);
-        var english = manager.GetResourceSet(CultureInfo.InvariantCulture, createIfNotExists: true, tryParents: true);
-        var vietnamese = manager.GetResourceSet(new CultureInfo("vi"), createIfNotExists: true, tryParents: false);
-
-        Assert.NotNull(english);
-        Assert.NotNull(vietnamese);
-
         string[] keys =
         [
             "Search_Suggestion", "Home_Suggestions", "Maint_LowDisk", "Maint_HighUptime", "Maint_Open",
         ];
 
-        foreach (var key in keys)
-        {
-            Assert.True(english!.GetString(key) is not null, $"Missing EN resource for key '{key}'.");
-            Assert.True(vietnamese!.GetString(key) is not null, $"Missing VI resource for key '{key}'.");
-        }
+        AssertKeysExist(keys);
     }
 }

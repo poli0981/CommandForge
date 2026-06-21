@@ -110,6 +110,9 @@
                     <MenuItem Header="Tiếng Việt" Command="{Binding Settings.SetLanguageCommand}"
                               CommandParameter="vi"
                               IsChecked="{Binding Settings.SelectedLanguage.Code, Converter={StaticResource StringEquals}, ConverterParameter=vi, Mode=OneWay}" />
+                    <MenuItem Header="日本語" Command="{Binding Settings.SetLanguageCommand}"
+                              CommandParameter="ja"
+                              IsChecked="{Binding Settings.SelectedLanguage.Code, Converter={StaticResource StringEquals}, ConverterParameter=ja, Mode=OneWay}" />
                 </MenuItem>
                 <Separator />
                 <MenuItem Header="{res:Loc MenuToggleSidebar}" Command="{Binding ToggleSidebarCommand}" InputGestureText="Ctrl+B" />

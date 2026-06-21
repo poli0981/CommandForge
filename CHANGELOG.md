@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.2.0] — 2026-06-21
+
 ### Added
 - **38 new commands** across all ten categories (catalog grew from 78 to 116): installed
   updates / drivers / BIOS / programs / displays; active connections, ARP cache, routing table,
@@ -85,7 +87,8 @@ Initial public release.
   checksums (and an optional VirusTotal scan). No telemetry — the only network use is checking
   GitHub for updates.
 
-[Unreleased]: https://github.com/poli0981/CommandForge/compare/v1.1.1...HEAD
+[Unreleased]: https://github.com/poli0981/CommandForge/compare/v1.2.0...HEAD
+[1.2.0]: https://github.com/poli0981/CommandForge/compare/v1.1.1...v1.2.0
 [1.1.1]: https://github.com/poli0981/CommandForge/compare/v1.1.0...v1.1.1
 [1.1.0]: https://github.com/poli0981/CommandForge/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/poli0981/CommandForge/releases/tag/v1.0.0

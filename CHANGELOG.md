@@ -7,7 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-_Nothing yet._
+### Added
+- **38 new commands** across all ten categories (catalog grew from 78 to 116): installed
+  updates / drivers / BIOS / programs / displays; active connections, ARP cache, routing table,
+  Wi-Fi profiles and WinHTTP proxy; dark/light mode and Windows 11 taskbar-alignment and
+  clock-seconds tweaks; thumbnail / font / Prefetch cleanup; the Balanced power plan, power
+  requests and a Fast Startup toggle; Task Manager, Device Manager, Services and Group Policy
+  result; winget source list and Microsoft Store reset; Defender status and full scan; firewall
+  on/off; WSL shutdown, Windows Sandbox off and a long-paths toggle.
+- **Japanese (日本語) language.** A full Japanese translation joins English and Vietnamese,
+  selectable in Settings and the View menu and switching live without a restart.
+
+### Changed
+- **Version-aware command list.** Commands that only apply to a specific Windows version (such as
+  the Windows 11 taskbar and clock tweaks) are now hidden automatically when they do not apply to
+  your build of Windows.
 
 ## [1.1.1] — 2026-06-19
 

@@ -31,6 +31,7 @@ public sealed partial class MainViewModel : ObservableObject
     private readonly IRegistryService _registry;
     private readonly Dictionary<string, CommandItemViewModel> _itemsById;
     private readonly CommandDefinition? _restorePointCommand;
+    private readonly int _osBuild;
     private IReadOnlyList<SearchableCommand> _searchable;
     private IReadOnlyDictionary<string, string> _categoryTitles;
 
@@ -89,7 +90,8 @@ public sealed partial class MainViewModel : ObservableObject
             }
         };
 
-        var vms = CatalogViewModelBuilder.Build(catalog);
+        _osBuild = systemInfo.GetStatus().OsBuild;
+        var vms = CatalogViewModelBuilder.Build(catalog, _osBuild);
         _searchable = vms.Searchable;
         _categoryTitles = vms.CategoryTitles;
         _itemsById = vms.Items.ToDictionary(i => i.Command.Id, StringComparer.Ordinal);
@@ -472,7 +474,7 @@ public sealed partial class MainViewModel : ObservableObject
     {
         // Rebuild the search corpus + category-title map in the new language, and refresh the
         // already-displayed item/category/detail view-models in place.
-        var vms = CatalogViewModelBuilder.Build(_catalog);
+        var vms = CatalogViewModelBuilder.Build(_catalog, _osBuild);
         _searchable = vms.Searchable;
         _categoryTitles = vms.CategoryTitles;
 

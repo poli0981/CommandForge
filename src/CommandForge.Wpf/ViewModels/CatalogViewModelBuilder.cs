@@ -17,7 +17,12 @@ internal sealed record CatalogViewModels(
 /// </summary>
 internal static class CatalogViewModelBuilder
 {
-    public static CatalogViewModels Build(ICatalogProvider catalog)
+    /// <summary>
+    /// Projects the catalog to view-models, hiding commands that do not apply to the current OS build
+    /// (e.g. Windows 11-only tweaks on Windows 10). The hidden commands never reach the list, palette,
+    /// category counts or any dashboard.
+    /// </summary>
+    public static CatalogViewModels Build(ICatalogProvider catalog, int currentOsBuild)
     {
         var categoryTitles = catalog.GetCategories()
             .ToDictionary(c => c.Id, c => Strings.Get(c.TitleKey), StringComparer.Ordinal);
@@ -26,6 +31,11 @@ internal static class CatalogViewModelBuilder
         var searchable = new List<SearchableCommand>();
         foreach (var command in catalog.GetCommands())
         {
+            if (!command.AppliesToOsBuild(currentOsBuild))
+            {
+                continue;
+            }
+
             var title = Strings.Get(command.TitleKey);
             var description = Strings.Get(command.DescriptionKey);
             items.Add(new CommandItemViewModel(command, title, description));

@@ -33,6 +33,8 @@ internal sealed record CommandDto
     public string? DocUrl { get; init; }
     public string[]? Tags { get; init; }
     public RegistryValueDto[]? AffectedRegistryValues { get; init; }
+    public int? MinOsBuild { get; init; }
+    public int? MaxOsBuild { get; init; }
 }
 
 /// <summary>JSON shape of a registry-value reference (for before/after comparison).</summary>

@@ -73,6 +73,9 @@ public static class CatalogLoader
             if (string.IsNullOrWhiteSpace(dto.DescriptionKey)) { errors.Add($"Command '{dto.Id}' is missing descriptionKey."); continue; }
             if (string.IsNullOrWhiteSpace(dto.Executable)) { errors.Add($"Command '{dto.Id}' is missing executable."); continue; }
             if (dto.Restart == RestartPolicy.FromOutputRegex && !IsValidRegex(dto.RestartRegex)) { errors.Add($"Command '{dto.Id}' has an invalid restartRegex."); continue; }
+            if (dto.MinOsBuild is <= 0) { errors.Add($"Command '{dto.Id}' has a non-positive minOsBuild."); continue; }
+            if (dto.MaxOsBuild is <= 0) { errors.Add($"Command '{dto.Id}' has a non-positive maxOsBuild."); continue; }
+            if (dto.MinOsBuild is { } minBuild && dto.MaxOsBuild is { } maxBuild && maxBuild < minBuild) { errors.Add($"Command '{dto.Id}' has maxOsBuild ({maxBuild}) less than minOsBuild ({minBuild})."); continue; }
 
             commands.Add(new CommandDefinition
             {
@@ -100,6 +103,8 @@ public static class CatalogLoader
                         .Where(r => !string.IsNullOrWhiteSpace(r.Path))
                         .Select(r => new RegistryValueRef { Path = r.Path!, Name = r.Name ?? string.Empty })
                         .ToList(),
+                MinOsBuild = dto.MinOsBuild,
+                MaxOsBuild = dto.MaxOsBuild,
             });
         }
 

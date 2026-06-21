@@ -1337,4 +1337,232 @@ Tiếp tục?</value>
   <data name="PortableInfo_LogFolder" xml:space="preserve">
     <value>Thư mục nhật ký</value>
   </data>
+  <data name="Cmd_info.hotfixes_Title" xml:space="preserve">
+    <value>Bản cập nhật đã cài</value>
+  </data>
+  <data name="Cmd_info.hotfixes_Desc" xml:space="preserve">
+    <value>Liệt kê các bản cập nhật &amp; hotfix Windows đã cài, mới nhất trước.</value>
+  </data>
+  <data name="Cmd_info.drivers_Title" xml:space="preserve">
+    <value>Driver đã cài</value>
+  </data>
+  <data name="Cmd_info.drivers_Desc" xml:space="preserve">
+    <value>Liệt kê driver thiết bị đã ký kèm phiên bản và nhà cung cấp.</value>
+  </data>
+  <data name="Cmd_info.bios_Title" xml:space="preserve">
+    <value>Thông tin BIOS / Firmware</value>
+  </data>
+  <data name="Cmd_info.bios_Desc" xml:space="preserve">
+    <value>Hiện hãng, phiên bản, số sê-ri và ngày phát hành BIOS.</value>
+  </data>
+  <data name="Cmd_info.env_Title" xml:space="preserve">
+    <value>Biến môi trường</value>
+  </data>
+  <data name="Cmd_info.env_Desc" xml:space="preserve">
+    <value>Liệt kê các biến môi trường hiện tại và giá trị.</value>
+  </data>
+  <data name="Cmd_info.installedapps_Title" xml:space="preserve">
+    <value>Chương trình đã cài</value>
+  </data>
+  <data name="Cmd_info.installedapps_Desc" xml:space="preserve">
+    <value>Liệt kê chương trình đã cài từ khóa Uninstall trong registry.</value>
+  </data>
+  <data name="Cmd_info.monitors_Title" xml:space="preserve">
+    <value>Thông tin màn hình</value>
+  </data>
+  <data name="Cmd_info.monitors_Desc" xml:space="preserve">
+    <value>Hiện màn hình đang kết nối kèm độ phân giải và tần số quét.</value>
+  </data>
+  <data name="Cmd_net.netstat_Title" xml:space="preserve">
+    <value>Kết nối đang hoạt động</value>
+  </data>
+  <data name="Cmd_net.netstat_Desc" xml:space="preserve">
+    <value>Hiện kết nối TCP/UDP và cổng đang lắng nghe kèm PID.</value>
+  </data>
+  <data name="Cmd_net.arp_Title" xml:space="preserve">
+    <value>Bộ nhớ ARP</value>
+  </data>
+  <data name="Cmd_net.arp_Desc" xml:space="preserve">
+    <value>Hiện bảng ARP ánh xạ địa chỉ IP sang MAC.</value>
+  </data>
+  <data name="Cmd_net.route_Title" xml:space="preserve">
+    <value>Bảng định tuyến</value>
+  </data>
+  <data name="Cmd_net.route_Desc" xml:space="preserve">
+    <value>In bảng định tuyến IPv4/IPv6.</value>
+  </data>
+  <data name="Cmd_net.wifi.profiles_Title" xml:space="preserve">
+    <value>Hồ sơ Wi-Fi</value>
+  </data>
+  <data name="Cmd_net.wifi.profiles_Desc" xml:space="preserve">
+    <value>Liệt kê các hồ sơ mạng Wi-Fi (WLAN) đã lưu.</value>
+  </data>
+  <data name="Cmd_net.proxy.show_Title" xml:space="preserve">
+    <value>Proxy WinHTTP</value>
+  </data>
+  <data name="Cmd_net.proxy.show_Desc" xml:space="preserve">
+    <value>Hiện cấu hình proxy WinHTTP của hệ thống.</value>
+  </data>
+  <data name="Cmd_tweak.darkmode.on_Title" xml:space="preserve">
+    <value>Bật chế độ tối</value>
+  </data>
+  <data name="Cmd_tweak.darkmode.on_Desc" xml:space="preserve">
+    <value>Chuyển ứng dụng và giao diện hệ thống sang chế độ tối.</value>
+  </data>
+  <data name="Cmd_tweak.darkmode.off_Title" xml:space="preserve">
+    <value>Bật chế độ sáng</value>
+  </data>
+  <data name="Cmd_tweak.darkmode.off_Desc" xml:space="preserve">
+    <value>Chuyển ứng dụng và giao diện hệ thống về chế độ sáng.</value>
+  </data>
+  <data name="Cmd_tweak.win11.taskbarleft_Title" xml:space="preserve">
+    <value>Thanh tác vụ: căn trái (Win11)</value>
+  </data>
+  <data name="Cmd_tweak.win11.taskbarleft_Desc" xml:space="preserve">
+    <value>Căn thanh tác vụ Windows 11 về bên trái và khởi động lại Explorer.</value>
+  </data>
+  <data name="Cmd_tweak.win11.taskbarcenter_Title" xml:space="preserve">
+    <value>Thanh tác vụ: căn giữa (Win11)</value>
+  </data>
+  <data name="Cmd_tweak.win11.taskbarcenter_Desc" xml:space="preserve">
+    <value>Căn giữa thanh tác vụ Windows 11 và khởi động lại Explorer.</value>
+  </data>
+  <data name="Cmd_tweak.clockseconds.on_Title" xml:space="preserve">
+    <value>Hiện giây trên đồng hồ (Win11)</value>
+  </data>
+  <data name="Cmd_tweak.clockseconds.on_Desc" xml:space="preserve">
+    <value>Hiện giây trên đồng hồ thanh tác vụ Windows 11 và khởi động lại Explorer.</value>
+  </data>
+  <data name="Cmd_tweak.clockseconds.off_Title" xml:space="preserve">
+    <value>Ẩn giây trên đồng hồ (Win11)</value>
+  </data>
+  <data name="Cmd_tweak.clockseconds.off_Desc" xml:space="preserve">
+    <value>Ẩn giây trên đồng hồ thanh tác vụ Windows 11 và khởi động lại Explorer.</value>
+  </data>
+  <data name="Cmd_clean.thumbnailcache_Title" xml:space="preserve">
+    <value>Xóa cache ảnh thu nhỏ</value>
+  </data>
+  <data name="Cmd_clean.thumbnailcache_Desc" xml:space="preserve">
+    <value>Xóa ảnh thu nhỏ đã lưu và khởi động lại Explorer để dựng lại.</value>
+  </data>
+  <data name="Cmd_clean.fontcache_Title" xml:space="preserve">
+    <value>Xóa cache phông chữ</value>
+  </data>
+  <data name="Cmd_clean.fontcache_Desc" xml:space="preserve">
+    <value>Dừng dịch vụ Font Cache, xóa cache và khởi động lại dịch vụ.</value>
+  </data>
+  <data name="Cmd_clean.prefetch_Title" xml:space="preserve">
+    <value>Xóa Prefetch</value>
+  </data>
+  <data name="Cmd_clean.prefetch_Desc" xml:space="preserve">
+    <value>Làm trống thư mục Prefetch của Windows (tự dựng lại).</value>
+  </data>
+  <data name="Cmd_power.set.balanced_Title" xml:space="preserve">
+    <value>Đặt gói Cân bằng</value>
+  </data>
+  <data name="Cmd_power.set.balanced_Desc" xml:space="preserve">
+    <value>Kích hoạt gói nguồn Cân bằng (Balanced).</value>
+  </data>
+  <data name="Cmd_power.requests_Title" xml:space="preserve">
+    <value>Yêu cầu nguồn</value>
+  </data>
+  <data name="Cmd_power.requests_Desc" xml:space="preserve">
+    <value>Hiện ứng dụng/driver đang ngăn máy ngủ hoặc tắt màn hình.</value>
+  </data>
+  <data name="Cmd_power.fastboot.off_Title" xml:space="preserve">
+    <value>Tắt Khởi động nhanh</value>
+  </data>
+  <data name="Cmd_power.fastboot.off_Desc" xml:space="preserve">
+    <value>Tắt Fast Startup (hybrid boot) để tắt máy hoàn toàn.</value>
+  </data>
+  <data name="Cmd_power.fastboot.on_Title" xml:space="preserve">
+    <value>Bật Khởi động nhanh</value>
+  </data>
+  <data name="Cmd_power.fastboot.on_Desc" xml:space="preserve">
+    <value>Bật Fast Startup (hybrid boot).</value>
+  </data>
+  <data name="Cmd_diag.taskmgr_Title" xml:space="preserve">
+    <value>Trình quản lý tác vụ</value>
+  </data>
+  <data name="Cmd_diag.taskmgr_Desc" xml:space="preserve">
+    <value>Mở Task Manager.</value>
+  </data>
+  <data name="Cmd_diag.devmgmt_Title" xml:space="preserve">
+    <value>Trình quản lý thiết bị</value>
+  </data>
+  <data name="Cmd_diag.devmgmt_Desc" xml:space="preserve">
+    <value>Mở Device Manager.</value>
+  </data>
+  <data name="Cmd_diag.services_Title" xml:space="preserve">
+    <value>Dịch vụ</value>
+  </data>
+  <data name="Cmd_diag.services_Desc" xml:space="preserve">
+    <value>Mở bảng quản lý Dịch vụ (Services).</value>
+  </data>
+  <data name="Cmd_diag.gpresult_Title" xml:space="preserve">
+    <value>Kết quả Group Policy</value>
+  </data>
+  <data name="Cmd_diag.gpresult_Desc" xml:space="preserve">
+    <value>Hiện tóm tắt Resultant Set of Policy (RSoP) cho máy và người dùng này.</value>
+  </data>
+  <data name="Cmd_winget.source.list_Title" xml:space="preserve">
+    <value>Liệt kê nguồn winget</value>
+  </data>
+  <data name="Cmd_winget.source.list_Desc" xml:space="preserve">
+    <value>Liệt kê các nguồn gói winget đã cấu hình.</value>
+  </data>
+  <data name="Cmd_store.reset_Title" xml:space="preserve">
+    <value>Đặt lại Microsoft Store</value>
+  </data>
+  <data name="Cmd_store.reset_Desc" xml:space="preserve">
+    <value>Xóa cache Microsoft Store (wsreset).</value>
+  </data>
+  <data name="Cmd_sec.defender.status_Title" xml:space="preserve">
+    <value>Trạng thái Defender</value>
+  </data>
+  <data name="Cmd_sec.defender.status_Desc" xml:space="preserve">
+    <value>Hiện trạng thái bảo vệ và phiên bản định nghĩa của Microsoft Defender.</value>
+  </data>
+  <data name="Cmd_sec.defender.fullscan_Title" xml:space="preserve">
+    <value>Defender quét toàn bộ</value>
+  </data>
+  <data name="Cmd_sec.defender.fullscan_Desc" xml:space="preserve">
+    <value>Chạy quét toàn bộ Microsoft Defender (có thể lâu).</value>
+  </data>
+  <data name="Cmd_sec.firewall.on_Title" xml:space="preserve">
+    <value>Bật tường lửa</value>
+  </data>
+  <data name="Cmd_sec.firewall.on_Desc" xml:space="preserve">
+    <value>Bật Windows Firewall cho mọi hồ sơ.</value>
+  </data>
+  <data name="Cmd_sec.firewall.off_Title" xml:space="preserve">
+    <value>Tắt tường lửa</value>
+  </data>
+  <data name="Cmd_sec.firewall.off_Desc" xml:space="preserve">
+    <value>Tắt Windows Firewall cho mọi hồ sơ. Việc này khiến máy mất bảo vệ — hãy bật lại sớm nhất có thể.</value>
+  </data>
+  <data name="Cmd_dev.wsl.shutdown_Title" xml:space="preserve">
+    <value>Tắt WSL</value>
+  </data>
+  <data name="Cmd_dev.wsl.shutdown_Desc" xml:space="preserve">
+    <value>Dừng mọi distro WSL đang chạy và máy ảo WSL.</value>
+  </data>
+  <data name="Cmd_dev.sandbox.off_Title" xml:space="preserve">
+    <value>Tắt Windows Sandbox</value>
+  </data>
+  <data name="Cmd_dev.sandbox.off_Desc" xml:space="preserve">
+    <value>Tắt tính năng tùy chọn Windows Sandbox. Cần khởi động lại.</value>
+  </data>
+  <data name="Cmd_dev.longpaths.on_Title" xml:space="preserve">
+    <value>Bật đường dẫn dài</value>
+  </data>
+  <data name="Cmd_dev.longpaths.on_Desc" xml:space="preserve">
+    <value>Bật hỗ trợ đường dẫn dài Win32 (hơn 260 ký tự).</value>
+  </data>
+  <data name="Cmd_dev.longpaths.off_Title" xml:space="preserve">
+    <value>Tắt đường dẫn dài</value>
+  </data>
+  <data name="Cmd_dev.longpaths.off_Desc" xml:space="preserve">
+    <value>Tắt hỗ trợ đường dẫn dài Win32 (về mặc định).</value>
+  </data>
 </root>

@@ -24,7 +24,7 @@ jobs:
       REPO_URL: https://github.com/poli0981/CommandForge
       VT_API_KEY: ${{ secrets.VT_API_KEY }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
       - uses: actions/setup-dotnet@v5
         with:

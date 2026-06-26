@@ -7,6 +7,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.3.0] — 2026-06-26
+
+### Added
+- **25 new commands and a new "Storage" category** (catalog grew from 116 to 141): optimize /
+  defragment C:, Disk Management, list volumes & free space, and open Storage settings; TPM status,
+  Secure Boot state and a computer & OS summary; network adapters, DNS servers and an internet
+  connectivity test; startup programs, Driver Verifier, Performance Monitor and a system health
+  report; clear crash dumps, Windows Error Reporting data and the DNS + ARP caches; lid-close and
+  monitor-timeout power toggles; and NumLock-at-startup and verbose sign-in toggles.
+- **Two new UI languages — Simplified Chinese (简体中文) and Spanish (Español)** — joining English,
+  Vietnamese and Japanese. Selectable in Settings and the View menu and switching live without a
+  restart.
+
+### Changed
+- **Fixed main window size.** The main window is now a fixed 1100×720 and can no longer be resized
+  or maximized; the F11 full-screen shortcut has been removed.
+
 ## [1.2.0] — 2026-06-21
 
 ### Added
@@ -87,7 +104,8 @@ Initial public release.
   checksums (and an optional VirusTotal scan). No telemetry — the only network use is checking
   GitHub for updates.
 
-[Unreleased]: https://github.com/poli0981/CommandForge/compare/v1.2.0...HEAD
+[Unreleased]: https://github.com/poli0981/CommandForge/compare/v1.3.0...HEAD
+[1.3.0]: https://github.com/poli0981/CommandForge/compare/v1.2.0...v1.3.0
 [1.2.0]: https://github.com/poli0981/CommandForge/compare/v1.1.1...v1.2.0
 [1.1.1]: https://github.com/poli0981/CommandForge/compare/v1.1.0...v1.1.1
 [1.1.0]: https://github.com/poli0981/CommandForge/compare/v1.0.0...v1.1.0

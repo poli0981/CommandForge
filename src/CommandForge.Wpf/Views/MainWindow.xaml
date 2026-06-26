@@ -113,6 +113,12 @@
                     <MenuItem Header="日本語" Command="{Binding Settings.SetLanguageCommand}"
                               CommandParameter="ja"
                               IsChecked="{Binding Settings.SelectedLanguage.Code, Converter={StaticResource StringEquals}, ConverterParameter=ja, Mode=OneWay}" />
+                    <MenuItem Header="简体中文" Command="{Binding Settings.SetLanguageCommand}"
+                              CommandParameter="zh-Hans"
+                              IsChecked="{Binding Settings.SelectedLanguage.Code, Converter={StaticResource StringEquals}, ConverterParameter=zh-Hans, Mode=OneWay}" />
+                    <MenuItem Header="Español" Command="{Binding Settings.SetLanguageCommand}"
+                              CommandParameter="es"
+                              IsChecked="{Binding Settings.SelectedLanguage.Code, Converter={StaticResource StringEquals}, ConverterParameter=es, Mode=OneWay}" />
                 </MenuItem>
                 <Separator />
                 <MenuItem Header="{res:Loc MenuToggleSidebar}" Command="{Binding ToggleSidebarCommand}" InputGestureText="Ctrl+B" />

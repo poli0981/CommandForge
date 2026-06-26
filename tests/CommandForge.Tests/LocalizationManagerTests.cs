@@ -46,6 +46,32 @@ public sealed class LocalizationManagerTests
         }
     }
 
+    [Theory]
+    [InlineData("vi")]
+    [InlineData("ja")]
+    [InlineData("zh-Hans")]
+    [InlineData("es")]
+    public void SetCulture_LoadsSatellite_NotEnglishFallback(string culture)
+    {
+        var original = LocalizationManager.Instance.CurrentCulture;
+        try
+        {
+            LocalizationManager.Instance.SetCulture(new CultureInfo("en"));
+            var en = LocalizationManager.Instance["Menu_CheckForUpdates"];
+
+            LocalizationManager.Instance.SetCulture(new CultureInfo(culture));
+            var translated = LocalizationManager.Instance["Menu_CheckForUpdates"];
+
+            Assert.False(string.IsNullOrEmpty(translated));
+            // A real satellite resolves to a translated string; an English fallback would be identical.
+            Assert.NotEqual(en, translated);
+        }
+        finally
+        {
+            LocalizationManager.Instance.SetCulture(original);
+        }
+    }
+
     [Fact]
     public void SetCulture_RaisesItemBracketPropertyChanged()
     {

@@ -1,0 +1,1568 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AppTitle" xml:space="preserve">
+    <value>CommandForge</value>
+  </data>
+  <data name="LegalGateTitle" xml:space="preserve">
+    <value>欢迎使用 CommandForge</value>
+  </data>
+  <data name="LegalGateIntro" xml:space="preserve">
+    <value>CommandForge 会运行系统级 Windows 命令。请在继续前阅读并接受相关条款。</value>
+  </data>
+  <data name="LegalGateReadOnGitHub" xml:space="preserve">
+    <value>在 GitHub 上阅读完整文本</value>
+  </data>
+  <data name="LegalGateAgree" xml:space="preserve">
+    <value>我已阅读并同意所有条款</value>
+  </data>
+  <data name="LegalGateContinue" xml:space="preserve">
+    <value>继续</value>
+  </data>
+  <data name="LegalGateExit" xml:space="preserve">
+    <value>退出</value>
+  </data>
+  <data name="TabEula" xml:space="preserve">
+    <value>EULA</value>
+  </data>
+  <data name="TabGpl" xml:space="preserve">
+    <value>GPLv3</value>
+  </data>
+  <data name="TabDisclaimer" xml:space="preserve">
+    <value>免责声明</value>
+  </data>
+  <data name="TabPrivacy" xml:space="preserve">
+    <value>隐私</value>
+  </data>
+  <data name="MenuFile" xml:space="preserve">
+    <value>文件</value>
+  </data>
+  <data name="MenuView" xml:space="preserve">
+    <value>视图</value>
+  </data>
+  <data name="MenuTools" xml:space="preserve">
+    <value>工具</value>
+  </data>
+  <data name="MenuAbout" xml:space="preserve">
+    <value>关于</value>
+  </data>
+  <data name="MenuHelp" xml:space="preserve">
+    <value>帮助</value>
+  </data>
+  <data name="MenuExit" xml:space="preserve">
+    <value>退出</value>
+  </data>
+  <data name="MenuToggleSidebar" xml:space="preserve">
+    <value>折叠侧边栏</value>
+  </data>
+  <data name="SidebarHome" xml:space="preserve">
+    <value>主页</value>
+  </data>
+  <data name="SidebarFavorites" xml:space="preserve">
+    <value>收藏夹</value>
+  </data>
+  <data name="SidebarHistory" xml:space="preserve">
+    <value>历史记录</value>
+  </data>
+  <data name="SidebarRecipes" xml:space="preserve">
+    <value>配方</value>
+  </data>
+  <data name="SidebarUserCommands" xml:space="preserve">
+    <value>我的命令</value>
+  </data>
+  <data name="SidebarSettings" xml:space="preserve">
+    <value>设置</value>
+  </data>
+  <data name="Sidebar_AllCommands" xml:space="preserve">
+    <value>所有命令</value>
+  </data>
+  <data name="PaneCommands" xml:space="preserve">
+    <value>命令</value>
+  </data>
+  <data name="PaneDetails" xml:space="preserve">
+    <value>详情</value>
+  </data>
+  <data name="PaneConsole" xml:space="preserve">
+    <value>控制台</value>
+  </data>
+  <data name="Console_Cancel" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="Result_Success" xml:space="preserve">
+    <value>成功</value>
+  </data>
+  <data name="Result_Failed" xml:space="preserve">
+    <value>失败</value>
+  </data>
+  <data name="Result_Cancelled" xml:space="preserve">
+    <value>已取消</value>
+  </data>
+  <data name="Result_ExitCode" xml:space="preserve">
+    <value>退出代码</value>
+  </data>
+  <data name="Result_Restart" xml:space="preserve">
+    <value>立即重启</value>
+  </data>
+  <data name="Restart_ConfirmTitle" xml:space="preserve">
+    <value>需要重启</value>
+  </data>
+  <data name="Restart_ConfirmMessage" xml:space="preserve">
+    <value>部分更改需要重启才能完成。现在重启吗？</value>
+  </data>
+  <data name="ComingSoon" xml:space="preserve">
+    <value>即将推出</value>
+  </data>
+  <data name="NoCommandsInCategory" xml:space="preserve">
+    <value>此分类下暂无命令。</value>
+  </data>
+  <data name="NoSearchResults" xml:space="preserve">
+    <value>没有与搜索匹配的命令。</value>
+  </data>
+  <data name="Detail_RunDisabledHint" xml:space="preserve">
+    <value>命令运行功能将在下一阶段推出。</value>
+  </data>
+  <data name="Detail_SelectPrompt" xml:space="preserve">
+    <value>选择一个命令以查看其详情。</value>
+  </data>
+  <data name="Detail_Revert" xml:space="preserve">
+    <value>还原</value>
+  </data>
+  <data name="Confirm_TypeToConfirm" xml:space="preserve">
+    <value>输入命令名称以确认：</value>
+  </data>
+  <data name="Confirm_CreateRestorePoint" xml:space="preserve">
+    <value>先创建系统还原点（推荐）</value>
+  </data>
+  <data name="Exit_RunningTitle" xml:space="preserve">
+    <value>命令正在运行</value>
+  </data>
+  <data name="Exit_RunningMessage" xml:space="preserve">
+    <value>仍有命令在运行。是否取消并退出？</value>
+  </data>
+  <data name="Restore_Creating" xml:space="preserve">
+    <value>正在创建还原点…</value>
+  </data>
+  <data name="Restore_Created" xml:space="preserve">
+    <value>还原点已创建。</value>
+  </data>
+  <data name="Restore_Failed" xml:space="preserve">
+    <value>无法创建还原点（仍将继续）。</value>
+  </data>
+  <data name="Detail_CommandLine" xml:space="preserve">
+    <value>要运行的命令</value>
+  </data>
+  <data name="Detail_Copy" xml:space="preserve">
+    <value>复制</value>
+  </data>
+  <data name="Detail_Run" xml:space="preserve">
+    <value>运行</value>
+  </data>
+  <data name="Detail_Doc" xml:space="preserve">
+    <value>文档</value>
+  </data>
+  <data name="Detail_RequiresAdmin" xml:space="preserve">
+    <value>需要管理员权限</value>
+  </data>
+  <data name="Detail_MayRestart" xml:space="preserve">
+    <value>可能需要重启</value>
+  </data>
+  <data name="Search_Placeholder" xml:space="preserve">
+    <value>搜索命令…（Ctrl+K）</value>
+  </data>
+  <data name="Search_Suggestion" xml:space="preserve">
+    <value>您是否想找：</value>
+  </data>
+  <data name="Home_Suggestions" xml:space="preserve">
+    <value>维护建议</value>
+  </data>
+  <data name="Maint_LowDisk" xml:space="preserve">
+    <value>系统盘可用空间不足——建议进行磁盘清理。</value>
+  </data>
+  <data name="Maint_HighUptime" xml:space="preserve">
+    <value>您的电脑已运行超过一周——重启可能会有帮助。</value>
+  </data>
+  <data name="Maint_Open" xml:space="preserve">
+    <value>打开</value>
+  </data>
+  <data name="Palette_Placeholder" xml:space="preserve">
+    <value>输入以搜索整个命令目录…</value>
+  </data>
+  <data name="Danger_Safe" xml:space="preserve">
+    <value>安全</value>
+  </data>
+  <data name="Danger_Caution" xml:space="preserve">
+    <value>谨慎</value>
+  </data>
+  <data name="Danger_Dangerous" xml:space="preserve">
+    <value>危险</value>
+  </data>
+  <data name="Cat_system-maintenance" xml:space="preserve">
+    <value>系统与维护</value>
+  </data>
+  <data name="Cat_updates-packages" xml:space="preserve">
+    <value>更新与软件包</value>
+  </data>
+  <data name="Cat_tweaks-shortcuts" xml:space="preserve">
+    <value>调整与快捷方式</value>
+  </data>
+  <data name="Cat_network" xml:space="preserve">
+    <value>网络</value>
+  </data>
+  <data name="Cat_cleanup" xml:space="preserve">
+    <value>清理</value>
+  </data>
+  <data name="Cat_power" xml:space="preserve">
+    <value>电源</value>
+  </data>
+  <data name="Cat_system-info" xml:space="preserve">
+    <value>系统信息</value>
+  </data>
+  <data name="Cat_diagnostics" xml:space="preserve">
+    <value>诊断</value>
+  </data>
+  <data name="Cat_security-privacy" xml:space="preserve">
+    <value>安全与隐私</value>
+  </data>
+  <data name="Cat_developer" xml:space="preserve">
+    <value>开发者</value>
+  </data>
+  <data name="Cmd_info.systeminfo_Title" xml:space="preserve">
+    <value>系统信息</value>
+  </data>
+  <data name="Cmd_info.systeminfo_Desc" xml:space="preserve">
+    <value>显示本系统的完整概览。</value>
+  </data>
+  <data name="Cmd_info.winver_Title" xml:space="preserve">
+    <value>Windows 版本</value>
+  </data>
+  <data name="Cmd_info.winver_Desc" xml:space="preserve">
+    <value>显示 Windows 的版本、版本号和内部版本号。</value>
+  </data>
+  <data name="Cmd_info.cpu_Title" xml:space="preserve">
+    <value>CPU 信息</value>
+  </data>
+  <data name="Cmd_info.cpu_Desc" xml:space="preserve">
+    <value>显示处理器名称、核心数和主频。</value>
+  </data>
+  <data name="Cmd_info.gpu_Title" xml:space="preserve">
+    <value>GPU 信息</value>
+  </data>
+  <data name="Cmd_info.gpu_Desc" xml:space="preserve">
+    <value>显示显卡名称和驱动程序版本。</value>
+  </data>
+  <data name="Cmd_info.ram_Title" xml:space="preserve">
+    <value>内存信息</value>
+  </data>
+  <data name="Cmd_info.ram_Desc" xml:space="preserve">
+    <value>显示已安装的内存条。</value>
+  </data>
+  <data name="Cmd_info.disk_Title" xml:space="preserve">
+    <value>磁盘信息</value>
+  </data>
+  <data name="Cmd_info.disk_Desc" xml:space="preserve">
+    <value>列出物理磁盘及其介质类型。</value>
+  </data>
+  <data name="Cmd_info.uptime_Title" xml:space="preserve">
+    <value>系统运行时间</value>
+  </data>
+  <data name="Cmd_info.uptime_Desc" xml:space="preserve">
+    <value>显示系统已运行的时长。</value>
+  </data>
+  <data name="Cmd_info.activation_Title" xml:space="preserve">
+    <value>激活状态</value>
+  </data>
+  <data name="Cmd_info.activation_Desc" xml:space="preserve">
+    <value>显示 Windows 激活状态。</value>
+  </data>
+  <data name="Cmd_net.ipconfig.all_Title" xml:space="preserve">
+    <value>网络配置</value>
+  </data>
+  <data name="Cmd_net.ipconfig.all_Desc" xml:space="preserve">
+    <value>显示所有适配器的完整 IP 配置。</value>
+  </data>
+  <data name="Cmd_net.flushdns_Title" xml:space="preserve">
+    <value>刷新 DNS 缓存</value>
+  </data>
+  <data name="Cmd_net.flushdns_Desc" xml:space="preserve">
+    <value>清除 DNS 解析器缓存。</value>
+  </data>
+  <data name="Cmd_net.showadapters_Title" xml:space="preserve">
+    <value>显示网络适配器</value>
+  </data>
+  <data name="Cmd_net.showadapters_Desc" xml:space="preserve">
+    <value>列出网络接口及其状态。</value>
+  </data>
+  <data name="Cmd_tweak.godmode_Title" xml:space="preserve">
+    <value>打开 God Mode</value>
+  </data>
+  <data name="Cmd_tweak.godmode_Desc" xml:space="preserve">
+    <value>打开包含全部任务的（God Mode）控制面板视图。</value>
+  </data>
+  <data name="Cmd_tweak.showext_Title" xml:space="preserve">
+    <value>显示文件扩展名</value>
+  </data>
+  <data name="Cmd_tweak.showext_Desc" xml:space="preserve">
+    <value>在资源管理器中始终显示文件扩展名。</value>
+  </data>
+  <data name="Cmd_tweak.showhidden_Title" xml:space="preserve">
+    <value>显示隐藏文件</value>
+  </data>
+  <data name="Cmd_tweak.showhidden_Desc" xml:space="preserve">
+    <value>在资源管理器中显示隐藏的文件和文件夹。</value>
+  </data>
+  <data name="Cmd_cleanup.cleanmgr_Title" xml:space="preserve">
+    <value>磁盘清理</value>
+  </data>
+  <data name="Cmd_cleanup.cleanmgr_Desc" xml:space="preserve">
+    <value>打开 Windows 磁盘清理工具。</value>
+  </data>
+  <data name="Cmd_power.list_Title" xml:space="preserve">
+    <value>列出电源计划</value>
+  </data>
+  <data name="Cmd_power.list_Desc" xml:space="preserve">
+    <value>显示可用的电源计划。</value>
+  </data>
+  <data name="Cmd_power.batteryreport_Title" xml:space="preserve">
+    <value>电池报告</value>
+  </data>
+  <data name="Cmd_power.batteryreport_Desc" xml:space="preserve">
+    <value>生成 HTML 格式的电池健康报告。</value>
+  </data>
+  <data name="Cmd_diag.reliability_Title" xml:space="preserve">
+    <value>可靠性监视器</value>
+  </data>
+  <data name="Cmd_diag.reliability_Desc" xml:space="preserve">
+    <value>打开 Windows 可靠性监视器。</value>
+  </data>
+  <data name="Cmd_diag.eventviewer_Title" xml:space="preserve">
+    <value>事件查看器</value>
+  </data>
+  <data name="Cmd_diag.eventviewer_Desc" xml:space="preserve">
+    <value>打开 Windows 事件查看器。</value>
+  </data>
+  <data name="Cmd_diag.resmon_Title" xml:space="preserve">
+    <value>资源监视器</value>
+  </data>
+  <data name="Cmd_diag.resmon_Desc" xml:space="preserve">
+    <value>打开 Windows 资源监视器。</value>
+  </data>
+  <data name="Cmd_diag.dxdiag_Title" xml:space="preserve">
+    <value>DirectX 诊断</value>
+  </data>
+  <data name="Cmd_diag.dxdiag_Desc" xml:space="preserve">
+    <value>打开 DirectX 诊断工具。</value>
+  </data>
+  <data name="Cmd_winget.list_Title" xml:space="preserve">
+    <value>列出已安装的应用</value>
+  </data>
+  <data name="Cmd_winget.list_Desc" xml:space="preserve">
+    <value>列出通过 winget 安装的应用。</value>
+  </data>
+  <data name="Cmd_winget.upgrade.list_Title" xml:space="preserve">
+    <value>检查应用更新</value>
+  </data>
+  <data name="Cmd_winget.upgrade.list_Desc" xml:space="preserve">
+    <value>显示有新版本可用的应用。</value>
+  </data>
+  <data name="Cmd_sec.firewall.status_Title" xml:space="preserve">
+    <value>防火墙状态</value>
+  </data>
+  <data name="Cmd_sec.firewall.status_Desc" xml:space="preserve">
+    <value>显示所有防火墙配置文件的状态。</value>
+  </data>
+  <data name="Cmd_dev.wsl.list_Title" xml:space="preserve">
+    <value>列出 WSL 发行版</value>
+  </data>
+  <data name="Cmd_dev.wsl.list_Desc" xml:space="preserve">
+    <value>列出已安装的 WSL 发行版。</value>
+  </data>
+  <data name="Cmd_dism.checkhealth_Title" xml:space="preserve">
+    <value>DISM CheckHealth</value>
+  </data>
+  <data name="Cmd_dism.checkhealth_Desc" xml:space="preserve">
+    <value>快速检查 Windows 映像是否损坏（只读）。</value>
+  </data>
+  <data name="Cmd_dism.scanhealth_Title" xml:space="preserve">
+    <value>DISM ScanHealth</value>
+  </data>
+  <data name="Cmd_dism.scanhealth_Desc" xml:space="preserve">
+    <value>深度扫描 Windows 映像是否损坏（只读，较慢）。</value>
+  </data>
+  <data name="Cmd_dism.analyzecomponentstore_Title" xml:space="preserve">
+    <value>分析组件存储</value>
+  </data>
+  <data name="Cmd_dism.analyzecomponentstore_Desc" xml:space="preserve">
+    <value>分析 WinSxS 并报告是否建议进行清理。</value>
+  </data>
+  <data name="Cmd_chkdsk.read_Title" xml:space="preserve">
+    <value>检查磁盘（只读）</value>
+  </data>
+  <data name="Cmd_chkdsk.read_Desc" xml:space="preserve">
+    <value>检查 C: 驱动器是否存在错误（只读）。</value>
+  </data>
+  <data name="Cmd_sec.bitlocker.status_Title" xml:space="preserve">
+    <value>BitLocker 状态</value>
+  </data>
+  <data name="Cmd_sec.bitlocker.status_Desc" xml:space="preserve">
+    <value>显示所有卷的 BitLocker 加密状态。</value>
+  </data>
+  <data name="Cmd_dev.features.list_Title" xml:space="preserve">
+    <value>列出 Windows 功能</value>
+  </data>
+  <data name="Cmd_dev.features.list_Desc" xml:space="preserve">
+    <value>列出已启用的 Windows 可选功能。</value>
+  </data>
+  <data name="Cmd_system.restorepoint_Title" xml:space="preserve">
+    <value>创建还原点</value>
+  </data>
+  <data name="Cmd_system.restorepoint_Desc" xml:space="preserve">
+    <value>创建系统还原点。</value>
+  </data>
+  <data name="Cmd_dism.restorehealth_Title" xml:space="preserve">
+    <value>DISM RestoreHealth</value>
+  </data>
+  <data name="Cmd_dism.restorehealth_Desc" xml:space="preserve">
+    <value>修复 Windows 映像（可能需要一段时间；可能需要重启）。</value>
+  </data>
+  <data name="Cmd_sfc.scannow_Title" xml:space="preserve">
+    <value>SFC scannow</value>
+  </data>
+  <data name="Cmd_sfc.scannow_Desc" xml:space="preserve">
+    <value>扫描并修复受保护的系统文件（可能需要重启）。</value>
+  </data>
+  <data name="Cmd_net.winsock.reset_Title" xml:space="preserve">
+    <value>重置 Winsock</value>
+  </data>
+  <data name="Cmd_net.winsock.reset_Desc" xml:space="preserve">
+    <value>重置 Winsock 目录（之后需要重启）。</value>
+  </data>
+  <data name="Cmd_sec.defender.quickscan_Title" xml:space="preserve">
+    <value>Defender 快速扫描</value>
+  </data>
+  <data name="Cmd_sec.defender.quickscan_Desc" xml:space="preserve">
+    <value>运行 Microsoft Defender 快速扫描。</value>
+  </data>
+  <data name="Cmd_power.hibernate.off_Title" xml:space="preserve">
+    <value>关闭休眠</value>
+  </data>
+  <data name="Cmd_power.hibernate.off_Desc" xml:space="preserve">
+    <value>禁用休眠并释放其占用的磁盘空间。</value>
+  </data>
+  <data name="Cmd_power.hibernate.on_Title" xml:space="preserve">
+    <value>开启休眠</value>
+  </data>
+  <data name="Cmd_power.hibernate.on_Desc" xml:space="preserve">
+    <value>重新启用休眠。</value>
+  </data>
+  <data name="Cmd_tweak.hideext_Title" xml:space="preserve">
+    <value>隐藏文件扩展名</value>
+  </data>
+  <data name="Cmd_tweak.hideext_Desc" xml:space="preserve">
+    <value>在资源管理器中隐藏已知文件类型的扩展名。</value>
+  </data>
+  <data name="Cmd_sec.telemetry.basic_Title" xml:space="preserve">
+    <value>最小化遥测</value>
+  </data>
+  <data name="Cmd_sec.telemetry.basic_Desc" xml:space="preserve">
+    <value>将遥测策略设置为最低级别。在某些版本上可能影响 Windows Update；可恢复。</value>
+  </data>
+  <data name="Cmd_sec.telemetry.restore_Title" xml:space="preserve">
+    <value>还原遥测策略</value>
+  </data>
+  <data name="Cmd_sec.telemetry.restore_Desc" xml:space="preserve">
+    <value>移除遥测策略覆盖（恢复为系统默认值）。</value>
+  </data>
+  <data name="Cmd_dism.startcomponentcleanup_Title" xml:space="preserve">
+    <value>清理组件存储</value>
+  </data>
+  <data name="Cmd_dism.startcomponentcleanup_Desc" xml:space="preserve">
+    <value>从 WinSxS 中移除已被取代的组件以释放磁盘空间。可能需要重启。</value>
+  </data>
+  <data name="Cmd_chkdsk.fix_Title" xml:space="preserve">
+    <value>修复磁盘（chkdsk /f /r）</value>
+  </data>
+  <data name="Cmd_chkdsk.fix_Desc" xml:space="preserve">
+    <value>在下次重启时对系统盘安排一次带修复的完整磁盘检查。</value>
+  </data>
+  <data name="Cmd_winget.upgrade.all_Title" xml:space="preserve">
+    <value>升级所有软件包</value>
+  </data>
+  <data name="Cmd_winget.upgrade.all_Desc" xml:space="preserve">
+    <value>升级所有 winget 可更新的已安装应用。</value>
+  </data>
+  <data name="Cmd_winget.source.reset_Title" xml:space="preserve">
+    <value>重置 winget 源</value>
+  </data>
+  <data name="Cmd_winget.source.reset_Desc" xml:space="preserve">
+    <value>将 winget 软件包源重置为默认设置。</value>
+  </data>
+  <data name="Cmd_wu.scan_Title" xml:space="preserve">
+    <value>扫描 Windows 更新</value>
+  </data>
+  <data name="Cmd_wu.scan_Desc" xml:space="preserve">
+    <value>立即触发 Windows Update 检查新的更新。</value>
+  </data>
+  <data name="Cmd_wu.reset.components_Title" xml:space="preserve">
+    <value>重置 Windows Update</value>
+  </data>
+  <data name="Cmd_wu.reset.components_Desc" xml:space="preserve">
+    <value>停止更新服务，清除其缓存后再重新启动。通常可修复卡住的更新。</value>
+  </data>
+  <data name="Cmd_tweak.win11.classicmenu_Title" xml:space="preserve">
+    <value>经典右键菜单（Win11）</value>
+  </data>
+  <data name="Cmd_tweak.win11.classicmenu_Desc" xml:space="preserve">
+    <value>在 Windows 11 中恢复完整的右键菜单。重启资源管理器后生效。</value>
+  </data>
+  <data name="Cmd_tweak.win11.modernmenu_Title" xml:space="preserve">
+    <value>新版右键菜单（Win11）</value>
+  </data>
+  <data name="Cmd_tweak.win11.modernmenu_Desc" xml:space="preserve">
+    <value>恢复 Windows 11 默认的右键菜单。重启资源管理器后生效。</value>
+  </data>
+  <data name="Cmd_tweak.restartexplorer_Title" xml:space="preserve">
+    <value>重启资源管理器</value>
+  </data>
+  <data name="Cmd_tweak.restartexplorer_Desc" xml:space="preserve">
+    <value>重启 Windows 资源管理器外壳（任务栏和桌面）。</value>
+  </data>
+  <data name="Cmd_tweak.cleariconcache_Title" xml:space="preserve">
+    <value>清除图标缓存</value>
+  </data>
+  <data name="Cmd_tweak.cleariconcache_Desc" xml:space="preserve">
+    <value>重建图标缓存，修复损坏或过时的图标。</value>
+  </data>
+  <data name="Cmd_net.registerdns_Title" xml:space="preserve">
+    <value>注册 DNS</value>
+  </data>
+  <data name="Cmd_net.registerdns_Desc" xml:space="preserve">
+    <value>刷新 DHCP 租约并重新注册 DNS 名称。</value>
+  </data>
+  <data name="Cmd_net.release_Title" xml:space="preserve">
+    <value>释放 IP 地址</value>
+  </data>
+  <data name="Cmd_net.release_Desc" xml:space="preserve">
+    <value>释放当前的 DHCP IP 租约。</value>
+  </data>
+  <data name="Cmd_net.renew_Title" xml:space="preserve">
+    <value>续订 IP 地址</value>
+  </data>
+  <data name="Cmd_net.renew_Desc" xml:space="preserve">
+    <value>请求新的 DHCP IP 租约。</value>
+  </data>
+  <data name="Cmd_net.ip.reset_Title" xml:space="preserve">
+    <value>重置 TCP/IP 协议栈</value>
+  </data>
+  <data name="Cmd_net.ip.reset_Desc" xml:space="preserve">
+    <value>将 TCP/IP 协议栈重置为默认设置。需要重启。</value>
+  </data>
+  <data name="Cmd_net.full.reset_Title" xml:space="preserve">
+    <value>完整网络重置</value>
+  </data>
+  <data name="Cmd_net.full.reset_Desc" xml:space="preserve">
+    <value>重置 Winsock 和 TCP/IP 并刷新 DNS 缓存。需要重启。</value>
+  </data>
+  <data name="Cmd_clean.cleanmgr.auto_Title" xml:space="preserve">
+    <value>自动磁盘清理</value>
+  </data>
+  <data name="Cmd_clean.cleanmgr.auto_Desc" xml:space="preserve">
+    <value>在所有类别上运行磁盘清理，无需提示。</value>
+  </data>
+  <data name="Cmd_clean.recyclebin_Title" xml:space="preserve">
+    <value>清空回收站</value>
+  </data>
+  <data name="Cmd_clean.recyclebin_Desc" xml:space="preserve">
+    <value>永久删除回收站中的所有内容。</value>
+  </data>
+  <data name="Cmd_clean.usertemp_Title" xml:space="preserve">
+    <value>清除用户临时文件</value>
+  </data>
+  <data name="Cmd_clean.usertemp_Desc" xml:space="preserve">
+    <value>删除你的用户临时文件夹中的内容。</value>
+  </data>
+  <data name="Cmd_clean.wintemp_Title" xml:space="preserve">
+    <value>清除 Windows 临时文件</value>
+  </data>
+  <data name="Cmd_clean.wintemp_Desc" xml:space="preserve">
+    <value>删除 Windows 临时文件夹中的内容。</value>
+  </data>
+  <data name="Cmd_clean.windowsold_Title" xml:space="preserve">
+    <value>删除 Windows.old</value>
+  </data>
+  <data name="Cmd_clean.windowsold_Desc" xml:space="preserve">
+    <value>删除以前的 Windows 安装文件夹。你将失去回退的选项。</value>
+  </data>
+  <data name="Cmd_clean.wucache_Title" xml:space="preserve">
+    <value>清除 Windows Update 缓存</value>
+  </data>
+  <data name="Cmd_clean.wucache_Desc" xml:space="preserve">
+    <value>停止更新服务，删除已下载的更新文件后再重新启动。</value>
+  </data>
+  <data name="Cmd_clean.deliveryopt_Title" xml:space="preserve">
+    <value>清除传递优化缓存</value>
+  </data>
+  <data name="Cmd_clean.deliveryopt_Desc" xml:space="preserve">
+    <value>删除缓存的传递优化更新文件。</value>
+  </data>
+  <data name="Cmd_power.set.highperf_Title" xml:space="preserve">
+    <value>启用高性能</value>
+  </data>
+  <data name="Cmd_power.set.highperf_Desc" xml:space="preserve">
+    <value>将当前电源计划切换为高性能。</value>
+  </data>
+  <data name="Cmd_power.add.ultimate_Title" xml:space="preserve">
+    <value>添加卓越性能</value>
+  </data>
+  <data name="Cmd_power.add.ultimate_Desc" xml:space="preserve">
+    <value>创建卓越性能电源计划。</value>
+  </data>
+  <data name="Cmd_power.energy_Title" xml:space="preserve">
+    <value>能耗报告</value>
+  </data>
+  <data name="Cmd_power.energy_Desc" xml:space="preserve">
+    <value>分析能效 60 秒，并将 HTML 报告保存到你的用户配置文件。</value>
+  </data>
+  <data name="Cmd_power.sleepstudy_Title" xml:space="preserve">
+    <value>睡眠状态报告</value>
+  </data>
+  <data name="Cmd_power.sleepstudy_Desc" xml:space="preserve">
+    <value>将 HTML 睡眠状态报告保存到你的用户配置文件。</value>
+  </data>
+  <data name="Cmd_diag.msinfo_Title" xml:space="preserve">
+    <value>系统信息</value>
+  </data>
+  <data name="Cmd_diag.msinfo_Desc" xml:space="preserve">
+    <value>打开系统信息（msinfo32）工具。</value>
+  </data>
+  <data name="Cmd_diag.memtest_Title" xml:space="preserve">
+    <value>Windows 内存诊断</value>
+  </data>
+  <data name="Cmd_diag.memtest_Desc" xml:space="preserve">
+    <value>安排在下次重启时运行内存测试。</value>
+  </data>
+  <data name="Cmd_sec.defender.update_Title" xml:space="preserve">
+    <value>更新 Defender 病毒定义</value>
+  </data>
+  <data name="Cmd_sec.defender.update_Desc" xml:space="preserve">
+    <value>下载最新的 Microsoft Defender 定义。</value>
+  </data>
+  <data name="Cmd_dev.devmode.on_Title" xml:space="preserve">
+    <value>启用开发者模式</value>
+  </data>
+  <data name="Cmd_dev.devmode.on_Desc" xml:space="preserve">
+    <value>开启 Windows 开发者模式（允许旁加载）。</value>
+  </data>
+  <data name="Cmd_dev.devmode.off_Title" xml:space="preserve">
+    <value>禁用开发者模式</value>
+  </data>
+  <data name="Cmd_dev.devmode.off_Desc" xml:space="preserve">
+    <value>关闭 Windows 开发者模式。</value>
+  </data>
+  <data name="Cmd_dev.wsl.install_Title" xml:space="preserve">
+    <value>安装 WSL</value>
+  </data>
+  <data name="Cmd_dev.wsl.install_Desc" xml:space="preserve">
+    <value>安装适用于 Linux 的 Windows 子系统。需要重启。</value>
+  </data>
+  <data name="Cmd_dev.wsl.update_Title" xml:space="preserve">
+    <value>更新 WSL</value>
+  </data>
+  <data name="Cmd_dev.wsl.update_Desc" xml:space="preserve">
+    <value>更新适用于 Linux 的 Windows 子系统内核。</value>
+  </data>
+  <data name="Cmd_dev.hyperv.on_Title" xml:space="preserve">
+    <value>启用 Hyper-V</value>
+  </data>
+  <data name="Cmd_dev.hyperv.on_Desc" xml:space="preserve">
+    <value>开启 Hyper-V 虚拟化功能。需要重启。</value>
+  </data>
+  <data name="Cmd_dev.hyperv.off_Title" xml:space="preserve">
+    <value>禁用 Hyper-V</value>
+  </data>
+  <data name="Cmd_dev.hyperv.off_Desc" xml:space="preserve">
+    <value>关闭 Hyper-V 虚拟化功能。需要重启。</value>
+  </data>
+  <data name="Cmd_dev.sandbox.on_Title" xml:space="preserve">
+    <value>启用 Windows 沙盒</value>
+  </data>
+  <data name="Cmd_dev.sandbox.on_Desc" xml:space="preserve">
+    <value>开启 Windows 沙盒功能。需要重启。</value>
+  </data>
+  <data name="Cmd_dev.netfx3.on_Title" xml:space="preserve">
+    <value>启用 .NET Framework 3.5</value>
+  </data>
+  <data name="Cmd_dev.netfx3.on_Desc" xml:space="preserve">
+    <value>安装 .NET Framework 3.5 功能。可能需要重启。</value>
+  </data>
+  <data name="Menu_CheckForUpdates" xml:space="preserve">
+    <value>检查更新</value>
+  </data>
+  <data name="Update_Title" xml:space="preserve">
+    <value>更新</value>
+  </data>
+  <data name="Update_Checking" xml:space="preserve">
+    <value>正在检查更新…</value>
+  </data>
+  <data name="Update_UpToDate" xml:space="preserve">
+    <value>你已使用最新版本。</value>
+  </data>
+  <data name="Update_Available" xml:space="preserve">
+    <value>版本 {0} 已可用。立即下载并重启？</value>
+  </data>
+  <data name="Update_Downloading" xml:space="preserve">
+    <value>正在下载更新…</value>
+  </data>
+  <data name="Update_DownloadRestart" xml:space="preserve">
+    <value>下载并重启</value>
+  </data>
+  <data name="Update_Close" xml:space="preserve">
+    <value>关闭</value>
+  </data>
+  <data name="Update_Error_Offline" xml:space="preserve">
+    <value>无法连接到 GitHub。请检查你的网络连接后重试。</value>
+  </data>
+  <data name="Update_Error_NotFound" xml:space="preserve">
+    <value>未找到此应用的发布源。</value>
+  </data>
+  <data name="Update_Error_RateLimited" xml:space="preserve">
+    <value>已达到 GitHub 速率限制，请稍后重试。</value>
+  </data>
+  <data name="Update_Error_ServerError" xml:space="preserve">
+    <value>GitHub 返回了服务器错误，请稍后重试。</value>
+  </data>
+  <data name="Update_Error_NotInstalled" xml:space="preserve">
+    <value>仅在已安装版本的应用中可使用更新功能。</value>
+  </data>
+  <data name="Update_Error_Unknown" xml:space="preserve">
+    <value>检查更新失败，请稍后重试。</value>
+  </data>
+  <data name="Update_Error_CommandRunning" xml:space="preserve">
+    <value>请先完成或取消正在运行的命令，然后再更新。</value>
+  </data>
+  <data name="Menu_OpenSettings" xml:space="preserve">
+    <value>设置</value>
+  </data>
+  <data name="LanguageOption_System" xml:space="preserve">
+    <value>系统默认</value>
+  </data>
+  <data name="Settings_Appearance" xml:space="preserve">
+    <value>外观</value>
+  </data>
+  <data name="Settings_Behavior" xml:space="preserve">
+    <value>行为与安全</value>
+  </data>
+  <data name="Settings_Updates" xml:space="preserve">
+    <value>更新</value>
+  </data>
+  <data name="Settings_About" xml:space="preserve">
+    <value>关于</value>
+  </data>
+  <data name="Settings_Theme" xml:space="preserve">
+    <value>主题</value>
+  </data>
+  <data name="Settings_ThemeSystem" xml:space="preserve">
+    <value>跟随系统</value>
+  </data>
+  <data name="Settings_ThemeLight" xml:space="preserve">
+    <value>浅色</value>
+  </data>
+  <data name="Settings_ThemeDark" xml:space="preserve">
+    <value>深色</value>
+  </data>
+  <data name="Settings_Language" xml:space="preserve">
+    <value>语言</value>
+  </data>
+  <data name="Settings_FontSize" xml:space="preserve">
+    <value>字体大小</value>
+  </data>
+  <data name="Settings_FontSmall" xml:space="preserve">
+    <value>小</value>
+  </data>
+  <data name="Settings_FontMedium" xml:space="preserve">
+    <value>中</value>
+  </data>
+  <data name="Settings_FontLarge" xml:space="preserve">
+    <value>大</value>
+  </data>
+  <data name="Settings_CollapseSidebar" xml:space="preserve">
+    <value>默认折叠侧边栏</value>
+  </data>
+  <data name="Settings_ShowBadges" xml:space="preserve">
+    <value>在列表中显示管理员/重启标记</value>
+  </data>
+  <data name="Settings_ConfirmCaution" xml:space="preserve">
+    <value>执行“谨慎”级命令前需确认</value>
+  </data>
+  <data name="Settings_ConfirmDangerous" xml:space="preserve">
+    <value>执行“危险”级命令前需确认</value>
+  </data>
+  <data name="Settings_DangerousLockedTooltip" xml:space="preserve">
+    <value>始终开启——此安全检查无法禁用。</value>
+  </data>
+  <data name="Settings_AutoRestorePoint" xml:space="preserve">
+    <value>执行风险命令前先创建系统还原点</value>
+  </data>
+  <data name="Settings_AutoScroll" xml:space="preserve">
+    <value>自动滚动控制台</value>
+  </data>
+  <data name="Settings_WarnOnCancel" xml:space="preserve">
+    <value>在命令运行时关闭前发出警告</value>
+  </data>
+  <data name="Settings_AutoCheckUpdates" xml:space="preserve">
+    <value>启动时检查更新</value>
+  </data>
+  <data name="Settings_CurrentVersion" xml:space="preserve">
+    <value>当前版本：</value>
+  </data>
+  <data name="Settings_LastChecked" xml:space="preserve">
+    <value>上次检查：</value>
+  </data>
+  <data name="Settings_CheckNow" xml:space="preserve">
+    <value>立即检查</value>
+  </data>
+  <data name="Settings_Profiles" xml:space="preserve">
+    <value>备份与配置文件</value>
+  </data>
+  <data name="Settings_ExportImport" xml:space="preserve">
+    <value>导入 / 导出</value>
+  </data>
+  <data name="Settings_ExportImportHint" xml:space="preserve">
+    <value>将外观、行为和收藏夹复制到文件，以便迁移到另一台计算机。</value>
+  </data>
+  <data name="Settings_ExportSettings" xml:space="preserve">
+    <value>导出…</value>
+  </data>
+  <data name="Settings_ImportSettings" xml:space="preserve">
+    <value>导入…</value>
+  </data>
+  <data name="Settings_SavedProfiles" xml:space="preserve">
+    <value>已保存的配置文件</value>
+  </data>
+  <data name="Settings_ProfilesHint" xml:space="preserve">
+    <value>将当前设置和收藏夹保存为命名配置文件，然后在不同场景之间切换（例如游戏电脑、办公）。</value>
+  </data>
+  <data name="Settings_ApplyProfile" xml:space="preserve">
+    <value>应用</value>
+  </data>
+  <data name="Settings_DeleteProfile" xml:space="preserve">
+    <value>删除</value>
+  </data>
+  <data name="Settings_SaveCurrentAsProfile" xml:space="preserve">
+    <value>将当前设置另存为新配置</value>
+  </data>
+  <data name="Settings_ProfileName" xml:space="preserve">
+    <value>配置名称</value>
+  </data>
+  <data name="Settings_SaveProfile" xml:space="preserve">
+    <value>保存配置</value>
+  </data>
+  <data name="Settings_ExportSuccess" xml:space="preserve">
+    <value>设置已导出至 {0}。</value>
+  </data>
+  <data name="Settings_ImportConfirm" xml:space="preserve">
+    <value>是否用导入的值替换当前的外观、行为和收藏夹？</value>
+  </data>
+  <data name="Settings_ImportInvalid" xml:space="preserve">
+    <value>所选文件不是有效的 CommandForge 设置文件。</value>
+  </data>
+  <data name="Settings_ImportSuccess" xml:space="preserve">
+    <value>设置已导入。</value>
+  </data>
+  <data name="Settings_ProfileApplied" xml:space="preserve">
+    <value>已应用配置“{0}”。</value>
+  </data>
+  <data name="Settings_DeleteProfileConfirm" xml:space="preserve">
+    <value>是否删除配置“{0}”？</value>
+  </data>
+  <data name="Settings_NoDataCollected" xml:space="preserve">
+    <value>本应用不会收集您的任何数据。</value>
+  </data>
+  <data name="Settings_License" xml:space="preserve">
+    <value>许可证（GPLv3）</value>
+  </data>
+  <data name="Settings_GitHub" xml:space="preserve">
+    <value>GitHub</value>
+  </data>
+  <data name="Menu_LogViewer" xml:space="preserve">
+    <value>日志查看器</value>
+  </data>
+  <data name="Menu_ExportLogs" xml:space="preserve">
+    <value>导出日志（.zip）</value>
+  </data>
+  <data name="Menu_DebugPanel" xml:space="preserve">
+    <value>调试面板</value>
+  </data>
+  <data name="Menu_ReportBug" xml:space="preserve">
+    <value>报告问题</value>
+  </data>
+  <data name="LogViewer_Title" xml:space="preserve">
+    <value>日志查看器</value>
+  </data>
+  <data name="LogViewer_Level" xml:space="preserve">
+    <value>级别</value>
+  </data>
+  <data name="LogViewer_FilterHint" xml:space="preserve">
+    <value>筛选文本</value>
+  </data>
+  <data name="LogViewer_AutoScroll" xml:space="preserve">
+    <value>自动滚动</value>
+  </data>
+  <data name="LogViewer_OpenFolder" xml:space="preserve">
+    <value>打开日志文件夹</value>
+  </data>
+  <data name="LogViewer_Export" xml:space="preserve">
+    <value>导出日志（.zip）</value>
+  </data>
+  <data name="LogViewer_Clear" xml:space="preserve">
+    <value>清除</value>
+  </data>
+  <data name="LogLevel_All" xml:space="preserve">
+    <value>全部</value>
+  </data>
+  <data name="LogLevel_Info" xml:space="preserve">
+    <value>信息</value>
+  </data>
+  <data name="LogLevel_Warning" xml:space="preserve">
+    <value>警告</value>
+  </data>
+  <data name="LogLevel_Error" xml:space="preserve">
+    <value>错误</value>
+  </data>
+  <data name="LogLevel_Debug" xml:space="preserve">
+    <value>调试</value>
+  </data>
+  <data name="Log_ExportSuccess" xml:space="preserve">
+    <value>日志已导出至 {0}。分享前请先检查其内容。</value>
+  </data>
+  <data name="Debug_TabVerbose" xml:space="preserve">
+    <value>日志</value>
+  </data>
+  <data name="Debug_TabCatalog" xml:space="preserve">
+    <value>目录</value>
+  </data>
+  <data name="Debug_TabSystemInfo" xml:space="preserve">
+    <value>系统信息</value>
+  </data>
+  <data name="Debug_CategoryCount" xml:space="preserve">
+    <value>类别：</value>
+  </data>
+  <data name="Debug_CommandCount" xml:space="preserve">
+    <value>命令：</value>
+  </data>
+  <data name="Debug_ValidationErrors" xml:space="preserve">
+    <value>验证错误</value>
+  </data>
+  <data name="Debug_NoValidationErrors" xml:space="preserve">
+    <value>没有验证错误。</value>
+  </data>
+  <data name="Debug_CopySystemInfo" xml:space="preserve">
+    <value>复制</value>
+  </data>
+  <data name="Debug_Refresh" xml:space="preserve">
+    <value>刷新</value>
+  </data>
+  <data name="Error_Title" xml:space="preserve">
+    <value>意外错误</value>
+  </data>
+  <data name="Error_Message" xml:space="preserve">
+    <value>出现了问题。你可以复制详细信息，或在 GitHub 上报告此问题。</value>
+  </data>
+  <data name="Error_Code" xml:space="preserve">
+    <value>错误代码：</value>
+  </data>
+  <data name="Error_CopyDetails" xml:space="preserve">
+    <value>复制详细信息</value>
+  </data>
+  <data name="Error_ReportBug" xml:space="preserve">
+    <value>报告问题</value>
+  </data>
+  <data name="Error_Close" xml:space="preserve">
+    <value>关闭</value>
+  </data>
+  <data name="ReportBug_Title" xml:space="preserve">
+    <value>报告问题</value>
+  </data>
+  <data name="ReportBug_Environment" xml:space="preserve">
+    <value>环境信息</value>
+  </data>
+  <data name="ReportBug_ExportLog" xml:space="preserve">
+    <value>导出日志（.zip）</value>
+  </data>
+  <data name="ReportBug_OpenIssue" xml:space="preserve">
+    <value>在 GitHub 上创建 issue</value>
+  </data>
+  <data name="ReportBug_Close" xml:space="preserve">
+    <value>关闭</value>
+  </data>
+  <data name="ReportBug_DescriptionHint" xml:space="preserve">
+    <value>描述发生了什么（可选）</value>
+  </data>
+  <data name="ReportBug_ReviewReminder" xml:space="preserve">
+    <value>将 .zip 附加到 issue 前，请先检查其内容。</value>
+  </data>
+  <data name="Settings_Logs" xml:space="preserve">
+    <value>日志</value>
+  </data>
+  <data name="Settings_LogLevel" xml:space="preserve">
+    <value>日志级别</value>
+  </data>
+  <data name="Settings_LogsSize" xml:space="preserve">
+    <value>日志大小：</value>
+  </data>
+  <data name="Settings_OpenLogFolder" xml:space="preserve">
+    <value>打开日志文件夹</value>
+  </data>
+  <data name="Settings_ExportLogs" xml:space="preserve">
+    <value>导出日志（.zip）</value>
+  </data>
+  <data name="Settings_ClearOldLogs" xml:space="preserve">
+    <value>删除旧日志</value>
+  </data>
+  <data name="Settings_ClearLogsConfirm" xml:space="preserve">
+    <value>要删除旧日志文件吗？今天的日志将会保留。</value>
+  </data>
+  <data name="Settings_Advanced" xml:space="preserve">
+    <value>高级</value>
+  </data>
+  <data name="Settings_RunMode" xml:space="preserve">
+    <value>运行模式：</value>
+  </data>
+  <data name="Settings_RunModeInstalled" xml:space="preserve">
+    <value>已安装</value>
+  </data>
+  <data name="Settings_RunModePortable" xml:space="preserve">
+    <value>便携版 / 开发版</value>
+  </data>
+  <data name="Settings_ConfigPath" xml:space="preserve">
+    <value>配置文件</value>
+  </data>
+  <data name="Settings_OpenConfig" xml:space="preserve">
+    <value>打开文件夹</value>
+  </data>
+  <data name="Settings_OpenDebugPanel" xml:space="preserve">
+    <value>打开调试面板</value>
+  </data>
+  <data name="Settings_ResetDefaults" xml:space="preserve">
+    <value>恢复默认设置</value>
+  </data>
+  <data name="Settings_ResetConfirm" xml:space="preserve">
+    <value>要将所有设置恢复为默认值吗？你已接受的条款和日志将会保留。</value>
+  </data>
+  <data name="Home_SystemStatus" xml:space="preserve">
+    <value>系统状态</value>
+  </data>
+  <data name="Home_StatusOs" xml:space="preserve">
+    <value>Windows</value>
+  </data>
+  <data name="Home_StatusMemory" xml:space="preserve">
+    <value>内存</value>
+  </data>
+  <data name="Home_StatusDisk" xml:space="preserve">
+    <value>系统盘</value>
+  </data>
+  <data name="Home_StatusUptime" xml:space="preserve">
+    <value>运行时长</value>
+  </data>
+  <data name="Home_OsFormat" xml:space="preserve">
+    <value>{0}（内部版本 {1}）</value>
+  </data>
+  <data name="Home_StorageFormat" xml:space="preserve">
+    <value>{1} 中可用 {0}</value>
+  </data>
+  <data name="Home_GigabytesFormat" xml:space="preserve">
+    <value>{0:0.0} GB</value>
+  </data>
+  <data name="Home_DiskFormat" xml:space="preserve">
+    <value>{0} · {1}</value>
+  </data>
+  <data name="Home_UptimeWithDays" xml:space="preserve">
+    <value>{0} 天 {1} 小时 {2} 分</value>
+  </data>
+  <data name="Home_UptimeNoDays" xml:space="preserve">
+    <value>{1} 小时 {2} 分</value>
+  </data>
+  <data name="Home_Recent" xml:space="preserve">
+    <value>最近使用的命令</value>
+  </data>
+  <data name="Home_NoRecent" xml:space="preserve">
+    <value>尚未运行任何命令。</value>
+  </data>
+  <data name="Home_NoFavorites" xml:space="preserve">
+    <value>尚无收藏。点击星形图标可固定命令。</value>
+  </data>
+  <data name="History_Title" xml:space="preserve">
+    <value>执行历史</value>
+  </data>
+  <data name="History_Empty" xml:space="preserve">
+    <value>尚未运行任何命令。</value>
+  </data>
+  <data name="History_RunAgain" xml:space="preserve">
+    <value>再次运行</value>
+  </data>
+  <data name="History_Clear" xml:space="preserve">
+    <value>清除历史</value>
+  </data>
+  <data name="History_Undo" xml:space="preserve">
+    <value>撤消</value>
+  </data>
+  <data name="Registry_ChangesHeader" xml:space="preserve">
+    <value>— registry 变更前/后 —</value>
+  </data>
+  <data name="Registry_ChangeFormat" xml:space="preserve">
+    <value>{0}：{1} → {2}</value>
+  </data>
+  <data name="Registry_NotSet" xml:space="preserve">
+    <value>（未设置）</value>
+  </data>
+  <data name="Registry_NoChanges" xml:space="preserve">
+    <value>未检测到 registry 变更。</value>
+  </data>
+  <data name="Recipes_Saved" xml:space="preserve">
+    <value>已保存的配方</value>
+  </data>
+  <data name="Recipes_New" xml:space="preserve">
+    <value>新建</value>
+  </data>
+  <data name="Recipe_Delete" xml:space="preserve">
+    <value>删除配方</value>
+  </data>
+  <data name="Recipes_NameHint" xml:space="preserve">
+    <value>配方名称</value>
+  </data>
+  <data name="Recipes_NoSteps" xml:space="preserve">
+    <value>尚无步骤。在下方添加命令以构建命令链。</value>
+  </data>
+  <data name="Recipes_AddHint" xml:space="preserve">
+    <value>添加命令…</value>
+  </data>
+  <data name="Recipes_AddStep" xml:space="preserve">
+    <value>添加</value>
+  </data>
+  <data name="Recipes_Save" xml:space="preserve">
+    <value>保存</value>
+  </data>
+  <data name="Recipes_Run" xml:space="preserve">
+    <value>运行配方</value>
+  </data>
+  <data name="Recipes_MoveUp" xml:space="preserve">
+    <value>上移</value>
+  </data>
+  <data name="Recipes_MoveDown" xml:space="preserve">
+    <value>下移</value>
+  </data>
+  <data name="Recipes_RemoveStep" xml:space="preserve">
+    <value>移除步骤</value>
+  </data>
+  <data name="Recipe_StepHeader" xml:space="preserve">
+    <value>▶ 步骤 {0}/{1}：{2}</value>
+  </data>
+  <data name="Recipe_StoppedOnError" xml:space="preserve">
+    <value>配方已停止：某个步骤失败。</value>
+  </data>
+  <data name="Recipe_StoppedRestart" xml:space="preserve">
+    <value>配方已暂停：继续之前需要重新启动。</value>
+  </data>
+  <data name="Recipe_Cancelled" xml:space="preserve">
+    <value>配方已取消。</value>
+  </data>
+  <data name="Recipe_ContainsDangerous" xml:space="preserve">
+    <value>此配方包含危险步骤。</value>
+  </data>
+  <data name="Recipe_ConfirmTitle" xml:space="preserve">
+    <value>运行配方？</value>
+  </data>
+  <data name="Recipe_DeleteConfirm" xml:space="preserve">
+    <value>删除配方“{0}”？</value>
+  </data>
+  <data name="UserCmd_Warning" xml:space="preserve">
+    <value>这些命令不属于已审核的命令目录，且始终以非管理员权限运行。您需自行承担其执行后果的全部责任。</value>
+  </data>
+  <data name="UserCmd_Saved" xml:space="preserve">
+    <value>已保存的命令</value>
+  </data>
+  <data name="UserCmd_New" xml:space="preserve">
+    <value>新建</value>
+  </data>
+  <data name="UserCmd_Delete" xml:space="preserve">
+    <value>删除</value>
+  </data>
+  <data name="UserCmd_NameHint" xml:space="preserve">
+    <value>名称</value>
+  </data>
+  <data name="UserCmd_ExecutableHint" xml:space="preserve">
+    <value>可执行文件（例如 cmd、powershell）</value>
+  </data>
+  <data name="UserCmd_ArgumentsHint" xml:space="preserve">
+    <value>参数</value>
+  </data>
+  <data name="UserCmd_Save" xml:space="preserve">
+    <value>保存</value>
+  </data>
+  <data name="UserCmd_Run" xml:space="preserve">
+    <value>运行</value>
+  </data>
+  <data name="UserCmd_NoCommands" xml:space="preserve">
+    <value>暂无命令。</value>
+  </data>
+  <data name="UserCmd_RunTitle" xml:space="preserve">
+    <value>运行此命令？</value>
+  </data>
+  <data name="UserCmd_RunConfirm" xml:space="preserve">
+    <value>此命令将在没有管理员权限的情况下运行：
+
+{0}
+
+是否继续？</value>
+  </data>
+  <data name="UserCmd_DeleteConfirm" xml:space="preserve">
+    <value>删除“{0}”？</value>
+  </data>
+  <data name="Favorite_Toggle" xml:space="preserve">
+    <value>切换收藏</value>
+  </data>
+  <data name="Menu_OpenConfigFolder" xml:space="preserve">
+    <value>打开配置文件夹</value>
+  </data>
+  <data name="Menu_OpenLogFolder" xml:space="preserve">
+    <value>打开日志文件夹</value>
+  </data>
+  <data name="Menu_FullScreen" xml:space="preserve">
+    <value>全屏</value>
+  </data>
+  <data name="Menu_About" xml:space="preserve">
+    <value>关于 CommandForge</value>
+  </data>
+  <data name="Menu_Wiki" xml:space="preserve">
+    <value>指南 / Wiki</value>
+  </data>
+  <data name="Legal_EulaSummary" xml:space="preserve">
+    <value>使用 CommandForge 即表示您接受：它会执行系统级命令，风险由您自行承担，且不提供任何担保。GNU GPL v3 规定您的权利；本条款仅额外增加风险确认和免责声明。</value>
+  </data>
+  <data name="Legal_GplSummary" xml:space="preserve">
+    <value>CommandForge 是基于 GNU 通用公共许可证 v3.0 的自由软件。您可以根据 GPLv3 的条款使用、研究、修改和再分发它。</value>
+  </data>
+  <data name="Legal_DisclaimerSummary" xml:space="preserve">
+    <value>使用风险自负。系统级命令可能更改配置或导致数据丢失——在执行有风险的操作前，请备份数据并创建还原点。CommandForge 与 Microsoft 无任何关联。</value>
+  </data>
+  <data name="Legal_PrivacySummary" xml:space="preserve">
+    <value>离线优先。CommandForge 不收集任何个人数据，也没有遥测；唯一的网络连接是 GitHub 更新检查。</value>
+  </data>
+  <data name="Menu_Terms" xml:space="preserve">
+    <value>条款与隐私</value>
+  </data>
+  <data name="LegalViewer_Title" xml:space="preserve">
+    <value>条款与隐私</value>
+  </data>
+  <data name="Menu_KeyboardShortcuts" xml:space="preserve">
+    <value>键盘快捷键</value>
+  </data>
+  <data name="Menu_PortableInfo" xml:space="preserve">
+    <value>便携版信息</value>
+  </data>
+  <data name="Menu_RestorePoint" xml:space="preserve">
+    <value>创建系统还原点</value>
+  </data>
+  <data name="Shortcuts_Palette" xml:space="preserve">
+    <value>打开命令面板 / 聚焦搜索</value>
+  </data>
+  <data name="Shortcuts_ListNav" xml:space="preserve">
+    <value>移动选择（列表与面板）</value>
+  </data>
+  <data name="Shortcuts_OpenSelected" xml:space="preserve">
+    <value>打开所选命令</value>
+  </data>
+  <data name="Shortcuts_CloseDialog" xml:space="preserve">
+    <value>关闭对话框 / 取消</value>
+  </data>
+  <data name="PortableInfo_ConfigFolder" xml:space="preserve">
+    <value>配置文件夹</value>
+  </data>
+  <data name="PortableInfo_LogFolder" xml:space="preserve">
+    <value>日志文件夹</value>
+  </data>
+  <data name="Cmd_info.hotfixes_Title" xml:space="preserve">
+    <value>已安装的更新</value>
+  </data>
+  <data name="Cmd_info.hotfixes_Desc" xml:space="preserve">
+    <value>列出已安装的 Windows 更新和修补程序，最新的排在前面。</value>
+  </data>
+  <data name="Cmd_info.drivers_Title" xml:space="preserve">
+    <value>已安装的驱动程序</value>
+  </data>
+  <data name="Cmd_info.drivers_Desc" xml:space="preserve">
+    <value>列出已签名的设备驱动程序及其版本和提供商。</value>
+  </data>
+  <data name="Cmd_info.bios_Title" xml:space="preserve">
+    <value>BIOS / 固件信息</value>
+  </data>
+  <data name="Cmd_info.bios_Desc" xml:space="preserve">
+    <value>显示 BIOS 制造商、版本、序列号和发布日期。</value>
+  </data>
+  <data name="Cmd_info.env_Title" xml:space="preserve">
+    <value>环境变量</value>
+  </data>
+  <data name="Cmd_info.env_Desc" xml:space="preserve">
+    <value>列出当前的环境变量及其值。</value>
+  </data>
+  <data name="Cmd_info.installedapps_Title" xml:space="preserve">
+    <value>已安装的程序</value>
+  </data>
+  <data name="Cmd_info.installedapps_Desc" xml:space="preserve">
+    <value>从注册表卸载项中列出已安装的程序。</value>
+  </data>
+  <data name="Cmd_info.monitors_Title" xml:space="preserve">
+    <value>显示器信息</value>
+  </data>
+  <data name="Cmd_info.monitors_Desc" xml:space="preserve">
+    <value>显示已连接的显示器及其当前分辨率和刷新率。</value>
+  </data>
+  <data name="Cmd_net.netstat_Title" xml:space="preserve">
+    <value>活动连接</value>
+  </data>
+  <data name="Cmd_net.netstat_Desc" xml:space="preserve">
+    <value>显示活动的 TCP/UDP 连接和侦听端口及其 PID。</value>
+  </data>
+  <data name="Cmd_net.arp_Title" xml:space="preserve">
+    <value>ARP 缓存</value>
+  </data>
+  <data name="Cmd_net.arp_Desc" xml:space="preserve">
+    <value>显示将 IP 地址映射到 MAC 地址的 ARP 表。</value>
+  </data>
+  <data name="Cmd_net.route_Title" xml:space="preserve">
+    <value>路由表</value>
+  </data>
+  <data name="Cmd_net.route_Desc" xml:space="preserve">
+    <value>打印 IPv4/IPv6 路由表。</value>
+  </data>
+  <data name="Cmd_net.wifi.profiles_Title" xml:space="preserve">
+    <value>Wi-Fi 配置文件</value>
+  </data>
+  <data name="Cmd_net.wifi.profiles_Desc" xml:space="preserve">
+    <value>列出已保存的 Wi-Fi (WLAN) 网络配置文件。</value>
+  </data>
+  <data name="Cmd_net.proxy.show_Title" xml:space="preserve">
+    <value>WinHTTP 代理</value>
+  </data>
+  <data name="Cmd_net.proxy.show_Desc" xml:space="preserve">
+    <value>显示系统 WinHTTP 代理配置。</value>
+  </data>
+  <data name="Cmd_tweak.darkmode.on_Title" xml:space="preserve">
+    <value>启用深色模式</value>
+  </data>
+  <data name="Cmd_tweak.darkmode.on_Desc" xml:space="preserve">
+    <value>将应用和系统主题切换为深色模式。</value>
+  </data>
+  <data name="Cmd_tweak.darkmode.off_Title" xml:space="preserve">
+    <value>启用浅色模式</value>
+  </data>
+  <data name="Cmd_tweak.darkmode.off_Desc" xml:space="preserve">
+    <value>将应用和系统主题切换回浅色模式。</value>
+  </data>
+  <data name="Cmd_tweak.win11.taskbarleft_Title" xml:space="preserve">
+    <value>任务栏：左对齐 (Win11)</value>
+  </data>
+  <data name="Cmd_tweak.win11.taskbarleft_Desc" xml:space="preserve">
+    <value>将 Windows 11 任务栏左对齐并重启资源管理器。</value>
+  </data>
+  <data name="Cmd_tweak.win11.taskbarcenter_Title" xml:space="preserve">
+    <value>任务栏：居中对齐 (Win11)</value>
+  </data>
+  <data name="Cmd_tweak.win11.taskbarcenter_Desc" xml:space="preserve">
+    <value>将 Windows 11 任务栏居中对齐并重启资源管理器。</value>
+  </data>
+  <data name="Cmd_tweak.clockseconds.on_Title" xml:space="preserve">
+    <value>时钟显示秒数 (Win11)</value>
+  </data>
+  <data name="Cmd_tweak.clockseconds.on_Desc" xml:space="preserve">
+    <value>在 Windows 11 任务栏时钟中显示秒数并重启资源管理器。</value>
+  </data>
+  <data name="Cmd_tweak.clockseconds.off_Title" xml:space="preserve">
+    <value>时钟隐藏秒数 (Win11)</value>
+  </data>
+  <data name="Cmd_tweak.clockseconds.off_Desc" xml:space="preserve">
+    <value>在 Windows 11 任务栏时钟中隐藏秒数并重启资源管理器。</value>
+  </data>
+  <data name="Cmd_clean.thumbnailcache_Title" xml:space="preserve">
+    <value>清除缩略图缓存</value>
+  </data>
+  <data name="Cmd_clean.thumbnailcache_Desc" xml:space="preserve">
+    <value>删除缓存的缩略图并重启资源管理器以重新生成。</value>
+  </data>
+  <data name="Cmd_clean.fontcache_Title" xml:space="preserve">
+    <value>清除字体缓存</value>
+  </data>
+  <data name="Cmd_clean.fontcache_Desc" xml:space="preserve">
+    <value>停止字体缓存服务，清除其缓存后重新启动。</value>
+  </data>
+  <data name="Cmd_clean.prefetch_Title" xml:space="preserve">
+    <value>清除预读取</value>
+  </data>
+  <data name="Cmd_clean.prefetch_Desc" xml:space="preserve">
+    <value>清空 Windows 预读取文件夹（会自动重新生成）。</value>
+  </data>
+  <data name="Cmd_power.set.balanced_Title" xml:space="preserve">
+    <value>设置为平衡计划</value>
+  </data>
+  <data name="Cmd_power.set.balanced_Desc" xml:space="preserve">
+    <value>启用平衡电源计划。</value>
+  </data>
+  <data name="Cmd_power.requests_Title" xml:space="preserve">
+    <value>电源请求</value>
+  </data>
+  <data name="Cmd_power.requests_Desc" xml:space="preserve">
+    <value>显示当前阻止睡眠或关闭显示器的应用和驱动程序。</value>
+  </data>
+  <data name="Cmd_power.fastboot.off_Title" xml:space="preserve">
+    <value>禁用快速启动</value>
+  </data>
+  <data name="Cmd_power.fastboot.off_Desc" xml:space="preserve">
+    <value>关闭快速启动（混合启动）以执行完整关机。</value>
+  </data>
+  <data name="Cmd_power.fastboot.on_Title" xml:space="preserve">
+    <value>启用快速启动</value>
+  </data>
+  <data name="Cmd_power.fastboot.on_Desc" xml:space="preserve">
+    <value>开启快速启动（混合启动）。</value>
+  </data>
+  <data name="Cmd_diag.taskmgr_Title" xml:space="preserve">
+    <value>任务管理器</value>
+  </data>
+  <data name="Cmd_diag.taskmgr_Desc" xml:space="preserve">
+    <value>打开任务管理器。</value>
+  </data>
+  <data name="Cmd_diag.devmgmt_Title" xml:space="preserve">
+    <value>设备管理器</value>
+  </data>
+  <data name="Cmd_diag.devmgmt_Desc" xml:space="preserve">
+    <value>打开设备管理器。</value>
+  </data>
+  <data name="Cmd_diag.services_Title" xml:space="preserve">
+    <value>服务</value>
+  </data>
+  <data name="Cmd_diag.services_Desc" xml:space="preserve">
+    <value>打开服务管理控制台。</value>
+  </data>
+  <data name="Cmd_diag.gpresult_Title" xml:space="preserve">
+    <value>组策略结果</value>
+  </data>
+  <data name="Cmd_diag.gpresult_Desc" xml:space="preserve">
+    <value>显示此电脑和用户的策略结果集 (RSoP) 摘要。</value>
+  </data>
+  <data name="Cmd_winget.source.list_Title" xml:space="preserve">
+    <value>列出 winget 源</value>
+  </data>
+  <data name="Cmd_winget.source.list_Desc" xml:space="preserve">
+    <value>列出已配置的 winget 软件包源。</value>
+  </data>
+  <data name="Cmd_store.reset_Title" xml:space="preserve">
+    <value>重置 Microsoft Store</value>
+  </data>
+  <data name="Cmd_store.reset_Desc" xml:space="preserve">
+    <value>清除 Microsoft Store 缓存 (wsreset)。</value>
+  </data>
+  <data name="Cmd_sec.defender.status_Title" xml:space="preserve">
+    <value>Defender 状态</value>
+  </data>
+  <data name="Cmd_sec.defender.status_Desc" xml:space="preserve">
+    <value>显示 Microsoft Defender 的保护状态和签名版本。</value>
+  </data>
+  <data name="Cmd_sec.defender.fullscan_Title" xml:space="preserve">
+    <value>Defender 完整扫描</value>
+  </data>
+  <data name="Cmd_sec.defender.fullscan_Desc" xml:space="preserve">
+    <value>运行 Microsoft Defender 防病毒完整扫描（可能需要一段时间）。</value>
+  </data>
+  <data name="Cmd_sec.firewall.on_Title" xml:space="preserve">
+    <value>启用防火墙</value>
+  </data>
+  <data name="Cmd_sec.firewall.on_Desc" xml:space="preserve">
+    <value>为所有配置文件启用 Windows 防火墙。</value>
+  </data>
+  <data name="Cmd_sec.firewall.off_Title" xml:space="preserve">
+    <value>禁用防火墙</value>
+  </data>
+  <data name="Cmd_sec.firewall.off_Desc" xml:space="preserve">
+    <value>为所有配置文件关闭 Windows 防火墙。这会使电脑处于无保护状态——请尽快重新启用。</value>
+  </data>
+  <data name="Cmd_dev.wsl.shutdown_Title" xml:space="preserve">
+    <value>关闭 WSL</value>
+  </data>
+  <data name="Cmd_dev.wsl.shutdown_Desc" xml:space="preserve">
+    <value>停止所有正在运行的 WSL 发行版和 WSL 虚拟机。</value>
+  </data>
+  <data name="Cmd_dev.sandbox.off_Title" xml:space="preserve">
+    <value>禁用 Windows 沙盒</value>
+  </data>
+  <data name="Cmd_dev.sandbox.off_Desc" xml:space="preserve">
+    <value>关闭 Windows 沙盒可选功能。需要重启。</value>
+  </data>
+  <data name="Cmd_dev.longpaths.on_Title" xml:space="preserve">
+    <value>启用长路径</value>
+  </data>
+  <data name="Cmd_dev.longpaths.on_Desc" xml:space="preserve">
+    <value>启用 Win32 长路径（超过 260 个字符）支持。</value>
+  </data>
+  <data name="Cmd_dev.longpaths.off_Title" xml:space="preserve">
+    <value>禁用长路径</value>
+  </data>
+  <data name="Cmd_dev.longpaths.off_Desc" xml:space="preserve">
+    <value>禁用 Win32 长路径支持（恢复为默认值）。</value>
+  </data>
+</root>

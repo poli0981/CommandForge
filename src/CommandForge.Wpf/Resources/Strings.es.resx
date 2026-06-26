@@ -1,0 +1,1568 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AppTitle" xml:space="preserve">
+    <value>CommandForge</value>
+  </data>
+  <data name="LegalGateTitle" xml:space="preserve">
+    <value>Bienvenido a CommandForge</value>
+  </data>
+  <data name="LegalGateIntro" xml:space="preserve">
+    <value>CommandForge ejecuta comandos de Windows a nivel de sistema. Revise y acepte los términos antes de continuar.</value>
+  </data>
+  <data name="LegalGateReadOnGitHub" xml:space="preserve">
+    <value>Leer el texto completo en GitHub</value>
+  </data>
+  <data name="LegalGateAgree" xml:space="preserve">
+    <value>He leído y acepto todos los términos</value>
+  </data>
+  <data name="LegalGateContinue" xml:space="preserve">
+    <value>Continuar</value>
+  </data>
+  <data name="LegalGateExit" xml:space="preserve">
+    <value>Salir</value>
+  </data>
+  <data name="TabEula" xml:space="preserve">
+    <value>EULA</value>
+  </data>
+  <data name="TabGpl" xml:space="preserve">
+    <value>GPLv3</value>
+  </data>
+  <data name="TabDisclaimer" xml:space="preserve">
+    <value>Aviso legal</value>
+  </data>
+  <data name="TabPrivacy" xml:space="preserve">
+    <value>Privacidad</value>
+  </data>
+  <data name="MenuFile" xml:space="preserve">
+    <value>Archivo</value>
+  </data>
+  <data name="MenuView" xml:space="preserve">
+    <value>Ver</value>
+  </data>
+  <data name="MenuTools" xml:space="preserve">
+    <value>Herramientas</value>
+  </data>
+  <data name="MenuAbout" xml:space="preserve">
+    <value>Acerca de</value>
+  </data>
+  <data name="MenuHelp" xml:space="preserve">
+    <value>Ayuda</value>
+  </data>
+  <data name="MenuExit" xml:space="preserve">
+    <value>Salir</value>
+  </data>
+  <data name="MenuToggleSidebar" xml:space="preserve">
+    <value>Contraer barra lateral</value>
+  </data>
+  <data name="SidebarHome" xml:space="preserve">
+    <value>Inicio</value>
+  </data>
+  <data name="SidebarFavorites" xml:space="preserve">
+    <value>Favoritos</value>
+  </data>
+  <data name="SidebarHistory" xml:space="preserve">
+    <value>Historial</value>
+  </data>
+  <data name="SidebarRecipes" xml:space="preserve">
+    <value>Recetas</value>
+  </data>
+  <data name="SidebarUserCommands" xml:space="preserve">
+    <value>Mis comandos</value>
+  </data>
+  <data name="SidebarSettings" xml:space="preserve">
+    <value>Configuración</value>
+  </data>
+  <data name="Sidebar_AllCommands" xml:space="preserve">
+    <value>Todos los comandos</value>
+  </data>
+  <data name="PaneCommands" xml:space="preserve">
+    <value>Comandos</value>
+  </data>
+  <data name="PaneDetails" xml:space="preserve">
+    <value>Detalles</value>
+  </data>
+  <data name="PaneConsole" xml:space="preserve">
+    <value>Consola</value>
+  </data>
+  <data name="Console_Cancel" xml:space="preserve">
+    <value>Cancelar</value>
+  </data>
+  <data name="Result_Success" xml:space="preserve">
+    <value>Correcto</value>
+  </data>
+  <data name="Result_Failed" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="Result_Cancelled" xml:space="preserve">
+    <value>Cancelado</value>
+  </data>
+  <data name="Result_ExitCode" xml:space="preserve">
+    <value>Código de salida</value>
+  </data>
+  <data name="Result_Restart" xml:space="preserve">
+    <value>Reiniciar ahora</value>
+  </data>
+  <data name="Restart_ConfirmTitle" xml:space="preserve">
+    <value>Reinicio necesario</value>
+  </data>
+  <data name="Restart_ConfirmMessage" xml:space="preserve">
+    <value>Algunos cambios requieren un reinicio para completarse. ¿Reiniciar ahora?</value>
+  </data>
+  <data name="ComingSoon" xml:space="preserve">
+    <value>Próximamente</value>
+  </data>
+  <data name="NoCommandsInCategory" xml:space="preserve">
+    <value>Aún no hay comandos en esta categoría.</value>
+  </data>
+  <data name="NoSearchResults" xml:space="preserve">
+    <value>Ningún comando coincide con tu búsqueda.</value>
+  </data>
+  <data name="Detail_RunDisabledHint" xml:space="preserve">
+    <value>La ejecución de comandos llegará en la próxima fase.</value>
+  </data>
+  <data name="Detail_SelectPrompt" xml:space="preserve">
+    <value>Selecciona un comando para ver sus detalles.</value>
+  </data>
+  <data name="Detail_Revert" xml:space="preserve">
+    <value>Revertir</value>
+  </data>
+  <data name="Confirm_TypeToConfirm" xml:space="preserve">
+    <value>Escribe el nombre del comando para confirmar:</value>
+  </data>
+  <data name="Confirm_CreateRestorePoint" xml:space="preserve">
+    <value>Crear primero un punto de restauración del sistema (recomendado)</value>
+  </data>
+  <data name="Exit_RunningTitle" xml:space="preserve">
+    <value>Comando en ejecución</value>
+  </data>
+  <data name="Exit_RunningMessage" xml:space="preserve">
+    <value>Aún se está ejecutando un comando. ¿Cancelarlo y salir?</value>
+  </data>
+  <data name="Restore_Creating" xml:space="preserve">
+    <value>Creando punto de restauración…</value>
+  </data>
+  <data name="Restore_Created" xml:space="preserve">
+    <value>Punto de restauración creado.</value>
+  </data>
+  <data name="Restore_Failed" xml:space="preserve">
+    <value>No se pudo crear un punto de restauración (se continúa de todos modos).</value>
+  </data>
+  <data name="Detail_CommandLine" xml:space="preserve">
+    <value>Comando a ejecutar</value>
+  </data>
+  <data name="Detail_Copy" xml:space="preserve">
+    <value>Copiar</value>
+  </data>
+  <data name="Detail_Run" xml:space="preserve">
+    <value>Ejecutar</value>
+  </data>
+  <data name="Detail_Doc" xml:space="preserve">
+    <value>Documentación</value>
+  </data>
+  <data name="Detail_RequiresAdmin" xml:space="preserve">
+    <value>Requiere administrador</value>
+  </data>
+  <data name="Detail_MayRestart" xml:space="preserve">
+    <value>Puede requerir reinicio</value>
+  </data>
+  <data name="Search_Placeholder" xml:space="preserve">
+    <value>Buscar comandos… (Ctrl+K)</value>
+  </data>
+  <data name="Search_Suggestion" xml:space="preserve">
+    <value>Quizás quisiste decir:</value>
+  </data>
+  <data name="Home_Suggestions" xml:space="preserve">
+    <value>Sugerencias de mantenimiento</value>
+  </data>
+  <data name="Maint_LowDisk" xml:space="preserve">
+    <value>Tu unidad del sistema tiene poco espacio libre; considera usar el Liberador de espacio en disco.</value>
+  </data>
+  <data name="Maint_HighUptime" xml:space="preserve">
+    <value>Tu PC lleva más de una semana en funcionamiento; un reinicio puede ayudar.</value>
+  </data>
+  <data name="Maint_Open" xml:space="preserve">
+    <value>Abrir</value>
+  </data>
+  <data name="Palette_Placeholder" xml:space="preserve">
+    <value>Escribe para buscar en todo el catálogo…</value>
+  </data>
+  <data name="Danger_Safe" xml:space="preserve">
+    <value>Seguro</value>
+  </data>
+  <data name="Danger_Caution" xml:space="preserve">
+    <value>Precaución</value>
+  </data>
+  <data name="Danger_Dangerous" xml:space="preserve">
+    <value>Peligroso</value>
+  </data>
+  <data name="Cat_system-maintenance" xml:space="preserve">
+    <value>Sistema y mantenimiento</value>
+  </data>
+  <data name="Cat_updates-packages" xml:space="preserve">
+    <value>Actualizaciones y paquetes</value>
+  </data>
+  <data name="Cat_tweaks-shortcuts" xml:space="preserve">
+    <value>Ajustes y accesos directos</value>
+  </data>
+  <data name="Cat_network" xml:space="preserve">
+    <value>Red</value>
+  </data>
+  <data name="Cat_cleanup" xml:space="preserve">
+    <value>Limpieza</value>
+  </data>
+  <data name="Cat_power" xml:space="preserve">
+    <value>Energía</value>
+  </data>
+  <data name="Cat_system-info" xml:space="preserve">
+    <value>Información del sistema</value>
+  </data>
+  <data name="Cat_diagnostics" xml:space="preserve">
+    <value>Diagnóstico</value>
+  </data>
+  <data name="Cat_security-privacy" xml:space="preserve">
+    <value>Seguridad y privacidad</value>
+  </data>
+  <data name="Cat_developer" xml:space="preserve">
+    <value>Desarrollador</value>
+  </data>
+  <data name="Cmd_info.systeminfo_Title" xml:space="preserve">
+    <value>Información del sistema</value>
+  </data>
+  <data name="Cmd_info.systeminfo_Desc" xml:space="preserve">
+    <value>Muestra un resumen completo de este sistema.</value>
+  </data>
+  <data name="Cmd_info.winver_Title" xml:space="preserve">
+    <value>Versión de Windows</value>
+  </data>
+  <data name="Cmd_info.winver_Desc" xml:space="preserve">
+    <value>Muestra la edición, versión y compilación de Windows.</value>
+  </data>
+  <data name="Cmd_info.cpu_Title" xml:space="preserve">
+    <value>Información de la CPU</value>
+  </data>
+  <data name="Cmd_info.cpu_Desc" xml:space="preserve">
+    <value>Muestra el nombre del procesador, los núcleos y la velocidad de reloj.</value>
+  </data>
+  <data name="Cmd_info.gpu_Title" xml:space="preserve">
+    <value>Información de la GPU</value>
+  </data>
+  <data name="Cmd_info.gpu_Desc" xml:space="preserve">
+    <value>Muestra el nombre de la tarjeta gráfica y la versión del controlador.</value>
+  </data>
+  <data name="Cmd_info.ram_Title" xml:space="preserve">
+    <value>Información de la memoria</value>
+  </data>
+  <data name="Cmd_info.ram_Desc" xml:space="preserve">
+    <value>Muestra los módulos de RAM instalados.</value>
+  </data>
+  <data name="Cmd_info.disk_Title" xml:space="preserve">
+    <value>Información del disco</value>
+  </data>
+  <data name="Cmd_info.disk_Desc" xml:space="preserve">
+    <value>Enumera los discos físicos y sus tipos de medio.</value>
+  </data>
+  <data name="Cmd_info.uptime_Title" xml:space="preserve">
+    <value>Tiempo de actividad del sistema</value>
+  </data>
+  <data name="Cmd_info.uptime_Desc" xml:space="preserve">
+    <value>Muestra cuánto tiempo lleva en funcionamiento el sistema.</value>
+  </data>
+  <data name="Cmd_info.activation_Title" xml:space="preserve">
+    <value>Estado de activación</value>
+  </data>
+  <data name="Cmd_info.activation_Desc" xml:space="preserve">
+    <value>Muestra el estado de activación de Windows.</value>
+  </data>
+  <data name="Cmd_net.ipconfig.all_Title" xml:space="preserve">
+    <value>Configuración de red</value>
+  </data>
+  <data name="Cmd_net.ipconfig.all_Desc" xml:space="preserve">
+    <value>Muestra la configuración IP completa de todos los adaptadores.</value>
+  </data>
+  <data name="Cmd_net.flushdns_Title" xml:space="preserve">
+    <value>Vaciar caché de DNS</value>
+  </data>
+  <data name="Cmd_net.flushdns_Desc" xml:space="preserve">
+    <value>Borra la caché del solucionador de DNS.</value>
+  </data>
+  <data name="Cmd_net.showadapters_Title" xml:space="preserve">
+    <value>Mostrar adaptadores de red</value>
+  </data>
+  <data name="Cmd_net.showadapters_Desc" xml:space="preserve">
+    <value>Enumera las interfaces de red y su estado.</value>
+  </data>
+  <data name="Cmd_tweak.godmode_Title" xml:space="preserve">
+    <value>Abrir God Mode</value>
+  </data>
+  <data name="Cmd_tweak.godmode_Desc" xml:space="preserve">
+    <value>Abre la vista del panel de control con todas las tareas (God Mode).</value>
+  </data>
+  <data name="Cmd_tweak.showext_Title" xml:space="preserve">
+    <value>Mostrar extensiones de archivo</value>
+  </data>
+  <data name="Cmd_tweak.showext_Desc" xml:space="preserve">
+    <value>Mostrar siempre las extensiones de los nombres de archivo en el Explorador.</value>
+  </data>
+  <data name="Cmd_tweak.showhidden_Title" xml:space="preserve">
+    <value>Mostrar archivos ocultos</value>
+  </data>
+  <data name="Cmd_tweak.showhidden_Desc" xml:space="preserve">
+    <value>Mostrar los archivos y carpetas ocultos en el Explorador.</value>
+  </data>
+  <data name="Cmd_cleanup.cleanmgr_Title" xml:space="preserve">
+    <value>Liberador de espacio en disco</value>
+  </data>
+  <data name="Cmd_cleanup.cleanmgr_Desc" xml:space="preserve">
+    <value>Abre la herramienta Liberador de espacio en disco de Windows.</value>
+  </data>
+  <data name="Cmd_power.list_Title" xml:space="preserve">
+    <value>Listar planes de energía</value>
+  </data>
+  <data name="Cmd_power.list_Desc" xml:space="preserve">
+    <value>Muestra los planes de energía disponibles.</value>
+  </data>
+  <data name="Cmd_power.batteryreport_Title" xml:space="preserve">
+    <value>Informe de batería</value>
+  </data>
+  <data name="Cmd_power.batteryreport_Desc" xml:space="preserve">
+    <value>Genera un informe HTML sobre el estado de la batería.</value>
+  </data>
+  <data name="Cmd_diag.reliability_Title" xml:space="preserve">
+    <value>Monitor de confiabilidad</value>
+  </data>
+  <data name="Cmd_diag.reliability_Desc" xml:space="preserve">
+    <value>Abre el Monitor de confiabilidad de Windows.</value>
+  </data>
+  <data name="Cmd_diag.eventviewer_Title" xml:space="preserve">
+    <value>Visor de eventos</value>
+  </data>
+  <data name="Cmd_diag.eventviewer_Desc" xml:space="preserve">
+    <value>Abre el Visor de eventos de Windows.</value>
+  </data>
+  <data name="Cmd_diag.resmon_Title" xml:space="preserve">
+    <value>Monitor de recursos</value>
+  </data>
+  <data name="Cmd_diag.resmon_Desc" xml:space="preserve">
+    <value>Abre el Monitor de recursos de Windows.</value>
+  </data>
+  <data name="Cmd_diag.dxdiag_Title" xml:space="preserve">
+    <value>Diagnóstico de DirectX</value>
+  </data>
+  <data name="Cmd_diag.dxdiag_Desc" xml:space="preserve">
+    <value>Abre la herramienta de diagnóstico de DirectX.</value>
+  </data>
+  <data name="Cmd_winget.list_Title" xml:space="preserve">
+    <value>Listar aplicaciones instaladas</value>
+  </data>
+  <data name="Cmd_winget.list_Desc" xml:space="preserve">
+    <value>Enumera las aplicaciones instaladas mediante winget.</value>
+  </data>
+  <data name="Cmd_winget.upgrade.list_Title" xml:space="preserve">
+    <value>Buscar actualizaciones de aplicaciones</value>
+  </data>
+  <data name="Cmd_winget.upgrade.list_Desc" xml:space="preserve">
+    <value>Muestra las aplicaciones que tienen nuevas versiones disponibles.</value>
+  </data>
+  <data name="Cmd_sec.firewall.status_Title" xml:space="preserve">
+    <value>Estado del firewall</value>
+  </data>
+  <data name="Cmd_sec.firewall.status_Desc" xml:space="preserve">
+    <value>Muestra el estado de todos los perfiles del firewall.</value>
+  </data>
+  <data name="Cmd_dev.wsl.list_Title" xml:space="preserve">
+    <value>Listar distribuciones de WSL</value>
+  </data>
+  <data name="Cmd_dev.wsl.list_Desc" xml:space="preserve">
+    <value>Lista las distribuciones de WSL instaladas.</value>
+  </data>
+  <data name="Cmd_dism.checkhealth_Title" xml:space="preserve">
+    <value>DISM CheckHealth</value>
+  </data>
+  <data name="Cmd_dism.checkhealth_Desc" xml:space="preserve">
+    <value>Comprueba rápidamente si la imagen de Windows está dañada (solo lectura).</value>
+  </data>
+  <data name="Cmd_dism.scanhealth_Title" xml:space="preserve">
+    <value>DISM ScanHealth</value>
+  </data>
+  <data name="Cmd_dism.scanhealth_Desc" xml:space="preserve">
+    <value>Analiza en profundidad si la imagen de Windows está dañada (solo lectura, lento).</value>
+  </data>
+  <data name="Cmd_dism.analyzecomponentstore_Title" xml:space="preserve">
+    <value>Analizar almacén de componentes</value>
+  </data>
+  <data name="Cmd_dism.analyzecomponentstore_Desc" xml:space="preserve">
+    <value>Analiza WinSxS e indica si se recomienda una limpieza.</value>
+  </data>
+  <data name="Cmd_chkdsk.read_Title" xml:space="preserve">
+    <value>Comprobar disco (solo lectura)</value>
+  </data>
+  <data name="Cmd_chkdsk.read_Desc" xml:space="preserve">
+    <value>Comprueba si la unidad C: tiene errores (solo lectura).</value>
+  </data>
+  <data name="Cmd_sec.bitlocker.status_Title" xml:space="preserve">
+    <value>Estado de BitLocker</value>
+  </data>
+  <data name="Cmd_sec.bitlocker.status_Desc" xml:space="preserve">
+    <value>Muestra el estado del cifrado de BitLocker en todos los volúmenes.</value>
+  </data>
+  <data name="Cmd_dev.features.list_Title" xml:space="preserve">
+    <value>Listar características de Windows</value>
+  </data>
+  <data name="Cmd_dev.features.list_Desc" xml:space="preserve">
+    <value>Lista las características opcionales de Windows habilitadas.</value>
+  </data>
+  <data name="Cmd_system.restorepoint_Title" xml:space="preserve">
+    <value>Crear punto de restauración</value>
+  </data>
+  <data name="Cmd_system.restorepoint_Desc" xml:space="preserve">
+    <value>Crea un punto de restauración del sistema.</value>
+  </data>
+  <data name="Cmd_dism.restorehealth_Title" xml:space="preserve">
+    <value>DISM RestoreHealth</value>
+  </data>
+  <data name="Cmd_dism.restorehealth_Desc" xml:space="preserve">
+    <value>Repara la imagen de Windows (puede tardar un rato; es posible que requiera reiniciar).</value>
+  </data>
+  <data name="Cmd_sfc.scannow_Title" xml:space="preserve">
+    <value>SFC scannow</value>
+  </data>
+  <data name="Cmd_sfc.scannow_Desc" xml:space="preserve">
+    <value>Analiza y repara los archivos protegidos del sistema (es posible que requiera reiniciar).</value>
+  </data>
+  <data name="Cmd_net.winsock.reset_Title" xml:space="preserve">
+    <value>Restablecer Winsock</value>
+  </data>
+  <data name="Cmd_net.winsock.reset_Desc" xml:space="preserve">
+    <value>Restablece el catálogo de Winsock (después es necesario reiniciar).</value>
+  </data>
+  <data name="Cmd_sec.defender.quickscan_Title" xml:space="preserve">
+    <value>Análisis rápido de Defender</value>
+  </data>
+  <data name="Cmd_sec.defender.quickscan_Desc" xml:space="preserve">
+    <value>Ejecuta un análisis rápido de Microsoft Defender.</value>
+  </data>
+  <data name="Cmd_power.hibernate.off_Title" xml:space="preserve">
+    <value>Desactivar hibernación</value>
+  </data>
+  <data name="Cmd_power.hibernate.off_Desc" xml:space="preserve">
+    <value>Desactiva la hibernación y libera el espacio de disco que utiliza.</value>
+  </data>
+  <data name="Cmd_power.hibernate.on_Title" xml:space="preserve">
+    <value>Activar hibernación</value>
+  </data>
+  <data name="Cmd_power.hibernate.on_Desc" xml:space="preserve">
+    <value>Vuelve a activar la hibernación.</value>
+  </data>
+  <data name="Cmd_tweak.hideext_Title" xml:space="preserve">
+    <value>Ocultar extensiones de archivo</value>
+  </data>
+  <data name="Cmd_tweak.hideext_Desc" xml:space="preserve">
+    <value>Oculta las extensiones de archivo conocidas en el Explorador.</value>
+  </data>
+  <data name="Cmd_sec.telemetry.basic_Title" xml:space="preserve">
+    <value>Minimizar la telemetría</value>
+  </data>
+  <data name="Cmd_sec.telemetry.basic_Desc" xml:space="preserve">
+    <value>Establece la política de telemetría en el nivel más bajo. Puede afectar a Windows Update en algunas ediciones; es reversible.</value>
+  </data>
+  <data name="Cmd_sec.telemetry.restore_Title" xml:space="preserve">
+    <value>Restaurar política de telemetría</value>
+  </data>
+  <data name="Cmd_sec.telemetry.restore_Desc" xml:space="preserve">
+    <value>Elimina la anulación de la política de telemetría (vuelve al valor predeterminado del sistema).</value>
+  </data>
+  <data name="Cmd_dism.startcomponentcleanup_Title" xml:space="preserve">
+    <value>Limpiar almacén de componentes</value>
+  </data>
+  <data name="Cmd_dism.startcomponentcleanup_Desc" xml:space="preserve">
+    <value>Elimina los componentes reemplazados de WinSxS para liberar espacio de disco. Es posible que requiera reiniciar.</value>
+  </data>
+  <data name="Cmd_chkdsk.fix_Title" xml:space="preserve">
+    <value>Reparar disco (chkdsk /f /r)</value>
+  </data>
+  <data name="Cmd_chkdsk.fix_Desc" xml:space="preserve">
+    <value>Programa una comprobación completa del disco con reparación en la unidad del sistema en el próximo reinicio.</value>
+  </data>
+  <data name="Cmd_winget.upgrade.all_Title" xml:space="preserve">
+    <value>Actualizar todos los paquetes</value>
+  </data>
+  <data name="Cmd_winget.upgrade.all_Desc" xml:space="preserve">
+    <value>Actualiza todas las aplicaciones instaladas que winget puede actualizar.</value>
+  </data>
+  <data name="Cmd_winget.source.reset_Title" xml:space="preserve">
+    <value>Restablecer las fuentes de winget</value>
+  </data>
+  <data name="Cmd_winget.source.reset_Desc" xml:space="preserve">
+    <value>Restablece las fuentes de paquetes de winget a sus valores predeterminados.</value>
+  </data>
+  <data name="Cmd_wu.scan_Title" xml:space="preserve">
+    <value>Buscar actualizaciones de Windows</value>
+  </data>
+  <data name="Cmd_wu.scan_Desc" xml:space="preserve">
+    <value>Pide a Windows Update que busque nuevas actualizaciones ahora.</value>
+  </data>
+  <data name="Cmd_wu.reset.components_Title" xml:space="preserve">
+    <value>Restablecer Windows Update</value>
+  </data>
+  <data name="Cmd_wu.reset.components_Desc" xml:space="preserve">
+    <value>Detiene los servicios de actualización, borra sus cachés y los reinicia. A menudo soluciona actualizaciones bloqueadas.</value>
+  </data>
+  <data name="Cmd_tweak.win11.classicmenu_Title" xml:space="preserve">
+    <value>Menú contextual clásico (Win11)</value>
+  </data>
+  <data name="Cmd_tweak.win11.classicmenu_Desc" xml:space="preserve">
+    <value>Restaura el menú contextual completo en Windows 11. Reinicia el Explorador para aplicar los cambios.</value>
+  </data>
+  <data name="Cmd_tweak.win11.modernmenu_Title" xml:space="preserve">
+    <value>Menú contextual moderno (Win11)</value>
+  </data>
+  <data name="Cmd_tweak.win11.modernmenu_Desc" xml:space="preserve">
+    <value>Restaura el menú contextual predeterminado de Windows 11. Reinicia el Explorador para aplicar los cambios.</value>
+  </data>
+  <data name="Cmd_tweak.restartexplorer_Title" xml:space="preserve">
+    <value>Reiniciar el Explorador</value>
+  </data>
+  <data name="Cmd_tweak.restartexplorer_Desc" xml:space="preserve">
+    <value>Reinicia el shell del Explorador de Windows (barra de tareas y escritorio).</value>
+  </data>
+  <data name="Cmd_tweak.cleariconcache_Title" xml:space="preserve">
+    <value>Borrar la caché de iconos</value>
+  </data>
+  <data name="Cmd_tweak.cleariconcache_Desc" xml:space="preserve">
+    <value>Reconstruye la caché de iconos para corregir iconos dañados o desactualizados.</value>
+  </data>
+  <data name="Cmd_net.registerdns_Title" xml:space="preserve">
+    <value>Registrar DNS</value>
+  </data>
+  <data name="Cmd_net.registerdns_Desc" xml:space="preserve">
+    <value>Renueva las concesiones DHCP y vuelve a registrar los nombres DNS.</value>
+  </data>
+  <data name="Cmd_net.release_Title" xml:space="preserve">
+    <value>Liberar la dirección IP</value>
+  </data>
+  <data name="Cmd_net.release_Desc" xml:space="preserve">
+    <value>Libera la concesión de IP DHCP actual.</value>
+  </data>
+  <data name="Cmd_net.renew_Title" xml:space="preserve">
+    <value>Renovar la dirección IP</value>
+  </data>
+  <data name="Cmd_net.renew_Desc" xml:space="preserve">
+    <value>Solicita una nueva concesión de IP DHCP.</value>
+  </data>
+  <data name="Cmd_net.ip.reset_Title" xml:space="preserve">
+    <value>Restablecer la pila TCP/IP</value>
+  </data>
+  <data name="Cmd_net.ip.reset_Desc" xml:space="preserve">
+    <value>Restablece la pila TCP/IP a sus valores predeterminados. Requiere reiniciar.</value>
+  </data>
+  <data name="Cmd_net.full.reset_Title" xml:space="preserve">
+    <value>Restablecimiento completo de la red</value>
+  </data>
+  <data name="Cmd_net.full.reset_Desc" xml:space="preserve">
+    <value>Restablece Winsock y TCP/IP y vacía la caché de DNS. Requiere reiniciar.</value>
+  </data>
+  <data name="Cmd_clean.cleanmgr.auto_Title" xml:space="preserve">
+    <value>Liberador de espacio en disco automático</value>
+  </data>
+  <data name="Cmd_clean.cleanmgr.auto_Desc" xml:space="preserve">
+    <value>Ejecuta el Liberador de espacio en disco en todas las categorías sin pedir confirmación.</value>
+  </data>
+  <data name="Cmd_clean.recyclebin_Title" xml:space="preserve">
+    <value>Vaciar la Papelera de reciclaje</value>
+  </data>
+  <data name="Cmd_clean.recyclebin_Desc" xml:space="preserve">
+    <value>Elimina de forma permanente todo lo que hay en la Papelera de reciclaje.</value>
+  </data>
+  <data name="Cmd_clean.usertemp_Title" xml:space="preserve">
+    <value>Borrar los archivos temporales del usuario</value>
+  </data>
+  <data name="Cmd_clean.usertemp_Desc" xml:space="preserve">
+    <value>Elimina el contenido de tu carpeta temporal de usuario.</value>
+  </data>
+  <data name="Cmd_clean.wintemp_Title" xml:space="preserve">
+    <value>Borrar los archivos temporales de Windows</value>
+  </data>
+  <data name="Cmd_clean.wintemp_Desc" xml:space="preserve">
+    <value>Elimina el contenido de la carpeta temporal de Windows.</value>
+  </data>
+  <data name="Cmd_clean.windowsold_Title" xml:space="preserve">
+    <value>Eliminar Windows.old</value>
+  </data>
+  <data name="Cmd_clean.windowsold_Desc" xml:space="preserve">
+    <value>Elimina la carpeta de la instalación anterior de Windows. Perderás la opción de revertir.</value>
+  </data>
+  <data name="Cmd_clean.wucache_Title" xml:space="preserve">
+    <value>Borrar la caché de Windows Update</value>
+  </data>
+  <data name="Cmd_clean.wucache_Desc" xml:space="preserve">
+    <value>Detiene el servicio de actualización, elimina los archivos de actualización descargados y lo reinicia.</value>
+  </data>
+  <data name="Cmd_clean.deliveryopt_Title" xml:space="preserve">
+    <value>Borrar la caché de Optimización de entrega</value>
+  </data>
+  <data name="Cmd_clean.deliveryopt_Desc" xml:space="preserve">
+    <value>Eliminar los archivos de actualización en caché de Optimización de entrega.</value>
+  </data>
+  <data name="Cmd_power.set.highperf_Title" xml:space="preserve">
+    <value>Activar Alto rendimiento</value>
+  </data>
+  <data name="Cmd_power.set.highperf_Desc" xml:space="preserve">
+    <value>Cambiar el plan de energía activo a Alto rendimiento.</value>
+  </data>
+  <data name="Cmd_power.add.ultimate_Title" xml:space="preserve">
+    <value>Agregar Rendimiento máximo</value>
+  </data>
+  <data name="Cmd_power.add.ultimate_Desc" xml:space="preserve">
+    <value>Crear el plan de energía Rendimiento máximo.</value>
+  </data>
+  <data name="Cmd_power.energy_Title" xml:space="preserve">
+    <value>Informe de energía</value>
+  </data>
+  <data name="Cmd_power.energy_Desc" xml:space="preserve">
+    <value>Analizar la eficiencia energética durante 60 segundos y guardar un informe HTML en tu perfil.</value>
+  </data>
+  <data name="Cmd_power.sleepstudy_Title" xml:space="preserve">
+    <value>Informe de análisis de suspensión</value>
+  </data>
+  <data name="Cmd_power.sleepstudy_Desc" xml:space="preserve">
+    <value>Guardar un informe HTML de análisis de suspensión en tu perfil.</value>
+  </data>
+  <data name="Cmd_diag.msinfo_Title" xml:space="preserve">
+    <value>Información del sistema</value>
+  </data>
+  <data name="Cmd_diag.msinfo_Desc" xml:space="preserve">
+    <value>Abrir la herramienta Información del sistema (msinfo32).</value>
+  </data>
+  <data name="Cmd_diag.memtest_Title" xml:space="preserve">
+    <value>Diagnóstico de memoria de Windows</value>
+  </data>
+  <data name="Cmd_diag.memtest_Desc" xml:space="preserve">
+    <value>Programar una prueba de RAM para que se ejecute en el próximo reinicio.</value>
+  </data>
+  <data name="Cmd_sec.defender.update_Title" xml:space="preserve">
+    <value>Actualizar firmas de Defender</value>
+  </data>
+  <data name="Cmd_sec.defender.update_Desc" xml:space="preserve">
+    <value>Descargar las definiciones más recientes de Microsoft Defender.</value>
+  </data>
+  <data name="Cmd_dev.devmode.on_Title" xml:space="preserve">
+    <value>Activar el modo de desarrollador</value>
+  </data>
+  <data name="Cmd_dev.devmode.on_Desc" xml:space="preserve">
+    <value>Activar el modo de desarrollador de Windows (permite la instalación de aplicaciones de prueba).</value>
+  </data>
+  <data name="Cmd_dev.devmode.off_Title" xml:space="preserve">
+    <value>Desactivar el modo de desarrollador</value>
+  </data>
+  <data name="Cmd_dev.devmode.off_Desc" xml:space="preserve">
+    <value>Desactivar el modo de desarrollador de Windows.</value>
+  </data>
+  <data name="Cmd_dev.wsl.install_Title" xml:space="preserve">
+    <value>Instalar WSL</value>
+  </data>
+  <data name="Cmd_dev.wsl.install_Desc" xml:space="preserve">
+    <value>Instalar el Subsistema de Windows para Linux. Requiere un reinicio.</value>
+  </data>
+  <data name="Cmd_dev.wsl.update_Title" xml:space="preserve">
+    <value>Actualizar WSL</value>
+  </data>
+  <data name="Cmd_dev.wsl.update_Desc" xml:space="preserve">
+    <value>Actualizar el kernel del Subsistema de Windows para Linux.</value>
+  </data>
+  <data name="Cmd_dev.hyperv.on_Title" xml:space="preserve">
+    <value>Activar Hyper-V</value>
+  </data>
+  <data name="Cmd_dev.hyperv.on_Desc" xml:space="preserve">
+    <value>Activar la característica de virtualización Hyper-V. Requiere un reinicio.</value>
+  </data>
+  <data name="Cmd_dev.hyperv.off_Title" xml:space="preserve">
+    <value>Desactivar Hyper-V</value>
+  </data>
+  <data name="Cmd_dev.hyperv.off_Desc" xml:space="preserve">
+    <value>Desactivar la característica de virtualización Hyper-V. Requiere un reinicio.</value>
+  </data>
+  <data name="Cmd_dev.sandbox.on_Title" xml:space="preserve">
+    <value>Activar Espacio aislado de Windows</value>
+  </data>
+  <data name="Cmd_dev.sandbox.on_Desc" xml:space="preserve">
+    <value>Activar la característica Espacio aislado de Windows. Requiere un reinicio.</value>
+  </data>
+  <data name="Cmd_dev.netfx3.on_Title" xml:space="preserve">
+    <value>Activar .NET Framework 3.5</value>
+  </data>
+  <data name="Cmd_dev.netfx3.on_Desc" xml:space="preserve">
+    <value>Instalar la característica .NET Framework 3.5. Puede requerir un reinicio.</value>
+  </data>
+  <data name="Menu_CheckForUpdates" xml:space="preserve">
+    <value>Buscar actualizaciones</value>
+  </data>
+  <data name="Update_Title" xml:space="preserve">
+    <value>Actualizaciones</value>
+  </data>
+  <data name="Update_Checking" xml:space="preserve">
+    <value>Buscando actualizaciones…</value>
+  </data>
+  <data name="Update_UpToDate" xml:space="preserve">
+    <value>Tienes la versión más reciente.</value>
+  </data>
+  <data name="Update_Available" xml:space="preserve">
+    <value>La versión {0} está disponible. ¿Descargar y reiniciar ahora?</value>
+  </data>
+  <data name="Update_Downloading" xml:space="preserve">
+    <value>Descargando actualización…</value>
+  </data>
+  <data name="Update_DownloadRestart" xml:space="preserve">
+    <value>Descargar y reiniciar</value>
+  </data>
+  <data name="Update_Close" xml:space="preserve">
+    <value>Cerrar</value>
+  </data>
+  <data name="Update_Error_Offline" xml:space="preserve">
+    <value>No se pudo conectar con GitHub. Comprueba tu conexión a Internet e inténtalo de nuevo.</value>
+  </data>
+  <data name="Update_Error_NotFound" xml:space="preserve">
+    <value>No se encontró ningún canal de versiones para esta aplicación.</value>
+  </data>
+  <data name="Update_Error_RateLimited" xml:space="preserve">
+    <value>Se alcanzó el límite de solicitudes de GitHub. Inténtalo de nuevo más tarde.</value>
+  </data>
+  <data name="Update_Error_ServerError" xml:space="preserve">
+    <value>GitHub devolvió un error del servidor. Inténtalo de nuevo más tarde.</value>
+  </data>
+  <data name="Update_Error_NotInstalled" xml:space="preserve">
+    <value>Las actualizaciones solo están disponibles en la versión instalada de la aplicación.</value>
+  </data>
+  <data name="Update_Error_Unknown" xml:space="preserve">
+    <value>Error al buscar actualizaciones. Inténtalo de nuevo más tarde.</value>
+  </data>
+  <data name="Update_Error_CommandRunning" xml:space="preserve">
+    <value>Finaliza o cancela el comando en ejecución antes de actualizar.</value>
+  </data>
+  <data name="Menu_OpenSettings" xml:space="preserve">
+    <value>Configuración</value>
+  </data>
+  <data name="LanguageOption_System" xml:space="preserve">
+    <value>Predeterminado del sistema</value>
+  </data>
+  <data name="Settings_Appearance" xml:space="preserve">
+    <value>Apariencia</value>
+  </data>
+  <data name="Settings_Behavior" xml:space="preserve">
+    <value>Comportamiento y seguridad</value>
+  </data>
+  <data name="Settings_Updates" xml:space="preserve">
+    <value>Actualizaciones</value>
+  </data>
+  <data name="Settings_About" xml:space="preserve">
+    <value>Acerca de</value>
+  </data>
+  <data name="Settings_Theme" xml:space="preserve">
+    <value>Tema</value>
+  </data>
+  <data name="Settings_ThemeSystem" xml:space="preserve">
+    <value>Sistema</value>
+  </data>
+  <data name="Settings_ThemeLight" xml:space="preserve">
+    <value>Claro</value>
+  </data>
+  <data name="Settings_ThemeDark" xml:space="preserve">
+    <value>Oscuro</value>
+  </data>
+  <data name="Settings_Language" xml:space="preserve">
+    <value>Idioma</value>
+  </data>
+  <data name="Settings_FontSize" xml:space="preserve">
+    <value>Tamaño de fuente</value>
+  </data>
+  <data name="Settings_FontSmall" xml:space="preserve">
+    <value>Pequeño</value>
+  </data>
+  <data name="Settings_FontMedium" xml:space="preserve">
+    <value>Mediano</value>
+  </data>
+  <data name="Settings_FontLarge" xml:space="preserve">
+    <value>Grande</value>
+  </data>
+  <data name="Settings_CollapseSidebar" xml:space="preserve">
+    <value>Contraer la barra lateral de forma predeterminada</value>
+  </data>
+  <data name="Settings_ShowBadges" xml:space="preserve">
+    <value>Mostrar distintivos de Administrador/Reinicio en la lista</value>
+  </data>
+  <data name="Settings_ConfirmCaution" xml:space="preserve">
+    <value>Confirmar antes de los comandos de Precaución</value>
+  </data>
+  <data name="Settings_ConfirmDangerous" xml:space="preserve">
+    <value>Confirmar antes de los comandos Peligrosos</value>
+  </data>
+  <data name="Settings_DangerousLockedTooltip" xml:space="preserve">
+    <value>Siempre activada: esta comprobación de seguridad no se puede desactivar.</value>
+  </data>
+  <data name="Settings_AutoRestorePoint" xml:space="preserve">
+    <value>Ofrecer un punto de restauración del sistema antes de los comandos arriesgados</value>
+  </data>
+  <data name="Settings_AutoScroll" xml:space="preserve">
+    <value>Desplazamiento automático de la consola</value>
+  </data>
+  <data name="Settings_WarnOnCancel" xml:space="preserve">
+    <value>Advertir antes de cerrar mientras se ejecuta un comando</value>
+  </data>
+  <data name="Settings_AutoCheckUpdates" xml:space="preserve">
+    <value>Buscar actualizaciones al iniciar</value>
+  </data>
+  <data name="Settings_CurrentVersion" xml:space="preserve">
+    <value>Versión actual:</value>
+  </data>
+  <data name="Settings_LastChecked" xml:space="preserve">
+    <value>Última comprobación:</value>
+  </data>
+  <data name="Settings_CheckNow" xml:space="preserve">
+    <value>Buscar ahora</value>
+  </data>
+  <data name="Settings_Profiles" xml:space="preserve">
+    <value>Copia de seguridad y perfiles</value>
+  </data>
+  <data name="Settings_ExportImport" xml:space="preserve">
+    <value>Importar / exportar</value>
+  </data>
+  <data name="Settings_ExportImportHint" xml:space="preserve">
+    <value>Copia tu apariencia, comportamiento y favoritos a un archivo para trasladarlos a otro equipo.</value>
+  </data>
+  <data name="Settings_ExportSettings" xml:space="preserve">
+    <value>Exportar…</value>
+  </data>
+  <data name="Settings_ImportSettings" xml:space="preserve">
+    <value>Importar…</value>
+  </data>
+  <data name="Settings_SavedProfiles" xml:space="preserve">
+    <value>Perfiles guardados</value>
+  </data>
+  <data name="Settings_ProfilesHint" xml:space="preserve">
+    <value>Guarda la configuración y los favoritos actuales como un perfil con nombre y cambia entre contextos (p. ej., PC de juegos, Oficina).</value>
+  </data>
+  <data name="Settings_ApplyProfile" xml:space="preserve">
+    <value>Aplicar</value>
+  </data>
+  <data name="Settings_DeleteProfile" xml:space="preserve">
+    <value>Eliminar</value>
+  </data>
+  <data name="Settings_SaveCurrentAsProfile" xml:space="preserve">
+    <value>Guardar la configuración actual como nuevo perfil</value>
+  </data>
+  <data name="Settings_ProfileName" xml:space="preserve">
+    <value>Nombre del perfil</value>
+  </data>
+  <data name="Settings_SaveProfile" xml:space="preserve">
+    <value>Guardar perfil</value>
+  </data>
+  <data name="Settings_ExportSuccess" xml:space="preserve">
+    <value>Configuración exportada a {0}.</value>
+  </data>
+  <data name="Settings_ImportConfirm" xml:space="preserve">
+    <value>¿Reemplazar tu apariencia, comportamiento y favoritos actuales con los valores importados?</value>
+  </data>
+  <data name="Settings_ImportInvalid" xml:space="preserve">
+    <value>El archivo seleccionado no es un archivo de configuración válido de CommandForge.</value>
+  </data>
+  <data name="Settings_ImportSuccess" xml:space="preserve">
+    <value>Configuración importada.</value>
+  </data>
+  <data name="Settings_ProfileApplied" xml:space="preserve">
+    <value>Perfil "{0}" aplicado.</value>
+  </data>
+  <data name="Settings_DeleteProfileConfirm" xml:space="preserve">
+    <value>¿Eliminar el perfil "{0}"?</value>
+  </data>
+  <data name="Settings_NoDataCollected" xml:space="preserve">
+    <value>Esta aplicación no recopila ninguno de tus datos.</value>
+  </data>
+  <data name="Settings_License" xml:space="preserve">
+    <value>Licencia (GPLv3)</value>
+  </data>
+  <data name="Settings_GitHub" xml:space="preserve">
+    <value>GitHub</value>
+  </data>
+  <data name="Menu_LogViewer" xml:space="preserve">
+    <value>Visor de registros</value>
+  </data>
+  <data name="Menu_ExportLogs" xml:space="preserve">
+    <value>Exportar registros (.zip)</value>
+  </data>
+  <data name="Menu_DebugPanel" xml:space="preserve">
+    <value>Panel de depuración</value>
+  </data>
+  <data name="Menu_ReportBug" xml:space="preserve">
+    <value>Informar de un error</value>
+  </data>
+  <data name="LogViewer_Title" xml:space="preserve">
+    <value>Visor de registros</value>
+  </data>
+  <data name="LogViewer_Level" xml:space="preserve">
+    <value>Nivel</value>
+  </data>
+  <data name="LogViewer_FilterHint" xml:space="preserve">
+    <value>Filtrar texto</value>
+  </data>
+  <data name="LogViewer_AutoScroll" xml:space="preserve">
+    <value>Desplazamiento automático</value>
+  </data>
+  <data name="LogViewer_OpenFolder" xml:space="preserve">
+    <value>Abrir carpeta de registros</value>
+  </data>
+  <data name="LogViewer_Export" xml:space="preserve">
+    <value>Exportar registros (.zip)</value>
+  </data>
+  <data name="LogViewer_Clear" xml:space="preserve">
+    <value>Borrar</value>
+  </data>
+  <data name="LogLevel_All" xml:space="preserve">
+    <value>Todos</value>
+  </data>
+  <data name="LogLevel_Info" xml:space="preserve">
+    <value>Información</value>
+  </data>
+  <data name="LogLevel_Warning" xml:space="preserve">
+    <value>Advertencia</value>
+  </data>
+  <data name="LogLevel_Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="LogLevel_Debug" xml:space="preserve">
+    <value>Depuración</value>
+  </data>
+  <data name="Log_ExportSuccess" xml:space="preserve">
+    <value>Registros exportados a {0}. Revisa el contenido antes de compartirlo.</value>
+  </data>
+  <data name="Debug_TabVerbose" xml:space="preserve">
+    <value>Registro</value>
+  </data>
+  <data name="Debug_TabCatalog" xml:space="preserve">
+    <value>Catálogo</value>
+  </data>
+  <data name="Debug_TabSystemInfo" xml:space="preserve">
+    <value>Información del sistema</value>
+  </data>
+  <data name="Debug_CategoryCount" xml:space="preserve">
+    <value>Categorías:</value>
+  </data>
+  <data name="Debug_CommandCount" xml:space="preserve">
+    <value>Comandos:</value>
+  </data>
+  <data name="Debug_ValidationErrors" xml:space="preserve">
+    <value>Errores de validación</value>
+  </data>
+  <data name="Debug_NoValidationErrors" xml:space="preserve">
+    <value>No hay errores de validación.</value>
+  </data>
+  <data name="Debug_CopySystemInfo" xml:space="preserve">
+    <value>Copiar</value>
+  </data>
+  <data name="Debug_Refresh" xml:space="preserve">
+    <value>Actualizar</value>
+  </data>
+  <data name="Error_Title" xml:space="preserve">
+    <value>Error inesperado</value>
+  </data>
+  <data name="Error_Message" xml:space="preserve">
+    <value>Algo salió mal. Puedes copiar los detalles o informar de esto en GitHub.</value>
+  </data>
+  <data name="Error_Code" xml:space="preserve">
+    <value>Código de error:</value>
+  </data>
+  <data name="Error_CopyDetails" xml:space="preserve">
+    <value>Copiar detalles</value>
+  </data>
+  <data name="Error_ReportBug" xml:space="preserve">
+    <value>Informar de un error</value>
+  </data>
+  <data name="Error_Close" xml:space="preserve">
+    <value>Cerrar</value>
+  </data>
+  <data name="ReportBug_Title" xml:space="preserve">
+    <value>Informar de un error</value>
+  </data>
+  <data name="ReportBug_Environment" xml:space="preserve">
+    <value>Entorno</value>
+  </data>
+  <data name="ReportBug_ExportLog" xml:space="preserve">
+    <value>Exportar registro (.zip)</value>
+  </data>
+  <data name="ReportBug_OpenIssue" xml:space="preserve">
+    <value>Abrir incidencia en GitHub</value>
+  </data>
+  <data name="ReportBug_Close" xml:space="preserve">
+    <value>Cerrar</value>
+  </data>
+  <data name="ReportBug_DescriptionHint" xml:space="preserve">
+    <value>Describe lo que ocurrió (opcional)</value>
+  </data>
+  <data name="ReportBug_ReviewReminder" xml:space="preserve">
+    <value>Revisa el contenido del .zip antes de adjuntarlo a la incidencia.</value>
+  </data>
+  <data name="Settings_Logs" xml:space="preserve">
+    <value>Registros</value>
+  </data>
+  <data name="Settings_LogLevel" xml:space="preserve">
+    <value>Nivel de registro</value>
+  </data>
+  <data name="Settings_LogsSize" xml:space="preserve">
+    <value>Tamaño del registro:</value>
+  </data>
+  <data name="Settings_OpenLogFolder" xml:space="preserve">
+    <value>Abrir carpeta de registros</value>
+  </data>
+  <data name="Settings_ExportLogs" xml:space="preserve">
+    <value>Exportar registros (.zip)</value>
+  </data>
+  <data name="Settings_ClearOldLogs" xml:space="preserve">
+    <value>Eliminar registros antiguos</value>
+  </data>
+  <data name="Settings_ClearLogsConfirm" xml:space="preserve">
+    <value>¿Eliminar los archivos de registro antiguos? Se conserva el registro de hoy.</value>
+  </data>
+  <data name="Settings_Advanced" xml:space="preserve">
+    <value>Avanzado</value>
+  </data>
+  <data name="Settings_RunMode" xml:space="preserve">
+    <value>Modo de ejecución:</value>
+  </data>
+  <data name="Settings_RunModeInstalled" xml:space="preserve">
+    <value>Instalado</value>
+  </data>
+  <data name="Settings_RunModePortable" xml:space="preserve">
+    <value>Portátil / desarrollo</value>
+  </data>
+  <data name="Settings_ConfigPath" xml:space="preserve">
+    <value>Archivo de configuración</value>
+  </data>
+  <data name="Settings_OpenConfig" xml:space="preserve">
+    <value>Abrir carpeta</value>
+  </data>
+  <data name="Settings_OpenDebugPanel" xml:space="preserve">
+    <value>Abrir panel de depuración</value>
+  </data>
+  <data name="Settings_ResetDefaults" xml:space="preserve">
+    <value>Restablecer valores predeterminados</value>
+  </data>
+  <data name="Settings_ResetConfirm" xml:space="preserve">
+    <value>¿Restablecer toda la configuración a sus valores predeterminados? Se conservan los términos aceptados y los registros.</value>
+  </data>
+  <data name="Home_SystemStatus" xml:space="preserve">
+    <value>Estado del sistema</value>
+  </data>
+  <data name="Home_StatusOs" xml:space="preserve">
+    <value>Windows</value>
+  </data>
+  <data name="Home_StatusMemory" xml:space="preserve">
+    <value>Memoria</value>
+  </data>
+  <data name="Home_StatusDisk" xml:space="preserve">
+    <value>Unidad del sistema</value>
+  </data>
+  <data name="Home_StatusUptime" xml:space="preserve">
+    <value>Tiempo de actividad</value>
+  </data>
+  <data name="Home_OsFormat" xml:space="preserve">
+    <value>{0} (compilación {1})</value>
+  </data>
+  <data name="Home_StorageFormat" xml:space="preserve">
+    <value>{0} libres de {1}</value>
+  </data>
+  <data name="Home_GigabytesFormat" xml:space="preserve">
+    <value>{0:0.0} GB</value>
+  </data>
+  <data name="Home_DiskFormat" xml:space="preserve">
+    <value>{0} · {1}</value>
+  </data>
+  <data name="Home_UptimeWithDays" xml:space="preserve">
+    <value>{0} d {1} h {2} min</value>
+  </data>
+  <data name="Home_UptimeNoDays" xml:space="preserve">
+    <value>{1} h {2} min</value>
+  </data>
+  <data name="Home_Recent" xml:space="preserve">
+    <value>Comandos recientes</value>
+  </data>
+  <data name="Home_NoRecent" xml:space="preserve">
+    <value>Aún no se ha ejecutado ningún comando.</value>
+  </data>
+  <data name="Home_NoFavorites" xml:space="preserve">
+    <value>Aún no hay favoritos. Fija un comando con el icono de estrella.</value>
+  </data>
+  <data name="History_Title" xml:space="preserve">
+    <value>Historial de ejecución</value>
+  </data>
+  <data name="History_Empty" xml:space="preserve">
+    <value>Aún no se ha ejecutado ningún comando.</value>
+  </data>
+  <data name="History_RunAgain" xml:space="preserve">
+    <value>Ejecutar de nuevo</value>
+  </data>
+  <data name="History_Clear" xml:space="preserve">
+    <value>Borrar historial</value>
+  </data>
+  <data name="History_Undo" xml:space="preserve">
+    <value>Deshacer</value>
+  </data>
+  <data name="Registry_ChangesHeader" xml:space="preserve">
+    <value>— Registry antes/después —</value>
+  </data>
+  <data name="Registry_ChangeFormat" xml:space="preserve">
+    <value>{0}: {1} → {2}</value>
+  </data>
+  <data name="Registry_NotSet" xml:space="preserve">
+    <value>(sin definir)</value>
+  </data>
+  <data name="Registry_NoChanges" xml:space="preserve">
+    <value>No se detectaron cambios en el Registry.</value>
+  </data>
+  <data name="Recipes_Saved" xml:space="preserve">
+    <value>Recetas guardadas</value>
+  </data>
+  <data name="Recipes_New" xml:space="preserve">
+    <value>Nueva</value>
+  </data>
+  <data name="Recipe_Delete" xml:space="preserve">
+    <value>Eliminar receta</value>
+  </data>
+  <data name="Recipes_NameHint" xml:space="preserve">
+    <value>Nombre de la receta</value>
+  </data>
+  <data name="Recipes_NoSteps" xml:space="preserve">
+    <value>Aún no hay pasos. Agrega comandos abajo para crear la cadena.</value>
+  </data>
+  <data name="Recipes_AddHint" xml:space="preserve">
+    <value>Agregar un comando…</value>
+  </data>
+  <data name="Recipes_AddStep" xml:space="preserve">
+    <value>Agregar</value>
+  </data>
+  <data name="Recipes_Save" xml:space="preserve">
+    <value>Guardar</value>
+  </data>
+  <data name="Recipes_Run" xml:space="preserve">
+    <value>Ejecutar receta</value>
+  </data>
+  <data name="Recipes_MoveUp" xml:space="preserve">
+    <value>Subir</value>
+  </data>
+  <data name="Recipes_MoveDown" xml:space="preserve">
+    <value>Bajar</value>
+  </data>
+  <data name="Recipes_RemoveStep" xml:space="preserve">
+    <value>Quitar paso</value>
+  </data>
+  <data name="Recipe_StepHeader" xml:space="preserve">
+    <value>▶ Paso {0}/{1}: {2}</value>
+  </data>
+  <data name="Recipe_StoppedOnError" xml:space="preserve">
+    <value>Receta detenida: un paso falló.</value>
+  </data>
+  <data name="Recipe_StoppedRestart" xml:space="preserve">
+    <value>Receta en pausa: se requiere reiniciar antes de continuar.</value>
+  </data>
+  <data name="Recipe_Cancelled" xml:space="preserve">
+    <value>Receta cancelada.</value>
+  </data>
+  <data name="Recipe_ContainsDangerous" xml:space="preserve">
+    <value>Esta receta contiene pasos peligrosos.</value>
+  </data>
+  <data name="Recipe_ConfirmTitle" xml:space="preserve">
+    <value>¿Ejecutar receta?</value>
+  </data>
+  <data name="Recipe_DeleteConfirm" xml:space="preserve">
+    <value>¿Eliminar la receta «{0}»?</value>
+  </data>
+  <data name="UserCmd_Warning" xml:space="preserve">
+    <value>Estos comandos no forman parte del catálogo verificado y siempre se ejecutan sin derechos de administrador. Eres el único responsable de lo que hagan.</value>
+  </data>
+  <data name="UserCmd_Saved" xml:space="preserve">
+    <value>Comandos guardados</value>
+  </data>
+  <data name="UserCmd_New" xml:space="preserve">
+    <value>Nuevo</value>
+  </data>
+  <data name="UserCmd_Delete" xml:space="preserve">
+    <value>Eliminar</value>
+  </data>
+  <data name="UserCmd_NameHint" xml:space="preserve">
+    <value>Nombre</value>
+  </data>
+  <data name="UserCmd_ExecutableHint" xml:space="preserve">
+    <value>Ejecutable (p. ej. cmd, powershell)</value>
+  </data>
+  <data name="UserCmd_ArgumentsHint" xml:space="preserve">
+    <value>Argumentos</value>
+  </data>
+  <data name="UserCmd_Save" xml:space="preserve">
+    <value>Guardar</value>
+  </data>
+  <data name="UserCmd_Run" xml:space="preserve">
+    <value>Ejecutar</value>
+  </data>
+  <data name="UserCmd_NoCommands" xml:space="preserve">
+    <value>Aún no hay comandos.</value>
+  </data>
+  <data name="UserCmd_RunTitle" xml:space="preserve">
+    <value>¿Ejecutar este comando?</value>
+  </data>
+  <data name="UserCmd_RunConfirm" xml:space="preserve">
+    <value>Esto se ejecuta SIN derechos de administrador:
+
+{0}
+
+¿Continuar?</value>
+  </data>
+  <data name="UserCmd_DeleteConfirm" xml:space="preserve">
+    <value>¿Eliminar "{0}"?</value>
+  </data>
+  <data name="Favorite_Toggle" xml:space="preserve">
+    <value>Marcar o quitar favorito</value>
+  </data>
+  <data name="Menu_OpenConfigFolder" xml:space="preserve">
+    <value>Abrir carpeta de configuración</value>
+  </data>
+  <data name="Menu_OpenLogFolder" xml:space="preserve">
+    <value>Abrir carpeta de registros</value>
+  </data>
+  <data name="Menu_FullScreen" xml:space="preserve">
+    <value>Pantalla completa</value>
+  </data>
+  <data name="Menu_About" xml:space="preserve">
+    <value>Acerca de CommandForge</value>
+  </data>
+  <data name="Menu_Wiki" xml:space="preserve">
+    <value>Guía / Wiki</value>
+  </data>
+  <data name="Legal_EulaSummary" xml:space="preserve">
+    <value>Al usar CommandForge aceptas que ejecuta comandos a nivel de sistema bajo tu propio riesgo, sin ninguna garantía. La GNU GPL v3 rige tus derechos; esto solo añade un reconocimiento de riesgo y una exención de garantía.</value>
+  </data>
+  <data name="Legal_GplSummary" xml:space="preserve">
+    <value>CommandForge es software libre bajo la Licencia Pública General GNU v3.0. Puedes usarlo, estudiarlo, modificarlo y redistribuirlo bajo los términos de la GPLv3.</value>
+  </data>
+  <data name="Legal_DisclaimerSummary" xml:space="preserve">
+    <value>Úsalo bajo tu propio riesgo. Los comandos a nivel de sistema pueden cambiar la configuración o provocar pérdida de datos: haz una copia de seguridad y crea un punto de restauración antes de realizar operaciones arriesgadas. CommandForge no está afiliado a Microsoft.</value>
+  </data>
+  <data name="Legal_PrivacySummary" xml:space="preserve">
+    <value>Prioriza el funcionamiento sin conexión. CommandForge no recopila datos personales ni tiene telemetría; la única conexión de red es la comprobación de actualizaciones en GitHub.</value>
+  </data>
+  <data name="Menu_Terms" xml:space="preserve">
+    <value>Términos y privacidad</value>
+  </data>
+  <data name="LegalViewer_Title" xml:space="preserve">
+    <value>Términos y privacidad</value>
+  </data>
+  <data name="Menu_KeyboardShortcuts" xml:space="preserve">
+    <value>Atajos de teclado</value>
+  </data>
+  <data name="Menu_PortableInfo" xml:space="preserve">
+    <value>Información portátil</value>
+  </data>
+  <data name="Menu_RestorePoint" xml:space="preserve">
+    <value>Crear punto de restauración del sistema</value>
+  </data>
+  <data name="Shortcuts_Palette" xml:space="preserve">
+    <value>Abrir la paleta de comandos / enfocar la búsqueda</value>
+  </data>
+  <data name="Shortcuts_ListNav" xml:space="preserve">
+    <value>Mover la selección (listas y paleta)</value>
+  </data>
+  <data name="Shortcuts_OpenSelected" xml:space="preserve">
+    <value>Abrir el comando seleccionado</value>
+  </data>
+  <data name="Shortcuts_CloseDialog" xml:space="preserve">
+    <value>Cerrar diálogo / cancelar</value>
+  </data>
+  <data name="PortableInfo_ConfigFolder" xml:space="preserve">
+    <value>Carpeta de configuración</value>
+  </data>
+  <data name="PortableInfo_LogFolder" xml:space="preserve">
+    <value>Carpeta de registros</value>
+  </data>
+  <data name="Cmd_info.hotfixes_Title" xml:space="preserve">
+    <value>Actualizaciones instaladas</value>
+  </data>
+  <data name="Cmd_info.hotfixes_Desc" xml:space="preserve">
+    <value>Lista las actualizaciones y revisiones de Windows instaladas, las más recientes primero.</value>
+  </data>
+  <data name="Cmd_info.drivers_Title" xml:space="preserve">
+    <value>Controladores instalados</value>
+  </data>
+  <data name="Cmd_info.drivers_Desc" xml:space="preserve">
+    <value>Lista los controladores de dispositivos firmados con sus versiones y proveedores.</value>
+  </data>
+  <data name="Cmd_info.bios_Title" xml:space="preserve">
+    <value>Información de BIOS / firmware</value>
+  </data>
+  <data name="Cmd_info.bios_Desc" xml:space="preserve">
+    <value>Muestra el fabricante, la versión, el número de serie y la fecha de lanzamiento de la BIOS.</value>
+  </data>
+  <data name="Cmd_info.env_Title" xml:space="preserve">
+    <value>Variables de entorno</value>
+  </data>
+  <data name="Cmd_info.env_Desc" xml:space="preserve">
+    <value>Lista las variables de entorno actuales y sus valores.</value>
+  </data>
+  <data name="Cmd_info.installedapps_Title" xml:space="preserve">
+    <value>Programas instalados</value>
+  </data>
+  <data name="Cmd_info.installedapps_Desc" xml:space="preserve">
+    <value>Lista los programas instalados a partir de las claves de desinstalación del registro.</value>
+  </data>
+  <data name="Cmd_info.monitors_Title" xml:space="preserve">
+    <value>Información de pantalla</value>
+  </data>
+  <data name="Cmd_info.monitors_Desc" xml:space="preserve">
+    <value>Muestra las pantallas conectadas con su resolución actual y frecuencia de actualización.</value>
+  </data>
+  <data name="Cmd_net.netstat_Title" xml:space="preserve">
+    <value>Conexiones activas</value>
+  </data>
+  <data name="Cmd_net.netstat_Desc" xml:space="preserve">
+    <value>Muestra las conexiones TCP/UDP activas y los puertos en escucha con sus PID.</value>
+  </data>
+  <data name="Cmd_net.arp_Title" xml:space="preserve">
+    <value>Caché ARP</value>
+  </data>
+  <data name="Cmd_net.arp_Desc" xml:space="preserve">
+    <value>Muestra la tabla ARP que asigna direcciones IP a direcciones MAC.</value>
+  </data>
+  <data name="Cmd_net.route_Title" xml:space="preserve">
+    <value>Tabla de enrutamiento</value>
+  </data>
+  <data name="Cmd_net.route_Desc" xml:space="preserve">
+    <value>Imprime la tabla de enrutamiento IPv4/IPv6.</value>
+  </data>
+  <data name="Cmd_net.wifi.profiles_Title" xml:space="preserve">
+    <value>Perfiles de Wi-Fi</value>
+  </data>
+  <data name="Cmd_net.wifi.profiles_Desc" xml:space="preserve">
+    <value>Enumera los perfiles de red Wi-Fi (WLAN) guardados.</value>
+  </data>
+  <data name="Cmd_net.proxy.show_Title" xml:space="preserve">
+    <value>Proxy de WinHTTP</value>
+  </data>
+  <data name="Cmd_net.proxy.show_Desc" xml:space="preserve">
+    <value>Muestra la configuración del proxy WinHTTP del sistema.</value>
+  </data>
+  <data name="Cmd_tweak.darkmode.on_Title" xml:space="preserve">
+    <value>Activar modo oscuro</value>
+  </data>
+  <data name="Cmd_tweak.darkmode.on_Desc" xml:space="preserve">
+    <value>Cambia las aplicaciones y el tema del sistema al modo oscuro.</value>
+  </data>
+  <data name="Cmd_tweak.darkmode.off_Title" xml:space="preserve">
+    <value>Activar modo claro</value>
+  </data>
+  <data name="Cmd_tweak.darkmode.off_Desc" xml:space="preserve">
+    <value>Cambia las aplicaciones y el tema del sistema de nuevo al modo claro.</value>
+  </data>
+  <data name="Cmd_tweak.win11.taskbarleft_Title" xml:space="preserve">
+    <value>Barra de tareas: alinear a la izquierda (Win11)</value>
+  </data>
+  <data name="Cmd_tweak.win11.taskbarleft_Desc" xml:space="preserve">
+    <value>Alinea la barra de tareas de Windows 11 a la izquierda y reinicia Explorer.</value>
+  </data>
+  <data name="Cmd_tweak.win11.taskbarcenter_Title" xml:space="preserve">
+    <value>Barra de tareas: alinear al centro (Win11)</value>
+  </data>
+  <data name="Cmd_tweak.win11.taskbarcenter_Desc" xml:space="preserve">
+    <value>Centra la barra de tareas de Windows 11 y reinicia Explorer.</value>
+  </data>
+  <data name="Cmd_tweak.clockseconds.on_Title" xml:space="preserve">
+    <value>Mostrar segundos en el reloj (Win11)</value>
+  </data>
+  <data name="Cmd_tweak.clockseconds.on_Desc" xml:space="preserve">
+    <value>Muestra los segundos en el reloj de la barra de tareas de Windows 11 y reinicia Explorer.</value>
+  </data>
+  <data name="Cmd_tweak.clockseconds.off_Title" xml:space="preserve">
+    <value>Ocultar segundos en el reloj (Win11)</value>
+  </data>
+  <data name="Cmd_tweak.clockseconds.off_Desc" xml:space="preserve">
+    <value>Oculta los segundos del reloj de la barra de tareas de Windows 11 y reinicia Explorer.</value>
+  </data>
+  <data name="Cmd_clean.thumbnailcache_Title" xml:space="preserve">
+    <value>Borrar caché de miniaturas</value>
+  </data>
+  <data name="Cmd_clean.thumbnailcache_Desc" xml:space="preserve">
+    <value>Elimina las miniaturas en caché y reinicia Explorer para reconstruirlas.</value>
+  </data>
+  <data name="Cmd_clean.fontcache_Title" xml:space="preserve">
+    <value>Borrar caché de fuentes</value>
+  </data>
+  <data name="Cmd_clean.fontcache_Desc" xml:space="preserve">
+    <value>Detiene el servicio de caché de fuentes, borra su caché y lo reinicia.</value>
+  </data>
+  <data name="Cmd_clean.prefetch_Title" xml:space="preserve">
+    <value>Borrar Prefetch</value>
+  </data>
+  <data name="Cmd_clean.prefetch_Desc" xml:space="preserve">
+    <value>Vacía la carpeta Prefetch de Windows (se reconstruye automáticamente).</value>
+  </data>
+  <data name="Cmd_power.set.balanced_Title" xml:space="preserve">
+    <value>Establecer plan Equilibrado</value>
+  </data>
+  <data name="Cmd_power.set.balanced_Desc" xml:space="preserve">
+    <value>Activa el plan de energía Equilibrado.</value>
+  </data>
+  <data name="Cmd_power.requests_Title" xml:space="preserve">
+    <value>Solicitudes de energía</value>
+  </data>
+  <data name="Cmd_power.requests_Desc" xml:space="preserve">
+    <value>Muestra las aplicaciones y controladores que impiden actualmente la suspensión o el apagado de la pantalla.</value>
+  </data>
+  <data name="Cmd_power.fastboot.off_Title" xml:space="preserve">
+    <value>Desactivar Inicio rápido</value>
+  </data>
+  <data name="Cmd_power.fastboot.off_Desc" xml:space="preserve">
+    <value>Desactiva el Inicio rápido (arranque híbrido) para un apagado completo.</value>
+  </data>
+  <data name="Cmd_power.fastboot.on_Title" xml:space="preserve">
+    <value>Activar Inicio rápido</value>
+  </data>
+  <data name="Cmd_power.fastboot.on_Desc" xml:space="preserve">
+    <value>Activa el Inicio rápido (arranque híbrido).</value>
+  </data>
+  <data name="Cmd_diag.taskmgr_Title" xml:space="preserve">
+    <value>Administrador de tareas</value>
+  </data>
+  <data name="Cmd_diag.taskmgr_Desc" xml:space="preserve">
+    <value>Abre el Administrador de tareas.</value>
+  </data>
+  <data name="Cmd_diag.devmgmt_Title" xml:space="preserve">
+    <value>Administrador de dispositivos</value>
+  </data>
+  <data name="Cmd_diag.devmgmt_Desc" xml:space="preserve">
+    <value>Abre el Administrador de dispositivos.</value>
+  </data>
+  <data name="Cmd_diag.services_Title" xml:space="preserve">
+    <value>Servicios</value>
+  </data>
+  <data name="Cmd_diag.services_Desc" xml:space="preserve">
+    <value>Abre la consola de administración de Servicios.</value>
+  </data>
+  <data name="Cmd_diag.gpresult_Title" xml:space="preserve">
+    <value>Resultado de directiva de grupo</value>
+  </data>
+  <data name="Cmd_diag.gpresult_Desc" xml:space="preserve">
+    <value>Muestra el resumen del Conjunto resultante de directivas (RSoP) para este equipo y usuario.</value>
+  </data>
+  <data name="Cmd_winget.source.list_Title" xml:space="preserve">
+    <value>Listar orígenes de winget</value>
+  </data>
+  <data name="Cmd_winget.source.list_Desc" xml:space="preserve">
+    <value>Enumera los orígenes de paquetes de winget configurados.</value>
+  </data>
+  <data name="Cmd_store.reset_Title" xml:space="preserve">
+    <value>Restablecer Microsoft Store</value>
+  </data>
+  <data name="Cmd_store.reset_Desc" xml:space="preserve">
+    <value>Borra la caché de Microsoft Store (wsreset).</value>
+  </data>
+  <data name="Cmd_sec.defender.status_Title" xml:space="preserve">
+    <value>Estado de Defender</value>
+  </data>
+  <data name="Cmd_sec.defender.status_Desc" xml:space="preserve">
+    <value>Muestra el estado de protección de Microsoft Defender y la versión de firmas.</value>
+  </data>
+  <data name="Cmd_sec.defender.fullscan_Title" xml:space="preserve">
+    <value>Examen completo de Defender</value>
+  </data>
+  <data name="Cmd_sec.defender.fullscan_Desc" xml:space="preserve">
+    <value>Ejecuta un examen antivirus completo de Microsoft Defender (puede tardar un rato).</value>
+  </data>
+  <data name="Cmd_sec.firewall.on_Title" xml:space="preserve">
+    <value>Activar el firewall</value>
+  </data>
+  <data name="Cmd_sec.firewall.on_Desc" xml:space="preserve">
+    <value>Activa el Firewall de Windows para todos los perfiles.</value>
+  </data>
+  <data name="Cmd_sec.firewall.off_Title" xml:space="preserve">
+    <value>Desactivar el firewall</value>
+  </data>
+  <data name="Cmd_sec.firewall.off_Desc" xml:space="preserve">
+    <value>Desactiva el Firewall de Windows para todos los perfiles. Esto deja el equipo expuesto: vuelve a activarlo lo antes posible.</value>
+  </data>
+  <data name="Cmd_dev.wsl.shutdown_Title" xml:space="preserve">
+    <value>Apagar WSL</value>
+  </data>
+  <data name="Cmd_dev.wsl.shutdown_Desc" xml:space="preserve">
+    <value>Detiene todas las distribuciones de WSL en ejecución y la máquina virtual de WSL.</value>
+  </data>
+  <data name="Cmd_dev.sandbox.off_Title" xml:space="preserve">
+    <value>Deshabilitar Windows Sandbox</value>
+  </data>
+  <data name="Cmd_dev.sandbox.off_Desc" xml:space="preserve">
+    <value>Desactiva la característica opcional Windows Sandbox. Requiere reiniciar.</value>
+  </data>
+  <data name="Cmd_dev.longpaths.on_Title" xml:space="preserve">
+    <value>Habilitar rutas largas</value>
+  </data>
+  <data name="Cmd_dev.longpaths.on_Desc" xml:space="preserve">
+    <value>Habilita la compatibilidad con rutas largas de Win32 (más de 260 caracteres).</value>
+  </data>
+  <data name="Cmd_dev.longpaths.off_Title" xml:space="preserve">
+    <value>Deshabilitar rutas largas</value>
+  </data>
+  <data name="Cmd_dev.longpaths.off_Desc" xml:space="preserve">
+    <value>Deshabilita la compatibilidad con rutas largas de Win32 (vuelve al valor predeterminado).</value>
+  </data>
+</root>

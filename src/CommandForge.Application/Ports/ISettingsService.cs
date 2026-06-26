@@ -17,7 +17,7 @@ public interface ISettingsService
     /// <summary>The UI color theme (default <see cref="AppTheme.System"/>).</summary>
     public AppTheme Theme { get; set; }
 
-    /// <summary>UI language: <c>""</c> = follow OS, otherwise a culture code such as <c>"en"</c>, <c>"vi"</c> or <c>"ja"</c>.</summary>
+    /// <summary>UI language: <c>""</c> = follow OS, otherwise a culture code such as <c>"en"</c>, <c>"vi"</c>, <c>"ja"</c>, <c>"zh-Hans"</c> or <c>"es"</c>.</summary>
     public string Language { get; set; }
 
     /// <summary>The overall UI font size (default <see cref="FontScale.Medium"/>).</summary>

@@ -7,30 +7,39 @@ namespace CommandForge.Tests;
 
 /// <summary>
 /// Cross-checks that every catalog title/description and UI resource key exists in the neutral
-/// (EN) resources and in both the Vietnamese and Japanese satellites (no parent fallback), so a
-/// missing translation fails the build rather than silently falling back to English.
+/// (EN) resources and in every satellite culture (no parent fallback), so a missing translation
+/// fails the build rather than silently falling back to English.
 /// </summary>
 public sealed class ResxKeyTests
 {
     private static readonly CatalogLoadResult Catalog = CatalogLoader.LoadEmbedded();
 
-    /// <summary>Asserts every key resolves in EN (neutral) and in the VI and JA satellites without fallback.</summary>
+    /// <summary>The non-neutral UI cultures that must have a full satellite resource set (no fallback).</summary>
+    private static readonly string[] SatelliteCultures = ["vi", "ja", "zh-Hans", "es"];
+
+    /// <summary>Asserts every key resolves in EN (neutral) and in every satellite culture without fallback.</summary>
     private static void AssertKeysExist(IEnumerable<string> keys)
     {
         var manager = new ResourceManager("CommandForge.Wpf.Resources.Strings", typeof(Strings).Assembly);
         var english = manager.GetResourceSet(CultureInfo.InvariantCulture, createIfNotExists: true, tryParents: true);
-        var vietnamese = manager.GetResourceSet(new CultureInfo("vi"), createIfNotExists: true, tryParents: false);
-        var japanese = manager.GetResourceSet(new CultureInfo("ja"), createIfNotExists: true, tryParents: false);
-
         Assert.NotNull(english);
-        Assert.NotNull(vietnamese);
-        Assert.NotNull(japanese);
+
+        var satellites = SatelliteCultures.ToDictionary(
+            culture => culture,
+            culture => manager.GetResourceSet(new CultureInfo(culture), createIfNotExists: true, tryParents: false));
+
+        foreach (var (culture, set) in satellites)
+        {
+            Assert.True(set is not null, $"Missing satellite resource set for culture '{culture}'.");
+        }
 
         foreach (var key in keys)
         {
             Assert.True(english!.GetString(key) is not null, $"Missing EN resource for key '{key}'.");
-            Assert.True(vietnamese!.GetString(key) is not null, $"Missing VI resource for key '{key}'.");
-            Assert.True(japanese!.GetString(key) is not null, $"Missing JA resource for key '{key}'.");
+            foreach (var (culture, set) in satellites)
+            {
+                Assert.True(set!.GetString(key) is not null, $"Missing {culture} resource for key '{key}'.");
+            }
         }
     }
 

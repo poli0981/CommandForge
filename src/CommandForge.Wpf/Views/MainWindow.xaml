@@ -7,7 +7,7 @@
         xmlns:appset="clr-namespace:CommandForge.Application.Settings;assembly=CommandForge.Application"
         xmlns:views="clr-namespace:CommandForge.Wpf.Views"
         Title="{res:Loc AppTitle}"
-        Width="1100" Height="720" MinWidth="900" MinHeight="600"
+        Width="1100" Height="720" ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
         FontFamily="{DynamicResource MaterialDesignFont}"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
@@ -116,7 +116,6 @@
                 </MenuItem>
                 <Separator />
                 <MenuItem Header="{res:Loc MenuToggleSidebar}" Command="{Binding ToggleSidebarCommand}" InputGestureText="Ctrl+B" />
-                <MenuItem Header="{res:Loc Menu_FullScreen}" Click="OnToggleFullScreenClick" InputGestureText="F11" />
                 <Separator />
                 <MenuItem Header="{res:Loc Menu_OpenSettings}" Command="{Binding ShowSettingsCommand}" InputGestureText="Ctrl+," />
             </MenuItem>

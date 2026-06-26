@@ -18,9 +18,6 @@ public partial class MainWindow : Window
     private readonly IServiceProvider _services;
     private readonly ISettingsService _settings;
 
-    private bool _isFullScreen;
-    private WindowState _preFullScreenState = WindowState.Normal;
-
     public MainWindow(MainViewModel viewModel, IServiceProvider services, ISettingsService settings)
     {
         InitializeComponent();
@@ -33,50 +30,31 @@ public partial class MainWindow : Window
 
     private void OnExitClick(object sender, RoutedEventArgs e) => Close();
 
-    /// <summary>Restores the last window size/position/maximized state, ignoring off-screen positions.</summary>
+    /// <summary>
+    /// Restores the last window position only, ignoring off-screen positions. The window is a fixed
+    /// non-resizable size (see <c>ResizeMode="NoResize"</c> in XAML), so size/maximized state is not restored.
+    /// </summary>
     private void RestorePlacement()
     {
-        if (_settings.WindowWidth is { } width && width >= MinWidth)
-        {
-            Width = width;
-        }
-
-        if (_settings.WindowHeight is { } height && height >= MinHeight)
-        {
-            Height = height;
-        }
-
         if (_settings.WindowLeft is { } left && _settings.WindowTop is { } top && IsOnScreen(left, top, Width, Height))
         {
             WindowStartupLocation = WindowStartupLocation.Manual;
             Left = left;
             Top = top;
         }
-
-        if (_settings.WindowMaximized)
-        {
-            WindowState = WindowState.Maximized;
-        }
     }
 
-    /// <summary>Persists the current window placement (using restore bounds when maximized/minimized).</summary>
+    /// <summary>Persists the current window position (size/maximized are fixed and not saved).</summary>
     private void SavePlacement()
     {
-        var bounds = WindowState == WindowState.Normal
-            ? new Rect(Left, Top, Width, Height)
-            : RestoreBounds;
-
-        // RestoreBounds is empty before the window is first laid out — skip rather than save zeros.
-        if (bounds.Width <= 0 || bounds.Height <= 0)
+        // Left/Top are not yet meaningful before the window is first laid out — skip rather than save garbage.
+        if (double.IsNaN(Left) || double.IsNaN(Top))
         {
             return;
         }
 
-        _settings.WindowLeft = bounds.Left;
-        _settings.WindowTop = bounds.Top;
-        _settings.WindowWidth = bounds.Width;
-        _settings.WindowHeight = bounds.Height;
-        _settings.WindowMaximized = WindowState == WindowState.Maximized;
+        _settings.WindowLeft = Left;
+        _settings.WindowTop = Top;
         _settings.Save();
     }
 
@@ -152,34 +130,6 @@ public partial class MainWindow : Window
         {
             _viewModel.CheckForUpdatesCommand.Execute(null);
             e.Handled = true;
-        }
-        else if (e.Key == Key.F11)
-        {
-            ToggleFullScreen();
-            e.Handled = true;
-        }
-    }
-
-    private void OnToggleFullScreenClick(object sender, RoutedEventArgs e) => ToggleFullScreen();
-
-    private void ToggleFullScreen()
-    {
-        if (_isFullScreen)
-        {
-            WindowStyle = WindowStyle.SingleBorderWindow;
-            ResizeMode = ResizeMode.CanResize;
-            WindowState = _preFullScreenState;
-            _isFullScreen = false;
-        }
-        else
-        {
-            _preFullScreenState = WindowState;
-            WindowStyle = WindowStyle.None;
-            ResizeMode = ResizeMode.NoResize;
-            // Re-enter Maximized from Normal so the borderless window covers the whole screen.
-            WindowState = WindowState.Normal;
-            WindowState = WindowState.Maximized;
-            _isFullScreen = true;
         }
     }
 

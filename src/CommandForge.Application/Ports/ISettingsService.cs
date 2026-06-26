@@ -51,10 +51,16 @@ public interface ISettingsService
     /// <summary>Recently-run command ids, most-recent first (default empty). Capped by the caller.</summary>
     public IReadOnlyList<string> RecentCommandIds { get; set; }
 
-    /// <summary>Last main-window width in device-independent pixels, or <see langword="null"/> if never saved.</summary>
+    /// <summary>
+    /// Retained for config back-compat only. The main window is now a fixed, non-resizable size, so this
+    /// value is no longer read or written; it round-trips untouched for users upgrading from older versions.
+    /// </summary>
     public double? WindowWidth { get; set; }
 
-    /// <summary>Last main-window height in device-independent pixels, or <see langword="null"/> if never saved.</summary>
+    /// <summary>
+    /// Retained for config back-compat only. The main window is now a fixed, non-resizable size, so this
+    /// value is no longer read or written; it round-trips untouched for users upgrading from older versions.
+    /// </summary>
     public double? WindowHeight { get; set; }
 
     /// <summary>Last main-window left position, or <see langword="null"/> if never saved (centre on launch).</summary>
@@ -63,7 +69,10 @@ public interface ISettingsService
     /// <summary>Last main-window top position, or <see langword="null"/> if never saved (centre on launch).</summary>
     public double? WindowTop { get; set; }
 
-    /// <summary>Whether the main window was maximized when last closed (default <see langword="false"/>).</summary>
+    /// <summary>
+    /// Retained for config back-compat only. The main window can no longer be maximized, so this value is
+    /// no longer read or written; it round-trips untouched for users upgrading from older versions.
+    /// </summary>
     public bool WindowMaximized { get; set; }
 
     /// <summary>Persists the current settings to disk.</summary>

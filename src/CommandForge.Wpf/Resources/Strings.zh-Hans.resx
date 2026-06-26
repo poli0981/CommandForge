@@ -1565,4 +1565,157 @@
   <data name="Cmd_dev.longpaths.off_Desc" xml:space="preserve">
     <value>禁用 Win32 长路径支持（恢复为默认值）。</value>
   </data>
+  <data name="Cat_storage" xml:space="preserve">
+    <value>存储</value>
+  </data>
+  <data name="Cmd_info.tpm_Title" xml:space="preserve">
+    <value>TPM 状态</value>
+  </data>
+  <data name="Cmd_info.tpm_Desc" xml:space="preserve">
+    <value>显示受信任的平台模块（TPM）是否存在、版本及就绪状态。</value>
+  </data>
+  <data name="Cmd_info.secureboot_Title" xml:space="preserve">
+    <value>Secure Boot 状态</value>
+  </data>
+  <data name="Cmd_info.secureboot_Desc" xml:space="preserve">
+    <value>报告 UEFI Secure Boot 是否已启用。</value>
+  </data>
+  <data name="Cmd_info.product_Title" xml:space="preserve">
+    <value>计算机和操作系统摘要</value>
+  </data>
+  <data name="Cmd_info.product_Desc" xml:space="preserve">
+    <value>显示制造商、型号、操作系统版本及安装日期。</value>
+  </data>
+  <data name="Cmd_net.adapters_Title" xml:space="preserve">
+    <value>网络适配器</value>
+  </data>
+  <data name="Cmd_net.adapters_Desc" xml:space="preserve">
+    <value>列出网络适配器及其状态和链接速度。</value>
+  </data>
+  <data name="Cmd_net.dnsservers_Title" xml:space="preserve">
+    <value>DNS 服务器</value>
+  </data>
+  <data name="Cmd_net.dnsservers_Desc" xml:space="preserve">
+    <value>列出每个适配器配置的 DNS 服务器地址。</value>
+  </data>
+  <data name="Cmd_net.testconnection_Title" xml:space="preserve">
+    <value>测试网络连接</value>
+  </data>
+  <data name="Cmd_net.testconnection_Desc" xml:space="preserve">
+    <value>Ping 公共主机以检查网络连接。</value>
+  </data>
+  <data name="Cmd_diag.startup_Title" xml:space="preserve">
+    <value>启动程序</value>
+  </data>
+  <data name="Cmd_diag.startup_Desc" xml:space="preserve">
+    <value>列出配置为登录时运行的程序。</value>
+  </data>
+  <data name="Cmd_diag.driververifier_Title" xml:space="preserve">
+    <value>Driver Verifier 管理器</value>
+  </data>
+  <data name="Cmd_diag.driververifier_Desc" xml:space="preserve">
+    <value>打开 Driver Verifier 以对设备驱动程序进行压力测试（高级）。</value>
+  </data>
+  <data name="Cmd_diag.perfmon_Title" xml:space="preserve">
+    <value>Performance Monitor</value>
+  </data>
+  <data name="Cmd_diag.perfmon_Desc" xml:space="preserve">
+    <value>打开完整的 Performance Monitor 控制台。</value>
+  </data>
+  <data name="Cmd_diag.systemhealth_Title" xml:space="preserve">
+    <value>系统运行状况报告</value>
+  </data>
+  <data name="Cmd_diag.systemhealth_Desc" xml:space="preserve">
+    <value>生成系统诊断报告（大约需要一分钟）。</value>
+  </data>
+  <data name="Cmd_clean.dumps_Title" xml:space="preserve">
+    <value>清除崩溃转储</value>
+  </data>
+  <data name="Cmd_clean.dumps_Desc" xml:space="preserve">
+    <value>删除已保存的内存转储和小型转储文件。</value>
+  </data>
+  <data name="Cmd_clean.errorreports_Title" xml:space="preserve">
+    <value>清除错误报告数据</value>
+  </data>
+  <data name="Cmd_clean.errorreports_Desc" xml:space="preserve">
+    <value>删除排队中的 Windows 错误报告文件。</value>
+  </data>
+  <data name="Cmd_clean.dnsarp_Title" xml:space="preserve">
+    <value>清除 DNS 和 ARP 缓存</value>
+  </data>
+  <data name="Cmd_clean.dnsarp_Desc" xml:space="preserve">
+    <value>刷新 DNS 解析器缓存和 ARP 表。</value>
+  </data>
+  <data name="Cmd_power.lidclose.donothing_Title" xml:space="preserve">
+    <value>合上盖子：无操作（接通电源时）</value>
+  </data>
+  <data name="Cmd_power.lidclose.donothing_Desc" xml:space="preserve">
+    <value>在 AC power 下合上笔记本盖子时保持唤醒状态。</value>
+  </data>
+  <data name="Cmd_power.lidclose.sleep_Title" xml:space="preserve">
+    <value>合上盖子：睡眠（接通电源时）</value>
+  </data>
+  <data name="Cmd_power.lidclose.sleep_Desc" xml:space="preserve">
+    <value>在 AC power 下合上笔记本盖子时进入睡眠状态。</value>
+  </data>
+  <data name="Cmd_power.monitor.timeout15_Title" xml:space="preserve">
+    <value>15 分钟后关闭屏幕</value>
+  </data>
+  <data name="Cmd_power.monitor.timeout15_Desc" xml:space="preserve">
+    <value>在 AC power 下 15 分钟后关闭显示器。</value>
+  </data>
+  <data name="Cmd_power.monitor.timeout10_Title" xml:space="preserve">
+    <value>10 分钟后关闭屏幕</value>
+  </data>
+  <data name="Cmd_power.monitor.timeout10_Desc" xml:space="preserve">
+    <value>在 AC power 下 10 分钟后关闭显示器（默认）。</value>
+  </data>
+  <data name="Cmd_tweak.numlock.on_Title" xml:space="preserve">
+    <value>启动时开启 NumLock</value>
+  </data>
+  <data name="Cmd_tweak.numlock.on_Desc" xml:space="preserve">
+    <value>在启动时和登录界面启用 NumLock。</value>
+  </data>
+  <data name="Cmd_tweak.numlock.off_Title" xml:space="preserve">
+    <value>启动时关闭 NumLock</value>
+  </data>
+  <data name="Cmd_tweak.numlock.off_Desc" xml:space="preserve">
+    <value>在启动时和登录界面禁用 NumLock。</value>
+  </data>
+  <data name="Cmd_tweak.verbosestatus.on_Title" xml:space="preserve">
+    <value>开启详细登录信息</value>
+  </data>
+  <data name="Cmd_tweak.verbosestatus.on_Desc" xml:space="preserve">
+    <value>在启动和关机过程中显示详细的状态信息。</value>
+  </data>
+  <data name="Cmd_tweak.verbosestatus.off_Title" xml:space="preserve">
+    <value>关闭详细登录信息</value>
+  </data>
+  <data name="Cmd_tweak.verbosestatus.off_Desc" xml:space="preserve">
+    <value>恢复正常的启动和关机信息。</value>
+  </data>
+  <data name="Cmd_storage.optimize_Title" xml:space="preserve">
+    <value>优化 / 整理 C: 碎片</value>
+  </data>
+  <data name="Cmd_storage.optimize_Desc" xml:space="preserve">
+    <value>优化 C: 驱动器（SSD 执行 TRIM，HDD 进行碎片整理）。</value>
+  </data>
+  <data name="Cmd_storage.diskmgmt_Title" xml:space="preserve">
+    <value>Disk Management</value>
+  </data>
+  <data name="Cmd_storage.diskmgmt_Desc" xml:space="preserve">
+    <value>打开 Disk Management 控制台。</value>
+  </data>
+  <data name="Cmd_storage.volumes_Title" xml:space="preserve">
+    <value>列出卷和可用空间</value>
+  </data>
+  <data name="Cmd_storage.volumes_Desc" xml:space="preserve">
+    <value>显示各卷及其文件系统和可用空间。</value>
+  </data>
+  <data name="Cmd_storage.storagesense_Title" xml:space="preserve">
+    <value>打开存储设置</value>
+  </data>
+  <data name="Cmd_storage.storagesense_Desc" xml:space="preserve">
+    <value>打开 Windows 存储设置以管理 Storage Sense。</value>
+  </data>
 </root>

@@ -1565,4 +1565,157 @@ Tiếp tục?</value>
   <data name="Cmd_dev.longpaths.off_Desc" xml:space="preserve">
     <value>Tắt hỗ trợ đường dẫn dài Win32 (về mặc định).</value>
   </data>
+  <data name="Cat_storage" xml:space="preserve">
+    <value>Lưu trữ</value>
+  </data>
+  <data name="Cmd_info.tpm_Title" xml:space="preserve">
+    <value>Trạng thái TPM</value>
+  </data>
+  <data name="Cmd_info.tpm_Desc" xml:space="preserve">
+    <value>Hiển thị sự hiện diện, phiên bản và mức độ sẵn sàng của Trusted Platform Module (TPM).</value>
+  </data>
+  <data name="Cmd_info.secureboot_Title" xml:space="preserve">
+    <value>Trạng thái Secure Boot</value>
+  </data>
+  <data name="Cmd_info.secureboot_Desc" xml:space="preserve">
+    <value>Báo cáo Secure Boot của UEFI có được bật hay không.</value>
+  </data>
+  <data name="Cmd_info.product_Title" xml:space="preserve">
+    <value>Tóm tắt máy tính &amp; hệ điều hành</value>
+  </data>
+  <data name="Cmd_info.product_Desc" xml:space="preserve">
+    <value>Hiển thị nhà sản xuất, kiểu máy, phiên bản hệ điều hành và ngày cài đặt.</value>
+  </data>
+  <data name="Cmd_net.adapters_Title" xml:space="preserve">
+    <value>Bộ điều hợp mạng</value>
+  </data>
+  <data name="Cmd_net.adapters_Desc" xml:space="preserve">
+    <value>Liệt kê các bộ điều hợp mạng cùng trạng thái và tốc độ kết nối.</value>
+  </data>
+  <data name="Cmd_net.dnsservers_Title" xml:space="preserve">
+    <value>Máy chủ DNS</value>
+  </data>
+  <data name="Cmd_net.dnsservers_Desc" xml:space="preserve">
+    <value>Liệt kê các địa chỉ máy chủ DNS đã cấu hình cho từng bộ điều hợp.</value>
+  </data>
+  <data name="Cmd_net.testconnection_Title" xml:space="preserve">
+    <value>Kiểm tra kết nối Internet</value>
+  </data>
+  <data name="Cmd_net.testconnection_Desc" xml:space="preserve">
+    <value>Ping đến một máy chủ công cộng để kiểm tra kết nối Internet.</value>
+  </data>
+  <data name="Cmd_diag.startup_Title" xml:space="preserve">
+    <value>Chương trình khởi động</value>
+  </data>
+  <data name="Cmd_diag.startup_Desc" xml:space="preserve">
+    <value>Liệt kê các chương trình được cấu hình chạy khi đăng nhập.</value>
+  </data>
+  <data name="Cmd_diag.driververifier_Title" xml:space="preserve">
+    <value>Trình quản lý Driver Verifier</value>
+  </data>
+  <data name="Cmd_diag.driververifier_Desc" xml:space="preserve">
+    <value>Mở Driver Verifier để kiểm tra áp lực các driver thiết bị (nâng cao).</value>
+  </data>
+  <data name="Cmd_diag.perfmon_Title" xml:space="preserve">
+    <value>Performance Monitor</value>
+  </data>
+  <data name="Cmd_diag.perfmon_Desc" xml:space="preserve">
+    <value>Mở bảng điều khiển Performance Monitor đầy đủ.</value>
+  </data>
+  <data name="Cmd_diag.systemhealth_Title" xml:space="preserve">
+    <value>Báo cáo tình trạng hệ thống</value>
+  </data>
+  <data name="Cmd_diag.systemhealth_Desc" xml:space="preserve">
+    <value>Tạo báo cáo chẩn đoán hệ thống (mất khoảng một phút).</value>
+  </data>
+  <data name="Cmd_clean.dumps_Title" xml:space="preserve">
+    <value>Xóa tệp kết xuất sự cố</value>
+  </data>
+  <data name="Cmd_clean.dumps_Desc" xml:space="preserve">
+    <value>Xóa các tệp kết xuất bộ nhớ và minidump đã lưu.</value>
+  </data>
+  <data name="Cmd_clean.errorreports_Title" xml:space="preserve">
+    <value>Xóa dữ liệu báo cáo lỗi</value>
+  </data>
+  <data name="Cmd_clean.errorreports_Desc" xml:space="preserve">
+    <value>Xóa các tệp Windows Error Reporting đang xếp hàng.</value>
+  </data>
+  <data name="Cmd_clean.dnsarp_Title" xml:space="preserve">
+    <value>Xóa bộ nhớ đệm DNS &amp; ARP</value>
+  </data>
+  <data name="Cmd_clean.dnsarp_Desc" xml:space="preserve">
+    <value>Xóa bộ nhớ đệm phân giải DNS và bảng ARP.</value>
+  </data>
+  <data name="Cmd_power.lidclose.donothing_Title" xml:space="preserve">
+    <value>Đóng nắp: Không làm gì (Khi cắm sạc)</value>
+  </data>
+  <data name="Cmd_power.lidclose.donothing_Desc" xml:space="preserve">
+    <value>Giữ laptop hoạt động khi đóng nắp lúc dùng nguồn AC power.</value>
+  </data>
+  <data name="Cmd_power.lidclose.sleep_Title" xml:space="preserve">
+    <value>Đóng nắp: Ngủ (Khi cắm sạc)</value>
+  </data>
+  <data name="Cmd_power.lidclose.sleep_Desc" xml:space="preserve">
+    <value>Đưa laptop vào chế độ ngủ khi đóng nắp lúc dùng nguồn AC power.</value>
+  </data>
+  <data name="Cmd_power.monitor.timeout15_Title" xml:space="preserve">
+    <value>Tắt màn hình sau 15 phút</value>
+  </data>
+  <data name="Cmd_power.monitor.timeout15_Desc" xml:space="preserve">
+    <value>Tắt màn hình sau 15 phút khi dùng nguồn AC power.</value>
+  </data>
+  <data name="Cmd_power.monitor.timeout10_Title" xml:space="preserve">
+    <value>Tắt màn hình sau 10 phút</value>
+  </data>
+  <data name="Cmd_power.monitor.timeout10_Desc" xml:space="preserve">
+    <value>Tắt màn hình sau 10 phút khi dùng nguồn AC power (mặc định).</value>
+  </data>
+  <data name="Cmd_tweak.numlock.on_Title" xml:space="preserve">
+    <value>Bật NumLock khi khởi động</value>
+  </data>
+  <data name="Cmd_tweak.numlock.on_Desc" xml:space="preserve">
+    <value>Bật NumLock khi khởi động và tại màn hình đăng nhập.</value>
+  </data>
+  <data name="Cmd_tweak.numlock.off_Title" xml:space="preserve">
+    <value>Tắt NumLock khi khởi động</value>
+  </data>
+  <data name="Cmd_tweak.numlock.off_Desc" xml:space="preserve">
+    <value>Tắt NumLock khi khởi động và tại màn hình đăng nhập.</value>
+  </data>
+  <data name="Cmd_tweak.verbosestatus.on_Title" xml:space="preserve">
+    <value>Bật thông báo đăng nhập chi tiết</value>
+  </data>
+  <data name="Cmd_tweak.verbosestatus.on_Desc" xml:space="preserve">
+    <value>Hiển thị thông báo trạng thái chi tiết trong lúc khởi động và tắt máy.</value>
+  </data>
+  <data name="Cmd_tweak.verbosestatus.off_Title" xml:space="preserve">
+    <value>Tắt thông báo đăng nhập chi tiết</value>
+  </data>
+  <data name="Cmd_tweak.verbosestatus.off_Desc" xml:space="preserve">
+    <value>Khôi phục thông báo khởi động và tắt máy thông thường.</value>
+  </data>
+  <data name="Cmd_storage.optimize_Title" xml:space="preserve">
+    <value>Tối ưu / Chống phân mảnh ổ C:</value>
+  </data>
+  <data name="Cmd_storage.optimize_Desc" xml:space="preserve">
+    <value>Tối ưu ổ C: (TRIM cho SSD, chống phân mảnh cho HDD).</value>
+  </data>
+  <data name="Cmd_storage.diskmgmt_Title" xml:space="preserve">
+    <value>Disk Management</value>
+  </data>
+  <data name="Cmd_storage.diskmgmt_Desc" xml:space="preserve">
+    <value>Mở bảng điều khiển Disk Management.</value>
+  </data>
+  <data name="Cmd_storage.volumes_Title" xml:space="preserve">
+    <value>Liệt kê ổ đĩa &amp; dung lượng trống</value>
+  </data>
+  <data name="Cmd_storage.volumes_Desc" xml:space="preserve">
+    <value>Hiển thị các ổ đĩa cùng hệ thống tệp và dung lượng trống.</value>
+  </data>
+  <data name="Cmd_storage.storagesense_Title" xml:space="preserve">
+    <value>Mở cài đặt Lưu trữ</value>
+  </data>
+  <data name="Cmd_storage.storagesense_Desc" xml:space="preserve">
+    <value>Mở cài đặt Lưu trữ của Windows để quản lý Storage Sense.</value>
+  </data>
 </root>

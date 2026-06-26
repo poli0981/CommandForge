@@ -8,5 +8,6 @@
   { "id": "system-info",        "titleKey": "Cat_system-info",        "icon": "Information", "order": 7 },
   { "id": "diagnostics",        "titleKey": "Cat_diagnostics",        "icon": "Stethoscope", "order": 8 },
   { "id": "security-privacy",   "titleKey": "Cat_security-privacy",   "icon": "ShieldLock", "order": 9 },
-  { "id": "developer",          "titleKey": "Cat_developer",          "icon": "CodeBraces", "order": 10 }
+  { "id": "developer",          "titleKey": "Cat_developer",          "icon": "CodeBraces", "order": 10 },
+  { "id": "storage",            "titleKey": "Cat_storage",            "icon": "Harddisk", "order": 11 }
 ]

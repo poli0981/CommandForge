@@ -1565,4 +1565,157 @@ Continue?</value>
   <data name="Cmd_dev.longpaths.off_Desc" xml:space="preserve">
     <value>Disable Win32 long path support (back to the default).</value>
   </data>
+  <data name="Cat_storage" xml:space="preserve">
+    <value>Storage</value>
+  </data>
+  <data name="Cmd_info.tpm_Title" xml:space="preserve">
+    <value>TPM Status</value>
+  </data>
+  <data name="Cmd_info.tpm_Desc" xml:space="preserve">
+    <value>Show Trusted Platform Module presence, version, and readiness.</value>
+  </data>
+  <data name="Cmd_info.secureboot_Title" xml:space="preserve">
+    <value>Secure Boot State</value>
+  </data>
+  <data name="Cmd_info.secureboot_Desc" xml:space="preserve">
+    <value>Report whether UEFI Secure Boot is enabled.</value>
+  </data>
+  <data name="Cmd_info.product_Title" xml:space="preserve">
+    <value>Computer &amp; OS Summary</value>
+  </data>
+  <data name="Cmd_info.product_Desc" xml:space="preserve">
+    <value>Show manufacturer, model, OS edition, and install date.</value>
+  </data>
+  <data name="Cmd_net.adapters_Title" xml:space="preserve">
+    <value>Network Adapters</value>
+  </data>
+  <data name="Cmd_net.adapters_Desc" xml:space="preserve">
+    <value>List network adapters with their status and link speed.</value>
+  </data>
+  <data name="Cmd_net.dnsservers_Title" xml:space="preserve">
+    <value>DNS Servers</value>
+  </data>
+  <data name="Cmd_net.dnsservers_Desc" xml:space="preserve">
+    <value>List the configured DNS server addresses for each adapter.</value>
+  </data>
+  <data name="Cmd_net.testconnection_Title" xml:space="preserve">
+    <value>Test Internet Connection</value>
+  </data>
+  <data name="Cmd_net.testconnection_Desc" xml:space="preserve">
+    <value>Ping a public host to check internet connectivity.</value>
+  </data>
+  <data name="Cmd_diag.startup_Title" xml:space="preserve">
+    <value>Startup Programs</value>
+  </data>
+  <data name="Cmd_diag.startup_Desc" xml:space="preserve">
+    <value>List the programs configured to run at sign-in.</value>
+  </data>
+  <data name="Cmd_diag.driververifier_Title" xml:space="preserve">
+    <value>Driver Verifier Manager</value>
+  </data>
+  <data name="Cmd_diag.driververifier_Desc" xml:space="preserve">
+    <value>Open Driver Verifier to stress-test device drivers (advanced).</value>
+  </data>
+  <data name="Cmd_diag.perfmon_Title" xml:space="preserve">
+    <value>Performance Monitor</value>
+  </data>
+  <data name="Cmd_diag.perfmon_Desc" xml:space="preserve">
+    <value>Open the full Performance Monitor console.</value>
+  </data>
+  <data name="Cmd_diag.systemhealth_Title" xml:space="preserve">
+    <value>System Health Report</value>
+  </data>
+  <data name="Cmd_diag.systemhealth_Desc" xml:space="preserve">
+    <value>Generate a system diagnostics report (takes about a minute).</value>
+  </data>
+  <data name="Cmd_clean.dumps_Title" xml:space="preserve">
+    <value>Clear Crash Dumps</value>
+  </data>
+  <data name="Cmd_clean.dumps_Desc" xml:space="preserve">
+    <value>Delete saved memory dump and minidump files.</value>
+  </data>
+  <data name="Cmd_clean.errorreports_Title" xml:space="preserve">
+    <value>Clear Error Reporting Data</value>
+  </data>
+  <data name="Cmd_clean.errorreports_Desc" xml:space="preserve">
+    <value>Delete queued Windows Error Reporting files.</value>
+  </data>
+  <data name="Cmd_clean.dnsarp_Title" xml:space="preserve">
+    <value>Clear DNS &amp; ARP Caches</value>
+  </data>
+  <data name="Cmd_clean.dnsarp_Desc" xml:space="preserve">
+    <value>Flush the DNS resolver cache and the ARP table.</value>
+  </data>
+  <data name="Cmd_power.lidclose.donothing_Title" xml:space="preserve">
+    <value>Lid Close: Do Nothing (Plugged In)</value>
+  </data>
+  <data name="Cmd_power.lidclose.donothing_Desc" xml:space="preserve">
+    <value>Keep the laptop awake when the lid is closed on AC power.</value>
+  </data>
+  <data name="Cmd_power.lidclose.sleep_Title" xml:space="preserve">
+    <value>Lid Close: Sleep (Plugged In)</value>
+  </data>
+  <data name="Cmd_power.lidclose.sleep_Desc" xml:space="preserve">
+    <value>Put the laptop to sleep when the lid is closed on AC power.</value>
+  </data>
+  <data name="Cmd_power.monitor.timeout15_Title" xml:space="preserve">
+    <value>Screen Off After 15 Minutes</value>
+  </data>
+  <data name="Cmd_power.monitor.timeout15_Desc" xml:space="preserve">
+    <value>Turn off the display after 15 minutes on AC power.</value>
+  </data>
+  <data name="Cmd_power.monitor.timeout10_Title" xml:space="preserve">
+    <value>Screen Off After 10 Minutes</value>
+  </data>
+  <data name="Cmd_power.monitor.timeout10_Desc" xml:space="preserve">
+    <value>Turn off the display after 10 minutes on AC power (default).</value>
+  </data>
+  <data name="Cmd_tweak.numlock.on_Title" xml:space="preserve">
+    <value>NumLock On at Startup</value>
+  </data>
+  <data name="Cmd_tweak.numlock.on_Desc" xml:space="preserve">
+    <value>Enable NumLock at boot and on the sign-in screen.</value>
+  </data>
+  <data name="Cmd_tweak.numlock.off_Title" xml:space="preserve">
+    <value>NumLock Off at Startup</value>
+  </data>
+  <data name="Cmd_tweak.numlock.off_Desc" xml:space="preserve">
+    <value>Disable NumLock at boot and on the sign-in screen.</value>
+  </data>
+  <data name="Cmd_tweak.verbosestatus.on_Title" xml:space="preserve">
+    <value>Verbose Sign-in Messages On</value>
+  </data>
+  <data name="Cmd_tweak.verbosestatus.on_Desc" xml:space="preserve">
+    <value>Show detailed status messages during startup and shutdown.</value>
+  </data>
+  <data name="Cmd_tweak.verbosestatus.off_Title" xml:space="preserve">
+    <value>Verbose Sign-in Messages Off</value>
+  </data>
+  <data name="Cmd_tweak.verbosestatus.off_Desc" xml:space="preserve">
+    <value>Restore the normal startup and shutdown messages.</value>
+  </data>
+  <data name="Cmd_storage.optimize_Title" xml:space="preserve">
+    <value>Optimize / Defragment C:</value>
+  </data>
+  <data name="Cmd_storage.optimize_Desc" xml:space="preserve">
+    <value>Optimize the C: drive (TRIM for SSDs, defragment for HDDs).</value>
+  </data>
+  <data name="Cmd_storage.diskmgmt_Title" xml:space="preserve">
+    <value>Disk Management</value>
+  </data>
+  <data name="Cmd_storage.diskmgmt_Desc" xml:space="preserve">
+    <value>Open the Disk Management console.</value>
+  </data>
+  <data name="Cmd_storage.volumes_Title" xml:space="preserve">
+    <value>List Volumes &amp; Free Space</value>
+  </data>
+  <data name="Cmd_storage.volumes_Desc" xml:space="preserve">
+    <value>Show volumes with their file system and free space.</value>
+  </data>
+  <data name="Cmd_storage.storagesense_Title" xml:space="preserve">
+    <value>Open Storage Settings</value>
+  </data>
+  <data name="Cmd_storage.storagesense_Desc" xml:space="preserve">
+    <value>Open Windows Storage settings to manage Storage Sense.</value>
+  </data>
 </root>

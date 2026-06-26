@@ -1565,4 +1565,157 @@
   <data name="Cmd_dev.longpaths.off_Desc" xml:space="preserve">
     <value>Deshabilita la compatibilidad con rutas largas de Win32 (vuelve al valor predeterminado).</value>
   </data>
+  <data name="Cat_storage" xml:space="preserve">
+    <value>Almacenamiento</value>
+  </data>
+  <data name="Cmd_info.tpm_Title" xml:space="preserve">
+    <value>Estado del TPM</value>
+  </data>
+  <data name="Cmd_info.tpm_Desc" xml:space="preserve">
+    <value>Muestra la presencia, la versión y la disponibilidad del módulo TPM (Trusted Platform Module).</value>
+  </data>
+  <data name="Cmd_info.secureboot_Title" xml:space="preserve">
+    <value>Estado de Secure Boot</value>
+  </data>
+  <data name="Cmd_info.secureboot_Desc" xml:space="preserve">
+    <value>Indica si el Arranque seguro (Secure Boot) de UEFI está habilitado.</value>
+  </data>
+  <data name="Cmd_info.product_Title" xml:space="preserve">
+    <value>Resumen del equipo y del sistema operativo</value>
+  </data>
+  <data name="Cmd_info.product_Desc" xml:space="preserve">
+    <value>Muestra el fabricante, el modelo, la edición del sistema operativo y la fecha de instalación.</value>
+  </data>
+  <data name="Cmd_net.adapters_Title" xml:space="preserve">
+    <value>Adaptadores de red</value>
+  </data>
+  <data name="Cmd_net.adapters_Desc" xml:space="preserve">
+    <value>Enumera los adaptadores de red con su estado y velocidad de enlace.</value>
+  </data>
+  <data name="Cmd_net.dnsservers_Title" xml:space="preserve">
+    <value>Servidores DNS</value>
+  </data>
+  <data name="Cmd_net.dnsservers_Desc" xml:space="preserve">
+    <value>Enumera las direcciones de los servidores DNS configurados para cada adaptador.</value>
+  </data>
+  <data name="Cmd_net.testconnection_Title" xml:space="preserve">
+    <value>Probar conexión a Internet</value>
+  </data>
+  <data name="Cmd_net.testconnection_Desc" xml:space="preserve">
+    <value>Hace ping a un host público para comprobar la conectividad a Internet.</value>
+  </data>
+  <data name="Cmd_diag.startup_Title" xml:space="preserve">
+    <value>Programas de inicio</value>
+  </data>
+  <data name="Cmd_diag.startup_Desc" xml:space="preserve">
+    <value>Enumera los programas configurados para ejecutarse al iniciar sesión.</value>
+  </data>
+  <data name="Cmd_diag.driververifier_Title" xml:space="preserve">
+    <value>Administrador de Driver Verifier</value>
+  </data>
+  <data name="Cmd_diag.driververifier_Desc" xml:space="preserve">
+    <value>Abre Driver Verifier para someter a prueba de esfuerzo los controladores de dispositivos (avanzado).</value>
+  </data>
+  <data name="Cmd_diag.perfmon_Title" xml:space="preserve">
+    <value>Performance Monitor</value>
+  </data>
+  <data name="Cmd_diag.perfmon_Desc" xml:space="preserve">
+    <value>Abre la consola completa de Performance Monitor.</value>
+  </data>
+  <data name="Cmd_diag.systemhealth_Title" xml:space="preserve">
+    <value>Informe de estado del sistema</value>
+  </data>
+  <data name="Cmd_diag.systemhealth_Desc" xml:space="preserve">
+    <value>Genera un informe de diagnóstico del sistema (tarda alrededor de un minuto).</value>
+  </data>
+  <data name="Cmd_clean.dumps_Title" xml:space="preserve">
+    <value>Borrar volcados de fallos</value>
+  </data>
+  <data name="Cmd_clean.dumps_Desc" xml:space="preserve">
+    <value>Elimina los archivos de volcado de memoria y minivolcados guardados.</value>
+  </data>
+  <data name="Cmd_clean.errorreports_Title" xml:space="preserve">
+    <value>Borrar datos de informes de errores</value>
+  </data>
+  <data name="Cmd_clean.errorreports_Desc" xml:space="preserve">
+    <value>Elimina los archivos en cola del Informe de errores de Windows.</value>
+  </data>
+  <data name="Cmd_clean.dnsarp_Title" xml:space="preserve">
+    <value>Borrar cachés de DNS y ARP</value>
+  </data>
+  <data name="Cmd_clean.dnsarp_Desc" xml:space="preserve">
+    <value>Vacía la caché del solucionador DNS y la tabla ARP.</value>
+  </data>
+  <data name="Cmd_power.lidclose.donothing_Title" xml:space="preserve">
+    <value>Cierre de tapa: No hacer nada (conectado)</value>
+  </data>
+  <data name="Cmd_power.lidclose.donothing_Desc" xml:space="preserve">
+    <value>Mantiene el portátil activo al cerrar la tapa cuando está con alimentación de CA (AC power).</value>
+  </data>
+  <data name="Cmd_power.lidclose.sleep_Title" xml:space="preserve">
+    <value>Cierre de tapa: Suspender (conectado)</value>
+  </data>
+  <data name="Cmd_power.lidclose.sleep_Desc" xml:space="preserve">
+    <value>Suspende el portátil al cerrar la tapa cuando está con alimentación de CA (AC power).</value>
+  </data>
+  <data name="Cmd_power.monitor.timeout15_Title" xml:space="preserve">
+    <value>Apagar pantalla tras 15 minutos</value>
+  </data>
+  <data name="Cmd_power.monitor.timeout15_Desc" xml:space="preserve">
+    <value>Apaga la pantalla tras 15 minutos con alimentación de CA (AC power).</value>
+  </data>
+  <data name="Cmd_power.monitor.timeout10_Title" xml:space="preserve">
+    <value>Apagar pantalla tras 10 minutos</value>
+  </data>
+  <data name="Cmd_power.monitor.timeout10_Desc" xml:space="preserve">
+    <value>Apaga la pantalla tras 10 minutos con alimentación de CA (AC power) (predeterminado).</value>
+  </data>
+  <data name="Cmd_tweak.numlock.on_Title" xml:space="preserve">
+    <value>NumLock activado al iniciar</value>
+  </data>
+  <data name="Cmd_tweak.numlock.on_Desc" xml:space="preserve">
+    <value>Activa NumLock al arrancar y en la pantalla de inicio de sesión.</value>
+  </data>
+  <data name="Cmd_tweak.numlock.off_Title" xml:space="preserve">
+    <value>NumLock desactivado al iniciar</value>
+  </data>
+  <data name="Cmd_tweak.numlock.off_Desc" xml:space="preserve">
+    <value>Desactiva NumLock al arrancar y en la pantalla de inicio de sesión.</value>
+  </data>
+  <data name="Cmd_tweak.verbosestatus.on_Title" xml:space="preserve">
+    <value>Mensajes detallados de inicio de sesión activados</value>
+  </data>
+  <data name="Cmd_tweak.verbosestatus.on_Desc" xml:space="preserve">
+    <value>Muestra mensajes de estado detallados durante el inicio y el apagado.</value>
+  </data>
+  <data name="Cmd_tweak.verbosestatus.off_Title" xml:space="preserve">
+    <value>Mensajes detallados de inicio de sesión desactivados</value>
+  </data>
+  <data name="Cmd_tweak.verbosestatus.off_Desc" xml:space="preserve">
+    <value>Restaura los mensajes normales de inicio y apagado.</value>
+  </data>
+  <data name="Cmd_storage.optimize_Title" xml:space="preserve">
+    <value>Optimizar / Desfragmentar C:</value>
+  </data>
+  <data name="Cmd_storage.optimize_Desc" xml:space="preserve">
+    <value>Optimiza la unidad C: (TRIM para SSD, desfragmentación para HDD).</value>
+  </data>
+  <data name="Cmd_storage.diskmgmt_Title" xml:space="preserve">
+    <value>Disk Management</value>
+  </data>
+  <data name="Cmd_storage.diskmgmt_Desc" xml:space="preserve">
+    <value>Abre la consola de Disk Management.</value>
+  </data>
+  <data name="Cmd_storage.volumes_Title" xml:space="preserve">
+    <value>Enumerar volúmenes y espacio libre</value>
+  </data>
+  <data name="Cmd_storage.volumes_Desc" xml:space="preserve">
+    <value>Muestra los volúmenes con su sistema de archivos y espacio libre.</value>
+  </data>
+  <data name="Cmd_storage.storagesense_Title" xml:space="preserve">
+    <value>Abrir configuración de almacenamiento</value>
+  </data>
+  <data name="Cmd_storage.storagesense_Desc" xml:space="preserve">
+    <value>Abre la configuración de almacenamiento de Windows para administrar Storage Sense.</value>
+  </data>
 </root>

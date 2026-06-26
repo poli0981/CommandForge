@@ -1565,4 +1565,157 @@
   <data name="Cmd_dev.longpaths.off_Desc" xml:space="preserve">
     <value>Win32 の長いパスのサポートを無効にします（既定に戻します）。</value>
   </data>
+  <data name="Cat_storage" xml:space="preserve">
+    <value>ストレージ</value>
+  </data>
+  <data name="Cmd_info.tpm_Title" xml:space="preserve">
+    <value>TPM の状態</value>
+  </data>
+  <data name="Cmd_info.tpm_Desc" xml:space="preserve">
+    <value>TPM（トラステッド プラットフォーム モジュール）の有無、バージョン、利用可否を表示します。</value>
+  </data>
+  <data name="Cmd_info.secureboot_Title" xml:space="preserve">
+    <value>Secure Boot の状態</value>
+  </data>
+  <data name="Cmd_info.secureboot_Desc" xml:space="preserve">
+    <value>UEFI Secure Boot が有効かどうかを表示します。</value>
+  </data>
+  <data name="Cmd_info.product_Title" xml:space="preserve">
+    <value>コンピューターと OS の概要</value>
+  </data>
+  <data name="Cmd_info.product_Desc" xml:space="preserve">
+    <value>製造元、モデル、OS のエディション、インストール日を表示します。</value>
+  </data>
+  <data name="Cmd_net.adapters_Title" xml:space="preserve">
+    <value>ネットワーク アダプター</value>
+  </data>
+  <data name="Cmd_net.adapters_Desc" xml:space="preserve">
+    <value>ネットワーク アダプターの状態とリンク速度を一覧表示します。</value>
+  </data>
+  <data name="Cmd_net.dnsservers_Title" xml:space="preserve">
+    <value>DNS サーバー</value>
+  </data>
+  <data name="Cmd_net.dnsservers_Desc" xml:space="preserve">
+    <value>各アダプターに設定されている DNS サーバーのアドレスを一覧表示します。</value>
+  </data>
+  <data name="Cmd_net.testconnection_Title" xml:space="preserve">
+    <value>インターネット接続をテスト</value>
+  </data>
+  <data name="Cmd_net.testconnection_Desc" xml:space="preserve">
+    <value>パブリック ホストに ping を実行してインターネット接続を確認します。</value>
+  </data>
+  <data name="Cmd_diag.startup_Title" xml:space="preserve">
+    <value>スタートアップ プログラム</value>
+  </data>
+  <data name="Cmd_diag.startup_Desc" xml:space="preserve">
+    <value>サインイン時に実行されるよう設定されているプログラムを一覧表示します。</value>
+  </data>
+  <data name="Cmd_diag.driververifier_Title" xml:space="preserve">
+    <value>Driver Verifier マネージャー</value>
+  </data>
+  <data name="Cmd_diag.driververifier_Desc" xml:space="preserve">
+    <value>Driver Verifier を開いてデバイス ドライバーのストレス テストを行います（上級者向け）。</value>
+  </data>
+  <data name="Cmd_diag.perfmon_Title" xml:space="preserve">
+    <value>Performance Monitor</value>
+  </data>
+  <data name="Cmd_diag.perfmon_Desc" xml:space="preserve">
+    <value>Performance Monitor の完全なコンソールを開きます。</value>
+  </data>
+  <data name="Cmd_diag.systemhealth_Title" xml:space="preserve">
+    <value>システム正常性レポート</value>
+  </data>
+  <data name="Cmd_diag.systemhealth_Desc" xml:space="preserve">
+    <value>システム診断レポートを生成します（約 1 分かかります）。</value>
+  </data>
+  <data name="Cmd_clean.dumps_Title" xml:space="preserve">
+    <value>クラッシュ ダンプを削除</value>
+  </data>
+  <data name="Cmd_clean.dumps_Desc" xml:space="preserve">
+    <value>保存されたメモリ ダンプとミニダンプのファイルを削除します。</value>
+  </data>
+  <data name="Cmd_clean.errorreports_Title" xml:space="preserve">
+    <value>エラー報告データを削除</value>
+  </data>
+  <data name="Cmd_clean.errorreports_Desc" xml:space="preserve">
+    <value>キューに溜まった Windows エラー報告のファイルを削除します。</value>
+  </data>
+  <data name="Cmd_clean.dnsarp_Title" xml:space="preserve">
+    <value>DNS と ARP のキャッシュを削除</value>
+  </data>
+  <data name="Cmd_clean.dnsarp_Desc" xml:space="preserve">
+    <value>DNS リゾルバー キャッシュと ARP テーブルをクリアします。</value>
+  </data>
+  <data name="Cmd_power.lidclose.donothing_Title" xml:space="preserve">
+    <value>カバーを閉じたとき: 何もしない（電源接続時）</value>
+  </data>
+  <data name="Cmd_power.lidclose.donothing_Desc" xml:space="preserve">
+    <value>AC power 接続時にカバーを閉じてもノート PC をスリープさせません。</value>
+  </data>
+  <data name="Cmd_power.lidclose.sleep_Title" xml:space="preserve">
+    <value>カバーを閉じたとき: スリープ（電源接続時）</value>
+  </data>
+  <data name="Cmd_power.lidclose.sleep_Desc" xml:space="preserve">
+    <value>AC power 接続時にカバーを閉じるとノート PC をスリープさせます。</value>
+  </data>
+  <data name="Cmd_power.monitor.timeout15_Title" xml:space="preserve">
+    <value>15 分後に画面をオフ</value>
+  </data>
+  <data name="Cmd_power.monitor.timeout15_Desc" xml:space="preserve">
+    <value>AC power 接続時、15 分後にディスプレイをオフにします。</value>
+  </data>
+  <data name="Cmd_power.monitor.timeout10_Title" xml:space="preserve">
+    <value>10 分後に画面をオフ</value>
+  </data>
+  <data name="Cmd_power.monitor.timeout10_Desc" xml:space="preserve">
+    <value>AC power 接続時、10 分後にディスプレイをオフにします（既定）。</value>
+  </data>
+  <data name="Cmd_tweak.numlock.on_Title" xml:space="preserve">
+    <value>起動時に NumLock をオン</value>
+  </data>
+  <data name="Cmd_tweak.numlock.on_Desc" xml:space="preserve">
+    <value>起動時とサインイン画面で NumLock を有効にします。</value>
+  </data>
+  <data name="Cmd_tweak.numlock.off_Title" xml:space="preserve">
+    <value>起動時に NumLock をオフ</value>
+  </data>
+  <data name="Cmd_tweak.numlock.off_Desc" xml:space="preserve">
+    <value>起動時とサインイン画面で NumLock を無効にします。</value>
+  </data>
+  <data name="Cmd_tweak.verbosestatus.on_Title" xml:space="preserve">
+    <value>サインイン時の詳細メッセージをオン</value>
+  </data>
+  <data name="Cmd_tweak.verbosestatus.on_Desc" xml:space="preserve">
+    <value>起動時とシャットダウン時に詳細な状態メッセージを表示します。</value>
+  </data>
+  <data name="Cmd_tweak.verbosestatus.off_Title" xml:space="preserve">
+    <value>サインイン時の詳細メッセージをオフ</value>
+  </data>
+  <data name="Cmd_tweak.verbosestatus.off_Desc" xml:space="preserve">
+    <value>起動時とシャットダウン時のメッセージを通常表示に戻します。</value>
+  </data>
+  <data name="Cmd_storage.optimize_Title" xml:space="preserve">
+    <value>C: の最適化 / デフラグ</value>
+  </data>
+  <data name="Cmd_storage.optimize_Desc" xml:space="preserve">
+    <value>C: ドライブを最適化します（SSD は TRIM、HDD はデフラグ）。</value>
+  </data>
+  <data name="Cmd_storage.diskmgmt_Title" xml:space="preserve">
+    <value>Disk Management</value>
+  </data>
+  <data name="Cmd_storage.diskmgmt_Desc" xml:space="preserve">
+    <value>Disk Management コンソールを開きます。</value>
+  </data>
+  <data name="Cmd_storage.volumes_Title" xml:space="preserve">
+    <value>ボリュームと空き容量を一覧表示</value>
+  </data>
+  <data name="Cmd_storage.volumes_Desc" xml:space="preserve">
+    <value>ボリュームのファイル システムと空き容量を表示します。</value>
+  </data>
+  <data name="Cmd_storage.storagesense_Title" xml:space="preserve">
+    <value>ストレージ設定を開く</value>
+  </data>
+  <data name="Cmd_storage.storagesense_Desc" xml:space="preserve">
+    <value>Windows のストレージ設定を開いて Storage Sense を管理します。</value>
+  </data>
 </root>

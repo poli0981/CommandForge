@@ -1,3 +1,4 @@
+using CommandForge.Domain;
 using CommandForge.Infrastructure.Catalog;
 
 namespace CommandForge.Tests;
@@ -16,8 +17,26 @@ public sealed class CatalogTests
     [Fact]
     public void Catalog_HasCategoriesAndCommands()
     {
-        Assert.Equal(10, Catalog.Categories.Count);
+        Assert.Equal(11, Catalog.Categories.Count);
         Assert.True(Catalog.Commands.Count >= 20, $"Expected >= 20 commands, got {Catalog.Commands.Count}.");
+    }
+
+    [Fact]
+    public void Catalog_HasStorageCategory_WithCommands()
+    {
+        Assert.Contains(Catalog.Categories, c => c.Id == "storage");
+        Assert.Contains(Catalog.Commands, c => c.CategoryId == "storage");
+    }
+
+    [Fact]
+    public void Catalog_DangerousCommands_RequireConfirmation()
+    {
+        // Golden rule: Dangerous commands must always confirm before running.
+        var offenders = Catalog.Commands
+            .Where(c => c.DangerLevel == DangerLevel.Dangerous && !c.ConfirmBeforeRun)
+            .Select(c => c.Id)
+            .ToList();
+        Assert.True(offenders.Count == 0, $"Dangerous commands missing confirmation: {string.Join(", ", offenders)}.");
     }
 
     [Fact]

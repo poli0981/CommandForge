@@ -1838,4 +1838,127 @@ Tiếp tục?</value>
   <data name="Cmd_storage.smart.status_Desc" xml:space="preserve">
     <value>Hiển thị trạng thái dự đoán hỏng hóc SMART của từng ổ đĩa.</value>
   </data>
+  <data name="Cat_services-startup" xml:space="preserve">
+    <value>Dịch vụ &amp; Khởi động</value>
+  </data>
+  <data name="Cmd_storage.largefiles.temp_Title" xml:space="preserve">
+    <value>Tệp tạm lớn nhất</value>
+  </data>
+  <data name="Cmd_storage.largefiles.temp_Desc" xml:space="preserve">
+    <value>Liệt kê các tệp lớn nhất trong thư mục tạm.</value>
+  </data>
+  <data name="Cmd_storage.partition.list_Title" xml:space="preserve">
+    <value>Liệt kê phân vùng</value>
+  </data>
+  <data name="Cmd_storage.partition.list_Desc" xml:space="preserve">
+    <value>Liệt kê tất cả phân vùng ổ đĩa và kích thước.</value>
+  </data>
+  <data name="Cmd_storage.fragmentation.analyze_Title" xml:space="preserve">
+    <value>Phân tích phân mảnh</value>
+  </data>
+  <data name="Cmd_storage.fragmentation.analyze_Desc" xml:space="preserve">
+    <value>Phân tích phân mảnh ổ C: mà không thay đổi gì.</value>
+  </data>
+  <data name="Cmd_storage.cleanmgr.settings_Title" xml:space="preserve">
+    <value>Cấu hình Dọn dẹp ổ đĩa</value>
+  </data>
+  <data name="Cmd_storage.cleanmgr.settings_Desc" xml:space="preserve">
+    <value>Mở cài đặt Dọn dẹp ổ đĩa để chọn nội dung cần dọn.</value>
+  </data>
+  <data name="Cmd_storage.diskpart.list_Title" xml:space="preserve">
+    <value>Liệt kê đĩa &amp; ổ</value>
+  </data>
+  <data name="Cmd_storage.diskpart.list_Desc" xml:space="preserve">
+    <value>Liệt kê đĩa và ổ bằng DiskPart (chỉ đọc).</value>
+  </data>
+  <data name="Cmd_svc.spooler.restart_Title" xml:space="preserve">
+    <value>Khởi động lại Print Spooler</value>
+  </data>
+  <data name="Cmd_svc.spooler.restart_Desc" xml:space="preserve">
+    <value>Khởi động lại dịch vụ Print Spooler để xóa lệnh in bị kẹt.</value>
+  </data>
+  <data name="Cmd_svc.audio.restart_Title" xml:space="preserve">
+    <value>Khởi động lại dịch vụ âm thanh</value>
+  </data>
+  <data name="Cmd_svc.audio.restart_Desc" xml:space="preserve">
+    <value>Khởi động lại dịch vụ Windows Audio để khắc phục sự cố âm thanh.</value>
+  </data>
+  <data name="Cmd_svc.wuauserv.restart_Title" xml:space="preserve">
+    <value>Khởi động lại dịch vụ Windows Update</value>
+  </data>
+  <data name="Cmd_svc.wuauserv.restart_Desc" xml:space="preserve">
+    <value>Khởi động lại dịch vụ Windows Update.</value>
+  </data>
+  <data name="Cmd_svc.bits.restart_Title" xml:space="preserve">
+    <value>Khởi động lại BITS</value>
+  </data>
+  <data name="Cmd_svc.bits.restart_Desc" xml:space="preserve">
+    <value>Khởi động lại dịch vụ truyền nền BITS.</value>
+  </data>
+  <data name="Cmd_svc.list.running_Title" xml:space="preserve">
+    <value>Liệt kê dịch vụ đang chạy</value>
+  </data>
+  <data name="Cmd_svc.list.running_Desc" xml:space="preserve">
+    <value>Liệt kê tất cả dịch vụ đang chạy.</value>
+  </data>
+  <data name="Cmd_svc.list.automatic_Title" xml:space="preserve">
+    <value>Liệt kê dịch vụ tự động</value>
+  </data>
+  <data name="Cmd_svc.list.automatic_Desc" xml:space="preserve">
+    <value>Liệt kê các dịch vụ khởi động tự động và trạng thái.</value>
+  </data>
+  <data name="Cmd_startup.apps.settings_Title" xml:space="preserve">
+    <value>Ứng dụng khởi động</value>
+  </data>
+  <data name="Cmd_startup.apps.settings_Desc" xml:space="preserve">
+    <value>Mở trang cài đặt ứng dụng khởi động cùng Windows.</value>
+  </data>
+  <data name="Cmd_startup.folder.open_Title" xml:space="preserve">
+    <value>Mở thư mục Startup</value>
+  </data>
+  <data name="Cmd_startup.folder.open_Desc" xml:space="preserve">
+    <value>Mở thư mục Khởi động của người dùng hiện tại.</value>
+  </data>
+  <data name="Cmd_clean.iconcache_Title" xml:space="preserve">
+    <value>Xóa tệp bộ nhớ đệm biểu tượng</value>
+  </data>
+  <data name="Cmd_clean.iconcache_Desc" xml:space="preserve">
+    <value>Xóa bộ nhớ đệm biểu tượng của Explorer để dựng lại.</value>
+  </data>
+  <data name="Cmd_clean.recentfiles_Title" xml:space="preserve">
+    <value>Xóa mục gần đây</value>
+  </data>
+  <data name="Cmd_clean.recentfiles_Desc" xml:space="preserve">
+    <value>Xóa danh sách tệp và thư mục mở gần đây.</value>
+  </data>
+  <data name="Cmd_clean.eventlogs_Title" xml:space="preserve">
+    <value>Xóa nhật ký sự kiện</value>
+  </data>
+  <data name="Cmd_clean.eventlogs_Desc" xml:space="preserve">
+    <value>Xóa nhật ký sự kiện Ứng dụng và Hệ thống.</value>
+  </data>
+  <data name="Cmd_power.set.powersaver_Title" xml:space="preserve">
+    <value>Gói Tiết kiệm điện</value>
+  </data>
+  <data name="Cmd_power.set.powersaver_Desc" xml:space="preserve">
+    <value>Chuyển sang gói nguồn Tiết kiệm điện.</value>
+  </data>
+  <data name="Cmd_power.hibernate.now_Title" xml:space="preserve">
+    <value>Ngủ đông ngay</value>
+  </data>
+  <data name="Cmd_power.hibernate.now_Desc" xml:space="preserve">
+    <value>Đưa máy tính vào chế độ ngủ đông ngay lập tức.</value>
+  </data>
+  <data name="Cmd_chkdsk.scan.online_Title" xml:space="preserve">
+    <value>Quét ổ đĩa trực tuyến</value>
+  </data>
+  <data name="Cmd_chkdsk.scan.online_Desc" xml:space="preserve">
+    <value>Quét lỗi ổ C: ngay khi đang dùng mà không cần ngắt kết nối.</value>
+  </data>
+  <data name="Cmd_sfc.verifyonly_Title" xml:space="preserve">
+    <value>Kiểm tra tệp hệ thống</value>
+  </data>
+  <data name="Cmd_sfc.verifyonly_Desc" xml:space="preserve">
+    <value>Kiểm tra tệp hệ thống được bảo vệ có bị hỏng mà không sửa chữa.</value>
+  </data>
 </root>

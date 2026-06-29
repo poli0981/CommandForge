@@ -7,6 +7,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.4.0] — 2026-06-29
+
+### Added
+- **60 new commands and a new "Services & Startup" category** (catalog grew from 141 to 201):
+  - **Services & Startup** (new 12th category): restart the Print Spooler, Windows Audio, Windows
+    Update and BITS services; list running and automatic services; and open the Startup apps settings
+    and the Startup folder.
+  - **System info & storage:** battery health, network-adapter speed, disk health and SMART status,
+    page-file usage, local user accounts, time zone and Windows install date; plus a drive-usage
+    summary, largest temp files, partition list, fragmentation analysis, Disk Cleanup configuration
+    and a DiskPart disk/volume listing.
+  - **Network & diagnostics:** a public DNS lookup test, active TCP connections, firewall profiles,
+    shared folders, the hosts file and Network Connections; plus recent boot/shutdown and
+    unexpected-shutdown events, recent system errors, Print Management and Certificate Manager.
+  - **Cleanup, power & maintenance:** clear the icon cache, recent items and event logs; the Power
+    Saver plan and hibernate-now; and an online disk scan and a read-only system-file verification.
+  - **Security, updates & tweaks:** Defender threat history and exclusions, BitLocker volume details,
+    reset firewall to defaults, remove dynamic signatures and open Windows Security; update history,
+    Windows Update settings, App Installer self-update, package export, third-party drivers and
+    troubleshooters; and hide/show the Windows 11 taskbar search plus transparency, Snap-assist and
+    Telnet-client toggles.
+
 ## [1.3.0] — 2026-06-26
 
 ### Added

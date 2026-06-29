@@ -1718,4 +1718,124 @@
   <data name="Cmd_storage.storagesense_Desc" xml:space="preserve">
     <value>Abre la configuración de almacenamiento de Windows para administrar Storage Sense.</value>
   </data>
+  <data name="Cmd_info.battery.health_Title" xml:space="preserve">
+    <value>Estado de la batería</value>
+  </data>
+  <data name="Cmd_info.battery.health_Desc" xml:space="preserve">
+    <value>Muestra la capacidad de diseño frente a la de carga completa de la batería.</value>
+  </data>
+  <data name="Cmd_info.netadapter.speed_Title" xml:space="preserve">
+    <value>Velocidad del adaptador de red</value>
+  </data>
+  <data name="Cmd_info.netadapter.speed_Desc" xml:space="preserve">
+    <value>Enumera los adaptadores de red activos con su velocidad de enlace y dirección MAC.</value>
+  </data>
+  <data name="Cmd_info.diskhealth_Title" xml:space="preserve">
+    <value>Estado del disco</value>
+  </data>
+  <data name="Cmd_info.diskhealth_Desc" xml:space="preserve">
+    <value>Muestra el estado de salud y operativo de cada disco físico.</value>
+  </data>
+  <data name="Cmd_info.pagefile_Title" xml:space="preserve">
+    <value>Uso del archivo de paginación</value>
+  </data>
+  <data name="Cmd_info.pagefile_Desc" xml:space="preserve">
+    <value>Muestra el tamaño y el uso actual del archivo de paginación.</value>
+  </data>
+  <data name="Cmd_info.localusers_Title" xml:space="preserve">
+    <value>Cuentas de usuario locales</value>
+  </data>
+  <data name="Cmd_info.localusers_Desc" xml:space="preserve">
+    <value>Enumera las cuentas de usuario locales y si están habilitadas.</value>
+  </data>
+  <data name="Cmd_info.timezone_Title" xml:space="preserve">
+    <value>Hora y zona horaria</value>
+  </data>
+  <data name="Cmd_info.timezone_Desc" xml:space="preserve">
+    <value>Muestra la zona horaria actual y el estado de sincronización de hora.</value>
+  </data>
+  <data name="Cmd_info.osinstalldate_Title" xml:space="preserve">
+    <value>Fecha de instalación de Windows</value>
+  </data>
+  <data name="Cmd_info.osinstalldate_Desc" xml:space="preserve">
+    <value>Muestra cuándo se instaló Windows y hace cuántos días.</value>
+  </data>
+  <data name="Cmd_net.publicdns_Title" xml:space="preserve">
+    <value>Prueba de resolución de DNS público</value>
+  </data>
+  <data name="Cmd_net.publicdns_Desc" xml:space="preserve">
+    <value>Resuelve un dominio conocido a través de Google DNS para probar la resolución de nombres.</value>
+  </data>
+  <data name="Cmd_net.tcpconnections_Title" xml:space="preserve">
+    <value>Conexiones TCP activas</value>
+  </data>
+  <data name="Cmd_net.tcpconnections_Desc" xml:space="preserve">
+    <value>Enumera las conexiones TCP establecidas y su proceso propietario.</value>
+  </data>
+  <data name="Cmd_net.firewallprofiles_Title" xml:space="preserve">
+    <value>Perfiles de firewall</value>
+  </data>
+  <data name="Cmd_net.firewallprofiles_Desc" xml:space="preserve">
+    <value>Muestra cada perfil de firewall y sus acciones predeterminadas.</value>
+  </data>
+  <data name="Cmd_net.netshares_Title" xml:space="preserve">
+    <value>Carpetas compartidas</value>
+  </data>
+  <data name="Cmd_net.netshares_Desc" xml:space="preserve">
+    <value>Enumera los recursos compartidos SMB publicados por este equipo.</value>
+  </data>
+  <data name="Cmd_net.hostsfile.show_Title" xml:space="preserve">
+    <value>Mostrar archivo hosts</value>
+  </data>
+  <data name="Cmd_net.hostsfile.show_Desc" xml:space="preserve">
+    <value>Muestra el contenido del archivo hosts de Windows.</value>
+  </data>
+  <data name="Cmd_net.netconnections.diag_Title" xml:space="preserve">
+    <value>Conexiones de red</value>
+  </data>
+  <data name="Cmd_net.netconnections.diag_Desc" xml:space="preserve">
+    <value>Abre el panel de control Conexiones de red.</value>
+  </data>
+  <data name="Cmd_diag.lastboottime_Title" xml:space="preserve">
+    <value>Eventos recientes de inicio y apagado</value>
+  </data>
+  <data name="Cmd_diag.lastboottime_Desc" xml:space="preserve">
+    <value>Enumera los eventos más recientes de inicio y apagado del sistema.</value>
+  </data>
+  <data name="Cmd_diag.bsod.recent_Title" xml:space="preserve">
+    <value>Apagados inesperados recientes</value>
+  </data>
+  <data name="Cmd_diag.bsod.recent_Desc" xml:space="preserve">
+    <value>Enumera los eventos recientes de apagado inesperado Kernel-Power (evento 41).</value>
+  </data>
+  <data name="Cmd_diag.toperrors_Title" xml:space="preserve">
+    <value>Errores recientes del sistema</value>
+  </data>
+  <data name="Cmd_diag.toperrors_Desc" xml:space="preserve">
+    <value>Enumera las entradas críticas y de error recientes del registro del sistema.</value>
+  </data>
+  <data name="Cmd_diag.printmgmt_Title" xml:space="preserve">
+    <value>Administración de impresión</value>
+  </data>
+  <data name="Cmd_diag.printmgmt_Desc" xml:space="preserve">
+    <value>Abre la consola Administración de impresión.</value>
+  </data>
+  <data name="Cmd_diag.certmgr_Title" xml:space="preserve">
+    <value>Administrador de certificados</value>
+  </data>
+  <data name="Cmd_diag.certmgr_Desc" xml:space="preserve">
+    <value>Abre el Administrador de certificados del usuario actual.</value>
+  </data>
+  <data name="Cmd_storage.diskusage_Title" xml:space="preserve">
+    <value>Resumen de uso de unidades</value>
+  </data>
+  <data name="Cmd_storage.diskusage_Desc" xml:space="preserve">
+    <value>Muestra el espacio usado y libre de cada unidad del sistema de archivos.</value>
+  </data>
+  <data name="Cmd_storage.smart.status_Title" xml:space="preserve">
+    <value>Estado SMART del disco</value>
+  </data>
+  <data name="Cmd_storage.smart.status_Desc" xml:space="preserve">
+    <value>Muestra el estado de predicción de fallos SMART de cada disco.</value>
+  </data>
 </root>

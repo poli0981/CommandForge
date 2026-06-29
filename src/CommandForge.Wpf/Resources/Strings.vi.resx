@@ -1718,4 +1718,124 @@ Tiếp tục?</value>
   <data name="Cmd_storage.storagesense_Desc" xml:space="preserve">
     <value>Mở cài đặt Lưu trữ của Windows để quản lý Storage Sense.</value>
   </data>
+  <data name="Cmd_info.battery.health_Title" xml:space="preserve">
+    <value>Tình trạng pin</value>
+  </data>
+  <data name="Cmd_info.battery.health_Desc" xml:space="preserve">
+    <value>Hiển thị dung lượng thiết kế so với dung lượng sạc đầy của pin.</value>
+  </data>
+  <data name="Cmd_info.netadapter.speed_Title" xml:space="preserve">
+    <value>Tốc độ card mạng</value>
+  </data>
+  <data name="Cmd_info.netadapter.speed_Desc" xml:space="preserve">
+    <value>Liệt kê các card mạng đang hoạt động cùng tốc độ liên kết và địa chỉ MAC.</value>
+  </data>
+  <data name="Cmd_info.diskhealth_Title" xml:space="preserve">
+    <value>Tình trạng ổ đĩa</value>
+  </data>
+  <data name="Cmd_info.diskhealth_Desc" xml:space="preserve">
+    <value>Hiển thị tình trạng và trạng thái hoạt động của từng ổ đĩa vật lý.</value>
+  </data>
+  <data name="Cmd_info.pagefile_Title" xml:space="preserve">
+    <value>Sử dụng tệp trang</value>
+  </data>
+  <data name="Cmd_info.pagefile_Desc" xml:space="preserve">
+    <value>Hiển thị kích thước và mức sử dụng hiện tại của tệp trang.</value>
+  </data>
+  <data name="Cmd_info.localusers_Title" xml:space="preserve">
+    <value>Tài khoản người dùng cục bộ</value>
+  </data>
+  <data name="Cmd_info.localusers_Desc" xml:space="preserve">
+    <value>Liệt kê các tài khoản người dùng cục bộ và trạng thái kích hoạt.</value>
+  </data>
+  <data name="Cmd_info.timezone_Title" xml:space="preserve">
+    <value>Thời gian &amp; múi giờ</value>
+  </data>
+  <data name="Cmd_info.timezone_Desc" xml:space="preserve">
+    <value>Hiển thị múi giờ hiện tại và trạng thái đồng bộ thời gian.</value>
+  </data>
+  <data name="Cmd_info.osinstalldate_Title" xml:space="preserve">
+    <value>Ngày cài đặt Windows</value>
+  </data>
+  <data name="Cmd_info.osinstalldate_Desc" xml:space="preserve">
+    <value>Hiển thị thời điểm Windows được cài đặt và cách đây bao nhiêu ngày.</value>
+  </data>
+  <data name="Cmd_net.publicdns_Title" xml:space="preserve">
+    <value>Kiểm tra phân giải DNS công cộng</value>
+  </data>
+  <data name="Cmd_net.publicdns_Desc" xml:space="preserve">
+    <value>Phân giải một tên miền phổ biến qua DNS của Google để kiểm tra phân giải tên.</value>
+  </data>
+  <data name="Cmd_net.tcpconnections_Title" xml:space="preserve">
+    <value>Kết nối TCP đang hoạt động</value>
+  </data>
+  <data name="Cmd_net.tcpconnections_Desc" xml:space="preserve">
+    <value>Liệt kê các kết nối TCP đã thiết lập và tiến trình sở hữu.</value>
+  </data>
+  <data name="Cmd_net.firewallprofiles_Title" xml:space="preserve">
+    <value>Hồ sơ tường lửa</value>
+  </data>
+  <data name="Cmd_net.firewallprofiles_Desc" xml:space="preserve">
+    <value>Hiển thị từng hồ sơ tường lửa và hành động mặc định.</value>
+  </data>
+  <data name="Cmd_net.netshares_Title" xml:space="preserve">
+    <value>Thư mục chia sẻ</value>
+  </data>
+  <data name="Cmd_net.netshares_Desc" xml:space="preserve">
+    <value>Liệt kê các chia sẻ SMB do máy tính này cung cấp.</value>
+  </data>
+  <data name="Cmd_net.hostsfile.show_Title" xml:space="preserve">
+    <value>Xem tệp hosts</value>
+  </data>
+  <data name="Cmd_net.hostsfile.show_Desc" xml:space="preserve">
+    <value>Hiển thị nội dung của tệp hosts trên Windows.</value>
+  </data>
+  <data name="Cmd_net.netconnections.diag_Title" xml:space="preserve">
+    <value>Kết nối mạng</value>
+  </data>
+  <data name="Cmd_net.netconnections.diag_Desc" xml:space="preserve">
+    <value>Mở bảng điều khiển Kết nối mạng.</value>
+  </data>
+  <data name="Cmd_diag.lastboottime_Title" xml:space="preserve">
+    <value>Sự kiện khởi động &amp; tắt máy gần đây</value>
+  </data>
+  <data name="Cmd_diag.lastboottime_Desc" xml:space="preserve">
+    <value>Liệt kê các sự kiện khởi động và tắt máy gần đây nhất.</value>
+  </data>
+  <data name="Cmd_diag.bsod.recent_Title" xml:space="preserve">
+    <value>Tắt máy đột ngột gần đây</value>
+  </data>
+  <data name="Cmd_diag.bsod.recent_Desc" xml:space="preserve">
+    <value>Liệt kê các sự kiện tắt máy đột ngột Kernel-Power (sự kiện 41) gần đây.</value>
+  </data>
+  <data name="Cmd_diag.toperrors_Title" xml:space="preserve">
+    <value>Lỗi hệ thống gần đây</value>
+  </data>
+  <data name="Cmd_diag.toperrors_Desc" xml:space="preserve">
+    <value>Liệt kê các mục nghiêm trọng và lỗi gần đây từ nhật ký Hệ thống.</value>
+  </data>
+  <data name="Cmd_diag.printmgmt_Title" xml:space="preserve">
+    <value>Quản lý in</value>
+  </data>
+  <data name="Cmd_diag.printmgmt_Desc" xml:space="preserve">
+    <value>Mở bảng điều khiển Quản lý in.</value>
+  </data>
+  <data name="Cmd_diag.certmgr_Title" xml:space="preserve">
+    <value>Trình quản lý chứng chỉ</value>
+  </data>
+  <data name="Cmd_diag.certmgr_Desc" xml:space="preserve">
+    <value>Mở Trình quản lý chứng chỉ của người dùng hiện tại.</value>
+  </data>
+  <data name="Cmd_storage.diskusage_Title" xml:space="preserve">
+    <value>Tóm tắt dung lượng ổ đĩa</value>
+  </data>
+  <data name="Cmd_storage.diskusage_Desc" xml:space="preserve">
+    <value>Hiển thị dung lượng đã dùng và còn trống cho mỗi ổ đĩa.</value>
+  </data>
+  <data name="Cmd_storage.smart.status_Title" xml:space="preserve">
+    <value>Trạng thái SMART của ổ đĩa</value>
+  </data>
+  <data name="Cmd_storage.smart.status_Desc" xml:space="preserve">
+    <value>Hiển thị trạng thái dự đoán hỏng hóc SMART của từng ổ đĩa.</value>
+  </data>
 </root>

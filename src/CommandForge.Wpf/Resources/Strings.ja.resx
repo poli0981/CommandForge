@@ -1961,4 +1961,124 @@
   <data name="Cmd_sfc.verifyonly_Desc" xml:space="preserve">
     <value>修復せずに保護されたシステム ファイルの破損を確認します。</value>
   </data>
+  <data name="Cmd_sec.defender.history_Title" xml:space="preserve">
+    <value>Defender の脅威履歴</value>
+  </data>
+  <data name="Cmd_sec.defender.history_Desc" xml:space="preserve">
+    <value>Microsoft Defender の最近の脅威検出を表示します。</value>
+  </data>
+  <data name="Cmd_sec.defender.exclusions_Title" xml:space="preserve">
+    <value>Defender の除外</value>
+  </data>
+  <data name="Cmd_sec.defender.exclusions_Desc" xml:space="preserve">
+    <value>Defender から除外されたパス、拡張子、プロセスを一覧表示します。</value>
+  </data>
+  <data name="Cmd_sec.bitlocker.detail_Title" xml:space="preserve">
+    <value>BitLocker ボリュームの詳細</value>
+  </data>
+  <data name="Cmd_sec.bitlocker.detail_Desc" xml:space="preserve">
+    <value>各ボリュームの暗号化状態と進行状況を表示します。</value>
+  </data>
+  <data name="Cmd_sec.firewall.reset_Title" xml:space="preserve">
+    <value>ファイアウォールを既定値にリセット</value>
+  </data>
+  <data name="Cmd_sec.firewall.reset_Desc" xml:space="preserve">
+    <value>すべての Windows ファイアウォール規則を既定のポリシーにリセットします。</value>
+  </data>
+  <data name="Cmd_sec.defender.signatures.remove_Title" xml:space="preserve">
+    <value>動的シグネチャを削除</value>
+  </data>
+  <data name="Cmd_sec.defender.signatures.remove_Desc" xml:space="preserve">
+    <value>破損した更新を修正するために Defender の動的定義を削除します。</value>
+  </data>
+  <data name="Cmd_sec.windowssecurity.open_Title" xml:space="preserve">
+    <value>Windows セキュリティを開く</value>
+  </data>
+  <data name="Cmd_sec.windowssecurity.open_Desc" xml:space="preserve">
+    <value>Windows セキュリティ アプリを開きます。</value>
+  </data>
+  <data name="Cmd_wu.history_Title" xml:space="preserve">
+    <value>更新履歴</value>
+  </data>
+  <data name="Cmd_wu.history_Desc" xml:space="preserve">
+    <value>最近インストールされた Windows 更新プログラムを一覧表示します。</value>
+  </data>
+  <data name="Cmd_wu.pause_Title" xml:space="preserve">
+    <value>Windows Update の設定</value>
+  </data>
+  <data name="Cmd_wu.pause_Desc" xml:space="preserve">
+    <value>Windows Update の設定ページを開きます。</value>
+  </data>
+  <data name="Cmd_winget.upgrade.winget_Title" xml:space="preserve">
+    <value>アプリ インストーラーを更新</value>
+  </data>
+  <data name="Cmd_winget.upgrade.winget_Desc" xml:space="preserve">
+    <value>winget アプリ インストーラーを最新バージョンに更新します。</value>
+  </data>
+  <data name="Cmd_winget.export.list_Title" xml:space="preserve">
+    <value>インストール済みパッケージをエクスポート</value>
+  </data>
+  <data name="Cmd_winget.export.list_Desc" xml:space="preserve">
+    <value>winget のパッケージ一覧を JSON ファイルにエクスポートします。</value>
+  </data>
+  <data name="Cmd_wu.driver.list_Title" xml:space="preserve">
+    <value>サードパーティ製ドライバー</value>
+  </data>
+  <data name="Cmd_wu.driver.list_Desc" xml:space="preserve">
+    <value>システムにインストールされた非インボックス ドライバーを一覧表示します。</value>
+  </data>
+  <data name="Cmd_store.troubleshoot_Title" xml:space="preserve">
+    <value>トラブルシューティング ツール</value>
+  </data>
+  <data name="Cmd_store.troubleshoot_Desc" xml:space="preserve">
+    <value>Windows のトラブルシューティング設定ページを開きます。</value>
+  </data>
+  <data name="Cmd_tweak.taskbarsearch.hide_Title" xml:space="preserve">
+    <value>タスクバーの検索を非表示</value>
+  </data>
+  <data name="Cmd_tweak.taskbarsearch.hide_Desc" xml:space="preserve">
+    <value>タスクバーから検索ボックスを非表示にします。</value>
+  </data>
+  <data name="Cmd_tweak.taskbarsearch.show_Title" xml:space="preserve">
+    <value>タスクバーの検索を表示</value>
+  </data>
+  <data name="Cmd_tweak.taskbarsearch.show_Desc" xml:space="preserve">
+    <value>タスクバーに検索ボックスを表示します。</value>
+  </data>
+  <data name="Cmd_tweak.transparency.off_Title" xml:space="preserve">
+    <value>透明効果を無効化</value>
+  </data>
+  <data name="Cmd_tweak.transparency.off_Desc" xml:space="preserve">
+    <value>ウィンドウの透明効果をオフにします。</value>
+  </data>
+  <data name="Cmd_tweak.transparency.on_Title" xml:space="preserve">
+    <value>透明効果を有効化</value>
+  </data>
+  <data name="Cmd_tweak.transparency.on_Desc" xml:space="preserve">
+    <value>ウィンドウの透明効果をオンにします。</value>
+  </data>
+  <data name="Cmd_tweak.snapassist.off_Title" xml:space="preserve">
+    <value>スナップ アシストを無効化</value>
+  </data>
+  <data name="Cmd_tweak.snapassist.off_Desc" xml:space="preserve">
+    <value>ウィンドウをスナップするときの提案を停止します。</value>
+  </data>
+  <data name="Cmd_tweak.snapassist.on_Title" xml:space="preserve">
+    <value>スナップ アシストを有効化</value>
+  </data>
+  <data name="Cmd_tweak.snapassist.on_Desc" xml:space="preserve">
+    <value>ウィンドウをスナップするときに提案を表示します。</value>
+  </data>
+  <data name="Cmd_dev.telnet.on_Title" xml:space="preserve">
+    <value>Telnet クライアントを有効化</value>
+  </data>
+  <data name="Cmd_dev.telnet.on_Desc" xml:space="preserve">
+    <value>Windows の Telnet クライアント機能をインストールします。</value>
+  </data>
+  <data name="Cmd_dev.telnet.off_Title" xml:space="preserve">
+    <value>Telnet クライアントを無効化</value>
+  </data>
+  <data name="Cmd_dev.telnet.off_Desc" xml:space="preserve">
+    <value>Windows の Telnet クライアント機能を削除します。</value>
+  </data>
 </root>

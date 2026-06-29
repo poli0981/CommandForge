@@ -1961,4 +1961,124 @@ Tiếp tục?</value>
   <data name="Cmd_sfc.verifyonly_Desc" xml:space="preserve">
     <value>Kiểm tra tệp hệ thống được bảo vệ có bị hỏng mà không sửa chữa.</value>
   </data>
+  <data name="Cmd_sec.defender.history_Title" xml:space="preserve">
+    <value>Lịch sử mối đe dọa Defender</value>
+  </data>
+  <data name="Cmd_sec.defender.history_Desc" xml:space="preserve">
+    <value>Hiển thị các phát hiện mối đe dọa gần đây của Microsoft Defender.</value>
+  </data>
+  <data name="Cmd_sec.defender.exclusions_Title" xml:space="preserve">
+    <value>Loại trừ của Defender</value>
+  </data>
+  <data name="Cmd_sec.defender.exclusions_Desc" xml:space="preserve">
+    <value>Liệt kê các đường dẫn, phần mở rộng và tiến trình được loại trừ khỏi Defender.</value>
+  </data>
+  <data name="Cmd_sec.bitlocker.detail_Title" xml:space="preserve">
+    <value>Chi tiết ổ đĩa BitLocker</value>
+  </data>
+  <data name="Cmd_sec.bitlocker.detail_Desc" xml:space="preserve">
+    <value>Hiển thị trạng thái và tiến độ mã hóa cho từng ổ đĩa.</value>
+  </data>
+  <data name="Cmd_sec.firewall.reset_Title" xml:space="preserve">
+    <value>Đặt lại tường lửa về mặc định</value>
+  </data>
+  <data name="Cmd_sec.firewall.reset_Desc" xml:space="preserve">
+    <value>Đặt lại toàn bộ quy tắc Tường lửa Windows về chính sách mặc định.</value>
+  </data>
+  <data name="Cmd_sec.defender.signatures.remove_Title" xml:space="preserve">
+    <value>Xóa chữ ký động</value>
+  </data>
+  <data name="Cmd_sec.defender.signatures.remove_Desc" xml:space="preserve">
+    <value>Xóa các định nghĩa động của Defender để sửa bản cập nhật bị hỏng.</value>
+  </data>
+  <data name="Cmd_sec.windowssecurity.open_Title" xml:space="preserve">
+    <value>Mở Bảo mật Windows</value>
+  </data>
+  <data name="Cmd_sec.windowssecurity.open_Desc" xml:space="preserve">
+    <value>Mở ứng dụng Bảo mật Windows.</value>
+  </data>
+  <data name="Cmd_wu.history_Title" xml:space="preserve">
+    <value>Lịch sử cập nhật</value>
+  </data>
+  <data name="Cmd_wu.history_Desc" xml:space="preserve">
+    <value>Liệt kê các bản cập nhật Windows được cài đặt gần đây nhất.</value>
+  </data>
+  <data name="Cmd_wu.pause_Title" xml:space="preserve">
+    <value>Cài đặt Windows Update</value>
+  </data>
+  <data name="Cmd_wu.pause_Desc" xml:space="preserve">
+    <value>Mở trang cài đặt Windows Update.</value>
+  </data>
+  <data name="Cmd_winget.upgrade.winget_Title" xml:space="preserve">
+    <value>Cập nhật App Installer</value>
+  </data>
+  <data name="Cmd_winget.upgrade.winget_Desc" xml:space="preserve">
+    <value>Cập nhật winget App Installer lên phiên bản mới nhất.</value>
+  </data>
+  <data name="Cmd_winget.export.list_Title" xml:space="preserve">
+    <value>Xuất danh sách gói đã cài</value>
+  </data>
+  <data name="Cmd_winget.export.list_Desc" xml:space="preserve">
+    <value>Xuất danh sách gói winget ra tệp JSON.</value>
+  </data>
+  <data name="Cmd_wu.driver.list_Title" xml:space="preserve">
+    <value>Trình điều khiển bên thứ ba</value>
+  </data>
+  <data name="Cmd_wu.driver.list_Desc" xml:space="preserve">
+    <value>Liệt kê các trình điều khiển không tích hợp sẵn trên hệ thống.</value>
+  </data>
+  <data name="Cmd_store.troubleshoot_Title" xml:space="preserve">
+    <value>Trình khắc phục sự cố</value>
+  </data>
+  <data name="Cmd_store.troubleshoot_Desc" xml:space="preserve">
+    <value>Mở trang cài đặt trình khắc phục sự cố của Windows.</value>
+  </data>
+  <data name="Cmd_tweak.taskbarsearch.hide_Title" xml:space="preserve">
+    <value>Ẩn tìm kiếm trên thanh tác vụ</value>
+  </data>
+  <data name="Cmd_tweak.taskbarsearch.hide_Desc" xml:space="preserve">
+    <value>Ẩn hộp tìm kiếm khỏi thanh tác vụ.</value>
+  </data>
+  <data name="Cmd_tweak.taskbarsearch.show_Title" xml:space="preserve">
+    <value>Hiện tìm kiếm trên thanh tác vụ</value>
+  </data>
+  <data name="Cmd_tweak.taskbarsearch.show_Desc" xml:space="preserve">
+    <value>Hiển thị hộp tìm kiếm trên thanh tác vụ.</value>
+  </data>
+  <data name="Cmd_tweak.transparency.off_Title" xml:space="preserve">
+    <value>Tắt hiệu ứng trong suốt</value>
+  </data>
+  <data name="Cmd_tweak.transparency.off_Desc" xml:space="preserve">
+    <value>Tắt hiệu ứng trong suốt của cửa sổ.</value>
+  </data>
+  <data name="Cmd_tweak.transparency.on_Title" xml:space="preserve">
+    <value>Bật hiệu ứng trong suốt</value>
+  </data>
+  <data name="Cmd_tweak.transparency.on_Desc" xml:space="preserve">
+    <value>Bật hiệu ứng trong suốt của cửa sổ.</value>
+  </data>
+  <data name="Cmd_tweak.snapassist.off_Title" xml:space="preserve">
+    <value>Tắt Snap assist</value>
+  </data>
+  <data name="Cmd_tweak.snapassist.off_Desc" xml:space="preserve">
+    <value>Ngăn Windows gợi ý cửa sổ khi chia đôi màn hình.</value>
+  </data>
+  <data name="Cmd_tweak.snapassist.on_Title" xml:space="preserve">
+    <value>Bật Snap assist</value>
+  </data>
+  <data name="Cmd_tweak.snapassist.on_Desc" xml:space="preserve">
+    <value>Cho phép Windows gợi ý cửa sổ khi chia đôi màn hình.</value>
+  </data>
+  <data name="Cmd_dev.telnet.on_Title" xml:space="preserve">
+    <value>Bật ứng dụng Telnet</value>
+  </data>
+  <data name="Cmd_dev.telnet.on_Desc" xml:space="preserve">
+    <value>Cài đặt tính năng ứng dụng Telnet của Windows.</value>
+  </data>
+  <data name="Cmd_dev.telnet.off_Title" xml:space="preserve">
+    <value>Tắt ứng dụng Telnet</value>
+  </data>
+  <data name="Cmd_dev.telnet.off_Desc" xml:space="preserve">
+    <value>Gỡ tính năng ứng dụng Telnet của Windows.</value>
+  </data>
 </root>

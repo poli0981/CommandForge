@@ -1718,4 +1718,367 @@ Continue?</value>
   <data name="Cmd_storage.storagesense_Desc" xml:space="preserve">
     <value>Open Windows Storage settings to manage Storage Sense.</value>
   </data>
+  <data name="Cmd_info.battery.health_Title" xml:space="preserve">
+    <value>Battery health</value>
+  </data>
+  <data name="Cmd_info.battery.health_Desc" xml:space="preserve">
+    <value>Show the battery's designed versus full-charge capacity.</value>
+  </data>
+  <data name="Cmd_info.netadapter.speed_Title" xml:space="preserve">
+    <value>Network adapter speed</value>
+  </data>
+  <data name="Cmd_info.netadapter.speed_Desc" xml:space="preserve">
+    <value>List active network adapters with their link speed and MAC address.</value>
+  </data>
+  <data name="Cmd_info.diskhealth_Title" xml:space="preserve">
+    <value>Disk health</value>
+  </data>
+  <data name="Cmd_info.diskhealth_Desc" xml:space="preserve">
+    <value>Show each physical disk's health and operational status.</value>
+  </data>
+  <data name="Cmd_info.pagefile_Title" xml:space="preserve">
+    <value>Page file usage</value>
+  </data>
+  <data name="Cmd_info.pagefile_Desc" xml:space="preserve">
+    <value>Show the page file size and current usage.</value>
+  </data>
+  <data name="Cmd_info.localusers_Title" xml:space="preserve">
+    <value>Local user accounts</value>
+  </data>
+  <data name="Cmd_info.localusers_Desc" xml:space="preserve">
+    <value>List the local user accounts and whether they are enabled.</value>
+  </data>
+  <data name="Cmd_info.timezone_Title" xml:space="preserve">
+    <value>Time &amp; time zone</value>
+  </data>
+  <data name="Cmd_info.timezone_Desc" xml:space="preserve">
+    <value>Show the current time zone and time-synchronization status.</value>
+  </data>
+  <data name="Cmd_info.osinstalldate_Title" xml:space="preserve">
+    <value>Windows install date</value>
+  </data>
+  <data name="Cmd_info.osinstalldate_Desc" xml:space="preserve">
+    <value>Show when Windows was installed and how many days ago.</value>
+  </data>
+  <data name="Cmd_net.publicdns_Title" xml:space="preserve">
+    <value>Public DNS lookup test</value>
+  </data>
+  <data name="Cmd_net.publicdns_Desc" xml:space="preserve">
+    <value>Resolve a well-known domain through Google DNS to test name resolution.</value>
+  </data>
+  <data name="Cmd_net.tcpconnections_Title" xml:space="preserve">
+    <value>Active TCP connections</value>
+  </data>
+  <data name="Cmd_net.tcpconnections_Desc" xml:space="preserve">
+    <value>List established TCP connections and their owning process.</value>
+  </data>
+  <data name="Cmd_net.firewallprofiles_Title" xml:space="preserve">
+    <value>Firewall profiles</value>
+  </data>
+  <data name="Cmd_net.firewallprofiles_Desc" xml:space="preserve">
+    <value>Show each firewall profile and its default actions.</value>
+  </data>
+  <data name="Cmd_net.netshares_Title" xml:space="preserve">
+    <value>Shared folders</value>
+  </data>
+  <data name="Cmd_net.netshares_Desc" xml:space="preserve">
+    <value>List the SMB shares published by this computer.</value>
+  </data>
+  <data name="Cmd_net.hostsfile.show_Title" xml:space="preserve">
+    <value>Show hosts file</value>
+  </data>
+  <data name="Cmd_net.hostsfile.show_Desc" xml:space="preserve">
+    <value>Display the contents of the Windows hosts file.</value>
+  </data>
+  <data name="Cmd_net.netconnections.diag_Title" xml:space="preserve">
+    <value>Network connections</value>
+  </data>
+  <data name="Cmd_net.netconnections.diag_Desc" xml:space="preserve">
+    <value>Open the Network Connections control panel.</value>
+  </data>
+  <data name="Cmd_diag.lastboottime_Title" xml:space="preserve">
+    <value>Recent boot &amp; shutdown events</value>
+  </data>
+  <data name="Cmd_diag.lastboottime_Desc" xml:space="preserve">
+    <value>List the most recent system boot and shutdown events.</value>
+  </data>
+  <data name="Cmd_diag.bsod.recent_Title" xml:space="preserve">
+    <value>Recent unexpected shutdowns</value>
+  </data>
+  <data name="Cmd_diag.bsod.recent_Desc" xml:space="preserve">
+    <value>List recent Kernel-Power (event 41) unexpected-shutdown events.</value>
+  </data>
+  <data name="Cmd_diag.toperrors_Title" xml:space="preserve">
+    <value>Recent system errors</value>
+  </data>
+  <data name="Cmd_diag.toperrors_Desc" xml:space="preserve">
+    <value>List recent critical and error entries from the System log.</value>
+  </data>
+  <data name="Cmd_diag.printmgmt_Title" xml:space="preserve">
+    <value>Print Management</value>
+  </data>
+  <data name="Cmd_diag.printmgmt_Desc" xml:space="preserve">
+    <value>Open the Print Management console.</value>
+  </data>
+  <data name="Cmd_diag.certmgr_Title" xml:space="preserve">
+    <value>Certificate Manager</value>
+  </data>
+  <data name="Cmd_diag.certmgr_Desc" xml:space="preserve">
+    <value>Open the current-user Certificate Manager.</value>
+  </data>
+  <data name="Cmd_storage.diskusage_Title" xml:space="preserve">
+    <value>Drive usage summary</value>
+  </data>
+  <data name="Cmd_storage.diskusage_Desc" xml:space="preserve">
+    <value>Show used and free space for each file-system drive.</value>
+  </data>
+  <data name="Cmd_storage.smart.status_Title" xml:space="preserve">
+    <value>Disk SMART status</value>
+  </data>
+  <data name="Cmd_storage.smart.status_Desc" xml:space="preserve">
+    <value>Show each disk's SMART failure-prediction status.</value>
+  </data>
+  <data name="Cat_services-startup" xml:space="preserve">
+    <value>Services &amp; Startup</value>
+  </data>
+  <data name="Cmd_storage.largefiles.temp_Title" xml:space="preserve">
+    <value>Largest temp files</value>
+  </data>
+  <data name="Cmd_storage.largefiles.temp_Desc" xml:space="preserve">
+    <value>List the largest files in the temporary folder.</value>
+  </data>
+  <data name="Cmd_storage.partition.list_Title" xml:space="preserve">
+    <value>List partitions</value>
+  </data>
+  <data name="Cmd_storage.partition.list_Desc" xml:space="preserve">
+    <value>List all disk partitions and their sizes.</value>
+  </data>
+  <data name="Cmd_storage.fragmentation.analyze_Title" xml:space="preserve">
+    <value>Analyze fragmentation</value>
+  </data>
+  <data name="Cmd_storage.fragmentation.analyze_Desc" xml:space="preserve">
+    <value>Analyze the C: drive for fragmentation without changing it.</value>
+  </data>
+  <data name="Cmd_storage.cleanmgr.settings_Title" xml:space="preserve">
+    <value>Configure Disk Cleanup</value>
+  </data>
+  <data name="Cmd_storage.cleanmgr.settings_Desc" xml:space="preserve">
+    <value>Open Disk Cleanup's settings to choose what to clean.</value>
+  </data>
+  <data name="Cmd_storage.diskpart.list_Title" xml:space="preserve">
+    <value>List disks &amp; volumes</value>
+  </data>
+  <data name="Cmd_storage.diskpart.list_Desc" xml:space="preserve">
+    <value>List disks and volumes using DiskPart (read-only).</value>
+  </data>
+  <data name="Cmd_svc.spooler.restart_Title" xml:space="preserve">
+    <value>Restart Print Spooler</value>
+  </data>
+  <data name="Cmd_svc.spooler.restart_Desc" xml:space="preserve">
+    <value>Restart the Print Spooler service to clear stuck print jobs.</value>
+  </data>
+  <data name="Cmd_svc.audio.restart_Title" xml:space="preserve">
+    <value>Restart audio service</value>
+  </data>
+  <data name="Cmd_svc.audio.restart_Desc" xml:space="preserve">
+    <value>Restart the Windows Audio service to fix sound problems.</value>
+  </data>
+  <data name="Cmd_svc.wuauserv.restart_Title" xml:space="preserve">
+    <value>Restart Windows Update service</value>
+  </data>
+  <data name="Cmd_svc.wuauserv.restart_Desc" xml:space="preserve">
+    <value>Restart the Windows Update service.</value>
+  </data>
+  <data name="Cmd_svc.bits.restart_Title" xml:space="preserve">
+    <value>Restart BITS</value>
+  </data>
+  <data name="Cmd_svc.bits.restart_Desc" xml:space="preserve">
+    <value>Restart the Background Intelligent Transfer Service.</value>
+  </data>
+  <data name="Cmd_svc.list.running_Title" xml:space="preserve">
+    <value>List running services</value>
+  </data>
+  <data name="Cmd_svc.list.running_Desc" xml:space="preserve">
+    <value>List all services that are currently running.</value>
+  </data>
+  <data name="Cmd_svc.list.automatic_Title" xml:space="preserve">
+    <value>List automatic services</value>
+  </data>
+  <data name="Cmd_svc.list.automatic_Desc" xml:space="preserve">
+    <value>List services set to start automatically and their state.</value>
+  </data>
+  <data name="Cmd_startup.apps.settings_Title" xml:space="preserve">
+    <value>Startup apps</value>
+  </data>
+  <data name="Cmd_startup.apps.settings_Desc" xml:space="preserve">
+    <value>Open the Startup apps settings page.</value>
+  </data>
+  <data name="Cmd_startup.folder.open_Title" xml:space="preserve">
+    <value>Open Startup folder</value>
+  </data>
+  <data name="Cmd_startup.folder.open_Desc" xml:space="preserve">
+    <value>Open the current user's Startup folder.</value>
+  </data>
+  <data name="Cmd_clean.iconcache_Title" xml:space="preserve">
+    <value>Clear icon cache files</value>
+  </data>
+  <data name="Cmd_clean.iconcache_Desc" xml:space="preserve">
+    <value>Delete the Explorer icon cache so it rebuilds.</value>
+  </data>
+  <data name="Cmd_clean.recentfiles_Title" xml:space="preserve">
+    <value>Clear recent items</value>
+  </data>
+  <data name="Cmd_clean.recentfiles_Desc" xml:space="preserve">
+    <value>Remove the list of recently opened files and folders.</value>
+  </data>
+  <data name="Cmd_clean.eventlogs_Title" xml:space="preserve">
+    <value>Clear event logs</value>
+  </data>
+  <data name="Cmd_clean.eventlogs_Desc" xml:space="preserve">
+    <value>Clear the Application and System event logs.</value>
+  </data>
+  <data name="Cmd_power.set.powersaver_Title" xml:space="preserve">
+    <value>Power Saver plan</value>
+  </data>
+  <data name="Cmd_power.set.powersaver_Desc" xml:space="preserve">
+    <value>Switch to the Power Saver power plan.</value>
+  </data>
+  <data name="Cmd_power.hibernate.now_Title" xml:space="preserve">
+    <value>Hibernate now</value>
+  </data>
+  <data name="Cmd_power.hibernate.now_Desc" xml:space="preserve">
+    <value>Put the computer into hibernation immediately.</value>
+  </data>
+  <data name="Cmd_chkdsk.scan.online_Title" xml:space="preserve">
+    <value>Online disk scan</value>
+  </data>
+  <data name="Cmd_chkdsk.scan.online_Desc" xml:space="preserve">
+    <value>Scan the C: drive for errors online without unmounting.</value>
+  </data>
+  <data name="Cmd_sfc.verifyonly_Title" xml:space="preserve">
+    <value>Verify system files</value>
+  </data>
+  <data name="Cmd_sfc.verifyonly_Desc" xml:space="preserve">
+    <value>Check protected system files for corruption without repairing.</value>
+  </data>
+  <data name="Cmd_sec.defender.history_Title" xml:space="preserve">
+    <value>Defender threat history</value>
+  </data>
+  <data name="Cmd_sec.defender.history_Desc" xml:space="preserve">
+    <value>Show recent Microsoft Defender threat detections.</value>
+  </data>
+  <data name="Cmd_sec.defender.exclusions_Title" xml:space="preserve">
+    <value>Defender exclusions</value>
+  </data>
+  <data name="Cmd_sec.defender.exclusions_Desc" xml:space="preserve">
+    <value>List the paths, extensions and processes excluded from Defender.</value>
+  </data>
+  <data name="Cmd_sec.bitlocker.detail_Title" xml:space="preserve">
+    <value>BitLocker volume details</value>
+  </data>
+  <data name="Cmd_sec.bitlocker.detail_Desc" xml:space="preserve">
+    <value>Show encryption status and progress for each volume.</value>
+  </data>
+  <data name="Cmd_sec.firewall.reset_Title" xml:space="preserve">
+    <value>Reset firewall to defaults</value>
+  </data>
+  <data name="Cmd_sec.firewall.reset_Desc" xml:space="preserve">
+    <value>Reset all Windows Firewall rules to their default policy.</value>
+  </data>
+  <data name="Cmd_sec.defender.signatures.remove_Title" xml:space="preserve">
+    <value>Remove dynamic signatures</value>
+  </data>
+  <data name="Cmd_sec.defender.signatures.remove_Desc" xml:space="preserve">
+    <value>Remove Defender's dynamic definitions to fix corrupt updates.</value>
+  </data>
+  <data name="Cmd_sec.windowssecurity.open_Title" xml:space="preserve">
+    <value>Open Windows Security</value>
+  </data>
+  <data name="Cmd_sec.windowssecurity.open_Desc" xml:space="preserve">
+    <value>Open the Windows Security app.</value>
+  </data>
+  <data name="Cmd_wu.history_Title" xml:space="preserve">
+    <value>Update history</value>
+  </data>
+  <data name="Cmd_wu.history_Desc" xml:space="preserve">
+    <value>List the most recently installed Windows updates.</value>
+  </data>
+  <data name="Cmd_wu.pause_Title" xml:space="preserve">
+    <value>Windows Update settings</value>
+  </data>
+  <data name="Cmd_wu.pause_Desc" xml:space="preserve">
+    <value>Open the Windows Update settings page.</value>
+  </data>
+  <data name="Cmd_winget.upgrade.winget_Title" xml:space="preserve">
+    <value>Update App Installer</value>
+  </data>
+  <data name="Cmd_winget.upgrade.winget_Desc" xml:space="preserve">
+    <value>Update the winget App Installer to the latest version.</value>
+  </data>
+  <data name="Cmd_winget.export.list_Title" xml:space="preserve">
+    <value>Export installed packages</value>
+  </data>
+  <data name="Cmd_winget.export.list_Desc" xml:space="preserve">
+    <value>Export the winget package list to a JSON file.</value>
+  </data>
+  <data name="Cmd_wu.driver.list_Title" xml:space="preserve">
+    <value>Third-party drivers</value>
+  </data>
+  <data name="Cmd_wu.driver.list_Desc" xml:space="preserve">
+    <value>List non-inbox drivers installed on the system.</value>
+  </data>
+  <data name="Cmd_store.troubleshoot_Title" xml:space="preserve">
+    <value>Troubleshooters</value>
+  </data>
+  <data name="Cmd_store.troubleshoot_Desc" xml:space="preserve">
+    <value>Open the Windows troubleshooters settings page.</value>
+  </data>
+  <data name="Cmd_tweak.taskbarsearch.hide_Title" xml:space="preserve">
+    <value>Hide taskbar search</value>
+  </data>
+  <data name="Cmd_tweak.taskbarsearch.hide_Desc" xml:space="preserve">
+    <value>Hide the search box from the taskbar.</value>
+  </data>
+  <data name="Cmd_tweak.taskbarsearch.show_Title" xml:space="preserve">
+    <value>Show taskbar search</value>
+  </data>
+  <data name="Cmd_tweak.taskbarsearch.show_Desc" xml:space="preserve">
+    <value>Show the search box on the taskbar.</value>
+  </data>
+  <data name="Cmd_tweak.transparency.off_Title" xml:space="preserve">
+    <value>Disable transparency</value>
+  </data>
+  <data name="Cmd_tweak.transparency.off_Desc" xml:space="preserve">
+    <value>Turn off window transparency effects.</value>
+  </data>
+  <data name="Cmd_tweak.transparency.on_Title" xml:space="preserve">
+    <value>Enable transparency</value>
+  </data>
+  <data name="Cmd_tweak.transparency.on_Desc" xml:space="preserve">
+    <value>Turn on window transparency effects.</value>
+  </data>
+  <data name="Cmd_tweak.snapassist.off_Title" xml:space="preserve">
+    <value>Disable Snap assist</value>
+  </data>
+  <data name="Cmd_tweak.snapassist.off_Desc" xml:space="preserve">
+    <value>Stop Windows from suggesting windows when snapping.</value>
+  </data>
+  <data name="Cmd_tweak.snapassist.on_Title" xml:space="preserve">
+    <value>Enable Snap assist</value>
+  </data>
+  <data name="Cmd_tweak.snapassist.on_Desc" xml:space="preserve">
+    <value>Let Windows suggest windows when snapping.</value>
+  </data>
+  <data name="Cmd_dev.telnet.on_Title" xml:space="preserve">
+    <value>Enable Telnet client</value>
+  </data>
+  <data name="Cmd_dev.telnet.on_Desc" xml:space="preserve">
+    <value>Install the Windows Telnet client feature.</value>
+  </data>
+  <data name="Cmd_dev.telnet.off_Title" xml:space="preserve">
+    <value>Disable Telnet client</value>
+  </data>
+  <data name="Cmd_dev.telnet.off_Desc" xml:space="preserve">
+    <value>Remove the Windows Telnet client feature.</value>
+  </data>
 </root>

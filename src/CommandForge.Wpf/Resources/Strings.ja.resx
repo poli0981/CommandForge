@@ -1718,4 +1718,367 @@
   <data name="Cmd_storage.storagesense_Desc" xml:space="preserve">
     <value>Windows のストレージ設定を開いて Storage Sense を管理します。</value>
   </data>
+  <data name="Cmd_info.battery.health_Title" xml:space="preserve">
+    <value>バッテリーの状態</value>
+  </data>
+  <data name="Cmd_info.battery.health_Desc" xml:space="preserve">
+    <value>バッテリーの設計容量と満充電容量を表示します。</value>
+  </data>
+  <data name="Cmd_info.netadapter.speed_Title" xml:space="preserve">
+    <value>ネットワーク アダプターの速度</value>
+  </data>
+  <data name="Cmd_info.netadapter.speed_Desc" xml:space="preserve">
+    <value>アクティブなネットワーク アダプターのリンク速度と MAC アドレスを一覧表示します。</value>
+  </data>
+  <data name="Cmd_info.diskhealth_Title" xml:space="preserve">
+    <value>ディスクの状態</value>
+  </data>
+  <data name="Cmd_info.diskhealth_Desc" xml:space="preserve">
+    <value>各物理ディスクの正常性と動作状態を表示します。</value>
+  </data>
+  <data name="Cmd_info.pagefile_Title" xml:space="preserve">
+    <value>ページ ファイルの使用状況</value>
+  </data>
+  <data name="Cmd_info.pagefile_Desc" xml:space="preserve">
+    <value>ページ ファイルのサイズと現在の使用量を表示します。</value>
+  </data>
+  <data name="Cmd_info.localusers_Title" xml:space="preserve">
+    <value>ローカル ユーザー アカウント</value>
+  </data>
+  <data name="Cmd_info.localusers_Desc" xml:space="preserve">
+    <value>ローカル ユーザー アカウントと有効状態を一覧表示します。</value>
+  </data>
+  <data name="Cmd_info.timezone_Title" xml:space="preserve">
+    <value>時刻とタイム ゾーン</value>
+  </data>
+  <data name="Cmd_info.timezone_Desc" xml:space="preserve">
+    <value>現在のタイム ゾーンと時刻同期の状態を表示します。</value>
+  </data>
+  <data name="Cmd_info.osinstalldate_Title" xml:space="preserve">
+    <value>Windows のインストール日</value>
+  </data>
+  <data name="Cmd_info.osinstalldate_Desc" xml:space="preserve">
+    <value>Windows がいつインストールされ、何日前かを表示します。</value>
+  </data>
+  <data name="Cmd_net.publicdns_Title" xml:space="preserve">
+    <value>パブリック DNS 解決テスト</value>
+  </data>
+  <data name="Cmd_net.publicdns_Desc" xml:space="preserve">
+    <value>Google DNS 経由で既知のドメインを解決し、名前解決をテストします。</value>
+  </data>
+  <data name="Cmd_net.tcpconnections_Title" xml:space="preserve">
+    <value>アクティブな TCP 接続</value>
+  </data>
+  <data name="Cmd_net.tcpconnections_Desc" xml:space="preserve">
+    <value>確立された TCP 接続と所有プロセスを一覧表示します。</value>
+  </data>
+  <data name="Cmd_net.firewallprofiles_Title" xml:space="preserve">
+    <value>ファイアウォール プロファイル</value>
+  </data>
+  <data name="Cmd_net.firewallprofiles_Desc" xml:space="preserve">
+    <value>各ファイアウォール プロファイルと既定の動作を表示します。</value>
+  </data>
+  <data name="Cmd_net.netshares_Title" xml:space="preserve">
+    <value>共有フォルダー</value>
+  </data>
+  <data name="Cmd_net.netshares_Desc" xml:space="preserve">
+    <value>このコンピューターが公開している SMB 共有を一覧表示します。</value>
+  </data>
+  <data name="Cmd_net.hostsfile.show_Title" xml:space="preserve">
+    <value>hosts ファイルを表示</value>
+  </data>
+  <data name="Cmd_net.hostsfile.show_Desc" xml:space="preserve">
+    <value>Windows の hosts ファイルの内容を表示します。</value>
+  </data>
+  <data name="Cmd_net.netconnections.diag_Title" xml:space="preserve">
+    <value>ネットワーク接続</value>
+  </data>
+  <data name="Cmd_net.netconnections.diag_Desc" xml:space="preserve">
+    <value>ネットワーク接続のコントロール パネルを開きます。</value>
+  </data>
+  <data name="Cmd_diag.lastboottime_Title" xml:space="preserve">
+    <value>最近の起動とシャットダウン イベント</value>
+  </data>
+  <data name="Cmd_diag.lastboottime_Desc" xml:space="preserve">
+    <value>最近のシステム起動およびシャットダウン イベントを一覧表示します。</value>
+  </data>
+  <data name="Cmd_diag.bsod.recent_Title" xml:space="preserve">
+    <value>最近の予期しないシャットダウン</value>
+  </data>
+  <data name="Cmd_diag.bsod.recent_Desc" xml:space="preserve">
+    <value>最近の Kernel-Power (イベント 41) の予期しないシャットダウン イベントを一覧表示します。</value>
+  </data>
+  <data name="Cmd_diag.toperrors_Title" xml:space="preserve">
+    <value>最近のシステム エラー</value>
+  </data>
+  <data name="Cmd_diag.toperrors_Desc" xml:space="preserve">
+    <value>システム ログから最近の重大およびエラー項目を一覧表示します。</value>
+  </data>
+  <data name="Cmd_diag.printmgmt_Title" xml:space="preserve">
+    <value>印刷の管理</value>
+  </data>
+  <data name="Cmd_diag.printmgmt_Desc" xml:space="preserve">
+    <value>印刷の管理コンソールを開きます。</value>
+  </data>
+  <data name="Cmd_diag.certmgr_Title" xml:space="preserve">
+    <value>証明書マネージャー</value>
+  </data>
+  <data name="Cmd_diag.certmgr_Desc" xml:space="preserve">
+    <value>現在のユーザーの証明書マネージャーを開きます。</value>
+  </data>
+  <data name="Cmd_storage.diskusage_Title" xml:space="preserve">
+    <value>ドライブ使用状況の概要</value>
+  </data>
+  <data name="Cmd_storage.diskusage_Desc" xml:space="preserve">
+    <value>各ファイル システム ドライブの使用済みと空き容量を表示します。</value>
+  </data>
+  <data name="Cmd_storage.smart.status_Title" xml:space="preserve">
+    <value>ディスクの SMART 状態</value>
+  </data>
+  <data name="Cmd_storage.smart.status_Desc" xml:space="preserve">
+    <value>各ディスクの SMART 障害予測状態を表示します。</value>
+  </data>
+  <data name="Cat_services-startup" xml:space="preserve">
+    <value>サービスとスタートアップ</value>
+  </data>
+  <data name="Cmd_storage.largefiles.temp_Title" xml:space="preserve">
+    <value>最大の一時ファイル</value>
+  </data>
+  <data name="Cmd_storage.largefiles.temp_Desc" xml:space="preserve">
+    <value>一時フォルダー内の最大のファイルを一覧表示します。</value>
+  </data>
+  <data name="Cmd_storage.partition.list_Title" xml:space="preserve">
+    <value>パーティションの一覧</value>
+  </data>
+  <data name="Cmd_storage.partition.list_Desc" xml:space="preserve">
+    <value>すべてのディスク パーティションとそのサイズを一覧表示します。</value>
+  </data>
+  <data name="Cmd_storage.fragmentation.analyze_Title" xml:space="preserve">
+    <value>断片化の分析</value>
+  </data>
+  <data name="Cmd_storage.fragmentation.analyze_Desc" xml:space="preserve">
+    <value>変更を加えずに C: ドライブの断片化を分析します。</value>
+  </data>
+  <data name="Cmd_storage.cleanmgr.settings_Title" xml:space="preserve">
+    <value>ディスク クリーンアップの構成</value>
+  </data>
+  <data name="Cmd_storage.cleanmgr.settings_Desc" xml:space="preserve">
+    <value>ディスク クリーンアップの設定を開き、クリーンアップ対象を選択します。</value>
+  </data>
+  <data name="Cmd_storage.diskpart.list_Title" xml:space="preserve">
+    <value>ディスクとボリュームの一覧</value>
+  </data>
+  <data name="Cmd_storage.diskpart.list_Desc" xml:space="preserve">
+    <value>DiskPart を使用してディスクとボリュームを一覧表示します (読み取り専用)。</value>
+  </data>
+  <data name="Cmd_svc.spooler.restart_Title" xml:space="preserve">
+    <value>Print Spooler を再起動</value>
+  </data>
+  <data name="Cmd_svc.spooler.restart_Desc" xml:space="preserve">
+    <value>Print Spooler サービスを再起動して、詰まった印刷ジョブをクリアします。</value>
+  </data>
+  <data name="Cmd_svc.audio.restart_Title" xml:space="preserve">
+    <value>オーディオ サービスを再起動</value>
+  </data>
+  <data name="Cmd_svc.audio.restart_Desc" xml:space="preserve">
+    <value>Windows Audio サービスを再起動して音声の問題を解決します。</value>
+  </data>
+  <data name="Cmd_svc.wuauserv.restart_Title" xml:space="preserve">
+    <value>Windows Update サービスを再起動</value>
+  </data>
+  <data name="Cmd_svc.wuauserv.restart_Desc" xml:space="preserve">
+    <value>Windows Update サービスを再起動します。</value>
+  </data>
+  <data name="Cmd_svc.bits.restart_Title" xml:space="preserve">
+    <value>BITS を再起動</value>
+  </data>
+  <data name="Cmd_svc.bits.restart_Desc" xml:space="preserve">
+    <value>バックグラウンド インテリジェント転送サービスを再起動します。</value>
+  </data>
+  <data name="Cmd_svc.list.running_Title" xml:space="preserve">
+    <value>実行中のサービスを一覧表示</value>
+  </data>
+  <data name="Cmd_svc.list.running_Desc" xml:space="preserve">
+    <value>現在実行中のすべてのサービスを一覧表示します。</value>
+  </data>
+  <data name="Cmd_svc.list.automatic_Title" xml:space="preserve">
+    <value>自動サービスを一覧表示</value>
+  </data>
+  <data name="Cmd_svc.list.automatic_Desc" xml:space="preserve">
+    <value>自動的に開始するよう設定されたサービスとその状態を一覧表示します。</value>
+  </data>
+  <data name="Cmd_startup.apps.settings_Title" xml:space="preserve">
+    <value>スタートアップ アプリ</value>
+  </data>
+  <data name="Cmd_startup.apps.settings_Desc" xml:space="preserve">
+    <value>スタートアップ アプリの設定ページを開きます。</value>
+  </data>
+  <data name="Cmd_startup.folder.open_Title" xml:space="preserve">
+    <value>スタートアップ フォルダーを開く</value>
+  </data>
+  <data name="Cmd_startup.folder.open_Desc" xml:space="preserve">
+    <value>現在のユーザーのスタートアップ フォルダーを開きます。</value>
+  </data>
+  <data name="Cmd_clean.iconcache_Title" xml:space="preserve">
+    <value>アイコン キャッシュ ファイルをクリア</value>
+  </data>
+  <data name="Cmd_clean.iconcache_Desc" xml:space="preserve">
+    <value>Explorer のアイコン キャッシュを削除して再構築させます。</value>
+  </data>
+  <data name="Cmd_clean.recentfiles_Title" xml:space="preserve">
+    <value>最近使った項目をクリア</value>
+  </data>
+  <data name="Cmd_clean.recentfiles_Desc" xml:space="preserve">
+    <value>最近開いたファイルとフォルダーの一覧を削除します。</value>
+  </data>
+  <data name="Cmd_clean.eventlogs_Title" xml:space="preserve">
+    <value>イベント ログをクリア</value>
+  </data>
+  <data name="Cmd_clean.eventlogs_Desc" xml:space="preserve">
+    <value>アプリケーションとシステムのイベント ログをクリアします。</value>
+  </data>
+  <data name="Cmd_power.set.powersaver_Title" xml:space="preserve">
+    <value>省電力プラン</value>
+  </data>
+  <data name="Cmd_power.set.powersaver_Desc" xml:space="preserve">
+    <value>省電力の電源プランに切り替えます。</value>
+  </data>
+  <data name="Cmd_power.hibernate.now_Title" xml:space="preserve">
+    <value>今すぐ休止状態</value>
+  </data>
+  <data name="Cmd_power.hibernate.now_Desc" xml:space="preserve">
+    <value>コンピューターをすぐに休止状態にします。</value>
+  </data>
+  <data name="Cmd_chkdsk.scan.online_Title" xml:space="preserve">
+    <value>オンライン ディスク スキャン</value>
+  </data>
+  <data name="Cmd_chkdsk.scan.online_Desc" xml:space="preserve">
+    <value>マウント解除せずに C: ドライブのエラーをオンラインでスキャンします。</value>
+  </data>
+  <data name="Cmd_sfc.verifyonly_Title" xml:space="preserve">
+    <value>システム ファイルの検証</value>
+  </data>
+  <data name="Cmd_sfc.verifyonly_Desc" xml:space="preserve">
+    <value>修復せずに保護されたシステム ファイルの破損を確認します。</value>
+  </data>
+  <data name="Cmd_sec.defender.history_Title" xml:space="preserve">
+    <value>Defender の脅威履歴</value>
+  </data>
+  <data name="Cmd_sec.defender.history_Desc" xml:space="preserve">
+    <value>Microsoft Defender の最近の脅威検出を表示します。</value>
+  </data>
+  <data name="Cmd_sec.defender.exclusions_Title" xml:space="preserve">
+    <value>Defender の除外</value>
+  </data>
+  <data name="Cmd_sec.defender.exclusions_Desc" xml:space="preserve">
+    <value>Defender から除外されたパス、拡張子、プロセスを一覧表示します。</value>
+  </data>
+  <data name="Cmd_sec.bitlocker.detail_Title" xml:space="preserve">
+    <value>BitLocker ボリュームの詳細</value>
+  </data>
+  <data name="Cmd_sec.bitlocker.detail_Desc" xml:space="preserve">
+    <value>各ボリュームの暗号化状態と進行状況を表示します。</value>
+  </data>
+  <data name="Cmd_sec.firewall.reset_Title" xml:space="preserve">
+    <value>ファイアウォールを既定値にリセット</value>
+  </data>
+  <data name="Cmd_sec.firewall.reset_Desc" xml:space="preserve">
+    <value>すべての Windows ファイアウォール規則を既定のポリシーにリセットします。</value>
+  </data>
+  <data name="Cmd_sec.defender.signatures.remove_Title" xml:space="preserve">
+    <value>動的シグネチャを削除</value>
+  </data>
+  <data name="Cmd_sec.defender.signatures.remove_Desc" xml:space="preserve">
+    <value>破損した更新を修正するために Defender の動的定義を削除します。</value>
+  </data>
+  <data name="Cmd_sec.windowssecurity.open_Title" xml:space="preserve">
+    <value>Windows セキュリティを開く</value>
+  </data>
+  <data name="Cmd_sec.windowssecurity.open_Desc" xml:space="preserve">
+    <value>Windows セキュリティ アプリを開きます。</value>
+  </data>
+  <data name="Cmd_wu.history_Title" xml:space="preserve">
+    <value>更新履歴</value>
+  </data>
+  <data name="Cmd_wu.history_Desc" xml:space="preserve">
+    <value>最近インストールされた Windows 更新プログラムを一覧表示します。</value>
+  </data>
+  <data name="Cmd_wu.pause_Title" xml:space="preserve">
+    <value>Windows Update の設定</value>
+  </data>
+  <data name="Cmd_wu.pause_Desc" xml:space="preserve">
+    <value>Windows Update の設定ページを開きます。</value>
+  </data>
+  <data name="Cmd_winget.upgrade.winget_Title" xml:space="preserve">
+    <value>アプリ インストーラーを更新</value>
+  </data>
+  <data name="Cmd_winget.upgrade.winget_Desc" xml:space="preserve">
+    <value>winget アプリ インストーラーを最新バージョンに更新します。</value>
+  </data>
+  <data name="Cmd_winget.export.list_Title" xml:space="preserve">
+    <value>インストール済みパッケージをエクスポート</value>
+  </data>
+  <data name="Cmd_winget.export.list_Desc" xml:space="preserve">
+    <value>winget のパッケージ一覧を JSON ファイルにエクスポートします。</value>
+  </data>
+  <data name="Cmd_wu.driver.list_Title" xml:space="preserve">
+    <value>サードパーティ製ドライバー</value>
+  </data>
+  <data name="Cmd_wu.driver.list_Desc" xml:space="preserve">
+    <value>システムにインストールされた非インボックス ドライバーを一覧表示します。</value>
+  </data>
+  <data name="Cmd_store.troubleshoot_Title" xml:space="preserve">
+    <value>トラブルシューティング ツール</value>
+  </data>
+  <data name="Cmd_store.troubleshoot_Desc" xml:space="preserve">
+    <value>Windows のトラブルシューティング設定ページを開きます。</value>
+  </data>
+  <data name="Cmd_tweak.taskbarsearch.hide_Title" xml:space="preserve">
+    <value>タスクバーの検索を非表示</value>
+  </data>
+  <data name="Cmd_tweak.taskbarsearch.hide_Desc" xml:space="preserve">
+    <value>タスクバーから検索ボックスを非表示にします。</value>
+  </data>
+  <data name="Cmd_tweak.taskbarsearch.show_Title" xml:space="preserve">
+    <value>タスクバーの検索を表示</value>
+  </data>
+  <data name="Cmd_tweak.taskbarsearch.show_Desc" xml:space="preserve">
+    <value>タスクバーに検索ボックスを表示します。</value>
+  </data>
+  <data name="Cmd_tweak.transparency.off_Title" xml:space="preserve">
+    <value>透明効果を無効化</value>
+  </data>
+  <data name="Cmd_tweak.transparency.off_Desc" xml:space="preserve">
+    <value>ウィンドウの透明効果をオフにします。</value>
+  </data>
+  <data name="Cmd_tweak.transparency.on_Title" xml:space="preserve">
+    <value>透明効果を有効化</value>
+  </data>
+  <data name="Cmd_tweak.transparency.on_Desc" xml:space="preserve">
+    <value>ウィンドウの透明効果をオンにします。</value>
+  </data>
+  <data name="Cmd_tweak.snapassist.off_Title" xml:space="preserve">
+    <value>スナップ アシストを無効化</value>
+  </data>
+  <data name="Cmd_tweak.snapassist.off_Desc" xml:space="preserve">
+    <value>ウィンドウをスナップするときの提案を停止します。</value>
+  </data>
+  <data name="Cmd_tweak.snapassist.on_Title" xml:space="preserve">
+    <value>スナップ アシストを有効化</value>
+  </data>
+  <data name="Cmd_tweak.snapassist.on_Desc" xml:space="preserve">
+    <value>ウィンドウをスナップするときに提案を表示します。</value>
+  </data>
+  <data name="Cmd_dev.telnet.on_Title" xml:space="preserve">
+    <value>Telnet クライアントを有効化</value>
+  </data>
+  <data name="Cmd_dev.telnet.on_Desc" xml:space="preserve">
+    <value>Windows の Telnet クライアント機能をインストールします。</value>
+  </data>
+  <data name="Cmd_dev.telnet.off_Title" xml:space="preserve">
+    <value>Telnet クライアントを無効化</value>
+  </data>
+  <data name="Cmd_dev.telnet.off_Desc" xml:space="preserve">
+    <value>Windows の Telnet クライアント機能を削除します。</value>
+  </data>
 </root>

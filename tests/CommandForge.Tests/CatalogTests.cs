@@ -17,7 +17,7 @@ public sealed class CatalogTests
     [Fact]
     public void Catalog_HasCategoriesAndCommands()
     {
-        Assert.Equal(11, Catalog.Categories.Count);
+        Assert.Equal(12, Catalog.Categories.Count);
         Assert.True(Catalog.Commands.Count >= 20, $"Expected >= 20 commands, got {Catalog.Commands.Count}.");
     }
 

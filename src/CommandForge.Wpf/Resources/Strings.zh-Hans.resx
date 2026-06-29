@@ -1718,4 +1718,367 @@
   <data name="Cmd_storage.storagesense_Desc" xml:space="preserve">
     <value>打开 Windows 存储设置以管理 Storage Sense。</value>
   </data>
+  <data name="Cmd_info.battery.health_Title" xml:space="preserve">
+    <value>电池健康状况</value>
+  </data>
+  <data name="Cmd_info.battery.health_Desc" xml:space="preserve">
+    <value>显示电池的设计容量与满充电容量。</value>
+  </data>
+  <data name="Cmd_info.netadapter.speed_Title" xml:space="preserve">
+    <value>网络适配器速度</value>
+  </data>
+  <data name="Cmd_info.netadapter.speed_Desc" xml:space="preserve">
+    <value>列出活动的网络适配器及其链接速度和 MAC 地址。</value>
+  </data>
+  <data name="Cmd_info.diskhealth_Title" xml:space="preserve">
+    <value>磁盘健康状况</value>
+  </data>
+  <data name="Cmd_info.diskhealth_Desc" xml:space="preserve">
+    <value>显示每个物理磁盘的健康和运行状态。</value>
+  </data>
+  <data name="Cmd_info.pagefile_Title" xml:space="preserve">
+    <value>页面文件使用情况</value>
+  </data>
+  <data name="Cmd_info.pagefile_Desc" xml:space="preserve">
+    <value>显示页面文件的大小和当前使用量。</value>
+  </data>
+  <data name="Cmd_info.localusers_Title" xml:space="preserve">
+    <value>本地用户账户</value>
+  </data>
+  <data name="Cmd_info.localusers_Desc" xml:space="preserve">
+    <value>列出本地用户账户及其是否已启用。</value>
+  </data>
+  <data name="Cmd_info.timezone_Title" xml:space="preserve">
+    <value>时间和时区</value>
+  </data>
+  <data name="Cmd_info.timezone_Desc" xml:space="preserve">
+    <value>显示当前时区和时间同步状态。</value>
+  </data>
+  <data name="Cmd_info.osinstalldate_Title" xml:space="preserve">
+    <value>Windows 安装日期</value>
+  </data>
+  <data name="Cmd_info.osinstalldate_Desc" xml:space="preserve">
+    <value>显示 Windows 的安装时间以及距今天数。</value>
+  </data>
+  <data name="Cmd_net.publicdns_Title" xml:space="preserve">
+    <value>公共 DNS 解析测试</value>
+  </data>
+  <data name="Cmd_net.publicdns_Desc" xml:space="preserve">
+    <value>通过 Google DNS 解析知名域名以测试名称解析。</value>
+  </data>
+  <data name="Cmd_net.tcpconnections_Title" xml:space="preserve">
+    <value>活动的 TCP 连接</value>
+  </data>
+  <data name="Cmd_net.tcpconnections_Desc" xml:space="preserve">
+    <value>列出已建立的 TCP 连接及其所属进程。</value>
+  </data>
+  <data name="Cmd_net.firewallprofiles_Title" xml:space="preserve">
+    <value>防火墙配置文件</value>
+  </data>
+  <data name="Cmd_net.firewallprofiles_Desc" xml:space="preserve">
+    <value>显示每个防火墙配置文件及其默认操作。</value>
+  </data>
+  <data name="Cmd_net.netshares_Title" xml:space="preserve">
+    <value>共享文件夹</value>
+  </data>
+  <data name="Cmd_net.netshares_Desc" xml:space="preserve">
+    <value>列出此计算机发布的 SMB 共享。</value>
+  </data>
+  <data name="Cmd_net.hostsfile.show_Title" xml:space="preserve">
+    <value>显示 hosts 文件</value>
+  </data>
+  <data name="Cmd_net.hostsfile.show_Desc" xml:space="preserve">
+    <value>显示 Windows hosts 文件的内容。</value>
+  </data>
+  <data name="Cmd_net.netconnections.diag_Title" xml:space="preserve">
+    <value>网络连接</value>
+  </data>
+  <data name="Cmd_net.netconnections.diag_Desc" xml:space="preserve">
+    <value>打开网络连接控制面板。</value>
+  </data>
+  <data name="Cmd_diag.lastboottime_Title" xml:space="preserve">
+    <value>最近的启动和关机事件</value>
+  </data>
+  <data name="Cmd_diag.lastboottime_Desc" xml:space="preserve">
+    <value>列出最近的系统启动和关机事件。</value>
+  </data>
+  <data name="Cmd_diag.bsod.recent_Title" xml:space="preserve">
+    <value>最近的意外关机</value>
+  </data>
+  <data name="Cmd_diag.bsod.recent_Desc" xml:space="preserve">
+    <value>列出最近的 Kernel-Power（事件 41）意外关机事件。</value>
+  </data>
+  <data name="Cmd_diag.toperrors_Title" xml:space="preserve">
+    <value>最近的系统错误</value>
+  </data>
+  <data name="Cmd_diag.toperrors_Desc" xml:space="preserve">
+    <value>列出系统日志中最近的严重和错误项。</value>
+  </data>
+  <data name="Cmd_diag.printmgmt_Title" xml:space="preserve">
+    <value>打印管理</value>
+  </data>
+  <data name="Cmd_diag.printmgmt_Desc" xml:space="preserve">
+    <value>打开打印管理控制台。</value>
+  </data>
+  <data name="Cmd_diag.certmgr_Title" xml:space="preserve">
+    <value>证书管理器</value>
+  </data>
+  <data name="Cmd_diag.certmgr_Desc" xml:space="preserve">
+    <value>打开当前用户的证书管理器。</value>
+  </data>
+  <data name="Cmd_storage.diskusage_Title" xml:space="preserve">
+    <value>驱动器使用情况概览</value>
+  </data>
+  <data name="Cmd_storage.diskusage_Desc" xml:space="preserve">
+    <value>显示每个文件系统驱动器的已用和可用空间。</value>
+  </data>
+  <data name="Cmd_storage.smart.status_Title" xml:space="preserve">
+    <value>磁盘 SMART 状态</value>
+  </data>
+  <data name="Cmd_storage.smart.status_Desc" xml:space="preserve">
+    <value>显示每个磁盘的 SMART 故障预测状态。</value>
+  </data>
+  <data name="Cat_services-startup" xml:space="preserve">
+    <value>服务与启动</value>
+  </data>
+  <data name="Cmd_storage.largefiles.temp_Title" xml:space="preserve">
+    <value>最大的临时文件</value>
+  </data>
+  <data name="Cmd_storage.largefiles.temp_Desc" xml:space="preserve">
+    <value>列出临时文件夹中最大的文件。</value>
+  </data>
+  <data name="Cmd_storage.partition.list_Title" xml:space="preserve">
+    <value>列出分区</value>
+  </data>
+  <data name="Cmd_storage.partition.list_Desc" xml:space="preserve">
+    <value>列出所有磁盘分区及其大小。</value>
+  </data>
+  <data name="Cmd_storage.fragmentation.analyze_Title" xml:space="preserve">
+    <value>分析碎片</value>
+  </data>
+  <data name="Cmd_storage.fragmentation.analyze_Desc" xml:space="preserve">
+    <value>在不更改的情况下分析 C: 驱动器的碎片。</value>
+  </data>
+  <data name="Cmd_storage.cleanmgr.settings_Title" xml:space="preserve">
+    <value>配置磁盘清理</value>
+  </data>
+  <data name="Cmd_storage.cleanmgr.settings_Desc" xml:space="preserve">
+    <value>打开磁盘清理设置以选择要清理的内容。</value>
+  </data>
+  <data name="Cmd_storage.diskpart.list_Title" xml:space="preserve">
+    <value>列出磁盘和卷</value>
+  </data>
+  <data name="Cmd_storage.diskpart.list_Desc" xml:space="preserve">
+    <value>使用 DiskPart 列出磁盘和卷（只读）。</value>
+  </data>
+  <data name="Cmd_svc.spooler.restart_Title" xml:space="preserve">
+    <value>重启打印后台处理程序</value>
+  </data>
+  <data name="Cmd_svc.spooler.restart_Desc" xml:space="preserve">
+    <value>重启打印后台处理程序服务以清除卡住的打印作业。</value>
+  </data>
+  <data name="Cmd_svc.audio.restart_Title" xml:space="preserve">
+    <value>重启音频服务</value>
+  </data>
+  <data name="Cmd_svc.audio.restart_Desc" xml:space="preserve">
+    <value>重启 Windows Audio 服务以解决声音问题。</value>
+  </data>
+  <data name="Cmd_svc.wuauserv.restart_Title" xml:space="preserve">
+    <value>重启 Windows Update 服务</value>
+  </data>
+  <data name="Cmd_svc.wuauserv.restart_Desc" xml:space="preserve">
+    <value>重启 Windows Update 服务。</value>
+  </data>
+  <data name="Cmd_svc.bits.restart_Title" xml:space="preserve">
+    <value>重启 BITS</value>
+  </data>
+  <data name="Cmd_svc.bits.restart_Desc" xml:space="preserve">
+    <value>重启后台智能传输服务。</value>
+  </data>
+  <data name="Cmd_svc.list.running_Title" xml:space="preserve">
+    <value>列出正在运行的服务</value>
+  </data>
+  <data name="Cmd_svc.list.running_Desc" xml:space="preserve">
+    <value>列出当前正在运行的所有服务。</value>
+  </data>
+  <data name="Cmd_svc.list.automatic_Title" xml:space="preserve">
+    <value>列出自动服务</value>
+  </data>
+  <data name="Cmd_svc.list.automatic_Desc" xml:space="preserve">
+    <value>列出设置为自动启动的服务及其状态。</value>
+  </data>
+  <data name="Cmd_startup.apps.settings_Title" xml:space="preserve">
+    <value>启动应用</value>
+  </data>
+  <data name="Cmd_startup.apps.settings_Desc" xml:space="preserve">
+    <value>打开启动应用设置页面。</value>
+  </data>
+  <data name="Cmd_startup.folder.open_Title" xml:space="preserve">
+    <value>打开启动文件夹</value>
+  </data>
+  <data name="Cmd_startup.folder.open_Desc" xml:space="preserve">
+    <value>打开当前用户的启动文件夹。</value>
+  </data>
+  <data name="Cmd_clean.iconcache_Title" xml:space="preserve">
+    <value>清除图标缓存文件</value>
+  </data>
+  <data name="Cmd_clean.iconcache_Desc" xml:space="preserve">
+    <value>删除资源管理器图标缓存以便重建。</value>
+  </data>
+  <data name="Cmd_clean.recentfiles_Title" xml:space="preserve">
+    <value>清除最近项目</value>
+  </data>
+  <data name="Cmd_clean.recentfiles_Desc" xml:space="preserve">
+    <value>删除最近打开的文件和文件夹列表。</value>
+  </data>
+  <data name="Cmd_clean.eventlogs_Title" xml:space="preserve">
+    <value>清除事件日志</value>
+  </data>
+  <data name="Cmd_clean.eventlogs_Desc" xml:space="preserve">
+    <value>清除应用程序和系统事件日志。</value>
+  </data>
+  <data name="Cmd_power.set.powersaver_Title" xml:space="preserve">
+    <value>节能计划</value>
+  </data>
+  <data name="Cmd_power.set.powersaver_Desc" xml:space="preserve">
+    <value>切换到节能电源计划。</value>
+  </data>
+  <data name="Cmd_power.hibernate.now_Title" xml:space="preserve">
+    <value>立即休眠</value>
+  </data>
+  <data name="Cmd_power.hibernate.now_Desc" xml:space="preserve">
+    <value>立即让计算机进入休眠状态。</value>
+  </data>
+  <data name="Cmd_chkdsk.scan.online_Title" xml:space="preserve">
+    <value>联机磁盘扫描</value>
+  </data>
+  <data name="Cmd_chkdsk.scan.online_Desc" xml:space="preserve">
+    <value>在不卸载的情况下联机扫描 C: 驱动器的错误。</value>
+  </data>
+  <data name="Cmd_sfc.verifyonly_Title" xml:space="preserve">
+    <value>验证系统文件</value>
+  </data>
+  <data name="Cmd_sfc.verifyonly_Desc" xml:space="preserve">
+    <value>检查受保护的系统文件是否损坏而不进行修复。</value>
+  </data>
+  <data name="Cmd_sec.defender.history_Title" xml:space="preserve">
+    <value>Defender 威胁历史</value>
+  </data>
+  <data name="Cmd_sec.defender.history_Desc" xml:space="preserve">
+    <value>显示 Microsoft Defender 最近的威胁检测。</value>
+  </data>
+  <data name="Cmd_sec.defender.exclusions_Title" xml:space="preserve">
+    <value>Defender 排除项</value>
+  </data>
+  <data name="Cmd_sec.defender.exclusions_Desc" xml:space="preserve">
+    <value>列出从 Defender 中排除的路径、扩展名和进程。</value>
+  </data>
+  <data name="Cmd_sec.bitlocker.detail_Title" xml:space="preserve">
+    <value>BitLocker 卷详细信息</value>
+  </data>
+  <data name="Cmd_sec.bitlocker.detail_Desc" xml:space="preserve">
+    <value>显示每个卷的加密状态和进度。</value>
+  </data>
+  <data name="Cmd_sec.firewall.reset_Title" xml:space="preserve">
+    <value>将防火墙重置为默认值</value>
+  </data>
+  <data name="Cmd_sec.firewall.reset_Desc" xml:space="preserve">
+    <value>将所有 Windows 防火墙规则重置为默认策略。</value>
+  </data>
+  <data name="Cmd_sec.defender.signatures.remove_Title" xml:space="preserve">
+    <value>删除动态签名</value>
+  </data>
+  <data name="Cmd_sec.defender.signatures.remove_Desc" xml:space="preserve">
+    <value>删除 Defender 的动态定义以修复损坏的更新。</value>
+  </data>
+  <data name="Cmd_sec.windowssecurity.open_Title" xml:space="preserve">
+    <value>打开 Windows 安全中心</value>
+  </data>
+  <data name="Cmd_sec.windowssecurity.open_Desc" xml:space="preserve">
+    <value>打开 Windows 安全中心应用。</value>
+  </data>
+  <data name="Cmd_wu.history_Title" xml:space="preserve">
+    <value>更新历史记录</value>
+  </data>
+  <data name="Cmd_wu.history_Desc" xml:space="preserve">
+    <value>列出最近安装的 Windows 更新。</value>
+  </data>
+  <data name="Cmd_wu.pause_Title" xml:space="preserve">
+    <value>Windows 更新设置</value>
+  </data>
+  <data name="Cmd_wu.pause_Desc" xml:space="preserve">
+    <value>打开 Windows 更新设置页面。</value>
+  </data>
+  <data name="Cmd_winget.upgrade.winget_Title" xml:space="preserve">
+    <value>更新应用安装程序</value>
+  </data>
+  <data name="Cmd_winget.upgrade.winget_Desc" xml:space="preserve">
+    <value>将 winget 应用安装程序更新到最新版本。</value>
+  </data>
+  <data name="Cmd_winget.export.list_Title" xml:space="preserve">
+    <value>导出已安装的包</value>
+  </data>
+  <data name="Cmd_winget.export.list_Desc" xml:space="preserve">
+    <value>将 winget 包列表导出到 JSON 文件。</value>
+  </data>
+  <data name="Cmd_wu.driver.list_Title" xml:space="preserve">
+    <value>第三方驱动程序</value>
+  </data>
+  <data name="Cmd_wu.driver.list_Desc" xml:space="preserve">
+    <value>列出系统上安装的非内置驱动程序。</value>
+  </data>
+  <data name="Cmd_store.troubleshoot_Title" xml:space="preserve">
+    <value>疑难解答</value>
+  </data>
+  <data name="Cmd_store.troubleshoot_Desc" xml:space="preserve">
+    <value>打开 Windows 疑难解答设置页面。</value>
+  </data>
+  <data name="Cmd_tweak.taskbarsearch.hide_Title" xml:space="preserve">
+    <value>隐藏任务栏搜索</value>
+  </data>
+  <data name="Cmd_tweak.taskbarsearch.hide_Desc" xml:space="preserve">
+    <value>从任务栏隐藏搜索框。</value>
+  </data>
+  <data name="Cmd_tweak.taskbarsearch.show_Title" xml:space="preserve">
+    <value>显示任务栏搜索</value>
+  </data>
+  <data name="Cmd_tweak.taskbarsearch.show_Desc" xml:space="preserve">
+    <value>在任务栏上显示搜索框。</value>
+  </data>
+  <data name="Cmd_tweak.transparency.off_Title" xml:space="preserve">
+    <value>禁用透明效果</value>
+  </data>
+  <data name="Cmd_tweak.transparency.off_Desc" xml:space="preserve">
+    <value>关闭窗口透明效果。</value>
+  </data>
+  <data name="Cmd_tweak.transparency.on_Title" xml:space="preserve">
+    <value>启用透明效果</value>
+  </data>
+  <data name="Cmd_tweak.transparency.on_Desc" xml:space="preserve">
+    <value>打开窗口透明效果。</value>
+  </data>
+  <data name="Cmd_tweak.snapassist.off_Title" xml:space="preserve">
+    <value>禁用贴靠助手</value>
+  </data>
+  <data name="Cmd_tweak.snapassist.off_Desc" xml:space="preserve">
+    <value>停止 Windows 在贴靠窗口时提供建议。</value>
+  </data>
+  <data name="Cmd_tweak.snapassist.on_Title" xml:space="preserve">
+    <value>启用贴靠助手</value>
+  </data>
+  <data name="Cmd_tweak.snapassist.on_Desc" xml:space="preserve">
+    <value>允许 Windows 在贴靠窗口时提供建议。</value>
+  </data>
+  <data name="Cmd_dev.telnet.on_Title" xml:space="preserve">
+    <value>启用 Telnet 客户端</value>
+  </data>
+  <data name="Cmd_dev.telnet.on_Desc" xml:space="preserve">
+    <value>安装 Windows Telnet 客户端功能。</value>
+  </data>
+  <data name="Cmd_dev.telnet.off_Title" xml:space="preserve">
+    <value>禁用 Telnet 客户端</value>
+  </data>
+  <data name="Cmd_dev.telnet.off_Desc" xml:space="preserve">
+    <value>删除 Windows Telnet 客户端功能。</value>
+  </data>
 </root>

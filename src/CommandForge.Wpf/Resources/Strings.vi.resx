@@ -1718,4 +1718,367 @@ Tiếp tục?</value>
   <data name="Cmd_storage.storagesense_Desc" xml:space="preserve">
     <value>Mở cài đặt Lưu trữ của Windows để quản lý Storage Sense.</value>
   </data>
+  <data name="Cmd_info.battery.health_Title" xml:space="preserve">
+    <value>Tình trạng pin</value>
+  </data>
+  <data name="Cmd_info.battery.health_Desc" xml:space="preserve">
+    <value>Hiển thị dung lượng thiết kế so với dung lượng sạc đầy của pin.</value>
+  </data>
+  <data name="Cmd_info.netadapter.speed_Title" xml:space="preserve">
+    <value>Tốc độ card mạng</value>
+  </data>
+  <data name="Cmd_info.netadapter.speed_Desc" xml:space="preserve">
+    <value>Liệt kê các card mạng đang hoạt động cùng tốc độ liên kết và địa chỉ MAC.</value>
+  </data>
+  <data name="Cmd_info.diskhealth_Title" xml:space="preserve">
+    <value>Tình trạng ổ đĩa</value>
+  </data>
+  <data name="Cmd_info.diskhealth_Desc" xml:space="preserve">
+    <value>Hiển thị tình trạng và trạng thái hoạt động của từng ổ đĩa vật lý.</value>
+  </data>
+  <data name="Cmd_info.pagefile_Title" xml:space="preserve">
+    <value>Sử dụng tệp trang</value>
+  </data>
+  <data name="Cmd_info.pagefile_Desc" xml:space="preserve">
+    <value>Hiển thị kích thước và mức sử dụng hiện tại của tệp trang.</value>
+  </data>
+  <data name="Cmd_info.localusers_Title" xml:space="preserve">
+    <value>Tài khoản người dùng cục bộ</value>
+  </data>
+  <data name="Cmd_info.localusers_Desc" xml:space="preserve">
+    <value>Liệt kê các tài khoản người dùng cục bộ và trạng thái kích hoạt.</value>
+  </data>
+  <data name="Cmd_info.timezone_Title" xml:space="preserve">
+    <value>Thời gian &amp; múi giờ</value>
+  </data>
+  <data name="Cmd_info.timezone_Desc" xml:space="preserve">
+    <value>Hiển thị múi giờ hiện tại và trạng thái đồng bộ thời gian.</value>
+  </data>
+  <data name="Cmd_info.osinstalldate_Title" xml:space="preserve">
+    <value>Ngày cài đặt Windows</value>
+  </data>
+  <data name="Cmd_info.osinstalldate_Desc" xml:space="preserve">
+    <value>Hiển thị thời điểm Windows được cài đặt và cách đây bao nhiêu ngày.</value>
+  </data>
+  <data name="Cmd_net.publicdns_Title" xml:space="preserve">
+    <value>Kiểm tra phân giải DNS công cộng</value>
+  </data>
+  <data name="Cmd_net.publicdns_Desc" xml:space="preserve">
+    <value>Phân giải một tên miền phổ biến qua DNS của Google để kiểm tra phân giải tên.</value>
+  </data>
+  <data name="Cmd_net.tcpconnections_Title" xml:space="preserve">
+    <value>Kết nối TCP đang hoạt động</value>
+  </data>
+  <data name="Cmd_net.tcpconnections_Desc" xml:space="preserve">
+    <value>Liệt kê các kết nối TCP đã thiết lập và tiến trình sở hữu.</value>
+  </data>
+  <data name="Cmd_net.firewallprofiles_Title" xml:space="preserve">
+    <value>Hồ sơ tường lửa</value>
+  </data>
+  <data name="Cmd_net.firewallprofiles_Desc" xml:space="preserve">
+    <value>Hiển thị từng hồ sơ tường lửa và hành động mặc định.</value>
+  </data>
+  <data name="Cmd_net.netshares_Title" xml:space="preserve">
+    <value>Thư mục chia sẻ</value>
+  </data>
+  <data name="Cmd_net.netshares_Desc" xml:space="preserve">
+    <value>Liệt kê các chia sẻ SMB do máy tính này cung cấp.</value>
+  </data>
+  <data name="Cmd_net.hostsfile.show_Title" xml:space="preserve">
+    <value>Xem tệp hosts</value>
+  </data>
+  <data name="Cmd_net.hostsfile.show_Desc" xml:space="preserve">
+    <value>Hiển thị nội dung của tệp hosts trên Windows.</value>
+  </data>
+  <data name="Cmd_net.netconnections.diag_Title" xml:space="preserve">
+    <value>Kết nối mạng</value>
+  </data>
+  <data name="Cmd_net.netconnections.diag_Desc" xml:space="preserve">
+    <value>Mở bảng điều khiển Kết nối mạng.</value>
+  </data>
+  <data name="Cmd_diag.lastboottime_Title" xml:space="preserve">
+    <value>Sự kiện khởi động &amp; tắt máy gần đây</value>
+  </data>
+  <data name="Cmd_diag.lastboottime_Desc" xml:space="preserve">
+    <value>Liệt kê các sự kiện khởi động và tắt máy gần đây nhất.</value>
+  </data>
+  <data name="Cmd_diag.bsod.recent_Title" xml:space="preserve">
+    <value>Tắt máy đột ngột gần đây</value>
+  </data>
+  <data name="Cmd_diag.bsod.recent_Desc" xml:space="preserve">
+    <value>Liệt kê các sự kiện tắt máy đột ngột Kernel-Power (sự kiện 41) gần đây.</value>
+  </data>
+  <data name="Cmd_diag.toperrors_Title" xml:space="preserve">
+    <value>Lỗi hệ thống gần đây</value>
+  </data>
+  <data name="Cmd_diag.toperrors_Desc" xml:space="preserve">
+    <value>Liệt kê các mục nghiêm trọng và lỗi gần đây từ nhật ký Hệ thống.</value>
+  </data>
+  <data name="Cmd_diag.printmgmt_Title" xml:space="preserve">
+    <value>Quản lý in</value>
+  </data>
+  <data name="Cmd_diag.printmgmt_Desc" xml:space="preserve">
+    <value>Mở bảng điều khiển Quản lý in.</value>
+  </data>
+  <data name="Cmd_diag.certmgr_Title" xml:space="preserve">
+    <value>Trình quản lý chứng chỉ</value>
+  </data>
+  <data name="Cmd_diag.certmgr_Desc" xml:space="preserve">
+    <value>Mở Trình quản lý chứng chỉ của người dùng hiện tại.</value>
+  </data>
+  <data name="Cmd_storage.diskusage_Title" xml:space="preserve">
+    <value>Tóm tắt dung lượng ổ đĩa</value>
+  </data>
+  <data name="Cmd_storage.diskusage_Desc" xml:space="preserve">
+    <value>Hiển thị dung lượng đã dùng và còn trống cho mỗi ổ đĩa.</value>
+  </data>
+  <data name="Cmd_storage.smart.status_Title" xml:space="preserve">
+    <value>Trạng thái SMART của ổ đĩa</value>
+  </data>
+  <data name="Cmd_storage.smart.status_Desc" xml:space="preserve">
+    <value>Hiển thị trạng thái dự đoán hỏng hóc SMART của từng ổ đĩa.</value>
+  </data>
+  <data name="Cat_services-startup" xml:space="preserve">
+    <value>Dịch vụ &amp; Khởi động</value>
+  </data>
+  <data name="Cmd_storage.largefiles.temp_Title" xml:space="preserve">
+    <value>Tệp tạm lớn nhất</value>
+  </data>
+  <data name="Cmd_storage.largefiles.temp_Desc" xml:space="preserve">
+    <value>Liệt kê các tệp lớn nhất trong thư mục tạm.</value>
+  </data>
+  <data name="Cmd_storage.partition.list_Title" xml:space="preserve">
+    <value>Liệt kê phân vùng</value>
+  </data>
+  <data name="Cmd_storage.partition.list_Desc" xml:space="preserve">
+    <value>Liệt kê tất cả phân vùng ổ đĩa và kích thước.</value>
+  </data>
+  <data name="Cmd_storage.fragmentation.analyze_Title" xml:space="preserve">
+    <value>Phân tích phân mảnh</value>
+  </data>
+  <data name="Cmd_storage.fragmentation.analyze_Desc" xml:space="preserve">
+    <value>Phân tích phân mảnh ổ C: mà không thay đổi gì.</value>
+  </data>
+  <data name="Cmd_storage.cleanmgr.settings_Title" xml:space="preserve">
+    <value>Cấu hình Dọn dẹp ổ đĩa</value>
+  </data>
+  <data name="Cmd_storage.cleanmgr.settings_Desc" xml:space="preserve">
+    <value>Mở cài đặt Dọn dẹp ổ đĩa để chọn nội dung cần dọn.</value>
+  </data>
+  <data name="Cmd_storage.diskpart.list_Title" xml:space="preserve">
+    <value>Liệt kê đĩa &amp; ổ</value>
+  </data>
+  <data name="Cmd_storage.diskpart.list_Desc" xml:space="preserve">
+    <value>Liệt kê đĩa và ổ bằng DiskPart (chỉ đọc).</value>
+  </data>
+  <data name="Cmd_svc.spooler.restart_Title" xml:space="preserve">
+    <value>Khởi động lại Print Spooler</value>
+  </data>
+  <data name="Cmd_svc.spooler.restart_Desc" xml:space="preserve">
+    <value>Khởi động lại dịch vụ Print Spooler để xóa lệnh in bị kẹt.</value>
+  </data>
+  <data name="Cmd_svc.audio.restart_Title" xml:space="preserve">
+    <value>Khởi động lại dịch vụ âm thanh</value>
+  </data>
+  <data name="Cmd_svc.audio.restart_Desc" xml:space="preserve">
+    <value>Khởi động lại dịch vụ Windows Audio để khắc phục sự cố âm thanh.</value>
+  </data>
+  <data name="Cmd_svc.wuauserv.restart_Title" xml:space="preserve">
+    <value>Khởi động lại dịch vụ Windows Update</value>
+  </data>
+  <data name="Cmd_svc.wuauserv.restart_Desc" xml:space="preserve">
+    <value>Khởi động lại dịch vụ Windows Update.</value>
+  </data>
+  <data name="Cmd_svc.bits.restart_Title" xml:space="preserve">
+    <value>Khởi động lại BITS</value>
+  </data>
+  <data name="Cmd_svc.bits.restart_Desc" xml:space="preserve">
+    <value>Khởi động lại dịch vụ truyền nền BITS.</value>
+  </data>
+  <data name="Cmd_svc.list.running_Title" xml:space="preserve">
+    <value>Liệt kê dịch vụ đang chạy</value>
+  </data>
+  <data name="Cmd_svc.list.running_Desc" xml:space="preserve">
+    <value>Liệt kê tất cả dịch vụ đang chạy.</value>
+  </data>
+  <data name="Cmd_svc.list.automatic_Title" xml:space="preserve">
+    <value>Liệt kê dịch vụ tự động</value>
+  </data>
+  <data name="Cmd_svc.list.automatic_Desc" xml:space="preserve">
+    <value>Liệt kê các dịch vụ khởi động tự động và trạng thái.</value>
+  </data>
+  <data name="Cmd_startup.apps.settings_Title" xml:space="preserve">
+    <value>Ứng dụng khởi động</value>
+  </data>
+  <data name="Cmd_startup.apps.settings_Desc" xml:space="preserve">
+    <value>Mở trang cài đặt ứng dụng khởi động cùng Windows.</value>
+  </data>
+  <data name="Cmd_startup.folder.open_Title" xml:space="preserve">
+    <value>Mở thư mục Startup</value>
+  </data>
+  <data name="Cmd_startup.folder.open_Desc" xml:space="preserve">
+    <value>Mở thư mục Khởi động của người dùng hiện tại.</value>
+  </data>
+  <data name="Cmd_clean.iconcache_Title" xml:space="preserve">
+    <value>Xóa tệp bộ nhớ đệm biểu tượng</value>
+  </data>
+  <data name="Cmd_clean.iconcache_Desc" xml:space="preserve">
+    <value>Xóa bộ nhớ đệm biểu tượng của Explorer để dựng lại.</value>
+  </data>
+  <data name="Cmd_clean.recentfiles_Title" xml:space="preserve">
+    <value>Xóa mục gần đây</value>
+  </data>
+  <data name="Cmd_clean.recentfiles_Desc" xml:space="preserve">
+    <value>Xóa danh sách tệp và thư mục mở gần đây.</value>
+  </data>
+  <data name="Cmd_clean.eventlogs_Title" xml:space="preserve">
+    <value>Xóa nhật ký sự kiện</value>
+  </data>
+  <data name="Cmd_clean.eventlogs_Desc" xml:space="preserve">
+    <value>Xóa nhật ký sự kiện Ứng dụng và Hệ thống.</value>
+  </data>
+  <data name="Cmd_power.set.powersaver_Title" xml:space="preserve">
+    <value>Gói Tiết kiệm điện</value>
+  </data>
+  <data name="Cmd_power.set.powersaver_Desc" xml:space="preserve">
+    <value>Chuyển sang gói nguồn Tiết kiệm điện.</value>
+  </data>
+  <data name="Cmd_power.hibernate.now_Title" xml:space="preserve">
+    <value>Ngủ đông ngay</value>
+  </data>
+  <data name="Cmd_power.hibernate.now_Desc" xml:space="preserve">
+    <value>Đưa máy tính vào chế độ ngủ đông ngay lập tức.</value>
+  </data>
+  <data name="Cmd_chkdsk.scan.online_Title" xml:space="preserve">
+    <value>Quét ổ đĩa trực tuyến</value>
+  </data>
+  <data name="Cmd_chkdsk.scan.online_Desc" xml:space="preserve">
+    <value>Quét lỗi ổ C: ngay khi đang dùng mà không cần ngắt kết nối.</value>
+  </data>
+  <data name="Cmd_sfc.verifyonly_Title" xml:space="preserve">
+    <value>Kiểm tra tệp hệ thống</value>
+  </data>
+  <data name="Cmd_sfc.verifyonly_Desc" xml:space="preserve">
+    <value>Kiểm tra tệp hệ thống được bảo vệ có bị hỏng mà không sửa chữa.</value>
+  </data>
+  <data name="Cmd_sec.defender.history_Title" xml:space="preserve">
+    <value>Lịch sử mối đe dọa Defender</value>
+  </data>
+  <data name="Cmd_sec.defender.history_Desc" xml:space="preserve">
+    <value>Hiển thị các phát hiện mối đe dọa gần đây của Microsoft Defender.</value>
+  </data>
+  <data name="Cmd_sec.defender.exclusions_Title" xml:space="preserve">
+    <value>Loại trừ của Defender</value>
+  </data>
+  <data name="Cmd_sec.defender.exclusions_Desc" xml:space="preserve">
+    <value>Liệt kê các đường dẫn, phần mở rộng và tiến trình được loại trừ khỏi Defender.</value>
+  </data>
+  <data name="Cmd_sec.bitlocker.detail_Title" xml:space="preserve">
+    <value>Chi tiết ổ đĩa BitLocker</value>
+  </data>
+  <data name="Cmd_sec.bitlocker.detail_Desc" xml:space="preserve">
+    <value>Hiển thị trạng thái và tiến độ mã hóa cho từng ổ đĩa.</value>
+  </data>
+  <data name="Cmd_sec.firewall.reset_Title" xml:space="preserve">
+    <value>Đặt lại tường lửa về mặc định</value>
+  </data>
+  <data name="Cmd_sec.firewall.reset_Desc" xml:space="preserve">
+    <value>Đặt lại toàn bộ quy tắc Tường lửa Windows về chính sách mặc định.</value>
+  </data>
+  <data name="Cmd_sec.defender.signatures.remove_Title" xml:space="preserve">
+    <value>Xóa chữ ký động</value>
+  </data>
+  <data name="Cmd_sec.defender.signatures.remove_Desc" xml:space="preserve">
+    <value>Xóa các định nghĩa động của Defender để sửa bản cập nhật bị hỏng.</value>
+  </data>
+  <data name="Cmd_sec.windowssecurity.open_Title" xml:space="preserve">
+    <value>Mở Bảo mật Windows</value>
+  </data>
+  <data name="Cmd_sec.windowssecurity.open_Desc" xml:space="preserve">
+    <value>Mở ứng dụng Bảo mật Windows.</value>
+  </data>
+  <data name="Cmd_wu.history_Title" xml:space="preserve">
+    <value>Lịch sử cập nhật</value>
+  </data>
+  <data name="Cmd_wu.history_Desc" xml:space="preserve">
+    <value>Liệt kê các bản cập nhật Windows được cài đặt gần đây nhất.</value>
+  </data>
+  <data name="Cmd_wu.pause_Title" xml:space="preserve">
+    <value>Cài đặt Windows Update</value>
+  </data>
+  <data name="Cmd_wu.pause_Desc" xml:space="preserve">
+    <value>Mở trang cài đặt Windows Update.</value>
+  </data>
+  <data name="Cmd_winget.upgrade.winget_Title" xml:space="preserve">
+    <value>Cập nhật App Installer</value>
+  </data>
+  <data name="Cmd_winget.upgrade.winget_Desc" xml:space="preserve">
+    <value>Cập nhật winget App Installer lên phiên bản mới nhất.</value>
+  </data>
+  <data name="Cmd_winget.export.list_Title" xml:space="preserve">
+    <value>Xuất danh sách gói đã cài</value>
+  </data>
+  <data name="Cmd_winget.export.list_Desc" xml:space="preserve">
+    <value>Xuất danh sách gói winget ra tệp JSON.</value>
+  </data>
+  <data name="Cmd_wu.driver.list_Title" xml:space="preserve">
+    <value>Trình điều khiển bên thứ ba</value>
+  </data>
+  <data name="Cmd_wu.driver.list_Desc" xml:space="preserve">
+    <value>Liệt kê các trình điều khiển không tích hợp sẵn trên hệ thống.</value>
+  </data>
+  <data name="Cmd_store.troubleshoot_Title" xml:space="preserve">
+    <value>Trình khắc phục sự cố</value>
+  </data>
+  <data name="Cmd_store.troubleshoot_Desc" xml:space="preserve">
+    <value>Mở trang cài đặt trình khắc phục sự cố của Windows.</value>
+  </data>
+  <data name="Cmd_tweak.taskbarsearch.hide_Title" xml:space="preserve">
+    <value>Ẩn tìm kiếm trên thanh tác vụ</value>
+  </data>
+  <data name="Cmd_tweak.taskbarsearch.hide_Desc" xml:space="preserve">
+    <value>Ẩn hộp tìm kiếm khỏi thanh tác vụ.</value>
+  </data>
+  <data name="Cmd_tweak.taskbarsearch.show_Title" xml:space="preserve">
+    <value>Hiện tìm kiếm trên thanh tác vụ</value>
+  </data>
+  <data name="Cmd_tweak.taskbarsearch.show_Desc" xml:space="preserve">
+    <value>Hiển thị hộp tìm kiếm trên thanh tác vụ.</value>
+  </data>
+  <data name="Cmd_tweak.transparency.off_Title" xml:space="preserve">
+    <value>Tắt hiệu ứng trong suốt</value>
+  </data>
+  <data name="Cmd_tweak.transparency.off_Desc" xml:space="preserve">
+    <value>Tắt hiệu ứng trong suốt của cửa sổ.</value>
+  </data>
+  <data name="Cmd_tweak.transparency.on_Title" xml:space="preserve">
+    <value>Bật hiệu ứng trong suốt</value>
+  </data>
+  <data name="Cmd_tweak.transparency.on_Desc" xml:space="preserve">
+    <value>Bật hiệu ứng trong suốt của cửa sổ.</value>
+  </data>
+  <data name="Cmd_tweak.snapassist.off_Title" xml:space="preserve">
+    <value>Tắt Snap assist</value>
+  </data>
+  <data name="Cmd_tweak.snapassist.off_Desc" xml:space="preserve">
+    <value>Ngăn Windows gợi ý cửa sổ khi chia đôi màn hình.</value>
+  </data>
+  <data name="Cmd_tweak.snapassist.on_Title" xml:space="preserve">
+    <value>Bật Snap assist</value>
+  </data>
+  <data name="Cmd_tweak.snapassist.on_Desc" xml:space="preserve">
+    <value>Cho phép Windows gợi ý cửa sổ khi chia đôi màn hình.</value>
+  </data>
+  <data name="Cmd_dev.telnet.on_Title" xml:space="preserve">
+    <value>Bật ứng dụng Telnet</value>
+  </data>
+  <data name="Cmd_dev.telnet.on_Desc" xml:space="preserve">
+    <value>Cài đặt tính năng ứng dụng Telnet của Windows.</value>
+  </data>
+  <data name="Cmd_dev.telnet.off_Title" xml:space="preserve">
+    <value>Tắt ứng dụng Telnet</value>
+  </data>
+  <data name="Cmd_dev.telnet.off_Desc" xml:space="preserve">
+    <value>Gỡ tính năng ứng dụng Telnet của Windows.</value>
+  </data>
 </root>

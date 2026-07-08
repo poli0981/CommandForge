@@ -2081,4 +2081,244 @@ Tiếp tục?</value>
   <data name="Cmd_dev.telnet.off_Desc" xml:space="preserve">
     <value>Gỡ tính năng ứng dụng Telnet của Windows.</value>
   </data>
+  <data name="Cmd_tweak.win11.widgets.hide_Title" xml:space="preserve">
+    <value>Ẩn nút Widgets (Win11)</value>
+  </data>
+  <data name="Cmd_tweak.win11.widgets.hide_Desc" xml:space="preserve">
+    <value>Gỡ nút Widgets khỏi thanh tác vụ Windows 11 (theo người dùng; khởi động lại Explorer để áp dụng).</value>
+  </data>
+  <data name="Cmd_tweak.win11.copilot.hide_Title" xml:space="preserve">
+    <value>Ẩn nút Copilot (Win11)</value>
+  </data>
+  <data name="Cmd_tweak.win11.copilot.hide_Desc" xml:space="preserve">
+    <value>Gỡ nút Copilot khỏi thanh tác vụ trên Windows 11 22H2/23H2.</value>
+  </data>
+  <data name="Cmd_tweak.win11.endtask.on_Title" xml:space="preserve">
+    <value>Bật End Task trên thanh tác vụ (Win11)</value>
+  </data>
+  <data name="Cmd_tweak.win11.endtask.on_Desc" xml:space="preserve">
+    <value>Thêm mục End task vào menu chuột phải trên thanh tác vụ (Windows 11 23H2+).</value>
+  </data>
+  <data name="Cmd_tweak.win11.taskbarlabels.show_Title" xml:space="preserve">
+    <value>Không gộp + hiện nhãn (Win11)</value>
+  </data>
+  <data name="Cmd_tweak.win11.taskbarlabels.show_Desc" xml:space="preserve">
+    <value>Hiện các nút thanh tác vụ tách rời kèm nhãn chữ (Windows 11 22H2+; khởi động lại Explorer để áp dụng).</value>
+  </data>
+  <data name="Cmd_tweak.win11.start.morepins_Title" xml:space="preserve">
+    <value>Bố cục Start: Nhiều ghim hơn (Win11)</value>
+  </data>
+  <data name="Cmd_tweak.win11.start.morepins_Desc" xml:space="preserve">
+    <value>Chuyển menu Start của Windows 11 sang bố cục More pins (nhiều ghim hơn).</value>
+  </data>
+  <data name="Cmd_tweak.dynamiclighting_Title" xml:space="preserve">
+    <value>Cài đặt Dynamic Lighting (Win11)</value>
+  </data>
+  <data name="Cmd_tweak.dynamiclighting_Desc" xml:space="preserve">
+    <value>Mở trang Dynamic Lighting để điều khiển thiết bị RGB ngay trong Windows (Windows 11 23H2+).</value>
+  </data>
+  <data name="Cmd_tweak.win10.newsinterests.hide_Title" xml:space="preserve">
+    <value>Tắt News and Interests (Win10)</value>
+  </data>
+  <data name="Cmd_tweak.win10.newsinterests.hide_Desc" xml:space="preserve">
+    <value>Gỡ cụm thời tiết/tin tức News and Interests khỏi thanh tác vụ Windows 10.</value>
+  </data>
+  <data name="Cmd_tweak.win10.meetnow.hide_Title" xml:space="preserve">
+    <value>Ẩn biểu tượng Meet Now (Win10)</value>
+  </data>
+  <data name="Cmd_tweak.win10.meetnow.hide_Desc" xml:space="preserve">
+    <value>Gỡ biểu tượng Skype Meet Now khỏi khay hệ thống Windows 10 (khởi động lại Explorer để áp dụng).</value>
+  </data>
+  <data name="Cmd_tweak.win10.peoplebar.hide_Title" xml:space="preserve">
+    <value>Ẩn thanh People (Win10)</value>
+  </data>
+  <data name="Cmd_tweak.win10.peoplebar.hide_Desc" xml:space="preserve">
+    <value>Gỡ nút People khỏi thanh tác vụ Windows 10 (khởi động lại Explorer để áp dụng).</value>
+  </data>
+  <data name="Cmd_tweak.win10.cortanabutton.hide_Title" xml:space="preserve">
+    <value>Ẩn nút Cortana (Win10)</value>
+  </data>
+  <data name="Cmd_tweak.win10.cortanabutton.hide_Desc" xml:space="preserve">
+    <value>Gỡ nút Cortana khỏi thanh tác vụ Windows 10 (khởi động lại Explorer để áp dụng).</value>
+  </data>
+  <data name="Cmd_tweak.win10.livetiles.off_Title" xml:space="preserve">
+    <value>Tắt Live Tiles (Win10)</value>
+  </data>
+  <data name="Cmd_tweak.win10.livetiles.off_Desc" xml:space="preserve">
+    <value>Tắt toàn bộ thông báo ô động (live tile) trên menu Start Windows 10 (đăng xuất để áp dụng).</value>
+  </data>
+  <data name="Cmd_tweak.startdelay.off_Title" xml:space="preserve">
+    <value>Tắt độ trễ ứng dụng khởi động</value>
+  </data>
+  <data name="Cmd_tweak.startdelay.off_Desc" xml:space="preserve">
+    <value>Bỏ độ trễ trước khi các ứng dụng khởi động chạy lúc đăng nhập (theo người dùng).</value>
+  </data>
+  <data name="Cmd_tweak.startsearch.noweb_Title" xml:space="preserve">
+    <value>Tắt kết quả web trong Tìm kiếm</value>
+  </data>
+  <data name="Cmd_tweak.startsearch.noweb_Desc" xml:space="preserve">
+    <value>Ngăn Windows Search hiển thị kết quả và gợi ý web từ Bing.</value>
+  </data>
+  <data name="Cmd_net.wifi.capabilities_Title" xml:space="preserve">
+    <value>Khả năng sóng Wi-Fi</value>
+  </data>
+  <data name="Cmd_net.wifi.capabilities_Desc" xml:space="preserve">
+    <value>Hiển thị chi tiết driver bộ điều hợp không dây và các chuẩn sóng hỗ trợ (802.11 a/b/g/n/ac/ax).</value>
+  </data>
+  <data name="Cmd_net.tcp.global_Title" xml:space="preserve">
+    <value>Xem cài đặt TCP toàn cục</value>
+  </data>
+  <data name="Cmd_net.tcp.global_Desc" xml:space="preserve">
+    <value>Hiển thị các tham số điều chỉnh TCP/IP toàn cục như auto-tuning và bộ điều khiển tắc nghẽn.</value>
+  </data>
+  <data name="Cmd_net.wlan.report_Title" xml:space="preserve">
+    <value>Tạo báo cáo lịch sử Wi-Fi</value>
+  </data>
+  <data name="Cmd_net.wlan.report_Desc" xml:space="preserve">
+    <value>Tạo báo cáo HTML về kết nối Wi-Fi trong ProgramData để chẩn đoán sự cố.</value>
+  </data>
+  <data name="Cmd_storage.smart.reliability_Title" xml:space="preserve">
+    <value>Bộ đếm độ tin cậy SMART của đĩa</value>
+  </data>
+  <data name="Cmd_storage.smart.reliability_Desc" xml:space="preserve">
+    <value>Hiển thị độ hao mòn, nhiệt độ và bộ đếm lỗi đọc/ghi SMART của các đĩa vật lý.</value>
+  </data>
+  <data name="Cmd_storage.dirty.query_Title" xml:space="preserve">
+    <value>Kiểm tra dirty bit của ổ đĩa</value>
+  </data>
+  <data name="Cmd_storage.dirty.query_Desc" xml:space="preserve">
+    <value>Kiểm tra ổ C: có bị đánh dấu dirty và sẽ được chkdsk quét ở lần khởi động tới hay không.</value>
+  </data>
+  <data name="Cmd_storage.sectorinfo_Title" xml:space="preserve">
+    <value>Thông tin kích thước sector đĩa</value>
+  </data>
+  <data name="Cmd_storage.sectorinfo_Desc" xml:space="preserve">
+    <value>Hiển thị kích thước sector vật lý/logic và thông tin căn chỉnh của ổ C:.</value>
+  </data>
+  <data name="Cmd_power.waketimers_Title" xml:space="preserve">
+    <value>Liệt kê wake timer đang hoạt động</value>
+  </data>
+  <data name="Cmd_power.waketimers_Desc" xml:space="preserve">
+    <value>Hiển thị các bộ hẹn giờ được phép đánh thức máy khỏi chế độ ngủ.</value>
+  </data>
+  <data name="Cmd_power.hibernate.reduced_Title" xml:space="preserve">
+    <value>Giảm kích thước file ngủ đông</value>
+  </data>
+  <data name="Cmd_power.hibernate.reduced_Desc" xml:space="preserve">
+    <value>Đặt hiberfil.sys sang chế độ reduced (hỗ trợ fast startup, không ngủ đông đầy đủ) để tiết kiệm dung lượng đĩa.</value>
+  </data>
+  <data name="Cmd_power.energysaver.settings_Title" xml:space="preserve">
+    <value>Cài đặt Energy Saver (Win11 24H2)</value>
+  </data>
+  <data name="Cmd_power.energysaver.settings_Desc" xml:space="preserve">
+    <value>Mở trang cài đặt Energy Saver được thêm cho máy để bàn trong Windows 11 24H2.</value>
+  </data>
+  <data name="Cmd_sec.recall.status_Title" xml:space="preserve">
+    <value>Trạng thái tính năng Recall (Win11 24H2)</value>
+  </data>
+  <data name="Cmd_sec.recall.status_Desc" xml:space="preserve">
+    <value>Hiển thị tính năng tùy chọn Windows Recall đang bật, tắt hay đã gỡ.</value>
+  </data>
+  <data name="Cmd_sec.presence.settings_Title" xml:space="preserve">
+    <value>Cài đặt cảm biến hiện diện (Win11)</value>
+  </data>
+  <data name="Cmd_sec.presence.settings_Desc" xml:space="preserve">
+    <value>Mở cài đặt quyền riêng tư cảm biến hiện diện cho các cảm biến tương thích (Windows 11 22H2+).</value>
+  </data>
+  <data name="Cmd_sec.localadmins_Title" xml:space="preserve">
+    <value>Thành viên nhóm Administrators cục bộ</value>
+  </data>
+  <data name="Cmd_sec.localadmins_Desc" xml:space="preserve">
+    <value>Liệt kê tất cả thành viên của nhóm Administrators cục bộ (theo SID cố định).</value>
+  </data>
+  <data name="Cmd_sec.certstore.root_Title" xml:space="preserve">
+    <value>Chứng chỉ gốc tin cậy</value>
+  </data>
+  <data name="Cmd_sec.certstore.root_Desc" xml:space="preserve">
+    <value>Liệt kê các chứng chỉ trong kho Trusted Root Certification Authorities của máy.</value>
+  </data>
+  <data name="Cmd_sec.firewall.rules_Title" xml:space="preserve">
+    <value>Quy tắc tường lửa (Tất cả)</value>
+  </data>
+  <data name="Cmd_sec.firewall.rules_Desc" xml:space="preserve">
+    <value>Hiển thị toàn bộ quy tắc Windows Defender Firewall đã cấu hình kèm thiết lập.</value>
+  </data>
+  <data name="Cmd_dev.devdrive.query_Title" xml:space="preserve">
+    <value>Trạng thái Dev Drive (fsutil)</value>
+  </data>
+  <data name="Cmd_dev.devdrive.query_Desc" xml:space="preserve">
+    <value>Truy vấn hỗ trợ Dev Drive và các filter được phép gắn (Windows 11 22H2+).</value>
+  </data>
+  <data name="Cmd_dev.sudo.status_Title" xml:space="preserve">
+    <value>Trạng thái Sudo cho Windows</value>
+  </data>
+  <data name="Cmd_dev.sudo.status_Desc" xml:space="preserve">
+    <value>Báo cáo Sudo cho Windows có đang bật không và ở chế độ chạy nào (Windows 11 24H2).</value>
+  </data>
+  <data name="Cmd_dev.hyperv.vms_Title" xml:space="preserve">
+    <value>Liệt kê máy ảo Hyper-V</value>
+  </data>
+  <data name="Cmd_dev.hyperv.vms_Desc" xml:space="preserve">
+    <value>Liệt kê các máy ảo Hyper-V kèm trạng thái, CPU, bộ nhớ và thời gian chạy (cần Hyper-V).</value>
+  </data>
+  <data name="Cmd_dev.bcdedit.hypervisor_Title" xml:space="preserve">
+    <value>Kiểu khởi chạy hypervisor khi boot</value>
+  </data>
+  <data name="Cmd_dev.bcdedit.hypervisor_Desc" xml:space="preserve">
+    <value>Hiển thị mục boot hiện tại, bao gồm thiết lập hypervisorlaunchtype.</value>
+  </data>
+  <data name="Cmd_info.whoami_Title" xml:space="preserve">
+    <value>Quyền &amp; nhóm của người dùng hiện tại</value>
+  </data>
+  <data name="Cmd_info.whoami_Desc" xml:space="preserve">
+    <value>Hiển thị SID, các nhóm và đặc quyền đang bật của người dùng hiện tại.</value>
+  </data>
+  <data name="Cmd_info.startapps_Title" xml:space="preserve">
+    <value>Liệt kê ứng dụng &amp; ID trên Start</value>
+  </data>
+  <data name="Cmd_info.startapps_Desc" xml:space="preserve">
+    <value>Liệt kê mọi ứng dụng trên menu Start kèm mã AppUserModelID để khởi chạy.</value>
+  </data>
+  <data name="Cmd_info.bootconfig_Title" xml:space="preserve">
+    <value>Xem cấu hình khởi động (BCD)</value>
+  </data>
+  <data name="Cmd_info.bootconfig_Desc" xml:space="preserve">
+    <value>Hiển thị toàn bộ mục Boot Configuration Data trong kho boot.</value>
+  </data>
+  <data name="Cmd_diag.problemdevices_Title" xml:space="preserve">
+    <value>Liệt kê thiết bị gặp sự cố</value>
+  </data>
+  <data name="Cmd_diag.problemdevices_Desc" xml:space="preserve">
+    <value>Liệt kê các thiết bị đang báo lỗi driver hoặc phần cứng.</value>
+  </data>
+  <data name="Cmd_diag.eventlogs_Title" xml:space="preserve">
+    <value>Liệt kê tất cả nhật ký sự kiện</value>
+  </data>
+  <data name="Cmd_diag.eventlogs_Desc" xml:space="preserve">
+    <value>Liệt kê mọi kênh nhật ký sự kiện có trên hệ thống.</value>
+  </data>
+  <data name="Cmd_diag.joinstate_Title" xml:space="preserve">
+    <value>Trạng thái tham gia thiết bị (Entra/AD)</value>
+  </data>
+  <data name="Cmd_diag.joinstate_Desc" xml:space="preserve">
+    <value>Hiển thị trạng thái tham gia Microsoft Entra/Active Directory và đăng ký thiết bị.</value>
+  </data>
+  <data name="Cmd_clean.printqueue_Title" xml:space="preserve">
+    <value>Xóa hàng đợi in bị kẹt</value>
+  </data>
+  <data name="Cmd_clean.printqueue_Desc" xml:space="preserve">
+    <value>Dừng Spooler, xóa các lệnh in trong hàng đợi, rồi khởi động lại Spooler.</value>
+  </data>
+  <data name="Cmd_clean.edgecache_Title" xml:space="preserve">
+    <value>Xóa cache Microsoft Edge</value>
+  </data>
+  <data name="Cmd_clean.edgecache_Desc" xml:space="preserve">
+    <value>Xóa cache hồ sơ mặc định của Microsoft Edge (đóng Edge trước).</value>
+  </data>
+  <data name="Cmd_clean.teamscache_Title" xml:space="preserve">
+    <value>Xóa cache Teams mới</value>
+  </data>
+  <data name="Cmd_clean.teamscache_Desc" xml:space="preserve">
+    <value>Xóa cache của ứng dụng Microsoft Teams mới (đóng Teams trước).</value>
+  </data>
 </root>

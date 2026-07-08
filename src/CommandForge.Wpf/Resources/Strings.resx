@@ -2081,4 +2081,244 @@ Continue?</value>
   <data name="Cmd_dev.telnet.off_Desc" xml:space="preserve">
     <value>Remove the Windows Telnet client feature.</value>
   </data>
+  <data name="Cmd_tweak.win11.widgets.hide_Title" xml:space="preserve">
+    <value>Hide Widgets Button (Win11)</value>
+  </data>
+  <data name="Cmd_tweak.win11.widgets.hide_Desc" xml:space="preserve">
+    <value>Remove the Widgets button from the Windows 11 taskbar (per-user; restart Explorer to apply).</value>
+  </data>
+  <data name="Cmd_tweak.win11.copilot.hide_Title" xml:space="preserve">
+    <value>Hide Copilot Button (Win11)</value>
+  </data>
+  <data name="Cmd_tweak.win11.copilot.hide_Desc" xml:space="preserve">
+    <value>Remove the Copilot button from the taskbar on Windows 11 22H2/23H2.</value>
+  </data>
+  <data name="Cmd_tweak.win11.endtask.on_Title" xml:space="preserve">
+    <value>Enable Taskbar End Task (Win11)</value>
+  </data>
+  <data name="Cmd_tweak.win11.endtask.on_Desc" xml:space="preserve">
+    <value>Add the End task item to taskbar right-click menus (Windows 11 23H2+).</value>
+  </data>
+  <data name="Cmd_tweak.win11.taskbarlabels.show_Title" xml:space="preserve">
+    <value>Never Combine + Labels (Win11)</value>
+  </data>
+  <data name="Cmd_tweak.win11.taskbarlabels.show_Desc" xml:space="preserve">
+    <value>Show uncombined taskbar buttons with text labels (Windows 11 22H2+; restart Explorer to apply).</value>
+  </data>
+  <data name="Cmd_tweak.win11.start.morepins_Title" xml:space="preserve">
+    <value>Start Layout: More Pins (Win11)</value>
+  </data>
+  <data name="Cmd_tweak.win11.start.morepins_Desc" xml:space="preserve">
+    <value>Switch the Windows 11 Start menu to the More pins layout.</value>
+  </data>
+  <data name="Cmd_tweak.dynamiclighting_Title" xml:space="preserve">
+    <value>Dynamic Lighting Settings (Win11)</value>
+  </data>
+  <data name="Cmd_tweak.dynamiclighting_Desc" xml:space="preserve">
+    <value>Open the Dynamic Lighting page to control RGB peripherals natively (Windows 11 23H2+).</value>
+  </data>
+  <data name="Cmd_tweak.win10.newsinterests.hide_Title" xml:space="preserve">
+    <value>Turn Off News and Interests (Win10)</value>
+  </data>
+  <data name="Cmd_tweak.win10.newsinterests.hide_Desc" xml:space="preserve">
+    <value>Remove the News and Interests weather/news flyout from the Windows 10 taskbar.</value>
+  </data>
+  <data name="Cmd_tweak.win10.meetnow.hide_Title" xml:space="preserve">
+    <value>Hide Meet Now Icon (Win10)</value>
+  </data>
+  <data name="Cmd_tweak.win10.meetnow.hide_Desc" xml:space="preserve">
+    <value>Remove the Skype Meet Now icon from the Windows 10 system tray (restart Explorer to apply).</value>
+  </data>
+  <data name="Cmd_tweak.win10.peoplebar.hide_Title" xml:space="preserve">
+    <value>Hide People Bar (Win10)</value>
+  </data>
+  <data name="Cmd_tweak.win10.peoplebar.hide_Desc" xml:space="preserve">
+    <value>Remove the People button from the Windows 10 taskbar (restart Explorer to apply).</value>
+  </data>
+  <data name="Cmd_tweak.win10.cortanabutton.hide_Title" xml:space="preserve">
+    <value>Hide Cortana Button (Win10)</value>
+  </data>
+  <data name="Cmd_tweak.win10.cortanabutton.hide_Desc" xml:space="preserve">
+    <value>Remove the Cortana button from the Windows 10 taskbar (restart Explorer to apply).</value>
+  </data>
+  <data name="Cmd_tweak.win10.livetiles.off_Title" xml:space="preserve">
+    <value>Turn Off Live Tiles (Win10)</value>
+  </data>
+  <data name="Cmd_tweak.win10.livetiles.off_Desc" xml:space="preserve">
+    <value>Disable all Start menu live tile notifications on Windows 10 (sign out to apply).</value>
+  </data>
+  <data name="Cmd_tweak.startdelay.off_Title" xml:space="preserve">
+    <value>Disable Startup App Delay</value>
+  </data>
+  <data name="Cmd_tweak.startdelay.off_Desc" xml:space="preserve">
+    <value>Remove the delay before startup apps launch at sign-in (per-user).</value>
+  </data>
+  <data name="Cmd_tweak.startsearch.noweb_Title" xml:space="preserve">
+    <value>Disable Web Results in Search</value>
+  </data>
+  <data name="Cmd_tweak.startsearch.noweb_Desc" xml:space="preserve">
+    <value>Stop Windows Search from showing Bing web results and suggestions.</value>
+  </data>
+  <data name="Cmd_net.wifi.capabilities_Title" xml:space="preserve">
+    <value>Wi-Fi Radio Capabilities</value>
+  </data>
+  <data name="Cmd_net.wifi.capabilities_Desc" xml:space="preserve">
+    <value>Show wireless adapter driver details and supported radio types (802.11 a/b/g/n/ac/ax).</value>
+  </data>
+  <data name="Cmd_net.tcp.global_Title" xml:space="preserve">
+    <value>Show Global TCP Settings</value>
+  </data>
+  <data name="Cmd_net.tcp.global_Desc" xml:space="preserve">
+    <value>Display global TCP/IP tuning parameters such as auto-tuning and congestion provider.</value>
+  </data>
+  <data name="Cmd_net.wlan.report_Title" xml:space="preserve">
+    <value>Generate Wi-Fi History Report</value>
+  </data>
+  <data name="Cmd_net.wlan.report_Desc" xml:space="preserve">
+    <value>Build an HTML Wi-Fi connectivity report under ProgramData for troubleshooting.</value>
+  </data>
+  <data name="Cmd_storage.smart.reliability_Title" xml:space="preserve">
+    <value>Disk SMART Reliability Counters</value>
+  </data>
+  <data name="Cmd_storage.smart.reliability_Desc" xml:space="preserve">
+    <value>Show SMART wear, temperature, and read/write error counters for physical disks.</value>
+  </data>
+  <data name="Cmd_storage.dirty.query_Title" xml:space="preserve">
+    <value>Query Volume Dirty Bit</value>
+  </data>
+  <data name="Cmd_storage.dirty.query_Desc" xml:space="preserve">
+    <value>Check whether drive C: is flagged dirty and will be scanned by chkdsk at next boot.</value>
+  </data>
+  <data name="Cmd_storage.sectorinfo_Title" xml:space="preserve">
+    <value>Disk Sector Size Info</value>
+  </data>
+  <data name="Cmd_storage.sectorinfo_Desc" xml:space="preserve">
+    <value>Show physical and logical sector sizes and alignment info for drive C:.</value>
+  </data>
+  <data name="Cmd_power.waketimers_Title" xml:space="preserve">
+    <value>List Active Wake Timers</value>
+  </data>
+  <data name="Cmd_power.waketimers_Desc" xml:space="preserve">
+    <value>Show scheduled timers that are allowed to wake the PC from sleep.</value>
+  </data>
+  <data name="Cmd_power.hibernate.reduced_Title" xml:space="preserve">
+    <value>Reduce Hibernation File Size</value>
+  </data>
+  <data name="Cmd_power.hibernate.reduced_Desc" xml:space="preserve">
+    <value>Set hiberfil.sys to reduced mode (supports fast startup, not full hibernate) to save disk space.</value>
+  </data>
+  <data name="Cmd_power.energysaver.settings_Title" xml:space="preserve">
+    <value>Energy Saver Settings (Win11 24H2)</value>
+  </data>
+  <data name="Cmd_power.energysaver.settings_Desc" xml:space="preserve">
+    <value>Open the Energy Saver settings page introduced for desktops in Windows 11 24H2.</value>
+  </data>
+  <data name="Cmd_sec.recall.status_Title" xml:space="preserve">
+    <value>Recall Feature Status (Win11 24H2)</value>
+  </data>
+  <data name="Cmd_sec.recall.status_Desc" xml:space="preserve">
+    <value>Show whether the Windows Recall optional feature is enabled, disabled, or removed.</value>
+  </data>
+  <data name="Cmd_sec.presence.settings_Title" xml:space="preserve">
+    <value>Presence Sensing Settings (Win11)</value>
+  </data>
+  <data name="Cmd_sec.presence.settings_Desc" xml:space="preserve">
+    <value>Open Presence sensing privacy settings for compatible presence sensors (Windows 11 22H2+).</value>
+  </data>
+  <data name="Cmd_sec.localadmins_Title" xml:space="preserve">
+    <value>Local Administrators Members</value>
+  </data>
+  <data name="Cmd_sec.localadmins_Desc" xml:space="preserve">
+    <value>List all members of the local Administrators group (by well-known SID).</value>
+  </data>
+  <data name="Cmd_sec.certstore.root_Title" xml:space="preserve">
+    <value>Trusted Root Certificates</value>
+  </data>
+  <data name="Cmd_sec.certstore.root_Desc" xml:space="preserve">
+    <value>List certificates in the machine Trusted Root Certification Authorities store.</value>
+  </data>
+  <data name="Cmd_sec.firewall.rules_Title" xml:space="preserve">
+    <value>Firewall Rules (All)</value>
+  </data>
+  <data name="Cmd_sec.firewall.rules_Desc" xml:space="preserve">
+    <value>Show all configured Windows Defender Firewall rules with their settings.</value>
+  </data>
+  <data name="Cmd_dev.devdrive.query_Title" xml:space="preserve">
+    <value>Dev Drive Status (fsutil)</value>
+  </data>
+  <data name="Cmd_dev.devdrive.query_Desc" xml:space="preserve">
+    <value>Query Dev Drive support and the filters allowed to attach (Windows 11 22H2+).</value>
+  </data>
+  <data name="Cmd_dev.sudo.status_Title" xml:space="preserve">
+    <value>Sudo for Windows Status</value>
+  </data>
+  <data name="Cmd_dev.sudo.status_Desc" xml:space="preserve">
+    <value>Report whether Sudo for Windows is enabled and in which run mode (Windows 11 24H2).</value>
+  </data>
+  <data name="Cmd_dev.hyperv.vms_Title" xml:space="preserve">
+    <value>List Hyper-V VMs</value>
+  </data>
+  <data name="Cmd_dev.hyperv.vms_Desc" xml:space="preserve">
+    <value>List Hyper-V virtual machines with state, CPU, memory, and uptime (requires Hyper-V).</value>
+  </data>
+  <data name="Cmd_dev.bcdedit.hypervisor_Title" xml:space="preserve">
+    <value>Boot Hypervisor Launch Type</value>
+  </data>
+  <data name="Cmd_dev.bcdedit.hypervisor_Desc" xml:space="preserve">
+    <value>Show the current boot entry, including the hypervisorlaunchtype setting.</value>
+  </data>
+  <data name="Cmd_info.whoami_Title" xml:space="preserve">
+    <value>Current User Rights &amp; Groups</value>
+  </data>
+  <data name="Cmd_info.whoami_Desc" xml:space="preserve">
+    <value>Show the current user's SID, group memberships, and enabled privileges.</value>
+  </data>
+  <data name="Cmd_info.startapps_Title" xml:space="preserve">
+    <value>List Start Menu Apps &amp; IDs</value>
+  </data>
+  <data name="Cmd_info.startapps_Desc" xml:space="preserve">
+    <value>List all Start menu apps with their AppUserModelID launch identifiers.</value>
+  </data>
+  <data name="Cmd_info.bootconfig_Title" xml:space="preserve">
+    <value>View Boot Configuration (BCD)</value>
+  </data>
+  <data name="Cmd_info.bootconfig_Desc" xml:space="preserve">
+    <value>Display all Boot Configuration Data entries in the boot store.</value>
+  </data>
+  <data name="Cmd_diag.problemdevices_Title" xml:space="preserve">
+    <value>List Devices With Problems</value>
+  </data>
+  <data name="Cmd_diag.problemdevices_Desc" xml:space="preserve">
+    <value>Enumerate devices currently reporting a driver or hardware problem.</value>
+  </data>
+  <data name="Cmd_diag.eventlogs_Title" xml:space="preserve">
+    <value>List All Event Logs</value>
+  </data>
+  <data name="Cmd_diag.eventlogs_Desc" xml:space="preserve">
+    <value>Enumerate every event log channel available on the system.</value>
+  </data>
+  <data name="Cmd_diag.joinstate_Title" xml:space="preserve">
+    <value>Device Join State (Entra/AD)</value>
+  </data>
+  <data name="Cmd_diag.joinstate_Desc" xml:space="preserve">
+    <value>Show Microsoft Entra/Active Directory join and device registration status.</value>
+  </data>
+  <data name="Cmd_clean.printqueue_Title" xml:space="preserve">
+    <value>Clear Stuck Print Queue</value>
+  </data>
+  <data name="Cmd_clean.printqueue_Desc" xml:space="preserve">
+    <value>Stop the Spooler, delete queued print jobs, then restart the Spooler.</value>
+  </data>
+  <data name="Cmd_clean.edgecache_Title" xml:space="preserve">
+    <value>Clear Microsoft Edge Cache</value>
+  </data>
+  <data name="Cmd_clean.edgecache_Desc" xml:space="preserve">
+    <value>Delete the Microsoft Edge default profile cache (close Edge first).</value>
+  </data>
+  <data name="Cmd_clean.teamscache_Title" xml:space="preserve">
+    <value>Clear New Teams Cache</value>
+  </data>
+  <data name="Cmd_clean.teamscache_Desc" xml:space="preserve">
+    <value>Delete the cache for the new Microsoft Teams app (close Teams first).</value>
+  </data>
 </root>

@@ -2081,4 +2081,244 @@
   <data name="Cmd_dev.telnet.off_Desc" xml:space="preserve">
     <value>Quita la característica de cliente Telnet de Windows.</value>
   </data>
+  <data name="Cmd_tweak.win11.widgets.hide_Title" xml:space="preserve">
+    <value>Ocultar el botón de Widgets (Win11)</value>
+  </data>
+  <data name="Cmd_tweak.win11.widgets.hide_Desc" xml:space="preserve">
+    <value>Quita el botón de Widgets de la barra de tareas de Windows 11 (por usuario; reinicia Explorer para aplicar).</value>
+  </data>
+  <data name="Cmd_tweak.win11.copilot.hide_Title" xml:space="preserve">
+    <value>Ocultar el botón de Copilot (Win11)</value>
+  </data>
+  <data name="Cmd_tweak.win11.copilot.hide_Desc" xml:space="preserve">
+    <value>Quita el botón de Copilot de la barra de tareas en Windows 11 22H2/23H2.</value>
+  </data>
+  <data name="Cmd_tweak.win11.endtask.on_Title" xml:space="preserve">
+    <value>Habilitar End Task en la barra de tareas (Win11)</value>
+  </data>
+  <data name="Cmd_tweak.win11.endtask.on_Desc" xml:space="preserve">
+    <value>Añade la opción End task a los menús contextuales de la barra de tareas (Windows 11 23H2+).</value>
+  </data>
+  <data name="Cmd_tweak.win11.taskbarlabels.show_Title" xml:space="preserve">
+    <value>Nunca combinar + etiquetas (Win11)</value>
+  </data>
+  <data name="Cmd_tweak.win11.taskbarlabels.show_Desc" xml:space="preserve">
+    <value>Muestra los botones de la barra de tareas sin combinar y con etiquetas de texto (Windows 11 22H2+; reinicia Explorer para aplicar).</value>
+  </data>
+  <data name="Cmd_tweak.win11.start.morepins_Title" xml:space="preserve">
+    <value>Diseño de Start: More Pins (Win11)</value>
+  </data>
+  <data name="Cmd_tweak.win11.start.morepins_Desc" xml:space="preserve">
+    <value>Cambia el menú Start de Windows 11 al diseño More pins.</value>
+  </data>
+  <data name="Cmd_tweak.dynamiclighting_Title" xml:space="preserve">
+    <value>Configuración de Dynamic Lighting (Win11)</value>
+  </data>
+  <data name="Cmd_tweak.dynamiclighting_Desc" xml:space="preserve">
+    <value>Abre la página de Dynamic Lighting para controlar los periféricos RGB de forma nativa (Windows 11 23H2+).</value>
+  </data>
+  <data name="Cmd_tweak.win10.newsinterests.hide_Title" xml:space="preserve">
+    <value>Desactivar News and Interests (Win10)</value>
+  </data>
+  <data name="Cmd_tweak.win10.newsinterests.hide_Desc" xml:space="preserve">
+    <value>Quita el elemento emergente de clima/noticias de News and Interests de la barra de tareas de Windows 10.</value>
+  </data>
+  <data name="Cmd_tweak.win10.meetnow.hide_Title" xml:space="preserve">
+    <value>Ocultar el icono de Meet Now (Win10)</value>
+  </data>
+  <data name="Cmd_tweak.win10.meetnow.hide_Desc" xml:space="preserve">
+    <value>Quita el icono de Skype Meet Now del área de notificación de Windows 10 (reinicia Explorer para aplicar).</value>
+  </data>
+  <data name="Cmd_tweak.win10.peoplebar.hide_Title" xml:space="preserve">
+    <value>Ocultar la barra de People (Win10)</value>
+  </data>
+  <data name="Cmd_tweak.win10.peoplebar.hide_Desc" xml:space="preserve">
+    <value>Quita el botón de People de la barra de tareas de Windows 10 (reinicia Explorer para aplicar).</value>
+  </data>
+  <data name="Cmd_tweak.win10.cortanabutton.hide_Title" xml:space="preserve">
+    <value>Ocultar el botón de Cortana (Win10)</value>
+  </data>
+  <data name="Cmd_tweak.win10.cortanabutton.hide_Desc" xml:space="preserve">
+    <value>Quita el botón de Cortana de la barra de tareas de Windows 10 (reinicia Explorer para aplicar).</value>
+  </data>
+  <data name="Cmd_tweak.win10.livetiles.off_Title" xml:space="preserve">
+    <value>Desactivar iconos dinámicos (Win10)</value>
+  </data>
+  <data name="Cmd_tweak.win10.livetiles.off_Desc" xml:space="preserve">
+    <value>Desactiva todas las notificaciones de iconos dinámicos del menú Start en Windows 10 (cierra sesión para aplicar).</value>
+  </data>
+  <data name="Cmd_tweak.startdelay.off_Title" xml:space="preserve">
+    <value>Desactivar el retraso de las apps de inicio</value>
+  </data>
+  <data name="Cmd_tweak.startdelay.off_Desc" xml:space="preserve">
+    <value>Elimina el retraso antes de que las apps de inicio se ejecuten al iniciar sesión (por usuario).</value>
+  </data>
+  <data name="Cmd_tweak.startsearch.noweb_Title" xml:space="preserve">
+    <value>Desactivar resultados web en la búsqueda</value>
+  </data>
+  <data name="Cmd_tweak.startsearch.noweb_Desc" xml:space="preserve">
+    <value>Impide que Windows Search muestre resultados y sugerencias web de Bing.</value>
+  </data>
+  <data name="Cmd_net.wifi.capabilities_Title" xml:space="preserve">
+    <value>Capacidades de radio Wi-Fi</value>
+  </data>
+  <data name="Cmd_net.wifi.capabilities_Desc" xml:space="preserve">
+    <value>Muestra los detalles del controlador del adaptador inalámbrico y los tipos de radio compatibles (802.11 a/b/g/n/ac/ax).</value>
+  </data>
+  <data name="Cmd_net.tcp.global_Title" xml:space="preserve">
+    <value>Mostrar la configuración global de TCP</value>
+  </data>
+  <data name="Cmd_net.tcp.global_Desc" xml:space="preserve">
+    <value>Muestra los parámetros globales de ajuste de TCP/IP, como el ajuste automático y el proveedor de congestión.</value>
+  </data>
+  <data name="Cmd_net.wlan.report_Title" xml:space="preserve">
+    <value>Generar informe de historial de Wi-Fi</value>
+  </data>
+  <data name="Cmd_net.wlan.report_Desc" xml:space="preserve">
+    <value>Crea un informe de conectividad Wi-Fi en HTML dentro de ProgramData para solucionar problemas.</value>
+  </data>
+  <data name="Cmd_storage.smart.reliability_Title" xml:space="preserve">
+    <value>Contadores de fiabilidad SMART del disco</value>
+  </data>
+  <data name="Cmd_storage.smart.reliability_Desc" xml:space="preserve">
+    <value>Muestra los contadores SMART de desgaste, temperatura y errores de lectura/escritura de los discos físicos.</value>
+  </data>
+  <data name="Cmd_storage.dirty.query_Title" xml:space="preserve">
+    <value>Consultar el bit dirty del volumen</value>
+  </data>
+  <data name="Cmd_storage.dirty.query_Desc" xml:space="preserve">
+    <value>Comprueba si la unidad C: está marcada como dirty y si chkdsk la analizará en el próximo arranque.</value>
+  </data>
+  <data name="Cmd_storage.sectorinfo_Title" xml:space="preserve">
+    <value>Información del tamaño de sector del disco</value>
+  </data>
+  <data name="Cmd_storage.sectorinfo_Desc" xml:space="preserve">
+    <value>Muestra los tamaños de sector físico y lógico y la información de alineación de la unidad C:.</value>
+  </data>
+  <data name="Cmd_power.waketimers_Title" xml:space="preserve">
+    <value>Listar temporizadores de reactivación activos</value>
+  </data>
+  <data name="Cmd_power.waketimers_Desc" xml:space="preserve">
+    <value>Muestra los temporizadores programados que pueden reactivar el equipo desde la suspensión.</value>
+  </data>
+  <data name="Cmd_power.hibernate.reduced_Title" xml:space="preserve">
+    <value>Reducir el tamaño del archivo de hibernación</value>
+  </data>
+  <data name="Cmd_power.hibernate.reduced_Desc" xml:space="preserve">
+    <value>Configura hiberfil.sys en modo reducido (compatible con fast startup, no con la hibernación completa) para ahorrar espacio en disco.</value>
+  </data>
+  <data name="Cmd_power.energysaver.settings_Title" xml:space="preserve">
+    <value>Configuración de Energy Saver (Win11 24H2)</value>
+  </data>
+  <data name="Cmd_power.energysaver.settings_Desc" xml:space="preserve">
+    <value>Abre la página de configuración de Energy Saver introducida para equipos de escritorio en Windows 11 24H2.</value>
+  </data>
+  <data name="Cmd_sec.recall.status_Title" xml:space="preserve">
+    <value>Estado de la función Recall (Win11 24H2)</value>
+  </data>
+  <data name="Cmd_sec.recall.status_Desc" xml:space="preserve">
+    <value>Muestra si la función opcional Windows Recall está habilitada, deshabilitada o eliminada.</value>
+  </data>
+  <data name="Cmd_sec.presence.settings_Title" xml:space="preserve">
+    <value>Configuración de detección de presencia (Win11)</value>
+  </data>
+  <data name="Cmd_sec.presence.settings_Desc" xml:space="preserve">
+    <value>Abre la configuración de privacidad de detección de presencia para sensores de presencia compatibles (Windows 11 22H2+).</value>
+  </data>
+  <data name="Cmd_sec.localadmins_Title" xml:space="preserve">
+    <value>Miembros del grupo Administrators local</value>
+  </data>
+  <data name="Cmd_sec.localadmins_Desc" xml:space="preserve">
+    <value>Enumera todos los miembros del grupo local Administrators (mediante el SID conocido).</value>
+  </data>
+  <data name="Cmd_sec.certstore.root_Title" xml:space="preserve">
+    <value>Certificados de raíz de confianza</value>
+  </data>
+  <data name="Cmd_sec.certstore.root_Desc" xml:space="preserve">
+    <value>Enumera los certificados del almacén de entidades de certificación raíz de confianza del equipo.</value>
+  </data>
+  <data name="Cmd_sec.firewall.rules_Title" xml:space="preserve">
+    <value>Reglas del firewall (todas)</value>
+  </data>
+  <data name="Cmd_sec.firewall.rules_Desc" xml:space="preserve">
+    <value>Muestra todas las reglas configuradas de Windows Defender Firewall con sus ajustes.</value>
+  </data>
+  <data name="Cmd_dev.devdrive.query_Title" xml:space="preserve">
+    <value>Estado de Dev Drive (fsutil)</value>
+  </data>
+  <data name="Cmd_dev.devdrive.query_Desc" xml:space="preserve">
+    <value>Consulta la compatibilidad con Dev Drive y los filtros que se pueden adjuntar (Windows 11 22H2+).</value>
+  </data>
+  <data name="Cmd_dev.sudo.status_Title" xml:space="preserve">
+    <value>Estado de Sudo for Windows</value>
+  </data>
+  <data name="Cmd_dev.sudo.status_Desc" xml:space="preserve">
+    <value>Informa si Sudo for Windows está habilitado y en qué modo de ejecución (Windows 11 24H2).</value>
+  </data>
+  <data name="Cmd_dev.hyperv.vms_Title" xml:space="preserve">
+    <value>Listar máquinas virtuales de Hyper-V</value>
+  </data>
+  <data name="Cmd_dev.hyperv.vms_Desc" xml:space="preserve">
+    <value>Enumera las máquinas virtuales de Hyper-V con su estado, CPU, memoria y tiempo de actividad (requiere Hyper-V).</value>
+  </data>
+  <data name="Cmd_dev.bcdedit.hypervisor_Title" xml:space="preserve">
+    <value>Tipo de inicio del hipervisor de arranque</value>
+  </data>
+  <data name="Cmd_dev.bcdedit.hypervisor_Desc" xml:space="preserve">
+    <value>Muestra la entrada de arranque actual, incluida la configuración hypervisorlaunchtype.</value>
+  </data>
+  <data name="Cmd_info.whoami_Title" xml:space="preserve">
+    <value>Derechos y grupos del usuario actual</value>
+  </data>
+  <data name="Cmd_info.whoami_Desc" xml:space="preserve">
+    <value>Muestra el SID del usuario actual, sus pertenencias a grupos y los privilegios habilitados.</value>
+  </data>
+  <data name="Cmd_info.startapps_Title" xml:space="preserve">
+    <value>Listar apps del menú Start y sus ID</value>
+  </data>
+  <data name="Cmd_info.startapps_Desc" xml:space="preserve">
+    <value>Enumera todas las apps del menú Start con sus identificadores de inicio AppUserModelID.</value>
+  </data>
+  <data name="Cmd_info.bootconfig_Title" xml:space="preserve">
+    <value>Ver la configuración de arranque (BCD)</value>
+  </data>
+  <data name="Cmd_info.bootconfig_Desc" xml:space="preserve">
+    <value>Muestra todas las entradas de Boot Configuration Data del almacén de arranque.</value>
+  </data>
+  <data name="Cmd_diag.problemdevices_Title" xml:space="preserve">
+    <value>Listar dispositivos con problemas</value>
+  </data>
+  <data name="Cmd_diag.problemdevices_Desc" xml:space="preserve">
+    <value>Enumera los dispositivos que actualmente informan de un problema de controlador o hardware.</value>
+  </data>
+  <data name="Cmd_diag.eventlogs_Title" xml:space="preserve">
+    <value>Listar todos los registros de eventos</value>
+  </data>
+  <data name="Cmd_diag.eventlogs_Desc" xml:space="preserve">
+    <value>Enumera todos los canales de registro de eventos disponibles en el sistema.</value>
+  </data>
+  <data name="Cmd_diag.joinstate_Title" xml:space="preserve">
+    <value>Estado de unión del dispositivo (Entra/AD)</value>
+  </data>
+  <data name="Cmd_diag.joinstate_Desc" xml:space="preserve">
+    <value>Muestra el estado de unión a Microsoft Entra/Active Directory y de registro del dispositivo.</value>
+  </data>
+  <data name="Cmd_clean.printqueue_Title" xml:space="preserve">
+    <value>Vaciar la cola de impresión atascada</value>
+  </data>
+  <data name="Cmd_clean.printqueue_Desc" xml:space="preserve">
+    <value>Detiene el Spooler, elimina los trabajos de impresión en cola y luego reinicia el Spooler.</value>
+  </data>
+  <data name="Cmd_clean.edgecache_Title" xml:space="preserve">
+    <value>Borrar la caché de Microsoft Edge</value>
+  </data>
+  <data name="Cmd_clean.edgecache_Desc" xml:space="preserve">
+    <value>Elimina la caché del perfil predeterminado de Microsoft Edge (cierra Edge primero).</value>
+  </data>
+  <data name="Cmd_clean.teamscache_Title" xml:space="preserve">
+    <value>Borrar la caché del nuevo Teams</value>
+  </data>
+  <data name="Cmd_clean.teamscache_Desc" xml:space="preserve">
+    <value>Elimina la caché de la nueva app de Microsoft Teams (cierra Teams primero).</value>
+  </data>
 </root>

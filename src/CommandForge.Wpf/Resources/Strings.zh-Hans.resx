@@ -2081,4 +2081,244 @@
   <data name="Cmd_dev.telnet.off_Desc" xml:space="preserve">
     <value>删除 Windows Telnet 客户端功能。</value>
   </data>
+  <data name="Cmd_tweak.win11.widgets.hide_Title" xml:space="preserve">
+    <value>隐藏 Widgets 按钮 (Win11)</value>
+  </data>
+  <data name="Cmd_tweak.win11.widgets.hide_Desc" xml:space="preserve">
+    <value>从 Windows 11 任务栏中移除 Widgets 按钮（按用户设置；重启 Explorer 后生效）。</value>
+  </data>
+  <data name="Cmd_tweak.win11.copilot.hide_Title" xml:space="preserve">
+    <value>隐藏 Copilot 按钮 (Win11)</value>
+  </data>
+  <data name="Cmd_tweak.win11.copilot.hide_Desc" xml:space="preserve">
+    <value>从 Windows 11 22H2/23H2 的任务栏中移除 Copilot 按钮。</value>
+  </data>
+  <data name="Cmd_tweak.win11.endtask.on_Title" xml:space="preserve">
+    <value>启用任务栏 End Task (Win11)</value>
+  </data>
+  <data name="Cmd_tweak.win11.endtask.on_Desc" xml:space="preserve">
+    <value>在任务栏右键菜单中添加 End task（结束任务）项（Windows 11 23H2+）。</value>
+  </data>
+  <data name="Cmd_tweak.win11.taskbarlabels.show_Title" xml:space="preserve">
+    <value>从不合并 + 显示标签 (Win11)</value>
+  </data>
+  <data name="Cmd_tweak.win11.taskbarlabels.show_Desc" xml:space="preserve">
+    <value>以不合并的方式显示任务栏按钮并附带文字标签（Windows 11 22H2+；重启 Explorer 后生效）。</value>
+  </data>
+  <data name="Cmd_tweak.win11.start.morepins_Title" xml:space="preserve">
+    <value>Start 布局：More Pins (Win11)</value>
+  </data>
+  <data name="Cmd_tweak.win11.start.morepins_Desc" xml:space="preserve">
+    <value>将 Windows 11 的 Start 菜单切换为 More pins（更多固定项）布局。</value>
+  </data>
+  <data name="Cmd_tweak.dynamiclighting_Title" xml:space="preserve">
+    <value>Dynamic Lighting 设置 (Win11)</value>
+  </data>
+  <data name="Cmd_tweak.dynamiclighting_Desc" xml:space="preserve">
+    <value>打开 Dynamic Lighting 页面，以原生方式控制 RGB 外设（Windows 11 23H2+）。</value>
+  </data>
+  <data name="Cmd_tweak.win10.newsinterests.hide_Title" xml:space="preserve">
+    <value>关闭 News and Interests (Win10)</value>
+  </data>
+  <data name="Cmd_tweak.win10.newsinterests.hide_Desc" xml:space="preserve">
+    <value>从 Windows 10 任务栏中移除 News and Interests 的天气/新闻浮出控件。</value>
+  </data>
+  <data name="Cmd_tweak.win10.meetnow.hide_Title" xml:space="preserve">
+    <value>隐藏 Meet Now 图标 (Win10)</value>
+  </data>
+  <data name="Cmd_tweak.win10.meetnow.hide_Desc" xml:space="preserve">
+    <value>从 Windows 10 系统托盘中移除 Skype Meet Now 图标（重启 Explorer 后生效）。</value>
+  </data>
+  <data name="Cmd_tweak.win10.peoplebar.hide_Title" xml:space="preserve">
+    <value>隐藏 People 栏 (Win10)</value>
+  </data>
+  <data name="Cmd_tweak.win10.peoplebar.hide_Desc" xml:space="preserve">
+    <value>从 Windows 10 任务栏中移除 People 按钮（重启 Explorer 后生效）。</value>
+  </data>
+  <data name="Cmd_tweak.win10.cortanabutton.hide_Title" xml:space="preserve">
+    <value>隐藏 Cortana 按钮 (Win10)</value>
+  </data>
+  <data name="Cmd_tweak.win10.cortanabutton.hide_Desc" xml:space="preserve">
+    <value>从 Windows 10 任务栏中移除 Cortana 按钮（重启 Explorer 后生效）。</value>
+  </data>
+  <data name="Cmd_tweak.win10.livetiles.off_Title" xml:space="preserve">
+    <value>关闭动态磁贴 (Win10)</value>
+  </data>
+  <data name="Cmd_tweak.win10.livetiles.off_Desc" xml:space="preserve">
+    <value>在 Windows 10 上禁用所有 Start 菜单的动态磁贴通知（注销后生效）。</value>
+  </data>
+  <data name="Cmd_tweak.startdelay.off_Title" xml:space="preserve">
+    <value>禁用启动应用延迟</value>
+  </data>
+  <data name="Cmd_tweak.startdelay.off_Desc" xml:space="preserve">
+    <value>取消登录时启动应用运行前的延迟（按用户设置）。</value>
+  </data>
+  <data name="Cmd_tweak.startsearch.noweb_Title" xml:space="preserve">
+    <value>禁用搜索中的网页结果</value>
+  </data>
+  <data name="Cmd_tweak.startsearch.noweb_Desc" xml:space="preserve">
+    <value>阻止 Windows Search 显示 Bing 网页结果和建议。</value>
+  </data>
+  <data name="Cmd_net.wifi.capabilities_Title" xml:space="preserve">
+    <value>Wi-Fi 无线电功能</value>
+  </data>
+  <data name="Cmd_net.wifi.capabilities_Desc" xml:space="preserve">
+    <value>显示无线适配器的驱动程序详情和支持的无线电类型（802.11 a/b/g/n/ac/ax）。</value>
+  </data>
+  <data name="Cmd_net.tcp.global_Title" xml:space="preserve">
+    <value>显示全局 TCP 设置</value>
+  </data>
+  <data name="Cmd_net.tcp.global_Desc" xml:space="preserve">
+    <value>显示全局 TCP/IP 调优参数，如自动调优和拥塞控制提供程序。</value>
+  </data>
+  <data name="Cmd_net.wlan.report_Title" xml:space="preserve">
+    <value>生成 Wi-Fi 历史报告</value>
+  </data>
+  <data name="Cmd_net.wlan.report_Desc" xml:space="preserve">
+    <value>在 ProgramData 下生成用于故障排查的 HTML 格式 Wi-Fi 连接报告。</value>
+  </data>
+  <data name="Cmd_storage.smart.reliability_Title" xml:space="preserve">
+    <value>磁盘 SMART 可靠性计数器</value>
+  </data>
+  <data name="Cmd_storage.smart.reliability_Desc" xml:space="preserve">
+    <value>显示物理磁盘的 SMART 损耗、温度以及读/写错误计数器。</value>
+  </data>
+  <data name="Cmd_storage.dirty.query_Title" xml:space="preserve">
+    <value>查询卷的脏位</value>
+  </data>
+  <data name="Cmd_storage.dirty.query_Desc" xml:space="preserve">
+    <value>检查 C: 驱动器是否被标记为脏（dirty）以及是否会在下次启动时由 chkdsk 扫描。</value>
+  </data>
+  <data name="Cmd_storage.sectorinfo_Title" xml:space="preserve">
+    <value>磁盘扇区大小信息</value>
+  </data>
+  <data name="Cmd_storage.sectorinfo_Desc" xml:space="preserve">
+    <value>显示 C: 驱动器的物理和逻辑扇区大小及对齐信息。</value>
+  </data>
+  <data name="Cmd_power.waketimers_Title" xml:space="preserve">
+    <value>列出活动的唤醒计时器</value>
+  </data>
+  <data name="Cmd_power.waketimers_Desc" xml:space="preserve">
+    <value>显示允许将电脑从睡眠状态唤醒的计划计时器。</value>
+  </data>
+  <data name="Cmd_power.hibernate.reduced_Title" xml:space="preserve">
+    <value>缩减休眠文件大小</value>
+  </data>
+  <data name="Cmd_power.hibernate.reduced_Desc" xml:space="preserve">
+    <value>将 hiberfil.sys 设置为 reduced 模式（支持快速启动，但不支持完整休眠）以节省磁盘空间。</value>
+  </data>
+  <data name="Cmd_power.energysaver.settings_Title" xml:space="preserve">
+    <value>Energy Saver 设置 (Win11 24H2)</value>
+  </data>
+  <data name="Cmd_power.energysaver.settings_Desc" xml:space="preserve">
+    <value>打开 Windows 11 24H2 中为台式机引入的 Energy Saver 设置页面。</value>
+  </data>
+  <data name="Cmd_sec.recall.status_Title" xml:space="preserve">
+    <value>Recall 功能状态 (Win11 24H2)</value>
+  </data>
+  <data name="Cmd_sec.recall.status_Desc" xml:space="preserve">
+    <value>显示 Windows Recall 可选功能处于启用、禁用还是已移除的状态。</value>
+  </data>
+  <data name="Cmd_sec.presence.settings_Title" xml:space="preserve">
+    <value>存在感应设置 (Win11)</value>
+  </data>
+  <data name="Cmd_sec.presence.settings_Desc" xml:space="preserve">
+    <value>打开兼容存在感应传感器的存在感应隐私设置（Windows 11 22H2+）。</value>
+  </data>
+  <data name="Cmd_sec.localadmins_Title" xml:space="preserve">
+    <value>本地 Administrators 成员</value>
+  </data>
+  <data name="Cmd_sec.localadmins_Desc" xml:space="preserve">
+    <value>列出本地 Administrators 组的所有成员（按知名 SID）。</value>
+  </data>
+  <data name="Cmd_sec.certstore.root_Title" xml:space="preserve">
+    <value>受信任的根证书</value>
+  </data>
+  <data name="Cmd_sec.certstore.root_Desc" xml:space="preserve">
+    <value>列出计算机“受信任的根证书颁发机构”存储中的证书。</value>
+  </data>
+  <data name="Cmd_sec.firewall.rules_Title" xml:space="preserve">
+    <value>防火墙规则（全部）</value>
+  </data>
+  <data name="Cmd_sec.firewall.rules_Desc" xml:space="preserve">
+    <value>显示所有已配置的 Windows Defender Firewall 规则及其设置。</value>
+  </data>
+  <data name="Cmd_dev.devdrive.query_Title" xml:space="preserve">
+    <value>Dev Drive 状态 (fsutil)</value>
+  </data>
+  <data name="Cmd_dev.devdrive.query_Desc" xml:space="preserve">
+    <value>查询 Dev Drive 支持情况以及允许附加的筛选器（Windows 11 22H2+）。</value>
+  </data>
+  <data name="Cmd_dev.sudo.status_Title" xml:space="preserve">
+    <value>Sudo for Windows 状态</value>
+  </data>
+  <data name="Cmd_dev.sudo.status_Desc" xml:space="preserve">
+    <value>报告 Sudo for Windows 是否已启用及其运行模式（Windows 11 24H2）。</value>
+  </data>
+  <data name="Cmd_dev.hyperv.vms_Title" xml:space="preserve">
+    <value>列出 Hyper-V 虚拟机</value>
+  </data>
+  <data name="Cmd_dev.hyperv.vms_Desc" xml:space="preserve">
+    <value>列出 Hyper-V 虚拟机及其状态、CPU、内存和运行时间（需要 Hyper-V）。</value>
+  </data>
+  <data name="Cmd_dev.bcdedit.hypervisor_Title" xml:space="preserve">
+    <value>启动时的 Hypervisor 启动类型</value>
+  </data>
+  <data name="Cmd_dev.bcdedit.hypervisor_Desc" xml:space="preserve">
+    <value>显示当前的启动项，包括 hypervisorlaunchtype 设置。</value>
+  </data>
+  <data name="Cmd_info.whoami_Title" xml:space="preserve">
+    <value>当前用户的权限和组</value>
+  </data>
+  <data name="Cmd_info.whoami_Desc" xml:space="preserve">
+    <value>显示当前用户的 SID、所属组以及已启用的特权。</value>
+  </data>
+  <data name="Cmd_info.startapps_Title" xml:space="preserve">
+    <value>列出 Start 菜单应用及其 ID</value>
+  </data>
+  <data name="Cmd_info.startapps_Desc" xml:space="preserve">
+    <value>列出所有 Start 菜单应用及其 AppUserModelID 启动标识符。</value>
+  </data>
+  <data name="Cmd_info.bootconfig_Title" xml:space="preserve">
+    <value>查看启动配置 (BCD)</value>
+  </data>
+  <data name="Cmd_info.bootconfig_Desc" xml:space="preserve">
+    <value>显示启动存储中的所有 Boot Configuration Data 项。</value>
+  </data>
+  <data name="Cmd_diag.problemdevices_Title" xml:space="preserve">
+    <value>列出存在问题的设备</value>
+  </data>
+  <data name="Cmd_diag.problemdevices_Desc" xml:space="preserve">
+    <value>枚举当前报告驱动程序或硬件问题的设备。</value>
+  </data>
+  <data name="Cmd_diag.eventlogs_Title" xml:space="preserve">
+    <value>列出所有事件日志</value>
+  </data>
+  <data name="Cmd_diag.eventlogs_Desc" xml:space="preserve">
+    <value>枚举系统上可用的所有事件日志通道。</value>
+  </data>
+  <data name="Cmd_diag.joinstate_Title" xml:space="preserve">
+    <value>设备加入状态 (Entra/AD)</value>
+  </data>
+  <data name="Cmd_diag.joinstate_Desc" xml:space="preserve">
+    <value>显示 Microsoft Entra/Active Directory 加入和设备注册状态。</value>
+  </data>
+  <data name="Cmd_clean.printqueue_Title" xml:space="preserve">
+    <value>清除卡住的打印队列</value>
+  </data>
+  <data name="Cmd_clean.printqueue_Desc" xml:space="preserve">
+    <value>停止 Spooler，删除队列中的打印作业，然后重启 Spooler。</value>
+  </data>
+  <data name="Cmd_clean.edgecache_Title" xml:space="preserve">
+    <value>清除 Microsoft Edge 缓存</value>
+  </data>
+  <data name="Cmd_clean.edgecache_Desc" xml:space="preserve">
+    <value>删除 Microsoft Edge 默认配置文件的缓存（请先关闭 Edge）。</value>
+  </data>
+  <data name="Cmd_clean.teamscache_Title" xml:space="preserve">
+    <value>清除新版 Teams 缓存</value>
+  </data>
+  <data name="Cmd_clean.teamscache_Desc" xml:space="preserve">
+    <value>删除新版 Microsoft Teams 应用的缓存（请先关闭 Teams）。</value>
+  </data>
 </root>

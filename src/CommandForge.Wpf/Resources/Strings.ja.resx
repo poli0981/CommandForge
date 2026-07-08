@@ -2081,4 +2081,244 @@
   <data name="Cmd_dev.telnet.off_Desc" xml:space="preserve">
     <value>Windows の Telnet クライアント機能を削除します。</value>
   </data>
+  <data name="Cmd_tweak.win11.widgets.hide_Title" xml:space="preserve">
+    <value>Widgets ボタンを非表示 (Win11)</value>
+  </data>
+  <data name="Cmd_tweak.win11.widgets.hide_Desc" xml:space="preserve">
+    <value>Windows 11 のタスクバーから Widgets ボタンを削除します（ユーザー単位。適用するには Explorer を再起動してください）。</value>
+  </data>
+  <data name="Cmd_tweak.win11.copilot.hide_Title" xml:space="preserve">
+    <value>Copilot ボタンを非表示 (Win11)</value>
+  </data>
+  <data name="Cmd_tweak.win11.copilot.hide_Desc" xml:space="preserve">
+    <value>Windows 11 22H2/23H2 のタスクバーから Copilot ボタンを削除します。</value>
+  </data>
+  <data name="Cmd_tweak.win11.endtask.on_Title" xml:space="preserve">
+    <value>タスクバーの End Task を有効化 (Win11)</value>
+  </data>
+  <data name="Cmd_tweak.win11.endtask.on_Desc" xml:space="preserve">
+    <value>タスクバーの右クリックメニューに End task 項目を追加します（Windows 11 23H2 以降）。</value>
+  </data>
+  <data name="Cmd_tweak.win11.taskbarlabels.show_Title" xml:space="preserve">
+    <value>結合しない + ラベル表示 (Win11)</value>
+  </data>
+  <data name="Cmd_tweak.win11.taskbarlabels.show_Desc" xml:space="preserve">
+    <value>タスクバーのボタンを結合せず、テキストラベル付きで表示します（Windows 11 22H2 以降。適用するには Explorer を再起動してください）。</value>
+  </data>
+  <data name="Cmd_tweak.win11.start.morepins_Title" xml:space="preserve">
+    <value>Start レイアウト: More Pins (Win11)</value>
+  </data>
+  <data name="Cmd_tweak.win11.start.morepins_Desc" xml:space="preserve">
+    <value>Windows 11 の Start メニューを More pins レイアウトに切り替えます。</value>
+  </data>
+  <data name="Cmd_tweak.dynamiclighting_Title" xml:space="preserve">
+    <value>Dynamic Lighting の設定 (Win11)</value>
+  </data>
+  <data name="Cmd_tweak.dynamiclighting_Desc" xml:space="preserve">
+    <value>Dynamic Lighting のページを開き、RGB 周辺機器を Windows 標準機能で制御します（Windows 11 23H2 以降）。</value>
+  </data>
+  <data name="Cmd_tweak.win10.newsinterests.hide_Title" xml:space="preserve">
+    <value>News and Interests を無効化 (Win10)</value>
+  </data>
+  <data name="Cmd_tweak.win10.newsinterests.hide_Desc" xml:space="preserve">
+    <value>Windows 10 のタスクバーから News and Interests の天気/ニュースのフライアウトを削除します。</value>
+  </data>
+  <data name="Cmd_tweak.win10.meetnow.hide_Title" xml:space="preserve">
+    <value>Meet Now アイコンを非表示 (Win10)</value>
+  </data>
+  <data name="Cmd_tweak.win10.meetnow.hide_Desc" xml:space="preserve">
+    <value>Windows 10 の通知領域から Skype Meet Now アイコンを削除します（適用するには Explorer を再起動してください）。</value>
+  </data>
+  <data name="Cmd_tweak.win10.peoplebar.hide_Title" xml:space="preserve">
+    <value>People バーを非表示 (Win10)</value>
+  </data>
+  <data name="Cmd_tweak.win10.peoplebar.hide_Desc" xml:space="preserve">
+    <value>Windows 10 のタスクバーから People ボタンを削除します（適用するには Explorer を再起動してください）。</value>
+  </data>
+  <data name="Cmd_tweak.win10.cortanabutton.hide_Title" xml:space="preserve">
+    <value>Cortana ボタンを非表示 (Win10)</value>
+  </data>
+  <data name="Cmd_tweak.win10.cortanabutton.hide_Desc" xml:space="preserve">
+    <value>Windows 10 のタスクバーから Cortana ボタンを削除します（適用するには Explorer を再起動してください）。</value>
+  </data>
+  <data name="Cmd_tweak.win10.livetiles.off_Title" xml:space="preserve">
+    <value>ライブタイルを無効化 (Win10)</value>
+  </data>
+  <data name="Cmd_tweak.win10.livetiles.off_Desc" xml:space="preserve">
+    <value>Windows 10 の Start メニューにおけるすべてのライブタイル通知を無効にします（適用するにはサインアウトしてください）。</value>
+  </data>
+  <data name="Cmd_tweak.startdelay.off_Title" xml:space="preserve">
+    <value>スタートアップアプリの遅延を無効化</value>
+  </data>
+  <data name="Cmd_tweak.startdelay.off_Desc" xml:space="preserve">
+    <value>サインイン時にスタートアップアプリが起動するまでの遅延を解除します（ユーザー単位）。</value>
+  </data>
+  <data name="Cmd_tweak.startsearch.noweb_Title" xml:space="preserve">
+    <value>検索での Web 結果を無効化</value>
+  </data>
+  <data name="Cmd_tweak.startsearch.noweb_Desc" xml:space="preserve">
+    <value>Windows Search が Bing の Web 検索結果や候補を表示しないようにします。</value>
+  </data>
+  <data name="Cmd_net.wifi.capabilities_Title" xml:space="preserve">
+    <value>Wi-Fi 無線機能</value>
+  </data>
+  <data name="Cmd_net.wifi.capabilities_Desc" xml:space="preserve">
+    <value>無線アダプターのドライバー情報とサポートされる無線方式（802.11 a/b/g/n/ac/ax）を表示します。</value>
+  </data>
+  <data name="Cmd_net.tcp.global_Title" xml:space="preserve">
+    <value>グローバル TCP 設定を表示</value>
+  </data>
+  <data name="Cmd_net.tcp.global_Desc" xml:space="preserve">
+    <value>自動チューニングや輻輳プロバイダーなど、グローバルな TCP/IP チューニングパラメーターを表示します。</value>
+  </data>
+  <data name="Cmd_net.wlan.report_Title" xml:space="preserve">
+    <value>Wi-Fi 履歴レポートを生成</value>
+  </data>
+  <data name="Cmd_net.wlan.report_Desc" xml:space="preserve">
+    <value>トラブルシューティング用に、ProgramData 配下へ HTML 形式の Wi-Fi 接続レポートを作成します。</value>
+  </data>
+  <data name="Cmd_storage.smart.reliability_Title" xml:space="preserve">
+    <value>ディスク SMART 信頼性カウンター</value>
+  </data>
+  <data name="Cmd_storage.smart.reliability_Desc" xml:space="preserve">
+    <value>物理ディスクの SMART の摩耗、温度、読み取り/書き込みエラーのカウンターを表示します。</value>
+  </data>
+  <data name="Cmd_storage.dirty.query_Title" xml:space="preserve">
+    <value>ボリュームの Dirty ビットを照会</value>
+  </data>
+  <data name="Cmd_storage.dirty.query_Desc" xml:space="preserve">
+    <value>ドライブ C: が dirty としてマークされ、次回起動時に chkdsk でスキャンされるかどうかを確認します。</value>
+  </data>
+  <data name="Cmd_storage.sectorinfo_Title" xml:space="preserve">
+    <value>ディスクのセクターサイズ情報</value>
+  </data>
+  <data name="Cmd_storage.sectorinfo_Desc" xml:space="preserve">
+    <value>ドライブ C: の物理/論理セクターサイズとアライメント情報を表示します。</value>
+  </data>
+  <data name="Cmd_power.waketimers_Title" xml:space="preserve">
+    <value>有効なウェイクタイマーを一覧表示</value>
+  </data>
+  <data name="Cmd_power.waketimers_Desc" xml:space="preserve">
+    <value>スリープ状態から PC を復帰させることが許可されているスケジュール済みタイマーを表示します。</value>
+  </data>
+  <data name="Cmd_power.hibernate.reduced_Title" xml:space="preserve">
+    <value>休止状態ファイルのサイズを縮小</value>
+  </data>
+  <data name="Cmd_power.hibernate.reduced_Desc" xml:space="preserve">
+    <value>ディスク容量を節約するため、hiberfil.sys を reduced モード（fast startup に対応、完全な休止状態には非対応）に設定します。</value>
+  </data>
+  <data name="Cmd_power.energysaver.settings_Title" xml:space="preserve">
+    <value>Energy Saver の設定 (Win11 24H2)</value>
+  </data>
+  <data name="Cmd_power.energysaver.settings_Desc" xml:space="preserve">
+    <value>Windows 11 24H2 でデスクトップ向けに導入された Energy Saver の設定ページを開きます。</value>
+  </data>
+  <data name="Cmd_sec.recall.status_Title" xml:space="preserve">
+    <value>Recall 機能の状態 (Win11 24H2)</value>
+  </data>
+  <data name="Cmd_sec.recall.status_Desc" xml:space="preserve">
+    <value>Windows Recall のオプション機能が有効、無効、または削除済みのいずれであるかを表示します。</value>
+  </data>
+  <data name="Cmd_sec.presence.settings_Title" xml:space="preserve">
+    <value>プレゼンス検出の設定 (Win11)</value>
+  </data>
+  <data name="Cmd_sec.presence.settings_Desc" xml:space="preserve">
+    <value>対応するプレゼンスセンサー向けのプレゼンス検出プライバシー設定を開きます（Windows 11 22H2 以降）。</value>
+  </data>
+  <data name="Cmd_sec.localadmins_Title" xml:space="preserve">
+    <value>ローカル Administrators のメンバー</value>
+  </data>
+  <data name="Cmd_sec.localadmins_Desc" xml:space="preserve">
+    <value>ローカルの Administrators グループのすべてのメンバーを一覧表示します（既知の SID を使用）。</value>
+  </data>
+  <data name="Cmd_sec.certstore.root_Title" xml:space="preserve">
+    <value>信頼されたルート証明書</value>
+  </data>
+  <data name="Cmd_sec.certstore.root_Desc" xml:space="preserve">
+    <value>コンピューターの「信頼されたルート証明機関」ストアにある証明書を一覧表示します。</value>
+  </data>
+  <data name="Cmd_sec.firewall.rules_Title" xml:space="preserve">
+    <value>ファイアウォールルール (すべて)</value>
+  </data>
+  <data name="Cmd_sec.firewall.rules_Desc" xml:space="preserve">
+    <value>構成済みの Windows Defender Firewall ルールをすべて設定内容とともに表示します。</value>
+  </data>
+  <data name="Cmd_dev.devdrive.query_Title" xml:space="preserve">
+    <value>Dev Drive の状態 (fsutil)</value>
+  </data>
+  <data name="Cmd_dev.devdrive.query_Desc" xml:space="preserve">
+    <value>Dev Drive のサポート状況と、アタッチが許可されているフィルターを照会します（Windows 11 22H2 以降）。</value>
+  </data>
+  <data name="Cmd_dev.sudo.status_Title" xml:space="preserve">
+    <value>Sudo for Windows の状態</value>
+  </data>
+  <data name="Cmd_dev.sudo.status_Desc" xml:space="preserve">
+    <value>Sudo for Windows が有効かどうか、およびどの実行モードであるかを報告します（Windows 11 24H2）。</value>
+  </data>
+  <data name="Cmd_dev.hyperv.vms_Title" xml:space="preserve">
+    <value>Hyper-V の仮想マシンを一覧表示</value>
+  </data>
+  <data name="Cmd_dev.hyperv.vms_Desc" xml:space="preserve">
+    <value>Hyper-V の仮想マシンを状態、CPU、メモリ、稼働時間とともに一覧表示します（Hyper-V が必要）。</value>
+  </data>
+  <data name="Cmd_dev.bcdedit.hypervisor_Title" xml:space="preserve">
+    <value>ブート時のハイパーバイザー起動タイプ</value>
+  </data>
+  <data name="Cmd_dev.bcdedit.hypervisor_Desc" xml:space="preserve">
+    <value>現在のブートエントリを、hypervisorlaunchtype の設定を含めて表示します。</value>
+  </data>
+  <data name="Cmd_info.whoami_Title" xml:space="preserve">
+    <value>現在のユーザーの権利とグループ</value>
+  </data>
+  <data name="Cmd_info.whoami_Desc" xml:space="preserve">
+    <value>現在のユーザーの SID、所属グループ、有効な特権を表示します。</value>
+  </data>
+  <data name="Cmd_info.startapps_Title" xml:space="preserve">
+    <value>Start メニューのアプリと ID を一覧表示</value>
+  </data>
+  <data name="Cmd_info.startapps_Desc" xml:space="preserve">
+    <value>Start メニューのすべてのアプリを、起動識別子である AppUserModelID とともに一覧表示します。</value>
+  </data>
+  <data name="Cmd_info.bootconfig_Title" xml:space="preserve">
+    <value>ブート構成を表示 (BCD)</value>
+  </data>
+  <data name="Cmd_info.bootconfig_Desc" xml:space="preserve">
+    <value>ブートストア内のすべての Boot Configuration Data エントリを表示します。</value>
+  </data>
+  <data name="Cmd_diag.problemdevices_Title" xml:space="preserve">
+    <value>問題のあるデバイスを一覧表示</value>
+  </data>
+  <data name="Cmd_diag.problemdevices_Desc" xml:space="preserve">
+    <value>現在ドライバーまたはハードウェアの問題を報告しているデバイスを列挙します。</value>
+  </data>
+  <data name="Cmd_diag.eventlogs_Title" xml:space="preserve">
+    <value>すべてのイベントログを一覧表示</value>
+  </data>
+  <data name="Cmd_diag.eventlogs_Desc" xml:space="preserve">
+    <value>システムで利用可能なすべてのイベントログチャネルを列挙します。</value>
+  </data>
+  <data name="Cmd_diag.joinstate_Title" xml:space="preserve">
+    <value>デバイスの参加状態 (Entra/AD)</value>
+  </data>
+  <data name="Cmd_diag.joinstate_Desc" xml:space="preserve">
+    <value>Microsoft Entra/Active Directory への参加とデバイス登録の状態を表示します。</value>
+  </data>
+  <data name="Cmd_clean.printqueue_Title" xml:space="preserve">
+    <value>詰まった印刷キューをクリア</value>
+  </data>
+  <data name="Cmd_clean.printqueue_Desc" xml:space="preserve">
+    <value>Spooler を停止し、キューに入っている印刷ジョブを削除してから、Spooler を再起動します。</value>
+  </data>
+  <data name="Cmd_clean.edgecache_Title" xml:space="preserve">
+    <value>Microsoft Edge のキャッシュをクリア</value>
+  </data>
+  <data name="Cmd_clean.edgecache_Desc" xml:space="preserve">
+    <value>Microsoft Edge の既定プロファイルのキャッシュを削除します（先に Edge を閉じてください）。</value>
+  </data>
+  <data name="Cmd_clean.teamscache_Title" xml:space="preserve">
+    <value>新しい Teams のキャッシュをクリア</value>
+  </data>
+  <data name="Cmd_clean.teamscache_Desc" xml:space="preserve">
+    <value>新しい Microsoft Teams アプリのキャッシュを削除します（先に Teams を閉じてください）。</value>
+  </data>
 </root>

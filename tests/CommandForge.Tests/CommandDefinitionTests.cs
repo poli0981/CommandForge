@@ -52,11 +52,24 @@ public sealed class CommandDefinitionTests
     [InlineData("tweak.win11.taskbarcenter", 22000)]
     [InlineData("tweak.clockseconds.on", 22621)]
     [InlineData("tweak.clockseconds.off", 22621)]
+    [InlineData("tweak.win11.widgets.hide", 22000)]
+    [InlineData("tweak.win11.endtask.on", 22631)]
     public void EmbeddedCatalog_Win11Commands_AreGated(string id, int expectedMinBuild)
     {
         var catalog = CatalogLoader.LoadEmbedded();
         var command = catalog.Commands.Single(c => c.Id == id);
         Assert.Equal(expectedMinBuild, command.MinOsBuild);
+    }
+
+    [Theory]
+    [InlineData("tweak.win10.meetnow.hide", 19045)]
+    [InlineData("tweak.win10.newsinterests.hide", 19045)]
+    [InlineData("tweak.win10.livetiles.off", 19045)]
+    public void EmbeddedCatalog_Win10OnlyCommands_AreCappedByMaxBuild(string id, int expectedMaxBuild)
+    {
+        var catalog = CatalogLoader.LoadEmbedded();
+        var command = catalog.Commands.Single(c => c.Id == id);
+        Assert.Equal(expectedMaxBuild, command.MaxOsBuild);
     }
 
     [Fact]
@@ -69,5 +82,17 @@ public sealed class CommandDefinitionTests
         Assert.Contains("tweak.win11.taskbarleft", hiddenOnWin10);
         Assert.Contains("tweak.clockseconds.on", hiddenOnWin10);
         Assert.DoesNotContain("dism.checkhealth", hiddenOnWin10); // ungated commands stay visible
+    }
+
+    [Fact]
+    public void EmbeddedCatalog_Win10OnlyTweaks_HiddenOnWindows11()
+    {
+        const int windows11Build = 22000;
+        const int windows10Build = 19045;
+        var catalog = CatalogLoader.LoadEmbedded();
+
+        var meetNow = catalog.Commands.Single(c => c.Id == "tweak.win10.meetnow.hide");
+        Assert.False(meetNow.AppliesToOsBuild(windows11Build)); // capped by maxOsBuild -> hidden on Windows 11
+        Assert.True(meetNow.AppliesToOsBuild(windows10Build));  // visible on Windows 10 22H2
     }
 }

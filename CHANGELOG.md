@@ -7,6 +7,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.5.0] — 2026-07-08
+
+### Added
+- **40 new commands** (catalog grew from 201 to 241), focused on rarely-used and Windows-version-specific
+  features, gated by OS build so Windows 10-only commands are hidden on Windows 11 and vice-versa:
+  - **Windows 11-only tweaks & pages:** hide the Widgets and Copilot taskbar buttons; enable taskbar
+    "End task"; "Never combine + labels" taskbar; "More pins" Start layout; and open Dynamic Lighting,
+    Presence sensing and (24H2) Energy Saver settings.
+  - **Windows 10-only tweaks:** turn off News and Interests; hide the Meet Now, People and Cortana
+    buttons; and turn off all Start menu live tiles.
+  - **Diagnostics & system info:** current-user rights & groups, Start menu app IDs, Boot Configuration
+    (BCD), devices reporting problems, all event-log channels and Entra/AD device-join state.
+  - **Security, storage, power, network & developer:** local Administrators members, trusted root
+    certificates, all firewall rules and Recall feature status (24H2); SMART reliability counters,
+    volume dirty bit and sector-size info; active wake timers and reduced-size hibernation; Wi-Fi radio
+    capabilities, global TCP settings and a Wi-Fi history report; and Dev Drive status, Sudo for Windows
+    status, the Hyper-V VM list and the boot hypervisor launch type.
+
+### Fixed
+- **TPM Status** and **Defender Exclusions** now run with administrator elevation, so they return
+  results instead of appearing blank (both underlying queries require an elevated session).
+
 ## [1.4.0] — 2026-06-29
 
 ### Added
@@ -126,7 +148,9 @@ Initial public release.
   checksums (and an optional VirusTotal scan). No telemetry — the only network use is checking
   GitHub for updates.
 
-[Unreleased]: https://github.com/poli0981/CommandForge/compare/v1.3.0...HEAD
+[Unreleased]: https://github.com/poli0981/CommandForge/compare/v1.5.0...HEAD
+[1.5.0]: https://github.com/poli0981/CommandForge/compare/v1.4.0...v1.5.0
+[1.4.0]: https://github.com/poli0981/CommandForge/compare/v1.3.0...v1.4.0
 [1.3.0]: https://github.com/poli0981/CommandForge/compare/v1.2.0...v1.3.0
 [1.2.0]: https://github.com/poli0981/CommandForge/compare/v1.1.1...v1.2.0
 [1.1.1]: https://github.com/poli0981/CommandForge/compare/v1.1.0...v1.1.1

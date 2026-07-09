@@ -1,6 +1,8 @@
 using System.Globalization;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Windows;
+using System.Windows.Interop;
 using CommandForge.Application;
 using CommandForge.Application.Ports;
 using CommandForge.Application.UseCases;
@@ -26,6 +28,7 @@ namespace CommandForge.Wpf;
 public partial class App : System.Windows.Application
 {
     private IHost? _host;
+    private SingleInstanceGuard? _guard;
 
     /// <inheritdoc />
     protected override void OnStartup(StartupEventArgs e)
@@ -33,6 +36,21 @@ public partial class App : System.Windows.Application
         // Velopack install/update lifecycle hooks. Must run before the host/UI; may exit the process.
         // Called directly in the main assembly so the vpk packager can verify its presence.
         VelopackApp.Build().Run();
+
+        // Single-instance guard. Placed after Velopack (whose hook invocations exit inside Run())
+        // so those transient processes are never counted as a second instance. A later launch
+        // signals the primary to surface its window, then exits silently.
+        var guard = new SingleInstanceGuard();
+        if (!guard.IsPrimaryInstance)
+        {
+            guard.SignalPrimaryInstance();
+            guard.Dispose();
+            Shutdown(); // _guard is left null, so OnExit's _guard?.Dispose() is a no-op.
+            return;
+        }
+
+        _guard = guard;
+        _guard.StartListening(OnActivationRequested);
 
         base.OnStartup(e);
 
@@ -144,9 +162,37 @@ public partial class App : System.Windows.Application
         }
     }
 
+    /// <summary>Invoked (on a background thread) when a second instance asks us to surface our window.</summary>
+    private void OnActivationRequested() => Dispatcher.InvokeAsync(ActivateExistingWindow);
+
+    /// <summary>Restores and foregrounds the existing top-level window (main window, or the Legal Gate if it is still open).</summary>
+    private void ActivateExistingWindow()
+    {
+        var window = MainWindow
+            ?? System.Windows.Application.Current.Windows.Cast<Window>().LastOrDefault();
+        if (window is null)
+        {
+            return; // Signalled before any window is shown — the primary is about to show one anyway.
+        }
+
+        if (window.WindowState == WindowState.Minimized)
+        {
+            window.WindowState = WindowState.Normal; // MainWindow is NoResize, so Normal fully restores it.
+        }
+
+        window.Show();
+        window.Activate();
+        SetForegroundWindow(new WindowInteropHelper(window).Handle);
+    }
+
+    [DllImport("user32.dll")]
+    [return: MarshalAs(UnmanagedType.Bool)]
+    private static extern bool SetForegroundWindow(IntPtr hWnd);
+
     /// <inheritdoc />
     protected override void OnExit(ExitEventArgs e)
     {
+        _guard?.Dispose();
         Log.Information("CommandForge shutting down");
         Log.CloseAndFlush();
         _host?.Dispose();

@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.5.1] — 2026-07-09
+
+### Fixed
+- **Single instance:** launching the app while it is already running no longer opens a second
+  window. Later launches bring the existing window to the foreground (restoring it if minimized)
+  and then exit.
+
 ## [1.5.0] — 2026-07-08
 
 ### Added

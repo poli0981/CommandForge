@@ -35,8 +35,9 @@ The only network connection involved is to GitHub (see [PRIVACY.md](PRIVACY.md))
   `UpdateManager(new GithubSource("https://github.com/poli0981/CommandForge", null, prerelease: false))`.
 - Download and apply are separate steps, so the app can end the admin session and check for a
   running command just before it restarts.
-- Auto-update only works for an **installed** build (not a dev or portable run); the app detects
-  this and says so instead of offering an update.
+- Auto-update works for the installed app and for the portable zip from the releases page (both
+  carry Velopack's `Update.exe`). A build you run from source can't update; the app detects this
+  and says so instead of offering an update.
 
 ## Release artifacts and the delta mechanism
 
@@ -45,7 +46,7 @@ Each release (see [RELEASING.md](RELEASING.md)) uploads the contents of `Release
 | Asset | Purpose |
 |---|---|
 | `CommandForge-win-Setup.exe` | First-time installer |
-| `CommandForge-win-Portable.zip` | The app without an installer (settings and logs still go to `%AppData%\CommandForge`) |
+| `CommandForge-win-Portable.zip` | The app without an installer; extract it anywhere and it updates itself in place (settings and logs still go to `%AppData%\CommandForge`) |
 | `CommandForge-<version>-full.nupkg` | Full package (fallback / first install of a version) |
 | `CommandForge-<version>-delta.nupkg` | Delta from the previous version (small download) |
 | `releases.win.json` / `RELEASES` | Update manifest the client reads |

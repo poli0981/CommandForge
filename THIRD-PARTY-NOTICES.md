@@ -1,29 +1,37 @@
 # Third-Party Notices
 
 CommandForge (licensed under GPLv3) bundles or depends on the third-party components below.
-Each remains under its own license; all are compatible with GPLv3. Versions reflect the current
-build — see the `.csproj` files for the authoritative versions.
+Each remains under its own license; every component shipped with the app is compatible with
+GPLv3. Versions reflect the current build — see the `.csproj` files for the authoritative
+versions.
 
-## NuGet packages (runtime)
+## NuGet packages shipped with the app
 
 | Component | Version | License | Project |
 |---|---|---|---|
-| MaterialDesignThemes (+ MaterialDesignColors) | 5.3.2 | MIT | https://github.com/MaterialDesignInXAML/MaterialDesignInXamlToolkit |
+| WPF-UI (+ WPF-UI.Abstractions) | 4.3.0 | MIT | https://github.com/lepoco/wpfui |
 | CommunityToolkit.Mvvm | 8.4.2 | MIT | https://github.com/CommunityToolkit/dotnet |
-| Microsoft.Extensions.Hosting | 10.0.9 | MIT | https://github.com/dotnet/runtime |
-| Microsoft.Extensions.DependencyInjection.Abstractions | 10.0.9 | MIT | https://github.com/dotnet/runtime |
-| Serilog | 4.3.1 | Apache-2.0 | https://github.com/serilog/serilog |
-| Serilog.Extensions.Hosting | 10.0.0 | Apache-2.0 | https://github.com/serilog/serilog-extensions-hosting |
+| Microsoft.Extensions.DependencyInjection (+ .Abstractions) | 10.0.13 | MIT | https://github.com/dotnet/runtime |
+| Serilog | 4.4.0 | Apache-2.0 | https://github.com/serilog/serilog |
 | Serilog.Sinks.File | 7.0.0 | Apache-2.0 | https://github.com/serilog/serilog-sinks-file |
 | Serilog.Sinks.Async | 2.1.0 | Apache-2.0 | https://github.com/serilog/serilog-sinks-async |
-| Velopack | 1.2.0 | MIT | https://github.com/velopack/velopack |
-| System.Text.Json | (bundled with .NET 10) | MIT | https://github.com/dotnet/runtime |
+| Velopack (library, installer and update helpers) | 1.2.161 | MIT | https://github.com/velopack/velopack |
+| System.Text.Json and the rest of the .NET libraries | (bundled with .NET 10) | MIT | https://github.com/dotnet/runtime |
 
-## Build-time only (not redistributed)
+WPF-UI incorporates code from VirtualizingWrapPanel, dotnet/wpf and microsoft-ui-xaml (all MIT)
+and the Fluent System Icons (below); see the `ThirdPartyNotices.txt` in the WPF-UI package.
+
+## Build and test tools (not redistributed)
 
 | Component | Version | License | Project |
 |---|---|---|---|
-| Microsoft.Windows.CsWin32 | 0.3.296 | MIT | https://github.com/microsoft/CsWin32 |
+| Microsoft.Windows.CsWin32 | 0.3.366 | MIT | https://github.com/microsoft/CsWin32 |
+| SonarAnalyzer.CSharp | 10.35.0.4138 | SONAR Source-Available License v1.0 | https://github.com/SonarSource/sonar-dotnet |
+| vpk (Velopack CLI) | 1.2.161 | MIT | https://github.com/velopack/velopack |
+| xunit.v3 (`xunit.v3.mtp-off`) | 4.0.2 | Apache-2.0 | https://github.com/xunit/xunit |
+| xunit.runner.visualstudio | 4.0.1 | Apache-2.0 | https://github.com/xunit/visualstudio.xunit |
+| Microsoft.NET.Test.Sdk | 18.11.0 | MIT | https://github.com/microsoft/vstest |
+| coverlet.collector | 10.1.0 | MIT | https://github.com/coverlet-coverage/coverlet |
 
 ## Runtime & platform
 
@@ -31,11 +39,11 @@ build — see the `.csproj` files for the authoritative versions.
 
 ## Fonts & icons
 
-- **Material Design Icons** (via MaterialDesignThemes `PackIcon`) — Apache-2.0 / SIL OFL 1.1 —
-  https://github.com/Templarian/MaterialDesign
-- **Cascadia Code / Cascadia Mono** (console/monospace, referenced by name with fallbacks; not
-  bundled) — SIL OFL 1.1 — https://github.com/microsoft/cascadia-code
-- **Segoe UI / Segoe UI Variable** — Windows system font (not bundled).
+- **Fluent System Icons** (bundled inside WPF-UI; used for every icon in the app) — MIT,
+  © Microsoft Corporation — https://github.com/microsoft/fluentui-system-icons
+- **Cascadia Mono** (console and code text, referenced by name with Consolas / Courier New
+  fallbacks; not bundled) — SIL OFL 1.1 — https://github.com/microsoft/cascadia-code
+- **Segoe UI Variable / Segoe UI** — Windows system fonts (not bundled).
 
 ## AI disclosure
 

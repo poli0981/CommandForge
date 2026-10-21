@@ -7,7 +7,10 @@ behavior that violates
 [GitHub's Acceptable Use Policies](https://docs.github.com/site-policy/acceptable-use-policies)
 are not tolerated in this project's spaces (issues, pull requests, discussions, and comments).
 
-Please read the full text linked above. To report unacceptable behavior, contact the maintainer
-via [GitHub private vulnerability reporting](https://github.com/poli0981/CommandForge/security/advisories/new)
-or by opening a minimal issue asking for a private contact channel (do not include sensitive
-details in a public issue).
+Please read the full text linked above.
+
+## Reporting
+
+To report unacceptable behavior, email **[code@poli0981.dev](mailto:code@poli0981.dev)**. Reports
+are handled privately; don't put sensitive details in a public issue. You can also use GitHub's
+**Report content** option on the comment or issue concerned.

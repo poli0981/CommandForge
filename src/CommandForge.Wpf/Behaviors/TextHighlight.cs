@@ -2,11 +2,11 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 
-namespace CommandForge.Wpf.Behaviors;
+namespace CommandForge.Desktop.Behaviors;
 
 /// <summary>
 /// Attached behavior that renders a <see cref="TextBlock"/>'s text with the fuzzy-matched
-/// characters bolded. Bind <see cref="TextProperty"/> to the text and
+/// characters bolded and underlined. Bind <see cref="TextProperty"/> to the text and
 /// <see cref="MatchesProperty"/> to the matched indices.
 /// </summary>
 public static class TextHighlight
@@ -58,7 +58,10 @@ public static class TextHighlight
             var run = new Run(text[start..index]);
             if (isMatch)
             {
+                // Bold and underlined, in the row's own color: an accent color would vanish on a
+                // selected (accent) row.
                 run.FontWeight = FontWeights.Bold;
+                run.TextDecorations = TextDecorations.Underline;
             }
 
             textBlock.Inlines.Add(run);

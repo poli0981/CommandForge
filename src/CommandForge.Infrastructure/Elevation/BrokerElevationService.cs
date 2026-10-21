@@ -32,6 +32,9 @@ internal sealed class BrokerElevationService : IElevationService, IDisposable
     public bool IsSessionActive => _channel is not null && _server is { IsConnected: true };
 
     /// <inheritdoc />
+    public event EventHandler? SessionChanged;
+
+    /// <inheritdoc />
     public async Task<ExecutionResult> RunElevatedAsync(
         CommandDefinition command,
         ChannelWriter<OutputLine> output,
@@ -193,6 +196,7 @@ internal sealed class BrokerElevationService : IElevationService, IDisposable
                 _server = server;
                 _channel = new PipeMessageChannel(server);
                 _log.Information("Elevated session started (Elevator process {ProcessId}).", _elevator.Id);
+                SessionChanged?.Invoke(this, EventArgs.Empty);
                 return _channel;
             }
             catch
@@ -281,6 +285,7 @@ internal sealed class BrokerElevationService : IElevationService, IDisposable
 
     private void ResetConnection()
     {
+        var hadSession = _server is not null;
         _channel?.Dispose();
         _channel = null;
 
@@ -290,6 +295,11 @@ internal sealed class BrokerElevationService : IElevationService, IDisposable
 
         _elevator?.Dispose();
         _elevator = null;
+
+        if (hadSession)
+        {
+            SessionChanged?.Invoke(this, EventArgs.Empty);
+        }
     }
 
     public void Dispose()

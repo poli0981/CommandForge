@@ -1,7 +1,7 @@
 using CommandForge.Application.Ports;
 using CommandForge.Application.UseCases;
-using CommandForge.Wpf.Resources;
-using CommandForge.Wpf.ViewModels;
+using CommandForge.Desktop.Resources;
+using CommandForge.Desktop.ViewModels;
 
 namespace CommandForge.Tests;
 

@@ -1,17 +1,18 @@
-using System.Windows;
-using CommandForge.Wpf.Resources;
+using System.Windows.Controls;
+using CommandForge.Desktop.Resources;
 
-namespace CommandForge.Wpf.Views;
+namespace CommandForge.Desktop.Views;
 
 /// <summary>Read-only list of keyboard shortcuts (those actually wired in the shell).</summary>
-public partial class KeyboardShortcutsDialog : Window
+public partial class KeyboardShortcutsView : UserControl
 {
-    public KeyboardShortcutsDialog()
+    public KeyboardShortcutsView()
     {
         InitializeComponent();
-        DataContext = new[]
+        ShortcutList.ItemsSource = new[]
         {
             new Shortcut("Ctrl+K", Strings.Get("Shortcuts_Palette")),
+            new Shortcut("Ctrl+F", Strings.Get("Shortcuts_Search")),
             new Shortcut("Ctrl+H", Strings.Get("SidebarHome")),
             new Shortcut("Ctrl+B", Strings.Get("MenuToggleSidebar")),
             new Shortcut("Ctrl+,", Strings.Get("Menu_OpenSettings")),
@@ -23,8 +24,6 @@ public partial class KeyboardShortcutsDialog : Window
             new Shortcut("Esc", Strings.Get("Shortcuts_CloseDialog")),
         };
     }
-
-    private void OnCloseClick(object sender, RoutedEventArgs e) => Close();
 
     private sealed record Shortcut(string Key, string Action);
 }

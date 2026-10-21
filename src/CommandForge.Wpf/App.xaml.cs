@@ -6,18 +6,18 @@ using System.Windows.Interop;
 using CommandForge.Application;
 using CommandForge.Application.Ports;
 using CommandForge.Application.UseCases;
+using CommandForge.Desktop.Resources;
+using CommandForge.Desktop.Theming;
+using CommandForge.Desktop.Views;
 using CommandForge.Infrastructure;
 using CommandForge.Infrastructure.DependencyInjection;
 using CommandForge.Infrastructure.Logging;
-using CommandForge.Wpf.Resources;
-using CommandForge.Wpf.Theming;
-using CommandForge.Wpf.Views;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
 using Serilog.Core;
 using Serilog.Events;
 
-namespace CommandForge.Wpf;
+namespace CommandForge.Desktop;
 
 /// <summary>
 /// The WPF application. Builds the DI container and Serilog, then routes to the Legal Gate or the

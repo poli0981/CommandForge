@@ -1,8 +1,8 @@
-using System.Diagnostics;
+using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Navigation;
+using CommandForge.Desktop.Services;
 
-namespace CommandForge.Wpf.Views;
+namespace CommandForge.Desktop.Views;
 
 /// <summary>
 /// The four legal documents (EULA / GPLv3 / Disclaimer / Privacy) as tabs with a summary and a
@@ -10,11 +10,15 @@ namespace CommandForge.Wpf.Views;
 /// </summary>
 public partial class LegalDocumentsView : UserControl
 {
+    private readonly ShellService _shell = new();
+
     public LegalDocumentsView() => InitializeComponent();
 
-    private void OnRequestNavigate(object sender, RequestNavigateEventArgs e)
+    private void OnLinkClick(object sender, RoutedEventArgs e)
     {
-        Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri) { UseShellExecute = true });
-        e.Handled = true;
+        if (sender is FrameworkElement { Tag: string url })
+        {
+            _shell.TryOpen(url);
+        }
     }
 }

@@ -1,343 +1,351 @@
-<UserControl x:Class="CommandForge.Wpf.Views.SettingsView"
+<UserControl x:Class="CommandForge.Desktop.Views.SettingsView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             xmlns:res="clr-namespace:CommandForge.Wpf.Resources"
-             xmlns:conv="clr-namespace:CommandForge.Wpf.Converters">
+             xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+             xmlns:res="clr-namespace:CommandForge.Desktop.Resources"
+             xmlns:conv="clr-namespace:CommandForge.Desktop.Converters"
+             Foreground="{DynamicResource TextFillColorPrimaryBrush}">
     <UserControl.Resources>
         <conv:EnumToBooleanConverter x:Key="EnumBool" />
 
-        <Style x:Key="SectionHeader" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="20" />
-            <Setter Property="FontWeight" Value="Bold" />
-            <Setter Property="Margin" Value="0,0,0,16" />
+        <!-- Spacing between the setting cards of one group. -->
+        <Style TargetType="ui:CardControl" BasedOn="{StaticResource {x:Type ui:CardControl}}">
+            <Setter Property="Margin" Value="0,0,0,4" />
         </Style>
-        <Style x:Key="RowLabel" TargetType="TextBlock">
-            <Setter Property="FontWeight" Value="Medium" />
-            <Setter Property="Margin" Value="0,12,0,4" />
+        <Style TargetType="ui:CardExpander" BasedOn="{StaticResource {x:Type ui:CardExpander}}">
+            <Setter Property="Margin" Value="0,0,0,4" />
         </Style>
-        <!-- BasedOn the implicit MaterialDesign RadioButton style; without it the control falls back to
-             the default WPF template whose text is hardcoded black (unreadable in dark mode). -->
-        <Style x:Key="NavRadio" TargetType="RadioButton" BasedOn="{StaticResource {x:Type RadioButton}}">
-            <Setter Property="Margin" Value="0,2" />
-            <Setter Property="Padding" Value="8,6" />
+
+        <Style x:Key="CardTitleStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="{DynamicResource AppFontSize}" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+        </Style>
+        <Style x:Key="CardDescriptionStyle" TargetType="TextBlock" BasedOn="{StaticResource CaptionTextStyle}">
+            <Setter Property="TextWrapping" Value="Wrap" />
         </Style>
     </UserControl.Resources>
 
-    <Grid Margin="16">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="190" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="24,12,24,24" MaxWidth="1000">
+            <TextBlock Text="{res:Loc SidebarSettings}" Style="{StaticResource PageTitleTextStyle}" />
 
-        <!-- Section nav -->
-        <StackPanel Grid.Column="0" Margin="0,8,12,0">
-            <RadioButton Content="{res:Loc Settings_Appearance}" GroupName="Section" Style="{StaticResource NavRadio}"
-                         AutomationProperties.Name="{res:Loc Settings_Appearance}"
-                         IsChecked="{Binding SelectedSection, Converter={StaticResource EnumBool}, ConverterParameter=Appearance}" />
-            <RadioButton Content="{res:Loc Settings_Behavior}" GroupName="Section" Style="{StaticResource NavRadio}"
-                         AutomationProperties.Name="{res:Loc Settings_Behavior}"
-                         IsChecked="{Binding SelectedSection, Converter={StaticResource EnumBool}, ConverterParameter=Behavior}" />
-            <RadioButton Content="{res:Loc Settings_Updates}" GroupName="Section" Style="{StaticResource NavRadio}"
-                         AutomationProperties.Name="{res:Loc Settings_Updates}"
-                         IsChecked="{Binding SelectedSection, Converter={StaticResource EnumBool}, ConverterParameter=Updates}" />
-            <RadioButton Content="{res:Loc Settings_Profiles}" GroupName="Section" Style="{StaticResource NavRadio}"
-                         AutomationProperties.Name="{res:Loc Settings_Profiles}"
-                         IsChecked="{Binding SelectedSection, Converter={StaticResource EnumBool}, ConverterParameter=Profiles}" />
-            <RadioButton Content="{res:Loc Settings_Logs}" GroupName="Section" Style="{StaticResource NavRadio}"
-                         AutomationProperties.Name="{res:Loc Settings_Logs}"
-                         IsChecked="{Binding SelectedSection, Converter={StaticResource EnumBool}, ConverterParameter=Logs}" />
-            <RadioButton Content="{res:Loc Settings_Advanced}" GroupName="Section" Style="{StaticResource NavRadio}"
-                         AutomationProperties.Name="{res:Loc Settings_Advanced}"
-                         IsChecked="{Binding SelectedSection, Converter={StaticResource EnumBool}, ConverterParameter=Advanced}" />
-            <RadioButton Content="{res:Loc Settings_About}" GroupName="Section" Style="{StaticResource NavRadio}"
-                         AutomationProperties.Name="{res:Loc Settings_About}"
-                         IsChecked="{Binding SelectedSection, Converter={StaticResource EnumBool}, ConverterParameter=About}" />
+            <!-- ===== Appearance ===== -->
+            <TextBlock Text="{res:Loc Settings_Appearance}" Style="{StaticResource SectionHeaderTextStyle}" />
+
+            <ui:CardControl>
+                <ui:CardControl.Icon>
+                    <ui:SymbolIcon Symbol="DarkTheme24" />
+                </ui:CardControl.Icon>
+                <ui:CardControl.Header>
+                    <StackPanel>
+                        <TextBlock Text="{res:Loc Settings_Theme}" Style="{StaticResource CardTitleStyle}" />
+                        <TextBlock Text="{res:Loc Settings_ThemeDesc}" Style="{StaticResource CardDescriptionStyle}" />
+                    </StackPanel>
+                </ui:CardControl.Header>
+                <StackPanel Orientation="Horizontal">
+                    <RadioButton Content="{res:Loc Settings_ThemeSystem}" GroupName="Theme" Margin="0,0,12,0" MinWidth="0"
+                                 IsChecked="{Binding SelectedTheme, Converter={StaticResource EnumBool}, ConverterParameter=System}" />
+                    <RadioButton Content="{res:Loc Settings_ThemeLight}" GroupName="Theme" Margin="0,0,12,0" MinWidth="0"
+                                 IsChecked="{Binding SelectedTheme, Converter={StaticResource EnumBool}, ConverterParameter=Light}" />
+                    <RadioButton Content="{res:Loc Settings_ThemeDark}" GroupName="Theme" MinWidth="0"
+                                 IsChecked="{Binding SelectedTheme, Converter={StaticResource EnumBool}, ConverterParameter=Dark}" />
+                </StackPanel>
+            </ui:CardControl>
+
+            <ui:CardControl>
+                <ui:CardControl.Icon>
+                    <ui:SymbolIcon Symbol="LocalLanguage24" />
+                </ui:CardControl.Icon>
+                <ui:CardControl.Header>
+                    <StackPanel>
+                        <TextBlock Text="{res:Loc Settings_Language}" Style="{StaticResource CardTitleStyle}" />
+                        <TextBlock Text="{res:Loc Settings_LanguageDesc}" Style="{StaticResource CardDescriptionStyle}" />
+                    </StackPanel>
+                </ui:CardControl.Header>
+                <ComboBox MinWidth="200" ItemsSource="{Binding Languages}" DisplayMemberPath="DisplayName"
+                          SelectedItem="{Binding SelectedLanguage}" AutomationProperties.Name="{res:Loc Settings_Language}" />
+            </ui:CardControl>
+
+            <ui:CardControl>
+                <ui:CardControl.Icon>
+                    <ui:SymbolIcon Symbol="TextFontSize24" />
+                </ui:CardControl.Icon>
+                <ui:CardControl.Header>
+                    <StackPanel>
+                        <TextBlock Text="{res:Loc Settings_FontSize}" Style="{StaticResource CardTitleStyle}" />
+                        <TextBlock Text="{res:Loc Settings_FontSizeDesc}" Style="{StaticResource CardDescriptionStyle}" />
+                    </StackPanel>
+                </ui:CardControl.Header>
+                <StackPanel Orientation="Horizontal">
+                    <RadioButton Content="{res:Loc Settings_FontSmall}" GroupName="Font" Margin="0,0,12,0" MinWidth="0"
+                                 IsChecked="{Binding SelectedFontSize, Converter={StaticResource EnumBool}, ConverterParameter=Small}" />
+                    <RadioButton Content="{res:Loc Settings_FontMedium}" GroupName="Font" Margin="0,0,12,0" MinWidth="0"
+                                 IsChecked="{Binding SelectedFontSize, Converter={StaticResource EnumBool}, ConverterParameter=Medium}" />
+                    <RadioButton Content="{res:Loc Settings_FontLarge}" GroupName="Font" MinWidth="0"
+                                 IsChecked="{Binding SelectedFontSize, Converter={StaticResource EnumBool}, ConverterParameter=Large}" />
+                </StackPanel>
+            </ui:CardControl>
+
+            <ui:CardControl>
+                <ui:CardControl.Icon>
+                    <ui:SymbolIcon Symbol="PanelLeft24" />
+                </ui:CardControl.Icon>
+                <ui:CardControl.Header>
+                    <StackPanel>
+                        <TextBlock Text="{res:Loc Settings_CollapseSidebar}" Style="{StaticResource CardTitleStyle}" />
+                        <TextBlock Text="{res:Loc Settings_CollapseSidebarDesc}" Style="{StaticResource CardDescriptionStyle}" />
+                    </StackPanel>
+                </ui:CardControl.Header>
+                <ui:ToggleSwitch IsChecked="{Binding CollapseSidebarByDefault}" AutomationProperties.Name="{res:Loc Settings_CollapseSidebar}" />
+            </ui:CardControl>
+
+            <ui:CardControl>
+                <ui:CardControl.Icon>
+                    <ui:SymbolIcon Symbol="Shield24" />
+                </ui:CardControl.Icon>
+                <ui:CardControl.Header>
+                    <StackPanel>
+                        <TextBlock Text="{res:Loc Settings_ShowBadges}" Style="{StaticResource CardTitleStyle}" />
+                        <TextBlock Text="{res:Loc Settings_ShowBadgesDesc}" Style="{StaticResource CardDescriptionStyle}" />
+                    </StackPanel>
+                </ui:CardControl.Header>
+                <ui:ToggleSwitch IsChecked="{Binding ShowAdminRestartBadges}" AutomationProperties.Name="{res:Loc Settings_ShowBadges}" />
+            </ui:CardControl>
+
+            <!-- ===== Behavior & safety ===== -->
+            <TextBlock Text="{res:Loc Settings_Behavior}" Style="{StaticResource SectionHeaderTextStyle}" />
+
+            <ui:CardControl>
+                <ui:CardControl.Icon>
+                    <ui:SymbolIcon Symbol="Warning24" />
+                </ui:CardControl.Icon>
+                <ui:CardControl.Header>
+                    <StackPanel>
+                        <TextBlock Text="{res:Loc Settings_ConfirmCaution}" Style="{StaticResource CardTitleStyle}" />
+                        <TextBlock Text="{res:Loc Settings_ConfirmCautionDesc}" Style="{StaticResource CardDescriptionStyle}" />
+                    </StackPanel>
+                </ui:CardControl.Header>
+                <ui:ToggleSwitch IsChecked="{Binding ConfirmCaution}" AutomationProperties.Name="{res:Loc Settings_ConfirmCaution}" />
+            </ui:CardControl>
+
+            <!-- A fixed safety floor (golden rule #8): shown on and locked, at full contrast rather than greyed out. -->
+            <ui:CardControl ToolTip="{res:Loc Settings_DangerousLockedTooltip}">
+                <ui:CardControl.Icon>
+                    <ui:SymbolIcon Symbol="LockClosed24" />
+                </ui:CardControl.Icon>
+                <ui:CardControl.Header>
+                    <StackPanel>
+                        <TextBlock Text="{res:Loc Settings_ConfirmDangerous}" Style="{StaticResource CardTitleStyle}" />
+                        <TextBlock Text="{res:Loc Settings_DangerousLockedTooltip}" Style="{StaticResource CardDescriptionStyle}" />
+                    </StackPanel>
+                </ui:CardControl.Header>
+                <ui:ToggleSwitch IsChecked="{Binding ConfirmDangerous, Mode=OneWay}" IsHitTestVisible="False" Focusable="False"
+                                 AutomationProperties.Name="{res:Loc Settings_ConfirmDangerous}"
+                                 AutomationProperties.HelpText="{res:Loc Settings_DangerousLockedTooltip}" />
+            </ui:CardControl>
+
+            <ui:CardControl>
+                <ui:CardControl.Icon>
+                    <ui:SymbolIcon Symbol="History24" />
+                </ui:CardControl.Icon>
+                <ui:CardControl.Header>
+                    <StackPanel>
+                        <TextBlock Text="{res:Loc Settings_AutoRestorePoint}" Style="{StaticResource CardTitleStyle}" />
+                        <TextBlock Text="{res:Loc Settings_AutoRestorePointDesc}" Style="{StaticResource CardDescriptionStyle}" />
+                    </StackPanel>
+                </ui:CardControl.Header>
+                <ui:ToggleSwitch IsChecked="{Binding AutoCreateRestorePoint}" AutomationProperties.Name="{res:Loc Settings_AutoRestorePoint}" />
+            </ui:CardControl>
+
+            <ui:CardControl>
+                <ui:CardControl.Icon>
+                    <ui:SymbolIcon Symbol="ArrowAutofitDown24" />
+                </ui:CardControl.Icon>
+                <ui:CardControl.Header>
+                    <StackPanel>
+                        <TextBlock Text="{res:Loc Settings_AutoScroll}" Style="{StaticResource CardTitleStyle}" />
+                        <TextBlock Text="{res:Loc Settings_AutoScrollDesc}" Style="{StaticResource CardDescriptionStyle}" />
+                    </StackPanel>
+                </ui:CardControl.Header>
+                <ui:ToggleSwitch IsChecked="{Binding AutoScrollConsole}" AutomationProperties.Name="{res:Loc Settings_AutoScroll}" />
+            </ui:CardControl>
+
+            <ui:CardControl>
+                <ui:CardControl.Icon>
+                    <ui:SymbolIcon Symbol="Dismiss24" />
+                </ui:CardControl.Icon>
+                <ui:CardControl.Header>
+                    <StackPanel>
+                        <TextBlock Text="{res:Loc Settings_WarnOnCancel}" Style="{StaticResource CardTitleStyle}" />
+                        <TextBlock Text="{res:Loc Settings_WarnOnCancelDesc}" Style="{StaticResource CardDescriptionStyle}" />
+                    </StackPanel>
+                </ui:CardControl.Header>
+                <ui:ToggleSwitch IsChecked="{Binding WarnOnCancel}" AutomationProperties.Name="{res:Loc Settings_WarnOnCancel}" />
+            </ui:CardControl>
+
+            <!-- ===== Updates ===== -->
+            <TextBlock Text="{res:Loc Settings_Updates}" Style="{StaticResource SectionHeaderTextStyle}" />
+
+            <ui:CardControl>
+                <ui:CardControl.Icon>
+                    <ui:SymbolIcon Symbol="ArrowSyncCircle24" />
+                </ui:CardControl.Icon>
+                <ui:CardControl.Header>
+                    <StackPanel>
+                        <TextBlock Text="{res:Loc Settings_AutoCheckUpdates}" Style="{StaticResource CardTitleStyle}" />
+                        <TextBlock Text="{res:Loc Settings_AutoCheckUpdatesDesc}" Style="{StaticResource CardDescriptionStyle}" />
+                    </StackPanel>
+                </ui:CardControl.Header>
+                <ui:ToggleSwitch IsChecked="{Binding AutoCheckForUpdates}" AutomationProperties.Name="{res:Loc Settings_AutoCheckUpdates}" />
+            </ui:CardControl>
+
+            <ui:CardControl>
+                <ui:CardControl.Icon>
+                    <ui:SymbolIcon Symbol="Info24" />
+                </ui:CardControl.Icon>
+                <ui:CardControl.Header>
+                    <StackPanel>
+                        <TextBlock Style="{StaticResource CardTitleStyle}">
+                            <Run Text="{res:Loc Settings_CurrentVersion}" /><Run Text=" " /><Run Text="{Binding CurrentVersionText, Mode=OneWay}" />
+                        </TextBlock>
+                        <TextBlock Style="{StaticResource CardDescriptionStyle}">
+                            <Run Text="{res:Loc Settings_LastChecked}" /><Run Text=" " /><Run Text="{Binding LastCheckedText, Mode=OneWay}" />
+                        </TextBlock>
+                    </StackPanel>
+                </ui:CardControl.Header>
+                <ui:Button Content="{res:Loc Settings_CheckNow}" Command="{Binding CheckNowCommand}" />
+            </ui:CardControl>
+
+            <!-- ===== Backup & profiles ===== -->
+            <TextBlock Text="{res:Loc Settings_Profiles}" Style="{StaticResource SectionHeaderTextStyle}" />
+
+            <ui:CardControl>
+                <ui:CardControl.Icon>
+                    <ui:SymbolIcon Symbol="ArrowExportLtr24" />
+                </ui:CardControl.Icon>
+                <ui:CardControl.Header>
+                    <StackPanel>
+                        <TextBlock Text="{res:Loc Settings_ExportImport}" Style="{StaticResource CardTitleStyle}" />
+                        <TextBlock Text="{res:Loc Settings_ExportImportHint}" Style="{StaticResource CardDescriptionStyle}" />
+                    </StackPanel>
+                </ui:CardControl.Header>
+                <StackPanel Orientation="Horizontal">
+                    <ui:Button Content="{res:Loc Settings_ExportSettings}" Command="{Binding ExportSettingsCommand}" Margin="0,0,8,0" />
+                    <ui:Button Content="{res:Loc Settings_ImportSettings}" Command="{Binding ImportSettingsCommand}" />
+                </StackPanel>
+            </ui:CardControl>
+
+            <ui:CardExpander>
+                <ui:CardExpander.Icon>
+                    <ui:SymbolIcon Symbol="PeopleSettings24" />
+                </ui:CardExpander.Icon>
+                <ui:CardExpander.Header>
+                    <StackPanel>
+                        <TextBlock Text="{res:Loc Settings_SavedProfiles}" Style="{StaticResource CardTitleStyle}" />
+                        <TextBlock Text="{res:Loc Settings_ProfilesHint}" Style="{StaticResource CardDescriptionStyle}" />
+                    </StackPanel>
+                </ui:CardExpander.Header>
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <ComboBox MinWidth="220" VerticalAlignment="Center"
+                                  ItemsSource="{Binding ProfileNames}" SelectedItem="{Binding SelectedProfile}"
+                                  AutomationProperties.Name="{res:Loc Settings_SavedProfiles}" />
+                        <ui:Button Content="{res:Loc Settings_ApplyProfile}" Command="{Binding ApplyProfileCommand}" Margin="8,0,0,0" />
+                        <ui:Button Content="{res:Loc Settings_DeleteProfile}" Command="{Binding DeleteProfileCommand}" Margin="8,0,0,0" />
+                    </StackPanel>
+                    <TextBlock Text="{res:Loc Settings_SaveCurrentAsProfile}" Style="{StaticResource BodyStrongTextStyle}" Margin="0,16,0,6" />
+                    <StackPanel Orientation="Horizontal">
+                        <ui:TextBox MinWidth="220" PlaceholderText="{res:Loc Settings_ProfileName}"
+                                    AutomationProperties.Name="{res:Loc Settings_ProfileName}"
+                                    Text="{Binding NewProfileName, UpdateSourceTrigger=PropertyChanged}" />
+                        <ui:Button Content="{res:Loc Settings_SaveProfile}" Command="{Binding SaveProfileCommand}" Margin="8,0,0,0" />
+                    </StackPanel>
+                </StackPanel>
+            </ui:CardExpander>
+
+            <!-- ===== Logs ===== -->
+            <TextBlock Text="{res:Loc Settings_Logs}" Style="{StaticResource SectionHeaderTextStyle}" />
+
+            <ui:CardControl>
+                <ui:CardControl.Icon>
+                    <ui:SymbolIcon Symbol="DocumentText24" />
+                </ui:CardControl.Icon>
+                <ui:CardControl.Header>
+                    <StackPanel>
+                        <TextBlock Text="{res:Loc Settings_LogLevel}" Style="{StaticResource CardTitleStyle}" />
+                        <TextBlock Text="{res:Loc Settings_LogLevelDesc}" Style="{StaticResource CardDescriptionStyle}" />
+                    </StackPanel>
+                </ui:CardControl.Header>
+                <ComboBox MinWidth="160" ItemsSource="{Binding LogLevels}" SelectedItem="{Binding SelectedLogLevel}"
+                          AutomationProperties.Name="{res:Loc Settings_LogLevel}" />
+            </ui:CardControl>
+
+            <ui:CardExpander>
+                <ui:CardExpander.Icon>
+                    <ui:SymbolIcon Symbol="Folder24" />
+                </ui:CardExpander.Icon>
+                <ui:CardExpander.Header>
+                    <StackPanel>
+                        <TextBlock Text="{res:Loc Settings_LogsSize}" Style="{StaticResource CardTitleStyle}" />
+                        <TextBlock Text="{Binding LogsSizeText}" Style="{StaticResource CardDescriptionStyle}" />
+                    </StackPanel>
+                </ui:CardExpander.Header>
+                <WrapPanel>
+                    <ui:Button Content="{res:Loc Settings_OpenLogFolder}" Command="{Binding OpenLogFolderCommand}" Margin="0,0,8,8" />
+                    <ui:Button Content="{res:Loc Settings_ExportLogs}" Command="{Binding ExportLogsCommand}" Margin="0,0,8,8" />
+                    <ui:Button Content="{res:Loc Settings_ClearOldLogs}" Command="{Binding ClearOldLogsCommand}" Margin="0,0,8,8" />
+                </WrapPanel>
+            </ui:CardExpander>
+
+            <!-- ===== Advanced ===== -->
+            <TextBlock Text="{res:Loc Settings_Advanced}" Style="{StaticResource SectionHeaderTextStyle}" />
+
+            <ui:CardExpander>
+                <ui:CardExpander.Icon>
+                    <ui:SymbolIcon Symbol="Wrench24" />
+                </ui:CardExpander.Icon>
+                <ui:CardExpander.Header>
+                    <StackPanel>
+                        <TextBlock Text="{res:Loc Settings_RunMode}" Style="{StaticResource CardTitleStyle}" />
+                        <TextBlock Text="{Binding RunModeText}" Style="{StaticResource CardDescriptionStyle}" />
+                    </StackPanel>
+                </ui:CardExpander.Header>
+                <StackPanel>
+                    <TextBlock Text="{res:Loc Settings_ConfigPath}" Style="{StaticResource BodyStrongTextStyle}" Margin="0,0,0,4" />
+                    <Border Style="{StaticResource CodeBlockBorderStyle}">
+                        <TextBox Text="{Binding ConfigPathText, Mode=OneWay}" Style="{StaticResource ReadOnlyCodeTextBoxStyle}"
+                                 AutomationProperties.Name="{res:Loc Settings_ConfigPath}" />
+                    </Border>
+                    <WrapPanel Margin="0,12,0,0">
+                        <ui:Button Content="{res:Loc Settings_OpenConfig}" Command="{Binding OpenConfigFolderCommand}" Margin="0,0,8,8" />
+                        <ui:Button Content="{res:Loc Settings_OpenDebugPanel}" Margin="0,0,8,8"
+                                   Command="{Binding DataContext.ShowDebugCommand, RelativeSource={RelativeSource AncestorType=Window}}" />
+                        <ui:Button Content="{res:Loc Settings_ResetDefaults}" Command="{Binding ResetToDefaultsCommand}" Margin="0,0,8,8"
+                                   Appearance="Caution" />
+                    </WrapPanel>
+                </StackPanel>
+            </ui:CardExpander>
+
+            <!-- ===== About ===== -->
+            <TextBlock Text="{res:Loc Settings_About}" Style="{StaticResource SectionHeaderTextStyle}" />
+
+            <ui:CardControl>
+                <ui:CardControl.Icon>
+                    <ui:SymbolIcon Symbol="WindowConsole20" />
+                </ui:CardControl.Icon>
+                <ui:CardControl.Header>
+                    <StackPanel>
+                        <TextBlock Style="{StaticResource CardTitleStyle}">
+                            <Run Text="{res:Loc AppTitle}" FontWeight="SemiBold" /><Run Text="  " /><Run Text="{Binding CurrentVersionText, Mode=OneWay}" />
+                        </TextBlock>
+                        <TextBlock Text="{res:Loc Settings_NoDataCollected}" Style="{StaticResource CardDescriptionStyle}" />
+                    </StackPanel>
+                </ui:CardControl.Header>
+                <StackPanel Orientation="Horizontal">
+                    <ui:Button Content="{res:Loc Settings_License}" Command="{Binding OpenLicenseCommand}" Margin="0,0,8,0" />
+                    <ui:Button Content="{res:Loc Settings_GitHub}" Command="{Binding OpenRepoCommand}" />
+                </StackPanel>
+            </ui:CardControl>
         </StackPanel>
-
-        <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Auto" Padding="8,0,8,0">
-            <Grid>
-                <!-- Appearance -->
-                <StackPanel>
-                    <StackPanel.Style>
-                        <Style TargetType="StackPanel">
-                            <Setter Property="Visibility" Value="Collapsed" />
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding SelectedSection}" Value="Appearance">
-                                    <Setter Property="Visibility" Value="Visible" />
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </StackPanel.Style>
-
-                    <TextBlock Text="{res:Loc Settings_Appearance}" Style="{StaticResource SectionHeader}" />
-
-                    <TextBlock Text="{res:Loc Settings_Theme}" Style="{StaticResource RowLabel}" />
-                    <StackPanel Orientation="Horizontal">
-                        <RadioButton Content="{res:Loc Settings_ThemeSystem}" GroupName="Theme" Margin="0,0,16,0"
-                                     AutomationProperties.Name="{res:Loc Settings_ThemeSystem}"
-                                     IsChecked="{Binding SelectedTheme, Converter={StaticResource EnumBool}, ConverterParameter=System}" />
-                        <RadioButton Content="{res:Loc Settings_ThemeLight}" GroupName="Theme" Margin="0,0,16,0"
-                                     AutomationProperties.Name="{res:Loc Settings_ThemeLight}"
-                                     IsChecked="{Binding SelectedTheme, Converter={StaticResource EnumBool}, ConverterParameter=Light}" />
-                        <RadioButton Content="{res:Loc Settings_ThemeDark}" GroupName="Theme"
-                                     AutomationProperties.Name="{res:Loc Settings_ThemeDark}"
-                                     IsChecked="{Binding SelectedTheme, Converter={StaticResource EnumBool}, ConverterParameter=Dark}" />
-                    </StackPanel>
-
-                    <TextBlock Text="{res:Loc Settings_Language}" Style="{StaticResource RowLabel}" />
-                    <ComboBox Width="220" HorizontalAlignment="Left"
-                              AutomationProperties.Name="{res:Loc Settings_Language}"
-                              ItemsSource="{Binding Languages}" DisplayMemberPath="DisplayName"
-                              SelectedItem="{Binding SelectedLanguage}" />
-
-                    <TextBlock Text="{res:Loc Settings_FontSize}" Style="{StaticResource RowLabel}" />
-                    <StackPanel Orientation="Horizontal">
-                        <RadioButton Content="{res:Loc Settings_FontSmall}" GroupName="Font" Margin="0,0,16,0"
-                                     AutomationProperties.Name="{res:Loc Settings_FontSmall}"
-                                     IsChecked="{Binding SelectedFontSize, Converter={StaticResource EnumBool}, ConverterParameter=Small}" />
-                        <RadioButton Content="{res:Loc Settings_FontMedium}" GroupName="Font" Margin="0,0,16,0"
-                                     AutomationProperties.Name="{res:Loc Settings_FontMedium}"
-                                     IsChecked="{Binding SelectedFontSize, Converter={StaticResource EnumBool}, ConverterParameter=Medium}" />
-                        <RadioButton Content="{res:Loc Settings_FontLarge}" GroupName="Font"
-                                     AutomationProperties.Name="{res:Loc Settings_FontLarge}"
-                                     IsChecked="{Binding SelectedFontSize, Converter={StaticResource EnumBool}, ConverterParameter=Large}" />
-                    </StackPanel>
-
-                    <CheckBox Content="{res:Loc Settings_CollapseSidebar}" Margin="0,16,0,0"
-                              AutomationProperties.Name="{res:Loc Settings_CollapseSidebar}"
-                              IsChecked="{Binding CollapseSidebarByDefault}" />
-                    <CheckBox Content="{res:Loc Settings_ShowBadges}" Margin="0,8,0,0"
-                              AutomationProperties.Name="{res:Loc Settings_ShowBadges}"
-                              IsChecked="{Binding ShowAdminRestartBadges}" />
-                </StackPanel>
-
-                <!-- Behavior & Safety -->
-                <StackPanel>
-                    <StackPanel.Style>
-                        <Style TargetType="StackPanel">
-                            <Setter Property="Visibility" Value="Collapsed" />
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding SelectedSection}" Value="Behavior">
-                                    <Setter Property="Visibility" Value="Visible" />
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </StackPanel.Style>
-
-                    <TextBlock Text="{res:Loc Settings_Behavior}" Style="{StaticResource SectionHeader}" />
-                    <CheckBox Content="{res:Loc Settings_ConfirmCaution}" Margin="0,4"
-                              AutomationProperties.Name="{res:Loc Settings_ConfirmCaution}"
-                              IsChecked="{Binding ConfirmCaution}" />
-                    <StackPanel Orientation="Horizontal" Margin="0,4">
-                        <!-- Locked (always on) but kept at full contrast: non-interactive instead of
-                             IsEnabled=False, which dims the text to near-unreadable in dark mode. -->
-                        <CheckBox Content="{res:Loc Settings_ConfirmDangerous}"
-                                  IsHitTestVisible="False" Focusable="False"
-                                  ToolTip="{res:Loc Settings_DangerousLockedTooltip}"
-                                  AutomationProperties.HelpText="{res:Loc Settings_DangerousLockedTooltip}"
-                                  AutomationProperties.Name="{res:Loc Settings_ConfirmDangerous}"
-                                  IsChecked="{Binding ConfirmDangerous, Mode=OneWay}" />
-                        <materialDesign:PackIcon Kind="LockOutline" Width="15" Height="15" Opacity="0.6"
-                                                 VerticalAlignment="Center" Margin="8,0,0,0"
-                                                 ToolTip="{res:Loc Settings_DangerousLockedTooltip}" />
-                    </StackPanel>
-                    <CheckBox Content="{res:Loc Settings_AutoRestorePoint}" Margin="0,4"
-                              AutomationProperties.Name="{res:Loc Settings_AutoRestorePoint}"
-                              IsChecked="{Binding AutoCreateRestorePoint}" />
-                    <CheckBox Content="{res:Loc Settings_AutoScroll}" Margin="0,4"
-                              AutomationProperties.Name="{res:Loc Settings_AutoScroll}"
-                              IsChecked="{Binding AutoScrollConsole}" />
-                    <CheckBox Content="{res:Loc Settings_WarnOnCancel}" Margin="0,4"
-                              AutomationProperties.Name="{res:Loc Settings_WarnOnCancel}"
-                              IsChecked="{Binding WarnOnCancel}" />
-                </StackPanel>
-
-                <!-- Updates -->
-                <StackPanel>
-                    <StackPanel.Style>
-                        <Style TargetType="StackPanel">
-                            <Setter Property="Visibility" Value="Collapsed" />
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding SelectedSection}" Value="Updates">
-                                    <Setter Property="Visibility" Value="Visible" />
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </StackPanel.Style>
-
-                    <TextBlock Text="{res:Loc Settings_Updates}" Style="{StaticResource SectionHeader}" />
-                    <CheckBox Content="{res:Loc Settings_AutoCheckUpdates}" Margin="0,4"
-                              AutomationProperties.Name="{res:Loc Settings_AutoCheckUpdates}"
-                              IsChecked="{Binding AutoCheckForUpdates}" />
-                    <StackPanel Orientation="Horizontal" Margin="0,12,0,0">
-                        <TextBlock Text="{res:Loc Settings_CurrentVersion}" Opacity="0.7" />
-                        <TextBlock Text="{Binding CurrentVersionText}" Margin="8,0,0,0" />
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" Margin="0,4,0,0">
-                        <TextBlock Text="{res:Loc Settings_LastChecked}" Opacity="0.7" />
-                        <TextBlock Text="{Binding LastCheckedText}" Margin="8,0,0,0" />
-                    </StackPanel>
-                    <Button Content="{res:Loc Settings_CheckNow}" Command="{Binding CheckNowCommand}"
-                            HorizontalAlignment="Left" Margin="0,16,0,0"
-                            AutomationProperties.Name="{res:Loc Settings_CheckNow}"
-                            Style="{StaticResource MaterialDesignOutlinedButton}" />
-                </StackPanel>
-
-                <!-- Backup & profiles (import/export + named profiles) -->
-                <StackPanel>
-                    <StackPanel.Style>
-                        <Style TargetType="StackPanel">
-                            <Setter Property="Visibility" Value="Collapsed" />
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding SelectedSection}" Value="Profiles">
-                                    <Setter Property="Visibility" Value="Visible" />
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </StackPanel.Style>
-
-                    <TextBlock Text="{res:Loc Settings_Profiles}" Style="{StaticResource SectionHeader}" />
-
-                    <TextBlock Text="{res:Loc Settings_ExportImport}" Style="{StaticResource RowLabel}" />
-                    <TextBlock Text="{res:Loc Settings_ExportImportHint}" Opacity="0.7" TextWrapping="Wrap" Margin="0,0,0,8" />
-                    <StackPanel Orientation="Horizontal">
-                        <Button Content="{res:Loc Settings_ExportSettings}" Command="{Binding ExportSettingsCommand}"
-                                Style="{StaticResource MaterialDesignOutlinedButton}" Margin="0,0,8,0"
-                                AutomationProperties.Name="{res:Loc Settings_ExportSettings}" />
-                        <Button Content="{res:Loc Settings_ImportSettings}" Command="{Binding ImportSettingsCommand}"
-                                Style="{StaticResource MaterialDesignOutlinedButton}"
-                                AutomationProperties.Name="{res:Loc Settings_ImportSettings}" />
-                    </StackPanel>
-
-                    <Separator Margin="0,20,0,0" />
-
-                    <TextBlock Text="{res:Loc Settings_SavedProfiles}" Style="{StaticResource RowLabel}" />
-                    <TextBlock Text="{res:Loc Settings_ProfilesHint}" Opacity="0.7" TextWrapping="Wrap" Margin="0,0,0,8" />
-                    <StackPanel Orientation="Horizontal">
-                        <ComboBox Width="220" HorizontalAlignment="Left" VerticalAlignment="Center"
-                                  AutomationProperties.Name="{res:Loc Settings_SavedProfiles}"
-                                  ItemsSource="{Binding ProfileNames}" SelectedItem="{Binding SelectedProfile}" />
-                        <Button Content="{res:Loc Settings_ApplyProfile}" Command="{Binding ApplyProfileCommand}"
-                                Style="{StaticResource MaterialDesignOutlinedButton}" Margin="8,0,0,0"
-                                AutomationProperties.Name="{res:Loc Settings_ApplyProfile}" />
-                        <Button Content="{res:Loc Settings_DeleteProfile}" Command="{Binding DeleteProfileCommand}"
-                                Style="{StaticResource MaterialDesignOutlinedButton}" Margin="8,0,0,0"
-                                AutomationProperties.Name="{res:Loc Settings_DeleteProfile}" />
-                    </StackPanel>
-
-                    <TextBlock Text="{res:Loc Settings_SaveCurrentAsProfile}" Style="{StaticResource RowLabel}" />
-                    <StackPanel Orientation="Horizontal">
-                        <TextBox Width="220" HorizontalAlignment="Left" VerticalAlignment="Center"
-                                 materialDesign:HintAssist.Hint="{res:Loc Settings_ProfileName}"
-                                 AutomationProperties.Name="{res:Loc Settings_ProfileName}"
-                                 Text="{Binding NewProfileName, UpdateSourceTrigger=PropertyChanged}" />
-                        <Button Content="{res:Loc Settings_SaveProfile}" Command="{Binding SaveProfileCommand}"
-                                Style="{StaticResource MaterialDesignOutlinedButton}" Margin="8,0,0,0"
-                                AutomationProperties.Name="{res:Loc Settings_SaveProfile}" />
-                    </StackPanel>
-                </StackPanel>
-
-                <!-- Logs -->
-                <StackPanel>
-                    <StackPanel.Style>
-                        <Style TargetType="StackPanel">
-                            <Setter Property="Visibility" Value="Collapsed" />
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding SelectedSection}" Value="Logs">
-                                    <Setter Property="Visibility" Value="Visible" />
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </StackPanel.Style>
-
-                    <TextBlock Text="{res:Loc Settings_Logs}" Style="{StaticResource SectionHeader}" />
-                    <TextBlock Text="{res:Loc Settings_LogLevel}" Style="{StaticResource RowLabel}" />
-                    <ComboBox Width="220" HorizontalAlignment="Left"
-                              AutomationProperties.Name="{res:Loc Settings_LogLevel}"
-                              ItemsSource="{Binding LogLevels}" SelectedItem="{Binding SelectedLogLevel}" />
-                    <StackPanel Orientation="Horizontal" Margin="0,16,0,0">
-                        <TextBlock Text="{res:Loc Settings_LogsSize}" Opacity="0.7" />
-                        <TextBlock Text="{Binding LogsSizeText}" Margin="8,0,0,0" />
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" Margin="0,16,0,0">
-                        <Button Content="{res:Loc Settings_OpenLogFolder}" Command="{Binding OpenLogFolderCommand}"
-                                Style="{StaticResource MaterialDesignOutlinedButton}" Margin="0,0,8,0"
-                                AutomationProperties.Name="{res:Loc Settings_OpenLogFolder}" />
-                        <Button Content="{res:Loc Settings_ExportLogs}" Command="{Binding ExportLogsCommand}"
-                                Style="{StaticResource MaterialDesignOutlinedButton}" Margin="0,0,8,0"
-                                AutomationProperties.Name="{res:Loc Settings_ExportLogs}" />
-                        <Button Content="{res:Loc Settings_ClearOldLogs}" Command="{Binding ClearOldLogsCommand}"
-                                Style="{StaticResource MaterialDesignOutlinedButton}"
-                                AutomationProperties.Name="{res:Loc Settings_ClearOldLogs}" />
-                    </StackPanel>
-                </StackPanel>
-
-                <!-- Advanced -->
-                <StackPanel>
-                    <StackPanel.Style>
-                        <Style TargetType="StackPanel">
-                            <Setter Property="Visibility" Value="Collapsed" />
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding SelectedSection}" Value="Advanced">
-                                    <Setter Property="Visibility" Value="Visible" />
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </StackPanel.Style>
-
-                    <TextBlock Text="{res:Loc Settings_Advanced}" Style="{StaticResource SectionHeader}" />
-                    <StackPanel Orientation="Horizontal" Margin="0,4">
-                        <TextBlock Text="{res:Loc Settings_RunMode}" Opacity="0.7" />
-                        <TextBlock Text="{Binding RunModeText}" Margin="8,0,0,0" />
-                    </StackPanel>
-                    <TextBlock Text="{res:Loc Settings_ConfigPath}" Style="{StaticResource RowLabel}" />
-                    <TextBox Text="{Binding ConfigPathText, Mode=OneWay}" IsReadOnly="True"
-                             FontFamily="Cascadia Mono, Consolas, Courier New" />
-                    <StackPanel Orientation="Horizontal" Margin="0,16,0,0">
-                        <Button Content="{res:Loc Settings_OpenConfig}" Command="{Binding OpenConfigFolderCommand}"
-                                Style="{StaticResource MaterialDesignOutlinedButton}" Margin="0,0,8,0"
-                                AutomationProperties.Name="{res:Loc Settings_OpenConfig}" />
-                        <Button Content="{res:Loc Settings_OpenDebugPanel}"
-                                Command="{Binding DataContext.ShowDebugCommand, RelativeSource={RelativeSource AncestorType=Window}}"
-                                Style="{StaticResource MaterialDesignOutlinedButton}"
-                                AutomationProperties.Name="{res:Loc Settings_OpenDebugPanel}" />
-                    </StackPanel>
-                    <Button Content="{res:Loc Settings_ResetDefaults}" Command="{Binding ResetToDefaultsCommand}"
-                            HorizontalAlignment="Left" Margin="0,16,0,0"
-                            Style="{StaticResource MaterialDesignOutlinedButton}"
-                            AutomationProperties.Name="{res:Loc Settings_ResetDefaults}" />
-                </StackPanel>
-
-                <!-- About -->
-                <StackPanel>
-                    <StackPanel.Style>
-                        <Style TargetType="StackPanel">
-                            <Setter Property="Visibility" Value="Collapsed" />
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding SelectedSection}" Value="About">
-                                    <Setter Property="Visibility" Value="Visible" />
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </StackPanel.Style>
-
-                    <TextBlock Text="{res:Loc Settings_About}" Style="{StaticResource SectionHeader}" />
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{res:Loc AppTitle}" FontWeight="Medium" />
-                        <TextBlock Text="{Binding CurrentVersionText}" Margin="8,0,0,0" Opacity="0.8" />
-                    </StackPanel>
-                    <TextBlock Text="{res:Loc Settings_NoDataCollected}" TextWrapping="Wrap" Opacity="0.8" Margin="0,12,0,0" />
-                    <StackPanel Orientation="Horizontal" Margin="0,16,0,0">
-                        <Button Content="{res:Loc Settings_License}" Command="{Binding OpenLicenseCommand}"
-                                AutomationProperties.Name="{res:Loc Settings_License}"
-                                Style="{StaticResource MaterialDesignOutlinedButton}" Margin="0,0,8,0" />
-                        <Button Content="{res:Loc Settings_GitHub}" Command="{Binding OpenRepoCommand}"
-                                AutomationProperties.Name="{res:Loc Settings_GitHub}"
-                                Style="{StaticResource MaterialDesignOutlinedButton}" />
-                    </StackPanel>
-                </StackPanel>
-            </Grid>
-        </ScrollViewer>
-    </Grid>
+    </ScrollViewer>
 </UserControl>

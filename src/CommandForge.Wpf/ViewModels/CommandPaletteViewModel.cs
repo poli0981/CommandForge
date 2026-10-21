@@ -4,7 +4,7 @@ using CommandForge.Application.Search;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
-namespace CommandForge.Wpf.ViewModels;
+namespace CommandForge.Desktop.ViewModels;
 
 /// <summary>Command Palette (Ctrl+K): fuzzy search across the entire catalog.</summary>
 public sealed partial class CommandPaletteViewModel : ObservableObject

@@ -1,0 +1,125 @@
+<UserControl x:Class="CommandForge.Desktop.Views.ConsoleView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+             xmlns:res="clr-namespace:CommandForge.Desktop.Resources"
+             xmlns:beh="clr-namespace:CommandForge.Desktop.Behaviors">
+    <!-- The shared console (DataContext: ExecutionViewModel): virtualized output, status, result, actions. -->
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis" />
+    </UserControl.Resources>
+
+    <Border Style="{StaticResource ConsoleBorderStyle}" Padding="12,8,12,10">
+        <DockPanel>
+            <!-- Header: title, live status and actions -->
+            <Grid DockPanel.Dock="Top" Margin="0,0,0,6">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0" Text="{res:Loc PaneConsole}" Style="{StaticResource BodyStrongTextStyle}"
+                           VerticalAlignment="Center" AutomationProperties.HeadingLevel="Level3" />
+
+                <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="12,0" VerticalAlignment="Center"
+                            Visibility="{Binding IsRunning, Converter={StaticResource BoolToVis}}">
+                    <ProgressBar IsIndeterminate="True" Width="72" VerticalAlignment="Center" Margin="0,0,10,0" />
+                    <TextBlock VerticalAlignment="Center" AutomationProperties.LiveSetting="Polite">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock" BasedOn="{StaticResource CaptionTextStyle}">
+                                <Setter Property="Text" Value="{res:Loc Console_Running}" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsWaitingForElevation}" Value="True">
+                                        <Setter Property="Text" Value="{res:Loc Console_WaitingForAdmin}" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                </StackPanel>
+
+                <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
+                    <ui:Button Content="{res:Loc Console_Cancel}" Command="{Binding CancelCommand}" Margin="0,0,6,0"
+                               Visibility="{Binding IsRunning, Converter={StaticResource BoolToVis}}" />
+                    <ui:Button Style="{StaticResource IconButtonStyle}" Command="{Binding CopyOutputCommand}"
+                               ToolTip="{res:Loc Console_CopyAll}" AutomationProperties.Name="{res:Loc Console_CopyAll}">
+                        <ui:SymbolIcon Symbol="Copy24" />
+                    </ui:Button>
+                    <ui:Button Style="{StaticResource IconButtonStyle}" Command="{Binding SaveOutputCommand}"
+                               ToolTip="{res:Loc Console_Save}" AutomationProperties.Name="{res:Loc Console_Save}">
+                        <ui:SymbolIcon Symbol="Save24" />
+                    </ui:Button>
+                </StackPanel>
+            </Grid>
+
+            <!-- Result -->
+            <Grid DockPanel.Dock="Bottom" Margin="0,8,0,0"
+                  Visibility="{Binding HasResult, Converter={StaticResource BoolToVis}}">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" AutomationProperties.LiveSetting="Polite">
+                    <ui:SymbolIcon FontSize="16" Margin="0,0,6,0" VerticalAlignment="Center">
+                        <ui:SymbolIcon.Style>
+                            <Style TargetType="ui:SymbolIcon">
+                                <Setter Property="Symbol" Value="ErrorCircle24" />
+                                <Setter Property="Foreground" Value="{DynamicResource SystemFillColorCriticalBrush}" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Success}" Value="True">
+                                        <Setter Property="Symbol" Value="CheckmarkCircle24" />
+                                        <Setter Property="Foreground" Value="{DynamicResource SystemFillColorSuccessBrush}" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding Cancelled}" Value="True">
+                                        <Setter Property="Symbol" Value="DismissCircle24" />
+                                        <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ui:SymbolIcon.Style>
+                    </ui:SymbolIcon>
+                    <TextBlock Text="{Binding StatusText}" Style="{StaticResource BodyStrongTextStyle}" VerticalAlignment="Center" />
+                    <TextBlock Text="{res:Loc Result_ExitCode}" Style="{StaticResource SecondaryTextStyle}" Margin="14,0,4,0" VerticalAlignment="Center" />
+                    <TextBlock Text="{Binding ExitCode}" Style="{StaticResource SecondaryTextStyle}" VerticalAlignment="Center" />
+                    <TextBlock Text="{Binding DurationText}" Style="{StaticResource SecondaryTextStyle}" Margin="14,0,0,0" VerticalAlignment="Center" />
+                </StackPanel>
+                <ui:Button HorizontalAlignment="Right" Appearance="Primary" Content="{res:Loc Result_Restart}"
+                           Command="{Binding RestartWindowsCommand}"
+                           Visibility="{Binding RequiresRestart, Converter={StaticResource BoolToVis}}">
+                    <ui:Button.Icon>
+                        <ui:SymbolIcon Symbol="ArrowClockwise24" />
+                    </ui:Button.Icon>
+                </ui:Button>
+            </Grid>
+
+            <!-- Older lines dropped to stay within capacity -->
+            <TextBlock DockPanel.Dock="Top" Text="{Binding DroppedLinesText}" Style="{StaticResource CaptionTextStyle}"
+                       Margin="0,0,0,4" Visibility="{Binding HasDroppedLines, Converter={StaticResource BoolToVis}}" />
+
+            <!-- Output: virtualized, so even huge outputs stay responsive -->
+            <ListBox ItemsSource="{Binding OutputLines}"
+                     Background="Transparent" BorderThickness="0" Padding="0"
+                     VirtualizingPanel.IsVirtualizing="True"
+                     VirtualizingPanel.VirtualizationMode="Recycling"
+                     VirtualizingPanel.ScrollUnit="Pixel"
+                     ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                     beh:AutoScroll.Enabled="{Binding AutoScroll}"
+                     AutomationProperties.Name="{res:Loc PaneConsole}">
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="Focusable" Value="False" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="ListBoxItem">
+                                    <ContentPresenter Margin="0,0,0,1" />
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ListBox.ItemContainerStyle>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Text}" Style="{StaticResource ConsoleLineTextStyle}" />
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </DockPanel>
+    </Border>
+</UserControl>

@@ -2,13 +2,13 @@ using System.Collections.ObjectModel;
 using System.Globalization;
 using CommandForge.Application;
 using CommandForge.Application.Ports;
+using CommandForge.Desktop.Resources;
+using CommandForge.Desktop.Services;
 using CommandForge.Domain;
-using CommandForge.Wpf.Resources;
-using CommandForge.Wpf.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
-namespace CommandForge.Wpf.ViewModels;
+namespace CommandForge.Desktop.ViewModels;
 
 /// <summary>
 /// Recipes screen: build a named chain of catalog commands and run it sequentially (an overview

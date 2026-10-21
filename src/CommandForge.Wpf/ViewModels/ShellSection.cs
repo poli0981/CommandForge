@@ -1,4 +1,4 @@
-namespace CommandForge.Wpf.ViewModels;
+namespace CommandForge.Desktop.ViewModels;
 
 /// <summary>The active section of the main shell content area.</summary>
 public enum ShellSection

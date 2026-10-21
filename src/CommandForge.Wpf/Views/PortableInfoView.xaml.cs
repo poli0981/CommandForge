@@ -1,15 +1,15 @@
 using System.Globalization;
-using System.Windows;
+using System.Windows.Controls;
 using CommandForge.Application.Ports;
+using CommandForge.Desktop.Resources;
 using CommandForge.Infrastructure;
-using CommandForge.Wpf.Resources;
 
-namespace CommandForge.Wpf.Views;
+namespace CommandForge.Desktop.Views;
 
 /// <summary>Shows whether the app is installed or portable, plus its data paths and version.</summary>
-public partial class PortableInfoDialog : Window
+public partial class PortableInfoView : UserControl
 {
-    public PortableInfoDialog(IUpdateService updates)
+    public PortableInfoView(IUpdateService updates)
     {
         ArgumentNullException.ThrowIfNull(updates);
         InitializeComponent();
@@ -18,7 +18,7 @@ public partial class PortableInfoDialog : Window
             ? Strings.Get("Settings_RunModeInstalled")
             : Strings.Get("Settings_RunModePortable");
 
-        var version = typeof(PortableInfoDialog).Assembly.GetName().Version;
+        var version = typeof(PortableInfoView).Assembly.GetName().Version;
         VersionValue.Text = version is null
             ? "—"
             : string.Format(CultureInfo.CurrentCulture, "{0}.{1}.{2}", version.Major, version.Minor, version.Build);
@@ -26,6 +26,4 @@ public partial class PortableInfoDialog : Window
         ConfigValue.Text = AppPaths.DataDirectory;
         LogValue.Text = AppPaths.LogsDirectory;
     }
-
-    private void OnCloseClick(object sender, RoutedEventArgs e) => Close();
 }

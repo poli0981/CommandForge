@@ -1,23 +1,44 @@
-using System.Diagnostics;
-using System.Runtime.InteropServices;
-using System.Windows;
 using CommandForge.Application;
+using CommandForge.Desktop.Resources;
+using CommandForge.Desktop.Services;
 using CommandForge.Domain;
+using CommandForge.Infrastructure.Execution;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
-namespace CommandForge.Wpf.ViewModels;
+namespace CommandForge.Desktop.ViewModels;
 
 /// <summary>Detail panel for the selected command: metadata, the exact command-line preview, and actions.</summary>
 public sealed partial class CommandDetailViewModel : ObservableObject
 {
-    public CommandDetailViewModel(CommandDefinition command, string title, string description, string categoryTitle)
+    private readonly IClipboardService _clipboard;
+    private readonly IShellService _shell;
+    private readonly INotificationService _notifications;
+
+    public CommandDetailViewModel(
+        CommandDefinition command,
+        string title,
+        string description,
+        string categoryTitle,
+        IClipboardService clipboard,
+        IShellService shell,
+        INotificationService notifications)
     {
+        ArgumentNullException.ThrowIfNull(command);
+        ArgumentNullException.ThrowIfNull(clipboard);
+        ArgumentNullException.ThrowIfNull(shell);
+        ArgumentNullException.ThrowIfNull(notifications);
+
         Command = command;
         Title = title;
         Description = description;
         CategoryTitle = categoryTitle;
-        PreviewCommandLine = CommandPreview.Build(command);
+        _clipboard = clipboard;
+        _shell = shell;
+        _notifications = notifications;
+
+        // Show exactly what will run on this PC: path tokens filled in, as the executor does.
+        PreviewCommandLine = CommandPreview.Build(command, SystemPathTokens.Values);
     }
 
     public CommandDefinition Command { get; }
@@ -41,16 +62,19 @@ public sealed partial class CommandDetailViewModel : ObservableObject
 
     public bool HasDoc => !string.IsNullOrWhiteSpace(Command.DocUrl);
 
+    /// <summary>The rough duration, in words.</summary>
+    public string EstimatedDurationText => Strings.Get($"Estimate_{Command.EstimatedDuration}");
+
     [RelayCommand]
     private void Copy()
     {
-        try
+        if (_clipboard.TrySetText(PreviewCommandLine))
         {
-            Clipboard.SetText(PreviewCommandLine);
+            _notifications.Show(Strings.Get("Snack_Copied"), NotificationKind.Success);
         }
-        catch (COMException)
+        else
         {
-            // Clipboard temporarily locked by another process — safe to ignore.
+            _notifications.Show(Strings.Get("Snack_CopyFailed"), NotificationKind.Warning);
         }
     }
 
@@ -59,7 +83,7 @@ public sealed partial class CommandDetailViewModel : ObservableObject
     {
         if (Command.DocUrl is { } url)
         {
-            Process.Start(new ProcessStartInfo(url) { UseShellExecute = true });
+            _shell.TryOpen(url);
         }
     }
 }

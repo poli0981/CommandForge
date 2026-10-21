@@ -1,5 +1,5 @@
 using CommandForge.Application.Logging;
-using CommandForge.Wpf.ViewModels;
+using CommandForge.Desktop.ViewModels;
 
 namespace CommandForge.Tests;
 

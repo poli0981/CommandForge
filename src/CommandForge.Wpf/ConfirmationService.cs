@@ -1,17 +1,35 @@
 using CommandForge.Application.Ports;
+using CommandForge.Desktop.Resources;
+using CommandForge.Desktop.Services;
+using CommandForge.Desktop.ViewModels;
+using CommandForge.Desktop.Views;
 using CommandForge.Domain;
-using CommandForge.Wpf.Resources;
-using CommandForge.Wpf.ViewModels;
-using CommandForge.Wpf.Views;
+using Serilog;
+using Wpf.Ui.Controls;
 
-namespace CommandForge.Wpf;
+namespace CommandForge.Desktop;
 
-/// <summary><see cref="IConfirmationService"/> that shows the modal <see cref="ConfirmationDialog"/>.</summary>
+/// <summary><see cref="IConfirmationService"/> that shows the in-window <see cref="ConfirmationDialog"/>.</summary>
 public sealed class ConfirmationService : IConfirmationService
 {
-    public Task<ConfirmationOutcome?> ConfirmAsync(CommandDefinition command, bool defaultCreateRestorePoint)
+    private readonly InWindowDialogs _dialogs;
+
+    public ConfirmationService(InWindowDialogs dialogs)
+    {
+        ArgumentNullException.ThrowIfNull(dialogs);
+        _dialogs = dialogs;
+    }
+
+    public async Task<ConfirmationOutcome?> ConfirmAsync(CommandDefinition command, bool defaultCreateRestorePoint)
     {
         ArgumentNullException.ThrowIfNull(command);
+
+        // Without a way to ask, the answer is "no": a risky command never runs unconfirmed.
+        if (!_dialogs.CanShow)
+        {
+            Log.Warning("Confirmation for {CommandId} could not be shown; the command was not run.", command.Id);
+            return null;
+        }
 
         var viewModel = new ConfirmationViewModel(
             command,
@@ -19,14 +37,9 @@ public sealed class ConfirmationService : IConfirmationService
             Strings.Get(command.DescriptionKey),
             defaultCreateRestorePoint);
 
-        var dialog = new ConfirmationDialog(viewModel);
-        if (System.Windows.Application.Current?.MainWindow is { IsVisible: true } owner)
-        {
-            dialog.Owner = owner;
-        }
-
-        var confirmed = dialog.ShowDialog() == true;
-        return Task.FromResult<ConfirmationOutcome?>(
-            confirmed ? new ConfirmationOutcome(viewModel.ShowRestorePointOption && viewModel.CreateRestorePoint) : null);
+        var result = await _dialogs.ShowAsync(new ConfirmationDialog(viewModel));
+        return result == ContentDialogResult.Primary && viewModel.CanRun
+            ? new ConfirmationOutcome(viewModel.ShowRestorePointOption && viewModel.CreateRestorePoint)
+            : null;
     }
 }

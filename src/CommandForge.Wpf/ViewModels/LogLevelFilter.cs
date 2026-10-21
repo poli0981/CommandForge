@@ -1,4 +1,4 @@
-namespace CommandForge.Wpf.ViewModels;
+namespace CommandForge.Desktop.ViewModels;
 
 /// <summary>The Log Viewer's level filter (the "Level" dropdown). Distinct from the 6-value <c>LogLevel</c>.</summary>
 public enum LogLevelFilter

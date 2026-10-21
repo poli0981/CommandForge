@@ -1,7 +1,7 @@
 using System.Globalization;
 using System.Resources;
 
-namespace CommandForge.Wpf.Resources;
+namespace CommandForge.Desktop.Resources;
 
 /// <summary>
 /// Resolves localized UI strings (EN neutral + VI satellite). XAML binds via the
@@ -10,7 +10,7 @@ namespace CommandForge.Wpf.Resources;
 public static class Strings
 {
     private static readonly ResourceManager Manager =
-        new("CommandForge.Wpf.Resources.Strings", typeof(Strings).Assembly);
+        new("CommandForge.Desktop.Resources.Strings", typeof(Strings).Assembly);
 
     /// <summary>Resolves an arbitrary resource key for the current UI culture.</summary>
     public static string Get(string key) =>

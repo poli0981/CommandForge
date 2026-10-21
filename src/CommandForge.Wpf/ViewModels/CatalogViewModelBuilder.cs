@@ -1,8 +1,8 @@
 using CommandForge.Application.Ports;
 using CommandForge.Application.Search;
-using CommandForge.Wpf.Resources;
+using CommandForge.Desktop.Resources;
 
-namespace CommandForge.Wpf.ViewModels;
+namespace CommandForge.Desktop.ViewModels;
 
 /// <summary>View-model projections of the catalog, with resource keys resolved to localized text.</summary>
 internal sealed record CatalogViewModels(

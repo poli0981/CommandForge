@@ -94,6 +94,19 @@ public sealed class RunCommandUseCaseTests
 
         public bool IsSessionActive => false;
 
+        public event EventHandler? SessionChanged
+        {
+            add
+            {
+                // A fake session never starts or ends.
+            }
+
+            remove
+            {
+                // A fake session never starts or ends.
+            }
+        }
+
         public Task EndSessionAsync(CancellationToken cancellationToken = default) => Task.CompletedTask;
 
         public Task<ExecutionResult> RunElevatedAsync(CommandDefinition command, ChannelWriter<OutputLine> output, CancellationToken cancellationToken = default)
@@ -113,6 +126,19 @@ public sealed class RunCommandUseCaseTests
     private sealed class HangingElevation : IElevationService
     {
         public bool IsSessionActive => false;
+
+        public event EventHandler? SessionChanged
+        {
+            add
+            {
+                // A fake session never starts or ends.
+            }
+
+            remove
+            {
+                // A fake session never starts or ends.
+            }
+        }
 
         public Task EndSessionAsync(CancellationToken cancellationToken = default) => Task.CompletedTask;
 

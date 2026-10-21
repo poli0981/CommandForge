@@ -5,18 +5,19 @@ using CommandForge.Application;
 using CommandForge.Application.Logging;
 using CommandForge.Application.Ports;
 using CommandForge.Application.Settings;
+using CommandForge.Desktop.Resources;
+using CommandForge.Desktop.Services;
+using CommandForge.Desktop.Theming;
 using CommandForge.Infrastructure;
-using CommandForge.Wpf.Resources;
-using CommandForge.Wpf.Services;
-using CommandForge.Wpf.Theming;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
-namespace CommandForge.Wpf.ViewModels;
+namespace CommandForge.Desktop.ViewModels;
 
 /// <summary>
-/// Drives the in-shell Settings screen (Appearance, Behavior &amp; Safety, Updates, About). Appearance
-/// changes apply LIVE (theme/font/language) and every change is persisted via <see cref="ISettingsService"/>.
+/// Drives the Settings page (appearance, behavior &amp; safety, updates, profiles, logs, advanced,
+/// about). Appearance changes apply live (theme/font/language) and every change is persisted via
+/// <see cref="ISettingsService"/>.
 /// </summary>
 public sealed partial class SettingsViewModel : ObservableObject
 {
@@ -71,15 +72,7 @@ public sealed partial class SettingsViewModel : ObservableObject
         _files = files;
         _shell = shell;
 
-        Languages =
-        [
-            new LanguageOption("", Strings.Get("LanguageOption_System")),
-            new LanguageOption("en", "English"),
-            new LanguageOption("vi", "Tiếng Việt"),
-            new LanguageOption("ja", "日本語"),
-            new LanguageOption("zh-Hans", "简体中文"),
-            new LanguageOption("es", "Español"),
-        ];
+        Languages = LanguageOption.CreateAll();
 
         // Initialize from persisted settings directly (field assignment skips the apply/save hooks).
         _selectedTheme = settings.Theme;
@@ -113,9 +106,6 @@ public sealed partial class SettingsViewModel : ObservableObject
     /// </summary>
     public event Action? PortableSettingsApplied;
 
-    [ObservableProperty]
-    private SettingsSection _selectedSection = SettingsSection.Appearance;
-
     // ---- Appearance ----
 
     [ObservableProperty]
@@ -127,10 +117,6 @@ public sealed partial class SettingsViewModel : ObservableObject
         _settings.Theme = value;
         _settings.Save();
     }
-
-    /// <summary>Sets the theme (used by the View menu); routes through <see cref="SelectedTheme"/> to apply + persist.</summary>
-    [RelayCommand]
-    private void SetTheme(AppTheme theme) => SelectedTheme = theme;
 
     public IReadOnlyList<LanguageOption> Languages { get; }
 
@@ -145,15 +131,10 @@ public sealed partial class SettingsViewModel : ObservableObject
         }
 
         LocalizationManager.Instance.SetCulture(
-            string.IsNullOrEmpty(value.Code) ? LocalizationManager.Instance.SystemCulture : new CultureInfo(value.Code));
+            string.IsNullOrEmpty(value.Code) ? LocalizationManager.Instance.SystemCulture : CultureInfo.GetCultureInfo(value.Code));
         _settings.Language = value.Code;
         _settings.Save();
     }
-
-    /// <summary>Sets the UI language by culture code (<c>""</c> = system); used by the View menu.</summary>
-    [RelayCommand]
-    private void SetLanguage(string? code)
-        => SelectedLanguage = Languages.FirstOrDefault(l => l.Code == (code ?? string.Empty)) ?? Languages[0];
 
     [ObservableProperty]
     private FontScale _selectedFontSize;
@@ -164,10 +145,6 @@ public sealed partial class SettingsViewModel : ObservableObject
         _settings.FontSize = value;
         _settings.Save();
     }
-
-    /// <summary>Sets the font size (used by the View menu); routes through <see cref="SelectedFontSize"/>.</summary>
-    [RelayCommand]
-    private void SetFontSize(FontScale size) => SelectedFontSize = size;
 
     [ObservableProperty]
     private bool _collapseSidebarByDefault;

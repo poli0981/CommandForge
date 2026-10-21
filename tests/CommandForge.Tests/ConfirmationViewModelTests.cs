@@ -1,6 +1,6 @@
 using System.Text;
+using CommandForge.Desktop.ViewModels;
 using CommandForge.Domain;
-using CommandForge.Wpf.ViewModels;
 
 namespace CommandForge.Tests;
 

@@ -1,4 +1,4 @@
-namespace CommandForge.Wpf.ViewModels;
+namespace CommandForge.Desktop.ViewModels;
 
 /// <summary>One Home maintenance suggestion: a reason and an optional catalog command to open.</summary>
 public sealed class MaintenanceSuggestionViewModel

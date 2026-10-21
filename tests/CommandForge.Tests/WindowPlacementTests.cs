@@ -1,4 +1,4 @@
-using CommandForge.Wpf.Views;
+using CommandForge.Desktop.Views;
 
 namespace CommandForge.Tests;
 

@@ -1,7 +1,7 @@
 using System.Globalization;
 using CommandForge.Application.Logging;
 
-namespace CommandForge.Wpf.ViewModels;
+namespace CommandForge.Desktop.ViewModels;
 
 /// <summary>A single log line for display: formatted time, 3-letter level tag, message, and raw level.</summary>
 public sealed class LogEntryViewModel

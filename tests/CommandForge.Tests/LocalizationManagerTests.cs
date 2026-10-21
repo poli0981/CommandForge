@@ -1,6 +1,6 @@
 using System.ComponentModel;
 using System.Globalization;
-using CommandForge.Wpf.Resources;
+using CommandForge.Desktop.Resources;
 
 namespace CommandForge.Tests;
 

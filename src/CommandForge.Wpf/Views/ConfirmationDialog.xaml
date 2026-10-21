@@ -1,67 +1,41 @@
-<Window x:Class="CommandForge.Wpf.Views.ConfirmationDialog"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        xmlns:res="clr-namespace:CommandForge.Wpf.Resources"
-        Title="{Binding Title}"
-        Width="560" SizeToContent="Height" ResizeMode="NoResize"
-        WindowStartupLocation="CenterOwner" ShowInTaskbar="False"
-        FontFamily="{DynamicResource MaterialDesignFont}"
-        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-        TextElement.FontSize="{DynamicResource AppFontSize}"
-        Background="{DynamicResource MaterialDesignPaper}"
-        FocusManager.FocusedElement="{Binding ElementName=CancelButton}">
-    <Window.Resources>
+<ui:ContentDialog x:Class="CommandForge.Desktop.Views.ConfirmationDialog"
+                  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                  xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+                  xmlns:res="clr-namespace:CommandForge.Desktop.Resources"
+                  xmlns:views="clr-namespace:CommandForge.Desktop.Views"
+                  Title="{Binding Title}"
+                  PrimaryButtonText="{res:Loc Detail_Run}"
+                  CloseButtonText="{res:Loc Console_Cancel}"
+                  DefaultButton="Close"
+                  IsPrimaryButtonEnabled="{Binding CanRun}"
+                  DialogMaxWidth="640">
+    <ui:ContentDialog.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVis" />
-    </Window.Resources>
-    <Grid Margin="20">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
+    </ui:ContentDialog.Resources>
 
-        <DockPanel Grid.Row="0" Margin="0,0,0,12">
-            <materialDesign:PackIcon DockPanel.Dock="Left" Kind="Alert" Width="26" Height="26"
-                                     VerticalAlignment="Top" Margin="0,2,10,0" />
-            <StackPanel>
-                <TextBlock Text="{Binding Title}" FontSize="18" FontWeight="Bold" TextWrapping="Wrap" />
-                <TextBlock Text="{Binding DangerText}" Opacity="0.7" FontSize="12" />
-            </StackPanel>
-        </DockPanel>
+    <!-- Cancel is the default (Enter) and the Esc action: the safe choice is always the easy one. -->
+    <StackPanel MinWidth="420">
+        <views:DangerBadge Level="{Binding DangerLevel}" HorizontalAlignment="Left" Margin="0,0,0,12" />
 
-        <Border Grid.Row="1" Background="{DynamicResource MaterialDesignToolBarBackground}"
-                CornerRadius="4" Padding="10" Margin="0,0,0,12">
-            <TextBox Text="{Binding CommandLine, Mode=OneWay}" IsReadOnly="True" BorderThickness="0"
-                     AutomationProperties.Name="{res:Loc Detail_CommandLine}"
-                     Background="Transparent" TextWrapping="Wrap" FontFamily="Cascadia Mono, Consolas, Courier New" />
+        <TextBlock Text="{Binding Description}" TextWrapping="Wrap" Margin="0,0,0,12" />
+
+        <TextBlock Text="{res:Loc Detail_CommandLine}" Style="{StaticResource BodyStrongTextStyle}" Margin="0,0,0,4" />
+        <Border Style="{StaticResource CodeBlockBorderStyle}" Margin="0,0,0,12">
+            <TextBox Text="{Binding CommandLine, Mode=OneWay}" Style="{StaticResource ReadOnlyCodeTextBoxStyle}"
+                     AutomationProperties.Name="{res:Loc Detail_CommandLine}" />
         </Border>
 
-        <TextBlock Grid.Row="2" Text="{Binding Description}" TextWrapping="Wrap" Opacity="0.85" Margin="0,0,0,12" />
-
-        <StackPanel Grid.Row="3" Margin="0,0,0,12"
-                    Visibility="{Binding IsDangerous, Converter={StaticResource BoolToVis}}">
+        <StackPanel Margin="0,0,0,12" Visibility="{Binding IsDangerous, Converter={StaticResource BoolToVis}}">
             <TextBlock Text="{res:Loc Confirm_TypeToConfirm}" TextWrapping="Wrap" Margin="0,0,0,6" />
-            <TextBox x:Name="ConfirmationInputBox"
-                     Text="{Binding ConfirmationInput, UpdateSourceTrigger=PropertyChanged}"
-                     AutomationProperties.Name="{res:Loc Confirm_TypeToConfirm}"
-                     materialDesign:HintAssist.Hint="{Binding CommandId}" />
+            <ui:TextBox x:Name="ConfirmationInputBox"
+                        Text="{Binding ConfirmationInput, UpdateSourceTrigger=PropertyChanged}"
+                        PlaceholderText="{Binding CommandId}"
+                        AutomationProperties.Name="{res:Loc Confirm_TypeToConfirm}" />
         </StackPanel>
 
-        <CheckBox Grid.Row="4" IsChecked="{Binding CreateRestorePoint}"
-                  Visibility="{Binding ShowRestorePointOption, Converter={StaticResource BoolToVis}}"
-                  Content="{res:Loc Confirm_CreateRestorePoint}" Margin="0,0,0,16" />
-
-        <StackPanel Grid.Row="5" Orientation="Horizontal" HorizontalAlignment="Right">
-            <!-- Cancel is the default and the Esc action: the safe choice is always the easy one. -->
-            <Button x:Name="CancelButton" Content="{res:Loc Console_Cancel}" Command="{Binding CancelCommand}"
-                    IsCancel="True" IsDefault="True"
-                    Style="{StaticResource MaterialDesignOutlinedButton}" Margin="0,0,8,0" />
-            <Button Content="{res:Loc Detail_Run}" Command="{Binding RunCommand}"
-                    Style="{StaticResource MaterialDesignRaisedButton}" />
-        </StackPanel>
-    </Grid>
-</Window>
+        <CheckBox IsChecked="{Binding CreateRestorePoint}"
+                  Content="{res:Loc Confirm_CreateRestorePoint}"
+                  Visibility="{Binding ShowRestorePointOption, Converter={StaticResource BoolToVis}}" />
+    </StackPanel>
+</ui:ContentDialog>

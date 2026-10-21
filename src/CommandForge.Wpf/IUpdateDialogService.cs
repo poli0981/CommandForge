@@ -1,4 +1,4 @@
-namespace CommandForge.Wpf;
+namespace CommandForge.Desktop;
 
 /// <summary>Shows the modal update dialog. A WPF-side presentation service called by the shell.</summary>
 public interface IUpdateDialogService

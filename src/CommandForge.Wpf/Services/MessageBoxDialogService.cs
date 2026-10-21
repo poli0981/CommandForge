@@ -1,6 +1,6 @@
 using System.Windows;
 
-namespace CommandForge.Wpf.Services;
+namespace CommandForge.Desktop.Services;
 
 /// <summary><see cref="IDialogService"/> backed by the Windows message box.</summary>
 public sealed class MessageBoxDialogService : IDialogService

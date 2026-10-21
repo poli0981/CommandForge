@@ -1,21 +1,18 @@
-using System.Windows;
-using CommandForge.Wpf.ViewModels;
+using CommandForge.Desktop.ViewModels;
+using Wpf.Ui.Controls;
 
-namespace CommandForge.Wpf.Views;
+namespace CommandForge.Desktop.Views;
 
-/// <summary>First-run modal that gates the app behind acceptance of the legal terms.</summary>
-public partial class LegalGateWindow : Window
+/// <summary>First-run window that gates the app behind acceptance of the legal terms.</summary>
+public partial class LegalGateWindow : FluentWindow
 {
     public LegalGateWindow(LegalGateViewModel viewModel)
     {
+        ArgumentNullException.ThrowIfNull(viewModel);
         InitializeComponent();
         DataContext = viewModel;
-        viewModel.CloseRequested += OnCloseRequested;
-    }
 
-    private void OnCloseRequested(bool result)
-    {
-        // Setting DialogResult closes a dialog opened with ShowDialog().
-        DialogResult = result;
+        // Setting DialogResult closes a window opened with ShowDialog().
+        viewModel.CloseRequested += result => DialogResult = result;
     }
 }

@@ -1,7 +1,7 @@
 using System.Globalization;
 using System.Windows.Data;
 
-namespace CommandForge.Wpf.Converters;
+namespace CommandForge.Desktop.Converters;
 
 /// <summary>
 /// Two-way converter for binding a group of <see cref="System.Windows.Controls.RadioButton"/>s to an

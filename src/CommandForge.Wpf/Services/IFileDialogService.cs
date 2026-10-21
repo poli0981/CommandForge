@@ -1,4 +1,4 @@
-namespace CommandForge.Wpf.Services;
+namespace CommandForge.Desktop.Services;
 
 /// <summary>Open/save file pickers for view-models.</summary>
 public interface IFileDialogService

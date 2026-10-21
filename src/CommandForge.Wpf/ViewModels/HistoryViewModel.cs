@@ -1,11 +1,11 @@
 using System.Collections.ObjectModel;
 using CommandForge.Application.Ports;
-using CommandForge.Wpf.Resources;
-using CommandForge.Wpf.Services;
+using CommandForge.Desktop.Resources;
+using CommandForge.Desktop.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
-namespace CommandForge.Wpf.ViewModels;
+namespace CommandForge.Desktop.ViewModels;
 
 /// <summary>
 /// Execution-history screen: past command runs (newest first) with re-run and clear.

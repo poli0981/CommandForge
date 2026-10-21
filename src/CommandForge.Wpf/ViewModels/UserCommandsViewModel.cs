@@ -2,13 +2,13 @@ using System.Collections.ObjectModel;
 using System.Globalization;
 using CommandForge.Application.Ports;
 using CommandForge.Application.UserCommands;
+using CommandForge.Desktop.Resources;
+using CommandForge.Desktop.Services;
 using CommandForge.Domain;
-using CommandForge.Wpf.Resources;
-using CommandForge.Wpf.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
-namespace CommandForge.Wpf.ViewModels;
+namespace CommandForge.Desktop.ViewModels;
 
 /// <summary>
 /// "My commands" screen: create and run user-defined commands. These are kept entirely separate
@@ -172,7 +172,7 @@ public sealed partial class UserCommandsViewModel : ObservableObject
         }
 
         // SAFETY: ToDefinition forces RequiresAdmin = false → runs asInvoker, never via the broker.
-        await _execution.RunAsync(UserCommandFactory.ToDefinition(userCommand));
+        await _execution.RunAsync(UserCommandFactory.ToDefinition(userCommand), title: userCommand.Name);
     }
 
     private bool CanRun() => !string.IsNullOrWhiteSpace(EditExecutable) && !_execution.IsRunning;

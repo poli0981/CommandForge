@@ -1,11 +1,11 @@
 using System.Collections.Specialized;
 using CommandForge.Application.Settings;
 using CommandForge.Application.UserCommands;
+using CommandForge.Desktop;
+using CommandForge.Desktop.ViewModels;
 using CommandForge.Domain;
 using CommandForge.Infrastructure;
 using CommandForge.Infrastructure.Portability;
-using CommandForge.Wpf;
-using CommandForge.Wpf.ViewModels;
 
 namespace CommandForge.Tests;
 

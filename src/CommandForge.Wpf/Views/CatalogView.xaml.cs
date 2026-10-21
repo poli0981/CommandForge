@@ -1,31 +1,16 @@
-using System.Diagnostics;
-using System.Windows;
 using System.Windows.Controls;
-using CommandForge.Wpf.Resources;
 
-namespace CommandForge.Wpf.Views;
+namespace CommandForge.Desktop.Views;
 
-/// <summary>The catalog browse/run surface (search + command list + detail + console).</summary>
+/// <summary>The catalog browse/run page: search and risk filters, command list, detail and console.</summary>
 public partial class CatalogView : UserControl
 {
-    public CatalogView()
-    {
-        InitializeComponent();
-    }
+    public CatalogView() => InitializeComponent();
 
-    private void OnRestartClick(object sender, RoutedEventArgs e)
+    /// <summary>Puts the cursor in the search box (Ctrl+F, or after navigating here from the search box).</summary>
+    public void FocusSearch()
     {
-        var confirm = MessageBox.Show(
-            System.Windows.Window.GetWindow(this),
-            Strings.Get("Restart_ConfirmMessage"),
-            Strings.Get("Restart_ConfirmTitle"),
-            MessageBoxButton.OKCancel,
-            MessageBoxImage.Warning);
-
-        if (confirm == MessageBoxResult.OK)
-        {
-            var shutdown = System.IO.Path.Combine(Environment.SystemDirectory, "shutdown.exe");
-            Process.Start(new ProcessStartInfo(shutdown, "/r /t 0") { UseShellExecute = false, CreateNoWindow = true });
-        }
+        SearchBox.Focus();
+        SearchBox.SelectAll();
     }
 }

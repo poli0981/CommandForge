@@ -1,7 +1,7 @@
 using System.Windows.Data;
 using System.Windows.Markup;
 
-namespace CommandForge.Wpf.Resources;
+namespace CommandForge.Desktop.Resources;
 
 /// <summary>
 /// XAML markup extension that resolves a resource key to its localized string, e.g.

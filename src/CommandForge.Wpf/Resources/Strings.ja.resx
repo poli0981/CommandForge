@@ -91,26 +91,11 @@
   <data name="TabPrivacy" xml:space="preserve">
     <value>プライバシー</value>
   </data>
-  <data name="MenuFile" xml:space="preserve">
-    <value>ファイル</value>
-  </data>
-  <data name="MenuView" xml:space="preserve">
-    <value>表示</value>
-  </data>
-  <data name="MenuTools" xml:space="preserve">
-    <value>ツール</value>
-  </data>
-  <data name="MenuAbout" xml:space="preserve">
-    <value>情報</value>
-  </data>
-  <data name="MenuHelp" xml:space="preserve">
-    <value>ヘルプ</value>
-  </data>
   <data name="MenuExit" xml:space="preserve">
     <value>終了</value>
   </data>
   <data name="MenuToggleSidebar" xml:space="preserve">
-    <value>サイドバーを折りたたむ</value>
+    <value>ナビゲーション ウィンドウの表示/非表示</value>
   </data>
   <data name="SidebarHome" xml:space="preserve">
     <value>ホーム</value>
@@ -132,12 +117,6 @@
   </data>
   <data name="Sidebar_AllCommands" xml:space="preserve">
     <value>すべてのコマンド</value>
-  </data>
-  <data name="PaneCommands" xml:space="preserve">
-    <value>コマンド</value>
-  </data>
-  <data name="PaneDetails" xml:space="preserve">
-    <value>詳細</value>
   </data>
   <data name="PaneConsole" xml:space="preserve">
     <value>コンソール</value>
@@ -166,17 +145,8 @@
   <data name="Restart_ConfirmMessage" xml:space="preserve">
     <value>一部の変更を完了するには再起動が必要です。今すぐ再起動しますか？</value>
   </data>
-  <data name="ComingSoon" xml:space="preserve">
-    <value>近日公開</value>
-  </data>
-  <data name="NoCommandsInCategory" xml:space="preserve">
-    <value>このカテゴリにはまだコマンドがありません。</value>
-  </data>
   <data name="NoSearchResults" xml:space="preserve">
     <value>検索に一致するコマンドがありません。</value>
-  </data>
-  <data name="Detail_RunDisabledHint" xml:space="preserve">
-    <value>コマンドの実行は次のフェーズで利用可能になります。</value>
   </data>
   <data name="Detail_SelectPrompt" xml:space="preserve">
     <value>詳細を表示するにはコマンドを選択してください。</value>
@@ -224,7 +194,7 @@
     <value>再起動が必要な場合あり</value>
   </data>
   <data name="Search_Placeholder" xml:space="preserve">
-    <value>コマンドを検索…（Ctrl+K）</value>
+    <value>コマンドを検索…（Ctrl+F）</value>
   </data>
   <data name="Search_Suggestion" xml:space="preserve">
     <value>もしかして:</value>
@@ -1283,14 +1253,8 @@
   <data name="Menu_OpenLogFolder" xml:space="preserve">
     <value>ログフォルダーを開く</value>
   </data>
-  <data name="Menu_FullScreen" xml:space="preserve">
-    <value>全画面表示</value>
-  </data>
   <data name="Menu_About" xml:space="preserve">
     <value>CommandForge について</value>
-  </data>
-  <data name="Menu_Wiki" xml:space="preserve">
-    <value>ガイド / Wiki</value>
   </data>
   <data name="Legal_EulaSummary" xml:space="preserve">
     <value>CommandForge を使用することで、本ソフトウェアが自己責任のもとシステムレベルのコマンドを無保証で実行することに同意したものとみなされます。あなたの権利は GNU GPL v3 に従います。本規約はリスクの確認と保証の免責を追加するものです。</value>
@@ -2485,5 +2449,128 @@
   </data>
   <data name="Cmd_power.battery.status_Desc" xml:space="preserve">
     <value>現在のバッテリー残量、状態、推定駆動時間を表示します。</value>
+  </data>
+  <data name="Admin_SessionActive" xml:space="preserve">
+    <value>管理者セッション実行中</value>
+  </data>
+  <data name="Admin_SessionTooltip" xml:space="preserve">
+    <value>管理者コマンドは昇格したヘルパーで実行され、毎回確認されないよう開いたままになります。作業が終わったらセッションを終了してください。</value>
+  </data>
+  <data name="Admin_EndSession" xml:space="preserve">
+    <value>管理者セッションを終了</value>
+  </data>
+  <data name="Admin_SessionEnded" xml:space="preserve">
+    <value>管理者セッションを終了しました。次の管理者コマンドでは再びアクセス許可を求めます。</value>
+  </data>
+  <data name="Console_CopyAll" xml:space="preserve">
+    <value>出力をすべてコピー</value>
+  </data>
+  <data name="Console_Save" xml:space="preserve">
+    <value>出力をファイルに保存</value>
+  </data>
+  <data name="Console_Saved" xml:space="preserve">
+    <value>出力を {0} に保存しました</value>
+  </data>
+  <data name="Console_DroppedLines" xml:space="preserve">
+    <value>それより前の {0:N0} 行は表示されていません。</value>
+  </data>
+  <data name="Console_Running" xml:space="preserve">
+    <value>実行中…</value>
+  </data>
+  <data name="Console_WaitingForAdmin" xml:space="preserve">
+    <value>管理者のアクセス許可を待っています…</value>
+  </data>
+  <data name="Detail_Duration" xml:space="preserve">
+    <value>予想時間</value>
+  </data>
+  <data name="Estimate_Short" xml:space="preserve">
+    <value>数秒</value>
+  </data>
+  <data name="Estimate_Medium" xml:space="preserve">
+    <value>最大で数分</value>
+  </data>
+  <data name="Estimate_Long" xml:space="preserve">
+    <value>数分以上</value>
+  </data>
+  <data name="Dialog_Yes" xml:space="preserve">
+    <value>はい</value>
+  </data>
+  <data name="Dialog_No" xml:space="preserve">
+    <value>いいえ</value>
+  </data>
+  <data name="Dialog_OK" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="FileFilter_Text" xml:space="preserve">
+    <value>テキスト ファイル (*.txt)|*.txt</value>
+  </data>
+  <data name="Filter_AdminOnly" xml:space="preserve">
+    <value>管理者のみ</value>
+  </data>
+  <data name="Filter_Clear" xml:space="preserve">
+    <value>フィルターをクリア</value>
+  </data>
+  <data name="Menu_More" xml:space="preserve">
+    <value>その他</value>
+  </data>
+  <data name="Menu_UserGuide" xml:space="preserve">
+    <value>ユーザー ガイド</value>
+  </data>
+  <data name="Nav_Catalog" xml:space="preserve">
+    <value>コマンド カタログ</value>
+  </data>
+  <data name="Restart_Failed" xml:space="preserve">
+    <value>Windows を再起動できませんでした。作業内容を保存し、[スタート] メニューから再起動してください。</value>
+  </data>
+  <data name="Run_Finished" xml:space="preserve">
+    <value>{0} が完了しました</value>
+  </data>
+  <data name="Run_FinishedFailed" xml:space="preserve">
+    <value>{0} は失敗しました</value>
+  </data>
+  <data name="Settings_ThemeDesc" xml:space="preserve">
+    <value>ライト、ダーク、または Windows と同じ。</value>
+  </data>
+  <data name="Settings_LanguageDesc" xml:space="preserve">
+    <value>アプリの言語はすぐに切り替わります。</value>
+  </data>
+  <data name="Settings_FontSizeDesc" xml:space="preserve">
+    <value>アプリ全体の文字サイズ。</value>
+  </data>
+  <data name="Settings_CollapseSidebarDesc" xml:space="preserve">
+    <value>ナビゲーション ウィンドウを折りたたんだ状態で起動します。</value>
+  </data>
+  <data name="Settings_ShowBadgesDesc" xml:space="preserve">
+    <value>コマンド一覧に管理者と再起動のアイコンを表示します。</value>
+  </data>
+  <data name="Settings_ConfirmCautionDesc" xml:space="preserve">
+    <value>「注意」とマークされたコマンドの実行前に確認します。</value>
+  </data>
+  <data name="Settings_AutoRestorePointDesc" xml:space="preserve">
+    <value>リスクのある管理者コマンドの前に、「復元ポイントを作成」を既定でオンにします。</value>
+  </data>
+  <data name="Settings_AutoScrollDesc" xml:space="preserve">
+    <value>コンソールを最新の出力までスクロールしたままにします。</value>
+  </data>
+  <data name="Settings_WarnOnCancelDesc" xml:space="preserve">
+    <value>コマンドの実行中にアプリを閉じる前に確認します。</value>
+  </data>
+  <data name="Settings_AutoCheckUpdatesDesc" xml:space="preserve">
+    <value>アプリの起動時に GitHub で新しいバージョンを確認します。それ以外の情報は送信しません。</value>
+  </data>
+  <data name="Settings_LogLevelDesc" xml:space="preserve">
+    <value>この PC のログ ファイルに記録する詳細さ。</value>
+  </data>
+  <data name="Shortcuts_Search" xml:space="preserve">
+    <value>現在の一覧を検索</value>
+  </data>
+  <data name="Snack_Copied" xml:space="preserve">
+    <value>クリップボードにコピーしました</value>
+  </data>
+  <data name="Snack_CopyFailed" xml:space="preserve">
+    <value>コピーできませんでした。別のアプリがクリップボードを使用しています。もう一度お試しください。</value>
+  </data>
+  <data name="TitleBar_Search" xml:space="preserve">
+    <value>すべてのコマンドを検索 (Ctrl+K)</value>
   </data>
 </root>

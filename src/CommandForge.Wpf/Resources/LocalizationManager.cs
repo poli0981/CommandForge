@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Windows;
 using System.Windows.Markup;
 
-namespace CommandForge.Wpf.Resources;
+namespace CommandForge.Desktop.Resources;
 
 /// <summary>
 /// Live-localization source for XAML bindings. <see cref="LocExtension"/> binds to this singleton's

@@ -91,26 +91,11 @@
   <data name="TabPrivacy" xml:space="preserve">
     <value>Privacy</value>
   </data>
-  <data name="MenuFile" xml:space="preserve">
-    <value>File</value>
-  </data>
-  <data name="MenuView" xml:space="preserve">
-    <value>View</value>
-  </data>
-  <data name="MenuTools" xml:space="preserve">
-    <value>Tools</value>
-  </data>
-  <data name="MenuAbout" xml:space="preserve">
-    <value>About</value>
-  </data>
-  <data name="MenuHelp" xml:space="preserve">
-    <value>Help</value>
-  </data>
   <data name="MenuExit" xml:space="preserve">
     <value>Exit</value>
   </data>
   <data name="MenuToggleSidebar" xml:space="preserve">
-    <value>Collapse sidebar</value>
+    <value>Show or hide the navigation pane</value>
   </data>
   <data name="SidebarHome" xml:space="preserve">
     <value>Home</value>
@@ -132,12 +117,6 @@
   </data>
   <data name="Sidebar_AllCommands" xml:space="preserve">
     <value>All commands</value>
-  </data>
-  <data name="PaneCommands" xml:space="preserve">
-    <value>Commands</value>
-  </data>
-  <data name="PaneDetails" xml:space="preserve">
-    <value>Details</value>
   </data>
   <data name="PaneConsole" xml:space="preserve">
     <value>Console</value>
@@ -166,17 +145,8 @@
   <data name="Restart_ConfirmMessage" xml:space="preserve">
     <value>Some changes need a restart to complete. Restart now?</value>
   </data>
-  <data name="ComingSoon" xml:space="preserve">
-    <value>Coming soon</value>
-  </data>
-  <data name="NoCommandsInCategory" xml:space="preserve">
-    <value>No commands in this category yet.</value>
-  </data>
   <data name="NoSearchResults" xml:space="preserve">
     <value>No commands match your search.</value>
-  </data>
-  <data name="Detail_RunDisabledHint" xml:space="preserve">
-    <value>Running commands arrives in the next phase.</value>
   </data>
   <data name="Detail_SelectPrompt" xml:space="preserve">
     <value>Select a command to see its details.</value>
@@ -224,7 +194,7 @@
     <value>May require restart</value>
   </data>
   <data name="Search_Placeholder" xml:space="preserve">
-    <value>Search commands… (Ctrl+K)</value>
+    <value>Search commands… (Ctrl+F)</value>
   </data>
   <data name="Search_Suggestion" xml:space="preserve">
     <value>Did you mean:</value>
@@ -1283,14 +1253,8 @@ Continue?</value>
   <data name="Menu_OpenLogFolder" xml:space="preserve">
     <value>Open log folder</value>
   </data>
-  <data name="Menu_FullScreen" xml:space="preserve">
-    <value>Full screen</value>
-  </data>
   <data name="Menu_About" xml:space="preserve">
     <value>About CommandForge</value>
-  </data>
-  <data name="Menu_Wiki" xml:space="preserve">
-    <value>Guide / Wiki</value>
   </data>
   <data name="Legal_EulaSummary" xml:space="preserve">
     <value>By using CommandForge you accept that it runs system-level commands at your own risk, with no warranty. The GNU GPL v3 governs your rights; this only adds a risk acknowledgement and warranty disclaimer.</value>
@@ -2485,5 +2449,128 @@ Details were written to the log folder:
   </data>
   <data name="Cmd_power.battery.status_Desc" xml:space="preserve">
     <value>Show the current battery charge, status and estimated runtime.</value>
+  </data>
+  <data name="Admin_SessionActive" xml:space="preserve">
+    <value>Admin session active</value>
+  </data>
+  <data name="Admin_SessionTooltip" xml:space="preserve">
+    <value>Admin commands run in an elevated helper that stays open, so you aren't asked again each time. End the session when you're done.</value>
+  </data>
+  <data name="Admin_EndSession" xml:space="preserve">
+    <value>End admin session</value>
+  </data>
+  <data name="Admin_SessionEnded" xml:space="preserve">
+    <value>Admin session ended. The next admin command will ask for permission again.</value>
+  </data>
+  <data name="Console_CopyAll" xml:space="preserve">
+    <value>Copy all output</value>
+  </data>
+  <data name="Console_Save" xml:space="preserve">
+    <value>Save output to a file</value>
+  </data>
+  <data name="Console_Saved" xml:space="preserve">
+    <value>Output saved to {0}</value>
+  </data>
+  <data name="Console_DroppedLines" xml:space="preserve">
+    <value>{0:N0} earlier lines are not shown.</value>
+  </data>
+  <data name="Console_Running" xml:space="preserve">
+    <value>Running…</value>
+  </data>
+  <data name="Console_WaitingForAdmin" xml:space="preserve">
+    <value>Waiting for administrator permission…</value>
+  </data>
+  <data name="Detail_Duration" xml:space="preserve">
+    <value>Estimated time</value>
+  </data>
+  <data name="Estimate_Short" xml:space="preserve">
+    <value>a few seconds</value>
+  </data>
+  <data name="Estimate_Medium" xml:space="preserve">
+    <value>up to a couple of minutes</value>
+  </data>
+  <data name="Estimate_Long" xml:space="preserve">
+    <value>several minutes or more</value>
+  </data>
+  <data name="Dialog_Yes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="Dialog_No" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="Dialog_OK" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="FileFilter_Text" xml:space="preserve">
+    <value>Text files (*.txt)|*.txt</value>
+  </data>
+  <data name="Filter_AdminOnly" xml:space="preserve">
+    <value>Admin only</value>
+  </data>
+  <data name="Filter_Clear" xml:space="preserve">
+    <value>Clear filters</value>
+  </data>
+  <data name="Menu_More" xml:space="preserve">
+    <value>More</value>
+  </data>
+  <data name="Menu_UserGuide" xml:space="preserve">
+    <value>User guide</value>
+  </data>
+  <data name="Nav_Catalog" xml:space="preserve">
+    <value>Command catalog</value>
+  </data>
+  <data name="Restart_Failed" xml:space="preserve">
+    <value>Windows could not be restarted. Save your work and restart from the Start menu.</value>
+  </data>
+  <data name="Run_Finished" xml:space="preserve">
+    <value>{0} finished</value>
+  </data>
+  <data name="Run_FinishedFailed" xml:space="preserve">
+    <value>{0} failed</value>
+  </data>
+  <data name="Settings_ThemeDesc" xml:space="preserve">
+    <value>Light, dark, or the same as Windows.</value>
+  </data>
+  <data name="Settings_LanguageDesc" xml:space="preserve">
+    <value>The app switches language right away.</value>
+  </data>
+  <data name="Settings_FontSizeDesc" xml:space="preserve">
+    <value>Text size across the app.</value>
+  </data>
+  <data name="Settings_CollapseSidebarDesc" xml:space="preserve">
+    <value>Start with the navigation pane collapsed.</value>
+  </data>
+  <data name="Settings_ShowBadgesDesc" xml:space="preserve">
+    <value>Show admin and restart icons in command lists.</value>
+  </data>
+  <data name="Settings_ConfirmCautionDesc" xml:space="preserve">
+    <value>Ask before running commands marked Caution.</value>
+  </data>
+  <data name="Settings_AutoRestorePointDesc" xml:space="preserve">
+    <value>Tick “create a restore point” by default before risky admin commands.</value>
+  </data>
+  <data name="Settings_AutoScrollDesc" xml:space="preserve">
+    <value>Keep the console scrolled to the newest output.</value>
+  </data>
+  <data name="Settings_WarnOnCancelDesc" xml:space="preserve">
+    <value>Ask before closing the app while a command is running.</value>
+  </data>
+  <data name="Settings_AutoCheckUpdatesDesc" xml:space="preserve">
+    <value>Check GitHub for a new version when the app starts. Nothing else is sent.</value>
+  </data>
+  <data name="Settings_LogLevelDesc" xml:space="preserve">
+    <value>How much detail goes into the log files on this PC.</value>
+  </data>
+  <data name="Shortcuts_Search" xml:space="preserve">
+    <value>Search the current list</value>
+  </data>
+  <data name="Snack_Copied" xml:space="preserve">
+    <value>Copied to the clipboard</value>
+  </data>
+  <data name="Snack_CopyFailed" xml:space="preserve">
+    <value>Couldn't copy: another app is using the clipboard. Try again.</value>
+  </data>
+  <data name="TitleBar_Search" xml:space="preserve">
+    <value>Search all commands (Ctrl+K)</value>
   </data>
 </root>

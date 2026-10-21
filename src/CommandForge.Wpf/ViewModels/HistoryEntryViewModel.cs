@@ -1,8 +1,8 @@
 using System.Globalization;
+using CommandForge.Desktop.Resources;
 using CommandForge.Domain;
-using CommandForge.Wpf.Resources;
 
-namespace CommandForge.Wpf.ViewModels;
+namespace CommandForge.Desktop.ViewModels;
 
 /// <summary>One row in the execution-history list: a past run with its resolved title and display strings.</summary>
 public sealed class HistoryEntryViewModel

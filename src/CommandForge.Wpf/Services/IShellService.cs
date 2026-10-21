@@ -1,4 +1,4 @@
-namespace CommandForge.Wpf.Services;
+namespace CommandForge.Desktop.Services;
 
 /// <summary>Opens links/folders and restarts Windows on the user's request.</summary>
 public interface IShellService

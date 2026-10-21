@@ -1,11 +1,11 @@
 using CommandForge.Application;
+using CommandForge.Desktop.Resources;
 using CommandForge.Domain;
 using CommandForge.Infrastructure.Execution;
-using CommandForge.Wpf.Resources;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
-namespace CommandForge.Wpf.ViewModels;
+namespace CommandForge.Desktop.ViewModels;
 
 /// <summary>
 /// Confirmation prompt for a Caution/Dangerous command. Dangerous commands require the user
@@ -21,6 +21,7 @@ public sealed partial class ConfirmationViewModel : ObservableObject
         CommandId = command.Id;
         CommandLine = CommandPreview.Build(command, SystemPathTokens.Values);
         IsDangerous = RunSafety.NeedsTypedConfirmation(command);
+        DangerLevel = command.DangerLevel;
         DangerText = Strings.Get($"Danger_{command.DangerLevel}");
         ShowRestorePointOption = RunSafety.OffersRestorePoint(command);
         _createRestorePoint = ShowRestorePointOption && defaultCreateRestorePoint;
@@ -39,6 +40,8 @@ public sealed partial class ConfirmationViewModel : ObservableObject
     public string CommandLine { get; }
 
     public bool IsDangerous { get; }
+
+    public DangerLevel DangerLevel { get; }
 
     public string DangerText { get; }
 

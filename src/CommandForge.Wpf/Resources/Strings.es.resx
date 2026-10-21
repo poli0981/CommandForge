@@ -91,26 +91,11 @@
   <data name="TabPrivacy" xml:space="preserve">
     <value>Privacidad</value>
   </data>
-  <data name="MenuFile" xml:space="preserve">
-    <value>Archivo</value>
-  </data>
-  <data name="MenuView" xml:space="preserve">
-    <value>Ver</value>
-  </data>
-  <data name="MenuTools" xml:space="preserve">
-    <value>Herramientas</value>
-  </data>
-  <data name="MenuAbout" xml:space="preserve">
-    <value>Acerca de</value>
-  </data>
-  <data name="MenuHelp" xml:space="preserve">
-    <value>Ayuda</value>
-  </data>
   <data name="MenuExit" xml:space="preserve">
     <value>Salir</value>
   </data>
   <data name="MenuToggleSidebar" xml:space="preserve">
-    <value>Contraer barra lateral</value>
+    <value>Mostrar u ocultar el panel de navegación</value>
   </data>
   <data name="SidebarHome" xml:space="preserve">
     <value>Inicio</value>
@@ -132,12 +117,6 @@
   </data>
   <data name="Sidebar_AllCommands" xml:space="preserve">
     <value>Todos los comandos</value>
-  </data>
-  <data name="PaneCommands" xml:space="preserve">
-    <value>Comandos</value>
-  </data>
-  <data name="PaneDetails" xml:space="preserve">
-    <value>Detalles</value>
   </data>
   <data name="PaneConsole" xml:space="preserve">
     <value>Consola</value>
@@ -166,17 +145,8 @@
   <data name="Restart_ConfirmMessage" xml:space="preserve">
     <value>Algunos cambios requieren un reinicio para completarse. ¿Reiniciar ahora?</value>
   </data>
-  <data name="ComingSoon" xml:space="preserve">
-    <value>Próximamente</value>
-  </data>
-  <data name="NoCommandsInCategory" xml:space="preserve">
-    <value>Aún no hay comandos en esta categoría.</value>
-  </data>
   <data name="NoSearchResults" xml:space="preserve">
     <value>Ningún comando coincide con tu búsqueda.</value>
-  </data>
-  <data name="Detail_RunDisabledHint" xml:space="preserve">
-    <value>La ejecución de comandos llegará en la próxima fase.</value>
   </data>
   <data name="Detail_SelectPrompt" xml:space="preserve">
     <value>Selecciona un comando para ver sus detalles.</value>
@@ -224,7 +194,7 @@
     <value>Puede requerir reinicio</value>
   </data>
   <data name="Search_Placeholder" xml:space="preserve">
-    <value>Buscar comandos… (Ctrl+K)</value>
+    <value>Buscar comandos… (Ctrl+F)</value>
   </data>
   <data name="Search_Suggestion" xml:space="preserve">
     <value>Quizás quisiste decir:</value>
@@ -1283,14 +1253,8 @@
   <data name="Menu_OpenLogFolder" xml:space="preserve">
     <value>Abrir carpeta de registros</value>
   </data>
-  <data name="Menu_FullScreen" xml:space="preserve">
-    <value>Pantalla completa</value>
-  </data>
   <data name="Menu_About" xml:space="preserve">
     <value>Acerca de CommandForge</value>
-  </data>
-  <data name="Menu_Wiki" xml:space="preserve">
-    <value>Guía / Wiki</value>
   </data>
   <data name="Legal_EulaSummary" xml:space="preserve">
     <value>Al usar CommandForge aceptas que ejecuta comandos a nivel de sistema bajo tu propio riesgo, sin ninguna garantía. La GNU GPL v3 rige tus derechos; esto solo añade un reconocimiento de riesgo y una exención de garantía.</value>
@@ -2485,5 +2449,128 @@ Los detalles se escribieron en la carpeta de registros:
   </data>
   <data name="Cmd_power.battery.status_Desc" xml:space="preserve">
     <value>Muestra la carga actual de la batería, su estado y la autonomía estimada.</value>
+  </data>
+  <data name="Admin_SessionActive" xml:space="preserve">
+    <value>Sesión de administrador activa</value>
+  </data>
+  <data name="Admin_SessionTooltip" xml:space="preserve">
+    <value>Los comandos de administrador se ejecutan en un ayudante con privilegios elevados que permanece abierto para no preguntarte cada vez. Finaliza la sesión cuando termines.</value>
+  </data>
+  <data name="Admin_EndSession" xml:space="preserve">
+    <value>Finalizar la sesión de administrador</value>
+  </data>
+  <data name="Admin_SessionEnded" xml:space="preserve">
+    <value>Sesión de administrador finalizada. El próximo comando de administrador volverá a pedir permiso.</value>
+  </data>
+  <data name="Console_CopyAll" xml:space="preserve">
+    <value>Copiar toda la salida</value>
+  </data>
+  <data name="Console_Save" xml:space="preserve">
+    <value>Guardar la salida en un archivo</value>
+  </data>
+  <data name="Console_Saved" xml:space="preserve">
+    <value>Salida guardada en {0}</value>
+  </data>
+  <data name="Console_DroppedLines" xml:space="preserve">
+    <value>No se muestran {0:N0} líneas anteriores.</value>
+  </data>
+  <data name="Console_Running" xml:space="preserve">
+    <value>Ejecutando…</value>
+  </data>
+  <data name="Console_WaitingForAdmin" xml:space="preserve">
+    <value>Esperando el permiso de administrador…</value>
+  </data>
+  <data name="Detail_Duration" xml:space="preserve">
+    <value>Tiempo estimado</value>
+  </data>
+  <data name="Estimate_Short" xml:space="preserve">
+    <value>unos segundos</value>
+  </data>
+  <data name="Estimate_Medium" xml:space="preserve">
+    <value>hasta un par de minutos</value>
+  </data>
+  <data name="Estimate_Long" xml:space="preserve">
+    <value>varios minutos o más</value>
+  </data>
+  <data name="Dialog_Yes" xml:space="preserve">
+    <value>Sí</value>
+  </data>
+  <data name="Dialog_No" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="Dialog_OK" xml:space="preserve">
+    <value>Aceptar</value>
+  </data>
+  <data name="FileFilter_Text" xml:space="preserve">
+    <value>Archivos de texto (*.txt)|*.txt</value>
+  </data>
+  <data name="Filter_AdminOnly" xml:space="preserve">
+    <value>Solo de administrador</value>
+  </data>
+  <data name="Filter_Clear" xml:space="preserve">
+    <value>Borrar filtros</value>
+  </data>
+  <data name="Menu_More" xml:space="preserve">
+    <value>Más</value>
+  </data>
+  <data name="Menu_UserGuide" xml:space="preserve">
+    <value>Guía del usuario</value>
+  </data>
+  <data name="Nav_Catalog" xml:space="preserve">
+    <value>Catálogo de comandos</value>
+  </data>
+  <data name="Restart_Failed" xml:space="preserve">
+    <value>No se pudo reiniciar Windows. Guarda tu trabajo y reinicia desde el menú Inicio.</value>
+  </data>
+  <data name="Run_Finished" xml:space="preserve">
+    <value>{0} ha terminado</value>
+  </data>
+  <data name="Run_FinishedFailed" xml:space="preserve">
+    <value>{0} ha fallado</value>
+  </data>
+  <data name="Settings_ThemeDesc" xml:space="preserve">
+    <value>Claro, oscuro o igual que Windows.</value>
+  </data>
+  <data name="Settings_LanguageDesc" xml:space="preserve">
+    <value>La aplicación cambia de idioma al instante.</value>
+  </data>
+  <data name="Settings_FontSizeDesc" xml:space="preserve">
+    <value>Tamaño del texto en toda la aplicación.</value>
+  </data>
+  <data name="Settings_CollapseSidebarDesc" xml:space="preserve">
+    <value>Iniciar con el panel de navegación contraído.</value>
+  </data>
+  <data name="Settings_ShowBadgesDesc" xml:space="preserve">
+    <value>Mostrar los iconos de administrador y de reinicio en las listas de comandos.</value>
+  </data>
+  <data name="Settings_ConfirmCautionDesc" xml:space="preserve">
+    <value>Preguntar antes de ejecutar comandos marcados como Precaución.</value>
+  </data>
+  <data name="Settings_AutoRestorePointDesc" xml:space="preserve">
+    <value>Marcar por defecto «crear un punto de restauración» antes de los comandos de administrador con riesgo.</value>
+  </data>
+  <data name="Settings_AutoScrollDesc" xml:space="preserve">
+    <value>Mantener la consola desplazada hasta la salida más reciente.</value>
+  </data>
+  <data name="Settings_WarnOnCancelDesc" xml:space="preserve">
+    <value>Preguntar antes de cerrar la aplicación mientras se ejecuta un comando.</value>
+  </data>
+  <data name="Settings_AutoCheckUpdatesDesc" xml:space="preserve">
+    <value>Buscar una versión nueva en GitHub al iniciar la aplicación. No se envía nada más.</value>
+  </data>
+  <data name="Settings_LogLevelDesc" xml:space="preserve">
+    <value>Cuánto detalle se guarda en los archivos de registro de este equipo.</value>
+  </data>
+  <data name="Shortcuts_Search" xml:space="preserve">
+    <value>Buscar en la lista actual</value>
+  </data>
+  <data name="Snack_Copied" xml:space="preserve">
+    <value>Copiado al portapapeles</value>
+  </data>
+  <data name="Snack_CopyFailed" xml:space="preserve">
+    <value>No se pudo copiar: otra aplicación está usando el portapapeles. Inténtalo de nuevo.</value>
+  </data>
+  <data name="TitleBar_Search" xml:space="preserve">
+    <value>Buscar en todos los comandos (Ctrl+K)</value>
   </data>
 </root>

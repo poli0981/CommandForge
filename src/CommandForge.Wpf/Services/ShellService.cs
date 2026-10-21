@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using Serilog;
 
-namespace CommandForge.Wpf.Services;
+namespace CommandForge.Desktop.Services;
 
 /// <summary><see cref="IShellService"/> backed by ShellExecute.</summary>
 public sealed class ShellService : IShellService

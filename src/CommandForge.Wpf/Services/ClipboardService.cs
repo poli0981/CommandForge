@@ -1,7 +1,7 @@
 using System.Runtime.InteropServices;
 using System.Windows;
 
-namespace CommandForge.Wpf.Services;
+namespace CommandForge.Desktop.Services;
 
 /// <summary><see cref="IClipboardService"/> backed by the WPF clipboard.</summary>
 public sealed class ClipboardService : IClipboardService

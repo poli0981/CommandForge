@@ -1,0 +1,49 @@
+<UserControl x:Class="CommandForge.Desktop.Views.DangerBadge"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+             x:Name="Root"
+             Focusable="False">
+    <!-- The risk level as icon + text + color, so it never depends on color alone. -->
+    <Border x:Name="Chip" CornerRadius="4" Padding="8,3" BorderThickness="1">
+        <Border.Style>
+            <Style TargetType="Border">
+                <Setter Property="Background" Value="{DynamicResource SystemFillColorSuccessBackgroundBrush}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource SystemFillColorSuccessBrush}" />
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding Level, ElementName=Root}" Value="Caution">
+                        <Setter Property="Background" Value="{DynamicResource SystemFillColorCautionBackgroundBrush}" />
+                        <Setter Property="BorderBrush" Value="{DynamicResource SystemFillColorCautionBrush}" />
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding Level, ElementName=Root}" Value="Dangerous">
+                        <Setter Property="Background" Value="{DynamicResource SystemFillColorCriticalBackgroundBrush}" />
+                        <Setter Property="BorderBrush" Value="{DynamicResource SystemFillColorCriticalBrush}" />
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </Border.Style>
+        <StackPanel Orientation="Horizontal">
+            <ui:SymbolIcon FontSize="14" VerticalAlignment="Center" Margin="0,0,6,0">
+                <ui:SymbolIcon.Style>
+                    <Style TargetType="ui:SymbolIcon">
+                        <Setter Property="Symbol" Value="CheckmarkCircle24" />
+                        <Setter Property="Foreground" Value="{DynamicResource SystemFillColorSuccessBrush}" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Level, ElementName=Root}" Value="Caution">
+                                <Setter Property="Symbol" Value="Warning24" />
+                                <Setter Property="Foreground" Value="{DynamicResource SystemFillColorCautionBrush}" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Level, ElementName=Root}" Value="Dangerous">
+                                <Setter Property="Symbol" Value="ErrorCircle24" />
+                                <Setter Property="Foreground" Value="{DynamicResource SystemFillColorCriticalBrush}" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </ui:SymbolIcon.Style>
+            </ui:SymbolIcon>
+            <TextBlock x:Name="LabelText" VerticalAlignment="Center" FontWeight="SemiBold"
+                       FontSize="{DynamicResource AppFontSizeCaption}"
+                       Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+        </StackPanel>
+    </Border>
+</UserControl>

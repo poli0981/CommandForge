@@ -1,9 +1,10 @@
 using System.Windows.Threading;
-using CommandForge.Wpf.ViewModels;
-using CommandForge.Wpf.Views;
+using CommandForge.Desktop.Services;
+using CommandForge.Desktop.ViewModels;
+using CommandForge.Desktop.Views;
 using Serilog;
 
-namespace CommandForge.Wpf;
+namespace CommandForge.Desktop;
 
 /// <summary>
 /// Global crash handler: logs unhandled exceptions (structured, no sensitive data) and shows a
@@ -12,12 +13,15 @@ namespace CommandForge.Wpf;
 public sealed class CrashHandlingService
 {
     private readonly IReportBugDialogService _reportBug;
+    private readonly IClipboardService _clipboard;
     private int _handling;
 
-    public CrashHandlingService(IReportBugDialogService reportBug)
+    public CrashHandlingService(IReportBugDialogService reportBug, IClipboardService clipboard)
     {
         ArgumentNullException.ThrowIfNull(reportBug);
+        ArgumentNullException.ThrowIfNull(clipboard);
         _reportBug = reportBug;
+        _clipboard = clipboard;
     }
 
     /// <summary>Wires the three global exception sources. Call once at startup after the host is built.</summary>
@@ -95,7 +99,7 @@ public sealed class CrashHandlingService
         {
             app.Dispatcher.Invoke(() =>
             {
-                var viewModel = new ErrorViewModel(code, ex.ToString(), _reportBug);
+                var viewModel = new ErrorViewModel(code, ex.ToString(), _reportBug, _clipboard);
                 var dialog = new ErrorDialog(viewModel);
 
                 // Owner can only be a window that has been shown (a crash may happen before that).

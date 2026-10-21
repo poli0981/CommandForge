@@ -1,0 +1,23 @@
+<UserControl x:Class="CommandForge.Desktop.Views.KeyboardShortcutsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!-- The shortcuts the shell actually handles. -->
+    <ItemsControl x:Name="ShortcutList" MinWidth="380">
+        <ItemsControl.ItemTemplate>
+            <DataTemplate>
+                <Grid Margin="0,4">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="110" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Border Grid.Column="0" Style="{StaticResource CodeBlockBorderStyle}" Padding="6,2"
+                            HorizontalAlignment="Left" VerticalAlignment="Center">
+                        <TextBlock Text="{Binding Key}" FontFamily="{StaticResource ConsoleFontFamily}"
+                                   FontSize="{DynamicResource AppFontSizeConsole}" />
+                    </Border>
+                    <TextBlock Grid.Column="1" Text="{Binding Action}" VerticalAlignment="Center" Margin="12,0,0,0" TextWrapping="Wrap" />
+                </Grid>
+            </DataTemplate>
+        </ItemsControl.ItemTemplate>
+    </ItemsControl>
+</UserControl>

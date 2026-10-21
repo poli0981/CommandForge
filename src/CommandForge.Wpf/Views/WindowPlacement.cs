@@ -1,4 +1,4 @@
-namespace CommandForge.Wpf.Views;
+namespace CommandForge.Desktop.Views;
 
 /// <summary>Pure geometry helpers for restoring a saved window position safely across monitor changes.</summary>
 public static class WindowPlacement

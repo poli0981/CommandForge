@@ -1,4 +1,4 @@
-namespace CommandForge.Wpf.Services;
+namespace CommandForge.Desktop.Services;
 
 /// <summary>Clipboard access for view-models.</summary>
 public interface IClipboardService

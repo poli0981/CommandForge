@@ -1,202 +1,169 @@
-<UserControl x:Class="CommandForge.Wpf.Views.RecipesView"
+<UserControl x:Class="CommandForge.Desktop.Views.RecipesView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             xmlns:res="clr-namespace:CommandForge.Wpf.Resources"
-             xmlns:conv="clr-namespace:CommandForge.Wpf.Converters"
-             xmlns:beh="clr-namespace:CommandForge.Wpf.Behaviors">
+             xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+             xmlns:res="clr-namespace:CommandForge.Desktop.Resources"
+             xmlns:conv="clr-namespace:CommandForge.Desktop.Converters"
+             xmlns:views="clr-namespace:CommandForge.Desktop.Views"
+             Foreground="{DynamicResource TextFillColorPrimaryBrush}">
     <UserControl.Resources>
-        <conv:StringToPackIconKindConverter x:Key="IconConverter" />
-        <conv:DangerLevelToBrushConverter x:Key="DangerBrush" />
+        <conv:IconNameToSymbolConverter x:Key="IconConverter" />
+        <conv:DangerLevelToTextConverter x:Key="DangerText" />
         <BooleanToVisibilityConverter x:Key="BoolToVis" />
 
-        <Style x:Key="IconBtn" TargetType="Button" BasedOn="{StaticResource MaterialDesignFlatButton}">
-            <Setter Property="Padding" Value="0" />
-            <Setter Property="MinWidth" Value="0" />
-            <Setter Property="Width" Value="30" />
-            <Setter Property="Height" Value="30" />
-        </Style>
-
-        <!-- One recipe step: icon + title + danger dot + reorder/remove buttons. -->
+        <!-- One recipe step: icon, title, risk dot, reorder/remove. -->
         <DataTemplate x:Key="StepItem">
-            <Grid Margin="2,1">
+            <Grid Margin="0,2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-                <materialDesign:PackIcon Grid.Column="0" VerticalAlignment="Center" Margin="2,0,10,0"
-                                         Width="18" Height="18"
-                                         Kind="{Binding Icon, Converter={StaticResource IconConverter}}" />
-                <TextBlock Grid.Column="1" Text="{Binding Title}" VerticalAlignment="Center"
-                           TextTrimming="CharacterEllipsis" />
-                <Ellipse Grid.Column="2" Width="9" Height="9" VerticalAlignment="Center" Margin="6,0"
-                         Fill="{Binding DangerLevel, Converter={StaticResource DangerBrush}}" />
+                <ui:SymbolIcon Grid.Column="0" Symbol="{Binding Icon, Converter={StaticResource IconConverter}}"
+                               FontSize="18" VerticalAlignment="Center" Margin="2,0,10,0" />
+                <TextBlock Grid.Column="1" Text="{Binding Title}" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" />
+                <Ellipse Grid.Column="2" Style="{StaticResource DangerDotStyle}" Margin="8,0"
+                         ToolTip="{Binding DangerLevel, Converter={StaticResource DangerText}}" />
                 <StackPanel Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Center">
-                    <Button Style="{StaticResource IconBtn}" ToolTip="{res:Loc Recipes_MoveUp}"
-                            AutomationProperties.Name="{res:Loc Recipes_MoveUp}"
-                            Command="{Binding DataContext.MoveStepUpCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                            CommandParameter="{Binding}">
-                        <materialDesign:PackIcon Kind="ArrowUp" Width="16" Height="16" />
-                    </Button>
-                    <Button Style="{StaticResource IconBtn}" ToolTip="{res:Loc Recipes_MoveDown}"
-                            AutomationProperties.Name="{res:Loc Recipes_MoveDown}"
-                            Command="{Binding DataContext.MoveStepDownCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                            CommandParameter="{Binding}">
-                        <materialDesign:PackIcon Kind="ArrowDown" Width="16" Height="16" />
-                    </Button>
-                    <Button Style="{StaticResource IconBtn}" ToolTip="{res:Loc Recipes_RemoveStep}"
-                            AutomationProperties.Name="{res:Loc Recipes_RemoveStep}"
-                            Command="{Binding DataContext.RemoveStepCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                            CommandParameter="{Binding}">
-                        <materialDesign:PackIcon Kind="Close" Width="16" Height="16" />
-                    </Button>
+                    <ui:Button Style="{StaticResource IconButtonStyle}" ToolTip="{res:Loc Recipes_MoveUp}"
+                               AutomationProperties.Name="{res:Loc Recipes_MoveUp}"
+                               Command="{Binding DataContext.MoveStepUpCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                               CommandParameter="{Binding}">
+                        <ui:SymbolIcon Symbol="ArrowUp24" FontSize="15" />
+                    </ui:Button>
+                    <ui:Button Style="{StaticResource IconButtonStyle}" ToolTip="{res:Loc Recipes_MoveDown}"
+                               AutomationProperties.Name="{res:Loc Recipes_MoveDown}"
+                               Command="{Binding DataContext.MoveStepDownCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                               CommandParameter="{Binding}">
+                        <ui:SymbolIcon Symbol="ArrowDown24" FontSize="15" />
+                    </ui:Button>
+                    <ui:Button Style="{StaticResource IconButtonStyle}" ToolTip="{res:Loc Recipes_RemoveStep}"
+                               AutomationProperties.Name="{res:Loc Recipes_RemoveStep}"
+                               Command="{Binding DataContext.RemoveStepCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                               CommandParameter="{Binding}">
+                        <ui:SymbolIcon Symbol="Dismiss24" FontSize="15" />
+                    </ui:Button>
                 </StackPanel>
             </Grid>
         </DataTemplate>
     </UserControl.Resources>
 
-    <Grid Margin="16">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="230" />
-            <ColumnDefinition Width="*" MinWidth="360" />
-        </Grid.ColumnDefinitions>
+    <Grid Margin="24,12,24,16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
 
-        <!-- Left: saved recipes -->
-        <DockPanel Grid.Column="0" Margin="0,0,12,0">
-            <TextBlock DockPanel.Dock="Top" Text="{res:Loc Recipes_Saved}" FontWeight="Bold" Margin="0,0,0,8"
-                       AutomationProperties.HeadingLevel="Level2" />
-            <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" Margin="0,8,0,0">
-                <Button Content="{res:Loc Recipes_New}" Command="{Binding NewRecipeCommand}"
-                        Style="{StaticResource MaterialDesignOutlinedButton}" Margin="0,0,8,0"
-                        AutomationProperties.Name="{res:Loc Recipes_New}" />
-                <Button Content="{res:Loc Recipe_Delete}" Command="{Binding DeleteRecipeCommand}"
-                        Style="{StaticResource MaterialDesignOutlinedButton}"
-                        AutomationProperties.Name="{res:Loc Recipe_Delete}" />
-            </StackPanel>
-            <ListBox ItemsSource="{Binding RecipeNames}" SelectedItem="{Binding SelectedRecipeName}"
-                     BorderThickness="0" Background="Transparent"
-                     AutomationProperties.Name="{res:Loc Recipes_Saved}" />
-        </DockPanel>
+        <TextBlock Grid.Row="0" Text="{res:Loc SidebarRecipes}" Style="{StaticResource PageTitleTextStyle}" Margin="0,0,0,12" />
 
-        <!-- Right: editor + console -->
-        <Grid Grid.Column="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" MinHeight="120" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="240" />
+                <ColumnDefinition Width="*" MinWidth="380" />
+            </Grid.ColumnDefinitions>
 
-            <TextBlock Grid.Row="0" Text="{res:Loc SidebarRecipes}" FontSize="20" FontWeight="Bold"
-                       Margin="0,0,0,8" AutomationProperties.HeadingLevel="Level1" />
-
-            <TextBox Grid.Row="0" VerticalAlignment="Bottom" Margin="0,28,0,8"
-                     materialDesign:HintAssist.Hint="{res:Loc Recipes_NameHint}"
-                     AutomationProperties.Name="{res:Loc Recipes_NameHint}"
-                     Text="{Binding RecipeName, UpdateSourceTrigger=PropertyChanged}" />
-
-            <!-- Steps -->
-            <materialDesign:Card Grid.Row="1" Padding="6">
-                <Grid>
-                    <ItemsControl ItemsSource="{Binding Steps}" ItemTemplate="{StaticResource StepItem}">
-                        <ItemsControl.Template>
-                            <ControlTemplate TargetType="ItemsControl">
-                                <ScrollViewer VerticalScrollBarVisibility="Auto">
-                                    <ItemsPresenter />
-                                </ScrollViewer>
-                            </ControlTemplate>
-                        </ItemsControl.Template>
-                    </ItemsControl>
-                    <TextBlock Text="{res:Loc Recipes_NoSteps}" Opacity="0.6" Margin="10" TextWrapping="Wrap"
-                               HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center">
-                        <TextBlock.Style>
-                            <Style TargetType="TextBlock">
-                                <Setter Property="Visibility" Value="Collapsed" />
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding Steps.Count}" Value="0">
-                                        <Setter Property="Visibility" Value="Visible" />
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </TextBlock.Style>
-                    </TextBlock>
-                </Grid>
-            </materialDesign:Card>
-
-            <!-- Add step + actions -->
-            <Grid Grid.Row="2" Margin="0,8,0,0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-                <StackPanel Grid.Column="0" Orientation="Horizontal">
-                    <ComboBox Width="240" VerticalAlignment="Center"
-                              ItemsSource="{Binding AllCommands}" SelectedItem="{Binding CommandToAdd}"
-                              DisplayMemberPath="Title"
-                              materialDesign:HintAssist.Hint="{res:Loc Recipes_AddHint}"
-                              AutomationProperties.Name="{res:Loc Recipes_AddHint}" />
-                    <Button Content="{res:Loc Recipes_AddStep}" Command="{Binding AddStepCommand}"
-                            Style="{StaticResource MaterialDesignOutlinedButton}" Margin="8,0,0,0"
-                            AutomationProperties.Name="{res:Loc Recipes_AddStep}" />
+            <!-- Saved recipes -->
+            <DockPanel Grid.Column="0" Margin="0,0,16,0">
+                <TextBlock DockPanel.Dock="Top" Text="{res:Loc Recipes_Saved}" Style="{StaticResource BodyStrongTextStyle}"
+                           Margin="0,0,0,8" AutomationProperties.HeadingLevel="Level2" />
+                <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" Margin="0,8,0,0">
+                    <ui:Button Content="{res:Loc Recipes_New}" Command="{Binding NewRecipeCommand}" Margin="0,0,8,0">
+                        <ui:Button.Icon>
+                            <ui:SymbolIcon Symbol="Add24" />
+                        </ui:Button.Icon>
+                    </ui:Button>
+                    <ui:Button Content="{res:Loc Recipe_Delete}" Command="{Binding DeleteRecipeCommand}">
+                        <ui:Button.Icon>
+                            <ui:SymbolIcon Symbol="Delete24" />
+                        </ui:Button.Icon>
+                    </ui:Button>
                 </StackPanel>
-                <StackPanel Grid.Column="1" Orientation="Horizontal">
-                    <Button Content="{res:Loc Recipes_Save}" Command="{Binding SaveRecipeCommand}"
-                            Style="{StaticResource MaterialDesignOutlinedButton}" Margin="8,0,0,0"
-                            AutomationProperties.Name="{res:Loc Recipes_Save}" />
-                    <Button Content="{res:Loc Recipes_Run}" Command="{Binding RunRecipeCommand}"
-                            Style="{StaticResource MaterialDesignRaisedButton}" Margin="8,0,0,0"
-                            AutomationProperties.Name="{res:Loc Recipes_Run}" />
-                </StackPanel>
-            </Grid>
+                <ListBox ItemsSource="{Binding RecipeNames}" SelectedItem="{Binding SelectedRecipeName}"
+                         Background="Transparent" BorderThickness="0"
+                         AutomationProperties.Name="{res:Loc Recipes_Saved}" />
+            </DockPanel>
 
-            <!-- Console + result (shared execution VM) -->
-            <materialDesign:Card Grid.Row="3" Margin="0,8,0,0" Padding="12" MaxHeight="300"
-                                 Visibility="{Binding Execution.ShowConsole, Converter={StaticResource BoolToVis}}">
-                <DockPanel>
-                    <Grid DockPanel.Dock="Top">
-                        <TextBlock Text="{res:Loc PaneConsole}" FontWeight="Bold" VerticalAlignment="Center" />
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right"
-                                    Visibility="{Binding Execution.IsRunning, Converter={StaticResource BoolToVis}}">
-                            <ProgressBar IsIndeterminate="True" Width="90" Height="4" VerticalAlignment="Center" Margin="0,0,8,0" />
-                            <Button Content="{res:Loc Console_Cancel}" Command="{Binding Execution.CancelCommand}"
-                                    Style="{StaticResource MaterialDesignOutlinedButton}" Padding="8,2" Height="28" MinWidth="0" />
-                        </StackPanel>
+            <!-- Editor + console -->
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" MinHeight="120" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <ui:TextBox Grid.Row="0" Margin="0,0,0,8"
+                            PlaceholderText="{res:Loc Recipes_NameHint}"
+                            AutomationProperties.Name="{res:Loc Recipes_NameHint}"
+                            Text="{Binding RecipeName, UpdateSourceTrigger=PropertyChanged}" />
+
+                <ui:InfoBar Grid.Row="1" Margin="0,0,0,8" Severity="Warning" IsClosable="False"
+                            Title="{Binding UnavailableStepsNotice}"
+                            IsOpen="{Binding UnavailableStepsNotice, Converter={conv:NullToBooleanConverter}}" />
+
+                <!-- Steps -->
+                <ui:Card Grid.Row="2" Padding="8" VerticalAlignment="Stretch" VerticalContentAlignment="Stretch">
+                    <Grid>
+                        <ItemsControl ItemsSource="{Binding Steps}" ItemTemplate="{StaticResource StepItem}">
+                            <ItemsControl.Template>
+                                <ControlTemplate TargetType="ItemsControl">
+                                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                                        <ItemsPresenter />
+                                    </ScrollViewer>
+                                </ControlTemplate>
+                            </ItemsControl.Template>
+                        </ItemsControl>
+                        <TextBlock Text="{res:Loc Recipes_NoSteps}" Style="{StaticResource EmptyStateTextStyle}">
+                            <TextBlock.Visibility>
+                                <Binding Path="Steps.Count">
+                                    <Binding.Converter>
+                                        <conv:ZeroToVisibleConverter />
+                                    </Binding.Converter>
+                                </Binding>
+                            </TextBlock.Visibility>
+                        </TextBlock>
                     </Grid>
+                </ui:Card>
 
-                    <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" Margin="0,8,0,0"
-                                Visibility="{Binding Execution.HasResult, Converter={StaticResource BoolToVis}}">
-                        <TextBlock Text="{Binding Execution.StatusText}" FontWeight="Medium" />
-                        <TextBlock Text="{res:Loc Result_ExitCode}" Opacity="0.7" Margin="14,0,4,0" />
-                        <TextBlock Text="{Binding Execution.ExitCode}" Opacity="0.7" />
-                        <TextBlock Text="{Binding Execution.DurationText}" Opacity="0.7" Margin="14,0,0,0" />
+                <!-- Add step + actions -->
+                <Grid Grid.Row="3" Margin="0,8,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0" Orientation="Horizontal">
+                        <TextBlock Text="{res:Loc Recipes_AddHint}" VerticalAlignment="Center" Margin="0,0,8,0" />
+                        <ComboBox Width="260" VerticalAlignment="Center"
+                                  ItemsSource="{Binding AllCommands}" SelectedItem="{Binding CommandToAdd}"
+                                  DisplayMemberPath="Title" IsTextSearchEnabled="True"
+                                  AutomationProperties.Name="{res:Loc Recipes_AddHint}"
+                                  ToolTip="{res:Loc Recipes_AddHint}" />
+                        <ui:Button Content="{res:Loc Recipes_AddStep}" Command="{Binding AddStepCommand}" Margin="8,0,0,0">
+                            <ui:Button.Icon>
+                                <ui:SymbolIcon Symbol="Add24" />
+                            </ui:Button.Icon>
+                        </ui:Button>
                     </StackPanel>
+                    <StackPanel Grid.Column="1" Orientation="Horizontal">
+                        <ui:Button Content="{res:Loc Recipes_Save}" Command="{Binding SaveRecipeCommand}" Margin="8,0,0,0">
+                            <ui:Button.Icon>
+                                <ui:SymbolIcon Symbol="Save24" />
+                            </ui:Button.Icon>
+                        </ui:Button>
+                        <ui:Button Content="{res:Loc Recipes_Run}" Command="{Binding RunRecipeCommand}" Appearance="Primary" Margin="8,0,0,0">
+                            <ui:Button.Icon>
+                                <ui:SymbolIcon Symbol="Play24" />
+                            </ui:Button.Icon>
+                        </ui:Button>
+                    </StackPanel>
+                </Grid>
 
-                    <Border Background="{DynamicResource MaterialDesignToolBarBackground}" CornerRadius="4" Margin="0,8,0,0">
-                        <ScrollViewer beh:AutoScroll.Enabled="True" VerticalScrollBarVisibility="Auto" MaxHeight="200" Padding="8">
-                            <ItemsControl ItemsSource="{Binding Execution.OutputLines}">
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding Text}" TextWrapping="Wrap"
-                                                   FontFamily="Cascadia Mono, Consolas, Courier New" FontSize="12">
-                                            <TextBlock.Style>
-                                                <Style TargetType="TextBlock">
-                                                    <Style.Triggers>
-                                                        <DataTrigger Binding="{Binding IsError}" Value="True">
-                                                            <Setter Property="Foreground" Value="#E0884D" />
-                                                        </DataTrigger>
-                                                    </Style.Triggers>
-                                                </Style>
-                                            </TextBlock.Style>
-                                        </TextBlock>
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>
-                        </ScrollViewer>
-                    </Border>
-                </DockPanel>
-            </materialDesign:Card>
+                <views:ConsoleView Grid.Row="4" DataContext="{Binding Execution}" Margin="0,12,0,0"
+                                   MinHeight="160" MaxHeight="320"
+                                   Visibility="{Binding ShowConsole, Converter={StaticResource BoolToVis}}" />
+            </Grid>
         </Grid>
     </Grid>
 </UserControl>

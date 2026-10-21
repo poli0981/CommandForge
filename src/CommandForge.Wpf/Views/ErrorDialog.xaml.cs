@@ -1,13 +1,14 @@
-using System.Windows;
-using CommandForge.Wpf.ViewModels;
+using CommandForge.Desktop.ViewModels;
+using Wpf.Ui.Controls;
 
-namespace CommandForge.Wpf.Views;
+namespace CommandForge.Desktop.Views;
 
-/// <summary>Modal friendly crash dialog shown by the global exception handler.</summary>
-public partial class ErrorDialog : Window
+/// <summary>Friendly crash window shown by the global exception handler.</summary>
+public partial class ErrorDialog : FluentWindow
 {
     public ErrorDialog(ErrorViewModel viewModel)
     {
+        ArgumentNullException.ThrowIfNull(viewModel);
         InitializeComponent();
         DataContext = viewModel;
         viewModel.CloseRequested += Close;

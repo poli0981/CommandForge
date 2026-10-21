@@ -1,6 +1,6 @@
 using CommandForge.Application.Settings;
 
-namespace CommandForge.Wpf.Theming;
+namespace CommandForge.Desktop.Theming;
 
 /// <summary>Applies the UI color theme (Light/Dark/System) at runtime, with no restart.</summary>
 public interface IThemeService

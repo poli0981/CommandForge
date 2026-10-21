@@ -1,4 +1,4 @@
-namespace CommandForge.Wpf.ViewModels;
+namespace CommandForge.Desktop.ViewModels;
 
 /// <summary>The state of the modal update flow.</summary>
 public enum UpdateUiState

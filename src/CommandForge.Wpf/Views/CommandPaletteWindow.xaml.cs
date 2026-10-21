@@ -1,11 +1,11 @@
-using System.Windows;
 using System.Windows.Input;
-using CommandForge.Wpf.ViewModels;
+using CommandForge.Desktop.ViewModels;
+using Wpf.Ui.Controls;
 
-namespace CommandForge.Wpf.Views;
+namespace CommandForge.Desktop.Views;
 
 /// <summary>Command Palette overlay (Ctrl+K). Returns the chosen command id via <see cref="ChosenCommandId"/>.</summary>
-public partial class CommandPaletteWindow : Window
+public partial class CommandPaletteWindow : FluentWindow
 {
     private readonly CommandPaletteViewModel _viewModel;
     private bool _closing;

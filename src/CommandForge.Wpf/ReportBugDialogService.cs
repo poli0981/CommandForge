@@ -1,42 +1,46 @@
 using CommandForge.Application.Ports;
-using CommandForge.Wpf.Services;
-using CommandForge.Wpf.ViewModels;
-using CommandForge.Wpf.Views;
+using CommandForge.Desktop.Services;
+using CommandForge.Desktop.ViewModels;
+using CommandForge.Desktop.Views;
 
-namespace CommandForge.Wpf;
+namespace CommandForge.Desktop;
 
-/// <summary><see cref="IReportBugDialogService"/> that shows the modal <see cref="ReportBugDialog"/>.</summary>
+/// <summary><see cref="IReportBugDialogService"/> that shows the in-window <see cref="ReportBugDialog"/>.</summary>
 public sealed class ReportBugDialogService : IReportBugDialogService
 {
     private readonly ILogMaintenance _maintenance;
-    private readonly IDialogService _dialogs;
+    private readonly IDialogService _dialogService;
     private readonly IFileDialogService _files;
     private readonly IShellService _shell;
+    private readonly InWindowDialogs _dialogs;
 
-    public ReportBugDialogService(ILogMaintenance maintenance, IDialogService dialogs, IFileDialogService files, IShellService shell)
+    public ReportBugDialogService(ILogMaintenance maintenance, IDialogService dialogService, IFileDialogService files, IShellService shell, InWindowDialogs dialogs)
     {
         ArgumentNullException.ThrowIfNull(maintenance);
-        ArgumentNullException.ThrowIfNull(dialogs);
+        ArgumentNullException.ThrowIfNull(dialogService);
         ArgumentNullException.ThrowIfNull(files);
         ArgumentNullException.ThrowIfNull(shell);
+        ArgumentNullException.ThrowIfNull(dialogs);
         _maintenance = maintenance;
-        _dialogs = dialogs;
+        _dialogService = dialogService;
         _files = files;
         _shell = shell;
+        _dialogs = dialogs;
     }
 
     /// <inheritdoc />
-    public void Show(string? errorCode = null, string? errorDetails = null)
+    public async Task ShowAsync(string? errorCode = null, string? errorDetails = null)
     {
-        var viewModel = new ReportBugViewModel(_maintenance, _dialogs, _files, _shell, errorCode, errorDetails);
-        var dialog = new ReportBugDialog(viewModel);
+        var viewModel = new ReportBugViewModel(_maintenance, _dialogService, _files, _shell, errorCode, errorDetails);
 
-        // Owner can only be a window that has been shown (this also runs from the crash handler).
-        if (System.Windows.Application.Current?.MainWindow is { IsVisible: true } owner)
+        // A crash before the main window appeared (or with another dialog open): go straight to the
+        // prefilled issue form, which carries the same environment details.
+        if (!_dialogs.CanShow)
         {
-            dialog.Owner = owner;
+            viewModel.OpenIssueCommand.Execute(null);
+            return;
         }
 
-        dialog.ShowDialog();
+        await _dialogs.ShowAsync(new ReportBugDialog(viewModel));
     }
 }

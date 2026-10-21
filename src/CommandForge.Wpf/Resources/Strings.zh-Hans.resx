@@ -91,26 +91,11 @@
   <data name="TabPrivacy" xml:space="preserve">
     <value>隐私</value>
   </data>
-  <data name="MenuFile" xml:space="preserve">
-    <value>文件</value>
-  </data>
-  <data name="MenuView" xml:space="preserve">
-    <value>视图</value>
-  </data>
-  <data name="MenuTools" xml:space="preserve">
-    <value>工具</value>
-  </data>
-  <data name="MenuAbout" xml:space="preserve">
-    <value>关于</value>
-  </data>
-  <data name="MenuHelp" xml:space="preserve">
-    <value>帮助</value>
-  </data>
   <data name="MenuExit" xml:space="preserve">
     <value>退出</value>
   </data>
   <data name="MenuToggleSidebar" xml:space="preserve">
-    <value>折叠侧边栏</value>
+    <value>显示或隐藏导航窗格</value>
   </data>
   <data name="SidebarHome" xml:space="preserve">
     <value>主页</value>
@@ -132,12 +117,6 @@
   </data>
   <data name="Sidebar_AllCommands" xml:space="preserve">
     <value>所有命令</value>
-  </data>
-  <data name="PaneCommands" xml:space="preserve">
-    <value>命令</value>
-  </data>
-  <data name="PaneDetails" xml:space="preserve">
-    <value>详情</value>
   </data>
   <data name="PaneConsole" xml:space="preserve">
     <value>控制台</value>
@@ -166,17 +145,8 @@
   <data name="Restart_ConfirmMessage" xml:space="preserve">
     <value>部分更改需要重启才能完成。现在重启吗？</value>
   </data>
-  <data name="ComingSoon" xml:space="preserve">
-    <value>即将推出</value>
-  </data>
-  <data name="NoCommandsInCategory" xml:space="preserve">
-    <value>此分类下暂无命令。</value>
-  </data>
   <data name="NoSearchResults" xml:space="preserve">
     <value>没有与搜索匹配的命令。</value>
-  </data>
-  <data name="Detail_RunDisabledHint" xml:space="preserve">
-    <value>命令运行功能将在下一阶段推出。</value>
   </data>
   <data name="Detail_SelectPrompt" xml:space="preserve">
     <value>选择一个命令以查看其详情。</value>
@@ -224,7 +194,7 @@
     <value>可能需要重启</value>
   </data>
   <data name="Search_Placeholder" xml:space="preserve">
-    <value>搜索命令…（Ctrl+K）</value>
+    <value>搜索命令…（Ctrl+F）</value>
   </data>
   <data name="Search_Suggestion" xml:space="preserve">
     <value>您是否想找：</value>
@@ -1283,14 +1253,8 @@
   <data name="Menu_OpenLogFolder" xml:space="preserve">
     <value>打开日志文件夹</value>
   </data>
-  <data name="Menu_FullScreen" xml:space="preserve">
-    <value>全屏</value>
-  </data>
   <data name="Menu_About" xml:space="preserve">
     <value>关于 CommandForge</value>
-  </data>
-  <data name="Menu_Wiki" xml:space="preserve">
-    <value>指南 / Wiki</value>
   </data>
   <data name="Legal_EulaSummary" xml:space="preserve">
     <value>使用 CommandForge 即表示您接受：它会执行系统级命令，风险由您自行承担，且不提供任何担保。GNU GPL v3 规定您的权利；本条款仅额外增加风险确认和免责声明。</value>
@@ -2485,5 +2449,128 @@
   </data>
   <data name="Cmd_power.battery.status_Desc" xml:space="preserve">
     <value>显示当前电池电量、状态和预计剩余使用时间。</value>
+  </data>
+  <data name="Admin_SessionActive" xml:space="preserve">
+    <value>管理员会话已开启</value>
+  </data>
+  <data name="Admin_SessionTooltip" xml:space="preserve">
+    <value>管理员命令在一个保持运行的提升权限助手进程中执行，因此不会每次都询问。完成后请结束会话。</value>
+  </data>
+  <data name="Admin_EndSession" xml:space="preserve">
+    <value>结束管理员会话</value>
+  </data>
+  <data name="Admin_SessionEnded" xml:space="preserve">
+    <value>管理员会话已结束。下一个管理员命令将再次请求权限。</value>
+  </data>
+  <data name="Console_CopyAll" xml:space="preserve">
+    <value>复制全部输出</value>
+  </data>
+  <data name="Console_Save" xml:space="preserve">
+    <value>将输出保存到文件</value>
+  </data>
+  <data name="Console_Saved" xml:space="preserve">
+    <value>输出已保存到 {0}</value>
+  </data>
+  <data name="Console_DroppedLines" xml:space="preserve">
+    <value>之前的 {0:N0} 行未显示。</value>
+  </data>
+  <data name="Console_Running" xml:space="preserve">
+    <value>正在运行…</value>
+  </data>
+  <data name="Console_WaitingForAdmin" xml:space="preserve">
+    <value>正在等待管理员权限…</value>
+  </data>
+  <data name="Detail_Duration" xml:space="preserve">
+    <value>预计时间</value>
+  </data>
+  <data name="Estimate_Short" xml:space="preserve">
+    <value>几秒钟</value>
+  </data>
+  <data name="Estimate_Medium" xml:space="preserve">
+    <value>最多几分钟</value>
+  </data>
+  <data name="Estimate_Long" xml:space="preserve">
+    <value>几分钟或更久</value>
+  </data>
+  <data name="Dialog_Yes" xml:space="preserve">
+    <value>是</value>
+  </data>
+  <data name="Dialog_No" xml:space="preserve">
+    <value>否</value>
+  </data>
+  <data name="Dialog_OK" xml:space="preserve">
+    <value>确定</value>
+  </data>
+  <data name="FileFilter_Text" xml:space="preserve">
+    <value>文本文件 (*.txt)|*.txt</value>
+  </data>
+  <data name="Filter_AdminOnly" xml:space="preserve">
+    <value>仅管理员命令</value>
+  </data>
+  <data name="Filter_Clear" xml:space="preserve">
+    <value>清除筛选</value>
+  </data>
+  <data name="Menu_More" xml:space="preserve">
+    <value>更多</value>
+  </data>
+  <data name="Menu_UserGuide" xml:space="preserve">
+    <value>用户指南</value>
+  </data>
+  <data name="Nav_Catalog" xml:space="preserve">
+    <value>命令目录</value>
+  </data>
+  <data name="Restart_Failed" xml:space="preserve">
+    <value>无法重启 Windows。请保存工作，然后从“开始”菜单重启。</value>
+  </data>
+  <data name="Run_Finished" xml:space="preserve">
+    <value>{0} 已完成</value>
+  </data>
+  <data name="Run_FinishedFailed" xml:space="preserve">
+    <value>{0} 失败</value>
+  </data>
+  <data name="Settings_ThemeDesc" xml:space="preserve">
+    <value>浅色、深色或与 Windows 相同。</value>
+  </data>
+  <data name="Settings_LanguageDesc" xml:space="preserve">
+    <value>应用会立即切换语言。</value>
+  </data>
+  <data name="Settings_FontSizeDesc" xml:space="preserve">
+    <value>整个应用的文字大小。</value>
+  </data>
+  <data name="Settings_CollapseSidebarDesc" xml:space="preserve">
+    <value>启动时折叠导航窗格。</value>
+  </data>
+  <data name="Settings_ShowBadgesDesc" xml:space="preserve">
+    <value>在命令列表中显示管理员和重启图标。</value>
+  </data>
+  <data name="Settings_ConfirmCautionDesc" xml:space="preserve">
+    <value>运行标记为“谨慎”的命令前先确认。</value>
+  </data>
+  <data name="Settings_AutoRestorePointDesc" xml:space="preserve">
+    <value>在有风险的管理员命令前默认勾选“创建还原点”。</value>
+  </data>
+  <data name="Settings_AutoScrollDesc" xml:space="preserve">
+    <value>让控制台始终滚动到最新输出。</value>
+  </data>
+  <data name="Settings_WarnOnCancelDesc" xml:space="preserve">
+    <value>在命令运行时关闭应用前先确认。</value>
+  </data>
+  <data name="Settings_AutoCheckUpdatesDesc" xml:space="preserve">
+    <value>启动应用时在 GitHub 上检查新版本。不会发送任何其他信息。</value>
+  </data>
+  <data name="Settings_LogLevelDesc" xml:space="preserve">
+    <value>写入此电脑上日志文件的详细程度。</value>
+  </data>
+  <data name="Shortcuts_Search" xml:space="preserve">
+    <value>搜索当前列表</value>
+  </data>
+  <data name="Snack_Copied" xml:space="preserve">
+    <value>已复制到剪贴板</value>
+  </data>
+  <data name="Snack_CopyFailed" xml:space="preserve">
+    <value>无法复制：另一个应用正在使用剪贴板。请重试。</value>
+  </data>
+  <data name="TitleBar_Search" xml:space="preserve">
+    <value>搜索所有命令 (Ctrl+K)</value>
   </data>
 </root>

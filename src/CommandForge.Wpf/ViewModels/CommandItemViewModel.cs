@@ -1,8 +1,8 @@
+using CommandForge.Desktop.Resources;
 using CommandForge.Domain;
-using CommandForge.Wpf.Resources;
 using CommunityToolkit.Mvvm.ComponentModel;
 
-namespace CommandForge.Wpf.ViewModels;
+namespace CommandForge.Desktop.ViewModels;
 
 /// <summary>A command as shown in the list / palette: resolved text + display flags + match highlight.</summary>
 public sealed partial class CommandItemViewModel : ObservableObject

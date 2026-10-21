@@ -1,0 +1,26 @@
+<UserControl x:Class="CommandForge.Desktop.Views.AboutView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+             xmlns:res="clr-namespace:CommandForge.Desktop.Resources">
+    <!-- Shown in an in-window dialog: name, version, privacy note, links. -->
+    <StackPanel MinWidth="380" MaxWidth="520">
+        <StackPanel Orientation="Horizontal">
+            <ui:SymbolIcon Symbol="WindowConsole20" FontSize="32" Foreground="{DynamicResource AccentTextFillColorPrimaryBrush}"
+                           VerticalAlignment="Center" Margin="0,0,12,0" />
+            <StackPanel VerticalAlignment="Center">
+                <TextBlock Text="{res:Loc AppTitle}" Style="{StaticResource SubtitleTextStyle}" />
+                <TextBlock x:Name="VersionText" Style="{StaticResource SecondaryTextStyle}" />
+            </StackPanel>
+        </StackPanel>
+
+        <TextBlock Text="{res:Loc Settings_NoDataCollected}" TextWrapping="Wrap" Margin="0,16,0,0" />
+
+        <WrapPanel Margin="0,16,0,0">
+            <ui:HyperlinkButton Content="{res:Loc Settings_License}" Click="OnLicenseClick" Margin="0,0,8,4" />
+            <ui:HyperlinkButton Content="{res:Loc Settings_GitHub}" Click="OnGitHubClick" Margin="0,0,8,4" />
+            <ui:HyperlinkButton Content="{res:Loc Menu_UserGuide}" Click="OnUserGuideClick" Margin="0,0,8,4" />
+            <ui:HyperlinkButton Content="{res:Loc Menu_Terms}" Click="OnTermsClick" Margin="0,0,8,4" />
+        </WrapPanel>
+    </StackPanel>
+</UserControl>

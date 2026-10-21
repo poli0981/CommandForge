@@ -2,24 +2,27 @@ using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Runtime.InteropServices;
 using System.Text;
-using System.Windows;
 using CommandForge.Application.Ports;
+using CommandForge.Desktop.Services;
 using CommandForge.Infrastructure;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
-namespace CommandForge.Wpf.ViewModels;
+namespace CommandForge.Desktop.ViewModels;
 
 /// <summary>Developer Debug panel: verbose log dump, catalog stats + validation errors, and a system-info dump.</summary>
 public sealed partial class DebugViewModel : ObservableObject
 {
     private readonly ILogReader _logReader;
+    private readonly IClipboardService _clipboard;
 
-    public DebugViewModel(ILogReader logReader, ICatalogProvider catalog)
+    public DebugViewModel(ILogReader logReader, ICatalogProvider catalog, IClipboardService clipboard)
     {
         ArgumentNullException.ThrowIfNull(logReader);
         ArgumentNullException.ThrowIfNull(catalog);
+        ArgumentNullException.ThrowIfNull(clipboard);
         _logReader = logReader;
+        _clipboard = clipboard;
 
         CategoryCount = catalog.GetCategories().Count;
         CommandCount = catalog.GetCommands().Count;
@@ -57,17 +60,7 @@ public sealed partial class DebugViewModel : ObservableObject
     }
 
     [RelayCommand]
-    private void CopySystemInfo()
-    {
-        try
-        {
-            Clipboard.SetText(SystemInfo);
-        }
-        catch (COMException)
-        {
-            // Clipboard temporarily locked — safe to ignore.
-        }
-    }
+    private void CopySystemInfo() => _clipboard.TrySetText(SystemInfo);
 
     /// <summary>Builds the read-only system-info dump (pure; testable).</summary>
     public static string BuildSystemInfo()

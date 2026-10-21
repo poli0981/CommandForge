@@ -2,12 +2,12 @@ using System.Threading.Channels;
 using CommandForge.Application;
 using CommandForge.Application.Ports;
 using CommandForge.Application.UseCases;
+using CommandForge.Desktop.Services;
+using CommandForge.Desktop.ViewModels;
 using CommandForge.Domain;
 using CommandForge.Infrastructure;
 using CommandForge.Infrastructure.History;
 using CommandForge.Infrastructure.Recipes;
-using CommandForge.Wpf.Services;
-using CommandForge.Wpf.ViewModels;
 
 namespace CommandForge.Tests;
 
@@ -90,10 +90,15 @@ public sealed class RecipeConfirmationTests : IDisposable
     {
         var items = new[] { SafeStep, CautionStep, DangerousStep }
             .ToDictionary(c => c.Id, c => new CommandItemViewModel(c, c.Id, string.Empty), StringComparer.Ordinal);
+        var elevation = new RecordingElevation(_executed);
         var execution = new ExecutionViewModel(
-            new RunCommandUseCase(new RecordingExecutor(_executed), new RecordingElevation(_executed)),
+            new RunCommandUseCase(new RecordingExecutor(_executed), elevation),
+            elevation,
             _dialogs,
-            new NoClipboard());
+            new NoClipboard(),
+            new NoFiles(),
+            new NoShell(),
+            new NoNotifications());
         var recipes = new RecipesViewModel(
             items,
             execution,
@@ -170,6 +175,19 @@ public sealed class RecipeConfirmationTests : IDisposable
     {
         public bool IsSessionActive => false;
 
+        public event EventHandler? SessionChanged
+        {
+            add
+            {
+                // A fake session never starts or ends.
+            }
+
+            remove
+            {
+                // A fake session never starts or ends.
+            }
+        }
+
         public Task EndSessionAsync(CancellationToken cancellationToken = default) => Task.CompletedTask;
 
         public Task<ExecutionResult> RunElevatedAsync(CommandDefinition command, ChannelWriter<OutputLine> output, CancellationToken cancellationToken = default)
@@ -187,5 +205,27 @@ public sealed class RecipeConfirmationTests : IDisposable
     private sealed class NoClipboard : IClipboardService
     {
         public bool TrySetText(string text) => true;
+    }
+
+    private sealed class NoFiles : IFileDialogService
+    {
+        public string? PickSaveFile(string title, string filter, string defaultFileName) => null;
+
+        public string? PickOpenFile(string title, string filter) => null;
+    }
+
+    private sealed class NoShell : IShellService
+    {
+        public bool TryOpen(string target) => true;
+
+        public bool TryRestartWindows() => false;
+    }
+
+    private sealed class NoNotifications : INotificationService
+    {
+        public void Show(string message, NotificationKind kind = NotificationKind.Information)
+        {
+            // Not shown in tests.
+        }
     }
 }

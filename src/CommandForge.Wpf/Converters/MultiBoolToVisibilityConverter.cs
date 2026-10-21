@@ -2,7 +2,7 @@ using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
 
-namespace CommandForge.Wpf.Converters;
+namespace CommandForge.Desktop.Converters;
 
 /// <summary>Returns <see cref="Visibility.Visible"/> only when every bound boolean is <see langword="true"/>.</summary>
 public sealed class MultiBoolToVisibilityConverter : IMultiValueConverter

@@ -12,6 +12,9 @@ public interface IElevationService
     /// <summary>Whether an elevated session (a connected Elevator) is currently open.</summary>
     public bool IsSessionActive { get; }
 
+    /// <summary>Raised, on any thread, when a session starts or ends; <see cref="IsSessionActive"/> has the new state.</summary>
+    public event EventHandler? SessionChanged;
+
     /// <summary>Runs <paramref name="command"/> elevated via the broker, streaming output lines.</summary>
     public Task<ExecutionResult> RunElevatedAsync(
         CommandDefinition command,

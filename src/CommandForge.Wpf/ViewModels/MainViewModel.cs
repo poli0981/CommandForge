@@ -1,39 +1,25 @@
-using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Globalization;
+using System.ComponentModel;
 using CommandForge.Application;
 using CommandForge.Application.Ports;
-using CommandForge.Application.Registry;
-using CommandForge.Application.Search;
-using CommandForge.Application.Settings;
-using CommandForge.Domain;
-using CommandForge.Wpf.Resources;
-using CommandForge.Wpf.Services;
+using CommandForge.Desktop.Resources;
+using CommandForge.Desktop.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
-namespace CommandForge.Wpf.ViewModels;
+namespace CommandForge.Desktop.ViewModels;
 
 /// <summary>
-/// Main shell view-model: in-shell section switching (Catalog / Settings), catalog browse
-/// (sidebar categories + list), fuzzy search, the selected-command detail, and execution.
+/// The main shell: which page is showing (<see cref="CurrentSection"/>, mirrored by the navigation
+/// pane through <see cref="NavigationKey"/>), the page view-models, and app-wide actions (updates,
+/// bug report, restore point, the elevated session).
 /// </summary>
 public sealed partial class MainViewModel : ObservableObject
 {
-
-    private readonly ICatalogProvider _catalog;
-    private readonly IConfirmationService _confirmation;
     private readonly IUpdateDialogService _updateDialog;
     private readonly IReportBugDialogService _reportBug;
-    private readonly ISettingsService _settings;
-    private readonly IExecutionHistoryService _history;
-    private readonly IClock _clock;
-    private readonly IRegistryService _registry;
-    private readonly Dictionary<string, CommandItemViewModel> _itemsById;
-    private readonly CommandDefinition? _restorePointCommand;
-    private readonly int _osBuild;
-    private IReadOnlyList<SearchableCommand> _searchable;
-    private IReadOnlyDictionary<string, string> _categoryTitles;
+    private readonly IElevationService _elevation;
+    private readonly IShellService _shell;
+    private readonly INotificationService _notifications;
 
     public MainViewModel(
         ICatalogProvider catalog,
@@ -48,10 +34,14 @@ public sealed partial class MainViewModel : ObservableObject
         IUserCommandStore userCommandStore,
         IRegistryService registry,
         ISystemInfoService systemInfo,
+        IElevationService elevation,
         SettingsViewModel settingsViewModel,
         LogViewerViewModel logViewer,
         DebugViewModel debug,
-        IDialogService dialogs)
+        IDialogService dialogs,
+        IClipboardService clipboard,
+        IShellService shell,
+        INotificationService notifications)
     {
         ArgumentNullException.ThrowIfNull(catalog);
         ArgumentNullException.ThrowIfNull(execution);
@@ -65,144 +55,195 @@ public sealed partial class MainViewModel : ObservableObject
         ArgumentNullException.ThrowIfNull(userCommandStore);
         ArgumentNullException.ThrowIfNull(registry);
         ArgumentNullException.ThrowIfNull(systemInfo);
+        ArgumentNullException.ThrowIfNull(elevation);
         ArgumentNullException.ThrowIfNull(settingsViewModel);
         ArgumentNullException.ThrowIfNull(logViewer);
         ArgumentNullException.ThrowIfNull(debug);
         ArgumentNullException.ThrowIfNull(dialogs);
+        ArgumentNullException.ThrowIfNull(clipboard);
+        ArgumentNullException.ThrowIfNull(shell);
+        ArgumentNullException.ThrowIfNull(notifications);
 
-        _catalog = catalog;
-        _confirmation = confirmation;
         _updateDialog = updateDialog;
         _reportBug = reportBug;
-        _settings = settings;
-        _history = history;
-        _clock = clock;
-        _registry = registry;
+        _elevation = elevation;
+        _shell = shell;
+        _notifications = notifications;
+        Execution = execution;
         Settings = settingsViewModel;
         LogViewer = logViewer;
         Debug = debug;
-        Execution = execution;
+
+        Catalog = new CatalogViewModel(
+            catalog,
+            systemInfo.GetStatus().OsBuild,
+            execution,
+            settingsViewModel,
+            confirmation,
+            settings,
+            history,
+            clock,
+            registry,
+            clipboard,
+            shell,
+            notifications);
+        Home = new HomeViewModel(Catalog.ItemsById, settings, systemInfo, item => SelectCommandById(item.Command.Id));
+        History = new HistoryViewModel(Catalog.ItemsById, history, SelectCommandById, RunCommandByIdAsync, execution, dialogs);
+        Recipes = new RecipesViewModel(Catalog.ItemsById, execution, recipeStore, history, clock, confirmation, dialogs, settings, Catalog.RestorePointCommand);
+        UserCommands = new UserCommandsViewModel(userCommandStore, execution, dialogs);
+
+        _isPaneOpen = !settings.CollapseSidebarByDefault;
+        Execution.AutoScroll = settings.AutoScrollConsole;
+        _isAdminSessionActive = elevation.IsSessionActive;
+
         Execution.PropertyChanged += (_, e) =>
         {
             if (e.PropertyName == nameof(ExecutionViewModel.IsRunning))
             {
-                RunSelectedCommand.NotifyCanExecuteChanged();
-                RevertSelectedCommand.NotifyCanExecuteChanged();
                 CreateRestorePointCommand.NotifyCanExecuteChanged();
+                EndAdminSessionCommand.NotifyCanExecuteChanged();
             }
         };
 
-        _osBuild = systemInfo.GetStatus().OsBuild;
-        var vms = CatalogViewModelBuilder.Build(catalog, _osBuild);
-        _searchable = vms.Searchable;
-        _categoryTitles = vms.CategoryTitles;
-        _itemsById = vms.Items.ToDictionary(i => i.Command.Id, StringComparer.Ordinal);
-        _restorePointCommand = _itemsById.GetValueOrDefault(RunSafety.RestorePointCommandId)?.Command;
-
-        // Reflect persisted favorites on the shared item view-models (drives the star icon everywhere).
-        var favoriteIds = new HashSet<string>(settings.FavoriteCommandIds, StringComparer.Ordinal);
-        foreach (var item in _itemsById.Values)
+        // The pane mirrors the catalog's browse state (Favorites / a category / everything).
+        Catalog.PropertyChanged += (_, e) =>
         {
-            item.IsFavorite = favoriteIds.Contains(item.Command.Id);
-        }
+            if (e.PropertyName is nameof(CatalogViewModel.IsFavoritesMode) or nameof(CatalogViewModel.SelectedCategory))
+            {
+                OnPropertyChanged(nameof(NavigationKey));
+            }
+        };
 
-        Home = new HomeViewModel(_itemsById, settings, systemInfo, item => SelectCommandById(item.Command.Id));
-        History = new HistoryViewModel(_itemsById, history, SelectCommandById, RunCommandByIdAsync, execution, dialogs);
-        Recipes = new RecipesViewModel(_itemsById, execution, recipeStore, history, clock, confirmation, dialogs, settings, _restorePointCommand);
-        UserCommands = new UserCommandsViewModel(userCommandStore, execution, dialogs);
+        Settings.PropertyChanged += OnSettingsChanged;
+        Settings.PortableSettingsApplied += OnPortableSettingsApplied;
 
-        Categories.Add(new CategoryViewModel(null, "Sidebar_AllCommands", "ViewGridOutline", vms.Items.Count));
-        foreach (var category in catalog.GetCategories())
-        {
-            var count = vms.Items.Count(i => string.Equals(i.Command.CategoryId, category.Id, StringComparison.Ordinal));
-            Categories.Add(new CategoryViewModel(category.Id, category.TitleKey, category.Icon, count));
-        }
+        // Elevated-session changes arrive on a broker thread.
+        _elevation.SessionChanged += (_, _) => System.Windows.Application.Current?.Dispatcher.InvokeAsync(
+            () => IsAdminSessionActive = _elevation.IsSessionActive);
 
-        _isSidebarCollapsed = settings.CollapseSidebarByDefault;
-        SelectedCategory = Categories[0];
-
-        // Open on the Home dashboard (the SelectedCategory assignment above forces Catalog, so set last).
-        Home.Refresh();
-        CurrentSection = ShellSection.Home;
-
-        // Live language switching: re-resolve catalog display strings in place (keeps selection/scroll).
+        // Live language switching: re-resolve display strings in place (keeps selection/scroll).
         LocalizationManager.Instance.CultureChanged += OnCultureChanged;
 
-        // Import / apply-profile can change favorites — re-sync stars and dashboards when it does.
-        Settings.PortableSettingsApplied += OnPortableSettingsApplied;
+        Home.Refresh();
     }
 
-    /// <summary>The Home dashboard view-model (shown when <see cref="CurrentSection"/> is Home).</summary>
     public HomeViewModel Home { get; }
 
-    /// <summary>The execution-history view-model (shown when <see cref="CurrentSection"/> is History).</summary>
+    public CatalogViewModel Catalog { get; }
+
     public HistoryViewModel History { get; }
 
-    /// <summary>The recipes view-model (shown when <see cref="CurrentSection"/> is Recipes).</summary>
     public RecipesViewModel Recipes { get; }
 
-    /// <summary>The user-defined commands view-model (shown when <see cref="CurrentSection"/> is UserCommands).</summary>
     public UserCommandsViewModel UserCommands { get; }
 
-    /// <summary>The Settings screen view-model (shown when <see cref="CurrentSection"/> is Settings).</summary>
     public SettingsViewModel Settings { get; }
 
-    /// <summary>The Log Viewer view-model (shown when <see cref="CurrentSection"/> is LogViewer).</summary>
     public LogViewerViewModel LogViewer { get; }
 
-    /// <summary>The Debug panel view-model (shown when <see cref="CurrentSection"/> is Debug).</summary>
     public DebugViewModel Debug { get; }
 
     public ExecutionViewModel Execution { get; }
 
-    public ObservableCollection<CategoryViewModel> Categories { get; } = [];
-
-    public ObservableCollection<CommandItemViewModel> FilteredCommands { get; } = [];
-
-    /// <summary>Whether the command list is filtered by the selected category or by Favorites.</summary>
-    private enum BrowseMode
-    {
-        Category,
-        Favorites,
-    }
-
-    private BrowseMode _browseMode = BrowseMode.Category;
-
     [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(NavigationKey))]
     private ShellSection _currentSection = ShellSection.Home;
 
+    /// <summary>Whether the navigation pane is expanded (Ctrl+B toggles it).</summary>
     [ObservableProperty]
-    private bool _isSidebarCollapsed;
+    private bool _isPaneOpen;
 
+    /// <summary>Whether an elevated helper is running (admin commands run without a new UAC prompt).</summary>
     [ObservableProperty]
-    private CategoryViewModel? _selectedCategory;
+    [NotifyCanExecuteChangedFor(nameof(EndAdminSessionCommand))]
+    private bool _isAdminSessionActive;
 
-    [ObservableProperty]
-    private string _searchText = string.Empty;
+    /// <summary>The navigation target that matches the current state (see <see cref="NavigationKeys"/>).</summary>
+    public string NavigationKey => CurrentSection switch
+    {
+        ShellSection.Home => NavigationKeys.Home,
+        ShellSection.Catalog when Catalog.IsFavoritesMode => NavigationKeys.Favorites,
+        ShellSection.Catalog when Catalog.SelectedCategory?.Id is { } id => NavigationKeys.Category(id),
+        ShellSection.Catalog => NavigationKeys.Catalog,
+        ShellSection.History => NavigationKeys.History,
+        ShellSection.Recipes => NavigationKeys.Recipes,
+        ShellSection.UserCommands => NavigationKeys.UserCommands,
+        ShellSection.Settings => NavigationKeys.Settings,
+        ShellSection.LogViewer => NavigationKeys.Logs,
+        ShellSection.Debug => NavigationKeys.Debug,
+        _ => NavigationKeys.Home,
+    };
 
-    [ObservableProperty]
-    [NotifyCanExecuteChangedFor(nameof(RunSelectedCommand))]
-    [NotifyCanExecuteChangedFor(nameof(RevertSelectedCommand))]
-    private CommandItemViewModel? _selectedCommand;
+    /// <summary>Goes to the page a navigation key names (from the navigation pane).</summary>
+    public void Navigate(string key)
+    {
+        ArgumentNullException.ThrowIfNull(key);
+        if (string.Equals(key, NavigationKey, StringComparison.Ordinal))
+        {
+            return;
+        }
 
-    [ObservableProperty]
-    private CommandDetailViewModel? _detail;
+        if (NavigationKeys.CategoryIdOf(key) is { } categoryId)
+        {
+            Catalog.ShowCategory(categoryId);
+            CurrentSection = ShellSection.Catalog;
+            return;
+        }
 
-    [ObservableProperty]
-    private bool _hasResults;
-
-    /// <summary>A natural-language search keyword suggestion for the current query (null if none).</summary>
-    [ObservableProperty]
-    private string? _searchSuggestion;
+        switch (key)
+        {
+            case NavigationKeys.Favorites:
+                ShowFavorites();
+                break;
+            case NavigationKeys.Catalog:
+                ShowCatalog();
+                break;
+            case NavigationKeys.History:
+                ShowHistory();
+                break;
+            case NavigationKeys.Recipes:
+                ShowRecipes();
+                break;
+            case NavigationKeys.UserCommands:
+                ShowUserCommands();
+                break;
+            case NavigationKeys.Settings:
+                ShowSettings();
+                break;
+            case NavigationKeys.Logs:
+                ShowLogViewer();
+                break;
+            case NavigationKeys.Debug:
+                ShowDebug();
+                break;
+            default:
+                ShowHome();
+                break;
+        }
+    }
 
     [RelayCommand]
-    private void ToggleSidebar() => IsSidebarCollapsed = !IsSidebarCollapsed;
+    private void ToggleSidebar() => IsPaneOpen = !IsPaneOpen;
 
     [RelayCommand]
     private void ShowHome()
     {
         Home.Refresh();
         CurrentSection = ShellSection.Home;
+    }
+
+    [RelayCommand]
+    private void ShowCatalog()
+    {
+        Catalog.ShowAll();
+        CurrentSection = ShellSection.Catalog;
+    }
+
+    [RelayCommand]
+    private void ShowFavorites()
+    {
+        Catalog.ShowFavorites();
+        CurrentSection = ShellSection.Catalog;
     }
 
     [RelayCommand]
@@ -230,53 +271,16 @@ public sealed partial class MainViewModel : ObservableObject
     private void ShowSettings() => CurrentSection = ShellSection.Settings;
 
     [RelayCommand]
-    private void OpenWiki()
-        => Process.Start(new ProcessStartInfo(ProductLinks.UserGuide) { UseShellExecute = true });
-
-    [RelayCommand]
-    private void ShowCatalog() => CurrentSection = ShellSection.Catalog;
-
-    /// <summary>Shows the catalog filtered to pinned favorites.</summary>
-    [RelayCommand]
-    private void ShowFavorites()
-    {
-        _browseMode = BrowseMode.Favorites;
-        SearchText = string.Empty;
-        SelectedCategory = null; // clears the category highlight; stays in Favorites mode (see OnSelectedCategoryChanged)
-        CurrentSection = ShellSection.Catalog;
-        ApplyFilter();
-    }
-
-    /// <summary>Pins or unpins a command from Favorites and persists the change.</summary>
-    [RelayCommand]
-    private void ToggleFavorite(CommandItemViewModel? item)
-    {
-        if (item is null)
-        {
-            return;
-        }
-
-        _settings.FavoriteCommandIds = Favorites.Toggle(_settings.FavoriteCommandIds, item.Command.Id);
-
-        // Update the shared item before persisting so the UI matches the in-memory list even if Save() fails.
-        item.IsFavorite = _settings.FavoriteCommandIds.Contains(item.Command.Id, StringComparer.Ordinal);
-        _settings.Save();
-
-        // When viewing the Favorites filter, drop a just-unpinned command from the list immediately.
-        if (_browseMode == BrowseMode.Favorites)
-        {
-            ApplyFilter();
-        }
-    }
-
-    [RelayCommand]
     private void ShowLogViewer() => CurrentSection = ShellSection.LogViewer;
 
     [RelayCommand]
     private void ShowDebug() => CurrentSection = ShellSection.Debug;
 
     [RelayCommand]
-    private void ReportBug() => _reportBug.Show();
+    private void OpenUserGuide() => _shell.TryOpen(ProductLinks.UserGuide);
+
+    [RelayCommand]
+    private Task ReportBugAsync() => _reportBug.ShowAsync();
 
     [RelayCommand]
     private Task CheckForUpdatesAsync() => _updateDialog.ShowAsync(startedFromStartup: false);
@@ -285,285 +289,63 @@ public sealed partial class MainViewModel : ObservableObject
     [RelayCommand(CanExecute = nameof(CanCreateRestorePoint))]
     private Task CreateRestorePointAsync()
     {
-        if (_restorePointCommand is null)
+        if (Catalog.RestorePointCommand is not { } command)
         {
             return Task.CompletedTask;
         }
 
-        SelectCommandById(_restorePointCommand.Id); // show it in the catalog so its console output is visible
-        return ConfirmAndRunAsync(_restorePointCommand);
+        CurrentSection = ShellSection.Catalog; // its console output shows on the catalog page
+        return Catalog.RunCommandByIdAsync(command.Id);
     }
 
-    private bool CanCreateRestorePoint() => _restorePointCommand is not null && !Execution.IsRunning;
+    private bool CanCreateRestorePoint() => Catalog.RestorePointCommand is not null && !Execution.IsRunning;
 
-    [RelayCommand(CanExecute = nameof(CanRunSelected))]
-    private Task RunSelectedAsync()
-        => SelectedCommand is null ? Task.CompletedTask : ConfirmAndRunAsync(SelectedCommand.Command);
-
-    private bool CanRunSelected() => SelectedCommand is not null && !Execution.IsRunning;
-
-    [RelayCommand(CanExecute = nameof(CanRevertSelected))]
-    private Task RevertSelectedAsync()
+    /// <summary>Closes the elevated helper; the next admin command asks for permission again.</summary>
+    [RelayCommand(CanExecute = nameof(CanEndAdminSession))]
+    private async Task EndAdminSessionAsync()
     {
-        if (SelectedCommand?.Command.RevertCommandId is not { } revertId
-            || !_itemsById.TryGetValue(revertId, out var revertItem))
-        {
-            return Task.CompletedTask;
-        }
-
-        return ConfirmAndRunAsync(revertItem.Command);
+        await _elevation.EndSessionAsync();
+        IsAdminSessionActive = _elevation.IsSessionActive;
+        _notifications.Show(Strings.Get("Admin_SessionEnded"));
     }
 
-    private bool CanRevertSelected()
-        => SelectedCommand?.Command.RevertCommandId is not null && !Execution.IsRunning;
+    private bool CanEndAdminSession() => IsAdminSessionActive && !Execution.IsRunning;
 
-    /// <summary>
-    /// Confirms a command per <see cref="RunSafety"/> (Dangerous always confirms with typing; Caution
-    /// honors <see cref="ISettingsService.ConfirmCaution"/>), optionally creating a restore point, then runs it.
-    /// </summary>
-    private async Task ConfirmAndRunAsync(CommandDefinition command)
-    {
-        if (Execution.IsRunning)
-        {
-            return; // one run at a time — and never record a run that didn't happen
-        }
-
-        CommandDefinition? restorePoint = null;
-        if (RunSafety.NeedsConfirmation(command, _settings.ConfirmCaution))
-        {
-            var outcome = await _confirmation.ConfirmAsync(
-                command,
-                defaultCreateRestorePoint: RunSafety.DefaultCreateRestorePoint(command, _settings.AutoCreateRestorePoint));
-            if (outcome is null)
-            {
-                return;
-            }
-
-            if (outcome.CreateRestorePoint)
-            {
-                restorePoint = _restorePointCommand;
-            }
-        }
-        else if (RunSafety.DefaultCreateRestorePoint(command, _settings.AutoCreateRestorePoint))
-        {
-            // Caution confirmation skipped by setting, but still honor the restore-point preference.
-            restorePoint = _restorePointCommand;
-        }
-
-        // Read-only before snapshot of any registry values this command may change.
-        var registryBefore = command.AffectedRegistryValues.Count > 0
-            ? RegistrySnapshot.Capture(_registry, command.AffectedRegistryValues)
-            : null;
-
-        if (!await Execution.RunAsync(command, restorePoint))
-        {
-            return;
-        }
-
-        // Record the run for the Home "recent commands" list and the execution history
-        // (skip user-cancelled runs, matching the recent-commands behaviour).
-        if (!Execution.Cancelled)
-        {
-            _settings.RecentCommandIds = RecentCommands.Add(_settings.RecentCommandIds, command.Id);
-            _settings.Save();
-
-            if (Execution.LastResult is { } result)
-            {
-                _history.Record(new ExecutionRecord
-                {
-                    CommandId = command.Id,
-                    Timestamp = _clock.Now,
-                    ExitCode = result.ExitCode,
-                    Success = result.Success,
-                    DurationMs = (long)result.Duration.TotalMilliseconds,
-                    RequiresRestart = result.RequiresRestart,
-                });
-            }
-
-            if (registryBefore is not null)
-            {
-                AppendRegistryDiff(command.AffectedRegistryValues, registryBefore);
-            }
-        }
-    }
-
-    /// <summary>Re-reads the affected registry values and appends a before/after summary to the console.</summary>
-    private void AppendRegistryDiff(
-        IReadOnlyList<RegistryValueRef> references,
-        IReadOnlyDictionary<RegistryValueRef, string?> before)
-    {
-        var after = RegistrySnapshot.Capture(_registry, references);
-        var changes = RegistrySnapshot.Diff(references, before, after);
-
-        Execution.OutputLines.Add(new OutputLine(Strings.Get("Registry_ChangesHeader"), IsError: false));
-        if (changes.Count == 0)
-        {
-            Execution.OutputLines.Add(new OutputLine(Strings.Get("Registry_NoChanges"), IsError: false));
-            return;
-        }
-
-        foreach (var change in changes)
-        {
-            var label = string.IsNullOrEmpty(change.Reference.Name)
-                ? change.Reference.Path
-                : change.Reference.Path + "\\" + change.Reference.Name;
-            Execution.OutputLines.Add(new OutputLine(
-                string.Format(
-                    CultureInfo.CurrentCulture,
-                    Strings.Get("Registry_ChangeFormat"),
-                    label,
-                    change.Before ?? Strings.Get("Registry_NotSet"),
-                    change.After ?? Strings.Get("Registry_NotSet")),
-                IsError: false));
-        }
-    }
-
-    /// <summary>Re-runs a command by id (used by the History view's "Run again"); ignores unknown ids.</summary>
+    /// <summary>Re-runs a command by id (History's "Run again" / "Undo"); ignores unknown ids.</summary>
     public Task RunCommandByIdAsync(string commandId)
     {
-        if (!_itemsById.TryGetValue(commandId, out var item))
-        {
-            return Task.CompletedTask;
-        }
-
-        SelectCommandById(commandId);
-        return ConfirmAndRunAsync(item.Command);
+        CurrentSection = ShellSection.Catalog;
+        return Catalog.RunCommandByIdAsync(commandId);
     }
 
-    /// <summary>Selects a command by id (used by the palette and Home), clearing filters so it is visible.</summary>
+    /// <summary>Shows a command in the catalog (from the palette, Home and History).</summary>
     public void SelectCommandById(string commandId)
     {
-        _browseMode = BrowseMode.Category;
+        Catalog.SelectCommandById(commandId);
         CurrentSection = ShellSection.Catalog;
-        if (Categories.Count > 0)
-        {
-            SelectedCategory = Categories[0];
-        }
-
-        SearchText = string.Empty;
-        if (_itemsById.TryGetValue(commandId, out var item))
-        {
-            SelectedCommand = item;
-        }
     }
 
-    partial void OnSearchTextChanged(string value)
+    private void OnSettingsChanged(object? sender, PropertyChangedEventArgs e)
     {
-        // Suggest a catalog keyword for natural-language queries (local; no LLM/network).
-        SearchSuggestion = NaturalLanguageSearch.Suggest(value);
-        ApplyFilter();
-    }
-
-    /// <summary>Applies the natural-language keyword suggestion as the search query.</summary>
-    [RelayCommand]
-    private void ApplySuggestion()
-    {
-        if (SearchSuggestion is { } suggestion)
+        if (e.PropertyName == nameof(SettingsViewModel.AutoScrollConsole))
         {
-            SearchText = suggestion;
+            Execution.AutoScroll = Settings.AutoScrollConsole;
         }
     }
-
-    partial void OnSelectedCategoryChanged(CategoryViewModel? value)
-    {
-        // Picking a category leaves Favorites mode; clearing the selection (value is null) keeps the
-        // current mode, so ShowFavorites can deselect the category without flipping back to Category.
-        if (value is not null)
-        {
-            _browseMode = BrowseMode.Category;
-        }
-
-        CurrentSection = ShellSection.Catalog;
-        ApplyFilter();
-    }
-
-    partial void OnSelectedCommandChanged(CommandItemViewModel? value) => UpdateDetail();
 
     private void OnCultureChanged(object? sender, EventArgs e)
     {
-        // Rebuild the search corpus + category-title map in the new language, and refresh the
-        // already-displayed item/category/detail view-models in place.
-        var vms = CatalogViewModelBuilder.Build(_catalog, _osBuild);
-        _searchable = vms.Searchable;
-        _categoryTitles = vms.CategoryTitles;
-
-        foreach (var item in _itemsById.Values)
-        {
-            item.Refresh();
-        }
-
-        foreach (var category in Categories)
-        {
-            category.Refresh();
-        }
-
-        UpdateDetail();
+        Catalog.RefreshLanguage();
         Home.Refresh();
         History.Refresh();
     }
 
     private void OnPortableSettingsApplied()
     {
-        // Favorites may have changed (import / apply-profile); re-sync the shared item view-models
-        // (drives the star icon everywhere) and the dashboards. Theme/font/language already applied
-        // live via the Settings observable-property setters.
-        var favoriteIds = new HashSet<string>(_settings.FavoriteCommandIds, StringComparer.Ordinal);
-        foreach (var item in _itemsById.Values)
-        {
-            item.IsFavorite = favoriteIds.Contains(item.Command.Id);
-        }
-
+        // Favorites may have changed (import / apply-profile). Theme, font and language already
+        // applied themselves through the Settings view-model's property setters.
+        Catalog.SyncFavorites();
         Home.Refresh();
         History.Refresh();
-        if (_browseMode == BrowseMode.Favorites)
-        {
-            ApplyFilter();
-        }
-    }
-
-    private void ApplyFilter()
-    {
-        var inFavorites = _browseMode == BrowseMode.Favorites;
-        var favoriteIds = inFavorites
-            ? new HashSet<string>(_settings.FavoriteCommandIds, StringComparer.Ordinal)
-            : null;
-        var filter = !inFavorites && SelectedCategory?.Id is { } categoryId
-            ? new CommandSearchFilter { CategoryId = categoryId }
-            : null;
-        var hits = SearchCommandsUseCase.Search(_searchable, SearchText, filter);
-
-        FilteredCommands.Clear();
-        foreach (var hit in hits)
-        {
-            if (favoriteIds is not null && !favoriteIds.Contains(hit.Command.Id))
-            {
-                continue;
-            }
-
-            var item = _itemsById[hit.Command.Id];
-            item.TitleMatches = hit.TitleMatches;
-            FilteredCommands.Add(item);
-        }
-
-        HasResults = FilteredCommands.Count > 0;
-        if (SelectedCommand is null || !FilteredCommands.Contains(SelectedCommand))
-        {
-            SelectedCommand = FilteredCommands.Count > 0 ? FilteredCommands[0] : null;
-        }
-    }
-
-    private void UpdateDetail()
-    {
-        if (SelectedCommand is null)
-        {
-            Detail = null;
-            return;
-        }
-
-        var command = SelectedCommand.Command;
-        var categoryTitle = _categoryTitles.TryGetValue(command.CategoryId, out var title)
-            ? title
-            : command.CategoryId;
-        Detail = new CommandDetailViewModel(command, SelectedCommand.Title, SelectedCommand.Description, categoryTitle);
     }
 }

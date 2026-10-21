@@ -1,7 +1,7 @@
-using CommandForge.Wpf.Resources;
+using CommandForge.Desktop.Resources;
 using CommunityToolkit.Mvvm.ComponentModel;
 
-namespace CommandForge.Wpf.ViewModels;
+namespace CommandForge.Desktop.ViewModels;
 
 /// <summary>A sidebar category entry. <see cref="Id"/> is <see langword="null"/> for the "All" pseudo-category.</summary>
 public sealed partial class CategoryViewModel : ObservableObject

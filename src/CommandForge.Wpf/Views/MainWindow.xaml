@@ -1,305 +1,163 @@
-<Window x:Class="CommandForge.Wpf.Views.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        xmlns:res="clr-namespace:CommandForge.Wpf.Resources"
-        xmlns:conv="clr-namespace:CommandForge.Wpf.Converters"
-        xmlns:appset="clr-namespace:CommandForge.Application.Settings;assembly=CommandForge.Application"
-        xmlns:views="clr-namespace:CommandForge.Wpf.Views"
-        Title="{res:Loc AppTitle}"
-        Width="1100" Height="720" ResizeMode="NoResize"
-        WindowStartupLocation="CenterScreen"
-        FontFamily="{DynamicResource MaterialDesignFont}"
-        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-        TextElement.FontSize="{DynamicResource AppFontSize}"
-        Background="{DynamicResource MaterialDesignPaper}"
-        PreviewKeyDown="OnWindowPreviewKeyDown"
-        Closing="OnWindowClosing">
+<ui:FluentWindow x:Class="CommandForge.Desktop.Views.MainWindow"
+                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                 xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+                 xmlns:res="clr-namespace:CommandForge.Desktop.Resources"
+                 Title="{res:Loc AppTitle}"
+                 Width="1200" Height="780" MinWidth="960" MinHeight="600"
+                 WindowStartupLocation="CenterScreen"
+                 ExtendsContentIntoTitleBar="True"
+                 WindowBackdropType="Mica"
+                 WindowCornerPreference="Round"
+                 TextElement.FontSize="{DynamicResource AppFontSize}"
+                 PreviewKeyDown="OnWindowPreviewKeyDown"
+                 Closing="OnWindowClosing">
+    <Window.TaskbarItemInfo>
+        <TaskbarItemInfo />
+    </Window.TaskbarItemInfo>
     <Window.Resources>
-        <conv:StringToPackIconKindConverter x:Key="IconConverter" />
-        <conv:EnumToBooleanConverter x:Key="EnumBool" />
-        <conv:StringEqualsConverter x:Key="StringEquals" />
-
-        <DataTemplate x:Key="HomeTemplate">
-            <views:HomeView DataContext="{Binding Home}" />
-        </DataTemplate>
-        <DataTemplate x:Key="CatalogTemplate">
-            <views:CatalogView />
-        </DataTemplate>
-        <DataTemplate x:Key="HistoryTemplate">
-            <views:HistoryView DataContext="{Binding History}" />
-        </DataTemplate>
-        <DataTemplate x:Key="RecipesTemplate">
-            <views:RecipesView DataContext="{Binding Recipes}" />
-        </DataTemplate>
-        <DataTemplate x:Key="UserCommandsTemplate">
-            <views:UserCommandsView DataContext="{Binding UserCommands}" />
-        </DataTemplate>
-        <DataTemplate x:Key="SettingsTemplate">
-            <views:SettingsView DataContext="{Binding Settings}" />
-        </DataTemplate>
-        <DataTemplate x:Key="LogViewerTemplate">
-            <views:LogViewerView DataContext="{Binding LogViewer}" />
-        </DataTemplate>
-        <DataTemplate x:Key="DebugTemplate">
-            <views:DebugView DataContext="{Binding Debug}" />
-        </DataTemplate>
-
-        <Style x:Key="SidebarLabelStyle" TargetType="TextBlock">
-            <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="Margin" Value="14,0,0,0" />
-            <Style.Triggers>
-                <DataTrigger Binding="{Binding DataContext.IsSidebarCollapsed, RelativeSource={RelativeSource AncestorType=Window}}" Value="True">
-                    <Setter Property="Visibility" Value="Collapsed" />
-                </DataTrigger>
-            </Style.Triggers>
-        </Style>
-        <Style x:Key="SidebarButtonStyle" TargetType="Button" BasedOn="{StaticResource MaterialDesignFlatButton}">
-            <Setter Property="HorizontalContentAlignment" Value="Left" />
-            <Setter Property="Padding" Value="14,8" />
-            <Setter Property="Height" Value="44" />
-        </Style>
+        <BooleanToVisibilityConverter x:Key="BoolToVis" />
     </Window.Resources>
 
-    <DockPanel>
-        <Menu DockPanel.Dock="Top">
-            <MenuItem Header="{res:Loc MenuFile}">
-                <MenuItem Header="{res:Loc Menu_OpenConfigFolder}" Command="{Binding Settings.OpenConfigFolderCommand}" />
-                <MenuItem Header="{res:Loc Menu_OpenLogFolder}" Command="{Binding Settings.OpenLogFolderCommand}" />
-                <Separator />
-                <MenuItem Header="{res:Loc Menu_PortableInfo}" Click="OnShowPortableInfoClick" />
-                <Separator />
-                <MenuItem Header="{res:Loc MenuExit}" Click="OnExitClick" InputGestureText="Ctrl+Q" />
-            </MenuItem>
-            <MenuItem Header="{res:Loc MenuView}">
-                <MenuItem Header="{res:Loc SidebarHome}" Command="{Binding ShowHomeCommand}" InputGestureText="Ctrl+H" />
-                <MenuItem Header="{res:Loc SidebarFavorites}" Command="{Binding ShowFavoritesCommand}" />
-                <MenuItem Header="{res:Loc SidebarHistory}" Command="{Binding ShowHistoryCommand}" />
-                <MenuItem Header="{res:Loc SidebarRecipes}" Command="{Binding ShowRecipesCommand}" />
-                <MenuItem Header="{res:Loc SidebarUserCommands}" Command="{Binding ShowUserCommandsCommand}" />
-                <Separator />
-                <MenuItem Header="{res:Loc Settings_Theme}">
-                    <MenuItem Header="{res:Loc Settings_ThemeSystem}" Command="{Binding Settings.SetThemeCommand}"
-                              CommandParameter="{x:Static appset:AppTheme.System}"
-                              IsChecked="{Binding Settings.SelectedTheme, Converter={StaticResource EnumBool}, ConverterParameter=System, Mode=OneWay}" />
-                    <MenuItem Header="{res:Loc Settings_ThemeLight}" Command="{Binding Settings.SetThemeCommand}"
-                              CommandParameter="{x:Static appset:AppTheme.Light}"
-                              IsChecked="{Binding Settings.SelectedTheme, Converter={StaticResource EnumBool}, ConverterParameter=Light, Mode=OneWay}" />
-                    <MenuItem Header="{res:Loc Settings_ThemeDark}" Command="{Binding Settings.SetThemeCommand}"
-                              CommandParameter="{x:Static appset:AppTheme.Dark}"
-                              IsChecked="{Binding Settings.SelectedTheme, Converter={StaticResource EnumBool}, ConverterParameter=Dark, Mode=OneWay}" />
-                </MenuItem>
-                <MenuItem Header="{res:Loc Settings_FontSize}">
-                    <MenuItem Header="{res:Loc Settings_FontSmall}" Command="{Binding Settings.SetFontSizeCommand}"
-                              CommandParameter="{x:Static appset:FontScale.Small}"
-                              IsChecked="{Binding Settings.SelectedFontSize, Converter={StaticResource EnumBool}, ConverterParameter=Small, Mode=OneWay}" />
-                    <MenuItem Header="{res:Loc Settings_FontMedium}" Command="{Binding Settings.SetFontSizeCommand}"
-                              CommandParameter="{x:Static appset:FontScale.Medium}"
-                              IsChecked="{Binding Settings.SelectedFontSize, Converter={StaticResource EnumBool}, ConverterParameter=Medium, Mode=OneWay}" />
-                    <MenuItem Header="{res:Loc Settings_FontLarge}" Command="{Binding Settings.SetFontSizeCommand}"
-                              CommandParameter="{x:Static appset:FontScale.Large}"
-                              IsChecked="{Binding Settings.SelectedFontSize, Converter={StaticResource EnumBool}, ConverterParameter=Large, Mode=OneWay}" />
-                </MenuItem>
-                <MenuItem Header="{res:Loc Settings_Language}">
-                    <MenuItem Header="{res:Loc LanguageOption_System}" Command="{Binding Settings.SetLanguageCommand}"
-                              CommandParameter=""
-                              IsChecked="{Binding Settings.SelectedLanguage.Code, Converter={StaticResource StringEquals}, Mode=OneWay}" />
-                    <MenuItem Header="English" Command="{Binding Settings.SetLanguageCommand}"
-                              CommandParameter="en"
-                              IsChecked="{Binding Settings.SelectedLanguage.Code, Converter={StaticResource StringEquals}, ConverterParameter=en, Mode=OneWay}" />
-                    <MenuItem Header="Tiếng Việt" Command="{Binding Settings.SetLanguageCommand}"
-                              CommandParameter="vi"
-                              IsChecked="{Binding Settings.SelectedLanguage.Code, Converter={StaticResource StringEquals}, ConverterParameter=vi, Mode=OneWay}" />
-                    <MenuItem Header="日本語" Command="{Binding Settings.SetLanguageCommand}"
-                              CommandParameter="ja"
-                              IsChecked="{Binding Settings.SelectedLanguage.Code, Converter={StaticResource StringEquals}, ConverterParameter=ja, Mode=OneWay}" />
-                    <MenuItem Header="简体中文" Command="{Binding Settings.SetLanguageCommand}"
-                              CommandParameter="zh-Hans"
-                              IsChecked="{Binding Settings.SelectedLanguage.Code, Converter={StaticResource StringEquals}, ConverterParameter=zh-Hans, Mode=OneWay}" />
-                    <MenuItem Header="Español" Command="{Binding Settings.SetLanguageCommand}"
-                              CommandParameter="es"
-                              IsChecked="{Binding Settings.SelectedLanguage.Code, Converter={StaticResource StringEquals}, ConverterParameter=es, Mode=OneWay}" />
-                </MenuItem>
-                <Separator />
-                <MenuItem Header="{res:Loc MenuToggleSidebar}" Command="{Binding ToggleSidebarCommand}" InputGestureText="Ctrl+B" />
-                <Separator />
-                <MenuItem Header="{res:Loc Menu_OpenSettings}" Command="{Binding ShowSettingsCommand}" InputGestureText="Ctrl+," />
-            </MenuItem>
-            <MenuItem Header="{res:Loc MenuTools}">
-                <MenuItem Header="{res:Loc Palette_Placeholder}" Click="OnOpenPaletteClick" InputGestureText="Ctrl+K" />
-                <MenuItem Header="{res:Loc Menu_LogViewer}" Command="{Binding ShowLogViewerCommand}" InputGestureText="Ctrl+L" />
-                <MenuItem Header="{res:Loc Menu_ExportLogs}" Command="{Binding LogViewer.ExportZipCommand}" />
-                <MenuItem Header="{res:Loc Menu_DebugPanel}" Command="{Binding ShowDebugCommand}" />
-                <Separator />
-                <MenuItem Header="{res:Loc Menu_RestorePoint}" Command="{Binding CreateRestorePointCommand}" />
-            </MenuItem>
-            <MenuItem Header="{res:Loc MenuAbout}">
-                <MenuItem Header="{res:Loc Menu_About}" Click="OnShowAboutClick" />
-                <MenuItem Header="{res:Loc Menu_Terms}" Click="OnShowTermsClick" />
-                <Separator />
-                <MenuItem Header="{res:Loc Settings_License}" Command="{Binding Settings.OpenLicenseCommand}" />
-                <MenuItem Header="{res:Loc Settings_GitHub}" Command="{Binding Settings.OpenRepoCommand}" />
-            </MenuItem>
-            <MenuItem Header="{res:Loc MenuHelp}">
-                <MenuItem Header="{res:Loc Menu_Wiki}" Command="{Binding OpenWikiCommand}" />
-                <MenuItem Header="{res:Loc Menu_KeyboardShortcuts}" Click="OnShowKeyboardShortcutsClick" />
-                <MenuItem Header="{res:Loc Menu_ReportBug}" Command="{Binding ReportBugCommand}" />
-                <Separator />
-                <MenuItem Header="{res:Loc Menu_CheckForUpdates}" Command="{Binding CheckForUpdatesCommand}" InputGestureText="F5" />
-            </MenuItem>
-        </Menu>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
 
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
+        <ui:TitleBar x:Name="AppTitleBar" Grid.Row="0" Title="{res:Loc AppTitle}" CloseWindowByDoubleClickOnIcon="True">
+            <ui:TitleBar.Icon>
+                <ui:SymbolIcon Symbol="WindowConsole20" />
+            </ui:TitleBar.Icon>
 
-            <!-- Sidebar: categories -->
-            <Border Grid.Column="0" Background="{DynamicResource MaterialDesignToolBarBackground}">
-                <Border.Style>
-                    <Style TargetType="Border">
-                        <Setter Property="Width" Value="230" />
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding IsSidebarCollapsed}" Value="True">
-                                <Setter Property="Width" Value="56" />
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </Border.Style>
-                <DockPanel>
-                    <Button DockPanel.Dock="Top" Style="{StaticResource SidebarButtonStyle}"
-                            Command="{Binding ToggleSidebarCommand}"
-                            AutomationProperties.Name="{res:Loc MenuToggleSidebar}"
-                            ToolTip="{res:Loc MenuToggleSidebar}">
-                        <materialDesign:PackIcon Kind="Menu" Width="22" Height="22" />
-                    </Button>
+            <!-- Looks like a search box; opens the command palette (Ctrl+K). -->
+            <ui:TitleBar.CenterContent>
+                <ui:Button x:Name="SearchButton" Click="OnOpenPaletteClick" Width="420" Margin="24,0,0,0"
+                           HorizontalAlignment="Center" HorizontalContentAlignment="Left" Padding="10,5"
+                           AutomationProperties.Name="{res:Loc TitleBar_Search}">
+                    <StackPanel Orientation="Horizontal">
+                        <ui:SymbolIcon Symbol="Search24" FontSize="16" Margin="0,0,8,0" />
+                        <TextBlock Text="{res:Loc TitleBar_Search}" Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                   VerticalAlignment="Center" />
+                    </StackPanel>
+                </ui:Button>
+            </ui:TitleBar.CenterContent>
 
-                    <Button DockPanel.Dock="Top" Style="{StaticResource SidebarButtonStyle}"
-                            Command="{Binding ShowHomeCommand}"
-                            AutomationProperties.Name="{res:Loc SidebarHome}"
-                            ToolTip="{res:Loc SidebarHome}">
+            <ui:TitleBar.TrailingContent>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,8,0">
+                    <!-- Shown while an elevated helper runs; its menu ends the session. -->
+                    <ui:DropDownButton Appearance="Transparent" Margin="0,0,4,0" Padding="8,4"
+                                       Visibility="{Binding IsAdminSessionActive, Converter={StaticResource BoolToVis}}"
+                                       ToolTip="{res:Loc Admin_SessionTooltip}"
+                                       AutomationProperties.Name="{res:Loc Admin_SessionActive}">
                         <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="Home" Width="22" Height="22" />
-                            <TextBlock Text="{res:Loc SidebarHome}" Style="{StaticResource SidebarLabelStyle}" />
+                            <ui:SymbolIcon Symbol="Shield24" FontSize="16" Foreground="{DynamicResource SystemFillColorCautionBrush}" />
+                            <TextBlock Text="{res:Loc Admin_SessionActive}" Margin="6,0,0,0" VerticalAlignment="Center" />
                         </StackPanel>
-                    </Button>
+                        <ui:DropDownButton.Flyout>
+                            <ContextMenu DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
+                                <ui:MenuItem Header="{res:Loc Admin_EndSession}" Command="{Binding EndAdminSessionCommand}">
+                                    <ui:MenuItem.Icon>
+                                        <ui:SymbolIcon Symbol="ShieldDismiss24" />
+                                    </ui:MenuItem.Icon>
+                                </ui:MenuItem>
+                            </ContextMenu>
+                        </ui:DropDownButton.Flyout>
+                    </ui:DropDownButton>
 
-                    <Button DockPanel.Dock="Top" Style="{StaticResource SidebarButtonStyle}"
-                            Command="{Binding ShowFavoritesCommand}"
-                            AutomationProperties.Name="{res:Loc SidebarFavorites}"
-                            ToolTip="{res:Loc SidebarFavorites}">
-                        <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="Star" Width="22" Height="22" />
-                            <TextBlock Text="{res:Loc SidebarFavorites}" Style="{StaticResource SidebarLabelStyle}" />
-                        </StackPanel>
-                    </Button>
+                    <ui:DropDownButton Appearance="Transparent" Padding="8,4" ToolTip="{res:Loc Menu_More}"
+                                       AutomationProperties.Name="{res:Loc Menu_More}">
+                        <ui:SymbolIcon Symbol="MoreHorizontal24" />
+                        <ui:DropDownButton.Flyout>
+                            <ContextMenu DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
+                                <ui:MenuItem Header="{res:Loc Palette_Placeholder}" InputGestureText="Ctrl+K" Click="OnOpenPaletteClick">
+                                    <ui:MenuItem.Icon>
+                                        <ui:SymbolIcon Symbol="Search24" />
+                                    </ui:MenuItem.Icon>
+                                </ui:MenuItem>
+                                <ui:MenuItem Header="{res:Loc Menu_CheckForUpdates}" InputGestureText="F5" Command="{Binding CheckForUpdatesCommand}">
+                                    <ui:MenuItem.Icon>
+                                        <ui:SymbolIcon Symbol="ArrowSyncCircle24" />
+                                    </ui:MenuItem.Icon>
+                                </ui:MenuItem>
+                                <ui:MenuItem Header="{res:Loc Menu_RestorePoint}" Command="{Binding CreateRestorePointCommand}">
+                                    <ui:MenuItem.Icon>
+                                        <ui:SymbolIcon Symbol="History24" />
+                                    </ui:MenuItem.Icon>
+                                </ui:MenuItem>
+                                <Separator />
+                                <ui:MenuItem Header="{res:Loc Menu_ExportLogs}" Command="{Binding LogViewer.ExportZipCommand}">
+                                    <ui:MenuItem.Icon>
+                                        <ui:SymbolIcon Symbol="ArrowExportLtr24" />
+                                    </ui:MenuItem.Icon>
+                                </ui:MenuItem>
+                                <ui:MenuItem Header="{res:Loc Menu_OpenConfigFolder}" Command="{Binding Settings.OpenConfigFolderCommand}">
+                                    <ui:MenuItem.Icon>
+                                        <ui:SymbolIcon Symbol="FolderOpen24" />
+                                    </ui:MenuItem.Icon>
+                                </ui:MenuItem>
+                                <ui:MenuItem Header="{res:Loc Menu_OpenLogFolder}" Command="{Binding Settings.OpenLogFolderCommand}">
+                                    <ui:MenuItem.Icon>
+                                        <ui:SymbolIcon Symbol="Folder24" />
+                                    </ui:MenuItem.Icon>
+                                </ui:MenuItem>
+                                <ui:MenuItem Header="{res:Loc Menu_PortableInfo}" Click="OnShowPortableInfoClick">
+                                    <ui:MenuItem.Icon>
+                                        <ui:SymbolIcon Symbol="Info24" />
+                                    </ui:MenuItem.Icon>
+                                </ui:MenuItem>
+                                <Separator />
+                                <ui:MenuItem Header="{res:Loc Menu_KeyboardShortcuts}" Click="OnShowKeyboardShortcutsClick">
+                                    <ui:MenuItem.Icon>
+                                        <ui:SymbolIcon Symbol="Keyboard24" />
+                                    </ui:MenuItem.Icon>
+                                </ui:MenuItem>
+                                <ui:MenuItem Header="{res:Loc Menu_UserGuide}" Command="{Binding OpenUserGuideCommand}">
+                                    <ui:MenuItem.Icon>
+                                        <ui:SymbolIcon Symbol="BookOpen24" />
+                                    </ui:MenuItem.Icon>
+                                </ui:MenuItem>
+                                <ui:MenuItem Header="{res:Loc Menu_ReportBug}" Command="{Binding ReportBugCommand}">
+                                    <ui:MenuItem.Icon>
+                                        <ui:SymbolIcon Symbol="Bug24" />
+                                    </ui:MenuItem.Icon>
+                                </ui:MenuItem>
+                                <Separator />
+                                <ui:MenuItem Header="{res:Loc Menu_Terms}" Click="OnShowTermsClick">
+                                    <ui:MenuItem.Icon>
+                                        <ui:SymbolIcon Symbol="DocumentText24" />
+                                    </ui:MenuItem.Icon>
+                                </ui:MenuItem>
+                                <ui:MenuItem Header="{res:Loc Menu_About}" Click="OnShowAboutClick">
+                                    <ui:MenuItem.Icon>
+                                        <ui:SymbolIcon Symbol="Info24" />
+                                    </ui:MenuItem.Icon>
+                                </ui:MenuItem>
+                            </ContextMenu>
+                        </ui:DropDownButton.Flyout>
+                    </ui:DropDownButton>
+                </StackPanel>
+            </ui:TitleBar.TrailingContent>
+        </ui:TitleBar>
 
-                    <Button DockPanel.Dock="Top" Style="{StaticResource SidebarButtonStyle}"
-                            Command="{Binding ShowHistoryCommand}"
-                            AutomationProperties.Name="{res:Loc SidebarHistory}"
-                            ToolTip="{res:Loc SidebarHistory}">
-                        <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="History" Width="22" Height="22" />
-                            <TextBlock Text="{res:Loc SidebarHistory}" Style="{StaticResource SidebarLabelStyle}" />
-                        </StackPanel>
-                    </Button>
+        <!-- Items are built from the catalog in code; selection stays in sync with MainViewModel.NavigationKey. -->
+        <ui:NavigationView x:Name="RootNavigation" Grid.Row="1"
+                           PaneDisplayMode="Left"
+                           IsBackButtonVisible="Collapsed"
+                           IsPaneToggleVisible="True"
+                           IsPaneOpen="{Binding IsPaneOpen, Mode=TwoWay}"
+                           OpenPaneLength="290"
+                           FrameMargin="0"
+                           TitleBar="{Binding ElementName=AppTitleBar, Mode=OneWay}"
+                           TransitionDuration="150">
+            <ui:NavigationView.ContentOverlay>
+                <Grid>
+                    <ui:SnackbarPresenter x:Name="RootSnackbar" VerticalAlignment="Bottom" />
+                </Grid>
+            </ui:NavigationView.ContentOverlay>
+        </ui:NavigationView>
 
-                    <Button DockPanel.Dock="Top" Style="{StaticResource SidebarButtonStyle}"
-                            Command="{Binding ShowRecipesCommand}"
-                            AutomationProperties.Name="{res:Loc SidebarRecipes}"
-                            ToolTip="{res:Loc SidebarRecipes}">
-                        <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="PlaylistPlay" Width="22" Height="22" />
-                            <TextBlock Text="{res:Loc SidebarRecipes}" Style="{StaticResource SidebarLabelStyle}" />
-                        </StackPanel>
-                    </Button>
-
-                    <Button DockPanel.Dock="Top" Style="{StaticResource SidebarButtonStyle}"
-                            Command="{Binding ShowUserCommandsCommand}"
-                            AutomationProperties.Name="{res:Loc SidebarUserCommands}"
-                            ToolTip="{res:Loc SidebarUserCommands}">
-                        <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="ScriptTextOutline" Width="22" Height="22" />
-                            <TextBlock Text="{res:Loc SidebarUserCommands}" Style="{StaticResource SidebarLabelStyle}" />
-                        </StackPanel>
-                    </Button>
-
-                    <Button DockPanel.Dock="Bottom" Style="{StaticResource SidebarButtonStyle}"
-                            Margin="0,0,0,10"
-                            Command="{Binding ShowSettingsCommand}"
-                            AutomationProperties.Name="{res:Loc SidebarSettings}"
-                            ToolTip="{res:Loc SidebarSettings}">
-                        <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="Cog" Width="22" Height="22" />
-                            <TextBlock Text="{res:Loc SidebarSettings}" Style="{StaticResource SidebarLabelStyle}" />
-                        </StackPanel>
-                    </Button>
-
-                    <ListBox ItemsSource="{Binding Categories}" SelectedItem="{Binding SelectedCategory}"
-                             Background="Transparent" BorderThickness="0" Padding="4,4"
-                             HorizontalContentAlignment="Stretch"
-                             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                             ScrollViewer.VerticalScrollBarVisibility="Hidden">
-                        <ListBox.ItemContainerStyle>
-                            <Style TargetType="ListBoxItem" BasedOn="{StaticResource {x:Type ListBoxItem}}">
-                                <Setter Property="Padding" Value="12,8" />
-                                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                            </Style>
-                        </ListBox.ItemContainerStyle>
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto" />
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="Auto" />
-                                    </Grid.ColumnDefinitions>
-                                    <materialDesign:PackIcon Grid.Column="0"
-                                                             Kind="{Binding Icon, Converter={StaticResource IconConverter}}"
-                                                             Width="22" Height="22" VerticalAlignment="Center" />
-                                    <TextBlock Grid.Column="1" Text="{Binding Title}" TextTrimming="CharacterEllipsis"
-                                               Style="{StaticResource SidebarLabelStyle}" />
-                                    <TextBlock Grid.Column="2" Text="{Binding Count}" Opacity="0.6"
-                                               Style="{StaticResource SidebarLabelStyle}" />
-                                </Grid>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
-                </DockPanel>
-            </Border>
-
-            <!-- Content: swaps between Catalog and Settings (Home added in 5c) -->
-            <ContentControl Grid.Column="1" Content="{Binding}">
-                <ContentControl.Style>
-                    <Style TargetType="ContentControl">
-                        <Setter Property="ContentTemplate" Value="{StaticResource CatalogTemplate}" />
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding CurrentSection}" Value="Home">
-                                <Setter Property="ContentTemplate" Value="{StaticResource HomeTemplate}" />
-                            </DataTrigger>
-                            <DataTrigger Binding="{Binding CurrentSection}" Value="History">
-                                <Setter Property="ContentTemplate" Value="{StaticResource HistoryTemplate}" />
-                            </DataTrigger>
-                            <DataTrigger Binding="{Binding CurrentSection}" Value="Recipes">
-                                <Setter Property="ContentTemplate" Value="{StaticResource RecipesTemplate}" />
-                            </DataTrigger>
-                            <DataTrigger Binding="{Binding CurrentSection}" Value="UserCommands">
-                                <Setter Property="ContentTemplate" Value="{StaticResource UserCommandsTemplate}" />
-                            </DataTrigger>
-                            <DataTrigger Binding="{Binding CurrentSection}" Value="Settings">
-                                <Setter Property="ContentTemplate" Value="{StaticResource SettingsTemplate}" />
-                            </DataTrigger>
-                            <DataTrigger Binding="{Binding CurrentSection}" Value="LogViewer">
-                                <Setter Property="ContentTemplate" Value="{StaticResource LogViewerTemplate}" />
-                            </DataTrigger>
-                            <DataTrigger Binding="{Binding CurrentSection}" Value="Debug">
-                                <Setter Property="ContentTemplate" Value="{StaticResource DebugTemplate}" />
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </ContentControl.Style>
-            </ContentControl>
-        </Grid>
-    </DockPanel>
-</Window>
+        <!-- In-window dialogs cover the whole window, title bar included. -->
+        <ui:ContentDialogHost x:Name="RootDialogHost" Grid.Row="0" Grid.RowSpan="2" />
+    </Grid>
+</ui:FluentWindow>

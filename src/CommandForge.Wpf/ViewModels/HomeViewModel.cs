@@ -2,11 +2,11 @@ using System.Collections.ObjectModel;
 using System.Globalization;
 using CommandForge.Application.Ports;
 using CommandForge.Application.SystemInfo;
-using CommandForge.Wpf.Resources;
+using CommandForge.Desktop.Resources;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
-namespace CommandForge.Wpf.ViewModels;
+namespace CommandForge.Desktop.ViewModels;
 
 /// <summary>
 /// Home dashboard: recently-run commands, pinned favorites, and a read-only system-status widget.

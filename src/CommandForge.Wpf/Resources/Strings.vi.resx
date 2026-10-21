@@ -91,26 +91,11 @@
   <data name="TabPrivacy" xml:space="preserve">
     <value>Quyền riêng tư</value>
   </data>
-  <data name="MenuFile" xml:space="preserve">
-    <value>Tệp</value>
-  </data>
-  <data name="MenuView" xml:space="preserve">
-    <value>Xem</value>
-  </data>
-  <data name="MenuTools" xml:space="preserve">
-    <value>Công cụ</value>
-  </data>
-  <data name="MenuAbout" xml:space="preserve">
-    <value>Giới thiệu</value>
-  </data>
-  <data name="MenuHelp" xml:space="preserve">
-    <value>Trợ giúp</value>
-  </data>
   <data name="MenuExit" xml:space="preserve">
     <value>Thoát</value>
   </data>
   <data name="MenuToggleSidebar" xml:space="preserve">
-    <value>Thu gọn thanh bên</value>
+    <value>Ẩn/hiện ngăn điều hướng</value>
   </data>
   <data name="SidebarHome" xml:space="preserve">
     <value>Trang chủ</value>
@@ -132,12 +117,6 @@
   </data>
   <data name="Sidebar_AllCommands" xml:space="preserve">
     <value>Tất cả lệnh</value>
-  </data>
-  <data name="PaneCommands" xml:space="preserve">
-    <value>Danh sách lệnh</value>
-  </data>
-  <data name="PaneDetails" xml:space="preserve">
-    <value>Chi tiết</value>
   </data>
   <data name="PaneConsole" xml:space="preserve">
     <value>Bảng điều khiển</value>
@@ -166,17 +145,8 @@
   <data name="Restart_ConfirmMessage" xml:space="preserve">
     <value>Một số thay đổi cần khởi động lại để hoàn tất. Khởi động lại ngay?</value>
   </data>
-  <data name="ComingSoon" xml:space="preserve">
-    <value>Sắp có</value>
-  </data>
-  <data name="NoCommandsInCategory" xml:space="preserve">
-    <value>Nhóm này chưa có lệnh nào.</value>
-  </data>
   <data name="NoSearchResults" xml:space="preserve">
     <value>Không có lệnh nào khớp tìm kiếm.</value>
-  </data>
-  <data name="Detail_RunDisabledHint" xml:space="preserve">
-    <value>Chạy lệnh sẽ có ở phase tiếp theo.</value>
   </data>
   <data name="Detail_SelectPrompt" xml:space="preserve">
     <value>Chọn một lệnh để xem chi tiết.</value>
@@ -224,7 +194,7 @@
     <value>Có thể cần khởi động lại</value>
   </data>
   <data name="Search_Placeholder" xml:space="preserve">
-    <value>Tìm lệnh… (Ctrl+K)</value>
+    <value>Tìm lệnh… (Ctrl+F)</value>
   </data>
   <data name="Search_Suggestion" xml:space="preserve">
     <value>Gợi ý:</value>
@@ -1283,14 +1253,8 @@ Tiếp tục?</value>
   <data name="Menu_OpenLogFolder" xml:space="preserve">
     <value>Mở thư mục nhật ký</value>
   </data>
-  <data name="Menu_FullScreen" xml:space="preserve">
-    <value>Toàn màn hình</value>
-  </data>
   <data name="Menu_About" xml:space="preserve">
     <value>Giới thiệu CommandForge</value>
-  </data>
-  <data name="Menu_Wiki" xml:space="preserve">
-    <value>Hướng dẫn / Wiki</value>
   </data>
   <data name="Legal_EulaSummary" xml:space="preserve">
     <value>Khi dùng CommandForge, bạn chấp nhận ứng dụng chạy các lệnh cấp hệ thống với rủi ro của riêng bạn và không kèm bảo hành. Giấy phép GNU GPL v3 điều chỉnh quyền của bạn; tài liệu này chỉ bổ sung xác nhận rủi ro và miễn trừ bảo hành.</value>
@@ -2485,5 +2449,128 @@ Chi tiết đã được ghi vào thư mục log:
   </data>
   <data name="Cmd_power.battery.status_Desc" xml:space="preserve">
     <value>Hiển thị mức pin hiện tại, trạng thái và thời gian sử dụng ước tính.</value>
+  </data>
+  <data name="Admin_SessionActive" xml:space="preserve">
+    <value>Đang mở phiên quản trị</value>
+  </data>
+  <data name="Admin_SessionTooltip" xml:space="preserve">
+    <value>Lệnh quản trị chạy trong một tiến trình phụ có quyền cao, được giữ mở để không phải hỏi lại mỗi lần. Hãy kết thúc phiên khi đã xong.</value>
+  </data>
+  <data name="Admin_EndSession" xml:space="preserve">
+    <value>Kết thúc phiên quản trị</value>
+  </data>
+  <data name="Admin_SessionEnded" xml:space="preserve">
+    <value>Đã kết thúc phiên quản trị. Lệnh quản trị tiếp theo sẽ hỏi quyền lại.</value>
+  </data>
+  <data name="Console_CopyAll" xml:space="preserve">
+    <value>Sao chép toàn bộ kết quả</value>
+  </data>
+  <data name="Console_Save" xml:space="preserve">
+    <value>Lưu kết quả ra tệp</value>
+  </data>
+  <data name="Console_Saved" xml:space="preserve">
+    <value>Đã lưu kết quả vào {0}</value>
+  </data>
+  <data name="Console_DroppedLines" xml:space="preserve">
+    <value>{0:N0} dòng trước đó không được hiển thị.</value>
+  </data>
+  <data name="Console_Running" xml:space="preserve">
+    <value>Đang chạy…</value>
+  </data>
+  <data name="Console_WaitingForAdmin" xml:space="preserve">
+    <value>Đang chờ cấp quyền quản trị viên…</value>
+  </data>
+  <data name="Detail_Duration" xml:space="preserve">
+    <value>Thời gian ước tính</value>
+  </data>
+  <data name="Estimate_Short" xml:space="preserve">
+    <value>vài giây</value>
+  </data>
+  <data name="Estimate_Medium" xml:space="preserve">
+    <value>tối đa vài phút</value>
+  </data>
+  <data name="Estimate_Long" xml:space="preserve">
+    <value>vài phút trở lên</value>
+  </data>
+  <data name="Dialog_Yes" xml:space="preserve">
+    <value>Có</value>
+  </data>
+  <data name="Dialog_No" xml:space="preserve">
+    <value>Không</value>
+  </data>
+  <data name="Dialog_OK" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="FileFilter_Text" xml:space="preserve">
+    <value>Tệp văn bản (*.txt)|*.txt</value>
+  </data>
+  <data name="Filter_AdminOnly" xml:space="preserve">
+    <value>Chỉ lệnh quản trị</value>
+  </data>
+  <data name="Filter_Clear" xml:space="preserve">
+    <value>Xóa bộ lọc</value>
+  </data>
+  <data name="Menu_More" xml:space="preserve">
+    <value>Thêm</value>
+  </data>
+  <data name="Menu_UserGuide" xml:space="preserve">
+    <value>Hướng dẫn sử dụng</value>
+  </data>
+  <data name="Nav_Catalog" xml:space="preserve">
+    <value>Danh mục lệnh</value>
+  </data>
+  <data name="Restart_Failed" xml:space="preserve">
+    <value>Không thể khởi động lại Windows. Hãy lưu công việc và khởi động lại từ menu Start.</value>
+  </data>
+  <data name="Run_Finished" xml:space="preserve">
+    <value>{0} đã chạy xong</value>
+  </data>
+  <data name="Run_FinishedFailed" xml:space="preserve">
+    <value>{0} thất bại</value>
+  </data>
+  <data name="Settings_ThemeDesc" xml:space="preserve">
+    <value>Sáng, tối hoặc theo Windows.</value>
+  </data>
+  <data name="Settings_LanguageDesc" xml:space="preserve">
+    <value>Ứng dụng đổi ngôn ngữ ngay lập tức.</value>
+  </data>
+  <data name="Settings_FontSizeDesc" xml:space="preserve">
+    <value>Cỡ chữ trong toàn ứng dụng.</value>
+  </data>
+  <data name="Settings_CollapseSidebarDesc" xml:space="preserve">
+    <value>Khởi động với ngăn điều hướng được thu gọn.</value>
+  </data>
+  <data name="Settings_ShowBadgesDesc" xml:space="preserve">
+    <value>Hiện biểu tượng quản trị và khởi động lại trong danh sách lệnh.</value>
+  </data>
+  <data name="Settings_ConfirmCautionDesc" xml:space="preserve">
+    <value>Hỏi trước khi chạy lệnh được đánh dấu Thận trọng.</value>
+  </data>
+  <data name="Settings_AutoRestorePointDesc" xml:space="preserve">
+    <value>Mặc định chọn “tạo điểm khôi phục” trước các lệnh quản trị có rủi ro.</value>
+  </data>
+  <data name="Settings_AutoScrollDesc" xml:space="preserve">
+    <value>Giữ console cuộn tới kết quả mới nhất.</value>
+  </data>
+  <data name="Settings_WarnOnCancelDesc" xml:space="preserve">
+    <value>Hỏi trước khi đóng ứng dụng khi một lệnh đang chạy.</value>
+  </data>
+  <data name="Settings_AutoCheckUpdatesDesc" xml:space="preserve">
+    <value>Kiểm tra phiên bản mới trên GitHub khi mở ứng dụng. Không gửi gì khác.</value>
+  </data>
+  <data name="Settings_LogLevelDesc" xml:space="preserve">
+    <value>Mức chi tiết ghi vào tệp nhật ký trên máy này.</value>
+  </data>
+  <data name="Shortcuts_Search" xml:space="preserve">
+    <value>Tìm trong danh sách hiện tại</value>
+  </data>
+  <data name="Snack_Copied" xml:space="preserve">
+    <value>Đã sao chép vào bộ nhớ tạm</value>
+  </data>
+  <data name="Snack_CopyFailed" xml:space="preserve">
+    <value>Không sao chép được: ứng dụng khác đang dùng bộ nhớ tạm. Hãy thử lại.</value>
+  </data>
+  <data name="TitleBar_Search" xml:space="preserve">
+    <value>Tìm mọi lệnh (Ctrl+K)</value>
   </data>
 </root>

@@ -1,9 +1,9 @@
 using System.Globalization;
 using System.Windows.Data;
+using CommandForge.Desktop.Resources;
 using CommandForge.Domain;
-using CommandForge.Wpf.Resources;
 
-namespace CommandForge.Wpf.Converters;
+namespace CommandForge.Desktop.Converters;
 
 /// <summary>Maps a <see cref="DangerLevel"/> to its localized label (Danger_Safe / _Caution / _Dangerous).</summary>
 public sealed class DangerLevelToTextConverter : IValueConverter

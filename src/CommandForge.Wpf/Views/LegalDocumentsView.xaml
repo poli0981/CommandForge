@@ -1,51 +1,45 @@
-<UserControl x:Class="CommandForge.Wpf.Views.LegalDocumentsView"
+<UserControl x:Class="CommandForge.Desktop.Views.LegalDocumentsView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:res="clr-namespace:CommandForge.Wpf.Resources">
+             xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+             xmlns:res="clr-namespace:CommandForge.Desktop.Resources">
+    <!-- Each document: a short summary and a link to the full text on GitHub (Tag = URL). -->
     <TabControl>
         <TabItem Header="{res:Loc TabEula}">
-            <StackPanel Margin="16">
-                <TextBlock Text="{res:Loc Legal_EulaSummary}" TextWrapping="Wrap" />
-                <TextBlock Margin="0,12,0,0">
-                    <Hyperlink NavigateUri="https://github.com/poli0981/CommandForge/blob/main/EULA.md"
-                               RequestNavigate="OnRequestNavigate">
-                        <Run Text="{res:Loc LegalGateReadOnGitHub}" />
-                    </Hyperlink>
-                </TextBlock>
-            </StackPanel>
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <StackPanel Margin="4,16,4,4">
+                    <TextBlock Text="{res:Loc Legal_EulaSummary}" TextWrapping="Wrap" />
+                    <ui:HyperlinkButton Content="{res:Loc LegalGateReadOnGitHub}" Margin="-8,12,0,0" Click="OnLinkClick"
+                                        Tag="https://github.com/poli0981/CommandForge/blob/main/EULA.md" />
+                </StackPanel>
+            </ScrollViewer>
         </TabItem>
         <TabItem Header="{res:Loc TabGpl}">
-            <StackPanel Margin="16">
-                <TextBlock Text="{res:Loc Legal_GplSummary}" TextWrapping="Wrap" />
-                <TextBlock Margin="0,12,0,0">
-                    <Hyperlink NavigateUri="https://github.com/poli0981/CommandForge/blob/main/LICENSE"
-                               RequestNavigate="OnRequestNavigate">
-                        <Run Text="{res:Loc LegalGateReadOnGitHub}" />
-                    </Hyperlink>
-                </TextBlock>
-            </StackPanel>
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <StackPanel Margin="4,16,4,4">
+                    <TextBlock Text="{res:Loc Legal_GplSummary}" TextWrapping="Wrap" />
+                    <ui:HyperlinkButton Content="{res:Loc LegalGateReadOnGitHub}" Margin="-8,12,0,0" Click="OnLinkClick"
+                                        Tag="https://github.com/poli0981/CommandForge/blob/main/LICENSE" />
+                </StackPanel>
+            </ScrollViewer>
         </TabItem>
         <TabItem Header="{res:Loc TabDisclaimer}">
-            <StackPanel Margin="16">
-                <TextBlock Text="{res:Loc Legal_DisclaimerSummary}" TextWrapping="Wrap" />
-                <TextBlock Margin="0,12,0,0">
-                    <Hyperlink NavigateUri="https://github.com/poli0981/CommandForge/blob/main/DISCLAIMER.md"
-                               RequestNavigate="OnRequestNavigate">
-                        <Run Text="{res:Loc LegalGateReadOnGitHub}" />
-                    </Hyperlink>
-                </TextBlock>
-            </StackPanel>
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <StackPanel Margin="4,16,4,4">
+                    <TextBlock Text="{res:Loc Legal_DisclaimerSummary}" TextWrapping="Wrap" />
+                    <ui:HyperlinkButton Content="{res:Loc LegalGateReadOnGitHub}" Margin="-8,12,0,0" Click="OnLinkClick"
+                                        Tag="https://github.com/poli0981/CommandForge/blob/main/DISCLAIMER.md" />
+                </StackPanel>
+            </ScrollViewer>
         </TabItem>
         <TabItem Header="{res:Loc TabPrivacy}">
-            <StackPanel Margin="16">
-                <TextBlock Text="{res:Loc Legal_PrivacySummary}" TextWrapping="Wrap" />
-                <TextBlock Margin="0,12,0,0">
-                    <Hyperlink NavigateUri="https://github.com/poli0981/CommandForge/blob/main/PRIVACY.md"
-                               RequestNavigate="OnRequestNavigate">
-                        <Run Text="{res:Loc LegalGateReadOnGitHub}" />
-                    </Hyperlink>
-                </TextBlock>
-            </StackPanel>
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <StackPanel Margin="4,16,4,4">
+                    <TextBlock Text="{res:Loc Legal_PrivacySummary}" TextWrapping="Wrap" />
+                    <ui:HyperlinkButton Content="{res:Loc LegalGateReadOnGitHub}" Margin="-8,12,0,0" Click="OnLinkClick"
+                                        Tag="https://github.com/poli0981/CommandForge/blob/main/PRIVACY.md" />
+                </StackPanel>
+            </ScrollViewer>
         </TabItem>
     </TabControl>
 </UserControl>

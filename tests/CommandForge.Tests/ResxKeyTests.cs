@@ -1,7 +1,8 @@
 using System.Globalization;
 using System.Resources;
+using System.Text.RegularExpressions;
+using CommandForge.Desktop.Resources;
 using CommandForge.Infrastructure.Catalog;
-using CommandForge.Wpf.Resources;
 
 namespace CommandForge.Tests;
 
@@ -10,7 +11,7 @@ namespace CommandForge.Tests;
 /// (EN) resources and in every satellite culture (no parent fallback), so a missing translation
 /// fails the build rather than silently falling back to English.
 /// </summary>
-public sealed class ResxKeyTests
+public sealed partial class ResxKeyTests
 {
     private static readonly CatalogLoadResult Catalog = CatalogLoader.LoadEmbedded();
 
@@ -20,7 +21,7 @@ public sealed class ResxKeyTests
     /// <summary>Asserts every key resolves in EN (neutral) and in every satellite culture without fallback.</summary>
     private static void AssertKeysExist(IEnumerable<string> keys)
     {
-        var manager = new ResourceManager("CommandForge.Wpf.Resources.Strings", typeof(Strings).Assembly);
+        var manager = new ResourceManager("CommandForge.Desktop.Resources.Strings", typeof(Strings).Assembly);
         var english = manager.GetResourceSet(CultureInfo.InvariantCulture, createIfNotExists: true, tryParents: true);
         Assert.NotNull(english);
 
@@ -131,17 +132,18 @@ public sealed class ResxKeyTests
     }
 
     [Fact]
-    public void MenuUiKeys_ExistInResx_AllCultures()
+    public void ShellUiKeys_ExistInResx_AllCultures()
     {
         string[] keys =
         [
-            "MenuFile", "MenuView", "MenuTools", "MenuAbout", "MenuHelp", "MenuExit", "MenuToggleSidebar",
-            "Menu_OpenConfigFolder", "Menu_OpenLogFolder", "Menu_FullScreen", "Menu_About", "Menu_Wiki",
+            "MenuExit", "MenuToggleSidebar", "Menu_More", "Menu_UserGuide", "Nav_Catalog", "TitleBar_Search",
+            "Menu_OpenConfigFolder", "Menu_OpenLogFolder", "Menu_About", "Menu_Terms",
             "Menu_OpenSettings", "Menu_LogViewer", "Menu_ExportLogs", "Menu_DebugPanel",
             "Menu_CheckForUpdates", "Menu_ReportBug", "Palette_Placeholder",
-            "Menu_Wiki", "Menu_About", "Menu_OpenConfigFolder", "Menu_OpenLogFolder",
-            "Menu_FullScreen", "Menu_Terms",
             "Menu_KeyboardShortcuts", "Menu_PortableInfo", "Menu_RestorePoint",
+            "Admin_SessionActive", "Admin_SessionTooltip", "Admin_EndSession", "Admin_SessionEnded",
+            "Run_Finished", "Run_FinishedFailed", "Snack_Copied", "Snack_CopyFailed",
+            "Dialog_Yes", "Dialog_No", "Dialog_OK",
         ];
 
         AssertKeysExist(keys);
@@ -210,4 +212,69 @@ public sealed class ResxKeyTests
 
         AssertKeysExist(keys);
     }
+
+    [Fact]
+    public void EveryKeyTheUiUses_ExistsInResx_AllCultures()
+    {
+        // Scans the presentation sources, so a new {res:Loc ...} or Strings.Get("...") can't ship
+        // without its translations.
+        var root = FindRepositoryRoot();
+        var keys = new SortedSet<string>(StringComparer.Ordinal);
+        foreach (var path in Directory.EnumerateFiles(Path.Combine(root, "src", "CommandForge.Wpf"), "*.*", SearchOption.AllDirectories))
+        {
+            if (!path.EndsWith(".xaml", StringComparison.OrdinalIgnoreCase) && !path.EndsWith(".cs", StringComparison.OrdinalIgnoreCase))
+            {
+                continue;
+            }
+
+            var separators = new[] { Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar };
+            if (path.Split(separators).Any(part => part is "bin" or "obj"))
+            {
+                continue;
+            }
+
+            foreach (var line in File.ReadLines(path))
+            {
+                if (line.TrimStart().StartsWith("//", StringComparison.Ordinal))
+                {
+                    continue; // documentation examples are not real keys
+                }
+
+                foreach (Match match in UiKeyPattern().Matches(line))
+                {
+                    keys.Add(match.Groups["key"].Value);
+                }
+            }
+        }
+
+        Assert.True(keys.Count > 100, $"Expected the scan to find the UI's keys, found {keys.Count}.");
+        AssertKeysExist(keys);
+    }
+
+    [Fact]
+    public void DynamicKeys_ExistInResx_AllCultures()
+    {
+        // Keys built at runtime from enum names: Danger_{level}, Estimate_{duration}.
+        var keys = Enum.GetNames<CommandForge.Domain.DangerLevel>().Select(level => "Danger_" + level)
+            .Concat(Enum.GetNames<CommandForge.Domain.EstimatedDuration>().Select(duration => "Estimate_" + duration));
+
+        AssertKeysExist(keys);
+    }
+
+    private static string FindRepositoryRoot()
+    {
+        for (var directory = new DirectoryInfo(AppContext.BaseDirectory); directory is not null; directory = directory.Parent)
+        {
+            if (File.Exists(Path.Combine(directory.FullName, "CommandForge.slnx")))
+            {
+                return directory.FullName;
+            }
+        }
+
+        throw new InvalidOperationException("Could not find the repository root (CommandForge.slnx) above " + AppContext.BaseDirectory);
+    }
+
+    // {res:Loc Key} in XAML, Strings.Get("Key") / Localized("Key") in code.
+    [GeneratedRegex(@"(?:res:Loc\s+|Strings\.Get\(""|Localized\("")(?<key>[A-Za-z][A-Za-z0-9_]*)(?:""|[\s}])", RegexOptions.CultureInvariant, matchTimeoutMilliseconds: 2000)]
+    private static partial Regex UiKeyPattern();
 }

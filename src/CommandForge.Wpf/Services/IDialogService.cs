@@ -1,4 +1,4 @@
-namespace CommandForge.Wpf.Services;
+namespace CommandForge.Desktop.Services;
 
 /// <summary>
 /// Modal prompts used by view-models. Behind an interface so view-models stay testable and the

@@ -1,44 +1,91 @@
-<UserControl x:Class="CommandForge.Wpf.Views.CatalogView"
+<UserControl x:Class="CommandForge.Desktop.Views.CatalogView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             xmlns:res="clr-namespace:CommandForge.Wpf.Resources"
-             xmlns:conv="clr-namespace:CommandForge.Wpf.Converters"
-             xmlns:beh="clr-namespace:CommandForge.Wpf.Behaviors">
+             xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+             xmlns:res="clr-namespace:CommandForge.Desktop.Resources"
+             xmlns:conv="clr-namespace:CommandForge.Desktop.Converters"
+             xmlns:beh="clr-namespace:CommandForge.Desktop.Behaviors"
+             xmlns:views="clr-namespace:CommandForge.Desktop.Views"
+             Foreground="{DynamicResource TextFillColorPrimaryBrush}">
     <UserControl.Resources>
-        <conv:DangerLevelToBrushConverter x:Key="DangerBrush" />
+        <conv:IconNameToSymbolConverter x:Key="IconConverter" />
         <conv:DangerLevelToTextConverter x:Key="DangerText" />
-        <conv:StringToPackIconKindConverter x:Key="IconConverter" />
         <conv:MultiBoolToVisibilityConverter x:Key="MultiBoolVis" />
         <BooleanToVisibilityConverter x:Key="BoolToVis" />
+
+        <!-- A risk-filter chip: a toggle with the level's dot and name. -->
+        <Style x:Key="FilterChipStyle" TargetType="ToggleButton" BasedOn="{StaticResource {x:Type ToggleButton}}">
+            <Setter Property="Margin" Value="0,0,6,0" />
+            <Setter Property="Padding" Value="10,4" />
+        </Style>
     </UserControl.Resources>
 
-    <Grid>
+    <Grid Margin="24,12,24,16">
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <!-- Search bar -->
-        <Grid Grid.Row="0" Margin="14,12">
+        <!-- Heading: what is being browsed -->
+        <TextBlock Grid.Row="0" Text="{Binding PageTitle}" Style="{StaticResource PageTitleTextStyle}" Margin="0,0,0,12" />
+
+        <!-- Search + risk filters -->
+        <Grid Grid.Row="1" Margin="0,0,0,8">
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" MinWidth="220" MaxWidth="560" />
                 <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <materialDesign:PackIcon Grid.Column="0" Kind="Magnify" Width="22" Height="22"
-                                     VerticalAlignment="Center" Opacity="0.7" Margin="0,0,8,0" />
-            <TextBox Grid.Column="1" VerticalAlignment="Center"
-                     AutomationProperties.Name="{res:Loc Search_Placeholder}"
-                     Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
-                     materialDesign:HintAssist.Hint="{res:Loc Search_Placeholder}" />
+            <ui:TextBox Grid.Column="0" x:Name="SearchBox"
+                        PlaceholderText="{res:Loc Search_Placeholder}"
+                        ClearButtonEnabled="True"
+                        AutomationProperties.Name="{res:Loc Search_Placeholder}"
+                        Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}">
+                <ui:TextBox.Icon>
+                    <ui:SymbolIcon Symbol="Search24" />
+                </ui:TextBox.Icon>
+            </ui:TextBox>
+
+            <WrapPanel Grid.Column="1" Margin="12,0,0,0" VerticalAlignment="Center">
+                <ToggleButton Style="{StaticResource FilterChipStyle}" IsChecked="{Binding ShowSafe}"
+                              AutomationProperties.Name="{res:Loc Danger_Safe}">
+                    <StackPanel Orientation="Horizontal">
+                        <Ellipse Width="8" Height="8" Margin="0,0,6,0" Fill="{DynamicResource SystemFillColorSuccessBrush}" />
+                        <TextBlock Text="{res:Loc Danger_Safe}" />
+                    </StackPanel>
+                </ToggleButton>
+                <ToggleButton Style="{StaticResource FilterChipStyle}" IsChecked="{Binding ShowCaution}"
+                              AutomationProperties.Name="{res:Loc Danger_Caution}">
+                    <StackPanel Orientation="Horizontal">
+                        <Ellipse Width="8" Height="8" Margin="0,0,6,0" Fill="{DynamicResource SystemFillColorCautionBrush}" />
+                        <TextBlock Text="{res:Loc Danger_Caution}" />
+                    </StackPanel>
+                </ToggleButton>
+                <ToggleButton Style="{StaticResource FilterChipStyle}" IsChecked="{Binding ShowDangerous}"
+                              AutomationProperties.Name="{res:Loc Danger_Dangerous}">
+                    <StackPanel Orientation="Horizontal">
+                        <Ellipse Width="8" Height="8" Margin="0,0,6,0" Fill="{DynamicResource SystemFillColorCriticalBrush}" />
+                        <TextBlock Text="{res:Loc Danger_Dangerous}" />
+                    </StackPanel>
+                </ToggleButton>
+                <ToggleButton Style="{StaticResource FilterChipStyle}" IsChecked="{Binding AdminOnly}"
+                              AutomationProperties.Name="{res:Loc Filter_AdminOnly}">
+                    <StackPanel Orientation="Horizontal">
+                        <ui:SymbolIcon Symbol="Shield24" FontSize="14" Margin="0,0,6,0" />
+                        <TextBlock Text="{res:Loc Filter_AdminOnly}" />
+                    </StackPanel>
+                </ToggleButton>
+                <ui:Button Appearance="Transparent" Content="{res:Loc Filter_Clear}" Command="{Binding ClearFiltersCommand}"
+                           Visibility="{Binding HasActiveFilters, Converter={StaticResource BoolToVis}}" />
+            </WrapPanel>
         </Grid>
 
-        <!-- Natural-language search suggestion (local; shown when a NL phrase maps to a keyword) -->
-        <Button Grid.Row="1" HorizontalAlignment="Left" Margin="44,0,14,8" Padding="8,2" Height="28" MinWidth="0"
-                Command="{Binding ApplySuggestionCommand}">
-            <Button.Style>
-                <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignFlatButton}">
+        <!-- Natural-language suggestion (local; shown when a phrase maps to a keyword) -->
+        <ui:Button Grid.Row="2" HorizontalAlignment="Left" Appearance="Transparent" Margin="0,0,0,8" Padding="8,4"
+                   Command="{Binding ApplySuggestionCommand}">
+            <ui:Button.Style>
+                <Style TargetType="ui:Button" BasedOn="{StaticResource {x:Type ui:Button}}">
                     <Setter Property="Visibility" Value="Visible" />
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding SearchSuggestion}" Value="{x:Null}">
@@ -46,286 +93,216 @@
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>
-            </Button.Style>
+            </ui:Button.Style>
             <StackPanel Orientation="Horizontal">
-                <materialDesign:PackIcon Kind="LightbulbOnOutline" Width="16" Height="16" VerticalAlignment="Center" Margin="0,0,6,0" />
+                <ui:SymbolIcon Symbol="Lightbulb24" Margin="0,0,6,0" />
                 <TextBlock Text="{res:Loc Search_Suggestion}" VerticalAlignment="Center" />
-                <TextBlock Text="{Binding SearchSuggestion}" FontWeight="Medium" Margin="4,0,0,0" VerticalAlignment="Center" />
+                <TextBlock Text="{Binding SearchSuggestion}" FontWeight="SemiBold" Margin="4,0,0,0" VerticalAlignment="Center" />
             </StackPanel>
-        </Button>
+        </ui:Button>
 
-        <!-- Body: command list + detail/console -->
-        <Grid Grid.Row="2" Margin="8,0,8,8">
+        <!-- Body: command list | detail + console -->
+        <Grid Grid.Row="3">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" MinWidth="220" />
+                <ColumnDefinition Width="*" MinWidth="280" />
                 <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="1.6*" MinWidth="300" />
+                <ColumnDefinition Width="1.4*" MinWidth="380" />
             </Grid.ColumnDefinitions>
 
             <!-- Command list -->
             <Grid Grid.Column="0">
-                <ListBox ItemsSource="{Binding FilteredCommands}" SelectedItem="{Binding SelectedCommand}"
+                <ListBox x:Name="CommandList" ItemsSource="{Binding FilteredCommands}" SelectedItem="{Binding SelectedCommand}"
                          Background="Transparent" BorderThickness="0"
                          HorizontalContentAlignment="Stretch"
                          VirtualizingPanel.IsVirtualizing="True"
-                         ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                         VirtualizingPanel.VirtualizationMode="Recycling"
+                         ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                         AutomationProperties.Name="{Binding PageTitle}">
                     <ListBox.ItemContainerStyle>
                         <Style TargetType="ListBoxItem" BasedOn="{StaticResource {x:Type ListBoxItem}}">
                             <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                            <Setter Property="AutomationProperties.Name" Value="{Binding Title}" />
+                            <Setter Property="AutomationProperties.HelpText" Value="{Binding Description}" />
                         </Style>
                     </ListBox.ItemContainerStyle>
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <Grid Margin="2,4">
+                            <Grid Margin="0,4">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
-                                <materialDesign:PackIcon Grid.Column="0"
-                                                         Kind="{Binding Icon, Converter={StaticResource IconConverter}}"
-                                                         Width="22" Height="22" VerticalAlignment="Center" Margin="2,0,10,0" />
+                                <ui:SymbolIcon Grid.Column="0" Symbol="{Binding Icon, Converter={StaticResource IconConverter}}"
+                                               FontSize="20" VerticalAlignment="Center" Margin="2,0,12,0" />
                                 <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                                    <TextBlock FontWeight="Medium" TextTrimming="CharacterEllipsis"
+                                    <TextBlock Style="{StaticResource ListTitleTextStyle}"
                                                beh:TextHighlight.Text="{Binding Title}"
                                                beh:TextHighlight.Matches="{Binding TitleMatches}" />
-                                    <TextBlock Text="{Binding Description}" Opacity="0.6" FontSize="12"
-                                               TextTrimming="CharacterEllipsis" />
+                                    <TextBlock Text="{Binding Description}" Style="{StaticResource ListDescriptionTextStyle}" />
                                 </StackPanel>
-                                <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
-                                    <Button Command="{Binding DataContext.ToggleFavoriteCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                            CommandParameter="{Binding}"
-                                            Style="{StaticResource MaterialDesignFlatButton}"
-                                            Padding="0" MinWidth="0" Width="28" Height="28" Margin="0,0,2,0"
-                                            AutomationProperties.Name="{res:Loc Favorite_Toggle}"
-                                            ToolTip="{res:Loc Favorite_Toggle}">
-                                        <materialDesign:PackIcon Width="16" Height="16">
-                                            <materialDesign:PackIcon.Style>
-                                                <Style TargetType="materialDesign:PackIcon">
-                                                    <Setter Property="Kind" Value="StarOutline" />
-                                                    <Setter Property="Opacity" Value="0.55" />
-                                                    <Style.Triggers>
-                                                        <DataTrigger Binding="{Binding IsFavorite}" Value="True">
-                                                            <Setter Property="Kind" Value="Star" />
-                                                            <Setter Property="Opacity" Value="1" />
-                                                            <Setter Property="Foreground" Value="{DynamicResource PrimaryHueMidBrush}" />
-                                                        </DataTrigger>
-                                                    </Style.Triggers>
-                                                </Style>
-                                            </materialDesign:PackIcon.Style>
-                                        </materialDesign:PackIcon>
-                                    </Button>
-                                    <materialDesign:PackIcon Kind="ShieldAccount" Width="16" Height="16" Margin="3,0" Opacity="0.7"
-                                                             ToolTip="{res:Loc Detail_RequiresAdmin}">
-                                        <materialDesign:PackIcon.Visibility>
+                                <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center" Margin="8,0,0,0">
+                                    <ui:Button Style="{StaticResource IconButtonStyle}" Margin="0,0,2,0"
+                                               Command="{Binding DataContext.ToggleFavoriteCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                               CommandParameter="{Binding}"
+                                               ToolTip="{res:Loc Favorite_Toggle}" AutomationProperties.Name="{res:Loc Favorite_Toggle}">
+                                        <!-- Filled = pinned; the row's own color keeps it visible on a selected row. -->
+                                        <ui:SymbolIcon Symbol="Star24" FontSize="16" Filled="{Binding IsFavorite}" />
+                                    </ui:Button>
+                                    <ui:SymbolIcon Symbol="Shield24" FontSize="15" Margin="3,0"
+                                                   Opacity="0.75"
+                                                   ToolTip="{res:Loc Detail_RequiresAdmin}">
+                                        <ui:SymbolIcon.Visibility>
                                             <MultiBinding Converter="{StaticResource MultiBoolVis}">
                                                 <Binding Path="RequiresAdmin" />
                                                 <Binding Path="DataContext.Settings.ShowAdminRestartBadges"
                                                          RelativeSource="{RelativeSource AncestorType=UserControl}" />
                                             </MultiBinding>
-                                        </materialDesign:PackIcon.Visibility>
-                                    </materialDesign:PackIcon>
-                                    <materialDesign:PackIcon Kind="Restart" Width="16" Height="16" Margin="3,0" Opacity="0.7"
-                                                             ToolTip="{res:Loc Detail_MayRestart}">
-                                        <materialDesign:PackIcon.Visibility>
+                                        </ui:SymbolIcon.Visibility>
+                                    </ui:SymbolIcon>
+                                    <ui:SymbolIcon Symbol="ArrowClockwise24" FontSize="15" Margin="3,0"
+                                                   Opacity="0.75"
+                                                   ToolTip="{res:Loc Detail_MayRestart}">
+                                        <ui:SymbolIcon.Visibility>
                                             <MultiBinding Converter="{StaticResource MultiBoolVis}">
                                                 <Binding Path="RequiresRestart" />
                                                 <Binding Path="DataContext.Settings.ShowAdminRestartBadges"
                                                          RelativeSource="{RelativeSource AncestorType=UserControl}" />
                                             </MultiBinding>
-                                        </materialDesign:PackIcon.Visibility>
-                                    </materialDesign:PackIcon>
-                                    <materialDesign:PackIcon Kind="UndoVariant" Width="16" Height="16" Margin="3,0" Opacity="0.7"
-                                                             Visibility="{Binding IsRevertable, Converter={StaticResource BoolToVis}}" />
-                                    <Ellipse Width="9" Height="9" Margin="6,0,2,0"
-                                             Fill="{Binding DangerLevel, Converter={StaticResource DangerBrush}}" />
+                                        </ui:SymbolIcon.Visibility>
+                                    </ui:SymbolIcon>
+                                    <ui:SymbolIcon Symbol="ArrowUndo24" FontSize="15" Margin="3,0"
+                                                   Opacity="0.75"
+                                                   ToolTip="{res:Loc Detail_Revert}"
+                                                   Visibility="{Binding IsRevertable, Converter={StaticResource BoolToVis}}" />
+                                    <Ellipse Style="{StaticResource DangerDotStyle}" Margin="6,0,2,0"
+                                             ToolTip="{Binding DangerLevel, Converter={StaticResource DangerText}}" />
                                 </StackPanel>
                             </Grid>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
 
-                <TextBlock Text="{res:Loc NoSearchResults}" Opacity="0.6"
-                           HorizontalAlignment="Center" VerticalAlignment="Center"
-                           TextWrapping="Wrap" TextAlignment="Center" Margin="16">
-                    <TextBlock.Style>
-                        <Style TargetType="TextBlock">
-                            <Setter Property="Visibility" Value="Collapsed" />
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding HasResults}" Value="False">
-                                    <Setter Property="Visibility" Value="Visible" />
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </TextBlock.Style>
+                <TextBlock Text="{res:Loc NoSearchResults}" Style="{StaticResource EmptyStateTextStyle}">
+                    <TextBlock.Visibility>
+                        <Binding Path="HasResults">
+                            <Binding.Converter>
+                                <conv:InverseBooleanToVisibilityConverter />
+                            </Binding.Converter>
+                        </Binding>
+                    </TextBlock.Visibility>
                 </TextBlock>
             </Grid>
 
-            <GridSplitter Grid.Column="1" Width="4" HorizontalAlignment="Center" VerticalAlignment="Stretch"
-                          Background="Transparent" />
+            <GridSplitter Grid.Column="1" Width="6" Margin="6,0" HorizontalAlignment="Center" VerticalAlignment="Stretch"
+                          Background="Transparent" Focusable="False" />
 
-            <!-- Right column: detail (top) + console/result (bottom) -->
+            <!-- Detail (top) + console (bottom), split evenly once something ran; the splitter resizes them. -->
             <Grid Grid.Column="2">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" MinHeight="200" />
                     <RowDefinition Height="Auto" />
+                    <RowDefinition Height="{Binding Execution.ShowConsole, Converter={conv:BoolToStarConverter}}" />
                 </Grid.RowDefinitions>
 
-                <materialDesign:Card Grid.Row="0" Margin="4" Padding="16">
+                <ui:Card Grid.Row="0" VerticalAlignment="Stretch" VerticalContentAlignment="Stretch" Padding="20,16">
                     <Grid>
-                        <ScrollViewer DataContext="{Binding Detail}" VerticalScrollBarVisibility="Auto">
-                            <ScrollViewer.Style>
-                                <Style TargetType="ScrollViewer">
-                                    <Setter Property="Visibility" Value="Visible" />
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding}" Value="{x:Null}">
-                                            <Setter Property="Visibility" Value="Collapsed" />
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </ScrollViewer.Style>
+                        <ScrollViewer DataContext="{Binding Detail}" VerticalScrollBarVisibility="Auto"
+                                      Visibility="{Binding DataContext.Detail, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={conv:NullToVisibilityConverter}}">
                             <StackPanel>
                                 <DockPanel>
-                                    <Border DockPanel.Dock="Right" CornerRadius="4" Padding="8,2" VerticalAlignment="Top"
-                                            Background="{Binding DangerLevel, Converter={StaticResource DangerBrush}}">
-                                        <TextBlock Text="{Binding DangerLevel, Converter={StaticResource DangerText}}"
-                                                   Foreground="#FF1B1B1B" FontSize="11" FontWeight="Medium" />
-                                    </Border>
-                                    <Button DockPanel.Dock="Right" VerticalAlignment="Top" Margin="0,0,8,0"
-                                            Command="{Binding DataContext.ToggleFavoriteCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                            CommandParameter="{Binding DataContext.SelectedCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                            Style="{StaticResource MaterialDesignFlatButton}"
-                                            Padding="0" MinWidth="0" Width="32" Height="32"
-                                            AutomationProperties.Name="{res:Loc Favorite_Toggle}"
-                                            ToolTip="{res:Loc Favorite_Toggle}">
-                                        <materialDesign:PackIcon Width="20" Height="20">
-                                            <materialDesign:PackIcon.Style>
-                                                <Style TargetType="materialDesign:PackIcon">
-                                                    <Setter Property="Kind" Value="StarOutline" />
-                                                    <Setter Property="Opacity" Value="0.6" />
-                                                    <Style.Triggers>
-                                                        <DataTrigger Binding="{Binding DataContext.SelectedCommand.IsFavorite, RelativeSource={RelativeSource AncestorType=UserControl}}" Value="True">
-                                                            <Setter Property="Kind" Value="Star" />
-                                                            <Setter Property="Opacity" Value="1" />
-                                                            <Setter Property="Foreground" Value="{DynamicResource PrimaryHueMidBrush}" />
-                                                        </DataTrigger>
-                                                    </Style.Triggers>
-                                                </Style>
-                                            </materialDesign:PackIcon.Style>
-                                        </materialDesign:PackIcon>
-                                    </Button>
-                                    <TextBlock Text="{Binding Title}" FontSize="20" FontWeight="Bold" TextWrapping="Wrap" />
+                                    <ui:Button DockPanel.Dock="Right" Style="{StaticResource IconButtonStyle}" VerticalAlignment="Top"
+                                               Command="{Binding DataContext.ToggleFavoriteCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                               CommandParameter="{Binding DataContext.SelectedCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                               ToolTip="{res:Loc Favorite_Toggle}" AutomationProperties.Name="{res:Loc Favorite_Toggle}">
+                                        <ui:SymbolIcon Symbol="Star24" FontSize="20"
+                                                       Filled="{Binding DataContext.SelectedCommand.IsFavorite, RelativeSource={RelativeSource AncestorType=UserControl}}" />
+                                    </ui:Button>
+                                    <TextBlock Text="{Binding Title}" Style="{StaticResource SubtitleTextStyle}" Margin="0,0,8,0" />
                                 </DockPanel>
 
-                                <StackPanel Orientation="Horizontal" Margin="0,6,0,0">
-                                    <TextBlock Text="{Binding CategoryTitle}" Opacity="0.7" />
-                                    <TextBlock Text="·" Margin="8,0" Opacity="0.5"
-                                               Visibility="{Binding RequiresAdmin, Converter={StaticResource BoolToVis}}" />
-                                    <TextBlock Text="{res:Loc Detail_RequiresAdmin}" Opacity="0.7"
-                                               Visibility="{Binding RequiresAdmin, Converter={StaticResource BoolToVis}}" />
-                                    <TextBlock Text="·" Margin="8,0" Opacity="0.5"
-                                               Visibility="{Binding RequiresRestart, Converter={StaticResource BoolToVis}}" />
-                                    <TextBlock Text="{res:Loc Detail_MayRestart}" Opacity="0.7"
-                                               Visibility="{Binding RequiresRestart, Converter={StaticResource BoolToVis}}" />
-                                </StackPanel>
+                                <WrapPanel Margin="0,8,0,0">
+                                    <views:DangerBadge Level="{Binding DangerLevel}" Margin="0,0,8,4" />
+                                    <Border CornerRadius="4" Padding="8,3" Margin="0,0,8,4" BorderThickness="1"
+                                            BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}">
+                                        <TextBlock Text="{Binding CategoryTitle}" FontSize="{DynamicResource AppFontSizeCaption}" />
+                                    </Border>
+                                    <Border CornerRadius="4" Padding="8,3" Margin="0,0,8,4" BorderThickness="1"
+                                            BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+                                            Visibility="{Binding RequiresAdmin, Converter={StaticResource BoolToVis}}">
+                                        <StackPanel Orientation="Horizontal">
+                                            <ui:SymbolIcon Symbol="Shield24" FontSize="13" Margin="0,0,5,0" />
+                                            <TextBlock Text="{res:Loc Detail_RequiresAdmin}" FontSize="{DynamicResource AppFontSizeCaption}" />
+                                        </StackPanel>
+                                    </Border>
+                                    <Border CornerRadius="4" Padding="8,3" Margin="0,0,8,4" BorderThickness="1"
+                                            BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+                                            Visibility="{Binding RequiresRestart, Converter={StaticResource BoolToVis}}">
+                                        <StackPanel Orientation="Horizontal">
+                                            <ui:SymbolIcon Symbol="ArrowClockwise24" FontSize="13" Margin="0,0,5,0" />
+                                            <TextBlock Text="{res:Loc Detail_MayRestart}" FontSize="{DynamicResource AppFontSizeCaption}" />
+                                        </StackPanel>
+                                    </Border>
+                                    <Border CornerRadius="4" Padding="8,3" Margin="0,0,8,4" BorderThickness="1"
+                                            BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}">
+                                        <StackPanel Orientation="Horizontal">
+                                            <ui:SymbolIcon Symbol="Timer24" FontSize="13" Margin="0,0,5,0" />
+                                            <TextBlock FontSize="{DynamicResource AppFontSizeCaption}">
+                                                <Run Text="{res:Loc Detail_Duration}" /><Run Text=": " /><Run Text="{Binding EstimatedDurationText, Mode=OneWay}" />
+                                            </TextBlock>
+                                        </StackPanel>
+                                    </Border>
+                                </WrapPanel>
 
                                 <TextBlock Text="{Binding Description}" TextWrapping="Wrap" Margin="0,12,0,0" />
 
-                                <TextBlock Text="{res:Loc Detail_CommandLine}" FontWeight="Medium" Margin="0,16,0,4" />
-                                <Border Background="{DynamicResource MaterialDesignToolBarBackground}" CornerRadius="4" Padding="10">
-                                    <TextBox Text="{Binding PreviewCommandLine, Mode=OneWay}" IsReadOnly="True"
-                                             BorderThickness="0" Background="Transparent" TextWrapping="Wrap"
-                                             FontFamily="Cascadia Mono, Consolas, Courier New" />
+                                <TextBlock Text="{res:Loc Detail_CommandLine}" Style="{StaticResource BodyStrongTextStyle}" Margin="0,16,0,4" />
+                                <Border Style="{StaticResource CodeBlockBorderStyle}">
+                                    <TextBox Text="{Binding PreviewCommandLine, Mode=OneWay}" Style="{StaticResource ReadOnlyCodeTextBoxStyle}"
+                                             AutomationProperties.Name="{res:Loc Detail_CommandLine}" />
                                 </Border>
 
-                                <StackPanel Orientation="Horizontal" Margin="0,16,0,0">
-                                    <Button Content="{res:Loc Detail_Run}"
-                                            Command="{Binding DataContext.RunSelectedCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                            Style="{StaticResource MaterialDesignRaisedButton}" Margin="0,0,8,0" />
-                                    <Button Content="{res:Loc Detail_Revert}"
-                                            Command="{Binding DataContext.RevertSelectedCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                            Style="{StaticResource MaterialDesignOutlinedButton}" Margin="0,0,8,0"
-                                            Visibility="{Binding HasRevert, Converter={StaticResource BoolToVis}}" />
-                                    <Button Content="{res:Loc Detail_Copy}" Command="{Binding CopyCommand}"
-                                            Style="{StaticResource MaterialDesignOutlinedButton}" Margin="0,0,8,0" />
-                                    <Button Content="{res:Loc Detail_Doc}" Command="{Binding OpenDocCommand}"
-                                            Style="{StaticResource MaterialDesignOutlinedButton}"
-                                            Visibility="{Binding HasDoc, Converter={StaticResource BoolToVis}}" />
-                                </StackPanel>
+                                <WrapPanel Margin="0,16,0,0">
+                                    <ui:Button Appearance="Primary" Margin="0,0,8,8" Content="{res:Loc Detail_Run}"
+                                               Command="{Binding DataContext.RunSelectedCommand, RelativeSource={RelativeSource AncestorType=UserControl}}">
+                                        <ui:Button.Icon>
+                                            <ui:SymbolIcon Symbol="Play24" />
+                                        </ui:Button.Icon>
+                                    </ui:Button>
+                                    <ui:Button Margin="0,0,8,8" Content="{res:Loc Detail_Revert}"
+                                               Command="{Binding DataContext.RevertSelectedCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                               Visibility="{Binding HasRevert, Converter={StaticResource BoolToVis}}">
+                                        <ui:Button.Icon>
+                                            <ui:SymbolIcon Symbol="ArrowUndo24" />
+                                        </ui:Button.Icon>
+                                    </ui:Button>
+                                    <ui:Button Margin="0,0,8,8" Content="{res:Loc Detail_Copy}" Command="{Binding CopyCommand}">
+                                        <ui:Button.Icon>
+                                            <ui:SymbolIcon Symbol="Copy24" />
+                                        </ui:Button.Icon>
+                                    </ui:Button>
+                                    <ui:Button Margin="0,0,8,8" Content="{res:Loc Detail_Doc}" Command="{Binding OpenDocCommand}"
+                                               Visibility="{Binding HasDoc, Converter={StaticResource BoolToVis}}">
+                                        <ui:Button.Icon>
+                                            <ui:SymbolIcon Symbol="BookOpen24" />
+                                        </ui:Button.Icon>
+                                    </ui:Button>
+                                </WrapPanel>
                             </StackPanel>
                         </ScrollViewer>
 
-                        <TextBlock Text="{res:Loc Detail_SelectPrompt}" Opacity="0.5"
-                                   HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center">
-                            <TextBlock.Style>
-                                <Style TargetType="TextBlock">
-                                    <Setter Property="Visibility" Value="Collapsed" />
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding Detail}" Value="{x:Null}">
-                                            <Setter Property="Visibility" Value="Visible" />
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </TextBlock.Style>
-                        </TextBlock>
+                        <TextBlock Text="{res:Loc Detail_SelectPrompt}" Style="{StaticResource EmptyStateTextStyle}"
+                                   Visibility="{Binding Detail, Converter={conv:NullToVisibilityConverter Inverse=True}}" />
                     </Grid>
-                </materialDesign:Card>
+                </ui:Card>
 
-                <!-- Console + result -->
-                <materialDesign:Card Grid.Row="1" Margin="4" Padding="12" MaxHeight="360"
-                                     Visibility="{Binding Execution.ShowConsole, Converter={StaticResource BoolToVis}}">
-                    <DockPanel>
-                        <Grid DockPanel.Dock="Top">
-                            <TextBlock Text="{res:Loc PaneConsole}" FontWeight="Bold" VerticalAlignment="Center" />
-                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right"
-                                        Visibility="{Binding Execution.IsRunning, Converter={StaticResource BoolToVis}}">
-                                <ProgressBar IsIndeterminate="True" Width="90" Height="4" VerticalAlignment="Center" Margin="0,0,8,0" />
-                                <Button Content="{res:Loc Console_Cancel}" Command="{Binding Execution.CancelCommand}"
-                                        Style="{StaticResource MaterialDesignOutlinedButton}" Padding="8,2" Height="28" MinWidth="0" />
-                            </StackPanel>
-                        </Grid>
+                <GridSplitter Grid.Row="1" Height="12" HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                              ResizeDirection="Rows" ResizeBehavior="PreviousAndNext" Background="Transparent"
+                              Focusable="False"
+                              Visibility="{Binding Execution.ShowConsole, Converter={StaticResource BoolToVis}}" />
 
-                        <Grid DockPanel.Dock="Bottom" Margin="0,8,0,0"
-                              Visibility="{Binding Execution.HasResult, Converter={StaticResource BoolToVis}}">
-                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                <TextBlock Text="{Binding Execution.StatusText}" FontWeight="Medium" />
-                                <TextBlock Text="{res:Loc Result_ExitCode}" Opacity="0.7" Margin="14,0,4,0" />
-                                <TextBlock Text="{Binding Execution.ExitCode}" Opacity="0.7" />
-                                <TextBlock Text="{Binding Execution.DurationText}" Opacity="0.7" Margin="14,0,0,0" />
-                            </StackPanel>
-                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                                <Button Content="{res:Loc Detail_Copy}" Command="{Binding Execution.CopyOutputCommand}"
-                                        Style="{StaticResource MaterialDesignFlatButton}" Padding="8,2" Height="28" MinWidth="0" />
-                                <Button Content="{res:Loc Result_Restart}" Click="OnRestartClick" Margin="6,0,0,0"
-                                        Style="{StaticResource MaterialDesignRaisedButton}" Padding="8,2" Height="28" MinWidth="0"
-                                        Visibility="{Binding Execution.RequiresRestart, Converter={StaticResource BoolToVis}}" />
-                            </StackPanel>
-                        </Grid>
-
-                        <Border Background="{DynamicResource MaterialDesignToolBarBackground}" CornerRadius="4" Margin="0,8,0,0">
-                            <ScrollViewer beh:AutoScroll.Enabled="{Binding Settings.AutoScrollConsole}" VerticalScrollBarVisibility="Auto" MaxHeight="240" Padding="8">
-                                <ItemsControl ItemsSource="{Binding Execution.OutputLines}">
-                                    <ItemsControl.ItemTemplate>
-                                        <DataTemplate>
-                                            <TextBlock Text="{Binding Text}" TextWrapping="Wrap"
-                                                       FontFamily="Cascadia Mono, Consolas, Courier New" FontSize="12">
-                                                <TextBlock.Style>
-                                                    <Style TargetType="TextBlock">
-                                                        <Style.Triggers>
-                                                            <DataTrigger Binding="{Binding IsError}" Value="True">
-                                                                <Setter Property="Foreground" Value="#E0884D" />
-                                                            </DataTrigger>
-                                                        </Style.Triggers>
-                                                    </Style>
-                                                </TextBlock.Style>
-                                            </TextBlock>
-                                        </DataTemplate>
-                                    </ItemsControl.ItemTemplate>
-                                </ItemsControl>
-                            </ScrollViewer>
-                        </Border>
-                    </DockPanel>
-                </materialDesign:Card>
+                <views:ConsoleView Grid.Row="2" DataContext="{Binding Execution}" MinHeight="140"
+                                   Visibility="{Binding ShowConsole, Converter={StaticResource BoolToVis}}" />
             </Grid>
         </Grid>
     </Grid>

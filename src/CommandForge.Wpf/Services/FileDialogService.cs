@@ -1,6 +1,6 @@
 using Microsoft.Win32;
 
-namespace CommandForge.Wpf.Services;
+namespace CommandForge.Desktop.Services;
 
 /// <summary><see cref="IFileDialogService"/> backed by the common Windows file dialogs.</summary>
 public sealed class FileDialogService : IFileDialogService

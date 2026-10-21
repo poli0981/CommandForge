@@ -1,173 +1,128 @@
-<UserControl x:Class="CommandForge.Wpf.Views.HomeView"
+<UserControl x:Class="CommandForge.Desktop.Views.HomeView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             xmlns:res="clr-namespace:CommandForge.Wpf.Resources"
-             xmlns:conv="clr-namespace:CommandForge.Wpf.Converters">
+             xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+             xmlns:res="clr-namespace:CommandForge.Desktop.Resources"
+             xmlns:conv="clr-namespace:CommandForge.Desktop.Converters"
+             Foreground="{DynamicResource TextFillColorPrimaryBrush}">
     <UserControl.Resources>
-        <conv:StringToPackIconKindConverter x:Key="IconConverter" />
-        <conv:DangerLevelToBrushConverter x:Key="DangerBrush" />
+        <conv:IconNameToSymbolConverter x:Key="IconConverter" />
+        <conv:DangerLevelToTextConverter x:Key="DangerText" />
         <BooleanToVisibilityConverter x:Key="BoolToVis" />
 
-        <!-- A clickable command row shared by the Recent and Favorites lists. -->
+        <!-- A clickable command row shared by the Recent and Favorites lists. The button names itself
+             from its content (title + description), so screen readers get the same context. -->
         <DataTemplate x:Key="HomeCommandItem">
-            <!-- No explicit AutomationProperties.Name: the button auto-names from its content
-                 (title + description), giving screen-reader users the same context as sighted users. -->
-            <!-- Height=Auto/MinHeight: the Material flat-button style fixes a short height that would
-                 otherwise clip the two-line (title + description) content. -->
-            <Button Style="{StaticResource MaterialDesignFlatButton}" HorizontalContentAlignment="Stretch"
-                    Padding="10,8" Margin="0,1" Height="Auto" MinHeight="52" VerticalContentAlignment="Center"
-                    Command="{Binding DataContext.OpenCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                    CommandParameter="{Binding}">
+            <ui:CardAction Margin="0,0,0,4" Padding="14,10"
+                           Command="{Binding DataContext.OpenCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                           CommandParameter="{Binding}"
+                           AutomationProperties.Name="{Binding Title}"
+                           AutomationProperties.HelpText="{Binding Description}">
+                <ui:CardAction.Icon>
+                    <ui:SymbolIcon Symbol="{Binding Icon, Converter={StaticResource IconConverter}}" />
+                </ui:CardAction.Icon>
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
-                    <materialDesign:PackIcon Grid.Column="0"
-                                             Kind="{Binding Icon, Converter={StaticResource IconConverter}}"
-                                             Width="20" Height="20" VerticalAlignment="Center" Margin="0,0,10,0" />
-                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                        <TextBlock Text="{Binding Title}" FontWeight="Medium" TextTrimming="CharacterEllipsis" />
-                        <TextBlock Text="{Binding Description}" Opacity="0.6" FontSize="12"
-                                   TextTrimming="CharacterEllipsis" />
+                    <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                        <TextBlock Text="{Binding Title}" Style="{StaticResource ListTitleTextStyle}" />
+                        <TextBlock Text="{Binding Description}" Style="{StaticResource ListDescriptionTextStyle}" />
                     </StackPanel>
-                    <Ellipse Grid.Column="2" Width="9" Height="9" VerticalAlignment="Center"
-                             Fill="{Binding DangerLevel, Converter={StaticResource DangerBrush}}" />
+                    <Ellipse Grid.Column="1" Style="{StaticResource DangerDotStyle}" Margin="12,0,0,0"
+                             ToolTip="{Binding DangerLevel, Converter={StaticResource DangerText}}" />
                 </Grid>
-            </Button>
+            </ui:CardAction>
         </DataTemplate>
 
-        <Style x:Key="SectionHeaderStyle" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="16" />
-            <Setter Property="FontWeight" Value="Medium" />
-            <Setter Property="Margin" Value="0,16,0,8" />
-            <Setter Property="AutomationProperties.HeadingLevel" Value="Level2" />
-        </Style>
-
-        <Style x:Key="StatusCardStyle" TargetType="materialDesign:Card">
-            <Setter Property="Padding" Value="14,10" />
+        <!-- One read-only status tile. -->
+        <Style x:Key="StatusCardStyle" TargetType="ui:Card" BasedOn="{StaticResource {x:Type ui:Card}}">
             <Setter Property="Margin" Value="0,0,12,12" />
-            <Setter Property="Width" Value="220" />
+            <Setter Property="Width" Value="230" />
+            <Setter Property="Padding" Value="16,12" />
         </Style>
     </UserControl.Resources>
 
-    <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="28,20,28,24">
-        <StackPanel MaxWidth="1000" HorizontalAlignment="Left">
-            <TextBlock Text="{res:Loc SidebarHome}" FontSize="24" FontWeight="Bold"
-                       AutomationProperties.HeadingLevel="Level1" />
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="24,12,24,24" MaxWidth="1040" HorizontalAlignment="Left">
+            <TextBlock Text="{res:Loc SidebarHome}" Style="{StaticResource PageTitleTextStyle}" />
 
-            <!-- System status widget (read-only) -->
-            <TextBlock Text="{res:Loc Home_SystemStatus}" Style="{StaticResource SectionHeaderStyle}" />
+            <!-- System status (read-only) -->
+            <TextBlock Text="{res:Loc Home_SystemStatus}" Style="{StaticResource SectionHeaderTextStyle}" />
             <WrapPanel>
-                <materialDesign:Card Style="{StaticResource StatusCardStyle}">
+                <ui:Card Style="{StaticResource StatusCardStyle}">
                     <StackPanel>
                         <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="Microsoft" Width="18" Height="18" Opacity="0.7" VerticalAlignment="Center" />
-                            <TextBlock Text="{res:Loc Home_StatusOs}" Opacity="0.7" Margin="8,0,0,0" />
+                            <ui:SymbolIcon Symbol="WindowApps24" FontSize="18" Foreground="{DynamicResource AccentTextFillColorPrimaryBrush}" />
+                            <TextBlock Text="{res:Loc Home_StatusOs}" Style="{StaticResource SecondaryTextStyle}" Margin="8,0,0,0" VerticalAlignment="Center" />
                         </StackPanel>
-                        <TextBlock Text="{Binding OsValue}" FontWeight="Medium" Margin="0,4,0,0" TextWrapping="Wrap" />
+                        <TextBlock Text="{Binding OsValue}" Style="{StaticResource BodyStrongTextStyle}" Margin="0,6,0,0" TextWrapping="Wrap" />
                     </StackPanel>
-                </materialDesign:Card>
-                <materialDesign:Card Style="{StaticResource StatusCardStyle}">
+                </ui:Card>
+                <ui:Card Style="{StaticResource StatusCardStyle}">
                     <StackPanel>
                         <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="Memory" Width="18" Height="18" Opacity="0.7" VerticalAlignment="Center" />
-                            <TextBlock Text="{res:Loc Home_StatusMemory}" Opacity="0.7" Margin="8,0,0,0" />
+                            <ui:SymbolIcon Symbol="DataUsage24" FontSize="18" Foreground="{DynamicResource AccentTextFillColorPrimaryBrush}" />
+                            <TextBlock Text="{res:Loc Home_StatusMemory}" Style="{StaticResource SecondaryTextStyle}" Margin="8,0,0,0" VerticalAlignment="Center" />
                         </StackPanel>
-                        <TextBlock Text="{Binding MemoryValue}" FontWeight="Medium" Margin="0,4,0,0" TextWrapping="Wrap" />
+                        <TextBlock Text="{Binding MemoryValue}" Style="{StaticResource BodyStrongTextStyle}" Margin="0,6,0,0" TextWrapping="Wrap" />
                     </StackPanel>
-                </materialDesign:Card>
-                <materialDesign:Card Style="{StaticResource StatusCardStyle}">
+                </ui:Card>
+                <ui:Card Style="{StaticResource StatusCardStyle}">
                     <StackPanel>
                         <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="Harddisk" Width="18" Height="18" Opacity="0.7" VerticalAlignment="Center" />
-                            <TextBlock Text="{res:Loc Home_StatusDisk}" Opacity="0.7" Margin="8,0,0,0" />
+                            <ui:SymbolIcon Symbol="HardDrive20" FontSize="18" Foreground="{DynamicResource AccentTextFillColorPrimaryBrush}" />
+                            <TextBlock Text="{res:Loc Home_StatusDisk}" Style="{StaticResource SecondaryTextStyle}" Margin="8,0,0,0" VerticalAlignment="Center" />
                         </StackPanel>
-                        <TextBlock Text="{Binding DiskValue}" FontWeight="Medium" Margin="0,4,0,0" TextWrapping="Wrap" />
+                        <TextBlock Text="{Binding DiskValue}" Style="{StaticResource BodyStrongTextStyle}" Margin="0,6,0,0" TextWrapping="Wrap" />
                     </StackPanel>
-                </materialDesign:Card>
-                <materialDesign:Card Style="{StaticResource StatusCardStyle}">
+                </ui:Card>
+                <ui:Card Style="{StaticResource StatusCardStyle}">
                     <StackPanel>
                         <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="ClockOutline" Width="18" Height="18" Opacity="0.7" VerticalAlignment="Center" />
-                            <TextBlock Text="{res:Loc Home_StatusUptime}" Opacity="0.7" Margin="8,0,0,0" />
+                            <ui:SymbolIcon Symbol="Clock24" FontSize="18" Foreground="{DynamicResource AccentTextFillColorPrimaryBrush}" />
+                            <TextBlock Text="{res:Loc Home_StatusUptime}" Style="{StaticResource SecondaryTextStyle}" Margin="8,0,0,0" VerticalAlignment="Center" />
                         </StackPanel>
-                        <TextBlock Text="{Binding UptimeValue}" FontWeight="Medium" Margin="0,4,0,0" TextWrapping="Wrap" />
+                        <TextBlock Text="{Binding UptimeValue}" Style="{StaticResource BodyStrongTextStyle}" Margin="0,6,0,0" TextWrapping="Wrap" />
                     </StackPanel>
-                </materialDesign:Card>
+                </ui:Card>
             </WrapPanel>
 
             <!-- Maintenance suggestions (local heuristics over the read-only status) -->
             <StackPanel Visibility="{Binding HasSuggestions, Converter={StaticResource BoolToVis}}">
-                <TextBlock Text="{res:Loc Home_Suggestions}" Style="{StaticResource SectionHeaderStyle}" />
+                <TextBlock Text="{res:Loc Home_Suggestions}" Style="{StaticResource SectionHeaderTextStyle}" />
                 <ItemsControl ItemsSource="{Binding Suggestions}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <materialDesign:Card Padding="12,8" Margin="0,0,0,6">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto" />
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="Auto" />
-                                    </Grid.ColumnDefinitions>
-                                    <materialDesign:PackIcon Grid.Column="0" Kind="LightbulbOnOutline" Width="20" Height="20"
-                                                             VerticalAlignment="Center" Margin="0,0,10,0" Opacity="0.8" />
-                                    <TextBlock Grid.Column="1" Text="{Binding Reason}" TextWrapping="Wrap" VerticalAlignment="Center" />
-                                    <Button Grid.Column="2" Content="{res:Loc Maint_Open}"
-                                            Style="{StaticResource MaterialDesignFlatButton}"
-                                            Visibility="{Binding CanOpen, Converter={StaticResource BoolToVis}}"
-                                            Command="{Binding DataContext.OpenCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                            CommandParameter="{Binding Command}" />
-                                </Grid>
-                            </materialDesign:Card>
+                            <ui:InfoBar Title="{Binding Reason}" IsOpen="True" IsClosable="False" Severity="Informational" Margin="0,0,0,6">
+                                <ui:Button Content="{res:Loc Maint_Open}" Margin="0,4,0,0"
+                                           Visibility="{Binding CanOpen, Converter={StaticResource BoolToVis}}"
+                                           Command="{Binding DataContext.OpenCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                           CommandParameter="{Binding Command}" />
+                            </ui:InfoBar>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
             </StackPanel>
 
-            <!-- Recently-run commands -->
-            <TextBlock Text="{res:Loc Home_Recent}" Style="{StaticResource SectionHeaderStyle}" />
-            <materialDesign:Card Padding="6">
-                <Grid>
-                    <ItemsControl ItemsSource="{Binding Recent}" ItemTemplate="{StaticResource HomeCommandItem}"
-                                  Visibility="{Binding HasRecent, Converter={StaticResource BoolToVis}}" />
-                    <TextBlock Text="{res:Loc Home_NoRecent}" Opacity="0.6" Margin="10" TextWrapping="Wrap">
-                        <TextBlock.Style>
-                            <Style TargetType="TextBlock">
-                                <Setter Property="Visibility" Value="Collapsed" />
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding HasRecent}" Value="False">
-                                        <Setter Property="Visibility" Value="Visible" />
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </TextBlock.Style>
-                    </TextBlock>
-                </Grid>
-            </materialDesign:Card>
+            <!-- Recently run commands -->
+            <TextBlock Text="{res:Loc Home_Recent}" Style="{StaticResource SectionHeaderTextStyle}" />
+            <Grid>
+                <ItemsControl ItemsSource="{Binding Recent}" ItemTemplate="{StaticResource HomeCommandItem}"
+                              Visibility="{Binding HasRecent, Converter={StaticResource BoolToVis}}" />
+                <TextBlock Text="{res:Loc Home_NoRecent}" Style="{StaticResource SecondaryTextStyle}"
+                           Visibility="{Binding HasRecent, Converter={conv:InverseBooleanToVisibilityConverter}}" />
+            </Grid>
 
             <!-- Pinned favorites -->
-            <TextBlock Text="{res:Loc SidebarFavorites}" Style="{StaticResource SectionHeaderStyle}" />
-            <materialDesign:Card Padding="6" Margin="0,0,0,8">
-                <Grid>
-                    <ItemsControl ItemsSource="{Binding Favorites}" ItemTemplate="{StaticResource HomeCommandItem}"
-                                  Visibility="{Binding HasFavorites, Converter={StaticResource BoolToVis}}" />
-                    <TextBlock Text="{res:Loc Home_NoFavorites}" Opacity="0.6" Margin="10" TextWrapping="Wrap">
-                        <TextBlock.Style>
-                            <Style TargetType="TextBlock">
-                                <Setter Property="Visibility" Value="Collapsed" />
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding HasFavorites}" Value="False">
-                                        <Setter Property="Visibility" Value="Visible" />
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </TextBlock.Style>
-                    </TextBlock>
-                </Grid>
-            </materialDesign:Card>
+            <TextBlock Text="{res:Loc SidebarFavorites}" Style="{StaticResource SectionHeaderTextStyle}" />
+            <Grid>
+                <ItemsControl ItemsSource="{Binding Favorites}" ItemTemplate="{StaticResource HomeCommandItem}"
+                              Visibility="{Binding HasFavorites, Converter={StaticResource BoolToVis}}" />
+                <TextBlock Text="{res:Loc Home_NoFavorites}" Style="{StaticResource SecondaryTextStyle}"
+                           Visibility="{Binding HasFavorites, Converter={conv:InverseBooleanToVisibilityConverter}}" />
+            </Grid>
         </StackPanel>
     </ScrollViewer>
 </UserControl>

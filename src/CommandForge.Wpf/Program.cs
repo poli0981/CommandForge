@@ -1,7 +1,7 @@
 using CommandForge.Infrastructure;
 using Velopack;
 
-namespace CommandForge.Wpf;
+namespace CommandForge.Desktop;
 
 /// <summary>
 /// Process entry point. Order matters: Velopack's install/update/uninstall hooks run first (they

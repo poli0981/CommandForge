@@ -1,0 +1,32 @@
+<UserControl x:Class="CommandForge.Desktop.Views.PortableInfoView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:res="clr-namespace:CommandForge.Desktop.Resources">
+    <!-- Whether the app is installed or portable, plus its version and data paths. -->
+    <Grid MinWidth="420" MaxWidth="560">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Grid.Column="0" Text="{res:Loc Settings_RunMode}" Style="{StaticResource SecondaryTextStyle}" Margin="0,0,16,10" />
+        <TextBlock Grid.Row="0" Grid.Column="1" x:Name="ModeValue" Style="{StaticResource BodyStrongTextStyle}" Margin="0,0,0,10" />
+
+        <TextBlock Grid.Row="1" Grid.Column="0" Text="{res:Loc Settings_CurrentVersion}" Style="{StaticResource SecondaryTextStyle}" Margin="0,0,16,10" />
+        <TextBlock Grid.Row="1" Grid.Column="1" x:Name="VersionValue" Margin="0,0,0,10" />
+
+        <TextBlock Grid.Row="2" Grid.Column="0" Text="{res:Loc PortableInfo_ConfigFolder}" Style="{StaticResource SecondaryTextStyle}" Margin="0,0,16,10" />
+        <TextBox Grid.Row="2" Grid.Column="1" x:Name="ConfigValue" Style="{StaticResource ReadOnlyCodeTextBoxStyle}" Margin="0,0,0,10"
+                 AutomationProperties.Name="{res:Loc PortableInfo_ConfigFolder}" />
+
+        <TextBlock Grid.Row="3" Grid.Column="0" Text="{res:Loc PortableInfo_LogFolder}" Style="{StaticResource SecondaryTextStyle}" Margin="0,0,16,0" />
+        <TextBox Grid.Row="3" Grid.Column="1" x:Name="LogValue" Style="{StaticResource ReadOnlyCodeTextBoxStyle}"
+                 AutomationProperties.Name="{res:Loc PortableInfo_LogFolder}" />
+    </Grid>
+</UserControl>

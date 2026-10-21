@@ -1,5 +1,5 @@
 using System.Runtime.InteropServices;
-using CommandForge.Wpf.ViewModels;
+using CommandForge.Desktop.ViewModels;
 
 namespace CommandForge.Tests;
 

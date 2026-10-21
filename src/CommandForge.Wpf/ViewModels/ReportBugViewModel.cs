@@ -4,12 +4,12 @@ using System.Runtime.InteropServices;
 using System.Text;
 using CommandForge.Application;
 using CommandForge.Application.Ports;
-using CommandForge.Wpf.Resources;
-using CommandForge.Wpf.Services;
+using CommandForge.Desktop.Resources;
+using CommandForge.Desktop.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
-namespace CommandForge.Wpf.ViewModels;
+namespace CommandForge.Desktop.ViewModels;
 
 /// <summary>
 /// Drives the Report-a-bug dialog: shows auto-gathered environment, exports logs, and opens a

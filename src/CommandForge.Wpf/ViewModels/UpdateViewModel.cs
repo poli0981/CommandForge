@@ -1,12 +1,12 @@
 using System.Globalization;
 using CommandForge.Application.Ports;
 using CommandForge.Application.UseCases;
-using CommandForge.Wpf.Resources;
+using CommandForge.Desktop.Resources;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Serilog;
 
-namespace CommandForge.Wpf.ViewModels;
+namespace CommandForge.Desktop.ViewModels;
 
 /// <summary>
 /// Drives the modal update dialog: check → (up to date | available | error) → download (progress)
@@ -36,6 +36,7 @@ public sealed partial class UpdateViewModel : ObservableObject
     [NotifyPropertyChangedFor(nameof(IsAvailable))]
     [NotifyPropertyChangedFor(nameof(IsDownloading))]
     [NotifyPropertyChangedFor(nameof(IsError))]
+    [NotifyPropertyChangedFor(nameof(DownloadButtonText))]
     [NotifyCanExecuteChangedFor(nameof(DownloadAndRestartCommand))]
     private UpdateUiState _state = UpdateUiState.Checking;
 
@@ -56,6 +57,9 @@ public sealed partial class UpdateViewModel : ObservableObject
     public bool IsAvailable => State == UpdateUiState.Available;
     public bool IsDownloading => State == UpdateUiState.Downloading;
     public bool IsError => State == UpdateUiState.Error;
+
+    /// <summary>The dialog's primary button text: only offered while an update is available (empty hides it).</summary>
+    public string DownloadButtonText => IsAvailable ? Strings.Get("Update_DownloadRestart") : string.Empty;
 
     /// <summary>Runs the update check (the manual menu path). The dialog calls this when shown.</summary>
     public async Task CheckAsync()

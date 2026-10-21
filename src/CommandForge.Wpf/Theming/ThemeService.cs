@@ -1,22 +1,19 @@
-using System.Windows.Media;
+using System.Windows;
 using CommandForge.Application.Settings;
-using MaterialDesignThemes.Wpf;
 using Microsoft.Win32;
+using Wpf.Ui.Appearance;
+using Wpf.Ui.Controls;
 
-namespace CommandForge.Wpf.Theming;
+namespace CommandForge.Desktop.Theming;
 
 /// <summary>
-/// <see cref="IThemeService"/> backed by MaterialDesign's <see cref="PaletteHelper"/>. Swaps the base
-/// theme at runtime (all brushes are DynamicResource, so the UI recolors live). In System mode it
-/// reads the OS light/dark setting and tracks changes via <see cref="SystemEvents"/>.
+/// <see cref="IThemeService"/> backed by WPF-UI's <see cref="ApplicationThemeManager"/>: swaps the
+/// Fluent theme dictionaries at runtime (all brushes are DynamicResource, so the UI recolors live)
+/// and uses the system accent color. System mode follows the OS light/dark setting, and Windows
+/// High Contrast always wins over the user's choice.
 /// </summary>
 public sealed class ThemeService : IThemeService, IDisposable
 {
-    // Deep Purple 500 reads well on light backgrounds; a lighter Deep Purple 200 keeps the accent
-    // legible on dark backgrounds (the mid hue drives flat-button text, tabs, selection and the star).
-    private static readonly Color LightPrimary = Color.FromRgb(0x67, 0x3A, 0xB7);
-    private static readonly Color DarkPrimary = Color.FromRgb(0xB3, 0x9D, 0xDB);
-
     private AppTheme _current = AppTheme.System;
     private bool _subscribed;
 
@@ -25,27 +22,20 @@ public sealed class ThemeService : IThemeService, IDisposable
     {
         _current = theme;
 
-        var baseTheme = theme switch
+        if (theme == AppTheme.System || SystemParameters.HighContrast)
         {
-            AppTheme.Light => BaseTheme.Light,
-            AppTheme.Dark => BaseTheme.Dark,
-            _ => DetectOsBaseTheme(),
-        };
-
-        var palette = new PaletteHelper();
-        var current = palette.GetTheme();
-        current.SetBaseTheme(baseTheme);
-        current.SetPrimaryColor(baseTheme == BaseTheme.Dark ? DarkPrimary : LightPrimary);
-        palette.SetTheme(current);
-
-        if (theme == AppTheme.System)
-        {
-            Subscribe();
+            ApplicationThemeManager.ApplySystemTheme(updateAccent: true);
         }
         else
         {
-            Unsubscribe();
+            ApplicationThemeManager.Apply(
+                theme == AppTheme.Dark ? ApplicationTheme.Dark : ApplicationTheme.Light,
+                WindowBackdropType.Mica,
+                updateAccent: true);
         }
+
+        // Keep listening in every mode: High Contrast can be switched on while the app runs.
+        Subscribe();
     }
 
     /// <inheritdoc />
@@ -75,19 +65,11 @@ public sealed class ThemeService : IThemeService, IDisposable
 
     private void OnUserPreferenceChanged(object sender, UserPreferenceChangedEventArgs e)
     {
-        if (e.Category == UserPreferenceCategory.General && _current == AppTheme.System)
+        // General: light/dark switch; Color: accent; Accessibility: High Contrast on/off.
+        if (e.Category is UserPreferenceCategory.General or UserPreferenceCategory.Color or UserPreferenceCategory.Accessibility)
         {
             // SystemEvents fires off the UI thread; marshal the theme swap onto it.
-            System.Windows.Application.Current?.Dispatcher.Invoke(() => Apply(AppTheme.System));
+            System.Windows.Application.Current?.Dispatcher.InvokeAsync(() => Apply(_current));
         }
-    }
-
-    private static BaseTheme DetectOsBaseTheme()
-    {
-        using var key = Registry.CurrentUser.OpenSubKey(
-            @"Software\Microsoft\Windows\CurrentVersion\Themes\Personalize");
-        return key?.GetValue("AppsUseLightTheme") is int value && value == 0
-            ? BaseTheme.Dark
-            : BaseTheme.Light;
     }
 }

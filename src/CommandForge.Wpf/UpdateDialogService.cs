@@ -1,23 +1,27 @@
 using CommandForge.Application.Ports;
 using CommandForge.Application.UseCases;
-using CommandForge.Wpf.ViewModels;
-using CommandForge.Wpf.Views;
+using CommandForge.Desktop.Services;
+using CommandForge.Desktop.ViewModels;
+using CommandForge.Desktop.Views;
 using Serilog;
 
-namespace CommandForge.Wpf;
+namespace CommandForge.Desktop;
 
-/// <summary><see cref="IUpdateDialogService"/> that shows the modal <see cref="UpdateDialog"/>.</summary>
+/// <summary><see cref="IUpdateDialogService"/> that shows the in-window <see cref="UpdateDialog"/>.</summary>
 public sealed class UpdateDialogService : IUpdateDialogService
 {
     private readonly CheckForUpdateUseCase _useCase;
     private readonly ExecutionViewModel _execution;
+    private readonly InWindowDialogs _dialogs;
 
-    public UpdateDialogService(CheckForUpdateUseCase useCase, ExecutionViewModel execution)
+    public UpdateDialogService(CheckForUpdateUseCase useCase, ExecutionViewModel execution, InWindowDialogs dialogs)
     {
         ArgumentNullException.ThrowIfNull(useCase);
         ArgumentNullException.ThrowIfNull(execution);
+        ArgumentNullException.ThrowIfNull(dialogs);
         _useCase = useCase;
         _execution = execution;
+        _dialogs = dialogs;
     }
 
     /// <inheritdoc />
@@ -42,41 +46,29 @@ public sealed class UpdateDialogService : IUpdateDialogService
             {
                 return prechecked.IsSuccess;
             }
+        }
 
-            // Never pop up over a dialog the user is working in (e.g. a confirmation); the next
-            // launch or a manual check will offer the update again.
-            if (IsAnotherDialogOpen())
-            {
-                Log.ForContext<UpdateDialogService>().Information("Update {Version} found at startup; not shown because another dialog is open.", prechecked.NewVersion);
-                return true;
-            }
+        // Never pop up over a dialog the user is working in (e.g. a confirmation); the next launch or
+        // a manual check offers the update again.
+        if (!_dialogs.CanShow)
+        {
+            Log.ForContext<UpdateDialogService>().Information(
+                "Update dialog not shown because another dialog is open (update found: {Version}).", prechecked?.NewVersion);
+            return prechecked?.IsSuccess ?? false;
         }
 
         var viewModel = new UpdateViewModel(_useCase) { IsCommandRunning = () => _execution.IsRunning };
-        var dialog = new UpdateDialog(viewModel);
-        if (System.Windows.Application.Current?.MainWindow is { IsVisible: true } owner)
-        {
-            dialog.Owner = owner;
-        }
-
         if (prechecked is { HasUpdate: true })
         {
             viewModel.SeedAvailable(prechecked.NewVersion);
         }
         else
         {
-            // Runs on the UI thread; awaited continuations pump during the modal ShowDialog loop.
+            // Runs on the UI thread alongside the dialog.
             _ = viewModel.CheckAsync();
         }
 
-        dialog.ShowDialog();
+        await _dialogs.ShowAsync(new UpdateDialog(viewModel));
         return viewModel.CheckSucceeded;
-    }
-
-    private static bool IsAnotherDialogOpen()
-    {
-        var app = System.Windows.Application.Current;
-        return app is not null
-            && app.Windows.OfType<System.Windows.Window>().Any(w => w.IsVisible && !ReferenceEquals(w, app.MainWindow));
     }
 }

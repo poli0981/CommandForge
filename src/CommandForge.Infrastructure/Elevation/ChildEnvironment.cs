@@ -71,7 +71,8 @@ internal static class ChildEnvironment
             ["CommonProgramFiles(x86)"] = SystemPaths.CommonProgramFilesX86,
 
             // Only $PSHOME\Modules: Windows PowerShell 5.1 re-inserts the per-user module folder when
-            // this variable is missing or equals the machine value, but keeps a narrower one as-is.
+            // this variable is missing or equals the machine value; to a narrower one it only adds the
+            // admin-only Program Files module folder (built from the trusted ProgramFiles value above).
             ["PSModulePath"] = Path.Combine(system32, "WindowsPowerShell", "v1.0", "Modules"),
 
             ["Path"] = MachinePath(),

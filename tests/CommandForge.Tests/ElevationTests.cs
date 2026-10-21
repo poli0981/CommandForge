@@ -12,7 +12,7 @@ namespace CommandForge.Tests;
 /// </summary>
 public sealed class ElevationTests
 {
-    [Fact]
+    [Fact(Timeout = 30_000)]
     public async Task PipeMessageChannel_RoundTrips_Request()
     {
         using var stream = new MemoryStream();
@@ -21,17 +21,17 @@ public sealed class ElevationTests
         await channel.WriteAsync(
             new ElevationRequest { Kind = ElevationRequestKind.Run, CommandId = "dism.checkhealth" },
             ElevationJsonContext.Default.ElevationRequest,
-            CancellationToken.None);
+            TestContext.Current.CancellationToken);
 
         stream.Position = 0;
-        var read = await channel.ReadAsync(ElevationJsonContext.Default.ElevationRequest, CancellationToken.None);
+        var read = await channel.ReadAsync(ElevationJsonContext.Default.ElevationRequest, TestContext.Current.CancellationToken);
 
         Assert.NotNull(read);
         Assert.Equal(ElevationRequestKind.Run, read.Kind);
         Assert.Equal("dism.checkhealth", read.CommandId);
     }
 
-    [Fact]
+    [Fact(Timeout = 30_000)]
     public async Task PipeMessageChannel_RoundTrips_Message()
     {
         using var stream = new MemoryStream();
@@ -40,10 +40,10 @@ public sealed class ElevationTests
         await channel.WriteAsync(
             ElevationMessage.Output("hello", isError: true),
             ElevationJsonContext.Default.ElevationMessage,
-            CancellationToken.None);
+            TestContext.Current.CancellationToken);
 
         stream.Position = 0;
-        var read = await channel.ReadAsync(ElevationJsonContext.Default.ElevationMessage, CancellationToken.None);
+        var read = await channel.ReadAsync(ElevationJsonContext.Default.ElevationMessage, TestContext.Current.CancellationToken);
 
         Assert.NotNull(read);
         Assert.Equal(ElevationMessageKind.Output, read.Kind);
@@ -51,7 +51,7 @@ public sealed class ElevationTests
         Assert.True(read.IsError);
     }
 
-    [Fact]
+    [Fact(Timeout = 30_000)]
     public async Task ElevationServer_RunsAdminCommand_StreamsOutputThenResult()
     {
         var command = AdminCommand("adm");
@@ -65,13 +65,13 @@ public sealed class ElevationTests
             await uiChannel.WriteAsync(
                 new ElevationRequest { Kind = ElevationRequestKind.Run, CommandId = "adm" },
                 ElevationJsonContext.Default.ElevationRequest,
-                CancellationToken.None);
+                TestContext.Current.CancellationToken);
 
-            var output = await uiChannel.ReadAsync(ElevationJsonContext.Default.ElevationMessage, CancellationToken.None);
+            var output = await uiChannel.ReadAsync(ElevationJsonContext.Default.ElevationMessage, TestContext.Current.CancellationToken);
             Assert.Equal(ElevationMessageKind.Output, output!.Kind);
             Assert.Equal("line-1", output.Text);
 
-            var result = await uiChannel.ReadAsync(ElevationJsonContext.Default.ElevationMessage, CancellationToken.None);
+            var result = await uiChannel.ReadAsync(ElevationJsonContext.Default.ElevationMessage, TestContext.Current.CancellationToken);
             Assert.Equal(ElevationMessageKind.Result, result!.Kind);
             Assert.True(result.Success);
             Assert.Equal(0, result.ExitCode);
@@ -82,7 +82,7 @@ public sealed class ElevationTests
         }
     }
 
-    [Fact]
+    [Fact(Timeout = 30_000)]
     public async Task ElevationServer_RejectsUnknownCommand()
     {
         var (uiChannel, serverTask, client, server) = await StartServerAsync(
@@ -95,13 +95,13 @@ public sealed class ElevationTests
             await uiChannel.WriteAsync(
                 new ElevationRequest { Kind = ElevationRequestKind.Run, CommandId = "does-not-exist" },
                 ElevationJsonContext.Default.ElevationRequest,
-                CancellationToken.None);
+                TestContext.Current.CancellationToken);
 
-            var rejection = await uiChannel.ReadAsync(ElevationJsonContext.Default.ElevationMessage, CancellationToken.None);
+            var rejection = await uiChannel.ReadAsync(ElevationJsonContext.Default.ElevationMessage, TestContext.Current.CancellationToken);
             Assert.Equal(ElevationMessageKind.Output, rejection!.Kind);
             Assert.True(rejection.IsError);
 
-            var result = await uiChannel.ReadAsync(ElevationJsonContext.Default.ElevationMessage, CancellationToken.None);
+            var result = await uiChannel.ReadAsync(ElevationJsonContext.Default.ElevationMessage, TestContext.Current.CancellationToken);
             Assert.Equal(ElevationMessageKind.Result, result!.Kind);
             Assert.False(result.Success);
 
@@ -118,11 +118,11 @@ public sealed class ElevationTests
         var server = new NamedPipeServerStream(pipeName, PipeDirection.InOut, 1, PipeTransmissionMode.Byte, PipeOptions.Asynchronous);
         var client = new NamedPipeClientStream(".", pipeName, PipeDirection.InOut, PipeOptions.Asynchronous);
 
-        var waitConnection = server.WaitForConnectionAsync();
-        await client.ConnectAsync(5000);
+        var waitConnection = server.WaitForConnectionAsync(TestContext.Current.CancellationToken);
+        await client.ConnectAsync(5000, TestContext.Current.CancellationToken);
         await waitConnection;
 
-        var serverTask = new ElevationServer(catalog, executor).RunAsync(server, CancellationToken.None);
+        var serverTask = new ElevationServer(catalog, executor).RunAsync(server, TestContext.Current.CancellationToken);
         return (new PipeMessageChannel(client), serverTask, client, server);
     }
 

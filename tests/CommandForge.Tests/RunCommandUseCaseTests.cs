@@ -5,7 +5,7 @@ using CommandForge.Domain;
 
 namespace CommandForge.Tests;
 
-/// <summary>Tests that commands route to the right executor based on <c>RequiresAdmin</c>.</summary>
+/// <summary>Tests routing by <c>RequiresAdmin</c>, and that a run always ends (fault, cancel) with the output channel completed.</summary>
 public sealed class RunCommandUseCaseTests
 {
     [Fact]
@@ -32,6 +32,36 @@ public sealed class RunCommandUseCaseTests
 
         Assert.True(executor.Called);
         Assert.False(elevation.Called);
+    }
+
+    [Fact(Timeout = 30_000)]
+    public async Task ExecutorFault_StillCompletesTheOutputChannel()
+    {
+        // The UI reads output until the channel completes; a crash must not leave it waiting forever.
+        var useCase = new RunCommandUseCase(new Throwing(), new RecordingElevation());
+        var channel = Channel.CreateUnbounded<OutputLine>();
+
+        await Assert.ThrowsAsync<InvalidOperationException>(
+            () => useCase.RunAsync(Command(requiresAdmin: false), channel.Writer, TestContext.Current.CancellationToken));
+
+        await channel.Reader.Completion.WaitAsync(TestContext.Current.CancellationToken);
+    }
+
+    [Fact(Timeout = 30_000)]
+    public async Task CancelWhileWaitingForElevation_ReturnsCancelled()
+    {
+        // e.g. the user cancels while the UAC prompt is still open.
+        var useCase = new RunCommandUseCase(new Recording(), new HangingElevation());
+        var channel = Channel.CreateUnbounded<OutputLine>();
+        using var cancel = CancellationTokenSource.CreateLinkedTokenSource(TestContext.Current.CancellationToken);
+
+        var run = useCase.RunAsync(Command(requiresAdmin: true), channel.Writer, cancel.Token);
+        await cancel.CancelAsync();
+        var result = await run;
+
+        Assert.True(result.Cancelled);
+        Assert.False(result.Success);
+        await channel.Reader.Completion.WaitAsync(TestContext.Current.CancellationToken);
     }
 
     private static CommandDefinition Command(bool requiresAdmin) => new()
@@ -71,6 +101,25 @@ public sealed class RunCommandUseCaseTests
             Called = true;
             output.TryComplete();
             return Task.FromResult(Ok());
+        }
+    }
+
+    private sealed class Throwing : ICommandExecutor
+    {
+        public Task<ExecutionResult> ExecuteAsync(CommandDefinition command, ChannelWriter<OutputLine> output, CancellationToken cancellationToken = default)
+            => throw new InvalidOperationException("executor failed");
+    }
+
+    private sealed class HangingElevation : IElevationService
+    {
+        public bool IsSessionActive => false;
+
+        public Task EndSessionAsync(CancellationToken cancellationToken = default) => Task.CompletedTask;
+
+        public async Task<ExecutionResult> RunElevatedAsync(CommandDefinition command, ChannelWriter<OutputLine> output, CancellationToken cancellationToken = default)
+        {
+            await Task.Delay(Timeout.Infinite, cancellationToken);
+            return Ok();
         }
     }
 }

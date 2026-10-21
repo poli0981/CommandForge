@@ -1055,10 +1055,7 @@
     <value>运行模式：</value>
   </data>
   <data name="Settings_RunModeInstalled" xml:space="preserve">
-    <value>已安装</value>
-  </data>
-  <data name="Settings_RunModePortable" xml:space="preserve">
-    <value>便携版 / 开发版</value>
+    <value>安装版或便携版（自动更新）</value>
   </data>
   <data name="Settings_ConfigPath" xml:space="preserve">
     <value>配置文件</value>
@@ -2581,5 +2578,8 @@
   </data>
   <data name="About_CodeContact" xml:space="preserve">
     <value>代码与贡献</value>
+  </data>
+  <data name="Settings_RunModeDev" xml:space="preserve">
+    <value>开发版本（不自动更新）</value>
   </data>
 </root>

@@ -1055,10 +1055,7 @@
     <value>実行モード:</value>
   </data>
   <data name="Settings_RunModeInstalled" xml:space="preserve">
-    <value>インストール版</value>
-  </data>
-  <data name="Settings_RunModePortable" xml:space="preserve">
-    <value>ポータブル / 開発</value>
+    <value>インストール版またはポータブル版 (自動更新)</value>
   </data>
   <data name="Settings_ConfigPath" xml:space="preserve">
     <value>設定ファイル</value>
@@ -2581,5 +2578,8 @@
   </data>
   <data name="About_CodeContact" xml:space="preserve">
     <value>コードと貢献</value>
+  </data>
+  <data name="Settings_RunModeDev" xml:space="preserve">
+    <value>開発ビルド (自動更新なし)</value>
   </data>
 </root>

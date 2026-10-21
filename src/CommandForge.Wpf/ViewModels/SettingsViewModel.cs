@@ -90,7 +90,7 @@ public sealed partial class SettingsViewModel : ObservableObject
 
         RunModeText = updates.IsUpdateSupported
             ? Strings.Get("Settings_RunModeInstalled")
-            : Strings.Get("Settings_RunModePortable");
+            : Strings.Get("Settings_RunModeDev");
         ConfigPathText = AppPaths.ConfigFilePath;
 
         var version = typeof(SettingsViewModel).Assembly.GetName().Version;

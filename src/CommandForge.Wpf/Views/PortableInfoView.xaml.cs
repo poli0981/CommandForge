@@ -16,7 +16,7 @@ public partial class PortableInfoView : UserControl
 
         ModeValue.Text = updates.IsUpdateSupported
             ? Strings.Get("Settings_RunModeInstalled")
-            : Strings.Get("Settings_RunModePortable");
+            : Strings.Get("Settings_RunModeDev");
 
         var version = typeof(PortableInfoView).Assembly.GetName().Version;
         VersionValue.Text = version is null

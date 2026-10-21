@@ -1,17 +1,19 @@
 using System.Collections.ObjectModel;
-using System.Windows;
+using System.Globalization;
+using CommandForge.Application;
 using CommandForge.Application.Ports;
 using CommandForge.Domain;
 using CommandForge.Wpf.Resources;
+using CommandForge.Wpf.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
 namespace CommandForge.Wpf.ViewModels;
 
 /// <summary>
-/// Recipes screen: build a named chain of catalog commands and run it sequentially (one
-/// aggregated confirmation, one UAC for an all-admin chain, stop-on-error). Steps reference the
-/// shared catalog <see cref="CommandItemViewModel"/> instances.
+/// Recipes screen: build a named chain of catalog commands and run it sequentially (an overview
+/// prompt, then the same per-command confirmation a single run would get, one UAC for an all-admin
+/// chain, stop-on-error). Steps reference the shared catalog <see cref="CommandItemViewModel"/> instances.
 /// </summary>
 public sealed partial class RecipesViewModel : ObservableObject
 {
@@ -20,25 +22,44 @@ public sealed partial class RecipesViewModel : ObservableObject
     private readonly IRecipeStore _store;
     private readonly IExecutionHistoryService _history;
     private readonly IClock _clock;
+    private readonly IConfirmationService _confirmation;
+    private readonly IDialogService _dialogs;
+    private readonly ISettingsService _settings;
+    private readonly CommandDefinition? _restorePointCommand;
+
+    // Steps of the loaded recipe that this PC doesn't offer (unknown id or another Windows build):
+    // kept on save so a recipe shared between machines never silently loses them.
+    private List<string> _unavailableStepIds = [];
 
     public RecipesViewModel(
         IReadOnlyDictionary<string, CommandItemViewModel> itemsById,
         ExecutionViewModel execution,
         IRecipeStore store,
         IExecutionHistoryService history,
-        IClock clock)
+        IClock clock,
+        IConfirmationService confirmation,
+        IDialogService dialogs,
+        ISettingsService settings,
+        CommandDefinition? restorePointCommand)
     {
         ArgumentNullException.ThrowIfNull(itemsById);
         ArgumentNullException.ThrowIfNull(execution);
         ArgumentNullException.ThrowIfNull(store);
         ArgumentNullException.ThrowIfNull(history);
         ArgumentNullException.ThrowIfNull(clock);
+        ArgumentNullException.ThrowIfNull(confirmation);
+        ArgumentNullException.ThrowIfNull(dialogs);
+        ArgumentNullException.ThrowIfNull(settings);
 
         _itemsById = itemsById;
         _execution = execution;
         _store = store;
         _history = history;
         _clock = clock;
+        _confirmation = confirmation;
+        _dialogs = dialogs;
+        _settings = settings;
+        _restorePointCommand = restorePointCommand;
 
         AllCommands = itemsById.Values.OrderBy(i => i.Title, StringComparer.CurrentCulture).ToList();
 
@@ -84,6 +105,10 @@ public sealed partial class RecipesViewModel : ObservableObject
     [ObservableProperty]
     private CommandItemViewModel? _commandToAdd;
 
+    /// <summary>Shown when the loaded recipe has steps this PC doesn't offer (null when none).</summary>
+    [ObservableProperty]
+    private string? _unavailableStepsNotice;
+
     /// <summary>Reloads the saved-recipe name list from the store.</summary>
     public void Refresh()
     {
@@ -115,18 +140,26 @@ public sealed partial class RecipesViewModel : ObservableObject
 
         RecipeName = recipe.Name;
         Steps.Clear();
+        var unavailable = new List<string>();
         foreach (var id in recipe.CommandIds)
         {
             if (_itemsById.TryGetValue(id, out var item))
             {
                 Steps.Add(item);
             }
+            else
+            {
+                unavailable.Add(id);
+            }
         }
+
+        SetUnavailableSteps(unavailable);
     }
 
     [RelayCommand]
     private void NewRecipe()
     {
+        SetUnavailableSteps([]);
         SelectedRecipeName = null;
         RecipeName = string.Empty;
         Steps.Clear();
@@ -180,7 +213,7 @@ public sealed partial class RecipesViewModel : ObservableObject
             return;
         }
 
-        _store.Save(new Recipe { Name = name, CommandIds = Steps.Select(s => s.Command.Id).ToList() });
+        _store.Save(new Recipe { Name = name, CommandIds = [.. Steps.Select(s => s.Command.Id), .. _unavailableStepIds] });
         Refresh();
         SelectedRecipeName = name;
     }
@@ -188,18 +221,17 @@ public sealed partial class RecipesViewModel : ObservableObject
     private bool CanSaveRecipe() => !string.IsNullOrWhiteSpace(RecipeName) && Steps.Count > 0;
 
     [RelayCommand(CanExecute = nameof(HasSelectedRecipe))]
-    private void DeleteRecipe()
+    private async Task DeleteRecipeAsync()
     {
         if (SelectedRecipeName is not { } name)
         {
             return;
         }
 
-        if (MessageBox.Show(
-                string.Format(System.Globalization.CultureInfo.CurrentCulture, Strings.Get("Recipe_DeleteConfirm"), name),
-                Strings.Get("Recipe_Delete"),
-                MessageBoxButton.YesNo,
-                MessageBoxImage.Warning) != MessageBoxResult.Yes)
+        var confirmed = await _dialogs.ConfirmAsync(
+            Strings.Get("Recipe_Delete"),
+            string.Format(CultureInfo.CurrentCulture, Strings.Get("Recipe_DeleteConfirm"), name));
+        if (!confirmed)
         {
             return;
         }
@@ -221,12 +253,36 @@ public sealed partial class RecipesViewModel : ObservableObject
             return;
         }
 
-        if (!ConfirmRecipe())
+        // 1. Overview of every step and its risk ("No" is the default answer).
+        var anyDangerous = steps.Any(s => s.DangerLevel == DangerLevel.Dangerous);
+        if (!await _dialogs.ConfirmAsync(Strings.Get("Recipe_ConfirmTitle"), BuildOverview(), anyDangerous ? DialogKind.Warning : DialogKind.Information))
         {
             return;
         }
 
-        var executed = await _execution.RunRecipeAsync(steps);
+        // 2. Each risky step gets exactly the confirmation a single run would (typing the name for
+        //    Dangerous): a recipe must never weaken the per-command safety gate (golden rule #8).
+        var createRestorePoint = false;
+        foreach (var step in steps)
+        {
+            if (!RunSafety.NeedsConfirmation(step, _settings.ConfirmCaution))
+            {
+                createRestorePoint |= RunSafety.DefaultCreateRestorePoint(step, _settings.AutoCreateRestorePoint);
+                continue;
+            }
+
+            var outcome = await _confirmation.ConfirmAsync(step, RunSafety.DefaultCreateRestorePoint(step, _settings.AutoCreateRestorePoint));
+            if (outcome is null)
+            {
+                return;
+            }
+
+            createRestorePoint |= outcome.CreateRestorePoint;
+        }
+
+        // 3. One restore point before the whole chain, then the steps (stop-on-error).
+        var name = string.IsNullOrWhiteSpace(RecipeName) ? Strings.Get("Recipe_ConfirmTitle") : RecipeName.Trim();
+        var executed = await _execution.RunRecipeAsync(steps, name, createRestorePoint ? _restorePointCommand : null);
 
         // Record each finished (non-cancelled) step in the execution history.
         foreach (var (commandId, result) in executed)
@@ -250,24 +306,31 @@ public sealed partial class RecipesViewModel : ObservableObject
 
     private bool CanRunRecipe() => Steps.Count > 0 && !_execution.IsRunning;
 
-    /// <summary>Shows a single aggregated confirmation listing all steps (a warning if any is Dangerous).</summary>
-    private bool ConfirmRecipe()
+    /// <summary>The overview: recipe name, then each step with its danger level (and an admin marker).</summary>
+    private string BuildOverview()
     {
-        var anyDangerous = Steps.Any(s => s.DangerLevel == DangerLevel.Dangerous);
-        var list = string.Join(Environment.NewLine, Steps.Select((s, i) => $"{i + 1}. {s.Title}"));
-        var header = string.IsNullOrWhiteSpace(RecipeName)
-            ? string.Empty
-            : RecipeName + Environment.NewLine + Environment.NewLine;
-        var message = header + list;
-        if (anyDangerous)
+        var lines = Steps.Select((s, i) => string.Format(
+            CultureInfo.CurrentCulture,
+            "{0}. {1} \u2014 {2}{3}",
+            i + 1,
+            s.Title,
+            Strings.Get($"Danger_{s.DangerLevel}"),
+            s.Command.RequiresAdmin ? " \u00b7 " + Strings.Get("Detail_RequiresAdmin") : string.Empty));
+        var header = string.IsNullOrWhiteSpace(RecipeName) ? string.Empty : RecipeName.Trim() + Environment.NewLine + Environment.NewLine;
+        var message = header + string.Join(Environment.NewLine, lines);
+        if (Steps.Any(s => s.DangerLevel == DangerLevel.Dangerous))
         {
             message += Environment.NewLine + Environment.NewLine + Strings.Get("Recipe_ContainsDangerous");
         }
 
-        return MessageBox.Show(
-            message,
-            Strings.Get("Recipe_ConfirmTitle"),
-            MessageBoxButton.YesNo,
-            anyDangerous ? MessageBoxImage.Warning : MessageBoxImage.Question) == MessageBoxResult.Yes;
+        return message;
+    }
+
+    private void SetUnavailableSteps(List<string> ids)
+    {
+        _unavailableStepIds = ids;
+        UnavailableStepsNotice = ids.Count == 0
+            ? null
+            : string.Format(CultureInfo.CurrentCulture, Strings.Get("Recipe_UnavailableSteps"), ids.Count);
     }
 }

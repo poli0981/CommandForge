@@ -185,7 +185,7 @@
     <value>Revertir</value>
   </data>
   <data name="Confirm_TypeToConfirm" xml:space="preserve">
-    <value>Escribe el nombre del comando para confirmar:</value>
+    <value>Escribe el nombre del comando (o el ID que aparece en el cuadro) para confirmar:</value>
   </data>
   <data name="Confirm_CreateRestorePoint" xml:space="preserve">
     <value>Crear primero un punto de restauración del sistema (recomendado)</value>
@@ -203,7 +203,7 @@
     <value>Punto de restauración creado.</value>
   </data>
   <data name="Restore_Failed" xml:space="preserve">
-    <value>No se pudo crear un punto de restauración (se continúa de todos modos).</value>
+    <value>No se pudo crear un punto de restauración.</value>
   </data>
   <data name="Detail_CommandLine" xml:space="preserve">
     <value>Comando a ejecutar</value>
@@ -2320,5 +2320,38 @@
   </data>
   <data name="Cmd_clean.teamscache_Desc" xml:space="preserve">
     <value>Elimina la caché de la nueva app de Microsoft Teams (cierra Teams primero).</value>
+  </data>
+  <data name="Startup_FailedMessage" xml:space="preserve">
+    <value>No se pudo iniciar CommandForge: {0}
+
+Los detalles se escribieron en la carpeta de registros:
+{1}</value>
+  </data>
+  <data name="Restore_Skipped" xml:space="preserve">
+    <value>Punto de restauración omitido: Windows solo permite uno cada 24 horas y ya existe uno reciente.</value>
+  </data>
+  <data name="Restore_FailedTitle" xml:space="preserve">
+    <value>Error al crear el punto de restauración</value>
+  </data>
+  <data name="Restore_FailedPrompt" xml:space="preserve">
+    <value>No se pudo crear un punto de restauración. ¿Ejecutar «{0}» sin él?</value>
+  </data>
+  <data name="Run_NotStarted" xml:space="preserve">
+    <value>El comando no se ejecutó.</value>
+  </data>
+  <data name="Run_UnexpectedError" xml:space="preserve">
+    <value>Error inesperado: {0}</value>
+  </data>
+  <data name="Duration_Milliseconds" xml:space="preserve">
+    <value>{0:F0} ms</value>
+  </data>
+  <data name="Duration_Seconds" xml:space="preserve">
+    <value>{0:F1} s</value>
+  </data>
+  <data name="History_ClearConfirm" xml:space="preserve">
+    <value>¿Borrar todo el historial de ejecución? No se puede deshacer.</value>
+  </data>
+  <data name="Recipe_UnavailableSteps" xml:space="preserve">
+    <value>{0} paso(s) no están disponibles en este PC. Se conservan en la receta, pero aquí se omiten.</value>
   </data>
 </root>

@@ -8,6 +8,7 @@ using CommandForge.Application.Search;
 using CommandForge.Application.Settings;
 using CommandForge.Domain;
 using CommandForge.Wpf.Resources;
+using CommandForge.Wpf.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
@@ -19,7 +20,6 @@ namespace CommandForge.Wpf.ViewModels;
 /// </summary>
 public sealed partial class MainViewModel : ObservableObject
 {
-    private const string RestorePointCommandId = "system.restorepoint";
 
     private readonly ICatalogProvider _catalog;
     private readonly IConfirmationService _confirmation;
@@ -50,7 +50,8 @@ public sealed partial class MainViewModel : ObservableObject
         ISystemInfoService systemInfo,
         SettingsViewModel settingsViewModel,
         LogViewerViewModel logViewer,
-        DebugViewModel debug)
+        DebugViewModel debug,
+        IDialogService dialogs)
     {
         ArgumentNullException.ThrowIfNull(catalog);
         ArgumentNullException.ThrowIfNull(execution);
@@ -67,6 +68,7 @@ public sealed partial class MainViewModel : ObservableObject
         ArgumentNullException.ThrowIfNull(settingsViewModel);
         ArgumentNullException.ThrowIfNull(logViewer);
         ArgumentNullException.ThrowIfNull(debug);
+        ArgumentNullException.ThrowIfNull(dialogs);
 
         _catalog = catalog;
         _confirmation = confirmation;
@@ -95,7 +97,7 @@ public sealed partial class MainViewModel : ObservableObject
         _searchable = vms.Searchable;
         _categoryTitles = vms.CategoryTitles;
         _itemsById = vms.Items.ToDictionary(i => i.Command.Id, StringComparer.Ordinal);
-        _restorePointCommand = _itemsById.GetValueOrDefault(RestorePointCommandId)?.Command;
+        _restorePointCommand = _itemsById.GetValueOrDefault(RunSafety.RestorePointCommandId)?.Command;
 
         // Reflect persisted favorites on the shared item view-models (drives the star icon everywhere).
         var favoriteIds = new HashSet<string>(settings.FavoriteCommandIds, StringComparer.Ordinal);
@@ -105,8 +107,8 @@ public sealed partial class MainViewModel : ObservableObject
         }
 
         Home = new HomeViewModel(_itemsById, settings, systemInfo, item => SelectCommandById(item.Command.Id));
-        History = new HistoryViewModel(_itemsById, history, SelectCommandById, RunCommandByIdAsync);
-        Recipes = new RecipesViewModel(_itemsById, execution, recipeStore, history, clock);
+        History = new HistoryViewModel(_itemsById, history, SelectCommandById, RunCommandByIdAsync, execution, dialogs);
+        Recipes = new RecipesViewModel(_itemsById, execution, recipeStore, history, clock, confirmation, dialogs, settings, _restorePointCommand);
         UserCommands = new UserCommandsViewModel(userCommandStore, execution);
 
         Categories.Add(new CategoryViewModel(null, "Sidebar_AllCommands", "ViewGridOutline", vms.Items.Count));
@@ -316,18 +318,22 @@ public sealed partial class MainViewModel : ObservableObject
         => SelectedCommand?.Command.RevertCommandId is not null && !Execution.IsRunning;
 
     /// <summary>
-    /// Confirms a command per the user's settings (Dangerous always confirms; Caution honors
-    /// <see cref="ISettingsService.ConfirmCaution"/>), optionally creating a restore point, then runs it.
+    /// Confirms a command per <see cref="RunSafety"/> (Dangerous always confirms with typing; Caution
+    /// honors <see cref="ISettingsService.ConfirmCaution"/>), optionally creating a restore point, then runs it.
     /// </summary>
     private async Task ConfirmAndRunAsync(CommandDefinition command)
     {
-        CommandDefinition? restorePoint = null;
-        var needsConfirm = command.DangerLevel == DangerLevel.Dangerous
-            || (command.DangerLevel == DangerLevel.Caution && _settings.ConfirmCaution);
-
-        if (needsConfirm)
+        if (Execution.IsRunning)
         {
-            var outcome = await _confirmation.ConfirmAsync(command, defaultCreateRestorePoint: _settings.AutoCreateRestorePoint);
+            return; // one run at a time — and never record a run that didn't happen
+        }
+
+        CommandDefinition? restorePoint = null;
+        if (RunSafety.NeedsConfirmation(command, _settings.ConfirmCaution))
+        {
+            var outcome = await _confirmation.ConfirmAsync(
+                command,
+                defaultCreateRestorePoint: RunSafety.DefaultCreateRestorePoint(command, _settings.AutoCreateRestorePoint));
             if (outcome is null)
             {
                 return;
@@ -338,7 +344,7 @@ public sealed partial class MainViewModel : ObservableObject
                 restorePoint = _restorePointCommand;
             }
         }
-        else if (command.DangerLevel == DangerLevel.Caution && _settings.AutoCreateRestorePoint)
+        else if (RunSafety.DefaultCreateRestorePoint(command, _settings.AutoCreateRestorePoint))
         {
             // Caution confirmation skipped by setting, but still honor the restore-point preference.
             restorePoint = _restorePointCommand;
@@ -349,7 +355,10 @@ public sealed partial class MainViewModel : ObservableObject
             ? RegistrySnapshot.Capture(_registry, command.AffectedRegistryValues)
             : null;
 
-        await Execution.RunAsync(command, restorePoint);
+        if (!await Execution.RunAsync(command, restorePoint))
+        {
+            return;
+        }
 
         // Record the run for the Home "recent commands" list and the execution history
         // (skip user-cancelled runs, matching the recent-commands behaviour).

@@ -185,7 +185,7 @@
     <value>Hoàn tác</value>
   </data>
   <data name="Confirm_TypeToConfirm" xml:space="preserve">
-    <value>Gõ tên lệnh để xác nhận:</value>
+    <value>Gõ tên lệnh (hoặc mã ID hiển thị trong ô) để xác nhận:</value>
   </data>
   <data name="Confirm_CreateRestorePoint" xml:space="preserve">
     <value>Tạo điểm khôi phục hệ thống trước (khuyến nghị)</value>
@@ -203,7 +203,7 @@
     <value>Đã tạo điểm khôi phục.</value>
   </data>
   <data name="Restore_Failed" xml:space="preserve">
-    <value>Không tạo được điểm khôi phục (vẫn tiếp tục).</value>
+    <value>Không tạo được điểm khôi phục.</value>
   </data>
   <data name="Detail_CommandLine" xml:space="preserve">
     <value>Lệnh sẽ chạy</value>
@@ -2320,5 +2320,38 @@ Tiếp tục?</value>
   </data>
   <data name="Cmd_clean.teamscache_Desc" xml:space="preserve">
     <value>Xóa cache của ứng dụng Microsoft Teams mới (đóng Teams trước).</value>
+  </data>
+  <data name="Startup_FailedMessage" xml:space="preserve">
+    <value>Không thể khởi động CommandForge: {0}
+
+Chi tiết đã được ghi vào thư mục log:
+{1}</value>
+  </data>
+  <data name="Restore_Skipped" xml:space="preserve">
+    <value>Đã bỏ qua điểm khôi phục: Windows chỉ cho tạo một điểm mỗi 24 giờ và đã có một điểm gần đây.</value>
+  </data>
+  <data name="Restore_FailedTitle" xml:space="preserve">
+    <value>Không tạo được điểm khôi phục</value>
+  </data>
+  <data name="Restore_FailedPrompt" xml:space="preserve">
+    <value>Không thể tạo điểm khôi phục. Vẫn chạy "{0}" mà không có điểm khôi phục?</value>
+  </data>
+  <data name="Run_NotStarted" xml:space="preserve">
+    <value>Lệnh chưa được chạy.</value>
+  </data>
+  <data name="Run_UnexpectedError" xml:space="preserve">
+    <value>Lỗi không mong muốn: {0}</value>
+  </data>
+  <data name="Duration_Milliseconds" xml:space="preserve">
+    <value>{0:F0} ms</value>
+  </data>
+  <data name="Duration_Seconds" xml:space="preserve">
+    <value>{0:F1} giây</value>
+  </data>
+  <data name="History_ClearConfirm" xml:space="preserve">
+    <value>Xóa toàn bộ lịch sử chạy lệnh? Không thể hoàn tác thao tác này.</value>
+  </data>
+  <data name="Recipe_UnavailableSteps" xml:space="preserve">
+    <value>Có {0} bước không khả dụng trên máy này. Các bước đó vẫn được giữ trong chuỗi lệnh nhưng sẽ bị bỏ qua.</value>
   </data>
 </root>

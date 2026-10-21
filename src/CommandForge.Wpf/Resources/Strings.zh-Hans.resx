@@ -185,7 +185,7 @@
     <value>还原</value>
   </data>
   <data name="Confirm_TypeToConfirm" xml:space="preserve">
-    <value>输入命令名称以确认：</value>
+    <value>输入命令名称（或框中显示的 ID）以确认：</value>
   </data>
   <data name="Confirm_CreateRestorePoint" xml:space="preserve">
     <value>先创建系统还原点（推荐）</value>
@@ -203,7 +203,7 @@
     <value>还原点已创建。</value>
   </data>
   <data name="Restore_Failed" xml:space="preserve">
-    <value>无法创建还原点（仍将继续）。</value>
+    <value>无法创建还原点。</value>
   </data>
   <data name="Detail_CommandLine" xml:space="preserve">
     <value>要运行的命令</value>
@@ -2320,5 +2320,38 @@
   </data>
   <data name="Cmd_clean.teamscache_Desc" xml:space="preserve">
     <value>删除新版 Microsoft Teams 应用的缓存（请先关闭 Teams）。</value>
+  </data>
+  <data name="Startup_FailedMessage" xml:space="preserve">
+    <value>无法启动 CommandForge：{0}
+
+详细信息已写入日志文件夹：
+{1}</value>
+  </data>
+  <data name="Restore_Skipped" xml:space="preserve">
+    <value>已跳过还原点：Windows 每 24 小时只允许创建一个，并且最近已有一个。</value>
+  </data>
+  <data name="Restore_FailedTitle" xml:space="preserve">
+    <value>还原点创建失败</value>
+  </data>
+  <data name="Restore_FailedPrompt" xml:space="preserve">
+    <value>无法创建还原点。仍要在没有还原点的情况下运行“{0}”吗？</value>
+  </data>
+  <data name="Run_NotStarted" xml:space="preserve">
+    <value>命令未运行。</value>
+  </data>
+  <data name="Run_UnexpectedError" xml:space="preserve">
+    <value>意外错误：{0}</value>
+  </data>
+  <data name="Duration_Milliseconds" xml:space="preserve">
+    <value>{0:F0} 毫秒</value>
+  </data>
+  <data name="Duration_Seconds" xml:space="preserve">
+    <value>{0:F1} 秒</value>
+  </data>
+  <data name="History_ClearConfirm" xml:space="preserve">
+    <value>清除全部执行历史记录？此操作无法撤消。</value>
+  </data>
+  <data name="Recipe_UnavailableSteps" xml:space="preserve">
+    <value>有 {0} 个步骤在此电脑上不可用。它们仍保留在配方中，但在此处会被跳过。</value>
   </data>
 </root>

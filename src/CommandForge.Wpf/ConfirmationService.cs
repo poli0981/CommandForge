@@ -19,13 +19,14 @@ public sealed class ConfirmationService : IConfirmationService
             Strings.Get(command.DescriptionKey),
             defaultCreateRestorePoint);
 
-        var dialog = new ConfirmationDialog(viewModel)
+        var dialog = new ConfirmationDialog(viewModel);
+        if (System.Windows.Application.Current?.MainWindow is { IsVisible: true } owner)
         {
-            Owner = System.Windows.Application.Current.MainWindow,
-        };
+            dialog.Owner = owner;
+        }
 
         var confirmed = dialog.ShowDialog() == true;
         return Task.FromResult<ConfirmationOutcome?>(
-            confirmed ? new ConfirmationOutcome(viewModel.CreateRestorePoint) : null);
+            confirmed ? new ConfirmationOutcome(viewModel.ShowRestorePointOption && viewModel.CreateRestorePoint) : null);
     }
 }

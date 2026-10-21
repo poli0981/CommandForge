@@ -9,7 +9,8 @@
         FontFamily="{DynamicResource MaterialDesignFont}"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontSize="{DynamicResource AppFontSize}"
-        Background="{DynamicResource MaterialDesignPaper}">
+        Background="{DynamicResource MaterialDesignPaper}"
+        FocusManager.FocusedElement="{Binding ElementName=CancelButton}">
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVis" />
     </Window.Resources>
@@ -43,20 +44,24 @@
 
         <StackPanel Grid.Row="3" Margin="0,0,0,12"
                     Visibility="{Binding IsDangerous, Converter={StaticResource BoolToVis}}">
-            <TextBlock Text="{res:Loc Confirm_TypeToConfirm}" Margin="0,0,0,6" />
-            <TextBox Text="{Binding ConfirmationInput, UpdateSourceTrigger=PropertyChanged}"
+            <TextBlock Text="{res:Loc Confirm_TypeToConfirm}" TextWrapping="Wrap" Margin="0,0,0,6" />
+            <TextBox x:Name="ConfirmationInputBox"
+                     Text="{Binding ConfirmationInput, UpdateSourceTrigger=PropertyChanged}"
                      AutomationProperties.Name="{res:Loc Confirm_TypeToConfirm}"
-                     materialDesign:HintAssist.Hint="{Binding Title}" />
+                     materialDesign:HintAssist.Hint="{Binding CommandId}" />
         </StackPanel>
 
         <CheckBox Grid.Row="4" IsChecked="{Binding CreateRestorePoint}"
+                  Visibility="{Binding ShowRestorePointOption, Converter={StaticResource BoolToVis}}"
                   Content="{res:Loc Confirm_CreateRestorePoint}" Margin="0,0,0,16" />
 
         <StackPanel Grid.Row="5" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button Content="{res:Loc Console_Cancel}" Command="{Binding CancelCommand}"
+            <!-- Cancel is the default and the Esc action: the safe choice is always the easy one. -->
+            <Button x:Name="CancelButton" Content="{res:Loc Console_Cancel}" Command="{Binding CancelCommand}"
+                    IsCancel="True" IsDefault="True"
                     Style="{StaticResource MaterialDesignOutlinedButton}" Margin="0,0,8,0" />
             <Button Content="{res:Loc Detail_Run}" Command="{Binding RunCommand}"
-                    IsEnabled="{Binding CanRun}" Style="{StaticResource MaterialDesignRaisedButton}" />
+                    Style="{StaticResource MaterialDesignRaisedButton}" />
         </StackPanel>
     </Grid>
 </Window>

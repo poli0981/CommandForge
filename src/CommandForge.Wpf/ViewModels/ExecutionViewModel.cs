@@ -1,30 +1,46 @@
-using System.Collections.ObjectModel;
 using System.Globalization;
-using System.Runtime.InteropServices;
 using System.Threading.Channels;
-using System.Windows;
+using CommandForge.Application;
 using CommandForge.Application.Recipes;
 using CommandForge.Application.UseCases;
 using CommandForge.Domain;
 using CommandForge.Wpf.Resources;
+using CommandForge.Wpf.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Serilog;
 
 namespace CommandForge.Wpf.ViewModels;
 
 /// <summary>
-/// Hosts a single command run: live console output (streamed off the UI thread via a channel),
-/// cancellation, and the result (exit code, duration, restart-required).
+/// Hosts a single command run: live console output (streamed off the UI thread via a channel and
+/// appended in batches), cancellation, the optional restore point before it, and the result (exit
+/// code, duration, restart-required).
 /// </summary>
 public sealed partial class ExecutionViewModel : ObservableObject
 {
+    // Lines moved to the UI per dispatcher turn, and the pause after a full batch so WPF can render.
+    private const int MaxBatch = 500;
+    private static readonly TimeSpan BatchPause = TimeSpan.FromMilliseconds(15);
+
     private readonly RunCommandUseCase _run;
+    private readonly IDialogService _dialogs;
+    private readonly IClipboardService _clipboard;
+    private readonly ILogger _log = Log.ForContext<ExecutionViewModel>();
     private CancellationTokenSource? _cancellation;
 
-    public ExecutionViewModel(RunCommandUseCase run) => _run = run;
+    public ExecutionViewModel(RunCommandUseCase run, IDialogService dialogs, IClipboardService clipboard)
+    {
+        ArgumentNullException.ThrowIfNull(run);
+        ArgumentNullException.ThrowIfNull(dialogs);
+        ArgumentNullException.ThrowIfNull(clipboard);
+        _run = run;
+        _dialogs = dialogs;
+        _clipboard = clipboard;
+    }
 
-    /// <summary>Live output lines (stdout + stderr).</summary>
-    public ObservableCollection<OutputLine> OutputLines { get; } = [];
+    /// <summary>Live output lines (stdout + stderr), capped at <see cref="OutputBuffer.Capacity"/>.</summary>
+    public OutputBuffer OutputLines { get; } = new();
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(ShowConsole))]
@@ -71,46 +87,34 @@ public sealed partial class ExecutionViewModel : ObservableObject
     /// <summary>
     /// Runs <paramref name="command"/>, streaming output to <see cref="OutputLines"/>. If
     /// <paramref name="restorePointCommand"/> is supplied it runs first (before a risky command);
-    /// both go through the same broker, so they share one UAC prompt.
+    /// both go through the same broker, so they share one UAC prompt. Returns false when the command
+    /// did not run (another run is in progress, or the user stopped after a failed restore point).
     /// </summary>
-    public async Task RunAsync(CommandDefinition command, CommandDefinition? restorePointCommand = null)
+    public async Task<bool> RunAsync(CommandDefinition command, CommandDefinition? restorePointCommand = null)
     {
         ArgumentNullException.ThrowIfNull(command);
         if (IsRunning)
         {
-            return;
+            return false;
         }
 
-        OutputLines.Clear();
-        HasResult = false;
-        IsRunning = true;
-        _cancellation = new CancellationTokenSource();
-        var token = _cancellation.Token;
-
+        var token = Begin();
         try
         {
-            if (restorePointCommand is not null)
+            if (restorePointCommand is not null
+                && !await PrepareRestorePointAsync(restorePointCommand, Strings.Get(command.TitleKey), token))
             {
-                OutputLines.Add(new OutputLine(Strings.Get("Restore_Creating"), IsError: false));
-                var restoreResult = await RunOneAsync(restorePointCommand, token);
-                if (restoreResult.Cancelled)
-                {
-                    ApplyResult(restoreResult);
-                    return;
-                }
-
-                OutputLines.Add(new OutputLine(
-                    Strings.Get(restoreResult.Success ? "Restore_Created" : "Restore_Failed"),
-                    IsError: !restoreResult.Success));
+                return false;
             }
 
-            ApplyResult(await RunOneAsync(command, token));
+            var result = await RunOneAsync(command, token);
+            ApplyResult(result);
+            LogSummary(command, result);
+            return true;
         }
         finally
         {
-            IsRunning = false;
-            _cancellation.Dispose();
-            _cancellation = null;
+            End();
         }
     }
 
@@ -121,7 +125,9 @@ public sealed partial class ExecutionViewModel : ObservableObject
     /// Returns the (commandId, result) of each executed step, for history recording.
     /// </summary>
     public async Task<IReadOnlyList<(string CommandId, ExecutionResult Result)>> RunRecipeAsync(
-        IReadOnlyList<CommandDefinition> steps)
+        IReadOnlyList<CommandDefinition> steps,
+        string recipeName,
+        CommandDefinition? restorePointCommand = null)
     {
         ArgumentNullException.ThrowIfNull(steps);
 
@@ -131,30 +137,26 @@ public sealed partial class ExecutionViewModel : ObservableObject
             return executed;
         }
 
-        OutputLines.Clear();
-        HasResult = false;
-        IsRunning = true;
-        _cancellation = new CancellationTokenSource();
-        var token = _cancellation.Token;
+        var token = Begin();
         ExecutionResult? last = null;
-
         try
         {
+            if (restorePointCommand is not null && !await PrepareRestorePointAsync(restorePointCommand, recipeName, token))
+            {
+                return executed;
+            }
+
             for (var i = 0; i < steps.Count; i++)
             {
                 var step = steps[i];
                 OutputLines.Add(new OutputLine(
-                    string.Format(
-                        CultureInfo.CurrentCulture,
-                        Strings.Get("Recipe_StepHeader"),
-                        i + 1,
-                        steps.Count,
-                        Strings.Get(step.TitleKey)),
+                    string.Format(CultureInfo.CurrentCulture, Strings.Get("Recipe_StepHeader"), i + 1, steps.Count, Strings.Get(step.TitleKey)),
                     IsError: false));
 
                 var result = await RunOneAsync(step, token);
                 last = result;
                 executed.Add((step.Id, result));
+                LogSummary(step, result);
 
                 if (RecipeFlow.ShouldStop(result))
                 {
@@ -170,22 +172,50 @@ public sealed partial class ExecutionViewModel : ObservableObject
         }
         finally
         {
-            IsRunning = false;
-            _cancellation.Dispose();
-            _cancellation = null;
+            End();
         }
 
         return executed;
     }
 
-    private static string StopReasonKey(ExecutionResult result)
+    /// <summary>
+    /// Creates the restore point. "Already made one in the last 24 hours" counts as fine; any other
+    /// failure asks whether to continue without one (No is the default). Returns false to stop.
+    /// </summary>
+    private async Task<bool> PrepareRestorePointAsync(CommandDefinition restorePointCommand, string targetTitle, CancellationToken token)
     {
+        OutputLines.Add(new OutputLine(Strings.Get("Restore_Creating"), IsError: false));
+        var result = await RunOneAsync(restorePointCommand, token);
+
         if (result.Cancelled)
         {
-            return "Recipe_Cancelled";
+            ApplyResult(result);
+            return false;
         }
 
-        return result.RequiresRestart ? "Recipe_StoppedRestart" : "Recipe_StoppedOnError";
+        if (result.Success)
+        {
+            OutputLines.Add(new OutputLine(Strings.Get("Restore_Created"), IsError: false));
+            return true;
+        }
+
+        if (result.ExitCode == RunSafety.RestorePointSkippedExitCode)
+        {
+            OutputLines.Add(new OutputLine(Strings.Get("Restore_Skipped"), IsError: false));
+            return true;
+        }
+
+        OutputLines.Add(new OutputLine(Strings.Get("Restore_Failed"), IsError: true));
+        var proceed = await _dialogs.ConfirmAsync(
+            Strings.Get("Restore_FailedTitle"),
+            string.Format(CultureInfo.CurrentCulture, Strings.Get("Restore_FailedPrompt"), targetTitle));
+        if (!proceed)
+        {
+            OutputLines.Add(new OutputLine(Strings.Get("Run_NotStarted"), IsError: true));
+            ApplyResult(result);
+        }
+
+        return proceed;
     }
 
     private async Task<ExecutionResult> RunOneAsync(CommandDefinition command, CancellationToken token)
@@ -193,15 +223,53 @@ public sealed partial class ExecutionViewModel : ObservableObject
         var channel = Channel.CreateBounded<OutputLine>(
             new BoundedChannelOptions(4096) { SingleReader = true, SingleWriter = false });
 
-        // Executor runs off the UI thread; we consume on the UI thread (safe to touch the collection).
+        // Executor runs off the UI thread; we consume on the UI thread (safe to touch the buffer).
         var execution = Task.Run(() => _run.RunAsync(command, channel.Writer, token), CancellationToken.None);
 
-        await foreach (var line in channel.Reader.ReadAllAsync(CancellationToken.None))
+        var batch = new List<OutputLine>(MaxBatch);
+        while (await channel.Reader.WaitToReadAsync(CancellationToken.None))
         {
-            OutputLines.Add(line);
+            while (batch.Count < MaxBatch && channel.Reader.TryRead(out var line))
+            {
+                batch.Add(line);
+            }
+
+            OutputLines.Append(batch);
+            var full = batch.Count == MaxBatch;
+            batch.Clear();
+            if (full)
+            {
+                await Task.Delay(BatchPause, CancellationToken.None); // a fast producer: let WPF render
+            }
         }
 
-        return await execution;
+        try
+        {
+            return await execution;
+        }
+        catch (Exception ex)
+        {
+            // RunCommandUseCase already maps cancellation; anything else is unexpected — report, don't crash.
+            _log.Error(ex, "Running {CommandId} failed unexpectedly.", command.Id);
+            OutputLines.Add(new OutputLine(string.Format(CultureInfo.CurrentCulture, Strings.Get("Run_UnexpectedError"), ex.Message), IsError: true));
+            return new ExecutionResult { ExitCode = -1, Success = false, Duration = TimeSpan.Zero };
+        }
+    }
+
+    private CancellationToken Begin()
+    {
+        OutputLines.Clear();
+        HasResult = false;
+        IsRunning = true;
+        _cancellation = new CancellationTokenSource();
+        return _cancellation.Token;
+    }
+
+    private void End()
+    {
+        IsRunning = false;
+        _cancellation?.Dispose();
+        _cancellation = null;
     }
 
     private void ApplyResult(ExecutionResult result)
@@ -215,25 +283,35 @@ public sealed partial class ExecutionViewModel : ObservableObject
         HasResult = true;
     }
 
+    private void LogSummary(CommandDefinition command, ExecutionResult result)
+        => _log.Information(
+            "Ran {CommandId} (admin: {RequiresAdmin}): exit {ExitCode}, success {Success}, cancelled {Cancelled}, restart {RequiresRestart}, {DurationMs} ms.",
+            command.Id,
+            command.RequiresAdmin,
+            result.ExitCode,
+            result.Success,
+            result.Cancelled,
+            result.RequiresRestart,
+            (long)result.Duration.TotalMilliseconds);
+
+    private static string StopReasonKey(ExecutionResult result)
+    {
+        if (result.Cancelled)
+        {
+            return "Recipe_Cancelled";
+        }
+
+        return result.RequiresRestart ? "Recipe_StoppedRestart" : "Recipe_StoppedOnError";
+    }
+
     [RelayCommand]
     private void Cancel() => _cancellation?.Cancel();
 
     [RelayCommand]
-    private void CopyOutput()
-    {
-        var text = string.Join(Environment.NewLine, OutputLines.Select(l => l.Text));
-        try
-        {
-            Clipboard.SetText(text);
-        }
-        catch (COMException)
-        {
-            // Clipboard temporarily locked — safe to ignore.
-        }
-    }
+    private void CopyOutput() => _clipboard.TrySetText(OutputLines.ToText());
 
     private static string FormatDuration(TimeSpan duration)
         => duration.TotalSeconds < 1
-            ? $"{duration.TotalMilliseconds:F0} ms"
-            : $"{duration.TotalSeconds:F1} s";
+            ? string.Format(CultureInfo.CurrentCulture, Strings.Get("Duration_Milliseconds"), duration.TotalMilliseconds)
+            : string.Format(CultureInfo.CurrentCulture, Strings.Get("Duration_Seconds"), duration.TotalSeconds);
 }

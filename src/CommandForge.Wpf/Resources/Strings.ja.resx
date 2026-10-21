@@ -185,7 +185,7 @@
     <value>元に戻す</value>
   </data>
   <data name="Confirm_TypeToConfirm" xml:space="preserve">
-    <value>確認のためコマンド名を入力してください:</value>
+    <value>確認のため、コマンド名 (またはボックスに表示されている ID) を入力してください:</value>
   </data>
   <data name="Confirm_CreateRestorePoint" xml:space="preserve">
     <value>先にシステムの復元ポイントを作成する（推奨）</value>
@@ -203,7 +203,7 @@
     <value>復元ポイントを作成しました。</value>
   </data>
   <data name="Restore_Failed" xml:space="preserve">
-    <value>復元ポイントを作成できませんでした（このまま続行します）。</value>
+    <value>復元ポイントを作成できませんでした。</value>
   </data>
   <data name="Detail_CommandLine" xml:space="preserve">
     <value>実行するコマンド</value>
@@ -2320,5 +2320,38 @@
   </data>
   <data name="Cmd_clean.teamscache_Desc" xml:space="preserve">
     <value>新しい Microsoft Teams アプリのキャッシュを削除します（先に Teams を閉じてください）。</value>
+  </data>
+  <data name="Startup_FailedMessage" xml:space="preserve">
+    <value>CommandForge を起動できませんでした: {0}
+
+詳細はログ フォルダーに記録されました:
+{1}</value>
+  </data>
+  <data name="Restore_Skipped" xml:space="preserve">
+    <value>復元ポイントをスキップしました: Windows では 24 時間に 1 つしか作成できず、最近のものが既にあります。</value>
+  </data>
+  <data name="Restore_FailedTitle" xml:space="preserve">
+    <value>復元ポイントの作成に失敗しました</value>
+  </data>
+  <data name="Restore_FailedPrompt" xml:space="preserve">
+    <value>復元ポイントを作成できませんでした。復元ポイントなしで「{0}」を実行しますか?</value>
+  </data>
+  <data name="Run_NotStarted" xml:space="preserve">
+    <value>コマンドは実行されませんでした。</value>
+  </data>
+  <data name="Run_UnexpectedError" xml:space="preserve">
+    <value>予期しないエラー: {0}</value>
+  </data>
+  <data name="Duration_Milliseconds" xml:space="preserve">
+    <value>{0:F0} ミリ秒</value>
+  </data>
+  <data name="Duration_Seconds" xml:space="preserve">
+    <value>{0:F1} 秒</value>
+  </data>
+  <data name="History_ClearConfirm" xml:space="preserve">
+    <value>実行履歴をすべて消去しますか? この操作は元に戻せません。</value>
+  </data>
+  <data name="Recipe_UnavailableSteps" xml:space="preserve">
+    <value>{0} 個の手順はこの PC では利用できません。レシピには残りますが、ここではスキップされます。</value>
   </data>
 </root>

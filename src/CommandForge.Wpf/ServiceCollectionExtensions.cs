@@ -1,4 +1,5 @@
 using CommandForge.Application.Ports;
+using CommandForge.Wpf.Services;
 using CommandForge.Wpf.Theming;
 using CommandForge.Wpf.ViewModels;
 using CommandForge.Wpf.Views;
@@ -14,6 +15,10 @@ public static class ServiceCollectionExtensions
     {
         ArgumentNullException.ThrowIfNull(services);
 
+        services.AddSingleton<IDialogService, MessageBoxDialogService>();
+        services.AddSingleton<IClipboardService, ClipboardService>();
+        services.AddSingleton<IShellService, ShellService>();
+        services.AddSingleton<IFileDialogService, FileDialogService>();
         services.AddSingleton<IConfirmationService, ConfirmationService>();
         services.AddSingleton<IUpdateDialogService, UpdateDialogService>();
         services.AddSingleton<IReportBugDialogService, ReportBugDialogService>();

@@ -185,7 +185,7 @@
     <value>Revert</value>
   </data>
   <data name="Confirm_TypeToConfirm" xml:space="preserve">
-    <value>Type the command name to confirm:</value>
+    <value>Type the command name (or the ID shown in the box) to confirm:</value>
   </data>
   <data name="Confirm_CreateRestorePoint" xml:space="preserve">
     <value>Create a System Restore Point first (recommended)</value>
@@ -203,7 +203,7 @@
     <value>Restore point created.</value>
   </data>
   <data name="Restore_Failed" xml:space="preserve">
-    <value>Could not create a restore point (continuing anyway).</value>
+    <value>Could not create a restore point.</value>
   </data>
   <data name="Detail_CommandLine" xml:space="preserve">
     <value>Command to run</value>
@@ -2320,5 +2320,38 @@ Continue?</value>
   </data>
   <data name="Cmd_clean.teamscache_Desc" xml:space="preserve">
     <value>Delete the cache for the new Microsoft Teams app (close Teams first).</value>
+  </data>
+  <data name="Startup_FailedMessage" xml:space="preserve">
+    <value>CommandForge couldn't start: {0}
+
+Details were written to the log folder:
+{1}</value>
+  </data>
+  <data name="Restore_Skipped" xml:space="preserve">
+    <value>Restore point skipped: Windows allows only one every 24 hours, and a recent one already exists.</value>
+  </data>
+  <data name="Restore_FailedTitle" xml:space="preserve">
+    <value>Restore point failed</value>
+  </data>
+  <data name="Restore_FailedPrompt" xml:space="preserve">
+    <value>A restore point couldn't be created. Run "{0}" without one?</value>
+  </data>
+  <data name="Run_NotStarted" xml:space="preserve">
+    <value>The command was not run.</value>
+  </data>
+  <data name="Run_UnexpectedError" xml:space="preserve">
+    <value>Unexpected error: {0}</value>
+  </data>
+  <data name="Duration_Milliseconds" xml:space="preserve">
+    <value>{0:F0} ms</value>
+  </data>
+  <data name="Duration_Seconds" xml:space="preserve">
+    <value>{0:F1} s</value>
+  </data>
+  <data name="History_ClearConfirm" xml:space="preserve">
+    <value>Clear the whole execution history? This can't be undone.</value>
+  </data>
+  <data name="Recipe_UnavailableSteps" xml:space="preserve">
+    <value>{0} step(s) aren't available on this PC. They stay in the recipe but are skipped here.</value>
   </data>
 </root>

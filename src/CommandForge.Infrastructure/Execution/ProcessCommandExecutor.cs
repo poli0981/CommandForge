@@ -1,7 +1,9 @@
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Channels;
+using CommandForge.Application;
 using CommandForge.Application.Ports;
 using CommandForge.Domain;
 
@@ -14,12 +16,25 @@ namespace CommandForge.Infrastructure.Execution;
 /// </summary>
 internal sealed class ProcessCommandExecutor : ICommandExecutor
 {
+    // Only the tail of the output is kept for regex restart detection.
+    private const int MaxCapturedChars = 256 * 1024;
+
     // Catalog patterns are vetted, but output size is unbounded — cap the match time anyway.
     private static readonly TimeSpan RegexTimeout = TimeSpan.FromSeconds(2);
 
     private readonly IProcessRunner _runner;
+    private readonly IReadOnlyDictionary<string, string> _tokens;
 
-    public ProcessCommandExecutor(IProcessRunner runner) => _runner = runner;
+    public ProcessCommandExecutor(IProcessRunner runner)
+        : this(runner, SystemPathTokens.Values)
+    {
+    }
+
+    internal ProcessCommandExecutor(IProcessRunner runner, IReadOnlyDictionary<string, string> tokens)
+    {
+        _runner = runner;
+        _tokens = tokens;
+    }
 
     /// <inheritdoc />
     public async Task<ExecutionResult> ExecuteAsync(
@@ -31,22 +46,24 @@ internal sealed class ProcessCommandExecutor : ICommandExecutor
         ArgumentNullException.ThrowIfNull(output);
 
         var stopwatch = Stopwatch.StartNew();
+        var arguments = ArgumentTokens.Expand(command.ArgsTemplate, _tokens);
 
         if (command.ExecutionMode == ExecutionMode.Launch)
         {
-            return Launch(command, output, stopwatch);
+            return Launch(command, arguments, output, stopwatch);
         }
 
-        var capturedLines = new List<string>();
+        // Keep (a bounded tail of) the text only when a restart regex needs to inspect it.
+        var captured = command.Restart == RestartPolicy.FromOutputRegex ? new StringBuilder() : null;
 
-        // Internal pipe: runner (background threads) -> here. We tee each line to the caller's
-        // channel (for the UI) while capturing the full text for regex restart detection.
+        // Internal pipe: runner (background threads) -> here. Each line is teed to the caller's
+        // channel (for the UI) and, when needed, into the capture buffer.
         var inner = Channel.CreateUnbounded<OutputLine>(new UnboundedChannelOptions { SingleReader = true });
-        var runTask = _runner.RunAsync(command.Executable, command.ArgsTemplate, inner.Writer, cancellationToken);
+        var runTask = _runner.RunAsync(command.Executable, arguments, inner.Writer, cancellationToken);
 
         await foreach (var line in inner.Reader.ReadAllAsync(CancellationToken.None))
         {
-            capturedLines.Add(line.Text);
+            Capture(captured, line.Text);
             await output.WriteAsync(line, CancellationToken.None);
         }
 
@@ -63,7 +80,6 @@ internal sealed class ProcessCommandExecutor : ICommandExecutor
         catch (Exception ex) when (ex is Win32Exception or InvalidOperationException)
         {
             var error = $"Failed to start '{command.Executable}': {ex.Message}";
-            capturedLines.Add(error);
             await output.WriteAsync(new OutputLine(error, IsError: true), CancellationToken.None);
         }
         finally
@@ -72,27 +88,24 @@ internal sealed class ProcessCommandExecutor : ICommandExecutor
         }
 
         stopwatch.Stop();
-        var requiresRestart = !cancelled && DetectRestart(command, exitCode, string.Join('\n', capturedLines));
-
         return new ExecutionResult
         {
             ExitCode = exitCode,
             Success = !cancelled && (exitCode == 0 || exitCode == ExecutionResult.RebootRequiredExitCode),
             Duration = stopwatch.Elapsed,
-            RequiresRestart = requiresRestart,
+            RequiresRestart = !cancelled && DetectRestart(command, exitCode, captured),
             Cancelled = cancelled,
-            OutputLines = capturedLines,
         };
     }
 
-    private ExecutionResult Launch(CommandDefinition command, ChannelWriter<OutputLine> output, Stopwatch stopwatch)
+    private ExecutionResult Launch(CommandDefinition command, string arguments, ChannelWriter<OutputLine> output, Stopwatch stopwatch)
     {
         string message;
         bool success;
         try
         {
-            _runner.Launch(command.Executable, command.ArgsTemplate);
-            message = $"Launched: {command.Executable} {command.ArgsTemplate}".Trim();
+            _runner.Launch(command.Executable, arguments);
+            message = $"Launched: {command.Executable} {arguments}".Trim();
             success = true;
         }
         catch (Exception ex) when (ex is Win32Exception or InvalidOperationException)
@@ -110,19 +123,41 @@ internal sealed class ProcessCommandExecutor : ICommandExecutor
             ExitCode = success ? 0 : -1,
             Success = success,
             Duration = stopwatch.Elapsed,
-            RequiresRestart = false,
+            // A launched tool runs on its own; only an unconditional policy can be honoured.
+            RequiresRestart = success && command.Restart == RestartPolicy.Always,
             Cancelled = false,
-            OutputLines = [message],
         };
     }
 
-    private static bool DetectRestart(CommandDefinition command, int exitCode, string output)
-        => command.Restart switch
+    private static void Capture(StringBuilder? captured, string line)
+    {
+        if (captured is null)
+        {
+            return;
+        }
+
+        captured.Append(line).Append('\n');
+        if (captured.Length > MaxCapturedChars)
+        {
+            captured.Remove(0, captured.Length - MaxCapturedChars);
+        }
+    }
+
+    private static bool DetectRestart(CommandDefinition command, int exitCode, StringBuilder? captured)
+    {
+        // 3010 is Windows' own "succeeded, restart required" signal, whatever the catalog policy says.
+        if (exitCode == ExecutionResult.RebootRequiredExitCode)
+        {
+            return true;
+        }
+
+        return command.Restart switch
         {
             RestartPolicy.Always => true,
-            RestartPolicy.FromExitCode => exitCode == ExecutionResult.RebootRequiredExitCode,
             RestartPolicy.FromOutputRegex => command.RestartRegex is { } pattern
-                && Regex.IsMatch(output, pattern, RegexOptions.None, RegexTimeout),
+                && captured is not null
+                && Regex.IsMatch(captured.ToString(), pattern, RegexOptions.None, RegexTimeout),
             _ => false,
         };
+    }
 }

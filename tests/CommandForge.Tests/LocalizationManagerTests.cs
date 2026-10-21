@@ -5,6 +5,7 @@ using CommandForge.Wpf.Resources;
 namespace CommandForge.Tests;
 
 /// <summary>Verifies the live-localization source flips strings and notifies bindings on culture change.</summary>
+[Collection(CultureSensitiveCollection.Name)]
 public sealed class LocalizationManagerTests
 {
     [Fact]

@@ -1,6 +1,6 @@
-using System.Text.Json;
 using CommandForge.Application.Ports;
 using CommandForge.Application.Settings;
+using CommandForge.Infrastructure.Persistence;
 
 namespace CommandForge.Infrastructure.Portability;
 
@@ -11,6 +11,7 @@ namespace CommandForge.Infrastructure.Portability;
 public sealed class JsonProfileService : IProfileService
 {
     private readonly string _path;
+    private readonly Lock _gate = new();
     private readonly List<ProfileEntry> _profiles;
 
     /// <summary>Creates a service backed by the default <see cref="AppPaths.ProfilesFilePath"/>.</summary>
@@ -27,11 +28,22 @@ public sealed class JsonProfileService : IProfileService
     }
 
     /// <inheritdoc />
-    public IReadOnlyList<string> GetNames() => _profiles.Select(p => p.Name).ToList();
+    public IReadOnlyList<string> GetNames()
+    {
+        lock (_gate)
+        {
+            return _profiles.Select(p => p.Name).ToList();
+        }
+    }
 
     /// <inheritdoc />
     public PortableSettings? Get(string name)
-        => _profiles.FirstOrDefault(p => string.Equals(p.Name, name, StringComparison.OrdinalIgnoreCase))?.Settings;
+    {
+        lock (_gate)
+        {
+            return _profiles.FirstOrDefault(p => string.Equals(p.Name, name, StringComparison.OrdinalIgnoreCase))?.Settings;
+        }
+    }
 
     /// <inheritdoc />
     public void Save(string name, PortableSettings settings)
@@ -39,50 +51,29 @@ public sealed class JsonProfileService : IProfileService
         ArgumentException.ThrowIfNullOrWhiteSpace(name);
         ArgumentNullException.ThrowIfNull(settings);
 
-        _profiles.RemoveAll(p => string.Equals(p.Name, name, StringComparison.OrdinalIgnoreCase));
-        _profiles.Add(new ProfileEntry { Name = name, Settings = settings });
-        SaveFile();
+        lock (_gate)
+        {
+            _profiles.RemoveAll(p => string.Equals(p.Name, name, StringComparison.OrdinalIgnoreCase));
+            _profiles.Add(new ProfileEntry { Name = name, Settings = settings });
+            SaveFile();
+        }
     }
 
     /// <inheritdoc />
     public void Delete(string name)
     {
-        if (_profiles.RemoveAll(p => string.Equals(p.Name, name, StringComparison.OrdinalIgnoreCase)) > 0)
+        lock (_gate)
         {
-            SaveFile();
+            if (_profiles.RemoveAll(p => string.Equals(p.Name, name, StringComparison.OrdinalIgnoreCase)) > 0)
+            {
+                SaveFile();
+            }
         }
     }
 
     private void SaveFile()
-    {
-        var directory = Path.GetDirectoryName(_path);
-        if (!string.IsNullOrEmpty(directory))
-        {
-            Directory.CreateDirectory(directory);
-        }
-
-        var file = new ProfilesFile { Profiles = _profiles };
-        var json = JsonSerializer.Serialize(file, PortableSettingsJsonContext.Default.ProfilesFile);
-        File.WriteAllText(_path, json);
-    }
+        => JsonFile.TryWrite(_path, new ProfilesFile { Profiles = _profiles }, PortableSettingsJsonContext.Default.ProfilesFile);
 
     private static List<ProfileEntry> Load(string path)
-    {
-        if (!File.Exists(path))
-        {
-            return [];
-        }
-
-        try
-        {
-            var json = File.ReadAllText(path);
-            var file = JsonSerializer.Deserialize(json, PortableSettingsJsonContext.Default.ProfilesFile);
-            return file?.Profiles.ToList() ?? [];
-        }
-        catch (JsonException)
-        {
-            // Corrupt profiles file: start empty rather than crashing on startup.
-            return [];
-        }
-    }
+        => JsonFile.Read(path, PortableSettingsJsonContext.Default.ProfilesFile)?.Profiles?.Where(item => item is not null).ToList() ?? [];
 }

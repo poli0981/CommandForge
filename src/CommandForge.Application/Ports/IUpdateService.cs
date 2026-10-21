@@ -2,7 +2,7 @@ namespace CommandForge.Application.Ports;
 
 /// <summary>
 /// Checks GitHub Releases for application updates (via Velopack) and applies them.
-/// Per-user install ⇒ no UAC, so it never interacts with the elevation broker.
+/// Per-user install ⇒ no UAC; applying ends any elevated session first.
 /// </summary>
 public interface IUpdateService
 {
@@ -13,9 +13,14 @@ public interface IUpdateService
     public Task<UpdateCheckResult> CheckForUpdatesAsync(CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// Downloads (delta if available) and applies the pending update from the last successful check,
-    /// then restarts. Reports progress 0-100 via <paramref name="progress"/>. Returns an
-    /// <see cref="UpdateError"/> on failure; on success the process exits and this does not return.
+    /// Downloads (delta if available) the update found by the last successful check, reporting
+    /// progress 0-100. Returns <see cref="UpdateError.None"/> once it is ready to apply.
     /// </summary>
-    public Task<UpdateError> DownloadAndApplyAsync(IProgress<int>? progress, CancellationToken cancellationToken = default);
+    public Task<UpdateError> DownloadAsync(IProgress<int>? progress, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Ends the elevated session (the Elevator runs from the folder being replaced), applies the
+    /// downloaded update and restarts. On success the process exits and this does not return.
+    /// </summary>
+    public Task<UpdateError> ApplyAndRestartAsync(CancellationToken cancellationToken = default);
 }

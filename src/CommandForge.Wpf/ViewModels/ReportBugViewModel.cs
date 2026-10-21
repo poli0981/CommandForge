@@ -1,15 +1,13 @@
-using System.ComponentModel;
-using System.Diagnostics;
 using System.Globalization;
+using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
-using System.Windows;
 using CommandForge.Application;
 using CommandForge.Application.Ports;
 using CommandForge.Wpf.Resources;
+using CommandForge.Wpf.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Microsoft.Win32;
 
 namespace CommandForge.Wpf.ViewModels;
 
@@ -19,14 +17,31 @@ namespace CommandForge.Wpf.ViewModels;
 /// </summary>
 public sealed partial class ReportBugViewModel : ObservableObject
 {
+    // Browsers and GitHub cap URL length; the body beyond this is left for the user to paste.
+    private const int MaxBodyCharsInUrl = 4000;
 
     private readonly ILogMaintenance _maintenance;
+    private readonly IDialogService _dialogs;
+    private readonly IFileDialogService _files;
+    private readonly IShellService _shell;
     private readonly string? _errorCode;
 
-    public ReportBugViewModel(ILogMaintenance maintenance, string? errorCode = null, string? errorDetails = null)
+    public ReportBugViewModel(
+        ILogMaintenance maintenance,
+        IDialogService dialogs,
+        IFileDialogService files,
+        IShellService shell,
+        string? errorCode = null,
+        string? errorDetails = null)
     {
         ArgumentNullException.ThrowIfNull(maintenance);
+        ArgumentNullException.ThrowIfNull(dialogs);
+        ArgumentNullException.ThrowIfNull(files);
+        ArgumentNullException.ThrowIfNull(shell);
         _maintenance = maintenance;
+        _dialogs = dialogs;
+        _files = files;
+        _shell = shell;
         _errorCode = errorCode;
         EnvironmentText = BuildEnvironment(AppVersion(), RuntimeInformation.OSDescription, RuntimeInformation.OSArchitecture);
         _description = errorDetails ?? string.Empty;
@@ -42,39 +57,43 @@ public sealed partial class ReportBugViewModel : ObservableObject
     [RelayCommand]
     private async Task ExportLogAsync()
     {
-        var dialog = new SaveFileDialog
-        {
-            Title = Strings.Get("ReportBug_ExportLog"),
-            Filter = "Zip archive (*.zip)|*.zip",
-            FileName = $"commandforge-logs-{DateTime.Now:yyyyMMdd-HHmmss}.zip",
-        };
-        if (dialog.ShowDialog() != true)
+        var title = Strings.Get("ReportBug_ExportLog");
+        var path = _files.PickSaveFile(title, Strings.Get("FileFilter_Zip"), $"commandforge-logs-{DateTime.Now:yyyyMMdd-HHmmss}.zip");
+        if (path is null)
         {
             return;
         }
 
-        await _maintenance.ExportZipAsync(dialog.FileName);
-        MessageBox.Show(
-            string.Format(CultureInfo.CurrentCulture, Strings.Get("Log_ExportSuccess"), dialog.FileName)
-                + Environment.NewLine + Strings.Get("ReportBug_ReviewReminder"),
+        try
+        {
+            await _maintenance.ExportZipAsync(path);
+        }
+        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)
+        {
+            await _dialogs.ShowMessageAsync(title, string.Format(CultureInfo.CurrentCulture, Strings.Get("File_SaveFailed"), ex.Message), DialogKind.Error);
+            return;
+        }
+
+        await _dialogs.ShowMessageAsync(
             Strings.Get("ReportBug_Title"),
-            MessageBoxButton.OK,
-            MessageBoxImage.Information);
+            string.Format(CultureInfo.CurrentCulture, Strings.Get("Log_ExportSuccess"), path)
+                + Environment.NewLine + Strings.Get("ReportBug_ReviewReminder"));
     }
 
     [RelayCommand]
     private void OpenIssue()
     {
-        var body = BuildIssueBody(EnvironmentText, Description, _errorCode);
-        var url = $"{ProductLinks.NewIssue}?title={Uri.EscapeDataString(BuildTitle())}&body={Uri.EscapeDataString(body)}";
-        try
-        {
-            Process.Start(new ProcessStartInfo(url) { UseShellExecute = true });
-        }
-        catch (Exception ex) when (ex is Win32Exception or InvalidOperationException)
-        {
-            // Browser launch failed — ignore.
-        }
+        var body = TruncateForUrl(BuildIssueBody(EnvironmentText, Description, _errorCode));
+        _shell.TryOpen($"{ProductLinks.NewIssue}?title={Uri.EscapeDataString(BuildTitle())}&body={Uri.EscapeDataString(body)}");
+    }
+
+    /// <summary>Pure: keeps a prefilled issue body within URL limits (a full stack trace can exceed them).</summary>
+    public static string TruncateForUrl(string body)
+    {
+        ArgumentNullException.ThrowIfNull(body);
+        return body.Length <= MaxBodyCharsInUrl
+            ? body
+            : body[..MaxBodyCharsInUrl] + Environment.NewLine + Environment.NewLine + "_(truncated — please paste the rest of the details here)_";
     }
 
     [RelayCommand]

@@ -2,10 +2,11 @@
 //
 // Connects to the UI's named pipe and serves ONLY admin commands from its OWN embedded catalog
 // (golden rules #1/#2). It never builds a command line from pipe input — it accepts a commandId,
-// looks it up, validates requiresAdmin, and runs it.
+// looks it up, validates requiresAdmin, and runs it. It writes no files: diagnostics go back to
+// the UI over the pipe (a file in the user-writable profile could be redirected by a junction).
 
 using System.IO.Pipes;
-using CommandForge.Infrastructure;
+using System.Security.Principal;
 using CommandForge.Infrastructure.Catalog;
 using CommandForge.Infrastructure.Elevation;
 using CommandForge.Infrastructure.Execution;
@@ -15,29 +16,23 @@ if (args.Length < 1 || string.IsNullOrWhiteSpace(args[0]))
     return 2;
 }
 
-var pipeName = args[0];
-AppPaths.EnsureCreated();
-var logPath = Path.Combine(AppPaths.LogsDirectory, "elevator.log");
-
-void Log(string message) =>
-    File.AppendAllText(logPath, $"{DateTimeOffset.Now:O} {message}{Environment.NewLine}");
-
 try
 {
-    Log($"Starting; connecting to pipe {pipeName}");
-
-    using var client = new NamedPipeClientStream(".", pipeName, PipeDirection.InOut, PipeOptions.Asynchronous);
+    // Identification level: the (non-elevated) pipe server may learn who we are but cannot act as us.
+    using var client = new NamedPipeClientStream(".", args[0], PipeDirection.InOut, PipeOptions.Asynchronous, TokenImpersonationLevel.Identification);
     await client.ConnectAsync(30_000);
-    Log("Connected to UI");
 
-    var server = new ElevationServer(new JsonCatalogProvider(), new ProcessCommandExecutor(new SystemProcessRunner()));
-    await server.RunAsync(client, CancellationToken.None);
+    if (!PeerVerifier.IsExpectedServer(client))
+    {
+        return 3; // someone else owns the pipe — serve nothing
+    }
 
-    Log("Pipe closed; exiting");
+    // Elevated children get a clean environment (see ChildEnvironment for why).
+    var executor = new ProcessCommandExecutor(new SystemProcessRunner(ChildEnvironment.Apply));
+    await new ElevationServer(new JsonCatalogProvider(), executor).RunAsync(client, CancellationToken.None);
     return 0;
 }
-catch (Exception ex)
+catch (Exception ex) when (ex is IOException or TimeoutException or UnauthorizedAccessException or OperationCanceledException)
 {
-    Log($"Failed: {ex}");
     return 1;
 }

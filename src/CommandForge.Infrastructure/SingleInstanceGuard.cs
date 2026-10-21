@@ -1,3 +1,5 @@
+using Windows.Win32;
+
 namespace CommandForge.Infrastructure;
 
 /// <summary>
@@ -13,6 +15,9 @@ namespace CommandForge.Infrastructure;
 /// </remarks>
 public sealed class SingleInstanceGuard : IDisposable
 {
+    // ASFW_ANY: any process may set the foreground window (the primary's PID is not known here).
+    private const uint AsfwAny = unchecked((uint)-1);
+
     private readonly Mutex _mutex;
     private readonly EventWaitHandle _activateEvent;
     private readonly ManualResetEventSlim _stopEvent = new(initialState: false);
@@ -71,7 +76,13 @@ public sealed class SingleInstanceGuard : IDisposable
     }
 
     /// <summary>Secondary instance only: asks the primary instance to activate its window.</summary>
-    public void SignalPrimaryInstance() => _activateEvent.Set();
+    public void SignalPrimaryInstance()
+    {
+        // Windows only lets the foreground process hand the foreground to another process, so pass
+        // the right along first; otherwise the primary's SetForegroundWindow just flashes the taskbar.
+        PInvoke.AllowSetForegroundWindow(AsfwAny);
+        _activateEvent.Set();
+    }
 
     private void ListenLoop(Action onActivateRequested)
     {

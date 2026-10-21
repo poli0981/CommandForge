@@ -10,15 +10,18 @@ namespace CommandForge.Wpf;
 public sealed class UpdateDialogService : IUpdateDialogService
 {
     private readonly CheckForUpdateUseCase _useCase;
+    private readonly ExecutionViewModel _execution;
 
-    public UpdateDialogService(CheckForUpdateUseCase useCase)
+    public UpdateDialogService(CheckForUpdateUseCase useCase, ExecutionViewModel execution)
     {
         ArgumentNullException.ThrowIfNull(useCase);
+        ArgumentNullException.ThrowIfNull(execution);
         _useCase = useCase;
+        _execution = execution;
     }
 
     /// <inheritdoc />
-    public async Task ShowAsync(bool startedFromStartup)
+    public async Task<bool> ShowAsync(bool startedFromStartup)
     {
         UpdateCheckResult? prechecked = null;
         if (startedFromStartup)
@@ -32,20 +35,29 @@ public sealed class UpdateDialogService : IUpdateDialogService
             catch (Exception ex)
             {
                 Log.ForContext<UpdateDialogService>().Warning(ex, "Startup update check failed; ignoring.");
-                return;
+                return false;
             }
 
             if (!prechecked.HasUpdate)
             {
-                return;
+                return prechecked.IsSuccess;
+            }
+
+            // Never pop up over a dialog the user is working in (e.g. a confirmation); the next
+            // launch or a manual check will offer the update again.
+            if (IsAnotherDialogOpen())
+            {
+                Log.ForContext<UpdateDialogService>().Information("Update {Version} found at startup; not shown because another dialog is open.", prechecked.NewVersion);
+                return true;
             }
         }
 
-        var viewModel = new UpdateViewModel(_useCase) { IsCommandRunning = BuildCommandRunningGuard() };
-        var dialog = new UpdateDialog(viewModel)
+        var viewModel = new UpdateViewModel(_useCase) { IsCommandRunning = () => _execution.IsRunning };
+        var dialog = new UpdateDialog(viewModel);
+        if (System.Windows.Application.Current?.MainWindow is { IsVisible: true } owner)
         {
-            Owner = System.Windows.Application.Current.MainWindow,
-        };
+            dialog.Owner = owner;
+        }
 
         if (prechecked is { HasUpdate: true })
         {
@@ -58,10 +70,13 @@ public sealed class UpdateDialogService : IUpdateDialogService
         }
 
         dialog.ShowDialog();
+        return viewModel.CheckSucceeded;
     }
 
-    private static Func<bool>? BuildCommandRunningGuard()
-        => System.Windows.Application.Current.MainWindow?.DataContext is MainViewModel main
-            ? () => main.Execution.IsRunning
-            : null;
+    private static bool IsAnotherDialogOpen()
+    {
+        var app = System.Windows.Application.Current;
+        return app is not null
+            && app.Windows.OfType<System.Windows.Window>().Any(w => w.IsVisible && !ReferenceEquals(w, app.MainWindow));
+    }
 }

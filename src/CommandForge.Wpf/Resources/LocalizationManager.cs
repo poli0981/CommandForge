@@ -1,5 +1,7 @@
 using System.ComponentModel;
 using System.Globalization;
+using System.Windows;
+using System.Windows.Markup;
 
 namespace CommandForge.Wpf.Resources;
 
@@ -36,7 +38,11 @@ public sealed class LocalizationManager : INotifyPropertyChanged
     /// <inheritdoc />
     public event PropertyChangedEventHandler? PropertyChanged;
 
-    /// <summary>Switches the UI culture and notifies all bindings/listeners. No-op if unchanged.</summary>
+    /// <summary>
+    /// Switches the UI language and notifies all bindings/listeners. No-op if unchanged. Only the UI
+    /// culture changes: number and date formats keep following the user's regional settings, so an
+    /// English UI on a German machine still shows German dates.
+    /// </summary>
     public void SetCulture(CultureInfo culture)
     {
         ArgumentNullException.ThrowIfNull(culture);
@@ -47,15 +53,47 @@ public sealed class LocalizationManager : INotifyPropertyChanged
 
         CurrentCulture = culture;
         Thread.CurrentThread.CurrentUICulture = culture;
-        Thread.CurrentThread.CurrentCulture = culture;
         CultureInfo.CurrentUICulture = culture;
-        CultureInfo.CurrentCulture = culture;
         CultureInfo.DefaultThreadCurrentUICulture = culture;
-        CultureInfo.DefaultThreadCurrentCulture = culture;
+
+        ApplyLanguageToOpenWindows();
 
         // "Item[]" is WPF's signal to re-evaluate every indexer binding on this source.
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Item[]"));
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(CurrentCulture)));
         CultureChanged?.Invoke(this, EventArgs.Empty);
+    }
+
+    /// <summary>
+    /// Tags every window (current and future) with the UI language (xml:lang). WPF uses it to pick
+    /// glyphs for Han characters, so Japanese text isn't drawn with Chinese glyph shapes.
+    /// </summary>
+    public void TrackWindowLanguage()
+    {
+        EventManager.RegisterClassHandler(
+            typeof(Window),
+            FrameworkElement.LoadedEvent,
+            new RoutedEventHandler((sender, _) =>
+            {
+                if (sender is Window window)
+                {
+                    window.Language = XmlLanguage.GetLanguage(CurrentCulture.IetfLanguageTag);
+                }
+            }));
+        ApplyLanguageToOpenWindows();
+    }
+
+    private void ApplyLanguageToOpenWindows()
+    {
+        if (System.Windows.Application.Current is not { } app)
+        {
+            return;
+        }
+
+        var language = XmlLanguage.GetLanguage(CurrentCulture.IetfLanguageTag);
+        foreach (Window window in app.Windows)
+        {
+            window.Language = language;
+        }
     }
 }

@@ -1,6 +1,6 @@
-using System.Text.Json;
 using CommandForge.Application.Ports;
 using CommandForge.Application.Settings;
+using CommandForge.Infrastructure.Persistence;
 
 namespace CommandForge.Infrastructure.Portability;
 
@@ -12,27 +12,15 @@ public sealed class JsonSettingsFile : ISettingsFile
     {
         ArgumentNullException.ThrowIfNull(settings);
 
-        var json = JsonSerializer.Serialize(settings, PortableSettingsJsonContext.Default.PortableSettings);
-        File.WriteAllText(path, json);
+        // Throws on I/O errors: the user picked this path, so the caller reports the failure.
+        JsonFile.Write(path, settings, PortableSettingsJsonContext.Default.PortableSettings);
     }
 
     /// <inheritdoc />
     public PortableSettings? Read(string path)
     {
-        if (!File.Exists(path))
-        {
-            return null;
-        }
-
-        try
-        {
-            var json = File.ReadAllText(path);
-            return JsonSerializer.Deserialize(json, PortableSettingsJsonContext.Default.PortableSettings);
-        }
-        catch (JsonException)
-        {
-            // Not a valid settings file — caller surfaces a friendly error.
-            return null;
-        }
+        // Missing, unreadable or invalid files all come back as null; the caller shows a friendly error.
+        // A user-chosen import file is never renamed, even when it is not valid JSON.
+        return JsonFile.Read(path, PortableSettingsJsonContext.Default.PortableSettings, keepCorruptCopy: false);
     }
 }

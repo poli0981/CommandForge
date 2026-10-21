@@ -185,7 +185,7 @@
     <value>Revert</value>
   </data>
   <data name="Confirm_TypeToConfirm" xml:space="preserve">
-    <value>Type the command name to confirm:</value>
+    <value>Type the command name (or the ID shown in the box) to confirm:</value>
   </data>
   <data name="Confirm_CreateRestorePoint" xml:space="preserve">
     <value>Create a System Restore Point first (recommended)</value>
@@ -203,7 +203,7 @@
     <value>Restore point created.</value>
   </data>
   <data name="Restore_Failed" xml:space="preserve">
-    <value>Could not create a restore point (continuing anyway).</value>
+    <value>Could not create a restore point.</value>
   </data>
   <data name="Detail_CommandLine" xml:space="preserve">
     <value>Command to run</value>
@@ -383,7 +383,7 @@
     <value>Battery report</value>
   </data>
   <data name="Cmd_power.batteryreport_Desc" xml:space="preserve">
-    <value>Generate an HTML battery health report.</value>
+    <value>Save an HTML battery health report as battery-report.html in your user folder.</value>
   </data>
   <data name="Cmd_diag.reliability_Title" xml:space="preserve">
     <value>Reliability Monitor</value>
@@ -455,7 +455,7 @@
     <value>Check disk (read-only)</value>
   </data>
   <data name="Cmd_chkdsk.read_Desc" xml:space="preserve">
-    <value>Check the C: drive for errors (read-only).</value>
+    <value>Check the Windows drive for errors (read-only).</value>
   </data>
   <data name="Cmd_sec.bitlocker.status_Title" xml:space="preserve">
     <value>BitLocker status</value>
@@ -536,10 +536,10 @@
     <value>Remove superseded components from WinSxS to free disk space. May require a restart.</value>
   </data>
   <data name="Cmd_chkdsk.fix_Title" xml:space="preserve">
-    <value>Repair disk (chkdsk /f /r)</value>
+    <value>Repair Windows drive (offline scan and fix)</value>
   </data>
   <data name="Cmd_chkdsk.fix_Desc" xml:space="preserve">
-    <value>Schedule a full disk check with repair on the system drive at the next restart.</value>
+    <value>Schedule a check and repair of the Windows drive at the next restart.</value>
   </data>
   <data name="Cmd_winget.upgrade.all_Title" xml:space="preserve">
     <value>Upgrade all packages</value>
@@ -563,7 +563,7 @@
     <value>Reset Windows Update</value>
   </data>
   <data name="Cmd_wu.reset.components_Desc" xml:space="preserve">
-    <value>Stop the update services, clear their caches, and restart them. Often fixes stuck updates.</value>
+    <value>Stop the update services, set their cache folders aside (renamed with a .bak suffix) and restart them. Often fixes stuck updates.</value>
   </data>
   <data name="Cmd_tweak.win11.classicmenu_Title" xml:space="preserve">
     <value>Classic context menu (Win11)</value>
@@ -623,7 +623,7 @@
     <value>Automatic Disk Cleanup</value>
   </data>
   <data name="Cmd_clean.cleanmgr.auto_Desc" xml:space="preserve">
-    <value>Run Disk Cleanup across all categories without prompting.</value>
+    <value>Run Disk Cleanup on temporary files, caches and logs without prompting. Downloads, the Recycle Bin and Windows.old are never touched.</value>
   </data>
   <data name="Cmd_clean.recyclebin_Title" xml:space="preserve">
     <value>Empty Recycle Bin</value>
@@ -1695,10 +1695,10 @@ Continue?</value>
     <value>Restore the normal startup and shutdown messages.</value>
   </data>
   <data name="Cmd_storage.optimize_Title" xml:space="preserve">
-    <value>Optimize / Defragment C:</value>
+    <value>Optimize / Defragment Windows drive</value>
   </data>
   <data name="Cmd_storage.optimize_Desc" xml:space="preserve">
-    <value>Optimize the C: drive (TRIM for SSDs, defragment for HDDs).</value>
+    <value>Optimize the Windows drive (TRIM for SSDs, defragment for HDDs).</value>
   </data>
   <data name="Cmd_storage.diskmgmt_Title" xml:space="preserve">
     <value>Disk Management</value>
@@ -1752,7 +1752,7 @@ Continue?</value>
     <value>Time &amp; time zone</value>
   </data>
   <data name="Cmd_info.timezone_Desc" xml:space="preserve">
-    <value>Show the current time zone and time-synchronization status.</value>
+    <value>Show the current time zone, its UTC offset and whether it observes daylight saving time.</value>
   </data>
   <data name="Cmd_info.osinstalldate_Title" xml:space="preserve">
     <value>Windows install date</value>
@@ -1857,7 +1857,7 @@ Continue?</value>
     <value>Analyze fragmentation</value>
   </data>
   <data name="Cmd_storage.fragmentation.analyze_Desc" xml:space="preserve">
-    <value>Analyze the C: drive for fragmentation without changing it.</value>
+    <value>Analyze the Windows drive for fragmentation without changing it.</value>
   </data>
   <data name="Cmd_storage.cleanmgr.settings_Title" xml:space="preserve">
     <value>Configure Disk Cleanup</value>
@@ -1953,7 +1953,7 @@ Continue?</value>
     <value>Online disk scan</value>
   </data>
   <data name="Cmd_chkdsk.scan.online_Desc" xml:space="preserve">
-    <value>Scan the C: drive for errors online without unmounting.</value>
+    <value>Scan the Windows drive for errors online without unmounting it.</value>
   </data>
   <data name="Cmd_sfc.verifyonly_Title" xml:space="preserve">
     <value>Verify system files</value>
@@ -2082,10 +2082,10 @@ Continue?</value>
     <value>Remove the Windows Telnet client feature.</value>
   </data>
   <data name="Cmd_tweak.win11.widgets.hide_Title" xml:space="preserve">
-    <value>Hide Widgets Button (Win11)</value>
+    <value>Widgets button setting (Win11)</value>
   </data>
   <data name="Cmd_tweak.win11.widgets.hide_Desc" xml:space="preserve">
-    <value>Remove the Widgets button from the Windows 11 taskbar (per-user; restart Explorer to apply).</value>
+    <value>Open Taskbar settings to turn the Widgets button off. Windows 11 now blocks changing this setting from scripts.</value>
   </data>
   <data name="Cmd_tweak.win11.copilot.hide_Title" xml:space="preserve">
     <value>Hide Copilot Button (Win11)</value>
@@ -2187,13 +2187,13 @@ Continue?</value>
     <value>Query Volume Dirty Bit</value>
   </data>
   <data name="Cmd_storage.dirty.query_Desc" xml:space="preserve">
-    <value>Check whether drive C: is flagged dirty and will be scanned by chkdsk at next boot.</value>
+    <value>Check whether the Windows drive is flagged dirty and will be scanned by chkdsk at the next boot.</value>
   </data>
   <data name="Cmd_storage.sectorinfo_Title" xml:space="preserve">
     <value>Disk Sector Size Info</value>
   </data>
   <data name="Cmd_storage.sectorinfo_Desc" xml:space="preserve">
-    <value>Show physical and logical sector sizes and alignment info for drive C:.</value>
+    <value>Show physical and logical sector sizes and alignment info for the Windows drive.</value>
   </data>
   <data name="Cmd_power.waketimers_Title" xml:space="preserve">
     <value>List Active Wake Timers</value>
@@ -2320,5 +2320,170 @@ Continue?</value>
   </data>
   <data name="Cmd_clean.teamscache_Desc" xml:space="preserve">
     <value>Delete the cache for the new Microsoft Teams app (close Teams first).</value>
+  </data>
+  <data name="Startup_FailedMessage" xml:space="preserve">
+    <value>CommandForge couldn't start: {0}
+
+Details were written to the log folder:
+{1}</value>
+  </data>
+  <data name="Restore_Skipped" xml:space="preserve">
+    <value>Restore point skipped: Windows allows only one every 24 hours, and a recent one already exists.</value>
+  </data>
+  <data name="Restore_FailedTitle" xml:space="preserve">
+    <value>Restore point failed</value>
+  </data>
+  <data name="Restore_FailedPrompt" xml:space="preserve">
+    <value>A restore point couldn't be created. Run "{0}" without one?</value>
+  </data>
+  <data name="Run_NotStarted" xml:space="preserve">
+    <value>The command was not run.</value>
+  </data>
+  <data name="Run_UnexpectedError" xml:space="preserve">
+    <value>Unexpected error: {0}</value>
+  </data>
+  <data name="Duration_Milliseconds" xml:space="preserve">
+    <value>{0:F0} ms</value>
+  </data>
+  <data name="Duration_Seconds" xml:space="preserve">
+    <value>{0:F1} s</value>
+  </data>
+  <data name="History_ClearConfirm" xml:space="preserve">
+    <value>Clear the whole execution history? This can't be undone.</value>
+  </data>
+  <data name="Recipe_UnavailableSteps" xml:space="preserve">
+    <value>{0} step(s) aren't available on this PC. They stay in the recipe but are skipped here.</value>
+  </data>
+  <data name="Update_ReadyAfterCommand" xml:space="preserve">
+    <value>The update is downloaded. Finish the running command, then choose "Download &amp; restart" again.</value>
+  </data>
+  <data name="FileFilter_Json" xml:space="preserve">
+    <value>JSON files (*.json)|*.json</value>
+  </data>
+  <data name="FileFilter_Zip" xml:space="preserve">
+    <value>Zip archives (*.zip)|*.zip</value>
+  </data>
+  <data name="File_SaveFailed" xml:space="preserve">
+    <value>The file couldn't be saved: {0}</value>
+  </data>
+  <data name="Cmd_maint.restorepoints.list_Title" xml:space="preserve">
+    <value>List restore points</value>
+  </data>
+  <data name="Cmd_maint.restorepoints.list_Desc" xml:space="preserve">
+    <value>Show the System Restore Points on this PC, newest first.</value>
+  </data>
+  <data name="Cmd_maint.systemrestore.open_Title" xml:space="preserve">
+    <value>Open System Restore</value>
+  </data>
+  <data name="Cmd_maint.systemrestore.open_Desc" xml:space="preserve">
+    <value>Open System Restore to roll the PC back to an earlier restore point.</value>
+  </data>
+  <data name="Cmd_maint.automaintenance.run_Title" xml:space="preserve">
+    <value>Run Automatic Maintenance now</value>
+  </data>
+  <data name="Cmd_maint.automaintenance.run_Desc" xml:space="preserve">
+    <value>Start Windows' scheduled maintenance (updates, security scan, disk optimization) right away.</value>
+  </data>
+  <data name="Cmd_maint.time.resync_Title" xml:space="preserve">
+    <value>Sync system clock</value>
+  </data>
+  <data name="Cmd_maint.time.resync_Desc" xml:space="preserve">
+    <value>Resynchronize the Windows clock with the internet time server.</value>
+  </data>
+  <data name="Cmd_net.dnscache.show_Title" xml:space="preserve">
+    <value>Show DNS cache</value>
+  </data>
+  <data name="Cmd_net.dnscache.show_Desc" xml:space="preserve">
+    <value>List the names and addresses cached by the DNS client.</value>
+  </data>
+  <data name="Cmd_net.listening.ports_Title" xml:space="preserve">
+    <value>Listening ports</value>
+  </data>
+  <data name="Cmd_net.listening.ports_Desc" xml:space="preserve">
+    <value>Show TCP ports this PC is listening on and the process that owns each.</value>
+  </data>
+  <data name="Cmd_net.wifi.interface_Title" xml:space="preserve">
+    <value>Wi-Fi connection details</value>
+  </data>
+  <data name="Cmd_net.wifi.interface_Desc" xml:space="preserve">
+    <value>Show the current Wi-Fi network, signal strength, band and link speed.</value>
+  </data>
+  <data name="Cmd_startup.tasks.list_Title" xml:space="preserve">
+    <value>Third-party scheduled tasks</value>
+  </data>
+  <data name="Cmd_startup.tasks.list_Desc" xml:space="preserve">
+    <value>List enabled scheduled tasks that are not part of Windows.</value>
+  </data>
+  <data name="Cmd_startup.registry.run_Title" xml:space="preserve">
+    <value>Startup programs (Run keys)</value>
+  </data>
+  <data name="Cmd_startup.registry.run_Desc" xml:space="preserve">
+    <value>List programs started from the registry Run keys for this user and for all users.</value>
+  </data>
+  <data name="Cmd_svc.list.stopped.auto_Title" xml:space="preserve">
+    <value>Stopped automatic services</value>
+  </data>
+  <data name="Cmd_svc.list.stopped.auto_Desc" xml:space="preserve">
+    <value>List services set to start automatically that are not running. Some only start when needed, so a stopped service is not always a problem.</value>
+  </data>
+  <data name="Cmd_svc.search.restart_Title" xml:space="preserve">
+    <value>Restart Windows Search</value>
+  </data>
+  <data name="Cmd_svc.search.restart_Desc" xml:space="preserve">
+    <value>Restart the Windows Search service when search or indexing stops responding.</value>
+  </data>
+  <data name="Cmd_store.updates.open_Title" xml:space="preserve">
+    <value>Microsoft Store updates</value>
+  </data>
+  <data name="Cmd_store.updates.open_Desc" xml:space="preserve">
+    <value>Open the Microsoft Store downloads and updates page.</value>
+  </data>
+  <data name="Cmd_wu.optional.open_Title" xml:space="preserve">
+    <value>Optional updates</value>
+  </data>
+  <data name="Cmd_wu.optional.open_Desc" xml:space="preserve">
+    <value>Open the Windows Update page for optional driver and feature updates.</value>
+  </data>
+  <data name="Cmd_sec.uac.status_Title" xml:space="preserve">
+    <value>User Account Control settings</value>
+  </data>
+  <data name="Cmd_sec.uac.status_Desc" xml:space="preserve">
+    <value>Show whether UAC is on and how it prompts administrators and standard users.</value>
+  </data>
+  <data name="Cmd_sec.coreisolation.open_Title" xml:space="preserve">
+    <value>Core isolation</value>
+  </data>
+  <data name="Cmd_sec.coreisolation.open_Desc" xml:space="preserve">
+    <value>Open Windows Security's Core isolation page (memory integrity).</value>
+  </data>
+  <data name="Cmd_dev.envvars.open_Title" xml:space="preserve">
+    <value>Edit environment variables</value>
+  </data>
+  <data name="Cmd_dev.envvars.open_Desc" xml:space="preserve">
+    <value>Open the Environment Variables editor for your account.</value>
+  </data>
+  <data name="Cmd_dev.wsl.status_Title" xml:space="preserve">
+    <value>WSL status</value>
+  </data>
+  <data name="Cmd_dev.wsl.status_Desc" xml:space="preserve">
+    <value>Show the default Windows Subsystem for Linux distribution and version.</value>
+  </data>
+  <data name="Cmd_storage.trim.status_Title" xml:space="preserve">
+    <value>SSD TRIM status</value>
+  </data>
+  <data name="Cmd_storage.trim.status_Desc" xml:space="preserve">
+    <value>Check whether Windows sends TRIM commands to SSDs (DisableDeleteNotify = 0 means on).</value>
+  </data>
+  <data name="Cmd_diag.minidumps.list_Title" xml:space="preserve">
+    <value>Crash dump files</value>
+  </data>
+  <data name="Cmd_diag.minidumps.list_Desc" xml:space="preserve">
+    <value>List the minidump files Windows saved after blue-screen crashes.</value>
+  </data>
+  <data name="Cmd_power.battery.status_Title" xml:space="preserve">
+    <value>Battery charge</value>
+  </data>
+  <data name="Cmd_power.battery.status_Desc" xml:space="preserve">
+    <value>Show the current battery charge, status and estimated runtime.</value>
   </data>
 </root>

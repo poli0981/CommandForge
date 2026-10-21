@@ -185,7 +185,7 @@
     <value>还原</value>
   </data>
   <data name="Confirm_TypeToConfirm" xml:space="preserve">
-    <value>输入命令名称以确认：</value>
+    <value>输入命令名称（或框中显示的 ID）以确认：</value>
   </data>
   <data name="Confirm_CreateRestorePoint" xml:space="preserve">
     <value>先创建系统还原点（推荐）</value>
@@ -203,7 +203,7 @@
     <value>还原点已创建。</value>
   </data>
   <data name="Restore_Failed" xml:space="preserve">
-    <value>无法创建还原点（仍将继续）。</value>
+    <value>无法创建还原点。</value>
   </data>
   <data name="Detail_CommandLine" xml:space="preserve">
     <value>要运行的命令</value>
@@ -383,7 +383,7 @@
     <value>电池报告</value>
   </data>
   <data name="Cmd_power.batteryreport_Desc" xml:space="preserve">
-    <value>生成 HTML 格式的电池健康报告。</value>
+    <value>将 HTML 格式的电池健康报告保存为用户文件夹中的 battery-report.html。</value>
   </data>
   <data name="Cmd_diag.reliability_Title" xml:space="preserve">
     <value>可靠性监视器</value>
@@ -455,7 +455,7 @@
     <value>检查磁盘（只读）</value>
   </data>
   <data name="Cmd_chkdsk.read_Desc" xml:space="preserve">
-    <value>检查 C: 驱动器是否存在错误（只读）。</value>
+    <value>检查 Windows 所在驱动器是否存在错误（只读）。</value>
   </data>
   <data name="Cmd_sec.bitlocker.status_Title" xml:space="preserve">
     <value>BitLocker 状态</value>
@@ -536,10 +536,10 @@
     <value>从 WinSxS 中移除已被取代的组件以释放磁盘空间。可能需要重启。</value>
   </data>
   <data name="Cmd_chkdsk.fix_Title" xml:space="preserve">
-    <value>修复磁盘（chkdsk /f /r）</value>
+    <value>修复 Windows 驱动器（脱机扫描并修复）</value>
   </data>
   <data name="Cmd_chkdsk.fix_Desc" xml:space="preserve">
-    <value>在下次重启时对系统盘安排一次带修复的完整磁盘检查。</value>
+    <value>安排在下次重启时检查并修复 Windows 所在的驱动器。</value>
   </data>
   <data name="Cmd_winget.upgrade.all_Title" xml:space="preserve">
     <value>升级所有软件包</value>
@@ -563,7 +563,7 @@
     <value>重置 Windows Update</value>
   </data>
   <data name="Cmd_wu.reset.components_Desc" xml:space="preserve">
-    <value>停止更新服务，清除其缓存后再重新启动。通常可修复卡住的更新。</value>
+    <value>停止更新服务，将其缓存文件夹移到一旁（重命名并加上 .bak 后缀），然后重新启动服务。通常可修复卡住的更新。</value>
   </data>
   <data name="Cmd_tweak.win11.classicmenu_Title" xml:space="preserve">
     <value>经典右键菜单（Win11）</value>
@@ -623,7 +623,7 @@
     <value>自动磁盘清理</value>
   </data>
   <data name="Cmd_clean.cleanmgr.auto_Desc" xml:space="preserve">
-    <value>在所有类别上运行磁盘清理，无需提示。</value>
+    <value>无需提示即可对临时文件、缓存和日志运行磁盘清理。绝不会触及“下载”文件夹、回收站和 Windows.old。</value>
   </data>
   <data name="Cmd_clean.recyclebin_Title" xml:space="preserve">
     <value>清空回收站</value>
@@ -1695,10 +1695,10 @@
     <value>恢复正常的启动和关机信息。</value>
   </data>
   <data name="Cmd_storage.optimize_Title" xml:space="preserve">
-    <value>优化 / 整理 C: 碎片</value>
+    <value>优化 / 整理 Windows 驱动器碎片</value>
   </data>
   <data name="Cmd_storage.optimize_Desc" xml:space="preserve">
-    <value>优化 C: 驱动器（SSD 执行 TRIM，HDD 进行碎片整理）。</value>
+    <value>优化 Windows 所在驱动器（SSD 执行 TRIM，HDD 进行碎片整理）。</value>
   </data>
   <data name="Cmd_storage.diskmgmt_Title" xml:space="preserve">
     <value>Disk Management</value>
@@ -1752,7 +1752,7 @@
     <value>时间和时区</value>
   </data>
   <data name="Cmd_info.timezone_Desc" xml:space="preserve">
-    <value>显示当前时区和时间同步状态。</value>
+    <value>显示当前时区、与 UTC 的偏移量以及是否实行夏令时。</value>
   </data>
   <data name="Cmd_info.osinstalldate_Title" xml:space="preserve">
     <value>Windows 安装日期</value>
@@ -1857,7 +1857,7 @@
     <value>分析碎片</value>
   </data>
   <data name="Cmd_storage.fragmentation.analyze_Desc" xml:space="preserve">
-    <value>在不更改的情况下分析 C: 驱动器的碎片。</value>
+    <value>在不更改的情况下分析 Windows 所在驱动器的碎片。</value>
   </data>
   <data name="Cmd_storage.cleanmgr.settings_Title" xml:space="preserve">
     <value>配置磁盘清理</value>
@@ -1953,7 +1953,7 @@
     <value>联机磁盘扫描</value>
   </data>
   <data name="Cmd_chkdsk.scan.online_Desc" xml:space="preserve">
-    <value>在不卸载的情况下联机扫描 C: 驱动器的错误。</value>
+    <value>在不卸载的情况下联机扫描 Windows 所在驱动器的错误。</value>
   </data>
   <data name="Cmd_sfc.verifyonly_Title" xml:space="preserve">
     <value>验证系统文件</value>
@@ -2082,10 +2082,10 @@
     <value>删除 Windows Telnet 客户端功能。</value>
   </data>
   <data name="Cmd_tweak.win11.widgets.hide_Title" xml:space="preserve">
-    <value>隐藏 Widgets 按钮 (Win11)</value>
+    <value>Widgets 按钮设置 (Win11)</value>
   </data>
   <data name="Cmd_tweak.win11.widgets.hide_Desc" xml:space="preserve">
-    <value>从 Windows 11 任务栏中移除 Widgets 按钮（按用户设置；重启 Explorer 后生效）。</value>
+    <value>打开任务栏设置以关闭 Widgets 按钮。Windows 11 现已阻止通过脚本更改此设置。</value>
   </data>
   <data name="Cmd_tweak.win11.copilot.hide_Title" xml:space="preserve">
     <value>隐藏 Copilot 按钮 (Win11)</value>
@@ -2187,13 +2187,13 @@
     <value>查询卷的脏位</value>
   </data>
   <data name="Cmd_storage.dirty.query_Desc" xml:space="preserve">
-    <value>检查 C: 驱动器是否被标记为脏（dirty）以及是否会在下次启动时由 chkdsk 扫描。</value>
+    <value>检查 Windows 所在驱动器是否被标记为脏（dirty）以及是否会在下次启动时由 chkdsk 扫描。</value>
   </data>
   <data name="Cmd_storage.sectorinfo_Title" xml:space="preserve">
     <value>磁盘扇区大小信息</value>
   </data>
   <data name="Cmd_storage.sectorinfo_Desc" xml:space="preserve">
-    <value>显示 C: 驱动器的物理和逻辑扇区大小及对齐信息。</value>
+    <value>显示 Windows 所在驱动器的物理和逻辑扇区大小及对齐信息。</value>
   </data>
   <data name="Cmd_power.waketimers_Title" xml:space="preserve">
     <value>列出活动的唤醒计时器</value>
@@ -2320,5 +2320,170 @@
   </data>
   <data name="Cmd_clean.teamscache_Desc" xml:space="preserve">
     <value>删除新版 Microsoft Teams 应用的缓存（请先关闭 Teams）。</value>
+  </data>
+  <data name="Startup_FailedMessage" xml:space="preserve">
+    <value>无法启动 CommandForge：{0}
+
+详细信息已写入日志文件夹：
+{1}</value>
+  </data>
+  <data name="Restore_Skipped" xml:space="preserve">
+    <value>已跳过还原点：Windows 每 24 小时只允许创建一个，并且最近已有一个。</value>
+  </data>
+  <data name="Restore_FailedTitle" xml:space="preserve">
+    <value>还原点创建失败</value>
+  </data>
+  <data name="Restore_FailedPrompt" xml:space="preserve">
+    <value>无法创建还原点。仍要在没有还原点的情况下运行“{0}”吗？</value>
+  </data>
+  <data name="Run_NotStarted" xml:space="preserve">
+    <value>命令未运行。</value>
+  </data>
+  <data name="Run_UnexpectedError" xml:space="preserve">
+    <value>意外错误：{0}</value>
+  </data>
+  <data name="Duration_Milliseconds" xml:space="preserve">
+    <value>{0:F0} 毫秒</value>
+  </data>
+  <data name="Duration_Seconds" xml:space="preserve">
+    <value>{0:F1} 秒</value>
+  </data>
+  <data name="History_ClearConfirm" xml:space="preserve">
+    <value>清除全部执行历史记录？此操作无法撤消。</value>
+  </data>
+  <data name="Recipe_UnavailableSteps" xml:space="preserve">
+    <value>有 {0} 个步骤在此电脑上不可用。它们仍保留在配方中，但在此处会被跳过。</value>
+  </data>
+  <data name="Update_ReadyAfterCommand" xml:space="preserve">
+    <value>更新已下载。请等正在运行的命令结束后，再次选择“下载并重启”。</value>
+  </data>
+  <data name="FileFilter_Json" xml:space="preserve">
+    <value>JSON 文件 (*.json)|*.json</value>
+  </data>
+  <data name="FileFilter_Zip" xml:space="preserve">
+    <value>Zip 压缩文件 (*.zip)|*.zip</value>
+  </data>
+  <data name="File_SaveFailed" xml:space="preserve">
+    <value>无法保存文件：{0}</value>
+  </data>
+  <data name="Cmd_maint.restorepoints.list_Title" xml:space="preserve">
+    <value>列出还原点</value>
+  </data>
+  <data name="Cmd_maint.restorepoints.list_Desc" xml:space="preserve">
+    <value>按从新到旧的顺序显示此电脑上的系统还原点。</value>
+  </data>
+  <data name="Cmd_maint.systemrestore.open_Title" xml:space="preserve">
+    <value>打开系统还原</value>
+  </data>
+  <data name="Cmd_maint.systemrestore.open_Desc" xml:space="preserve">
+    <value>打开系统还原，将电脑回退到较早的还原点。</value>
+  </data>
+  <data name="Cmd_maint.automaintenance.run_Title" xml:space="preserve">
+    <value>立即运行自动维护</value>
+  </data>
+  <data name="Cmd_maint.automaintenance.run_Desc" xml:space="preserve">
+    <value>立即启动 Windows 的计划维护（更新、安全扫描、磁盘优化）。</value>
+  </data>
+  <data name="Cmd_maint.time.resync_Title" xml:space="preserve">
+    <value>同步系统时钟</value>
+  </data>
+  <data name="Cmd_maint.time.resync_Desc" xml:space="preserve">
+    <value>将 Windows 时钟与 Internet 时间服务器重新同步。</value>
+  </data>
+  <data name="Cmd_net.dnscache.show_Title" xml:space="preserve">
+    <value>显示 DNS 缓存</value>
+  </data>
+  <data name="Cmd_net.dnscache.show_Desc" xml:space="preserve">
+    <value>列出 DNS 客户端缓存的名称和地址。</value>
+  </data>
+  <data name="Cmd_net.listening.ports_Title" xml:space="preserve">
+    <value>正在侦听的端口</value>
+  </data>
+  <data name="Cmd_net.listening.ports_Desc" xml:space="preserve">
+    <value>显示此电脑正在侦听的 TCP 端口以及占用各端口的进程。</value>
+  </data>
+  <data name="Cmd_net.wifi.interface_Title" xml:space="preserve">
+    <value>Wi-Fi 连接详细信息</value>
+  </data>
+  <data name="Cmd_net.wifi.interface_Desc" xml:space="preserve">
+    <value>显示当前 Wi-Fi 网络、信号强度、频段和链路速度。</value>
+  </data>
+  <data name="Cmd_startup.tasks.list_Title" xml:space="preserve">
+    <value>第三方计划任务</value>
+  </data>
+  <data name="Cmd_startup.tasks.list_Desc" xml:space="preserve">
+    <value>列出已启用且不属于 Windows 的计划任务。</value>
+  </data>
+  <data name="Cmd_startup.registry.run_Title" xml:space="preserve">
+    <value>启动程序（Run 注册表项）</value>
+  </data>
+  <data name="Cmd_startup.registry.run_Desc" xml:space="preserve">
+    <value>列出从当前用户和所有用户的注册表 Run 项启动的程序。</value>
+  </data>
+  <data name="Cmd_svc.list.stopped.auto_Title" xml:space="preserve">
+    <value>已停止的自动服务</value>
+  </data>
+  <data name="Cmd_svc.list.stopped.auto_Desc" xml:space="preserve">
+    <value>列出设置为自动启动但未在运行的服务。有些服务只在需要时启动，因此已停止并不一定是问题。</value>
+  </data>
+  <data name="Cmd_svc.search.restart_Title" xml:space="preserve">
+    <value>重启 Windows Search</value>
+  </data>
+  <data name="Cmd_svc.search.restart_Desc" xml:space="preserve">
+    <value>当搜索或索引停止响应时，重启 Windows Search 服务。</value>
+  </data>
+  <data name="Cmd_store.updates.open_Title" xml:space="preserve">
+    <value>Microsoft Store 更新</value>
+  </data>
+  <data name="Cmd_store.updates.open_Desc" xml:space="preserve">
+    <value>打开 Microsoft Store 的下载和更新页面。</value>
+  </data>
+  <data name="Cmd_wu.optional.open_Title" xml:space="preserve">
+    <value>可选更新</value>
+  </data>
+  <data name="Cmd_wu.optional.open_Desc" xml:space="preserve">
+    <value>打开 Windows Update 中的可选驱动程序和功能更新页面。</value>
+  </data>
+  <data name="Cmd_sec.uac.status_Title" xml:space="preserve">
+    <value>用户帐户控制设置</value>
+  </data>
+  <data name="Cmd_sec.uac.status_Desc" xml:space="preserve">
+    <value>显示 UAC 是否开启，以及它如何提示管理员和标准用户。</value>
+  </data>
+  <data name="Cmd_sec.coreisolation.open_Title" xml:space="preserve">
+    <value>内核隔离</value>
+  </data>
+  <data name="Cmd_sec.coreisolation.open_Desc" xml:space="preserve">
+    <value>打开 Windows 安全中心的“内核隔离”（内存完整性）页面。</value>
+  </data>
+  <data name="Cmd_dev.envvars.open_Title" xml:space="preserve">
+    <value>编辑环境变量</value>
+  </data>
+  <data name="Cmd_dev.envvars.open_Desc" xml:space="preserve">
+    <value>打开当前帐户的环境变量编辑器。</value>
+  </data>
+  <data name="Cmd_dev.wsl.status_Title" xml:space="preserve">
+    <value>WSL 状态</value>
+  </data>
+  <data name="Cmd_dev.wsl.status_Desc" xml:space="preserve">
+    <value>显示适用于 Linux 的 Windows 子系统的默认发行版和版本。</value>
+  </data>
+  <data name="Cmd_storage.trim.status_Title" xml:space="preserve">
+    <value>SSD TRIM 状态</value>
+  </data>
+  <data name="Cmd_storage.trim.status_Desc" xml:space="preserve">
+    <value>检查 Windows 是否向 SSD 发送 TRIM 命令（DisableDeleteNotify = 0 表示已开启）。</value>
+  </data>
+  <data name="Cmd_diag.minidumps.list_Title" xml:space="preserve">
+    <value>崩溃转储文件</value>
+  </data>
+  <data name="Cmd_diag.minidumps.list_Desc" xml:space="preserve">
+    <value>列出 Windows 在蓝屏崩溃后保存的小型转储文件。</value>
+  </data>
+  <data name="Cmd_power.battery.status_Title" xml:space="preserve">
+    <value>电池电量</value>
+  </data>
+  <data name="Cmd_power.battery.status_Desc" xml:space="preserve">
+    <value>显示当前电池电量、状态和预计剩余使用时间。</value>
   </data>
 </root>

@@ -23,7 +23,11 @@ public sealed class CheckForUpdateUseCase
     public Task<UpdateCheckResult> ExecuteAsync(CancellationToken cancellationToken = default)
         => _updates.CheckForUpdatesAsync(cancellationToken);
 
-    /// <summary>Downloads and applies the pending update, then restarts.</summary>
-    public Task<UpdateError> DownloadAndApplyAsync(IProgress<int>? progress, CancellationToken cancellationToken = default)
-        => _updates.DownloadAndApplyAsync(progress, cancellationToken);
+    /// <summary>Downloads the pending update.</summary>
+    public Task<UpdateError> DownloadAsync(IProgress<int>? progress, CancellationToken cancellationToken = default)
+        => _updates.DownloadAsync(progress, cancellationToken);
+
+    /// <summary>Applies the downloaded update and restarts.</summary>
+    public Task<UpdateError> ApplyAndRestartAsync(CancellationToken cancellationToken = default)
+        => _updates.ApplyAndRestartAsync(cancellationToken);
 }

@@ -1,15 +1,14 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Globalization;
-using System.Windows;
+using System.IO;
 using System.Windows.Data;
 using CommandForge.Application.Logging;
 using CommandForge.Application.Ports;
 using CommandForge.Wpf.Resources;
+using CommandForge.Wpf.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Microsoft.Win32;
 
 namespace CommandForge.Wpf.ViewModels;
 
@@ -21,13 +20,22 @@ public sealed partial class LogViewerViewModel : ObservableObject
 {
     private readonly ILogReader _logReader;
     private readonly ILogMaintenance _maintenance;
+    private readonly IDialogService _dialogs;
+    private readonly IFileDialogService _files;
+    private readonly IShellService _shell;
 
-    public LogViewerViewModel(ILogReader logReader, ILogMaintenance maintenance)
+    public LogViewerViewModel(ILogReader logReader, ILogMaintenance maintenance, IDialogService dialogs, IFileDialogService files, IShellService shell)
     {
         ArgumentNullException.ThrowIfNull(logReader);
         ArgumentNullException.ThrowIfNull(maintenance);
+        ArgumentNullException.ThrowIfNull(dialogs);
+        ArgumentNullException.ThrowIfNull(files);
+        ArgumentNullException.ThrowIfNull(shell);
         _logReader = logReader;
         _maintenance = maintenance;
+        _dialogs = dialogs;
+        _files = files;
+        _shell = shell;
 
         LevelOptions =
         [
@@ -65,38 +73,31 @@ public sealed partial class LogViewerViewModel : ObservableObject
     partial void OnFilterTextChanged(string value) => View.Refresh();
 
     [RelayCommand]
-    private void OpenFolder()
-    {
-        try
-        {
-            Process.Start(new ProcessStartInfo(_maintenance.LogsDirectoryPath) { UseShellExecute = true });
-        }
-        catch (Exception ex) when (ex is Win32Exception or InvalidOperationException)
-        {
-            // Folder missing / shell failure — ignore.
-        }
-    }
+    private void OpenFolder() => _shell.TryOpen(_maintenance.LogsDirectoryPath);
 
     [RelayCommand]
     private async Task ExportZipAsync()
     {
-        var dialog = new SaveFileDialog
-        {
-            Title = Strings.Get("LogViewer_Export"),
-            Filter = "Zip archive (*.zip)|*.zip",
-            FileName = $"commandforge-logs-{DateTime.Now:yyyyMMdd-HHmmss}.zip",
-        };
-        if (dialog.ShowDialog() != true)
+        var title = Strings.Get("LogViewer_Export");
+        var path = _files.PickSaveFile(title, Strings.Get("FileFilter_Zip"), $"commandforge-logs-{DateTime.Now:yyyyMMdd-HHmmss}.zip");
+        if (path is null)
         {
             return;
         }
 
-        await _maintenance.ExportZipAsync(dialog.FileName);
-        MessageBox.Show(
-            string.Format(CultureInfo.CurrentCulture, Strings.Get("Log_ExportSuccess"), dialog.FileName),
+        try
+        {
+            await _maintenance.ExportZipAsync(path);
+        }
+        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)
+        {
+            await _dialogs.ShowMessageAsync(title, string.Format(CultureInfo.CurrentCulture, Strings.Get("File_SaveFailed"), ex.Message), DialogKind.Error);
+            return;
+        }
+
+        await _dialogs.ShowMessageAsync(
             Strings.Get("LogViewer_Title"),
-            MessageBoxButton.OK,
-            MessageBoxImage.Information);
+            string.Format(CultureInfo.CurrentCulture, Strings.Get("Log_ExportSuccess"), path));
     }
 
     [RelayCommand]

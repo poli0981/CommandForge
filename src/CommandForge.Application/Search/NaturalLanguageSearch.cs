@@ -3,6 +3,7 @@ namespace CommandForge.Application.Search;
 /// <summary>
 /// Local natural-language search: maps everyday EN/VI phrases to a catalog search keyword
 /// (e.g. "clean disk" / "dọn ổ đĩa" → "cleanup"). 100% LOCAL — no LLM, no network (golden rule #5).
+/// Phrases match whole words, ignoring case and accents ("pin" is battery, "typing" is not).
 /// </summary>
 public static class NaturalLanguageSearch
 {
@@ -40,10 +41,10 @@ public static class NaturalLanguageSearch
             return null;
         }
 
-        var text = query.Trim().ToLowerInvariant();
+        var text = TextFolding.Fold(query.Trim());
         foreach (var (phrase, keyword) in Map)
         {
-            if (text.Contains(phrase, StringComparison.Ordinal)
+            if (ContainsWholeWords(text, TextFolding.Fold(phrase))
                 && !string.Equals(text, keyword, StringComparison.Ordinal))
             {
                 return keyword;
@@ -51,5 +52,21 @@ public static class NaturalLanguageSearch
         }
 
         return null;
+    }
+
+    private static bool ContainsWholeWords(string text, string phrase)
+    {
+        for (var at = text.IndexOf(phrase, StringComparison.Ordinal); at >= 0; at = text.IndexOf(phrase, at + 1, StringComparison.Ordinal))
+        {
+            var end = at + phrase.Length;
+            var startsWord = at == 0 || !char.IsLetterOrDigit(text[at - 1]);
+            var endsWord = end == text.Length || !char.IsLetterOrDigit(text[end]);
+            if (startsWord && endsWord)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

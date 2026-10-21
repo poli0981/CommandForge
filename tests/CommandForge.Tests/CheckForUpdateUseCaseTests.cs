@@ -45,14 +45,25 @@ public sealed class CheckForUpdateUseCaseTests
     }
 
     [Fact]
-    public async Task DownloadAndApplyAsync_PropagatesError()
+    public async Task DownloadAsync_PropagatesError()
     {
         var fake = new FakeUpdateService { DownloadResult = UpdateError.Offline };
         var useCase = new CheckForUpdateUseCase(fake);
 
-        var error = await useCase.DownloadAndApplyAsync(progress: null, TestContext.Current.CancellationToken);
+        var error = await useCase.DownloadAsync(progress: null, TestContext.Current.CancellationToken);
 
         Assert.Equal(UpdateError.Offline, error);
+    }
+
+    [Fact]
+    public async Task ApplyAndRestartAsync_PropagatesError()
+    {
+        var fake = new FakeUpdateService { ApplyResult = UpdateError.Unknown };
+        var useCase = new CheckForUpdateUseCase(fake);
+
+        var error = await useCase.ApplyAndRestartAsync(TestContext.Current.CancellationToken);
+
+        Assert.Equal(UpdateError.Unknown, error);
     }
 
     private sealed class FakeUpdateService : IUpdateService
@@ -63,10 +74,15 @@ public sealed class CheckForUpdateUseCaseTests
 
         public UpdateError DownloadResult { get; init; } = UpdateError.None;
 
+        public UpdateError ApplyResult { get; init; } = UpdateError.None;
+
         public Task<UpdateCheckResult> CheckForUpdatesAsync(CancellationToken cancellationToken = default)
             => Task.FromResult(Result);
 
-        public Task<UpdateError> DownloadAndApplyAsync(IProgress<int>? progress, CancellationToken cancellationToken = default)
+        public Task<UpdateError> DownloadAsync(IProgress<int>? progress, CancellationToken cancellationToken = default)
             => Task.FromResult(DownloadResult);
+
+        public Task<UpdateError> ApplyAndRestartAsync(CancellationToken cancellationToken = default)
+            => Task.FromResult(ApplyResult);
     }
 }

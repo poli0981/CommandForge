@@ -48,6 +48,9 @@ public sealed partial class UpdateViewModel : ObservableObject
     [ObservableProperty]
     private string _message = string.Empty;
 
+    /// <summary>Whether the latest check completed without an error (an update was found or none exists).</summary>
+    public bool CheckSucceeded { get; private set; }
+
     public bool IsChecking => State == UpdateUiState.Checking;
     public bool IsUpToDate => State == UpdateUiState.UpToDate;
     public bool IsAvailable => State == UpdateUiState.Available;
@@ -81,6 +84,7 @@ public sealed partial class UpdateViewModel : ObservableObject
             EndOperation(cancellation);
         }
 
+        CheckSucceeded = result.IsSuccess;
         if (result.HasUpdate)
         {
             SeedAvailable(result.NewVersion);
@@ -100,6 +104,7 @@ public sealed partial class UpdateViewModel : ObservableObject
     /// <summary>Pre-seeds the dialog to the "available" state (the startup path already checked).</summary>
     public void SeedAvailable(string? newVersion)
     {
+        CheckSucceeded = true;
         NewVersion = newVersion;
         Message = string.Format(CultureInfo.CurrentUICulture, Strings.Get("Update_Available"), newVersion);
         State = UpdateUiState.Available;
@@ -110,12 +115,11 @@ public sealed partial class UpdateViewModel : ObservableObject
     [RelayCommand(CanExecute = nameof(CanDownload))]
     private async Task DownloadAndRestartAsync()
     {
-        // Phase 3 guard: applying restarts the process, which would orphan a running command and
-        // bypass the "block exit while running" prompt. Refuse until the command finishes.
+        // Applying restarts the process, which would kill a running command (and the elevated
+        // session) halfway. Refuse until it finishes — checked again after the download below.
         if (IsCommandRunning?.Invoke() == true)
         {
             Message = Strings.Get("Update_Error_CommandRunning");
-            State = UpdateUiState.Error;
             return;
         }
 
@@ -127,7 +131,19 @@ public sealed partial class UpdateViewModel : ObservableObject
         UpdateError error;
         try
         {
-            error = await _useCase.DownloadAndApplyAsync(progress, cancellation.Token);
+            error = await _useCase.DownloadAsync(progress, cancellation.Token);
+            if (error == UpdateError.None)
+            {
+                if (IsCommandRunning?.Invoke() == true)
+                {
+                    // A command started while downloading; the update waits (it is already downloaded).
+                    Message = Strings.Get("Update_ReadyAfterCommand");
+                    State = UpdateUiState.Available;
+                    return;
+                }
+
+                error = await _useCase.ApplyAndRestartAsync(cancellation.Token);
+            }
         }
         catch (OperationCanceledException)
         {
@@ -150,6 +166,9 @@ public sealed partial class UpdateViewModel : ObservableObject
         _cancellation?.Cancel();
         CloseRequested?.Invoke();
     }
+
+    /// <summary>Cancels a check or download in flight (the window is closing, e.g. via its title-bar X).</summary>
+    public void CancelPending() => _cancellation?.Cancel();
 
     /// <summary>Starts a cancellable operation; <see cref="Close"/> cancels whichever one is in flight.</summary>
     private CancellationTokenSource BeginOperation()

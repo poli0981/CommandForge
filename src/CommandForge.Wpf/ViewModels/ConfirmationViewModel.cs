@@ -1,5 +1,6 @@
 using CommandForge.Application;
 using CommandForge.Domain;
+using CommandForge.Infrastructure.Execution;
 using CommandForge.Wpf.Resources;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -8,7 +9,7 @@ namespace CommandForge.Wpf.ViewModels;
 
 /// <summary>
 /// Confirmation prompt for a Caution/Dangerous command. Dangerous commands require the user
-/// to type the exact command title before the Run button enables (golden rule #8).
+/// to type the command title (or id) before Run enables (golden rule #8); see <see cref="RunSafety"/>.
 /// </summary>
 public sealed partial class ConfirmationViewModel : ObservableObject
 {
@@ -17,13 +18,21 @@ public sealed partial class ConfirmationViewModel : ObservableObject
         ArgumentNullException.ThrowIfNull(command);
         Title = title;
         Description = description;
-        CommandLine = CommandPreview.Build(command);
-        IsDangerous = command.DangerLevel == DangerLevel.Dangerous;
+        CommandId = command.Id;
+        CommandLine = CommandPreview.Build(command, SystemPathTokens.Values);
+        IsDangerous = RunSafety.NeedsTypedConfirmation(command);
         DangerText = Strings.Get($"Danger_{command.DangerLevel}");
-        _createRestorePoint = defaultCreateRestorePoint;
+        ShowRestorePointOption = RunSafety.OffersRestorePoint(command);
+        _createRestorePoint = ShowRestorePointOption && defaultCreateRestorePoint;
     }
 
     public string Title { get; }
+
+    /// <summary>The catalog id, accepted as an alternative to typing the (possibly long, localized) title.</summary>
+    public string CommandId { get; }
+
+    /// <summary>Whether the restore-point checkbox applies to this command (risky admin commands only).</summary>
+    public bool ShowRestorePointOption { get; }
 
     public string Description { get; }
 
@@ -41,12 +50,13 @@ public sealed partial class ConfirmationViewModel : ObservableObject
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(CanRun))]
+    [NotifyCanExecuteChangedFor(nameof(RunCommand))]
     private string _confirmationInput = string.Empty;
 
-    /// <summary>Whether Run is allowed: always for Caution, only when the title is typed for Dangerous.</summary>
-    public bool CanRun => !IsDangerous || string.Equals(ConfirmationInput.Trim(), Title, StringComparison.Ordinal);
+    /// <summary>Whether Run is allowed: always for Caution, only once the title or id is typed for Dangerous.</summary>
+    public bool CanRun => !IsDangerous || RunSafety.IsTypedConfirmationValid(ConfirmationInput, Title, CommandId);
 
-    [RelayCommand]
+    [RelayCommand(CanExecute = nameof(CanRun))]
     private void Run() => CloseRequested?.Invoke(true);
 
     [RelayCommand]

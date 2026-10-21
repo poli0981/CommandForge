@@ -15,6 +15,9 @@ internal enum ElevationMessageKind
 {
     Output,
     Result,
+
+    /// <summary>A diagnostic for the UI's log (the elevated side writes no files of its own).</summary>
+    Log,
 }
 
 /// <summary>A request from the UI. Only a <see cref="CommandId"/> is ever sent — never a command line.</summary>
@@ -25,7 +28,7 @@ internal sealed record ElevationRequest
     public string? CommandId { get; init; }
 }
 
-/// <summary>A streamed output line or the final result.</summary>
+/// <summary>A streamed output line, a log line, or the final result.</summary>
 internal sealed record ElevationMessage
 {
     public ElevationMessageKind Kind { get; init; }
@@ -46,6 +49,9 @@ internal sealed record ElevationMessage
 
     public static ElevationMessage Output(string text, bool isError)
         => new() { Kind = ElevationMessageKind.Output, Text = text, IsError = isError };
+
+    public static ElevationMessage LogLine(string text, bool isError)
+        => new() { Kind = ElevationMessageKind.Log, Text = text, IsError = isError };
 
     public static ElevationMessage FromResult(ExecutionResult result)
         => new()

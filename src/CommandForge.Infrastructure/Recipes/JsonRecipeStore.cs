@@ -1,6 +1,6 @@
-using System.Text.Json;
 using CommandForge.Application.Ports;
 using CommandForge.Domain;
+using CommandForge.Infrastructure.Persistence;
 
 namespace CommandForge.Infrastructure.Recipes;
 
@@ -11,6 +11,7 @@ namespace CommandForge.Infrastructure.Recipes;
 public sealed class JsonRecipeStore : IRecipeStore
 {
     private readonly string _path;
+    private readonly Lock _gate = new();
     private readonly List<Recipe> _recipes;
 
     /// <summary>Creates a store backed by the default <see cref="AppPaths.RecipesFilePath"/>.</summary>
@@ -27,57 +28,42 @@ public sealed class JsonRecipeStore : IRecipeStore
     }
 
     /// <inheritdoc />
-    public IReadOnlyList<Recipe> GetAll() => _recipes;
+    public IReadOnlyList<Recipe> GetAll()
+    {
+        lock (_gate)
+        {
+            return [.. _recipes];
+        }
+    }
 
     /// <inheritdoc />
     public void Save(Recipe recipe)
     {
         ArgumentNullException.ThrowIfNull(recipe);
 
-        _recipes.RemoveAll(r => string.Equals(r.Name, recipe.Name, StringComparison.OrdinalIgnoreCase));
-        _recipes.Add(recipe);
-        SaveFile();
+        lock (_gate)
+        {
+            _recipes.RemoveAll(r => string.Equals(r.Name, recipe.Name, StringComparison.OrdinalIgnoreCase));
+            _recipes.Add(recipe);
+            SaveFile();
+        }
     }
 
     /// <inheritdoc />
     public void Delete(string name)
     {
-        if (_recipes.RemoveAll(r => string.Equals(r.Name, name, StringComparison.OrdinalIgnoreCase)) > 0)
+        lock (_gate)
         {
-            SaveFile();
+            if (_recipes.RemoveAll(r => string.Equals(r.Name, name, StringComparison.OrdinalIgnoreCase)) > 0)
+            {
+                SaveFile();
+            }
         }
     }
 
     private void SaveFile()
-    {
-        var directory = Path.GetDirectoryName(_path);
-        if (!string.IsNullOrEmpty(directory))
-        {
-            Directory.CreateDirectory(directory);
-        }
-
-        var file = new RecipesFile { Recipes = _recipes };
-        var json = JsonSerializer.Serialize(file, RecipeJsonContext.Default.RecipesFile);
-        File.WriteAllText(_path, json);
-    }
+        => JsonFile.TryWrite(_path, new RecipesFile { Recipes = _recipes }, RecipeJsonContext.Default.RecipesFile);
 
     private static List<Recipe> Load(string path)
-    {
-        if (!File.Exists(path))
-        {
-            return [];
-        }
-
-        try
-        {
-            var json = File.ReadAllText(path);
-            var file = JsonSerializer.Deserialize(json, RecipeJsonContext.Default.RecipesFile);
-            return file?.Recipes.ToList() ?? [];
-        }
-        catch (JsonException)
-        {
-            // Corrupt recipes file: start empty rather than crashing on startup.
-            return [];
-        }
-    }
+        => JsonFile.Read(path, RecipeJsonContext.Default.RecipesFile)?.Recipes?.Where(item => item is not null).ToList() ?? [];
 }

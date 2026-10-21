@@ -11,5 +11,9 @@ public partial class UpdateDialog : Window
         InitializeComponent();
         DataContext = viewModel;
         viewModel.CloseRequested += Close;
+
+        // Closing with the title-bar X must stop the download too; otherwise it would finish in the
+        // background and restart the app — possibly in the middle of a command.
+        Closing += (_, _) => viewModel.CancelPending();
     }
 }

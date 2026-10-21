@@ -6,7 +6,7 @@ namespace CommandForge.Tests;
 
 /// <summary>
 /// Enforces the Clean Architecture boundary (golden rule #4): the Domain and Application
-/// layers must not reference WPF or Win32 assemblies.
+/// layers must not reference WPF, Win32 or any infrastructure library.
 /// </summary>
 public sealed class ArchitectureTests
 {
@@ -17,6 +17,11 @@ public sealed class ArchitectureTests
         "WindowsBase",
         "System.Windows",
         "Microsoft.Windows",
+        "Microsoft.Win32",
+        "System.Management",
+        "Microsoft.Extensions",
+        "Serilog",
+        "Velopack",
     ];
 
     [Fact]
@@ -26,6 +31,24 @@ public sealed class ArchitectureTests
     [Fact]
     public void Application_DoesNotReferenceUiOrWin32()
         => AssertNoForbiddenReferences(typeof(LegalGateService).Assembly);
+
+    [Fact]
+    public void Domain_ReferencesOnlyTheRuntime()
+        => Assert.All(
+            typeof(CommandDefinition).Assembly.GetReferencedAssemblies(),
+            reference => Assert.True(IsRuntime(reference), $"Domain must not reference {reference.Name}."));
+
+    [Fact]
+    public void Application_ReferencesOnlyTheRuntimeAndDomain()
+        => Assert.All(
+            typeof(LegalGateService).Assembly.GetReferencedAssemblies(),
+            reference => Assert.True(
+                IsRuntime(reference) || reference.Name == typeof(CommandDefinition).Assembly.GetName().Name,
+                $"Application must not reference {reference.Name}."));
+
+    private static bool IsRuntime(AssemblyName reference)
+        => reference.Name is { } name
+            && (name.StartsWith("System.", StringComparison.Ordinal) || name is "System" or "mscorlib" or "netstandard");
 
     private static void AssertNoForbiddenReferences(Assembly assembly)
     {

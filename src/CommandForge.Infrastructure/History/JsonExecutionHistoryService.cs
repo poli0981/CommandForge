@@ -1,7 +1,7 @@
-using System.Text.Json;
 using CommandForge.Application.History;
 using CommandForge.Application.Ports;
 using CommandForge.Domain;
+using CommandForge.Infrastructure.Persistence;
 
 namespace CommandForge.Infrastructure.History;
 
@@ -12,6 +12,7 @@ namespace CommandForge.Infrastructure.History;
 public sealed class JsonExecutionHistoryService : IExecutionHistoryService
 {
     private readonly string _path;
+    private readonly Lock _gate = new();
     private IReadOnlyList<ExecutionRecord> _records;
 
     /// <summary>Creates a service backed by the default <see cref="AppPaths.HistoryFilePath"/>.</summary>
@@ -33,47 +34,26 @@ public sealed class JsonExecutionHistoryService : IExecutionHistoryService
     /// <inheritdoc />
     public void Record(ExecutionRecord record)
     {
-        _records = ExecutionHistory.Add(_records, record);
-        Save();
+        lock (_gate)
+        {
+            _records = ExecutionHistory.Add(_records, record);
+            Save();
+        }
     }
 
     /// <inheritdoc />
     public void Clear()
     {
-        _records = [];
-        Save();
+        lock (_gate)
+        {
+            _records = [];
+            Save();
+        }
     }
 
     private void Save()
-    {
-        var directory = Path.GetDirectoryName(_path);
-        if (!string.IsNullOrEmpty(directory))
-        {
-            Directory.CreateDirectory(directory);
-        }
-
-        var file = new HistoryFile { Records = _records };
-        var json = JsonSerializer.Serialize(file, ExecutionHistoryJsonContext.Default.HistoryFile);
-        File.WriteAllText(_path, json);
-    }
+        => JsonFile.TryWrite(_path, new HistoryFile { Records = _records }, ExecutionHistoryJsonContext.Default.HistoryFile);
 
     private static IReadOnlyList<ExecutionRecord> Load(string path)
-    {
-        if (!File.Exists(path))
-        {
-            return [];
-        }
-
-        try
-        {
-            var json = File.ReadAllText(path);
-            var file = JsonSerializer.Deserialize(json, ExecutionHistoryJsonContext.Default.HistoryFile);
-            return file?.Records ?? [];
-        }
-        catch (JsonException)
-        {
-            // Corrupt history: fall back to empty rather than crashing on startup.
-            return [];
-        }
-    }
+        => JsonFile.Read(path, ExecutionHistoryJsonContext.Default.HistoryFile)?.Records?.Where(r => r is not null).ToList() ?? [];
 }

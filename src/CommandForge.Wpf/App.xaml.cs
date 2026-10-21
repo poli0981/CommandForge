@@ -13,45 +13,35 @@ using CommandForge.Wpf.Resources;
 using CommandForge.Wpf.Theming;
 using CommandForge.Wpf.Views;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Serilog;
 using Serilog.Core;
 using Serilog.Events;
-using Velopack;
 
 namespace CommandForge.Wpf;
 
 /// <summary>
-/// Application entry point. Builds the Generic Host (DI + Serilog), then routes to the
-/// Legal Gate or the main window depending on whether the current terms were accepted.
+/// The WPF application. Builds the DI container and Serilog, then routes to the Legal Gate or the
+/// main window depending on whether the current terms were accepted. The process entry point is
+/// <see cref="Program.Main"/>.
 /// </summary>
 public partial class App : System.Windows.Application
 {
-    private IHost? _host;
-    private SingleInstanceGuard? _guard;
+    private const long MaxLogFileBytes = 10 * 1024 * 1024;
+    private const int RetainedLogFiles = 14;
+
+    private readonly SingleInstanceGuard? _guard;
+    private ServiceProvider? _services;
+
+    /// <summary>Parameterless constructor for the XAML designer; the app itself starts via <see cref="Program.Main"/>.</summary>
+    public App()
+    {
+    }
+
+    internal App(SingleInstanceGuard guard) => _guard = guard;
 
     /// <inheritdoc />
     protected override void OnStartup(StartupEventArgs e)
     {
-        // Velopack install/update lifecycle hooks. Must run before the host/UI; may exit the process.
-        // Called directly in the main assembly so the vpk packager can verify its presence.
-        VelopackApp.Build().Run();
-
-        // Single-instance guard. Placed after Velopack (whose hook invocations exit inside Run())
-        // so those transient processes are never counted as a second instance. A later launch
-        // signals the primary to surface its window, then exits silently.
-        var guard = new SingleInstanceGuard();
-        if (!guard.IsPrimaryInstance)
-        {
-            guard.SignalPrimaryInstance();
-            guard.Dispose();
-            Shutdown(); // _guard is left null, so OnExit's _guard?.Dispose() is a no-op.
-            return;
-        }
-
-        _guard = guard;
-        _guard.StartListening(OnActivationRequested);
-
         base.OnStartup(e);
 
         // The Legal Gate is shown as a modal dialog before the main window exists.
@@ -59,34 +49,40 @@ public partial class App : System.Windows.Application
         // (OnLastWindowClose) before we get a chance to show the main window.
         ShutdownMode = ShutdownMode.OnExplicitShutdown;
 
+        try
+        {
+            Start();
+        }
+        catch (Exception ex)
+        {
+            // Failing here with no window up would otherwise leave an invisible process holding the
+            // single-instance mutex, so every later launch would silently do nothing.
+            Log.Fatal(ex, "Startup failed.");
+            ShowStartupError(ex);
+            Shutdown(1);
+        }
+    }
+
+    private void Start()
+    {
         AppPaths.EnsureCreated();
 
         var logStore = new InMemoryLogStore();
         var levelSwitch = new LoggingLevelSwitch(LogEventLevel.Information);
-        Log.Logger = new LoggerConfiguration()
-            .MinimumLevel.ControlledBy(levelSwitch)
-            .WriteTo.Async(sink => sink.File(
-                Path.Combine(AppPaths.LogsDirectory, "log-.txt"),
-                rollingInterval: RollingInterval.Day))
-            .WriteTo.Sink(logStore)
-            .CreateLogger();
+        Log.Logger = CreateLogger(logStore, levelSwitch);
+        Log.Information("CommandForge {Version} starting up", typeof(App).Assembly.GetName().Version);
 
-        _host = Host.CreateDefaultBuilder()
-            .UseSerilog()
-            .ConfigureServices(services =>
-            {
-                services.AddCommandForgeInfrastructure(logStore, levelSwitch);
-                services.AddCommandForgeWpf();
-            })
-            .Build();
+        var services = new ServiceCollection();
+        services.AddCommandForgeInfrastructure(logStore, levelSwitch);
+        services.AddCommandForgeWpf();
+        _services = services.BuildServiceProvider(new ServiceProviderOptions { ValidateOnBuild = true, ValidateScopes = true });
 
-        Log.Information("CommandForge starting up");
-
-        _host.Services.GetRequiredService<CrashHandlingService>().Hook();
+        _services.GetRequiredService<CrashHandlingService>().Hook();
+        _guard?.StartListening(OnActivationRequested);
 
         ApplyUserPreferences();
 
-        var legalGate = _host.Services.GetRequiredService<LegalGateService>();
+        var legalGate = _services.GetRequiredService<LegalGateService>();
         if (legalGate.HasAcceptedCurrentTerms())
         {
             ShowMainWindow();
@@ -97,10 +93,23 @@ public partial class App : System.Windows.Application
         }
     }
 
+    private static Logger CreateLogger(InMemoryLogStore logStore, LoggingLevelSwitch levelSwitch)
+        => new LoggerConfiguration()
+            .MinimumLevel.ControlledBy(levelSwitch)
+            .WriteTo.Async(sink => sink.File(
+                Path.Combine(AppPaths.LogsDirectory, "log-.txt"),
+                rollingInterval: RollingInterval.Day,
+                fileSizeLimitBytes: MaxLogFileBytes,
+                rollOnFileSizeLimit: true,
+                retainedFileCountLimit: RetainedLogFiles))
+            .WriteTo.Sink(logStore)
+            .CreateLogger();
+
     /// <summary>Applies the persisted language, font size and theme before any window is shown.</summary>
     private void ApplyUserPreferences()
     {
-        var settings = _host!.Services.GetRequiredService<ISettingsService>();
+        var services = _services!;
+        var settings = services.GetRequiredService<ISettingsService>();
 
         // Recreate config.json with defaults if it was deleted while the app was closed.
         if (!File.Exists(AppPaths.ConfigFilePath))
@@ -109,17 +118,32 @@ public partial class App : System.Windows.Application
         }
 
         LocalizationManager.Instance.SetCulture(ResolveCulture(settings.Language));
-        _host.Services.GetRequiredService<IFontScaleService>().Apply(settings.FontSize);
-        _host.Services.GetRequiredService<IThemeService>().Apply(settings.Theme);
-        _host.Services.GetRequiredService<ILogLevelController>().Current = settings.LogLevel;
+        services.GetRequiredService<IFontScaleService>().Apply(settings.FontSize);
+        services.GetRequiredService<IThemeService>().Apply(settings.Theme);
+        services.GetRequiredService<ILogLevelController>().Current = settings.LogLevel;
     }
 
     private static CultureInfo ResolveCulture(string language)
-        => string.IsNullOrEmpty(language) ? LocalizationManager.Instance.SystemCulture : new CultureInfo(language);
+    {
+        if (string.IsNullOrEmpty(language))
+        {
+            return LocalizationManager.Instance.SystemCulture;
+        }
+
+        try
+        {
+            return CultureInfo.GetCultureInfo(language);
+        }
+        catch (CultureNotFoundException ex)
+        {
+            Log.Warning(ex, "Unknown language '{Language}' in config.json; following the system language.", language);
+            return LocalizationManager.Instance.SystemCulture;
+        }
+    }
 
     private void ShowLegalGate()
     {
-        var window = _host!.Services.GetRequiredService<LegalGateWindow>();
+        var window = _services!.GetRequiredService<LegalGateWindow>();
         var accepted = window.ShowDialog() == true;
         if (accepted)
         {
@@ -133,7 +157,7 @@ public partial class App : System.Windows.Application
 
     private void ShowMainWindow()
     {
-        var window = _host!.Services.GetRequiredService<MainWindow>();
+        var window = _services!.GetRequiredService<MainWindow>();
         MainWindow = window;
         ShutdownMode = ShutdownMode.OnMainWindowClose;
         window.Show();
@@ -146,20 +170,37 @@ public partial class App : System.Windows.Application
     {
         try
         {
-            var settings = _host!.Services.GetRequiredService<ISettingsService>();
-            var updates = _host.Services.GetRequiredService<CheckForUpdateUseCase>();
+            var services = _services!;
+            var settings = services.GetRequiredService<ISettingsService>();
+            var updates = services.GetRequiredService<CheckForUpdateUseCase>();
             if (!settings.AutoCheckForUpdates || !updates.IsSupported)
             {
                 return;
             }
 
-            var dialog = _host.Services.GetRequiredService<IUpdateDialogService>();
+            var dialog = services.GetRequiredService<IUpdateDialogService>();
             await dialog.ShowAsync(startedFromStartup: true);
         }
         catch (Exception ex)
         {
             Log.Warning(ex, "Startup update check failed.");
         }
+    }
+
+    private static void ShowStartupError(Exception ex)
+    {
+        string message;
+        try
+        {
+            message = string.Format(CultureInfo.CurrentCulture, Strings.Get("Startup_FailedMessage"), ex.Message, AppPaths.LogsDirectory);
+        }
+        catch (Exception)
+        {
+            // Resources may be what failed — fall back to plain English.
+            message = $"CommandForge could not start: {ex.Message}{Environment.NewLine}{Environment.NewLine}Details were written to {AppPaths.LogsDirectory}";
+        }
+
+        MessageBox.Show(message, ProductInfo.Name, MessageBoxButton.OK, MessageBoxImage.Error);
     }
 
     /// <summary>Invoked (on a background thread) when a second instance asks us to surface our window.</summary>
@@ -177,7 +218,7 @@ public partial class App : System.Windows.Application
 
         if (window.WindowState == WindowState.Minimized)
         {
-            window.WindowState = WindowState.Normal; // MainWindow is NoResize, so Normal fully restores it.
+            window.WindowState = WindowState.Normal;
         }
 
         window.Show();
@@ -192,10 +233,13 @@ public partial class App : System.Windows.Application
     /// <inheritdoc />
     protected override void OnExit(ExitEventArgs e)
     {
-        _guard?.Dispose();
         Log.Information("CommandForge shutting down");
+
+        // Disposing the container closes the elevation broker's pipe, which ends the Elevator.
+        _services?.Dispose();
+
+        // Flush last so anything logged while disposing is kept.
         Log.CloseAndFlush();
-        _host?.Dispose();
         base.OnExit(e);
     }
 }

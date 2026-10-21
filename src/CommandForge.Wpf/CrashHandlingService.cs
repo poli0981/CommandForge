@@ -58,9 +58,9 @@ public sealed class CrashHandlingService
     {
         if (Interlocked.Exchange(ref _handling, 1) == 1)
         {
-            // Already handling a crash — log and bail to avoid a secondary-crash loop.
-            Log.Fatal(ex, "Secondary exception while handling a crash.");
-            Log.CloseAndFlush();
+            // Already handling a crash — log and bail to avoid a secondary-crash loop. The logger
+            // stays open: closing it here would silence logging for the rest of the session.
+            Log.Error(ex, "Secondary exception while handling a crash.");
             return;
         }
 
@@ -96,7 +96,14 @@ public sealed class CrashHandlingService
             app.Dispatcher.Invoke(() =>
             {
                 var viewModel = new ErrorViewModel(code, ex.ToString(), _reportBug);
-                var dialog = new ErrorDialog(viewModel) { Owner = app.MainWindow };
+                var dialog = new ErrorDialog(viewModel);
+
+                // Owner can only be a window that has been shown (a crash may happen before that).
+                if (app.MainWindow is { IsVisible: true } owner)
+                {
+                    dialog.Owner = owner;
+                }
+
                 dialog.ShowDialog();
             });
         }
@@ -107,9 +114,19 @@ public sealed class CrashHandlingService
         }
     }
 
-    private static string GenerateCode(Exception ex)
+    /// <summary>
+    /// Builds a support code: UTC timestamp plus a hash of the exception type. The hash is FNV-1a so
+    /// the same failure gets the same suffix in every run (string.GetHashCode is randomized per process).
+    /// </summary>
+    internal static string GenerateCode(Exception ex)
     {
-        var hash = (uint)(ex.GetType().FullName ?? ex.GetType().Name).GetHashCode(StringComparison.Ordinal) & 0xFFFF;
-        return $"{DateTime.UtcNow:yyMMdd-HHmmss}-{hash:X4}";
+        var name = ex.GetType().FullName ?? ex.GetType().Name;
+        var hash = 2166136261u;
+        foreach (var c in name)
+        {
+            hash = (hash ^ c) * 16777619u;
+        }
+
+        return $"{DateTime.UtcNow:yyMMdd-HHmmss}-{hash & 0xFFFF:X4}";
     }
 }

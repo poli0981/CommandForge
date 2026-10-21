@@ -128,6 +128,22 @@ jobs:
             Out-File $checksums -Encoding ascii
           gh release upload $env:TAG $sbom $checksums --clobber
 
+      # Set before publishing, so the release and its Discord announcement never go out empty.
+      - name: Release notes from CHANGELOG.md
+        shell: pwsh
+        env:
+          VERSION: ${{ steps.ver.outputs.version }}
+          TAG: ${{ steps.ver.outputs.tag }}
+        run: |
+          $changelog = (Get-Content CHANGELOG.md -Raw) -replace "`r`n", "`n"
+          $pattern = "(?ms)^## \[$([regex]::Escape($env:VERSION))\][^\n]*\n(.*?)(?=^## \[|^\[[^\]]+\]: |\z)"
+          $section = [regex]::Match($changelog, $pattern, 'None', [TimeSpan]::FromSeconds(5))
+          if ($section.Success -and $section.Groups[1].Value.Trim()) {
+            $section.Groups[1].Value.Trim() | gh release edit $env:TAG --notes-file -
+          } else {
+            Write-Warning "CHANGELOG.md has no section for $env:VERSION; the release notes stay empty."
+          }
+
       - name: Publish the release
         shell: pwsh
         env:

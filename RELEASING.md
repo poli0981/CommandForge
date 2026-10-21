@@ -25,10 +25,12 @@ SemVer tag.
    - restores the pinned `vpk` tool and **downloads the previous release** so a delta package can
      be computed;
    - publishes and packages with Velopack (`scripts/pack.ps1`);
-   - creates **build-provenance attestations** for `Setup.exe` and the `.nupkg` files;
+   - creates **build-provenance attestations** for `Setup.exe`, the portable zip and this
+     version's `.nupkg` files;
    - uploads everything as a **draft** GitHub Release, attaches the **SPDX SBOM**
-     (`sbom.spdx.json`) and **`checksums.txt`** (SHA-256), then **publishes** it as the latest
-     release — installed copies only see the update once every asset is in place;
+     (`sbom.spdx.json`) and **`checksums.txt`** (SHA-256 of every published asset), sets the
+     release notes to this version's section of `CHANGELOG.md`, then **publishes** it as the
+     latest release — installed copies only see the update once every asset is in place;
    - if `VT_API_KEY` is set, submits `Setup.exe` and the full package to **VirusTotal** and appends
      the scan links to the release notes;
    - calls the shared announcer (`poli0981/.github`) to post the release to Discord.
@@ -39,8 +41,9 @@ SemVer tag.
    gh attestation verify CommandForge-win-Setup.exe --repo poli0981/CommandForge
    ```
 
-   Edit the release notes if needed (changelog highlights). The SHA-256 and VirusTotal details are
-   already attached.
+   The notes are the CHANGELOG section followed by the **VirusTotal** links; edit them on the
+   release page if you want a shorter summary (keep the VirusTotal section). The SHA-256 sums are
+   in `checksums.txt`.
 
 You can also run the workflow manually (**Actions → Release → Run workflow**) with a `version`
 input; the upload step then creates the `vX.Y.Z` tag.

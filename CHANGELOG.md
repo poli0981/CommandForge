@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- Settings → Advanced and Portable info now say whether this copy updates itself ("Installed or
+  portable" / "Development build") instead of "Installed" / "Portable / dev": the portable zip
+  from the releases page updates itself like the installed app.
+- Releases: the notes come from this changelog and list the VirusTotal reports; the provenance
+  attestations now also cover the portable zip, and `checksums.txt` lists exactly the files you
+  can download.
+
 ## [2.0.0] — 2026-10-21
 
 A redesign in the Fluent style of Windows 11, plus a broad safety, reliability and security

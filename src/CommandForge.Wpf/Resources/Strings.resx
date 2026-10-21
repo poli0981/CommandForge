@@ -1055,10 +1055,7 @@
     <value>Run mode:</value>
   </data>
   <data name="Settings_RunModeInstalled" xml:space="preserve">
-    <value>Installed</value>
-  </data>
-  <data name="Settings_RunModePortable" xml:space="preserve">
-    <value>Portable / dev</value>
+    <value>Installed or portable (updates itself)</value>
   </data>
   <data name="Settings_ConfigPath" xml:space="preserve">
     <value>Config file</value>
@@ -2581,5 +2578,8 @@ Details were written to the log folder:
   </data>
   <data name="About_CodeContact" xml:space="preserve">
     <value>Code and contributions</value>
+  </data>
+  <data name="Settings_RunModeDev" xml:space="preserve">
+    <value>Development build (doesn't update)</value>
   </data>
 </root>

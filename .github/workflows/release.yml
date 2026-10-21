@@ -85,9 +85,12 @@ jobs:
       - name: Attest build provenance
         uses: actions/attest-build-provenance@4d101475d8b20a2381f78447822ac1eab6504dd8 # v4.2.2
         with:
+          # Only what this run built: Releases/ also holds the previous version's full package,
+          # downloaded above just to compute the delta.
           subject-path: |
             Releases/*-Setup.exe
-            Releases/*.nupkg
+            Releases/*-Portable.zip
+            Releases/CommandForge-${{ steps.ver.outputs.version }}-*.nupkg
 
       # Upload as a DRAFT first: publishing is what makes installed copies auto-update, so the
       # release only goes live once every asset (SBOM, checksums, scan links) is attached.
@@ -113,14 +116,33 @@ jobs:
           $sbom = Join-Path $rel 'sbom.spdx.json'
           gh api "repos/$env:REPOSITORY/dependency-graph/sbom" --jq '.sbom' | Out-File $sbom -Encoding utf8NoBOM
           $checksums = Join-Path $rel 'checksums.txt'
+          # Hash exactly what the release offers for download: the assets vpk uploaded plus the
+          # SBOM (Releases/ also holds unpublished files, such as the previous full package).
+          $published = @(gh release view $env:TAG --json assets --jq '.assets[].name') + 'sbom.spdx.json'
           # Filter with Where-Object, not Get-ChildItem -Exclude (which returns nothing without a
           # trailing wildcard/-Recurse and once produced an empty checksums.txt).
           Get-ChildItem -Path $rel -File |
-            Where-Object { $_.Name -ne 'checksums.txt' } |
+            Where-Object { $_.Name -ne 'checksums.txt' -and $published -contains $_.Name } |
             Get-FileHash -Algorithm SHA256 |
             ForEach-Object { '{0}  {1}' -f $_.Hash.ToLower(), (Split-Path $_.Path -Leaf) } |
             Out-File $checksums -Encoding ascii
           gh release upload $env:TAG $sbom $checksums --clobber
+
+      # Set before publishing, so the release and its Discord announcement never go out empty.
+      - name: Release notes from CHANGELOG.md
+        shell: pwsh
+        env:
+          VERSION: ${{ steps.ver.outputs.version }}
+          TAG: ${{ steps.ver.outputs.tag }}
+        run: |
+          $changelog = (Get-Content CHANGELOG.md -Raw) -replace "`r`n", "`n"
+          $pattern = "(?ms)^## \[$([regex]::Escape($env:VERSION))\][^\n]*\n(.*?)(?=^## \[|^\[[^\]]+\]: |\z)"
+          $section = [regex]::Match($changelog, $pattern, 'None', [TimeSpan]::FromSeconds(5))
+          if ($section.Success -and $section.Groups[1].Value.Trim()) {
+            $section.Groups[1].Value.Trim() | gh release edit $env:TAG --notes-file -
+          } else {
+            Write-Warning "CHANGELOG.md has no section for $env:VERSION; the release notes stay empty."
+          }
 
       - name: Publish the release
         shell: pwsh
@@ -128,16 +150,34 @@ jobs:
           TAG: ${{ steps.ver.outputs.tag }}
         run: gh release edit $env:TAG --draft=false --latest
 
-      # The release-by-tag API used to append scan links can't see drafts, so this runs after publishing.
       - name: VirusTotal scan (optional)
+        id: vt
         if: env.VT_API_KEY != ''
         uses: crazy-max/ghaction-virustotal@936d8c5c00afe97d3d9a1af26d017cfdf26800a2 # v5.0.0
         with:
           vt_api_key: ${{ env.VT_API_KEY }}
-          update_release_body: true
           files: |
             Releases/*-Setup.exe
-            Releases/*-full.nupkg
+            Releases/CommandForge-${{ steps.ver.outputs.version }}-full.nupkg
+
+      # The action's own update_release_body only works on `release` events, and this workflow
+      # runs on tag pushes, so the report links are appended here.
+      - name: Add VirusTotal links to the release notes
+        if: steps.vt.outputs.analysis != ''
+        shell: pwsh
+        env:
+          TAG: ${{ steps.ver.outputs.tag }}
+          ANALYSIS: ${{ steps.vt.outputs.analysis }}
+        run: |
+          # ANALYSIS is "path=analysis-url,path=analysis-url"; link each file's permanent report.
+          $links = foreach ($pair in $env:ANALYSIS -split ',') {
+            $file = ($pair -split '=', 2)[0]
+            $hash = (Get-FileHash $file -Algorithm SHA256).Hash.ToLower()
+            '- [{0}](https://www.virustotal.com/gui/file/{1})' -f (Split-Path $file -Leaf), $hash
+          }
+          $body = (gh release view $env:TAG --json body --jq '.body') -join "`n"
+          $notes = (@($body.TrimEnd(), '', '### VirusTotal', '') + $links) -join "`n"
+          $notes | gh release edit $env:TAG --notes-file -
 
   announce:
     # A release published with GITHUB_TOKEN does not fire the `release` event, so the standalone
@@ -145,7 +185,7 @@ jobs:
     needs: release
     permissions:
       contents: read
-    uses: poli0981/.github/.github/workflows/announce-release.yml@main
+    uses: poli0981/.github/.github/workflows/announce-release.yml@c3e118a01d40e95b36b2c3466dc206638c11eb5a # main, 2026-07-06
     with:
       tag_override: ${{ needs.release.outputs.tag }}
     secrets: inherit

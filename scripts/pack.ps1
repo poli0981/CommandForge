@@ -5,12 +5,13 @@
 
 .DESCRIPTION
     Produces, under Releases/:
-      CommandForge-win-Setup.exe, RELEASES, releases.win.json, *-full.nupkg, *-delta.nupkg
+      CommandForge-win-Setup.exe, CommandForge-win-Portable.zip, RELEASES, releases.win.json,
+      *-full.nupkg, *-delta.nupkg
     Update is per-user (no UAC). The Elevator is published into the same folder by the
     PublishElevatorOnPublish MSBuild target, so vpk packages it automatically.
 
     vpk is pinned as a local .NET tool (.config/dotnet-tools.json) and must match the Velopack
-    library version in Directory.Packages.props.
+    library version referenced by CommandForge.Infrastructure.csproj and CommandForge.Wpf.csproj.
 
 .PARAMETER Version
     SemVer package version, e.g. 2.0.0 (no leading 'v'). Should match the git tag vX.Y.Z.

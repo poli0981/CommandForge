@@ -1055,10 +1055,7 @@
     <value>Chế độ chạy:</value>
   </data>
   <data name="Settings_RunModeInstalled" xml:space="preserve">
-    <value>Đã cài đặt</value>
-  </data>
-  <data name="Settings_RunModePortable" xml:space="preserve">
-    <value>Portable / dev</value>
+    <value>Bản cài đặt hoặc portable (tự cập nhật)</value>
   </data>
   <data name="Settings_ConfigPath" xml:space="preserve">
     <value>File cấu hình</value>
@@ -2581,5 +2578,8 @@ Chi tiết đã được ghi vào thư mục log:
   </data>
   <data name="About_CodeContact" xml:space="preserve">
     <value>Mã nguồn và đóng góp</value>
+  </data>
+  <data name="Settings_RunModeDev" xml:space="preserve">
+    <value>Bản phát triển (không tự cập nhật)</value>
   </data>
 </root>

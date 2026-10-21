@@ -95,7 +95,7 @@ public sealed partial class ResxKeyTests
             "ReportBug_Close", "ReportBug_DescriptionHint", "ReportBug_ReviewReminder",
             "Settings_Logs", "Settings_LogLevel", "Settings_LogsSize", "Settings_OpenLogFolder", "Settings_ExportLogs",
             "Settings_ClearOldLogs", "Settings_ClearLogsConfirm", "Settings_Advanced", "Settings_RunMode",
-            "Settings_RunModeInstalled", "Settings_RunModePortable", "Settings_ConfigPath", "Settings_OpenConfig",
+            "Settings_RunModeInstalled", "Settings_RunModeDev", "Settings_ConfigPath", "Settings_OpenConfig",
             "Settings_OpenDebugPanel", "Settings_ResetDefaults", "Settings_ResetConfirm",
         ];
 
@@ -156,7 +156,7 @@ public sealed partial class ResxKeyTests
         [
             "Shortcuts_Palette", "Shortcuts_ListNav", "Shortcuts_OpenSelected", "Shortcuts_CloseDialog",
             "PortableInfo_ConfigFolder", "PortableInfo_LogFolder",
-            "Settings_RunMode", "Settings_RunModeInstalled", "Settings_RunModePortable",
+            "Settings_RunMode", "Settings_RunModeInstalled", "Settings_RunModeDev",
             "Settings_CurrentVersion", "Settings_NoDataCollected", "LanguageOption_System",
         ];
 

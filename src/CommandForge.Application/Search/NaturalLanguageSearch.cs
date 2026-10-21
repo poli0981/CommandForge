@@ -2,7 +2,7 @@ namespace CommandForge.Application.Search;
 
 /// <summary>
 /// Local natural-language search: maps everyday EN/VI phrases to a catalog search keyword
-/// (e.g. "clean disk" / "dọn ổ đĩa" → "cleanup"). 100% LOCAL — no LLM, no network (golden rule #5).
+/// (e.g. "clean disk" / "dọn ổ đĩa" → "cleanup"). 100% LOCAL — no LLM, no network (golden rule #7).
 /// Phrases match whole words, ignoring case and accents ("pin" is battery, "typing" is not).
 /// </summary>
 public static class NaturalLanguageSearch

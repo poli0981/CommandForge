@@ -186,7 +186,7 @@ Under **My commands** you can save your own command lines, such as a `ping` you 
 | **Updates** | Check for updates on startup, the current version, the last check and **Check now**. |
 | **Backup & profiles** | **Export…** / **Import…** your appearance, behavior and favorites as a `.json` file, and save named profiles (for example "Gaming PC" or "Office") that you can **Apply** or **Delete**. |
 | **Logs** | Log level, log size, **Open log folder**, **Export logs (.zip)**, **Delete old logs**. |
-| **Advanced** | Run mode (Installed or Portable / dev), the config folder, the Debug panel, and **Reset to defaults** (keeps your accepted terms and logs). |
+| **Advanced** | Run mode (whether this copy updates itself), the config folder, the Debug panel, and **Reset to defaults** (keeps your accepted terms and logs). |
 | **About** | Version, license and GitHub links. |
 
 Theme, language and font size change immediately; no restart needed.

@@ -1055,10 +1055,7 @@
     <value>Modo de ejecución:</value>
   </data>
   <data name="Settings_RunModeInstalled" xml:space="preserve">
-    <value>Instalado</value>
-  </data>
-  <data name="Settings_RunModePortable" xml:space="preserve">
-    <value>Portátil / desarrollo</value>
+    <value>Instalada o portátil (se actualiza sola)</value>
   </data>
   <data name="Settings_ConfigPath" xml:space="preserve">
     <value>Archivo de configuración</value>
@@ -2581,5 +2578,8 @@ Los detalles se escribieron en la carpeta de registros:
   </data>
   <data name="About_CodeContact" xml:space="preserve">
     <value>Código y contribuciones</value>
+  </data>
+  <data name="Settings_RunModeDev" xml:space="preserve">
+    <value>Compilación de desarrollo (no se actualiza)</value>
   </data>
 </root>

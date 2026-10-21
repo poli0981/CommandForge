@@ -40,36 +40,31 @@ public static class FuzzyMatcher
 
         foreach (var queryChar in query)
         {
-            var found = false;
-            for (; textIndex < text.Length; textIndex++)
+            var target = char.ToLowerInvariant(queryChar);
+            while (textIndex < text.Length && char.ToLowerInvariant(text[textIndex]) != target)
             {
-                if (char.ToLowerInvariant(text[textIndex]) != char.ToLowerInvariant(queryChar))
-                {
-                    continue;
-                }
-
-                indices.Add(textIndex);
-                score += BaseScore;
-                if (textIndex == lastMatch + 1)
-                {
-                    score += ConsecutiveBonus;
-                }
-
-                if (textIndex == 0 || !char.IsLetterOrDigit(text[textIndex - 1]))
-                {
-                    score += WordBoundaryBonus;
-                }
-
-                lastMatch = textIndex;
                 textIndex++;
-                found = true;
-                break;
             }
 
-            if (!found)
+            if (textIndex >= text.Length)
             {
                 return null;
             }
+
+            indices.Add(textIndex);
+            score += BaseScore;
+            if (textIndex == lastMatch + 1)
+            {
+                score += ConsecutiveBonus;
+            }
+
+            if (textIndex == 0 || !char.IsLetterOrDigit(text[textIndex - 1]))
+            {
+                score += WordBoundaryBonus;
+            }
+
+            lastMatch = textIndex;
+            textIndex++;
         }
 
         return new FuzzyMatchResult(score, indices);

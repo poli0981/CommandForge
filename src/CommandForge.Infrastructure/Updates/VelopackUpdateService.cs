@@ -1,3 +1,4 @@
+using CommandForge.Application;
 using CommandForge.Application.Ports;
 using CommandForge.Application.Updates;
 using Serilog;
@@ -14,8 +15,6 @@ namespace CommandForge.Infrastructure.Updates;
 /// </summary>
 public sealed class VelopackUpdateService : IUpdateService
 {
-    private const string RepoUrl = "https://github.com/poli0981/CommandForge";
-
     private readonly ILogger _log = Log.ForContext<VelopackUpdateService>();
     private readonly Lazy<UpdateManager?> _manager;
     private UpdateInfo? _pending;
@@ -102,7 +101,7 @@ public sealed class VelopackUpdateService : IUpdateService
     {
         try
         {
-            return new UpdateManager(new GithubSource(RepoUrl, accessToken: null, prerelease: false));
+            return new UpdateManager(new GithubSource(ProductLinks.Repository, accessToken: null, prerelease: false));
         }
         catch (InvalidOperationException ex)
         {

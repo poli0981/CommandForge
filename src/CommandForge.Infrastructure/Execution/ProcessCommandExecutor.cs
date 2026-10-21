@@ -14,6 +14,9 @@ namespace CommandForge.Infrastructure.Execution;
 /// </summary>
 internal sealed class ProcessCommandExecutor : ICommandExecutor
 {
+    // Catalog patterns are vetted, but output size is unbounded — cap the match time anyway.
+    private static readonly TimeSpan RegexTimeout = TimeSpan.FromSeconds(2);
+
     private readonly IProcessRunner _runner;
 
     public ProcessCommandExecutor(IProcessRunner runner) => _runner = runner;
@@ -22,7 +25,7 @@ internal sealed class ProcessCommandExecutor : ICommandExecutor
     public async Task<ExecutionResult> ExecuteAsync(
         CommandDefinition command,
         ChannelWriter<OutputLine> output,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken = default)
     {
         ArgumentNullException.ThrowIfNull(command);
         ArgumentNullException.ThrowIfNull(output);
@@ -118,7 +121,8 @@ internal sealed class ProcessCommandExecutor : ICommandExecutor
         {
             RestartPolicy.Always => true,
             RestartPolicy.FromExitCode => exitCode == ExecutionResult.RebootRequiredExitCode,
-            RestartPolicy.FromOutputRegex => command.RestartRegex is { } pattern && Regex.IsMatch(output, pattern),
+            RestartPolicy.FromOutputRegex => command.RestartRegex is { } pattern
+                && Regex.IsMatch(output, pattern, RegexOptions.None, RegexTimeout),
             _ => false,
         };
 }

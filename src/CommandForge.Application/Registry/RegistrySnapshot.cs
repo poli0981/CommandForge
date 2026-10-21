@@ -39,11 +39,11 @@ public static class RegistrySnapshot
         var changes = new List<RegistryChange>();
         foreach (var reference in references)
         {
-            before.TryGetValue(reference, out var b);
-            after.TryGetValue(reference, out var a);
-            if (!string.Equals(b, a, StringComparison.Ordinal))
+            before.TryGetValue(reference, out var oldValue);
+            after.TryGetValue(reference, out var newValue);
+            if (!string.Equals(oldValue, newValue, StringComparison.Ordinal))
             {
-                changes.Add(new RegistryChange(reference, b, a));
+                changes.Add(new RegistryChange(reference, oldValue, newValue));
             }
         }
 

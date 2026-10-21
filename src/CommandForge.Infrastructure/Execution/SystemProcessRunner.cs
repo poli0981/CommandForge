@@ -73,8 +73,8 @@ internal sealed class SystemProcessRunner : IProcessRunner
                 throw;
             }
 
-            // Ensure the async stdout/stderr handlers have flushed before returning.
-            process.WaitForExit();
+            // WaitForExitAsync (.NET 6+) also waits for the redirected stdout/stderr to reach EOF,
+            // so every OutputDataReceived/ErrorDataReceived callback has run by now.
             return process.ExitCode;
         }
         finally

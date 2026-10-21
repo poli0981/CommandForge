@@ -27,9 +27,7 @@ public sealed class InMemoryLogStore : ILogEventSink, ILogReader
 
         _entries.Enqueue(new LogEntry(logEvent.Timestamp, MapLevel(logEvent.Level), logEvent.RenderMessage()));
 
-        while (_entries.Count > Capacity && _entries.TryDequeue(out _))
-        {
-        }
+        TrimTo(Capacity);
 
         EntriesChanged?.Invoke(this, EventArgs.Empty);
     }
@@ -40,11 +38,18 @@ public sealed class InMemoryLogStore : ILogEventSink, ILogReader
     /// <inheritdoc />
     public void Clear()
     {
-        while (_entries.TryDequeue(out _))
-        {
-        }
+        TrimTo(0);
 
         EntriesChanged?.Invoke(this, EventArgs.Empty);
+    }
+
+    private void TrimTo(int capacity)
+    {
+        var removed = true;
+        while (removed && _entries.Count > capacity)
+        {
+            removed = _entries.TryDequeue(out _);
+        }
     }
 
     private static LogLevel MapLevel(LogEventLevel level) => level switch

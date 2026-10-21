@@ -48,7 +48,7 @@ public sealed class CrashHandlingService
         Log.CloseAndFlush();
     }
 
-    private void OnUnobservedTaskException(object? sender, UnobservedTaskExceptionEventArgs e)
+    private static void OnUnobservedTaskException(object? sender, UnobservedTaskExceptionEventArgs e)
     {
         Log.Error(e.Exception, "Unobserved task exception.");
         e.SetObserved();

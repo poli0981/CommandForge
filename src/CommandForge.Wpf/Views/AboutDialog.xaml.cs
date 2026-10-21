@@ -1,16 +1,13 @@
 using System.Diagnostics;
 using System.Globalization;
 using System.Windows;
+using CommandForge.Application;
 
 namespace CommandForge.Wpf.Views;
 
 /// <summary>The About dialog: app name, version, links, and a Terms &amp; Privacy viewer.</summary>
 public partial class AboutDialog : Window
 {
-    private const string RepoUrl = "https://github.com/poli0981/CommandForge";
-    private const string WikiUrl = "https://github.com/poli0981/CommandForge/wiki";
-    private const string LicenseUrl = "https://www.gnu.org/licenses/gpl-3.0.html";
-
     public AboutDialog()
     {
         InitializeComponent();
@@ -20,11 +17,11 @@ public partial class AboutDialog : Window
             : string.Format(CultureInfo.CurrentCulture, "v{0}.{1}.{2}", version.Major, version.Minor, version.Build);
     }
 
-    private void OnLicenseClick(object sender, RoutedEventArgs e) => Open(LicenseUrl);
+    private void OnLicenseClick(object sender, RoutedEventArgs e) => Open(ProductLinks.License);
 
-    private void OnGitHubClick(object sender, RoutedEventArgs e) => Open(RepoUrl);
+    private void OnGitHubClick(object sender, RoutedEventArgs e) => Open(ProductLinks.Repository);
 
-    private void OnWikiClick(object sender, RoutedEventArgs e) => Open(WikiUrl);
+    private void OnWikiClick(object sender, RoutedEventArgs e) => Open(ProductLinks.UserGuide);
 
     private void OnTermsClick(object sender, RoutedEventArgs e)
         => new LegalViewerWindow { Owner = this }.ShowDialog();

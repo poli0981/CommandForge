@@ -40,7 +40,11 @@ internal sealed class ElevationServer
                 switch (request.Kind)
                 {
                     case ElevationRequestKind.Run:
-                        runCts?.Cancel();
+                        if (runCts is not null)
+                        {
+                            await runCts.CancelAsync();
+                        }
+
                         await runTask;
                         runCts?.Dispose();
                         runCts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
@@ -48,7 +52,11 @@ internal sealed class ElevationServer
                         break;
 
                     case ElevationRequestKind.Cancel:
-                        runCts?.Cancel();
+                        if (runCts is not null)
+                        {
+                            await runCts.CancelAsync();
+                        }
+
                         break;
 
                     default:
@@ -58,7 +66,11 @@ internal sealed class ElevationServer
         }
         finally
         {
-            runCts?.Cancel();
+            if (runCts is not null)
+            {
+                await runCts.CancelAsync();
+            }
+
             await runTask;
             runCts?.Dispose();
         }

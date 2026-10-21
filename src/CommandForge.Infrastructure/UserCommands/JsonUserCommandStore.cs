@@ -11,7 +11,7 @@ namespace CommandForge.Infrastructure.UserCommands;
 public sealed class JsonUserCommandStore : IUserCommandStore
 {
     private readonly string _path;
-    private List<UserCommand> _commands;
+    private readonly List<UserCommand> _commands;
 
     /// <summary>Creates a store backed by the default <see cref="AppPaths.UserCommandsFilePath"/>.</summary>
     public JsonUserCommandStore()

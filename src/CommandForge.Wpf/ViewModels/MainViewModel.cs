@@ -1,6 +1,7 @@
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Globalization;
+using CommandForge.Application;
 using CommandForge.Application.Ports;
 using CommandForge.Application.Registry;
 using CommandForge.Application.Search;
@@ -19,7 +20,6 @@ namespace CommandForge.Wpf.ViewModels;
 public sealed partial class MainViewModel : ObservableObject
 {
     private const string RestorePointCommandId = "system.restorepoint";
-    private const string WikiUrl = "https://github.com/poli0981/CommandForge/wiki";
 
     private readonly ICatalogProvider _catalog;
     private readonly IConfirmationService _confirmation;
@@ -229,7 +229,7 @@ public sealed partial class MainViewModel : ObservableObject
 
     [RelayCommand]
     private void OpenWiki()
-        => Process.Start(new ProcessStartInfo(WikiUrl) { UseShellExecute = true });
+        => Process.Start(new ProcessStartInfo(ProductLinks.UserGuide) { UseShellExecute = true });
 
     [RelayCommand]
     private void ShowCatalog() => CurrentSection = ShellSection.Catalog;

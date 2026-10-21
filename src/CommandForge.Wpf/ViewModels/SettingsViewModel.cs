@@ -2,6 +2,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Globalization;
 using System.Windows;
+using CommandForge.Application;
 using CommandForge.Application.Logging;
 using CommandForge.Application.Ports;
 using CommandForge.Application.Settings;
@@ -20,9 +21,6 @@ namespace CommandForge.Wpf.ViewModels;
 /// </summary>
 public sealed partial class SettingsViewModel : ObservableObject
 {
-    private const string RepoUrl = "https://github.com/poli0981/CommandForge";
-    private const string LicenseUrl = "https://www.gnu.org/licenses/gpl-3.0.html";
-
     private readonly ISettingsService _settings;
     private readonly IThemeService _theme;
     private readonly IFontScaleService _fonts;
@@ -178,6 +176,7 @@ public sealed partial class SettingsViewModel : ObservableObject
     partial void OnConfirmCautionChanged(bool value) => Persist(() => _settings.ConfirmCaution = value);
 
     /// <summary>Confirming Dangerous commands is a fixed safety floor — always on, shown as a locked toggle.</summary>
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Minor Code Smell", "S2325:Methods and properties that don't access instance data should be static", Justification = "Bound from XAML, which needs an instance property.")]
     public bool ConfirmDangerous => true;
 
     [ObservableProperty]
@@ -392,7 +391,7 @@ public sealed partial class SettingsViewModel : ObservableObject
     }
 
     [ObservableProperty]
-    private string _logsSizeText = string.Empty;
+    private string _logsSizeText;
 
     [RelayCommand]
     private void OpenLogFolder() => OpenPath(_maintenance.LogsDirectoryPath);
@@ -478,10 +477,10 @@ public sealed partial class SettingsViewModel : ObservableObject
     public string CurrentVersionText { get; }
 
     [RelayCommand]
-    private void OpenRepo() => OpenUrl(RepoUrl);
+    private void OpenRepo() => OpenUrl(ProductLinks.Repository);
 
     [RelayCommand]
-    private void OpenLicense() => OpenUrl(LicenseUrl);
+    private void OpenLicense() => OpenUrl(ProductLinks.License);
 
     private void Persist(Action apply)
     {

@@ -11,7 +11,7 @@ namespace CommandForge.Infrastructure.Recipes;
 public sealed class JsonRecipeStore : IRecipeStore
 {
     private readonly string _path;
-    private List<Recipe> _recipes;
+    private readonly List<Recipe> _recipes;
 
     /// <summary>Creates a store backed by the default <see cref="AppPaths.RecipesFilePath"/>.</summary>
     public JsonRecipeStore()

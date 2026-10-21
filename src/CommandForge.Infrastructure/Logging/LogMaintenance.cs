@@ -57,7 +57,7 @@ public sealed class LogMaintenance : ILogMaintenance
             {
                 await using var source = new FileStream(file, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
                 var entry = archive.CreateEntry(Path.GetFileName(file), CompressionLevel.Optimal);
-                await using var entryStream = entry.Open();
+                await using var entryStream = await entry.OpenAsync(cancellationToken).ConfigureAwait(false);
                 await source.CopyToAsync(entryStream, cancellationToken).ConfigureAwait(false);
             }
             catch (IOException)

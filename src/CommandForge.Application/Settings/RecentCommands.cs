@@ -17,13 +17,7 @@ public static class RecentCommands
         ArgumentException.ThrowIfNullOrEmpty(commandId);
 
         var result = new List<string>(current.Count + 1) { commandId };
-        foreach (var id in current)
-        {
-            if (!string.Equals(id, commandId, StringComparison.Ordinal))
-            {
-                result.Add(id);
-            }
-        }
+        result.AddRange(current.Where(id => !string.Equals(id, commandId, StringComparison.Ordinal)));
 
         if (result.Count > MaxItems)
         {

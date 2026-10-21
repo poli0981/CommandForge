@@ -26,7 +26,7 @@ internal sealed class BrokerElevationService : IElevationService, IDisposable
     public async Task<ExecutionResult> RunElevatedAsync(
         CommandDefinition command,
         ChannelWriter<OutputLine> output,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken = default)
     {
         ArgumentNullException.ThrowIfNull(command);
         ArgumentNullException.ThrowIfNull(output);
@@ -134,7 +134,7 @@ internal sealed class BrokerElevationService : IElevationService, IDisposable
             }
             catch
             {
-                server.Dispose();
+                await server.DisposeAsync();
                 _elevator?.Dispose();
                 _elevator = null;
                 throw;

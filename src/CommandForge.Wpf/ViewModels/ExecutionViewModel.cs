@@ -61,9 +61,12 @@ public sealed partial class ExecutionViewModel : ObservableObject
     public ExecutionResult? LastResult { get; private set; }
 
     /// <summary>Localized result status (Success / Failed / Cancelled).</summary>
-    public string StatusText => Cancelled
-        ? Strings.Get("Result_Cancelled")
-        : Success ? Strings.Get("Result_Success") : Strings.Get("Result_Failed");
+    public string StatusText => (Cancelled, Success) switch
+    {
+        (true, _) => Strings.Get("Result_Cancelled"),
+        (false, true) => Strings.Get("Result_Success"),
+        _ => Strings.Get("Result_Failed"),
+    };
 
     /// <summary>
     /// Runs <paramref name="command"/>, streaming output to <see cref="OutputLines"/>. If
@@ -155,10 +158,7 @@ public sealed partial class ExecutionViewModel : ObservableObject
 
                 if (RecipeFlow.ShouldStop(result))
                 {
-                    var key = result.Cancelled ? "Recipe_Cancelled"
-                        : result.RequiresRestart ? "Recipe_StoppedRestart"
-                        : "Recipe_StoppedOnError";
-                    OutputLines.Add(new OutputLine(Strings.Get(key), IsError: !result.Success && !result.Cancelled));
+                    OutputLines.Add(new OutputLine(Strings.Get(StopReasonKey(result)), IsError: !result.Success && !result.Cancelled));
                     break;
                 }
             }
@@ -176,6 +176,16 @@ public sealed partial class ExecutionViewModel : ObservableObject
         }
 
         return executed;
+    }
+
+    private static string StopReasonKey(ExecutionResult result)
+    {
+        if (result.Cancelled)
+        {
+            return "Recipe_Cancelled";
+        }
+
+        return result.RequiresRestart ? "Recipe_StoppedRestart" : "Recipe_StoppedOnError";
     }
 
     private async Task<ExecutionResult> RunOneAsync(CommandDefinition command, CancellationToken token)

@@ -108,13 +108,9 @@ public static class CatalogLoader
             });
         }
 
-        foreach (var command in commands)
-        {
-            if (!string.IsNullOrWhiteSpace(command.RevertCommandId) && !commandIds.Contains(command.RevertCommandId))
-            {
-                errors.Add($"Command '{command.Id}' has revertCommandId '{command.RevertCommandId}' that does not exist.");
-            }
-        }
+        errors.AddRange(commands
+            .Where(c => !string.IsNullOrWhiteSpace(c.RevertCommandId) && !commandIds.Contains(c.RevertCommandId))
+            .Select(c => $"Command '{c.Id}' has revertCommandId '{c.RevertCommandId}' that does not exist."));
 
         categories.Sort((a, b) => a.Order.CompareTo(b.Order));
         return new CatalogLoadResult(categories, commands, errors);
@@ -129,7 +125,7 @@ public static class CatalogLoader
 
         try
         {
-            _ = Regex.Match(string.Empty, pattern);
+            _ = Regex.Match(string.Empty, pattern, RegexOptions.None, TimeSpan.FromSeconds(1));
             return true;
         }
         catch (ArgumentException)

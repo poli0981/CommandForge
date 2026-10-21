@@ -161,8 +161,7 @@ jobs:
             Releases/CommandForge-${{ steps.ver.outputs.version }}-full.nupkg
 
       # The action's own update_release_body only works on `release` events, and this workflow
-      # runs on tag pushes, so the report links are appended here (after publishing: the
-      # release-by-tag lookup can't see drafts).
+      # runs on tag pushes, so the report links are appended here.
       - name: Add VirusTotal links to the release notes
         if: steps.vt.outputs.analysis != ''
         shell: pwsh

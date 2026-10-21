@@ -4,16 +4,22 @@
     Publishes CommandForge self-contained and packages it with Velopack (vpk) for GitHub Releases.
 
 .DESCRIPTION
-    Phase 4 release helper (no CI — that is Phase 6). Produces, under Releases/:
-      CommandForge-win-Setup.exe, RELEASES, *-full.nupkg, *-delta.nupkg
-    Update is per-user (no UAC). The Elevator is copied into the publish dir by the
-    CopyElevatorOnPublish MSBuild target, so vpk packages it automatically.
+    Produces, under Releases/:
+      CommandForge-win-Setup.exe, RELEASES, releases.win.json, *-full.nupkg, *-delta.nupkg
+    Update is per-user (no UAC). The Elevator is published into the same folder by the
+    PublishElevatorOnPublish MSBuild target, so vpk packages it automatically.
+
+    vpk is pinned as a local .NET tool (.config/dotnet-tools.json) and must match the Velopack
+    library version in Directory.Packages.props.
 
 .PARAMETER Version
-    SemVer package version, e.g. 0.3.0 (no leading 'v'). Should match the git tag vX.Y.Z.
+    SemVer package version, e.g. 2.0.0 (no leading 'v'). Should match the git tag vX.Y.Z.
+
+.PARAMETER SkipPack
+    Publish only (no vpk pack) — used by the CI packaging smoke test when vpk is not wanted.
 
 .EXAMPLE
-    ./scripts/pack.ps1 -Version 0.3.0
+    ./scripts/pack.ps1 -Version 2.0.0
 #>
 [CmdletBinding()]
 param(
@@ -22,7 +28,9 @@ param(
 
     [string] $Runtime = 'win-x64',
 
-    [string] $Configuration = 'Release'
+    [string] $Configuration = 'Release',
+
+    [switch] $SkipPack
 )
 
 $ErrorActionPreference = 'Stop'
@@ -33,25 +41,48 @@ $wpfProject = Join-Path $repoRoot 'src/CommandForge.Wpf'
 
 Write-Host "Publishing CommandForge $Version ($Runtime, $Configuration)..." -ForegroundColor Cyan
 # Stamp the assembly version so the in-app "App version" (Settings -> About, Report Bug) matches
-# the released package version; otherwise it stays at the 1.0.0 default regardless of the tag.
+# the released package version. ReadyToRun precompiles the app's own assemblies for faster startup
+# (the self-contained framework assemblies are already precompiled).
 dotnet publish $wpfProject `
     -c $Configuration -r $Runtime --self-contained true `
     -p:PublishSingleFile=false `
+    -p:PublishReadyToRun=true `
     -p:Version=$Version -p:FileVersion=$Version -p:InformationalVersion=$Version `
     -o $publishDir
+if ($LASTEXITCODE -ne 0) { throw "dotnet publish failed with exit code $LASTEXITCODE" }
 
-# vpk is the Velopack CLI: dotnet tool install -g vpk
-if (-not (Get-Command vpk -ErrorAction SilentlyContinue)) {
-    throw "vpk not found. Install it with: dotnet tool install -g vpk"
+# The elevated helper must ship next to the app (BrokerElevationService spawns it from there).
+foreach ($file in 'CommandForge.Wpf.exe', 'CommandForge.Elevator.exe', 'CommandForge.Elevator.dll') {
+    if (-not (Test-Path (Join-Path $publishDir $file))) {
+        throw "Publish output is missing $file"
+    }
 }
 
-Write-Host "Packing with Velopack..." -ForegroundColor Cyan
-vpk pack `
-    --packId CommandForge `
-    --packTitle CommandForge `
-    --packAuthors poli0981 `
-    --packVersion $Version `
-    --packDir $publishDir `
-    --mainExe CommandForge.Wpf.exe
+if ($SkipPack) {
+    Write-Host "Publish OK (pack skipped). Output: $publishDir" -ForegroundColor Green
+    return
+}
+
+Push-Location $repoRoot
+try {
+    dotnet tool restore
+    if ($LASTEXITCODE -ne 0) { throw "dotnet tool restore failed with exit code $LASTEXITCODE" }
+
+    Write-Host "Packing with Velopack..." -ForegroundColor Cyan
+    # --runtime selects native x64 Update.exe/Setup.exe helpers (vpk otherwise defaults to x86);
+    # the update channel stays the default "win", so existing installs keep receiving updates.
+    dotnet vpk pack `
+        --runtime $Runtime `
+        --packId CommandForge `
+        --packTitle CommandForge `
+        --packAuthors poli0981 `
+        --packVersion $Version `
+        --packDir $publishDir `
+        --mainExe CommandForge.Wpf.exe
+    if ($LASTEXITCODE -ne 0) { throw "vpk pack failed with exit code $LASTEXITCODE" }
+}
+finally {
+    Pop-Location
+}
 
 Write-Host "Done. Artifacts are in $(Join-Path $repoRoot 'Releases')." -ForegroundColor Green

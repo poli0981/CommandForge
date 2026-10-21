@@ -43,7 +43,8 @@ public sealed class UserCommandsTests
 
         await useCase.RunAsync(
             UserCommandFactory.ToDefinition(Sample()),
-            Channel.CreateUnbounded<OutputLine>().Writer);
+            Channel.CreateUnbounded<OutputLine>().Writer,
+            TestContext.Current.CancellationToken);
 
         Assert.True(executor.Called);
         Assert.False(elevation.Called); // never elevated
@@ -79,7 +80,7 @@ public sealed class UserCommandsTests
     {
         public bool Called { get; private set; }
 
-        public Task<ExecutionResult> ExecuteAsync(CommandDefinition command, ChannelWriter<OutputLine> output, CancellationToken cancellationToken)
+        public Task<ExecutionResult> ExecuteAsync(CommandDefinition command, ChannelWriter<OutputLine> output, CancellationToken cancellationToken = default)
         {
             Called = true;
             output.TryComplete();
@@ -93,7 +94,7 @@ public sealed class UserCommandsTests
 
         public bool IsElevationAvailable => true;
 
-        public Task<ExecutionResult> RunElevatedAsync(CommandDefinition command, ChannelWriter<OutputLine> output, CancellationToken cancellationToken)
+        public Task<ExecutionResult> RunElevatedAsync(CommandDefinition command, ChannelWriter<OutputLine> output, CancellationToken cancellationToken = default)
         {
             Called = true;
             output.TryComplete();

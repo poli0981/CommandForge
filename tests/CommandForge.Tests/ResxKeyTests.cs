@@ -35,7 +35,7 @@ public sealed class ResxKeyTests
 
         foreach (var key in keys)
         {
-            Assert.True(english!.GetString(key) is not null, $"Missing EN resource for key '{key}'.");
+            Assert.True(english.GetString(key) is not null, $"Missing EN resource for key '{key}'.");
             foreach (var (culture, set) in satellites)
             {
                 Assert.True(set!.GetString(key) is not null, $"Missing {culture} resource for key '{key}'.");

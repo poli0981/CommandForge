@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows;
+using CommandForge.Application;
 using CommandForge.Application.Ports;
 using CommandForge.Wpf.Resources;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -18,7 +19,6 @@ namespace CommandForge.Wpf.ViewModels;
 /// </summary>
 public sealed partial class ReportBugViewModel : ObservableObject
 {
-    private const string IssueBaseUrl = "https://github.com/poli0981/CommandForge/issues/new";
 
     private readonly ILogMaintenance _maintenance;
     private readonly string? _errorCode;
@@ -66,7 +66,7 @@ public sealed partial class ReportBugViewModel : ObservableObject
     private void OpenIssue()
     {
         var body = BuildIssueBody(EnvironmentText, Description, _errorCode);
-        var url = $"{IssueBaseUrl}?title={Uri.EscapeDataString(BuildTitle())}&body={Uri.EscapeDataString(body)}";
+        var url = $"{ProductLinks.NewIssue}?title={Uri.EscapeDataString(BuildTitle())}&body={Uri.EscapeDataString(body)}";
         try
         {
             Process.Start(new ProcessStartInfo(url) { UseShellExecute = true });

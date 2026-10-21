@@ -35,7 +35,7 @@ public sealed class SearchTests
         var match = FuzzyMatcher.Match("System information", "sys");
 
         Assert.NotNull(match);
-        Assert.Equal(3, match!.Value.MatchedIndices.Count);
+        Assert.Equal(3, match.Value.MatchedIndices.Count);
     }
 
     [Fact]
@@ -44,7 +44,7 @@ public sealed class SearchTests
         var match = FuzzyMatcher.Match("anything", string.Empty);
 
         Assert.NotNull(match);
-        Assert.Equal(0, match!.Value.Score);
+        Assert.Equal(0, match.Value.Score);
     }
 
     [Fact]

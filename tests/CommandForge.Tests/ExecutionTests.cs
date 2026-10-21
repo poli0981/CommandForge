@@ -23,7 +23,7 @@ public sealed class ExecutionTests
             ExecutionMode = mode,
         };
 
-    private static async Task<(ExecutionResult Result, List<OutputLine> Lines)> RunAsync(
+    private static async Task<(ExecutionResult Result, List<OutputLine> Lines)> ExecuteCommandAsync(
         IProcessRunner runner,
         CommandDefinition command)
     {
@@ -47,7 +47,7 @@ public sealed class ExecutionTests
     {
         var runner = new FakeProcessRunner(exitCode: 0, [new OutputLine("hello", false)]);
 
-        var (result, lines) = await RunAsync(runner, Command());
+        var (result, lines) = await ExecuteCommandAsync(runner, Command());
 
         Assert.True(result.Success);
         Assert.Equal(0, result.ExitCode);
@@ -61,7 +61,7 @@ public sealed class ExecutionTests
         var runner = new FakeProcessRunner(exitCode: 0,
             [new OutputLine("a", false), new OutputLine("b", false), new OutputLine("c", false)]);
 
-        var (_, lines) = await RunAsync(runner, Command());
+        var (_, lines) = await ExecuteCommandAsync(runner, Command());
 
         Assert.Equal(["a", "b", "c"], lines.Select(l => l.Text));
     }
@@ -71,7 +71,7 @@ public sealed class ExecutionTests
     {
         var runner = new FakeProcessRunner(exitCode: 3010);
 
-        var (result, _) = await RunAsync(runner, Command(restart: RestartPolicy.FromExitCode));
+        var (result, _) = await ExecuteCommandAsync(runner, Command(restart: RestartPolicy.FromExitCode));
 
         Assert.True(result.RequiresRestart);
         Assert.True(result.Success); // 3010 is a success-with-reboot code
@@ -82,7 +82,7 @@ public sealed class ExecutionTests
     {
         var runner = new FakeProcessRunner(exitCode: 0);
 
-        var (result, _) = await RunAsync(runner, Command(restart: RestartPolicy.Always));
+        var (result, _) = await ExecuteCommandAsync(runner, Command(restart: RestartPolicy.Always));
 
         Assert.True(result.RequiresRestart);
     }
@@ -92,7 +92,7 @@ public sealed class ExecutionTests
     {
         var runner = new FakeProcessRunner(exitCode: 0, [new OutputLine("Please reboot now.", false)]);
 
-        var (result, _) = await RunAsync(runner, Command(restart: RestartPolicy.FromOutputRegex, restartRegex: "reboot"));
+        var (result, _) = await ExecuteCommandAsync(runner, Command(restart: RestartPolicy.FromOutputRegex, restartRegex: "reboot"));
 
         Assert.True(result.RequiresRestart);
     }
@@ -102,7 +102,7 @@ public sealed class ExecutionTests
     {
         var runner = new FakeProcessRunner(exitCode: 0, [new OutputLine("all good", false)]);
 
-        var (result, _) = await RunAsync(runner, Command(restart: RestartPolicy.FromOutputRegex, restartRegex: "reboot"));
+        var (result, _) = await ExecuteCommandAsync(runner, Command(restart: RestartPolicy.FromOutputRegex, restartRegex: "reboot"));
 
         Assert.False(result.RequiresRestart);
     }
@@ -112,7 +112,7 @@ public sealed class ExecutionTests
     {
         var runner = new FakeProcessRunner(exitCode: 0, [new OutputLine("should not stream", false)]);
 
-        var (result, _) = await RunAsync(runner, Command(mode: ExecutionMode.Launch));
+        var (result, _) = await ExecuteCommandAsync(runner, Command(mode: ExecutionMode.Launch));
 
         Assert.True(runner.Launched);
         Assert.True(result.Success);
@@ -127,12 +127,18 @@ public sealed class ExecutionTests
         using var cts = new CancellationTokenSource();
 
         var execution = executor.ExecuteAsync(Command(), output.Writer, cts.Token);
-        var drain = Task.Run(async () =>
-        {
-            await foreach (var _ in output.Reader.ReadAllAsync(CancellationToken.None))
+        var drain = Task.Run(
+            async () =>
             {
-            }
-        });
+                var drained = 0;
+                await foreach (var _ in output.Reader.ReadAllAsync(CancellationToken.None))
+                {
+                    drained++;
+                }
+
+                return drained;
+            },
+            TestContext.Current.CancellationToken);
 
         cts.CancelAfter(50);
         var result = await execution;
@@ -157,7 +163,7 @@ public sealed class ExecutionTests
             ArgsTemplate = "/c echo CommandForgeTest",
         };
 
-        var (result, lines) = await RunAsync(new SystemProcessRunner(), command);
+        var (result, lines) = await ExecuteCommandAsync(new SystemProcessRunner(), command);
 
         Assert.True(result.Success);
         Assert.Equal(0, result.ExitCode);

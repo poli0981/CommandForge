@@ -11,7 +11,7 @@ namespace CommandForge.Infrastructure.Portability;
 public sealed class JsonProfileService : IProfileService
 {
     private readonly string _path;
-    private List<ProfileEntry> _profiles;
+    private readonly List<ProfileEntry> _profiles;
 
     /// <summary>Creates a service backed by the default <see cref="AppPaths.ProfilesFilePath"/>.</summary>
     public JsonProfileService()

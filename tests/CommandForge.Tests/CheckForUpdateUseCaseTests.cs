@@ -15,7 +15,7 @@ public sealed class CheckForUpdateUseCaseTests
         var fake = new FakeUpdateService { Result = UpdateCheckResult.Available("1.2.3") };
         var useCase = new CheckForUpdateUseCase(fake);
 
-        var result = await useCase.ExecuteAsync();
+        var result = await useCase.ExecuteAsync(TestContext.Current.CancellationToken);
 
         Assert.True(result.HasUpdate);
         Assert.Equal("1.2.3", result.NewVersion);
@@ -28,7 +28,7 @@ public sealed class CheckForUpdateUseCaseTests
         var fake = new FakeUpdateService { Result = UpdateCheckResult.Failed(UpdateError.RateLimited) };
         var useCase = new CheckForUpdateUseCase(fake);
 
-        var result = await useCase.ExecuteAsync();
+        var result = await useCase.ExecuteAsync(TestContext.Current.CancellationToken);
 
         Assert.False(result.HasUpdate);
         Assert.False(result.IsSuccess);
@@ -50,7 +50,7 @@ public sealed class CheckForUpdateUseCaseTests
         var fake = new FakeUpdateService { DownloadResult = UpdateError.Offline };
         var useCase = new CheckForUpdateUseCase(fake);
 
-        var error = await useCase.DownloadAndApplyAsync(progress: null);
+        var error = await useCase.DownloadAndApplyAsync(progress: null, TestContext.Current.CancellationToken);
 
         Assert.Equal(UpdateError.Offline, error);
     }

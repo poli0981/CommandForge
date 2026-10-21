@@ -24,9 +24,6 @@ public partial class LegalGateViewModel : ObservableObject
     [NotifyCanExecuteChangedFor(nameof(AcceptCommand))]
     private bool _isAgreed;
 
-    /// <summary>The terms version being presented.</summary>
-    public string TermsVersion => LegalGateService.CurrentTermsVersion;
-
     [RelayCommand(CanExecute = nameof(CanAccept))]
     private void Accept()
     {

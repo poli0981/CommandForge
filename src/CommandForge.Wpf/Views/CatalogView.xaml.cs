@@ -24,7 +24,8 @@ public partial class CatalogView : UserControl
 
         if (confirm == MessageBoxResult.OK)
         {
-            Process.Start(new ProcessStartInfo("shutdown", "/r /t 0") { UseShellExecute = false, CreateNoWindow = true });
+            var shutdown = System.IO.Path.Combine(Environment.SystemDirectory, "shutdown.exe");
+            Process.Start(new ProcessStartInfo(shutdown, "/r /t 0") { UseShellExecute = false, CreateNoWindow = true });
         }
     }
 }

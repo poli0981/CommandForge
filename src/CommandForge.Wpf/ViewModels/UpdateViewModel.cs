@@ -4,6 +4,7 @@ using CommandForge.Application.UseCases;
 using CommandForge.Wpf.Resources;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Serilog;
 
 namespace CommandForge.Wpf.ViewModels;
 
@@ -57,7 +58,29 @@ public sealed partial class UpdateViewModel : ObservableObject
     public async Task CheckAsync()
     {
         State = UpdateUiState.Checking;
-        var result = await _useCase.ExecuteAsync();
+        var cancellation = BeginOperation();
+        UpdateCheckResult result;
+        try
+        {
+            result = await _useCase.ExecuteAsync(cancellation.Token);
+        }
+        catch (OperationCanceledException)
+        {
+            return; // the dialog was closed while checking
+        }
+        catch (Exception ex)
+        {
+            // Never leave the dialog stuck on "Checking": surface a generic failure instead.
+            Log.ForContext<UpdateViewModel>().Warning(ex, "Update check failed unexpectedly.");
+            Message = ErrorMessage(UpdateError.Unknown);
+            State = UpdateUiState.Error;
+            return;
+        }
+        finally
+        {
+            EndOperation(cancellation);
+        }
+
         if (result.HasUpdate)
         {
             SeedAvailable(result.NewVersion);
@@ -98,18 +121,22 @@ public sealed partial class UpdateViewModel : ObservableObject
 
         State = UpdateUiState.Downloading;
         Percent = 0;
-        _cancellation = new CancellationTokenSource();
+        var cancellation = BeginOperation();
         var progress = new Progress<int>(p => Percent = p);
 
         UpdateError error;
         try
         {
-            error = await _useCase.DownloadAndApplyAsync(progress, _cancellation.Token);
+            error = await _useCase.DownloadAndApplyAsync(progress, cancellation.Token);
         }
         catch (OperationCanceledException)
         {
             CloseRequested?.Invoke();
             return;
+        }
+        finally
+        {
+            EndOperation(cancellation);
         }
 
         // Reaching here means apply did not restart (a failure, or a dev/unpackaged build).
@@ -122,6 +149,24 @@ public sealed partial class UpdateViewModel : ObservableObject
     {
         _cancellation?.Cancel();
         CloseRequested?.Invoke();
+    }
+
+    /// <summary>Starts a cancellable operation; <see cref="Close"/> cancels whichever one is in flight.</summary>
+    private CancellationTokenSource BeginOperation()
+    {
+        _cancellation?.Dispose();
+        _cancellation = new CancellationTokenSource();
+        return _cancellation;
+    }
+
+    private void EndOperation(CancellationTokenSource cancellation)
+    {
+        if (ReferenceEquals(_cancellation, cancellation))
+        {
+            _cancellation = null;
+        }
+
+        cancellation.Dispose();
     }
 
     private static string ErrorMessage(UpdateError error) => error switch

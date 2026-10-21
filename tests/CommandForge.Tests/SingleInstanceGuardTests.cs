@@ -36,7 +36,7 @@ public sealed class SingleInstanceGuardTests
             secondary.SignalPrimaryInstance();
         }
 
-        Assert.True(activated.Wait(TimeSpan.FromSeconds(5)));
+        Assert.True(activated.Wait(TimeSpan.FromSeconds(5), TestContext.Current.CancellationToken));
     }
 
     [Fact]

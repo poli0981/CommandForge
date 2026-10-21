@@ -29,7 +29,7 @@ public sealed class PortabilityTests
             var read = file.Read(path);
 
             Assert.NotNull(read);
-            Assert.Equal(AppTheme.Dark, read!.Theme);
+            Assert.Equal(AppTheme.Dark, read.Theme);
             Assert.Equal("vi", read.Language);
             Assert.Equal(FontScale.Large, read.FontSize);
             Assert.False(read.ConfirmCaution);

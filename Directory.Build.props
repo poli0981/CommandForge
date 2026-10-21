@@ -21,6 +21,17 @@
          don't force XML docs on every public member. -->
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <NoWarn>$(NoWarn);CS1591</NoWarn>
+
+    <!-- Supply-chain audit: restore checks direct AND transitive packages against the GitHub
+         Advisory Database. Moderate+ advisories (NU1902-NU1904) fail the build through
+         TreatWarningsAsErrors; low-severity ones (NU1901) stay warnings. -->
+    <NuGetAudit>true</NuGetAudit>
+    <NuGetAuditMode>all</NuGetAuditMode>
+    <NuGetAuditLevel>low</NuGetAuditLevel>
+    <WarningsNotAsErrors>$(WarningsNotAsErrors);NU1901</WarningsNotAsErrors>
+
+    <!-- Normalized source paths in PDBs for CI builds (reproducible artifacts). -->
+    <ContinuousIntegrationBuild Condition="'$(GITHUB_ACTIONS)' == 'true'">true</ContinuousIntegrationBuild>
   </PropertyGroup>
 
   <!--
@@ -42,7 +53,17 @@
     <RepositoryUrl>https://github.com/poli0981/CommandForge</RepositoryUrl>
     <PackageProjectUrl>https://github.com/poli0981/CommandForge</PackageProjectUrl>
     <RepositoryType>git</RepositoryType>
-    <Version>1.0.0</Version>
+    <Version>2.0.0</Version>
   </PropertyGroup>
+
+  <!-- Same rules SonarCloud applies, enforced at build time (warnings are errors). Package versions
+       live in each .csproj: GitHub's dependency graph (Dependabot alerts, dependency review, the
+       release SBOM) reads .csproj files but not Directory.Packages.props. -->
+  <ItemGroup>
+    <PackageReference Include="SonarAnalyzer.CSharp" Version="10.35.0.4138">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
 
 </Project>

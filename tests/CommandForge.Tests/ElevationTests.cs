@@ -27,7 +27,7 @@ public sealed class ElevationTests
         var read = await channel.ReadAsync(ElevationJsonContext.Default.ElevationRequest, CancellationToken.None);
 
         Assert.NotNull(read);
-        Assert.Equal(ElevationRequestKind.Run, read!.Kind);
+        Assert.Equal(ElevationRequestKind.Run, read.Kind);
         Assert.Equal("dism.checkhealth", read.CommandId);
     }
 
@@ -46,7 +46,7 @@ public sealed class ElevationTests
         var read = await channel.ReadAsync(ElevationJsonContext.Default.ElevationMessage, CancellationToken.None);
 
         Assert.NotNull(read);
-        Assert.Equal(ElevationMessageKind.Output, read!.Kind);
+        Assert.Equal(ElevationMessageKind.Output, read.Kind);
         Assert.Equal("hello", read.Text);
         Assert.True(read.IsError);
     }
@@ -77,7 +77,7 @@ public sealed class ElevationTests
             Assert.Equal(0, result.ExitCode);
 
             uiChannel.Dispose();
-            client.Dispose();
+            await client.DisposeAsync();
             await serverTask;
         }
     }
@@ -106,7 +106,7 @@ public sealed class ElevationTests
             Assert.False(result.Success);
 
             uiChannel.Dispose();
-            client.Dispose();
+            await client.DisposeAsync();
             await serverTask;
         }
     }
@@ -163,7 +163,7 @@ public sealed class ElevationTests
             _result = result;
         }
 
-        public async Task<ExecutionResult> ExecuteAsync(CommandDefinition command, ChannelWriter<OutputLine> output, CancellationToken cancellationToken)
+        public async Task<ExecutionResult> ExecuteAsync(CommandDefinition command, ChannelWriter<OutputLine> output, CancellationToken cancellationToken = default)
         {
             foreach (var line in _lines)
             {

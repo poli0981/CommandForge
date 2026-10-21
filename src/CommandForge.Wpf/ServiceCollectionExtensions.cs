@@ -29,7 +29,8 @@ public static class ServiceCollectionExtensions
         services.AddTransient<LegalGateViewModel>();
         // Singleton: a single shell instance whose CultureChanged subscription lives for the app.
         services.AddSingleton<MainViewModel>();
-        services.AddTransient<ExecutionViewModel>();
+        // Singleton: one shared console/run state (also read by the update dialog's "command running" guard).
+        services.AddSingleton<ExecutionViewModel>();
         services.AddTransient<CommandPaletteViewModel>();
         services.AddTransient<SettingsViewModel>();
         // Singletons: held by the singleton shell; one live ILogReader.EntriesChanged subscription each.

@@ -2354,4 +2354,7 @@ Chi tiết đã được ghi vào thư mục log:
   <data name="Recipe_UnavailableSteps" xml:space="preserve">
     <value>Có {0} bước không khả dụng trên máy này. Các bước đó vẫn được giữ trong chuỗi lệnh nhưng sẽ bị bỏ qua.</value>
   </data>
+  <data name="Update_ReadyAfterCommand" xml:space="preserve">
+    <value>Bản cập nhật đã được tải về. Hãy đợi lệnh đang chạy kết thúc rồi chọn lại "Tải &amp; khởi động lại".</value>
+  </data>
 </root>

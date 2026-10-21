@@ -207,8 +207,11 @@ public sealed partial class SettingsViewModel : ObservableObject
     [RelayCommand]
     private async Task CheckNowAsync()
     {
-        await _updateDialog.ShowAsync(startedFromStartup: false);
-        LastCheckedText = DateTime.Now.ToString("g", CultureInfo.CurrentCulture);
+        // Only a check that actually reached GitHub counts as "last checked".
+        if (await _updateDialog.ShowAsync(startedFromStartup: false))
+        {
+            LastCheckedText = DateTime.Now.ToString("g", CultureInfo.CurrentCulture);
+        }
     }
 
     // ---- Profiles (import/export + named profiles) ----

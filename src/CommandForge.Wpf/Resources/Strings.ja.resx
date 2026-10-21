@@ -2354,4 +2354,7 @@
   <data name="Recipe_UnavailableSteps" xml:space="preserve">
     <value>{0} 個の手順はこの PC では利用できません。レシピには残りますが、ここではスキップされます。</value>
   </data>
+  <data name="Update_ReadyAfterCommand" xml:space="preserve">
+    <value>更新プログラムはダウンロード済みです。実行中のコマンドが終わったら、もう一度「ダウンロードして再起動」を選んでください。</value>
+  </data>
 </root>

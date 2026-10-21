@@ -2354,4 +2354,7 @@
   <data name="Recipe_UnavailableSteps" xml:space="preserve">
     <value>有 {0} 个步骤在此电脑上不可用。它们仍保留在配方中，但在此处会被跳过。</value>
   </data>
+  <data name="Update_ReadyAfterCommand" xml:space="preserve">
+    <value>更新已下载。请等正在运行的命令结束后，再次选择“下载并重启”。</value>
+  </data>
 </root>

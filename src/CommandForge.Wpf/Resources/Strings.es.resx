@@ -2354,4 +2354,7 @@ Los detalles se escribieron en la carpeta de registros:
   <data name="Recipe_UnavailableSteps" xml:space="preserve">
     <value>{0} paso(s) no están disponibles en este PC. Se conservan en la receta, pero aquí se omiten.</value>
   </data>
+  <data name="Update_ReadyAfterCommand" xml:space="preserve">
+    <value>La actualización ya se descargó. Espera a que termine el comando en curso y vuelve a elegir «Descargar y reiniciar».</value>
+  </data>
 </root>

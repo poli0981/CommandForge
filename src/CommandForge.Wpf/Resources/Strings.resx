@@ -2354,4 +2354,7 @@ Details were written to the log folder:
   <data name="Recipe_UnavailableSteps" xml:space="preserve">
     <value>{0} step(s) aren't available on this PC. They stay in the recipe but are skipped here.</value>
   </data>
+  <data name="Update_ReadyAfterCommand" xml:space="preserve">
+    <value>The update is downloaded. Finish the running command, then choose "Download &amp; restart" again.</value>
+  </data>
 </root>

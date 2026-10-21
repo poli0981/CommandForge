@@ -4,14 +4,47 @@ updates:
     directory: "/"
     schedule:
       interval: weekly
+      day: monday
     open-pull-requests-limit: 5
     commit-message:
       prefix: "deps"
+    labels: ["dependencies", "nuget"]
+    cooldown:
+      default-days: 3
+      semver-major-days: 14
+    groups:
+      microsoft-extensions:
+        patterns: ["Microsoft.Extensions.*"]
+      serilog:
+        patterns: ["Serilog*"]
+      # The Velopack library and the vpk CLI (.config/dotnet-tools.json) must move together.
+      velopack:
+        patterns: ["Velopack", "vpk"]
+      testing:
+        patterns: ["xunit*", "Microsoft.NET.Test.Sdk", "coverlet.*"]
+      build-tooling:
+        patterns: ["SonarAnalyzer.CSharp", "Microsoft.Windows.CsWin32"]
+
+  - package-ecosystem: dotnet-sdk
+    directory: "/"
+    schedule:
+      interval: weekly
+      day: monday
+    commit-message:
+      prefix: "build"
+    labels: ["dependencies", "dotnet-sdk"]
 
   - package-ecosystem: github-actions
     directory: "/"
     schedule:
       interval: weekly
+      day: monday
     open-pull-requests-limit: 5
     commit-message:
       prefix: "ci"
+    labels: ["dependencies", "github-actions"]
+    cooldown:
+      default-days: 3
+    groups:
+      actions:
+        patterns: ["*"]

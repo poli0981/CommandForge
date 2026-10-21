@@ -4,3 +4,15 @@
 GetCurrentProcessId
 // Read-only physical-memory query for the Home dashboard (ISystemInfoService).
 GlobalMemoryStatusEx
+// Lets the primary instance take the foreground when a second launch asks it to (SingleInstanceGuard).
+AllowSetForegroundWindow
+// Console OEM code page: the encoding native tools use for redirected output (OutputDecoder).
+GetOEMCP
+// Kill-on-close job object so spawned command processes never outlive the app (ProcessJob).
+CreateJobObject
+SetInformationJobObject
+AssignProcessToJobObject
+JOBOBJECT_EXTENDED_LIMIT_INFORMATION
+// Elevation broker peer checks: who is on the other end of the pipe.
+GetNamedPipeClientProcessId
+GetNamedPipeServerProcessId

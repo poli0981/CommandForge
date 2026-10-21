@@ -15,20 +15,37 @@ public sealed class RunCommandUseCase
 
     public RunCommandUseCase(ICommandExecutor executor, IElevationService elevation)
     {
+        ArgumentNullException.ThrowIfNull(executor);
+        ArgumentNullException.ThrowIfNull(elevation);
         _executor = executor;
         _elevation = elevation;
     }
 
-    /// <summary>Runs <paramref name="command"/>, streaming output, choosing executor by <c>RequiresAdmin</c>.</summary>
-    public Task<ExecutionResult> RunAsync(
+    /// <summary>
+    /// Runs <paramref name="command"/>, streaming output, choosing the executor by <c>RequiresAdmin</c>.
+    /// The output channel is always completed — even when the run throws — so a reader never waits forever.
+    /// </summary>
+    public async Task<ExecutionResult> RunAsync(
         CommandDefinition command,
         ChannelWriter<OutputLine> output,
         CancellationToken cancellationToken = default)
     {
         ArgumentNullException.ThrowIfNull(command);
+        ArgumentNullException.ThrowIfNull(output);
 
-        return command.RequiresAdmin
-            ? _elevation.RunElevatedAsync(command, output, cancellationToken)
-            : _executor.ExecuteAsync(command, output, cancellationToken);
+        try
+        {
+            return command.RequiresAdmin
+                ? await _elevation.RunElevatedAsync(command, output, cancellationToken).ConfigureAwait(false)
+                : await _executor.ExecuteAsync(command, output, cancellationToken).ConfigureAwait(false);
+        }
+        catch (OperationCanceledException) when (cancellationToken.IsCancellationRequested)
+        {
+            return new ExecutionResult { ExitCode = -1, Success = false, Duration = TimeSpan.Zero, Cancelled = true };
+        }
+        finally
+        {
+            output.TryComplete();
+        }
     }
 }

@@ -18,13 +18,11 @@ public sealed record ExecutionResult
     public required TimeSpan Duration { get; init; }
 
     /// <summary>
-    /// Whether a system restart is required to finish (e.g. exit code 3010 or a regex match).
+    /// Whether a system restart is required to finish (exit code 3010, a restart-always command, or
+    /// an output-regex match).
     /// </summary>
     public bool RequiresRestart { get; init; }
 
     /// <summary>Whether the run was cancelled by the user (process tree killed).</summary>
     public bool Cancelled { get; init; }
-
-    /// <summary>Captured stdout/stderr lines, in order.</summary>
-    public IReadOnlyList<string> OutputLines { get; init; } = [];
 }

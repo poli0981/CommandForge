@@ -383,7 +383,7 @@
     <value>Informe de batería</value>
   </data>
   <data name="Cmd_power.batteryreport_Desc" xml:space="preserve">
-    <value>Genera un informe HTML sobre el estado de la batería.</value>
+    <value>Guarda un informe HTML sobre el estado de la batería como battery-report.html en tu carpeta de usuario.</value>
   </data>
   <data name="Cmd_diag.reliability_Title" xml:space="preserve">
     <value>Monitor de confiabilidad</value>
@@ -455,7 +455,7 @@
     <value>Comprobar disco (solo lectura)</value>
   </data>
   <data name="Cmd_chkdsk.read_Desc" xml:space="preserve">
-    <value>Comprueba si la unidad C: tiene errores (solo lectura).</value>
+    <value>Comprueba si la unidad de Windows tiene errores (solo lectura).</value>
   </data>
   <data name="Cmd_sec.bitlocker.status_Title" xml:space="preserve">
     <value>Estado de BitLocker</value>
@@ -536,10 +536,10 @@
     <value>Elimina los componentes reemplazados de WinSxS para liberar espacio de disco. Es posible que requiera reiniciar.</value>
   </data>
   <data name="Cmd_chkdsk.fix_Title" xml:space="preserve">
-    <value>Reparar disco (chkdsk /f /r)</value>
+    <value>Reparar la unidad de Windows (examen y reparación sin conexión)</value>
   </data>
   <data name="Cmd_chkdsk.fix_Desc" xml:space="preserve">
-    <value>Programa una comprobación completa del disco con reparación en la unidad del sistema en el próximo reinicio.</value>
+    <value>Programa una comprobación y reparación de la unidad de Windows en el próximo reinicio.</value>
   </data>
   <data name="Cmd_winget.upgrade.all_Title" xml:space="preserve">
     <value>Actualizar todos los paquetes</value>
@@ -563,7 +563,7 @@
     <value>Restablecer Windows Update</value>
   </data>
   <data name="Cmd_wu.reset.components_Desc" xml:space="preserve">
-    <value>Detiene los servicios de actualización, borra sus cachés y los reinicia. A menudo soluciona actualizaciones bloqueadas.</value>
+    <value>Detiene los servicios de actualización, aparta sus carpetas de caché (renombradas con el sufijo .bak) y los reinicia. A menudo soluciona actualizaciones bloqueadas.</value>
   </data>
   <data name="Cmd_tweak.win11.classicmenu_Title" xml:space="preserve">
     <value>Menú contextual clásico (Win11)</value>
@@ -623,7 +623,7 @@
     <value>Liberador de espacio en disco automático</value>
   </data>
   <data name="Cmd_clean.cleanmgr.auto_Desc" xml:space="preserve">
-    <value>Ejecuta el Liberador de espacio en disco en todas las categorías sin pedir confirmación.</value>
+    <value>Ejecuta el Liberador de espacio en disco sobre archivos temporales, cachés y registros sin pedir confirmación. Nunca toca Descargas, la Papelera de reciclaje ni Windows.old.</value>
   </data>
   <data name="Cmd_clean.recyclebin_Title" xml:space="preserve">
     <value>Vaciar la Papelera de reciclaje</value>
@@ -1695,10 +1695,10 @@
     <value>Restaura los mensajes normales de inicio y apagado.</value>
   </data>
   <data name="Cmd_storage.optimize_Title" xml:space="preserve">
-    <value>Optimizar / Desfragmentar C:</value>
+    <value>Optimizar / Desfragmentar la unidad de Windows</value>
   </data>
   <data name="Cmd_storage.optimize_Desc" xml:space="preserve">
-    <value>Optimiza la unidad C: (TRIM para SSD, desfragmentación para HDD).</value>
+    <value>Optimiza la unidad de Windows (TRIM para SSD, desfragmentación para HDD).</value>
   </data>
   <data name="Cmd_storage.diskmgmt_Title" xml:space="preserve">
     <value>Disk Management</value>
@@ -1752,7 +1752,7 @@
     <value>Hora y zona horaria</value>
   </data>
   <data name="Cmd_info.timezone_Desc" xml:space="preserve">
-    <value>Muestra la zona horaria actual y el estado de sincronización de hora.</value>
+    <value>Muestra la zona horaria actual, su diferencia con UTC y si aplica el horario de verano.</value>
   </data>
   <data name="Cmd_info.osinstalldate_Title" xml:space="preserve">
     <value>Fecha de instalación de Windows</value>
@@ -1857,7 +1857,7 @@
     <value>Analizar fragmentación</value>
   </data>
   <data name="Cmd_storage.fragmentation.analyze_Desc" xml:space="preserve">
-    <value>Analiza la fragmentación de la unidad C: sin modificarla.</value>
+    <value>Analiza la fragmentación de la unidad de Windows sin modificarla.</value>
   </data>
   <data name="Cmd_storage.cleanmgr.settings_Title" xml:space="preserve">
     <value>Configurar Liberador de espacio</value>
@@ -1953,7 +1953,7 @@
     <value>Examen de disco en línea</value>
   </data>
   <data name="Cmd_chkdsk.scan.online_Desc" xml:space="preserve">
-    <value>Examina la unidad C: en busca de errores en línea sin desmontarla.</value>
+    <value>Examina la unidad de Windows en busca de errores en línea sin desmontarla.</value>
   </data>
   <data name="Cmd_sfc.verifyonly_Title" xml:space="preserve">
     <value>Verificar archivos del sistema</value>
@@ -2082,10 +2082,10 @@
     <value>Quita la característica de cliente Telnet de Windows.</value>
   </data>
   <data name="Cmd_tweak.win11.widgets.hide_Title" xml:space="preserve">
-    <value>Ocultar el botón de Widgets (Win11)</value>
+    <value>Ajuste del botón de Widgets (Win11)</value>
   </data>
   <data name="Cmd_tweak.win11.widgets.hide_Desc" xml:space="preserve">
-    <value>Quita el botón de Widgets de la barra de tareas de Windows 11 (por usuario; reinicia Explorer para aplicar).</value>
+    <value>Abre la configuración de la barra de tareas para desactivar el botón de Widgets. Windows 11 ahora impide cambiar este ajuste mediante scripts.</value>
   </data>
   <data name="Cmd_tweak.win11.copilot.hide_Title" xml:space="preserve">
     <value>Ocultar el botón de Copilot (Win11)</value>
@@ -2187,13 +2187,13 @@
     <value>Consultar el bit dirty del volumen</value>
   </data>
   <data name="Cmd_storage.dirty.query_Desc" xml:space="preserve">
-    <value>Comprueba si la unidad C: está marcada como dirty y si chkdsk la analizará en el próximo arranque.</value>
+    <value>Comprueba si la unidad de Windows está marcada como dirty y si chkdsk la analizará en el próximo arranque.</value>
   </data>
   <data name="Cmd_storage.sectorinfo_Title" xml:space="preserve">
     <value>Información del tamaño de sector del disco</value>
   </data>
   <data name="Cmd_storage.sectorinfo_Desc" xml:space="preserve">
-    <value>Muestra los tamaños de sector físico y lógico y la información de alineación de la unidad C:.</value>
+    <value>Muestra los tamaños de sector físico y lógico y la información de alineación de la unidad de Windows.</value>
   </data>
   <data name="Cmd_power.waketimers_Title" xml:space="preserve">
     <value>Listar temporizadores de reactivación activos</value>
@@ -2365,5 +2365,125 @@ Los detalles se escribieron en la carpeta de registros:
   </data>
   <data name="File_SaveFailed" xml:space="preserve">
     <value>No se pudo guardar el archivo: {0}</value>
+  </data>
+  <data name="Cmd_maint.restorepoints.list_Title" xml:space="preserve">
+    <value>Listar puntos de restauración</value>
+  </data>
+  <data name="Cmd_maint.restorepoints.list_Desc" xml:space="preserve">
+    <value>Muestra los puntos de restauración del sistema de este equipo, del más reciente al más antiguo.</value>
+  </data>
+  <data name="Cmd_maint.systemrestore.open_Title" xml:space="preserve">
+    <value>Abrir Restaurar sistema</value>
+  </data>
+  <data name="Cmd_maint.systemrestore.open_Desc" xml:space="preserve">
+    <value>Abre Restaurar sistema para devolver el equipo a un punto de restauración anterior.</value>
+  </data>
+  <data name="Cmd_maint.automaintenance.run_Title" xml:space="preserve">
+    <value>Ejecutar el mantenimiento automático ahora</value>
+  </data>
+  <data name="Cmd_maint.automaintenance.run_Desc" xml:space="preserve">
+    <value>Inicia de inmediato el mantenimiento programado de Windows (actualizaciones, análisis de seguridad, optimización de unidades).</value>
+  </data>
+  <data name="Cmd_maint.time.resync_Title" xml:space="preserve">
+    <value>Sincronizar el reloj del sistema</value>
+  </data>
+  <data name="Cmd_maint.time.resync_Desc" xml:space="preserve">
+    <value>Vuelve a sincronizar el reloj de Windows con el servidor de hora de Internet.</value>
+  </data>
+  <data name="Cmd_net.dnscache.show_Title" xml:space="preserve">
+    <value>Mostrar la caché de DNS</value>
+  </data>
+  <data name="Cmd_net.dnscache.show_Desc" xml:space="preserve">
+    <value>Enumera los nombres y direcciones almacenados en la caché del cliente DNS.</value>
+  </data>
+  <data name="Cmd_net.listening.ports_Title" xml:space="preserve">
+    <value>Puertos en escucha</value>
+  </data>
+  <data name="Cmd_net.listening.ports_Desc" xml:space="preserve">
+    <value>Muestra los puertos TCP en los que escucha este equipo y el proceso propietario de cada uno.</value>
+  </data>
+  <data name="Cmd_net.wifi.interface_Title" xml:space="preserve">
+    <value>Detalles de la conexión Wi-Fi</value>
+  </data>
+  <data name="Cmd_net.wifi.interface_Desc" xml:space="preserve">
+    <value>Muestra la red Wi-Fi actual, la intensidad de la señal, la banda y la velocidad de enlace.</value>
+  </data>
+  <data name="Cmd_startup.tasks.list_Title" xml:space="preserve">
+    <value>Tareas programadas de terceros</value>
+  </data>
+  <data name="Cmd_startup.tasks.list_Desc" xml:space="preserve">
+    <value>Enumera las tareas programadas habilitadas que no forman parte de Windows.</value>
+  </data>
+  <data name="Cmd_startup.registry.run_Title" xml:space="preserve">
+    <value>Programas de inicio (claves Run)</value>
+  </data>
+  <data name="Cmd_startup.registry.run_Desc" xml:space="preserve">
+    <value>Enumera los programas que se inician desde las claves Run del registro, para este usuario y para todos los usuarios.</value>
+  </data>
+  <data name="Cmd_svc.list.stopped.auto_Title" xml:space="preserve">
+    <value>Servicios automáticos detenidos</value>
+  </data>
+  <data name="Cmd_svc.list.stopped.auto_Desc" xml:space="preserve">
+    <value>Enumera los servicios configurados para iniciarse automáticamente que no se están ejecutando. Algunos solo se inician cuando hacen falta, así que un servicio detenido no siempre es un problema.</value>
+  </data>
+  <data name="Cmd_svc.search.restart_Title" xml:space="preserve">
+    <value>Reiniciar Windows Search</value>
+  </data>
+  <data name="Cmd_svc.search.restart_Desc" xml:space="preserve">
+    <value>Reinicia el servicio Windows Search cuando la búsqueda o la indexación dejan de responder.</value>
+  </data>
+  <data name="Cmd_store.updates.open_Title" xml:space="preserve">
+    <value>Actualizaciones de Microsoft Store</value>
+  </data>
+  <data name="Cmd_store.updates.open_Desc" xml:space="preserve">
+    <value>Abre la página de descargas y actualizaciones de Microsoft Store.</value>
+  </data>
+  <data name="Cmd_wu.optional.open_Title" xml:space="preserve">
+    <value>Actualizaciones opcionales</value>
+  </data>
+  <data name="Cmd_wu.optional.open_Desc" xml:space="preserve">
+    <value>Abre la página de Windows Update con las actualizaciones opcionales de controladores y características.</value>
+  </data>
+  <data name="Cmd_sec.uac.status_Title" xml:space="preserve">
+    <value>Configuración del Control de cuentas de usuario</value>
+  </data>
+  <data name="Cmd_sec.uac.status_Desc" xml:space="preserve">
+    <value>Muestra si el UAC está activado y cómo pide confirmación a los administradores y a los usuarios estándar.</value>
+  </data>
+  <data name="Cmd_sec.coreisolation.open_Title" xml:space="preserve">
+    <value>Aislamiento del núcleo</value>
+  </data>
+  <data name="Cmd_sec.coreisolation.open_Desc" xml:space="preserve">
+    <value>Abre la página Aislamiento del núcleo (integridad de memoria) de Seguridad de Windows.</value>
+  </data>
+  <data name="Cmd_dev.envvars.open_Title" xml:space="preserve">
+    <value>Editar variables de entorno</value>
+  </data>
+  <data name="Cmd_dev.envvars.open_Desc" xml:space="preserve">
+    <value>Abre el editor de variables de entorno de tu cuenta.</value>
+  </data>
+  <data name="Cmd_dev.wsl.status_Title" xml:space="preserve">
+    <value>Estado de WSL</value>
+  </data>
+  <data name="Cmd_dev.wsl.status_Desc" xml:space="preserve">
+    <value>Muestra la distribución y la versión predeterminadas del Subsistema de Windows para Linux.</value>
+  </data>
+  <data name="Cmd_storage.trim.status_Title" xml:space="preserve">
+    <value>Estado de TRIM del SSD</value>
+  </data>
+  <data name="Cmd_storage.trim.status_Desc" xml:space="preserve">
+    <value>Comprueba si Windows envía comandos TRIM a los SSD (DisableDeleteNotify = 0 significa activado).</value>
+  </data>
+  <data name="Cmd_diag.minidumps.list_Title" xml:space="preserve">
+    <value>Archivos de volcado de bloqueo</value>
+  </data>
+  <data name="Cmd_diag.minidumps.list_Desc" xml:space="preserve">
+    <value>Enumera los archivos de minivolcado que Windows guardó tras los bloqueos con pantalla azul.</value>
+  </data>
+  <data name="Cmd_power.battery.status_Title" xml:space="preserve">
+    <value>Carga de la batería</value>
+  </data>
+  <data name="Cmd_power.battery.status_Desc" xml:space="preserve">
+    <value>Muestra la carga actual de la batería, su estado y la autonomía estimada.</value>
   </data>
 </root>

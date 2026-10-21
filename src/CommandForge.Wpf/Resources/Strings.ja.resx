@@ -383,7 +383,7 @@
     <value>バッテリーレポート</value>
   </data>
   <data name="Cmd_power.batteryreport_Desc" xml:space="preserve">
-    <value>バッテリーの状態を示す HTML レポートを生成します。</value>
+    <value>バッテリーの状態を示す HTML レポートを、ユーザー フォルダーに battery-report.html として保存します。</value>
   </data>
   <data name="Cmd_diag.reliability_Title" xml:space="preserve">
     <value>信頼性モニター</value>
@@ -455,7 +455,7 @@
     <value>ディスクをチェック（読み取り専用）</value>
   </data>
   <data name="Cmd_chkdsk.read_Desc" xml:space="preserve">
-    <value>C: ドライブのエラーをチェックします（読み取り専用）。</value>
+    <value>Windows ドライブのエラーをチェックします（読み取り専用）。</value>
   </data>
   <data name="Cmd_sec.bitlocker.status_Title" xml:space="preserve">
     <value>BitLocker の状態</value>
@@ -536,10 +536,10 @@
     <value>置き換えられた古いコンポーネントを WinSxS から削除してディスク領域を解放します。再起動が必要な場合があります。</value>
   </data>
   <data name="Cmd_chkdsk.fix_Title" xml:space="preserve">
-    <value>ディスクを修復（chkdsk /f /r）</value>
+    <value>Windows ドライブを修復（オフライン スキャンと修復）</value>
   </data>
   <data name="Cmd_chkdsk.fix_Desc" xml:space="preserve">
-    <value>次回再起動時にシステムドライブの完全なディスクチェックと修復をスケジュールします。</value>
+    <value>次回の再起動時に Windows ドライブのチェックと修復を行うようスケジュールします。</value>
   </data>
   <data name="Cmd_winget.upgrade.all_Title" xml:space="preserve">
     <value>すべてのパッケージを更新</value>
@@ -563,7 +563,7 @@
     <value>Windows Update をリセット</value>
   </data>
   <data name="Cmd_wu.reset.components_Desc" xml:space="preserve">
-    <value>更新サービスを停止し、キャッシュをクリアして再起動します。停止した更新の修復によく効きます。</value>
+    <value>更新サービスを停止し、キャッシュ フォルダーを退避（.bak 付きの名前に変更）してからサービスを再起動します。停止した更新の修復によく効きます。</value>
   </data>
   <data name="Cmd_tweak.win11.classicmenu_Title" xml:space="preserve">
     <value>クラシック右クリックメニュー（Win11）</value>
@@ -623,7 +623,7 @@
     <value>自動ディスク クリーンアップ</value>
   </data>
   <data name="Cmd_clean.cleanmgr.auto_Desc" xml:space="preserve">
-    <value>確認なしですべてのカテゴリのディスク クリーンアップを実行します。</value>
+    <value>一時ファイル、キャッシュ、ログを対象に確認なしでディスク クリーンアップを実行します。ダウンロード、ごみ箱、Windows.old には一切触れません。</value>
   </data>
   <data name="Cmd_clean.recyclebin_Title" xml:space="preserve">
     <value>ごみ箱を空にする</value>
@@ -1695,10 +1695,10 @@
     <value>起動時とシャットダウン時のメッセージを通常表示に戻します。</value>
   </data>
   <data name="Cmd_storage.optimize_Title" xml:space="preserve">
-    <value>C: の最適化 / デフラグ</value>
+    <value>Windows ドライブの最適化 / デフラグ</value>
   </data>
   <data name="Cmd_storage.optimize_Desc" xml:space="preserve">
-    <value>C: ドライブを最適化します（SSD は TRIM、HDD はデフラグ）。</value>
+    <value>Windows ドライブを最適化します（SSD は TRIM、HDD はデフラグ）。</value>
   </data>
   <data name="Cmd_storage.diskmgmt_Title" xml:space="preserve">
     <value>Disk Management</value>
@@ -1752,7 +1752,7 @@
     <value>時刻とタイム ゾーン</value>
   </data>
   <data name="Cmd_info.timezone_Desc" xml:space="preserve">
-    <value>現在のタイム ゾーンと時刻同期の状態を表示します。</value>
+    <value>現在のタイム ゾーン、UTC からのオフセット、夏時間の有無を表示します。</value>
   </data>
   <data name="Cmd_info.osinstalldate_Title" xml:space="preserve">
     <value>Windows のインストール日</value>
@@ -1857,7 +1857,7 @@
     <value>断片化の分析</value>
   </data>
   <data name="Cmd_storage.fragmentation.analyze_Desc" xml:space="preserve">
-    <value>変更を加えずに C: ドライブの断片化を分析します。</value>
+    <value>変更を加えずに Windows ドライブの断片化を分析します。</value>
   </data>
   <data name="Cmd_storage.cleanmgr.settings_Title" xml:space="preserve">
     <value>ディスク クリーンアップの構成</value>
@@ -1953,7 +1953,7 @@
     <value>オンライン ディスク スキャン</value>
   </data>
   <data name="Cmd_chkdsk.scan.online_Desc" xml:space="preserve">
-    <value>マウント解除せずに C: ドライブのエラーをオンラインでスキャンします。</value>
+    <value>マウント解除せずに Windows ドライブのエラーをオンラインでスキャンします。</value>
   </data>
   <data name="Cmd_sfc.verifyonly_Title" xml:space="preserve">
     <value>システム ファイルの検証</value>
@@ -2082,10 +2082,10 @@
     <value>Windows の Telnet クライアント機能を削除します。</value>
   </data>
   <data name="Cmd_tweak.win11.widgets.hide_Title" xml:space="preserve">
-    <value>Widgets ボタンを非表示 (Win11)</value>
+    <value>Widgets ボタンの設定 (Win11)</value>
   </data>
   <data name="Cmd_tweak.win11.widgets.hide_Desc" xml:space="preserve">
-    <value>Windows 11 のタスクバーから Widgets ボタンを削除します（ユーザー単位。適用するには Explorer を再起動してください）。</value>
+    <value>タスク バーの設定を開いて Widgets ボタンをオフにします。現在の Windows 11 では、この設定をスクリプトから変更できません。</value>
   </data>
   <data name="Cmd_tweak.win11.copilot.hide_Title" xml:space="preserve">
     <value>Copilot ボタンを非表示 (Win11)</value>
@@ -2187,13 +2187,13 @@
     <value>ボリュームの Dirty ビットを照会</value>
   </data>
   <data name="Cmd_storage.dirty.query_Desc" xml:space="preserve">
-    <value>ドライブ C: が dirty としてマークされ、次回起動時に chkdsk でスキャンされるかどうかを確認します。</value>
+    <value>Windows ドライブが dirty としてマークされ、次回起動時に chkdsk でスキャンされるかどうかを確認します。</value>
   </data>
   <data name="Cmd_storage.sectorinfo_Title" xml:space="preserve">
     <value>ディスクのセクターサイズ情報</value>
   </data>
   <data name="Cmd_storage.sectorinfo_Desc" xml:space="preserve">
-    <value>ドライブ C: の物理/論理セクターサイズとアライメント情報を表示します。</value>
+    <value>Windows ドライブの物理/論理セクターサイズとアライメント情報を表示します。</value>
   </data>
   <data name="Cmd_power.waketimers_Title" xml:space="preserve">
     <value>有効なウェイクタイマーを一覧表示</value>
@@ -2365,5 +2365,125 @@
   </data>
   <data name="File_SaveFailed" xml:space="preserve">
     <value>ファイルを保存できませんでした: {0}</value>
+  </data>
+  <data name="Cmd_maint.restorepoints.list_Title" xml:space="preserve">
+    <value>復元ポイントの一覧</value>
+  </data>
+  <data name="Cmd_maint.restorepoints.list_Desc" xml:space="preserve">
+    <value>この PC のシステムの復元ポイントを新しい順に表示します。</value>
+  </data>
+  <data name="Cmd_maint.systemrestore.open_Title" xml:space="preserve">
+    <value>システムの復元を開く</value>
+  </data>
+  <data name="Cmd_maint.systemrestore.open_Desc" xml:space="preserve">
+    <value>システムの復元を開き、PC を以前の復元ポイントに戻します。</value>
+  </data>
+  <data name="Cmd_maint.automaintenance.run_Title" xml:space="preserve">
+    <value>自動メンテナンスを今すぐ実行</value>
+  </data>
+  <data name="Cmd_maint.automaintenance.run_Desc" xml:space="preserve">
+    <value>Windows の定期メンテナンス（更新、セキュリティ スキャン、ドライブの最適化）をすぐに開始します。</value>
+  </data>
+  <data name="Cmd_maint.time.resync_Title" xml:space="preserve">
+    <value>システム時計を同期</value>
+  </data>
+  <data name="Cmd_maint.time.resync_Desc" xml:space="preserve">
+    <value>Windows の時計をインターネット タイム サーバーと再同期します。</value>
+  </data>
+  <data name="Cmd_net.dnscache.show_Title" xml:space="preserve">
+    <value>DNS キャッシュを表示</value>
+  </data>
+  <data name="Cmd_net.dnscache.show_Desc" xml:space="preserve">
+    <value>DNS クライアントがキャッシュしている名前とアドレスを一覧表示します。</value>
+  </data>
+  <data name="Cmd_net.listening.ports_Title" xml:space="preserve">
+    <value>待ち受け中のポート</value>
+  </data>
+  <data name="Cmd_net.listening.ports_Desc" xml:space="preserve">
+    <value>この PC が待ち受けている TCP ポートと、それぞれを所有するプロセスを表示します。</value>
+  </data>
+  <data name="Cmd_net.wifi.interface_Title" xml:space="preserve">
+    <value>Wi-Fi 接続の詳細</value>
+  </data>
+  <data name="Cmd_net.wifi.interface_Desc" xml:space="preserve">
+    <value>現在の Wi-Fi ネットワーク、信号強度、周波数帯、リンク速度を表示します。</value>
+  </data>
+  <data name="Cmd_startup.tasks.list_Title" xml:space="preserve">
+    <value>サードパーティのスケジュール済みタスク</value>
+  </data>
+  <data name="Cmd_startup.tasks.list_Desc" xml:space="preserve">
+    <value>Windows 標準ではない、有効なスケジュール済みタスクを一覧表示します。</value>
+  </data>
+  <data name="Cmd_startup.registry.run_Title" xml:space="preserve">
+    <value>スタートアップ プログラム（Run キー）</value>
+  </data>
+  <data name="Cmd_startup.registry.run_Desc" xml:space="preserve">
+    <value>現在のユーザーと全ユーザーのレジストリ Run キーから起動されるプログラムを一覧表示します。</value>
+  </data>
+  <data name="Cmd_svc.list.stopped.auto_Title" xml:space="preserve">
+    <value>停止中の自動開始サービス</value>
+  </data>
+  <data name="Cmd_svc.list.stopped.auto_Desc" xml:space="preserve">
+    <value>自動開始に設定されているのに実行されていないサービスを一覧表示します。必要なときだけ起動するサービスもあるため、停止中でも問題とは限りません。</value>
+  </data>
+  <data name="Cmd_svc.search.restart_Title" xml:space="preserve">
+    <value>Windows Search を再起動</value>
+  </data>
+  <data name="Cmd_svc.search.restart_Desc" xml:space="preserve">
+    <value>検索やインデックス作成が応答しなくなったときに Windows Search サービスを再起動します。</value>
+  </data>
+  <data name="Cmd_store.updates.open_Title" xml:space="preserve">
+    <value>Microsoft Store の更新</value>
+  </data>
+  <data name="Cmd_store.updates.open_Desc" xml:space="preserve">
+    <value>Microsoft Store のダウンロードと更新のページを開きます。</value>
+  </data>
+  <data name="Cmd_wu.optional.open_Title" xml:space="preserve">
+    <value>オプションの更新プログラム</value>
+  </data>
+  <data name="Cmd_wu.optional.open_Desc" xml:space="preserve">
+    <value>ドライバーや機能のオプションの更新プログラムを表示する Windows Update のページを開きます。</value>
+  </data>
+  <data name="Cmd_sec.uac.status_Title" xml:space="preserve">
+    <value>ユーザー アカウント制御の設定</value>
+  </data>
+  <data name="Cmd_sec.uac.status_Desc" xml:space="preserve">
+    <value>UAC が有効かどうかと、管理者および標準ユーザーへの確認方法を表示します。</value>
+  </data>
+  <data name="Cmd_sec.coreisolation.open_Title" xml:space="preserve">
+    <value>コア分離</value>
+  </data>
+  <data name="Cmd_sec.coreisolation.open_Desc" xml:space="preserve">
+    <value>Windows セキュリティの [コア分離]（メモリ整合性）ページを開きます。</value>
+  </data>
+  <data name="Cmd_dev.envvars.open_Title" xml:space="preserve">
+    <value>環境変数を編集</value>
+  </data>
+  <data name="Cmd_dev.envvars.open_Desc" xml:space="preserve">
+    <value>自分のアカウントの環境変数エディターを開きます。</value>
+  </data>
+  <data name="Cmd_dev.wsl.status_Title" xml:space="preserve">
+    <value>WSL の状態</value>
+  </data>
+  <data name="Cmd_dev.wsl.status_Desc" xml:space="preserve">
+    <value>Windows Subsystem for Linux の既定のディストリビューションとバージョンを表示します。</value>
+  </data>
+  <data name="Cmd_storage.trim.status_Title" xml:space="preserve">
+    <value>SSD の TRIM 状態</value>
+  </data>
+  <data name="Cmd_storage.trim.status_Desc" xml:space="preserve">
+    <value>Windows が SSD に TRIM コマンドを送信しているかを確認します（DisableDeleteNotify = 0 は有効）。</value>
+  </data>
+  <data name="Cmd_diag.minidumps.list_Title" xml:space="preserve">
+    <value>クラッシュ ダンプ ファイル</value>
+  </data>
+  <data name="Cmd_diag.minidumps.list_Desc" xml:space="preserve">
+    <value>ブルー スクリーンのクラッシュ後に Windows が保存したミニダンプ ファイルを一覧表示します。</value>
+  </data>
+  <data name="Cmd_power.battery.status_Title" xml:space="preserve">
+    <value>バッテリー残量</value>
+  </data>
+  <data name="Cmd_power.battery.status_Desc" xml:space="preserve">
+    <value>現在のバッテリー残量、状態、推定駆動時間を表示します。</value>
   </data>
 </root>

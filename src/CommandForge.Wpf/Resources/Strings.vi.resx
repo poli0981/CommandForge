@@ -383,7 +383,7 @@
     <value>Báo cáo pin</value>
   </data>
   <data name="Cmd_power.batteryreport_Desc" xml:space="preserve">
-    <value>Tạo báo cáo sức khỏe pin dạng HTML.</value>
+    <value>Lưu báo cáo sức khỏe pin dạng HTML thành battery-report.html trong thư mục người dùng.</value>
   </data>
   <data name="Cmd_diag.reliability_Title" xml:space="preserve">
     <value>Reliability Monitor</value>
@@ -455,7 +455,7 @@
     <value>Kiểm tra ổ đĩa (chỉ đọc)</value>
   </data>
   <data name="Cmd_chkdsk.read_Desc" xml:space="preserve">
-    <value>Kiểm tra lỗi ổ C: (chỉ đọc).</value>
+    <value>Kiểm tra lỗi ổ Windows (chỉ đọc).</value>
   </data>
   <data name="Cmd_sec.bitlocker.status_Title" xml:space="preserve">
     <value>Trạng thái BitLocker</value>
@@ -536,10 +536,10 @@
     <value>Xóa các thành phần cũ trong WinSxS để giải phóng dung lượng. Có thể cần khởi động lại.</value>
   </data>
   <data name="Cmd_chkdsk.fix_Title" xml:space="preserve">
-    <value>Sửa lỗi đĩa (chkdsk /f /r)</value>
+    <value>Sửa lỗi ổ Windows (quét và sửa ngoại tuyến)</value>
   </data>
   <data name="Cmd_chkdsk.fix_Desc" xml:space="preserve">
-    <value>Lên lịch kiểm tra và sửa lỗi toàn bộ ổ hệ thống ở lần khởi động kế tiếp.</value>
+    <value>Lên lịch kiểm tra và sửa lỗi ổ Windows ở lần khởi động lại kế tiếp.</value>
   </data>
   <data name="Cmd_winget.upgrade.all_Title" xml:space="preserve">
     <value>Nâng cấp tất cả gói</value>
@@ -563,7 +563,7 @@
     <value>Đặt lại Windows Update</value>
   </data>
   <data name="Cmd_wu.reset.components_Desc" xml:space="preserve">
-    <value>Dừng dịch vụ cập nhật, xóa cache và khởi động lại. Thường khắc phục cập nhật bị treo.</value>
+    <value>Dừng dịch vụ cập nhật, cất thư mục cache sang một bên (đổi tên thêm đuôi .bak) rồi khởi động lại. Thường khắc phục cập nhật bị treo.</value>
   </data>
   <data name="Cmd_tweak.win11.classicmenu_Title" xml:space="preserve">
     <value>Menu chuột phải cổ điển (Win11)</value>
@@ -623,7 +623,7 @@
     <value>Dọn đĩa tự động</value>
   </data>
   <data name="Cmd_clean.cleanmgr.auto_Desc" xml:space="preserve">
-    <value>Chạy Disk Cleanup cho mọi mục mà không cần hỏi.</value>
+    <value>Chạy Disk Cleanup cho tệp tạm, bộ nhớ đệm và nhật ký mà không cần hỏi. Không bao giờ đụng tới Downloads, Thùng rác và Windows.old.</value>
   </data>
   <data name="Cmd_clean.recyclebin_Title" xml:space="preserve">
     <value>Dọn thùng rác</value>
@@ -1695,10 +1695,10 @@ Tiếp tục?</value>
     <value>Khôi phục thông báo khởi động và tắt máy thông thường.</value>
   </data>
   <data name="Cmd_storage.optimize_Title" xml:space="preserve">
-    <value>Tối ưu / Chống phân mảnh ổ C:</value>
+    <value>Tối ưu / Chống phân mảnh ổ Windows</value>
   </data>
   <data name="Cmd_storage.optimize_Desc" xml:space="preserve">
-    <value>Tối ưu ổ C: (TRIM cho SSD, chống phân mảnh cho HDD).</value>
+    <value>Tối ưu ổ Windows (TRIM cho SSD, chống phân mảnh cho HDD).</value>
   </data>
   <data name="Cmd_storage.diskmgmt_Title" xml:space="preserve">
     <value>Disk Management</value>
@@ -1752,7 +1752,7 @@ Tiếp tục?</value>
     <value>Thời gian &amp; múi giờ</value>
   </data>
   <data name="Cmd_info.timezone_Desc" xml:space="preserve">
-    <value>Hiển thị múi giờ hiện tại và trạng thái đồng bộ thời gian.</value>
+    <value>Hiển thị múi giờ hiện tại, độ lệch so với UTC và việc có áp dụng giờ mùa hè hay không.</value>
   </data>
   <data name="Cmd_info.osinstalldate_Title" xml:space="preserve">
     <value>Ngày cài đặt Windows</value>
@@ -1857,7 +1857,7 @@ Tiếp tục?</value>
     <value>Phân tích phân mảnh</value>
   </data>
   <data name="Cmd_storage.fragmentation.analyze_Desc" xml:space="preserve">
-    <value>Phân tích phân mảnh ổ C: mà không thay đổi gì.</value>
+    <value>Phân tích phân mảnh ổ Windows mà không thay đổi gì.</value>
   </data>
   <data name="Cmd_storage.cleanmgr.settings_Title" xml:space="preserve">
     <value>Cấu hình Dọn dẹp ổ đĩa</value>
@@ -1953,7 +1953,7 @@ Tiếp tục?</value>
     <value>Quét ổ đĩa trực tuyến</value>
   </data>
   <data name="Cmd_chkdsk.scan.online_Desc" xml:space="preserve">
-    <value>Quét lỗi ổ C: ngay khi đang dùng mà không cần ngắt kết nối.</value>
+    <value>Quét lỗi ổ Windows ngay khi đang dùng mà không cần ngắt kết nối.</value>
   </data>
   <data name="Cmd_sfc.verifyonly_Title" xml:space="preserve">
     <value>Kiểm tra tệp hệ thống</value>
@@ -2082,10 +2082,10 @@ Tiếp tục?</value>
     <value>Gỡ tính năng ứng dụng Telnet của Windows.</value>
   </data>
   <data name="Cmd_tweak.win11.widgets.hide_Title" xml:space="preserve">
-    <value>Ẩn nút Widgets (Win11)</value>
+    <value>Cài đặt nút Widgets (Win11)</value>
   </data>
   <data name="Cmd_tweak.win11.widgets.hide_Desc" xml:space="preserve">
-    <value>Gỡ nút Widgets khỏi thanh tác vụ Windows 11 (theo người dùng; khởi động lại Explorer để áp dụng).</value>
+    <value>Mở cài đặt Thanh tác vụ để tắt nút Widgets. Windows 11 hiện chặn việc đổi cài đặt này bằng script.</value>
   </data>
   <data name="Cmd_tweak.win11.copilot.hide_Title" xml:space="preserve">
     <value>Ẩn nút Copilot (Win11)</value>
@@ -2187,13 +2187,13 @@ Tiếp tục?</value>
     <value>Kiểm tra dirty bit của ổ đĩa</value>
   </data>
   <data name="Cmd_storage.dirty.query_Desc" xml:space="preserve">
-    <value>Kiểm tra ổ C: có bị đánh dấu dirty và sẽ được chkdsk quét ở lần khởi động tới hay không.</value>
+    <value>Kiểm tra ổ Windows có bị đánh dấu dirty và sẽ được chkdsk quét ở lần khởi động tới hay không.</value>
   </data>
   <data name="Cmd_storage.sectorinfo_Title" xml:space="preserve">
     <value>Thông tin kích thước sector đĩa</value>
   </data>
   <data name="Cmd_storage.sectorinfo_Desc" xml:space="preserve">
-    <value>Hiển thị kích thước sector vật lý/logic và thông tin căn chỉnh của ổ C:.</value>
+    <value>Hiển thị kích thước sector vật lý/logic và thông tin căn chỉnh của ổ Windows.</value>
   </data>
   <data name="Cmd_power.waketimers_Title" xml:space="preserve">
     <value>Liệt kê wake timer đang hoạt động</value>
@@ -2365,5 +2365,125 @@ Chi tiết đã được ghi vào thư mục log:
   </data>
   <data name="File_SaveFailed" xml:space="preserve">
     <value>Không thể lưu tệp: {0}</value>
+  </data>
+  <data name="Cmd_maint.restorepoints.list_Title" xml:space="preserve">
+    <value>Liệt kê điểm khôi phục</value>
+  </data>
+  <data name="Cmd_maint.restorepoints.list_Desc" xml:space="preserve">
+    <value>Hiển thị các điểm khôi phục hệ thống trên máy, mới nhất trước.</value>
+  </data>
+  <data name="Cmd_maint.systemrestore.open_Title" xml:space="preserve">
+    <value>Mở Khôi phục hệ thống</value>
+  </data>
+  <data name="Cmd_maint.systemrestore.open_Desc" xml:space="preserve">
+    <value>Mở System Restore để đưa máy về một điểm khôi phục trước đó.</value>
+  </data>
+  <data name="Cmd_maint.automaintenance.run_Title" xml:space="preserve">
+    <value>Chạy bảo trì tự động ngay</value>
+  </data>
+  <data name="Cmd_maint.automaintenance.run_Desc" xml:space="preserve">
+    <value>Bắt đầu ngay đợt bảo trì định kỳ của Windows (cập nhật, quét bảo mật, tối ưu ổ đĩa).</value>
+  </data>
+  <data name="Cmd_maint.time.resync_Title" xml:space="preserve">
+    <value>Đồng bộ đồng hồ hệ thống</value>
+  </data>
+  <data name="Cmd_maint.time.resync_Desc" xml:space="preserve">
+    <value>Đồng bộ lại đồng hồ Windows với máy chủ thời gian trên Internet.</value>
+  </data>
+  <data name="Cmd_net.dnscache.show_Title" xml:space="preserve">
+    <value>Xem bộ nhớ đệm DNS</value>
+  </data>
+  <data name="Cmd_net.dnscache.show_Desc" xml:space="preserve">
+    <value>Liệt kê các tên miền và địa chỉ mà DNS client đang lưu đệm.</value>
+  </data>
+  <data name="Cmd_net.listening.ports_Title" xml:space="preserve">
+    <value>Cổng đang lắng nghe</value>
+  </data>
+  <data name="Cmd_net.listening.ports_Desc" xml:space="preserve">
+    <value>Hiển thị các cổng TCP máy đang lắng nghe và tiến trình sở hữu từng cổng.</value>
+  </data>
+  <data name="Cmd_net.wifi.interface_Title" xml:space="preserve">
+    <value>Chi tiết kết nối Wi-Fi</value>
+  </data>
+  <data name="Cmd_net.wifi.interface_Desc" xml:space="preserve">
+    <value>Hiển thị mạng Wi-Fi hiện tại, cường độ tín hiệu, băng tần và tốc độ liên kết.</value>
+  </data>
+  <data name="Cmd_startup.tasks.list_Title" xml:space="preserve">
+    <value>Tác vụ theo lịch của bên thứ ba</value>
+  </data>
+  <data name="Cmd_startup.tasks.list_Desc" xml:space="preserve">
+    <value>Liệt kê các tác vụ theo lịch đang bật không thuộc Windows.</value>
+  </data>
+  <data name="Cmd_startup.registry.run_Title" xml:space="preserve">
+    <value>Chương trình khởi động (khóa Run)</value>
+  </data>
+  <data name="Cmd_startup.registry.run_Desc" xml:space="preserve">
+    <value>Liệt kê chương trình tự chạy từ các khóa Run trong registry của người dùng hiện tại và của mọi người dùng.</value>
+  </data>
+  <data name="Cmd_svc.list.stopped.auto_Title" xml:space="preserve">
+    <value>Dịch vụ tự động đang dừng</value>
+  </data>
+  <data name="Cmd_svc.list.stopped.auto_Desc" xml:space="preserve">
+    <value>Liệt kê các dịch vụ được đặt khởi động tự động nhưng không chạy. Một số chỉ chạy khi cần, nên dịch vụ đang dừng chưa chắc là lỗi.</value>
+  </data>
+  <data name="Cmd_svc.search.restart_Title" xml:space="preserve">
+    <value>Khởi động lại Windows Search</value>
+  </data>
+  <data name="Cmd_svc.search.restart_Desc" xml:space="preserve">
+    <value>Khởi động lại dịch vụ Windows Search khi tìm kiếm hoặc lập chỉ mục không phản hồi.</value>
+  </data>
+  <data name="Cmd_store.updates.open_Title" xml:space="preserve">
+    <value>Cập nhật Microsoft Store</value>
+  </data>
+  <data name="Cmd_store.updates.open_Desc" xml:space="preserve">
+    <value>Mở trang tải xuống và cập nhật của Microsoft Store.</value>
+  </data>
+  <data name="Cmd_wu.optional.open_Title" xml:space="preserve">
+    <value>Bản cập nhật tùy chọn</value>
+  </data>
+  <data name="Cmd_wu.optional.open_Desc" xml:space="preserve">
+    <value>Mở trang Windows Update dành cho bản cập nhật driver và tính năng tùy chọn.</value>
+  </data>
+  <data name="Cmd_sec.uac.status_Title" xml:space="preserve">
+    <value>Cài đặt Kiểm soát tài khoản (UAC)</value>
+  </data>
+  <data name="Cmd_sec.uac.status_Desc" xml:space="preserve">
+    <value>Cho biết UAC có đang bật không và cách nó hỏi quyền với quản trị viên và người dùng thường.</value>
+  </data>
+  <data name="Cmd_sec.coreisolation.open_Title" xml:space="preserve">
+    <value>Cô lập lõi (Core isolation)</value>
+  </data>
+  <data name="Cmd_sec.coreisolation.open_Desc" xml:space="preserve">
+    <value>Mở trang Cô lập lõi (tính toàn vẹn bộ nhớ) trong Windows Security.</value>
+  </data>
+  <data name="Cmd_dev.envvars.open_Title" xml:space="preserve">
+    <value>Sửa biến môi trường</value>
+  </data>
+  <data name="Cmd_dev.envvars.open_Desc" xml:space="preserve">
+    <value>Mở trình chỉnh sửa biến môi trường cho tài khoản của bạn.</value>
+  </data>
+  <data name="Cmd_dev.wsl.status_Title" xml:space="preserve">
+    <value>Trạng thái WSL</value>
+  </data>
+  <data name="Cmd_dev.wsl.status_Desc" xml:space="preserve">
+    <value>Hiển thị bản phân phối và phiên bản Windows Subsystem for Linux mặc định.</value>
+  </data>
+  <data name="Cmd_storage.trim.status_Title" xml:space="preserve">
+    <value>Trạng thái TRIM của SSD</value>
+  </data>
+  <data name="Cmd_storage.trim.status_Desc" xml:space="preserve">
+    <value>Kiểm tra Windows có gửi lệnh TRIM tới SSD hay không (DisableDeleteNotify = 0 nghĩa là đang bật).</value>
+  </data>
+  <data name="Cmd_diag.minidumps.list_Title" xml:space="preserve">
+    <value>Tệp kết xuất sự cố</value>
+  </data>
+  <data name="Cmd_diag.minidumps.list_Desc" xml:space="preserve">
+    <value>Liệt kê các tệp minidump Windows đã lưu sau những lần lỗi màn hình xanh.</value>
+  </data>
+  <data name="Cmd_power.battery.status_Title" xml:space="preserve">
+    <value>Mức pin</value>
+  </data>
+  <data name="Cmd_power.battery.status_Desc" xml:space="preserve">
+    <value>Hiển thị mức pin hiện tại, trạng thái và thời gian sử dụng ước tính.</value>
   </data>
 </root>

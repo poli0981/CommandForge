@@ -41,8 +41,8 @@ SemVer tag.
    gh attestation verify CommandForge-win-Setup.exe --repo poli0981/CommandForge
    ```
 
-   Edit the release notes if needed (changelog highlights). The SHA-256 and VirusTotal details are
-   already attached.
+   Then add the changelog highlights to the release notes, above the **VirusTotal** section the
+   workflow appended (keep that section). The SHA-256 sums are already in `checksums.txt`.
 
 You can also run the workflow manually (**Actions → Release → Run workflow**) with a `version`
 input; the upload step then creates the `vX.Y.Z` tag.

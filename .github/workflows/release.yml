@@ -134,16 +134,35 @@ jobs:
           TAG: ${{ steps.ver.outputs.tag }}
         run: gh release edit $env:TAG --draft=false --latest
 
-      # The release-by-tag API used to append scan links can't see drafts, so this runs after publishing.
       - name: VirusTotal scan (optional)
+        id: vt
         if: env.VT_API_KEY != ''
         uses: crazy-max/ghaction-virustotal@936d8c5c00afe97d3d9a1af26d017cfdf26800a2 # v5.0.0
         with:
           vt_api_key: ${{ env.VT_API_KEY }}
-          update_release_body: true
           files: |
             Releases/*-Setup.exe
-            Releases/*-full.nupkg
+            Releases/CommandForge-${{ steps.ver.outputs.version }}-full.nupkg
+
+      # The action's own update_release_body only works on `release` events, and this workflow
+      # runs on tag pushes, so the report links are appended here (after publishing: the
+      # release-by-tag lookup can't see drafts).
+      - name: Add VirusTotal links to the release notes
+        if: steps.vt.outputs.analysis != ''
+        shell: pwsh
+        env:
+          TAG: ${{ steps.ver.outputs.tag }}
+          ANALYSIS: ${{ steps.vt.outputs.analysis }}
+        run: |
+          # ANALYSIS is "path=analysis-url,path=analysis-url"; link each file's permanent report.
+          $links = foreach ($pair in $env:ANALYSIS -split ',') {
+            $file = ($pair -split '=', 2)[0]
+            $hash = (Get-FileHash $file -Algorithm SHA256).Hash.ToLower()
+            '- [{0}](https://www.virustotal.com/gui/file/{1})' -f (Split-Path $file -Leaf), $hash
+          }
+          $body = (gh release view $env:TAG --json body --jq '.body') -join "`n"
+          $notes = (@($body.TrimEnd(), '', '### VirusTotal', '') + $links) -join "`n"
+          $notes | gh release edit $env:TAG --notes-file -
 
   announce:
     # A release published with GITHUB_TOKEN does not fire the `release` event, so the standalone

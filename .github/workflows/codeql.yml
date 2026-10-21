@@ -58,7 +58,8 @@ jobs:
 
       - if: matrix.build-mode == 'manual'
         name: Build
-        run: dotnet build CommandForge.slnx -c Release
+        # Roslyn analyzers add nothing to CodeQL's extraction and slow the traced build down.
+        run: dotnet build CommandForge.slnx -c Release -p:RunAnalyzers=false
 
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@6f2ac81f5cd81fe351a197ba0b00d91d03cd2aee # v4.39.0

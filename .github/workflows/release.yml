@@ -89,7 +89,9 @@ jobs:
             Releases/*-Setup.exe
             Releases/*.nupkg
 
-      - name: Publish GitHub Release (Velopack)
+      # Upload as a DRAFT first: publishing is what makes installed copies auto-update, so the
+      # release only goes live once every asset (SBOM, checksums, scan links) is attached.
+      - name: Create draft GitHub Release (Velopack)
         shell: pwsh
         env:
           VERSION: ${{ steps.ver.outputs.version }}
@@ -98,7 +100,6 @@ jobs:
           dotnet vpk upload github
           --repoUrl $env:REPO_URL
           --token $env:GH_TOKEN
-          --publish
           --releaseName "CommandForge $env:VERSION"
           --tag $env:TAG
 
@@ -121,6 +122,13 @@ jobs:
             Out-File $checksums -Encoding ascii
           gh release upload $env:TAG $sbom $checksums --clobber
 
+      - name: Publish the release
+        shell: pwsh
+        env:
+          TAG: ${{ steps.ver.outputs.tag }}
+        run: gh release edit $env:TAG --draft=false --latest
+
+      # The release-by-tag API used to append scan links can't see drafts, so this runs after publishing.
       - name: VirusTotal scan (optional)
         if: env.VT_API_KEY != ''
         uses: crazy-max/ghaction-virustotal@936d8c5c00afe97d3d9a1af26d017cfdf26800a2 # v5.0.0

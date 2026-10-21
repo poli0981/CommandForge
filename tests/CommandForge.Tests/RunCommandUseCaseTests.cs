@@ -15,7 +15,7 @@ public sealed class RunCommandUseCaseTests
         var elevation = new RecordingElevation();
         var useCase = new RunCommandUseCase(executor, elevation);
 
-        await useCase.RunAsync(Command(requiresAdmin: true), Channel.CreateUnbounded<OutputLine>().Writer);
+        await useCase.RunAsync(Command(requiresAdmin: true), Channel.CreateUnbounded<OutputLine>().Writer, TestContext.Current.CancellationToken);
 
         Assert.True(elevation.Called);
         Assert.False(executor.Called);
@@ -28,7 +28,7 @@ public sealed class RunCommandUseCaseTests
         var elevation = new RecordingElevation();
         var useCase = new RunCommandUseCase(executor, elevation);
 
-        await useCase.RunAsync(Command(requiresAdmin: false), Channel.CreateUnbounded<OutputLine>().Writer);
+        await useCase.RunAsync(Command(requiresAdmin: false), Channel.CreateUnbounded<OutputLine>().Writer, TestContext.Current.CancellationToken);
 
         Assert.True(executor.Called);
         Assert.False(elevation.Called);
@@ -50,7 +50,7 @@ public sealed class RunCommandUseCaseTests
     {
         public bool Called { get; private set; }
 
-        public Task<ExecutionResult> ExecuteAsync(CommandDefinition command, ChannelWriter<OutputLine> output, CancellationToken cancellationToken)
+        public Task<ExecutionResult> ExecuteAsync(CommandDefinition command, ChannelWriter<OutputLine> output, CancellationToken cancellationToken = default)
         {
             Called = true;
             output.TryComplete();
@@ -64,7 +64,7 @@ public sealed class RunCommandUseCaseTests
 
         public bool IsElevationAvailable => true;
 
-        public Task<ExecutionResult> RunElevatedAsync(CommandDefinition command, ChannelWriter<OutputLine> output, CancellationToken cancellationToken)
+        public Task<ExecutionResult> RunElevatedAsync(CommandDefinition command, ChannelWriter<OutputLine> output, CancellationToken cancellationToken = default)
         {
             Called = true;
             output.TryComplete();

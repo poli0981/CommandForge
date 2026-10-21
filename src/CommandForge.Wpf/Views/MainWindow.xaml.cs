@@ -101,36 +101,45 @@ public partial class MainWindow : Window
 
     private void OnWindowPreviewKeyDown(object sender, KeyEventArgs e)
     {
-        if (e.Key == Key.K && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
-        {
-            OpenPalette();
-            e.Handled = true;
-        }
-        else if (e.Key == Key.OemComma && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
-        {
-            _viewModel.ShowSettingsCommand.Execute(null);
-            e.Handled = true;
-        }
-        else if (e.Key == Key.L && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
-        {
-            _viewModel.ShowLogViewerCommand.Execute(null);
-            e.Handled = true;
-        }
-        else if (e.Key == Key.H && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
-        {
-            _viewModel.ShowHomeCommand.Execute(null);
-            e.Handled = true;
-        }
-        else if (e.Key == Key.Q && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
-        {
-            Close();
-            e.Handled = true;
-        }
-        else if (e.Key == Key.F5)
+        if (e.Key == Key.F5 && Keyboard.Modifiers == ModifierKeys.None)
         {
             _viewModel.CheckForUpdatesCommand.Execute(null);
             e.Handled = true;
+            return;
         }
+
+        // Exactly Ctrl: AltGr arrives as Ctrl+Alt, so a German "@" (AltGr+Q) must not quit the app
+        // and a Polish "ł" (AltGr+L) must not open the Log Viewer.
+        if (Keyboard.Modifiers != ModifierKeys.Control)
+        {
+            return;
+        }
+
+        switch (e.Key)
+        {
+            case Key.K:
+                OpenPalette();
+                break;
+            case Key.OemComma:
+                _viewModel.ShowSettingsCommand.Execute(null);
+                break;
+            case Key.L:
+                _viewModel.ShowLogViewerCommand.Execute(null);
+                break;
+            case Key.H:
+                _viewModel.ShowHomeCommand.Execute(null);
+                break;
+            case Key.B:
+                _viewModel.ToggleSidebarCommand.Execute(null);
+                break;
+            case Key.Q:
+                Close();
+                break;
+            default:
+                return;
+        }
+
+        e.Handled = true;
     }
 
     private void OpenPalette()

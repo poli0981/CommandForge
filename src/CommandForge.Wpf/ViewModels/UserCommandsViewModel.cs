@@ -1,10 +1,10 @@
 using System.Collections.ObjectModel;
 using System.Globalization;
-using System.Windows;
 using CommandForge.Application.Ports;
 using CommandForge.Application.UserCommands;
 using CommandForge.Domain;
 using CommandForge.Wpf.Resources;
+using CommandForge.Wpf.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
@@ -19,15 +19,18 @@ public sealed partial class UserCommandsViewModel : ObservableObject
 {
     private readonly IUserCommandStore _store;
     private readonly ExecutionViewModel _execution;
+    private readonly IDialogService _dialogs;
     private string? _editingId;
 
-    public UserCommandsViewModel(IUserCommandStore store, ExecutionViewModel execution)
+    public UserCommandsViewModel(IUserCommandStore store, ExecutionViewModel execution, IDialogService dialogs)
     {
         ArgumentNullException.ThrowIfNull(store);
         ArgumentNullException.ThrowIfNull(execution);
+        ArgumentNullException.ThrowIfNull(dialogs);
 
         _store = store;
         _execution = execution;
+        _dialogs = dialogs;
 
         _execution.PropertyChanged += (_, e) =>
         {
@@ -115,18 +118,17 @@ public sealed partial class UserCommandsViewModel : ObservableObject
     private bool CanSave() => !string.IsNullOrWhiteSpace(EditName) && !string.IsNullOrWhiteSpace(EditExecutable);
 
     [RelayCommand(CanExecute = nameof(HasSelected))]
-    private void Delete()
+    private async Task DeleteAsync()
     {
         if (SelectedCommand is not { } command)
         {
             return;
         }
 
-        if (MessageBox.Show(
-                string.Format(CultureInfo.CurrentCulture, Strings.Get("UserCmd_DeleteConfirm"), command.Name),
-                Strings.Get("UserCmd_Delete"),
-                MessageBoxButton.YesNo,
-                MessageBoxImage.Warning) != MessageBoxResult.Yes)
+        var confirmed = await _dialogs.ConfirmAsync(
+            Strings.Get("UserCmd_Delete"),
+            string.Format(CultureInfo.CurrentCulture, Strings.Get("UserCmd_DeleteConfirm"), command.Name));
+        if (!confirmed)
         {
             return;
         }
@@ -161,11 +163,10 @@ public sealed partial class UserCommandsViewModel : ObservableObject
         var commandLine = string.IsNullOrEmpty(effectiveArgs)
             ? executable
             : executable + " " + effectiveArgs;
-        if (MessageBox.Show(
-                string.Format(CultureInfo.CurrentCulture, Strings.Get("UserCmd_RunConfirm"), commandLine),
-                Strings.Get("UserCmd_RunTitle"),
-                MessageBoxButton.YesNo,
-                MessageBoxImage.Warning) != MessageBoxResult.Yes)
+        var confirmed = await _dialogs.ConfirmAsync(
+            Strings.Get("UserCmd_RunTitle"),
+            string.Format(CultureInfo.CurrentCulture, Strings.Get("UserCmd_RunConfirm"), commandLine));
+        if (!confirmed)
         {
             return;
         }

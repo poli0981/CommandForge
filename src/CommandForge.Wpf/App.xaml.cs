@@ -118,6 +118,7 @@ public partial class App : System.Windows.Application
         }
 
         LocalizationManager.Instance.SetCulture(ResolveCulture(settings.Language));
+        LocalizationManager.Instance.TrackWindowLanguage();
         services.GetRequiredService<IFontScaleService>().Apply(settings.FontSize);
         services.GetRequiredService<IThemeService>().Apply(settings.Theme);
         services.GetRequiredService<ILogLevelController>().Current = settings.LogLevel;

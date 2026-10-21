@@ -1,7 +1,7 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.IO;
 using System.Globalization;
+using System.IO;
 using System.Windows.Data;
 using CommandForge.Application.Logging;
 using CommandForge.Application.Ports;

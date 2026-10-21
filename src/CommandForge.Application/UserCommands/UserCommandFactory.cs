@@ -25,8 +25,10 @@ public static class UserCommandFactory
         {
             Id = IdPrefix + command.Id,
             CategoryId = "user",
-            TitleKey = command.Name,
-            DescriptionKey = command.Name,
+            // Not resource keys: the shell displays user commands by name. A name that happens to
+            // equal a resource key (e.g. "AppTitle") must not be translated into that resource.
+            TitleKey = IdPrefix + command.Id,
+            DescriptionKey = IdPrefix + command.Id,
             Executable = command.Executable,
             ArgsTemplate = NormalizeArguments(command.Executable, command.Arguments),
             ExecutionMode = ExecutionMode.Capture,
@@ -55,12 +57,25 @@ public static class UserCommandFactory
     }
 
     private static bool IsCmd(string executable)
-        => string.Equals(Path.GetFileNameWithoutExtension(executable.Trim()), "cmd", StringComparison.OrdinalIgnoreCase);
+        => string.Equals(Path.GetFileNameWithoutExtension(executable.Trim().Trim('"')), "cmd", StringComparison.OrdinalIgnoreCase);
 
+    /// <summary>True when a /c or /k switch appears among the leading switches (e.g. "/q /c dir").</summary>
     private static bool HasCmdRunSwitch(string arguments)
     {
-        var trimmed = arguments.TrimStart();
-        return StartsWithSwitch(trimmed, "/c") || StartsWithSwitch(trimmed, "/k");
+        foreach (var token in arguments.Split(' ', StringSplitOptions.RemoveEmptyEntries))
+        {
+            if (!token.StartsWith('/'))
+            {
+                return false; // switches come first; the command text starts here
+            }
+
+            if (StartsWithSwitch(token, "/c") || StartsWithSwitch(token, "/k"))
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private static bool StartsWithSwitch(string text, string flag)

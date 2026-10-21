@@ -11,6 +11,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <!-- Lets the tests reach internal helpers (e.g. CrashHandlingService.GenerateCode). -->
+    <InternalsVisibleTo Include="CommandForge.Tests" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\CommandForge.Application\CommandForge.Application.csproj" />
     <ProjectReference Include="..\CommandForge.Infrastructure\CommandForge.Infrastructure.csproj" />
     <!-- Build the Elevator first; its exe is copied next to the app by the target below

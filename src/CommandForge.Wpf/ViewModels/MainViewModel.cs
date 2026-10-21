@@ -109,7 +109,7 @@ public sealed partial class MainViewModel : ObservableObject
         Home = new HomeViewModel(_itemsById, settings, systemInfo, item => SelectCommandById(item.Command.Id));
         History = new HistoryViewModel(_itemsById, history, SelectCommandById, RunCommandByIdAsync, execution, dialogs);
         Recipes = new RecipesViewModel(_itemsById, execution, recipeStore, history, clock, confirmation, dialogs, settings, _restorePointCommand);
-        UserCommands = new UserCommandsViewModel(userCommandStore, execution);
+        UserCommands = new UserCommandsViewModel(userCommandStore, execution, dialogs);
 
         Categories.Add(new CategoryViewModel(null, "Sidebar_AllCommands", "ViewGridOutline", vms.Items.Count));
         foreach (var category in catalog.GetCategories())

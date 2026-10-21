@@ -2357,4 +2357,13 @@ Chi tiết đã được ghi vào thư mục log:
   <data name="Update_ReadyAfterCommand" xml:space="preserve">
     <value>Bản cập nhật đã được tải về. Hãy đợi lệnh đang chạy kết thúc rồi chọn lại "Tải &amp; khởi động lại".</value>
   </data>
+  <data name="FileFilter_Json" xml:space="preserve">
+    <value>Tệp JSON (*.json)|*.json</value>
+  </data>
+  <data name="FileFilter_Zip" xml:space="preserve">
+    <value>Tệp nén Zip (*.zip)|*.zip</value>
+  </data>
+  <data name="File_SaveFailed" xml:space="preserve">
+    <value>Không thể lưu tệp: {0}</value>
+  </data>
 </root>

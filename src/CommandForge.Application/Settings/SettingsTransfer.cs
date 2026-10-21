@@ -39,6 +39,7 @@ public static class SettingsTransfer
         ArgumentNullException.ThrowIfNull(portable);
         ArgumentNullException.ThrowIfNull(settings);
 
+        portable = portable.Normalized();
         settings.Theme = portable.Theme;
         settings.Language = portable.Language;
         settings.FontSize = portable.FontSize;

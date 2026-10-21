@@ -2357,4 +2357,13 @@ Los detalles se escribieron en la carpeta de registros:
   <data name="Update_ReadyAfterCommand" xml:space="preserve">
     <value>La actualización ya se descargó. Espera a que termine el comando en curso y vuelve a elegir «Descargar y reiniciar».</value>
   </data>
+  <data name="FileFilter_Json" xml:space="preserve">
+    <value>Archivos JSON (*.json)|*.json</value>
+  </data>
+  <data name="FileFilter_Zip" xml:space="preserve">
+    <value>Archivos Zip (*.zip)|*.zip</value>
+  </data>
+  <data name="File_SaveFailed" xml:space="preserve">
+    <value>No se pudo guardar el archivo: {0}</value>
+  </data>
 </root>

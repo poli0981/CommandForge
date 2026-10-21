@@ -1,17 +1,16 @@
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Globalization;
-using System.Windows;
+using System.IO;
 using CommandForge.Application;
 using CommandForge.Application.Logging;
 using CommandForge.Application.Ports;
 using CommandForge.Application.Settings;
 using CommandForge.Infrastructure;
 using CommandForge.Wpf.Resources;
+using CommandForge.Wpf.Services;
 using CommandForge.Wpf.Theming;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Microsoft.Win32;
 
 namespace CommandForge.Wpf.ViewModels;
 
@@ -29,6 +28,9 @@ public sealed partial class SettingsViewModel : ObservableObject
     private readonly ILogMaintenance _maintenance;
     private readonly ISettingsFile _settingsFile;
     private readonly IProfileService _profiles;
+    private readonly IDialogService _dialogs;
+    private readonly IFileDialogService _files;
+    private readonly IShellService _shell;
 
     public SettingsViewModel(
         ISettingsService settings,
@@ -39,7 +41,10 @@ public sealed partial class SettingsViewModel : ObservableObject
         ILogMaintenance maintenance,
         ISettingsFile settingsFile,
         IProfileService profiles,
-        IUpdateService updates)
+        IUpdateService updates,
+        IDialogService dialogs,
+        IFileDialogService files,
+        IShellService shell)
     {
         ArgumentNullException.ThrowIfNull(settings);
         ArgumentNullException.ThrowIfNull(theme);
@@ -50,6 +55,9 @@ public sealed partial class SettingsViewModel : ObservableObject
         ArgumentNullException.ThrowIfNull(settingsFile);
         ArgumentNullException.ThrowIfNull(profiles);
         ArgumentNullException.ThrowIfNull(updates);
+        ArgumentNullException.ThrowIfNull(dialogs);
+        ArgumentNullException.ThrowIfNull(files);
+        ArgumentNullException.ThrowIfNull(shell);
 
         _settings = settings;
         _theme = theme;
@@ -59,6 +67,9 @@ public sealed partial class SettingsViewModel : ObservableObject
         _maintenance = maintenance;
         _settingsFile = settingsFile;
         _profiles = profiles;
+        _dialogs = dialogs;
+        _files = files;
+        _shell = shell;
 
         Languages =
         [
@@ -229,66 +240,53 @@ public sealed partial class SettingsViewModel : ObservableObject
     private string _newProfileName = string.Empty;
 
     [RelayCommand]
-    private void ExportSettings()
+    private async Task ExportSettingsAsync()
     {
-        var dialog = new SaveFileDialog
-        {
-            Title = Strings.Get("Settings_ExportSettings"),
-            Filter = "JSON (*.json)|*.json",
-            FileName = $"commandforge-settings-{DateTime.Now:yyyyMMdd-HHmmss}.json",
-        };
-        if (dialog.ShowDialog() != true)
+        var title = Strings.Get("Settings_ExportSettings");
+        var path = _files.PickSaveFile(title, Strings.Get("FileFilter_Json"), $"commandforge-settings-{DateTime.Now:yyyyMMdd-HHmmss}.json");
+        if (path is null)
         {
             return;
         }
 
-        _settingsFile.Write(dialog.FileName, SettingsTransfer.Capture(_settings));
-        MessageBox.Show(
-            string.Format(CultureInfo.CurrentCulture, Strings.Get("Settings_ExportSuccess"), dialog.FileName),
+        try
+        {
+            _settingsFile.Write(path, SettingsTransfer.Capture(_settings));
+        }
+        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)
+        {
+            await _dialogs.ShowMessageAsync(title, string.Format(CultureInfo.CurrentCulture, Strings.Get("File_SaveFailed"), ex.Message), DialogKind.Error);
+            return;
+        }
+
+        await _dialogs.ShowMessageAsync(
             Strings.Get("Settings_Profiles"),
-            MessageBoxButton.OK,
-            MessageBoxImage.Information);
+            string.Format(CultureInfo.CurrentCulture, Strings.Get("Settings_ExportSuccess"), path));
     }
 
     [RelayCommand]
-    private void ImportSettings()
+    private async Task ImportSettingsAsync()
     {
-        var dialog = new OpenFileDialog
-        {
-            Title = Strings.Get("Settings_ImportSettings"),
-            Filter = "JSON (*.json)|*.json",
-        };
-        if (dialog.ShowDialog() != true)
+        var path = _files.PickOpenFile(Strings.Get("Settings_ImportSettings"), Strings.Get("FileFilter_Json"));
+        if (path is null)
         {
             return;
         }
 
-        var imported = _settingsFile.Read(dialog.FileName);
+        var imported = _settingsFile.Read(path);
         if (imported is null)
         {
-            MessageBox.Show(
-                Strings.Get("Settings_ImportInvalid"),
-                Strings.Get("Settings_Profiles"),
-                MessageBoxButton.OK,
-                MessageBoxImage.Warning);
+            await _dialogs.ShowMessageAsync(Strings.Get("Settings_Profiles"), Strings.Get("Settings_ImportInvalid"), DialogKind.Warning);
             return;
         }
 
-        if (MessageBox.Show(
-                Strings.Get("Settings_ImportConfirm"),
-                Strings.Get("Settings_ImportSettings"),
-                MessageBoxButton.YesNo,
-                MessageBoxImage.Question) != MessageBoxResult.Yes)
+        if (!await _dialogs.ConfirmAsync(Strings.Get("Settings_ImportSettings"), Strings.Get("Settings_ImportConfirm")))
         {
             return;
         }
 
         ApplyPortable(imported);
-        MessageBox.Show(
-            Strings.Get("Settings_ImportSuccess"),
-            Strings.Get("Settings_Profiles"),
-            MessageBoxButton.OK,
-            MessageBoxImage.Information);
+        await _dialogs.ShowMessageAsync(Strings.Get("Settings_Profiles"), Strings.Get("Settings_ImportSuccess"));
     }
 
     [RelayCommand(CanExecute = nameof(CanSaveProfile))]
@@ -309,7 +307,7 @@ public sealed partial class SettingsViewModel : ObservableObject
     private bool CanSaveProfile() => !string.IsNullOrWhiteSpace(NewProfileName);
 
     [RelayCommand(CanExecute = nameof(HasSelectedProfile))]
-    private void ApplyProfile()
+    private async Task ApplyProfileAsync()
     {
         if (SelectedProfile is not { } name || _profiles.Get(name) is not { } portable)
         {
@@ -317,26 +315,23 @@ public sealed partial class SettingsViewModel : ObservableObject
         }
 
         ApplyPortable(portable);
-        MessageBox.Show(
-            string.Format(CultureInfo.CurrentCulture, Strings.Get("Settings_ProfileApplied"), name),
+        await _dialogs.ShowMessageAsync(
             Strings.Get("Settings_Profiles"),
-            MessageBoxButton.OK,
-            MessageBoxImage.Information);
+            string.Format(CultureInfo.CurrentCulture, Strings.Get("Settings_ProfileApplied"), name));
     }
 
     [RelayCommand(CanExecute = nameof(HasSelectedProfile))]
-    private void DeleteProfile()
+    private async Task DeleteProfileAsync()
     {
         if (SelectedProfile is not { } name)
         {
             return;
         }
 
-        if (MessageBox.Show(
-                string.Format(CultureInfo.CurrentCulture, Strings.Get("Settings_DeleteProfileConfirm"), name),
-                Strings.Get("Settings_DeleteProfile"),
-                MessageBoxButton.YesNo,
-                MessageBoxImage.Warning) != MessageBoxResult.Yes)
+        var confirmed = await _dialogs.ConfirmAsync(
+            Strings.Get("Settings_DeleteProfile"),
+            string.Format(CultureInfo.CurrentCulture, Strings.Get("Settings_DeleteProfileConfirm"), name));
+        if (!confirmed)
         {
             return;
         }
@@ -362,6 +357,7 @@ public sealed partial class SettingsViewModel : ObservableObject
     /// </summary>
     private void ApplyPortable(PortableSettings portable)
     {
+        portable = portable.Normalized();
         SelectedTheme = portable.Theme;
         SelectedLanguage = Languages.FirstOrDefault(l => l.Code == portable.Language) ?? Languages[0];
         SelectedFontSize = portable.FontSize;
@@ -402,34 +398,32 @@ public sealed partial class SettingsViewModel : ObservableObject
     [RelayCommand]
     private async Task ExportLogsAsync()
     {
-        var dialog = new SaveFileDialog
-        {
-            Title = Strings.Get("Settings_ExportLogs"),
-            Filter = "Zip archive (*.zip)|*.zip",
-            FileName = $"commandforge-logs-{DateTime.Now:yyyyMMdd-HHmmss}.zip",
-        };
-        if (dialog.ShowDialog() != true)
+        var title = Strings.Get("Settings_ExportLogs");
+        var path = _files.PickSaveFile(title, Strings.Get("FileFilter_Zip"), $"commandforge-logs-{DateTime.Now:yyyyMMdd-HHmmss}.zip");
+        if (path is null)
         {
             return;
         }
 
-        await _maintenance.ExportZipAsync(dialog.FileName);
-        MessageBox.Show(
-            string.Format(CultureInfo.CurrentCulture, Strings.Get("Log_ExportSuccess"), dialog.FileName),
+        try
+        {
+            await _maintenance.ExportZipAsync(path);
+        }
+        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)
+        {
+            await _dialogs.ShowMessageAsync(title, string.Format(CultureInfo.CurrentCulture, Strings.Get("File_SaveFailed"), ex.Message), DialogKind.Error);
+            return;
+        }
+
+        await _dialogs.ShowMessageAsync(
             Strings.Get("Settings_Logs"),
-            MessageBoxButton.OK,
-            MessageBoxImage.Information);
+            string.Format(CultureInfo.CurrentCulture, Strings.Get("Log_ExportSuccess"), path));
     }
 
     [RelayCommand]
-    private void ClearOldLogs()
+    private async Task ClearOldLogsAsync()
     {
-        var confirm = MessageBox.Show(
-            Strings.Get("Settings_ClearLogsConfirm"),
-            Strings.Get("Settings_ClearOldLogs"),
-            MessageBoxButton.YesNo,
-            MessageBoxImage.Warning);
-        if (confirm != MessageBoxResult.Yes)
+        if (!await _dialogs.ConfirmAsync(Strings.Get("Settings_ClearOldLogs"), Strings.Get("Settings_ClearLogsConfirm")))
         {
             return;
         }
@@ -448,14 +442,9 @@ public sealed partial class SettingsViewModel : ObservableObject
     private void OpenConfigFolder() => OpenPath(AppPaths.DataDirectory);
 
     [RelayCommand]
-    private void ResetToDefaults()
+    private async Task ResetToDefaultsAsync()
     {
-        var confirm = MessageBox.Show(
-            Strings.Get("Settings_ResetConfirm"),
-            Strings.Get("Settings_ResetDefaults"),
-            MessageBoxButton.YesNo,
-            MessageBoxImage.Warning);
-        if (confirm != MessageBoxResult.Yes)
+        if (!await _dialogs.ConfirmAsync(Strings.Get("Settings_ResetDefaults"), Strings.Get("Settings_ResetConfirm")))
         {
             return;
         }
@@ -491,20 +480,9 @@ public sealed partial class SettingsViewModel : ObservableObject
         _settings.Save();
     }
 
-    private static void OpenUrl(string url)
-        => Process.Start(new ProcessStartInfo(url) { UseShellExecute = true });
+    private void OpenUrl(string url) => _shell.TryOpen(url);
 
-    private static void OpenPath(string path)
-    {
-        try
-        {
-            Process.Start(new ProcessStartInfo(path) { UseShellExecute = true });
-        }
-        catch (Exception ex) when (ex is System.ComponentModel.Win32Exception or InvalidOperationException)
-        {
-            // Path missing / shell failure — ignore.
-        }
-    }
+    private void OpenPath(string path) => _shell.TryOpen(path);
 
     private static string FormatSize(long bytes)
     {

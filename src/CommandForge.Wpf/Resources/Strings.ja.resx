@@ -2357,4 +2357,13 @@
   <data name="Update_ReadyAfterCommand" xml:space="preserve">
     <value>更新プログラムはダウンロード済みです。実行中のコマンドが終わったら、もう一度「ダウンロードして再起動」を選んでください。</value>
   </data>
+  <data name="FileFilter_Json" xml:space="preserve">
+    <value>JSON ファイル (*.json)|*.json</value>
+  </data>
+  <data name="FileFilter_Zip" xml:space="preserve">
+    <value>Zip アーカイブ (*.zip)|*.zip</value>
+  </data>
+  <data name="File_SaveFailed" xml:space="preserve">
+    <value>ファイルを保存できませんでした: {0}</value>
+  </data>
 </root>

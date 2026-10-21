@@ -2357,4 +2357,13 @@ Details were written to the log folder:
   <data name="Update_ReadyAfterCommand" xml:space="preserve">
     <value>The update is downloaded. Finish the running command, then choose "Download &amp; restart" again.</value>
   </data>
+  <data name="FileFilter_Json" xml:space="preserve">
+    <value>JSON files (*.json)|*.json</value>
+  </data>
+  <data name="FileFilter_Zip" xml:space="preserve">
+    <value>Zip archives (*.zip)|*.zip</value>
+  </data>
+  <data name="File_SaveFailed" xml:space="preserve">
+    <value>The file couldn't be saved: {0}</value>
+  </data>
 </root>

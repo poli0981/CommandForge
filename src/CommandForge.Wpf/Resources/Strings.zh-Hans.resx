@@ -2357,4 +2357,13 @@
   <data name="Update_ReadyAfterCommand" xml:space="preserve">
     <value>更新已下载。请等正在运行的命令结束后，再次选择“下载并重启”。</value>
   </data>
+  <data name="FileFilter_Json" xml:space="preserve">
+    <value>JSON 文件 (*.json)|*.json</value>
+  </data>
+  <data name="FileFilter_Zip" xml:space="preserve">
+    <value>Zip 压缩文件 (*.zip)|*.zip</value>
+  </data>
+  <data name="File_SaveFailed" xml:space="preserve">
+    <value>无法保存文件：{0}</value>
+  </data>
 </root>

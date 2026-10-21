@@ -37,7 +37,7 @@ jobs:
         uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: ${{ env.NUGET_PACKAGES }}
-          key: nuget-${{ runner.os }}-${{ hashFiles('global.json', 'Directory.Packages.props', '**/*.csproj') }}
+          key: nuget-${{ runner.os }}-${{ hashFiles('global.json', 'Directory.Build.props', '**/*.csproj') }}
           restore-keys: nuget-${{ runner.os }}-
 
       - name: Restore (NuGet audit fails on moderate+ advisories)
@@ -82,7 +82,7 @@ jobs:
         uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: ${{ env.NUGET_PACKAGES }}
-          key: nuget-package-${{ runner.os }}-${{ hashFiles('global.json', 'Directory.Packages.props', '**/*.csproj', '.config/dotnet-tools.json') }}
+          key: nuget-package-${{ runner.os }}-${{ hashFiles('global.json', 'Directory.Build.props', '**/*.csproj', '.config/dotnet-tools.json') }}
           restore-keys: nuget-package-${{ runner.os }}-
 
       - name: Publish + pack (Velopack smoke test)

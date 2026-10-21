@@ -24,7 +24,7 @@ public sealed class CrashHandlingService
         _clipboard = clipboard;
     }
 
-    /// <summary>Wires the three global exception sources. Call once at startup after the host is built.</summary>
+    /// <summary>Wires the three global exception sources. Call once at startup, right after the service provider is built.</summary>
     public void Hook()
     {
         if (System.Windows.Application.Current is { } app)

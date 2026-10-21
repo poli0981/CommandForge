@@ -2,7 +2,7 @@ namespace CommandForge.Desktop.Services;
 
 /// <summary>
 /// Modal prompts used by view-models. Behind an interface so view-models stay testable and the
-/// presentation (message boxes today, Fluent dialogs later) can change without touching them.
+/// presentation (Fluent in-window dialogs, with a message-box fallback) can change without touching them.
 /// </summary>
 public interface IDialogService
 {

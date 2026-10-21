@@ -2573,4 +2573,13 @@ Chi tiết đã được ghi vào thư mục log:
   <data name="TitleBar_Search" xml:space="preserve">
     <value>Tìm mọi lệnh (Ctrl+K)</value>
   </data>
+  <data name="About_Contact" xml:space="preserve">
+    <value>Liên hệ</value>
+  </data>
+  <data name="About_SecurityContact" xml:space="preserve">
+    <value>Vấn đề bảo mật</value>
+  </data>
+  <data name="About_CodeContact" xml:space="preserve">
+    <value>Mã nguồn và đóng góp</value>
+  </data>
 </root>

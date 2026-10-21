@@ -2573,4 +2573,13 @@
   <data name="TitleBar_Search" xml:space="preserve">
     <value>搜索所有命令 (Ctrl+K)</value>
   </data>
+  <data name="About_Contact" xml:space="preserve">
+    <value>联系方式</value>
+  </data>
+  <data name="About_SecurityContact" xml:space="preserve">
+    <value>安全问题</value>
+  </data>
+  <data name="About_CodeContact" xml:space="preserve">
+    <value>代码与贡献</value>
+  </data>
 </root>

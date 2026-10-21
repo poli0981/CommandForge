@@ -2573,4 +2573,13 @@ Details were written to the log folder:
   <data name="TitleBar_Search" xml:space="preserve">
     <value>Search all commands (Ctrl+K)</value>
   </data>
+  <data name="About_Contact" xml:space="preserve">
+    <value>Contact</value>
+  </data>
+  <data name="About_SecurityContact" xml:space="preserve">
+    <value>Security issues</value>
+  </data>
+  <data name="About_CodeContact" xml:space="preserve">
+    <value>Code and contributions</value>
+  </data>
 </root>

@@ -45,13 +45,14 @@ Each release (see [RELEASING.md](RELEASING.md)) uploads the contents of `Release
 | Asset | Purpose |
 |---|---|
 | `CommandForge-win-Setup.exe` | First-time installer |
+| `CommandForge-win-Portable.zip` | The app without an installer (settings and logs still go to `%AppData%\CommandForge`) |
 | `CommandForge-<version>-full.nupkg` | Full package (fallback / first install of a version) |
 | `CommandForge-<version>-delta.nupkg` | Delta from the previous version (small download) |
 | `releases.win.json` / `RELEASES` | Update manifest the client reads |
 | `checksums.txt` | SHA-256 of the assets (manual verification) |
 | `sbom.spdx.json` | SPDX software bill of materials |
 
-The installer and packages also have build-provenance attestations (see the
+The installer, the portable zip and the packages also have build-provenance attestations (see the
 [README](README.md#unknown-publisher-and-verifying-your-download)).
 
 Velopack needs the **previous** `-full.nupkg` present while packing to compute a delta. The

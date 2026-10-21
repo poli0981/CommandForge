@@ -85,9 +85,12 @@ jobs:
       - name: Attest build provenance
         uses: actions/attest-build-provenance@4d101475d8b20a2381f78447822ac1eab6504dd8 # v4.2.2
         with:
+          # Only what this run built: Releases/ also holds the previous version's full package,
+          # downloaded above just to compute the delta.
           subject-path: |
             Releases/*-Setup.exe
-            Releases/*.nupkg
+            Releases/*-Portable.zip
+            Releases/CommandForge-${{ steps.ver.outputs.version }}-*.nupkg
 
       # Upload as a DRAFT first: publishing is what makes installed copies auto-update, so the
       # release only goes live once every asset (SBOM, checksums, scan links) is attached.
@@ -113,10 +116,13 @@ jobs:
           $sbom = Join-Path $rel 'sbom.spdx.json'
           gh api "repos/$env:REPOSITORY/dependency-graph/sbom" --jq '.sbom' | Out-File $sbom -Encoding utf8NoBOM
           $checksums = Join-Path $rel 'checksums.txt'
+          # Hash exactly what the release offers for download: the assets vpk uploaded plus the
+          # SBOM (Releases/ also holds unpublished files, such as the previous full package).
+          $published = @(gh release view $env:TAG --json assets --jq '.assets[].name') + 'sbom.spdx.json'
           # Filter with Where-Object, not Get-ChildItem -Exclude (which returns nothing without a
           # trailing wildcard/-Recurse and once produced an empty checksums.txt).
           Get-ChildItem -Path $rel -File |
-            Where-Object { $_.Name -ne 'checksums.txt' } |
+            Where-Object { $_.Name -ne 'checksums.txt' -and $published -contains $_.Name } |
             Get-FileHash -Algorithm SHA256 |
             ForEach-Object { '{0}  {1}' -f $_.Hash.ToLower(), (Split-Path $_.Path -Leaf) } |
             Out-File $checksums -Encoding ascii

@@ -5,12 +5,21 @@ namespace CommandForge.Domain;
 /// </summary>
 public enum DangerLevel
 {
-    /// <summary>Read-only / informational, no risk.</summary>
+    /// <summary>
+    /// No risk of losing data: read-only queries, opening a tool or settings page, or a small
+    /// preference change that is undone the same way it was made.
+    /// </summary>
     Safe,
 
-    /// <summary>Changes the system but is recoverable / low risk.</summary>
+    /// <summary>
+    /// Changes system state (services, registry, caches, boot-time checks); recoverable, but undoing
+    /// it may take effort. Confirmed before running unless the user turned that off.
+    /// </summary>
     Caution,
 
-    /// <summary>May cause data loss or instability; requires strict confirmation.</summary>
+    /// <summary>
+    /// May lose data, remove a rollback option or leave Windows unstable. Always needs a typed
+    /// confirmation, which the user cannot turn off.
+    /// </summary>
     Dangerous,
 }

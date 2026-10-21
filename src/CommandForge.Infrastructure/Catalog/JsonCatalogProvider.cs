@@ -1,6 +1,8 @@
+using System.Buffers;
 using System.Text.Json;
 using System.Text.Json.Serialization.Metadata;
 using System.Text.RegularExpressions;
+using CommandForge.Application;
 using CommandForge.Application.Ports;
 using CommandForge.Domain;
 
@@ -13,19 +15,36 @@ public sealed record CatalogLoadResult(
     IReadOnlyList<string> Errors);
 
 /// <summary>
-/// Reads the embedded <c>categories.json</c> / <c>commands.json</c>, validates them, and
-/// maps to Domain entities. Structural validation only — the cross-check that title/desc
-/// resource keys exist lives in the test project (it owns the .resx).
+/// Reads the embedded <c>categories.json</c> / <c>commands.json</c>, validates them, and maps to
+/// Domain entities. A record that fails validation is reported and left out — never loaded half
+/// right. The cross-check that title/desc resource keys exist lives in the test project (it owns
+/// the .resx).
 /// </summary>
 public static class CatalogLoader
 {
     private const string ResourcePrefix = "CommandForge.Infrastructure.Catalog.";
 
+    // A catalog executable is a bare program name ("dism", "services.msc"); the resolver pins it to
+    // the system directories. Paths, quotes and spaces would sidestep that.
+    private static readonly SearchValues<char> NotInProgramName = SearchValues.Create(" \t\"/\\");
+
     /// <summary>Loads and validates the catalog embedded in this assembly.</summary>
     public static CatalogLoadResult LoadEmbedded()
     {
-        var categories = Deserialize("categories.json", CatalogJsonContext.Default.CategoryDtoArray);
-        var commands = Deserialize("commands.json", CatalogJsonContext.Default.CommandDtoArray);
+        CategoryDto[] categories;
+        CommandDto[] commands;
+        try
+        {
+            categories = Deserialize("categories.json", CatalogJsonContext.Default.CategoryDtoArray);
+            commands = Deserialize("commands.json", CatalogJsonContext.Default.CommandDtoArray);
+        }
+        catch (JsonException ex)
+        {
+            // Tests make this unreachable for a released build; still, an empty catalog plus an error
+            // in the log and the Debug panel beats an app (or Elevator) that cannot start at all.
+            return new CatalogLoadResult([], [], [$"The embedded catalog is not valid JSON: {ex.Message}"]);
+        }
+
         return Build(categories, commands);
     }
 
@@ -43,13 +62,45 @@ public static class CatalogLoader
     internal static CatalogLoadResult Build(CategoryDto[] categoryDtos, CommandDto[] commandDtos)
     {
         var errors = new List<string>();
+        var categories = BuildCategories(categoryDtos, errors);
+        var categoryIds = categories.Select(c => c.Id).ToHashSet(StringComparer.Ordinal);
 
+        var commands = new List<CommandDefinition>();
+        var seenIds = new HashSet<string>(StringComparer.Ordinal);
+        foreach (var dto in commandDtos)
+        {
+            if (string.IsNullOrWhiteSpace(dto.Id)) { errors.Add("A command has an empty id."); continue; }
+            if (!seenIds.Add(dto.Id)) { errors.Add($"Duplicate command id '{dto.Id}'."); continue; }
+
+            var problem = FindStructuralProblem(dto, categoryIds) ?? FindBehaviorProblem(dto);
+            if (problem is not null) { errors.Add($"Command '{dto.Id}' {problem}"); continue; }
+
+            commands.Add(ToDefinition(dto));
+        }
+
+        // Only commands that were actually loaded can be reverted to; a dangling id would offer an
+        // Undo that cannot run.
+        var loadedIds = commands.Select(c => c.Id).ToHashSet(StringComparer.Ordinal);
+        for (var i = 0; i < commands.Count; i++)
+        {
+            if (commands[i].RevertCommandId is { } revertId && !loadedIds.Contains(revertId))
+            {
+                errors.Add($"Command '{commands[i].Id}' has revertCommandId '{revertId}' that does not exist.");
+                commands[i] = commands[i] with { RevertCommandId = null };
+            }
+        }
+
+        return new CatalogLoadResult(categories, commands, errors);
+    }
+
+    private static List<CommandCategory> BuildCategories(CategoryDto[] categoryDtos, List<string> errors)
+    {
         var categories = new List<CommandCategory>();
-        var categoryIds = new HashSet<string>(StringComparer.Ordinal);
+        var seenIds = new HashSet<string>(StringComparer.Ordinal);
         foreach (var dto in categoryDtos)
         {
             if (string.IsNullOrWhiteSpace(dto.Id)) { errors.Add("A category has an empty id."); continue; }
-            if (!categoryIds.Add(dto.Id)) { errors.Add($"Duplicate category id '{dto.Id}'."); continue; }
+            if (!seenIds.Add(dto.Id)) { errors.Add($"Duplicate category id '{dto.Id}'."); continue; }
             if (string.IsNullOrWhiteSpace(dto.TitleKey)) { errors.Add($"Category '{dto.Id}' is missing titleKey."); continue; }
 
             categories.Add(new CommandCategory
@@ -61,60 +112,70 @@ public static class CatalogLoader
             });
         }
 
-        var commands = new List<CommandDefinition>();
-        var commandIds = new HashSet<string>(StringComparer.Ordinal);
-        foreach (var dto in commandDtos)
-        {
-            if (string.IsNullOrWhiteSpace(dto.Id)) { errors.Add("A command has an empty id."); continue; }
-            if (!commandIds.Add(dto.Id)) { errors.Add($"Duplicate command id '{dto.Id}'."); continue; }
-            if (string.IsNullOrWhiteSpace(dto.CategoryId)) { errors.Add($"Command '{dto.Id}' is missing categoryId."); continue; }
-            if (!categoryIds.Contains(dto.CategoryId)) { errors.Add($"Command '{dto.Id}' references unknown categoryId '{dto.CategoryId}'."); continue; }
-            if (string.IsNullOrWhiteSpace(dto.TitleKey)) { errors.Add($"Command '{dto.Id}' is missing titleKey."); continue; }
-            if (string.IsNullOrWhiteSpace(dto.DescriptionKey)) { errors.Add($"Command '{dto.Id}' is missing descriptionKey."); continue; }
-            if (string.IsNullOrWhiteSpace(dto.Executable)) { errors.Add($"Command '{dto.Id}' is missing executable."); continue; }
-            if (dto.Restart == RestartPolicy.FromOutputRegex && !IsValidRegex(dto.RestartRegex)) { errors.Add($"Command '{dto.Id}' has an invalid restartRegex."); continue; }
-            if (dto.MinOsBuild is <= 0) { errors.Add($"Command '{dto.Id}' has a non-positive minOsBuild."); continue; }
-            if (dto.MaxOsBuild is <= 0) { errors.Add($"Command '{dto.Id}' has a non-positive maxOsBuild."); continue; }
-            if (dto.MinOsBuild is { } minBuild && dto.MaxOsBuild is { } maxBuild && maxBuild < minBuild) { errors.Add($"Command '{dto.Id}' has maxOsBuild ({maxBuild}) less than minOsBuild ({minBuild})."); continue; }
+        categories.Sort((a, b) => a.Order.CompareTo(b.Order));
+        return categories;
+    }
 
-            commands.Add(new CommandDefinition
-            {
-                Id = dto.Id,
-                CategoryId = dto.CategoryId,
-                TitleKey = dto.TitleKey,
-                DescriptionKey = dto.DescriptionKey,
-                Icon = dto.Icon,
-                Executable = dto.Executable,
-                ArgsTemplate = dto.ArgsTemplate ?? string.Empty,
-                ExecutionMode = dto.ExecutionMode,
-                RequiresAdmin = dto.RequiresAdmin,
-                DangerLevel = dto.DangerLevel,
-                ConfirmBeforeRun = dto.ConfirmBeforeRun,
-                CreatesRestorePoint = dto.CreatesRestorePoint,
-                Restart = dto.Restart,
-                RestartRegex = dto.RestartRegex,
-                RevertCommandId = dto.RevertCommandId,
-                EstimatedDuration = dto.EstimatedDuration,
-                DocUrl = dto.DocUrl,
-                Tags = dto.Tags ?? [],
-                AffectedRegistryValues = dto.AffectedRegistryValues is null
-                    ? []
-                    : dto.AffectedRegistryValues
-                        .Where(r => !string.IsNullOrWhiteSpace(r.Path))
-                        .Select(r => new RegistryValueRef { Path = r.Path!, Name = r.Name ?? string.Empty })
-                        .ToList(),
-                MinOsBuild = dto.MinOsBuild,
-                MaxOsBuild = dto.MaxOsBuild,
-            });
+    /// <summary>A missing or dangling field, as the end of an error sentence; <see langword="null"/> when there is none.</summary>
+    private static string? FindStructuralProblem(CommandDto dto, HashSet<string> categoryIds)
+    {
+        if (string.IsNullOrWhiteSpace(dto.CategoryId)) { return "is missing categoryId."; }
+        if (!categoryIds.Contains(dto.CategoryId)) { return $"references unknown categoryId '{dto.CategoryId}'."; }
+        if (string.IsNullOrWhiteSpace(dto.TitleKey)) { return "is missing titleKey."; }
+        if (string.IsNullOrWhiteSpace(dto.DescriptionKey)) { return "is missing descriptionKey."; }
+        if (string.IsNullOrWhiteSpace(dto.Executable)) { return "is missing executable."; }
+        if (dto.Executable.AsSpan().IndexOfAny(NotInProgramName) >= 0) { return "has an executable that is not a plain program name (arguments belong in argsTemplate)."; }
+        if (dto.MinOsBuild is <= 0) { return "has a non-positive minOsBuild."; }
+        if (dto.MaxOsBuild is <= 0) { return "has a non-positive maxOsBuild."; }
+        if (dto.MinOsBuild is { } minBuild && dto.MaxOsBuild is { } maxBuild && maxBuild < minBuild) { return $"has maxOsBuild ({maxBuild}) less than minOsBuild ({minBuild})."; }
+        return null;
+    }
+
+    /// <summary>Settings that contradict each other or the safety rules; <see langword="null"/> when there are none.</summary>
+    private static string? FindBehaviorProblem(CommandDto dto)
+    {
+        var unknownTokens = ArgumentTokens.FindUnknown(dto.ArgsTemplate ?? string.Empty);
+        if (unknownTokens.Count > 0) { return $"uses unknown argument token(s) {string.Join(", ", unknownTokens)}."; }
+        if (dto.DangerLevel != DangerLevel.Safe && !dto.ConfirmBeforeRun) { return $"is {dto.DangerLevel} but does not set confirmBeforeRun."; }
+        if (dto.ExecutionMode == ExecutionMode.Launch && dto.Restart is RestartPolicy.FromExitCode or RestartPolicy.FromOutputRegex)
+        {
+            return $"cannot use restart policy {dto.Restart} in Launch mode (its exit code and output are not captured).";
         }
 
-        errors.AddRange(commands
-            .Where(c => !string.IsNullOrWhiteSpace(c.RevertCommandId) && !commandIds.Contains(c.RevertCommandId))
-            .Select(c => $"Command '{c.Id}' has revertCommandId '{c.RevertCommandId}' that does not exist."));
-
-        categories.Sort((a, b) => a.Order.CompareTo(b.Order));
-        return new CatalogLoadResult(categories, commands, errors);
+        if (dto.Restart == RestartPolicy.FromOutputRegex && !IsValidRegex(dto.RestartRegex)) { return "has an invalid restartRegex."; }
+        if (dto.Restart != RestartPolicy.FromOutputRegex && !string.IsNullOrEmpty(dto.RestartRegex)) { return $"has a restartRegex but its restart policy is {dto.Restart}."; }
+        return null;
     }
+
+    private static CommandDefinition ToDefinition(CommandDto dto) => new()
+    {
+        Id = dto.Id!,
+        CategoryId = dto.CategoryId!,
+        TitleKey = dto.TitleKey!,
+        DescriptionKey = dto.DescriptionKey!,
+        Icon = dto.Icon,
+        Executable = dto.Executable!,
+        ArgsTemplate = dto.ArgsTemplate ?? string.Empty,
+        ExecutionMode = dto.ExecutionMode,
+        RequiresAdmin = dto.RequiresAdmin,
+        DangerLevel = dto.DangerLevel,
+        ConfirmBeforeRun = dto.ConfirmBeforeRun,
+        CreatesRestorePoint = dto.CreatesRestorePoint,
+        Restart = dto.Restart,
+        RestartRegex = dto.RestartRegex,
+        RevertCommandId = string.IsNullOrWhiteSpace(dto.RevertCommandId) ? null : dto.RevertCommandId,
+        EstimatedDuration = dto.EstimatedDuration,
+        DocUrl = dto.DocUrl,
+        Tags = dto.Tags ?? [],
+        AffectedRegistryValues = dto.AffectedRegistryValues is null
+            ? []
+            : dto.AffectedRegistryValues
+                .Where(r => !string.IsNullOrWhiteSpace(r.Path))
+                .Select(r => new RegistryValueRef { Path = r.Path!, Name = r.Name ?? string.Empty })
+                .ToList(),
+        MinOsBuild = dto.MinOsBuild,
+        MaxOsBuild = dto.MaxOsBuild,
+    };
 
     private static bool IsValidRegex(string? pattern)
     {

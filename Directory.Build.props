@@ -56,4 +56,14 @@
     <Version>2.0.0</Version>
   </PropertyGroup>
 
+  <!-- Same rules SonarCloud applies, enforced at build time (warnings are errors). Package versions
+       live in each .csproj: GitHub's dependency graph (Dependabot alerts, dependency review, the
+       release SBOM) reads .csproj files but not Directory.Packages.props. -->
+  <ItemGroup>
+    <PackageReference Include="SonarAnalyzer.CSharp" Version="10.35.0.4138">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
 </Project>

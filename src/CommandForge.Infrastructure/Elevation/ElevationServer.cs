@@ -27,6 +27,12 @@ internal sealed class ElevationServer
         CancellationTokenSource? runCts = null;
         var runTask = Task.CompletedTask;
 
+        // The elevated side has no log file; surface catalog problems in the UI's log instead.
+        foreach (var error in _catalog.ValidationErrors)
+        {
+            await channel.WriteAsync(ElevationMessage.LogLine($"Catalog: {error}", isError: true), ElevationJsonContext.Default.ElevationMessage, cancellationToken);
+        }
+
         try
         {
             while (true)

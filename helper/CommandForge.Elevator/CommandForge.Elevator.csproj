@@ -6,6 +6,9 @@
     <TargetFramework>net10.0-windows</TargetFramework>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <RootNamespace>CommandForge.Elevator</RootNamespace>
+    <!-- The Elevator runs as administrator but inherits the user's environment block: never honour
+         DOTNET_STARTUP_HOOKS, which would load an arbitrary assembly into the elevated process. -->
+    <StartupHookSupport>false</StartupHookSupport>
   </PropertyGroup>
 
   <ItemGroup>

@@ -62,7 +62,9 @@ public sealed class RunCommandUseCaseTests
     {
         public bool Called { get; private set; }
 
-        public bool IsElevationAvailable => true;
+        public bool IsSessionActive => false;
+
+        public Task EndSessionAsync(CancellationToken cancellationToken = default) => Task.CompletedTask;
 
         public Task<ExecutionResult> RunElevatedAsync(CommandDefinition command, ChannelWriter<OutputLine> output, CancellationToken cancellationToken = default)
         {

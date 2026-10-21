@@ -145,7 +145,7 @@ jobs:
     needs: release
     permissions:
       contents: read
-    uses: poli0981/.github/.github/workflows/announce-release.yml@main
+    uses: poli0981/.github/.github/workflows/announce-release.yml@c3e118a01d40e95b36b2c3466dc206638c11eb5a # main, 2026-07-06
     with:
       tag_override: ${{ needs.release.outputs.tag }}
     secrets: inherit

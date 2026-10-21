@@ -6,21 +6,37 @@ CommandForge installs and updates itself with [Velopack](https://velopack.io/). 
 ## For users
 
 1. Download `CommandForge-win-Setup.exe` from the
-   [latest release](https://github.com/poli0981/CommandForge/releases) and run it. It installs
-   per-user under `%LocalAppData%\CommandForge`.
-2. After that, the app checks GitHub Releases for newer versions (on startup if enabled, or via
-   **Help → Check for updates** / `F5`) and updates itself. When a newer version exists it downloads
-   the update (a small **delta** when possible) and applies it on restart.
+   [latest release](https://github.com/poli0981/CommandForge/releases/latest) and run it. It
+   installs per-user under `%LocalAppData%\CommandForge`.
+2. After that, the app checks GitHub Releases for newer versions — on startup if **Settings →
+   Updates → Check for updates on startup** is on (the default), or when you choose **More (⋯) →
+   Check for updates** or press `F5`.
+3. When a newer version exists, choose **Download & restart**. The app downloads the update (a
+   small **delta** when possible), then restarts into the new version.
 
-The only network connection involved is to GitHub (see [PRIVACY.md](PRIVACY.md)). Update errors are
-mapped to clear messages: offline, not found (404), rate limited (403/429), and server error (5xx).
+Good to know:
+
+- Closing the update dialog — including with its **X** button — cancels the download.
+- The app never restarts in the middle of a command: if one is running, finish or cancel it first.
+  If you start a command while the update downloads, the restart waits; choose **Download &
+  restart** again when the command is done.
+- Before applying an update, the app ends the admin session, because the elevated helper runs
+  from the folder that Velopack replaces.
+- Errors are shown in plain words: offline or timed out, no release feed found (404), rate limited
+  (403/429), and GitHub server error (5xx).
+
+The only network connection involved is to GitHub (see [PRIVACY.md](PRIVACY.md)).
 
 ## How it works under the hood
 
-- The app calls `VelopackApp.Build().Run()` at startup to handle install/update/uninstall hooks.
-- It checks for updates via `UpdateManager(new GithubSource("https://github.com/poli0981/CommandForge", null, prerelease: false))`.
-- Auto-update only works for an **installed** build (not a dev/portable run); the app detects this
-  and hides update prompts otherwise.
+- `Program.Main` calls `VelopackApp.Build().Run()` before WPF starts, to handle the
+  install/update/uninstall hooks.
+- The app checks for updates via
+  `UpdateManager(new GithubSource("https://github.com/poli0981/CommandForge", null, prerelease: false))`.
+- Download and apply are separate steps, so the app can end the admin session and check for a
+  running command just before it restarts.
+- Auto-update only works for an **installed** build (not a dev or portable run); the app detects
+  this and says so instead of offering an update.
 
 ## Release artifacts and the delta mechanism
 
@@ -33,15 +49,16 @@ Each release (see [RELEASING.md](RELEASING.md)) uploads the contents of `Release
 | `CommandForge-<version>-delta.nupkg` | Delta from the previous version (small download) |
 | `releases.win.json` / `RELEASES` | Update manifest the client reads |
 | `checksums.txt` | SHA-256 of the assets (manual verification) |
+| `sbom.spdx.json` | SPDX software bill of materials |
 
-**First release (e.g. `v0.3.0`):** there is no previous version, so only a **full** package +
-`Setup.exe` + manifest are produced and uploaded.
+The installer and packages also have build-provenance attestations (see the
+[README](README.md#unknown-publisher-and-verifying-your-download)).
 
-**Subsequent releases (e.g. `v0.3.1`):** Velopack needs the **previous** `-full.nupkg` present
-while packing to compute the delta. The release workflow does this automatically by running
-`vpk download github` before `vpk pack`, so each release after the first produces **both** a
-`-full.nupkg` and a `-delta.nupkg`. Clients already on `0.3.0` download only the small
-`-delta.nupkg`; the full package remains the fallback.
+Velopack needs the **previous** `-full.nupkg` present while packing to compute a delta. The
+release workflow runs `vpk download github` before `vpk pack`, so every release after the first
+produces **both** a `-full.nupkg` and a `-delta.nupkg`. Clients on the previous version (for
+example 1.5.1 when 2.0.0 ships) download only the delta; the full package remains the fallback. The very first release had no previous version, so it shipped only a full package.
 
-> If you ever build a release **locally**, run `vpk download github --repoUrl <repo>` first so the
-> prior full package is available for the delta — otherwise only a full package is produced.
+> If you ever build a release **locally**, run `dotnet vpk download github --repoUrl <repo>`
+> first so the prior full package is available for the delta — otherwise only a full package is
+> produced.

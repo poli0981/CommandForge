@@ -1,6 +1,6 @@
 # Disclaimer — CommandForge
 
-> Last updated: 2026-06-18. This is not legal advice.
+> Last updated: 2026-10-21. This is not legal advice.
 
 ## ⚠️ Use at your own risk
 
@@ -52,3 +52,26 @@ please report translation problems via an issue.
 Command descriptions and documentation are provided in good faith but **may be incomplete or
 out of date** for some Windows versions. Command behavior can differ between Windows 10 and 11
 and across OS updates.
+
+## Copyright and takedown requests
+
+CommandForge's code and documentation are © poli0981 and contributors, licensed under the GPLv3.
+Third-party components keep their own licenses (see
+[THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md)). If you believe something in this project
+infringes your rights, please contact us first so it can be corrected quickly:
+
+- **Copyright questions** (attribution, licensing, permission requests):
+  [copyright@poli0981.dev](mailto:copyright@poli0981.dev)
+- **DMCA notices:** [dmca@poli0981.dev](mailto:dmca@poli0981.dev). Include the details required by
+  17 U.S.C. § 512(c)(3): the work, the material you believe infringes it and its location (URL),
+  your contact details, a good-faith statement, a statement that the notice is accurate and that
+  you are authorized to act, and your signature.
+- **Other takedown requests** (trademark, impersonation, unlawful content):
+  [takedown@poli0981.dev](mailto:takedown@poli0981.dev)
+
+Because the project is hosted on GitHub, you can also use GitHub's
+[DMCA Takedown Policy](https://docs.github.com/site-policy/content-removal-policies/dmca-takedown-policy).
+
+## Contact
+
+Other legal questions: [legal@poli0981.dev](mailto:legal@poli0981.dev).

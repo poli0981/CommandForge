@@ -22,6 +22,12 @@ public static class ProductLinks
     /// <summary>Private vulnerability reporting.</summary>
     public const string SecurityAdvisory = Repository + "/security/advisories/new";
 
+    /// <summary>Private security reports by email (the alternative to <see cref="SecurityAdvisory"/>).</summary>
+    public const string SecurityEmail = "security@poli0981.dev";
+
+    /// <summary>Questions about the code and contributions.</summary>
+    public const string CodeEmail = "code@poli0981.dev";
+
     /// <summary>Full text of the GNU GPL v3.</summary>
     public const string License = "https://www.gnu.org/licenses/gpl-3.0.html";
 }

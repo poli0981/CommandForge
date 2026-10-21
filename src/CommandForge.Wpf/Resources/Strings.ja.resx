@@ -2573,4 +2573,13 @@
   <data name="TitleBar_Search" xml:space="preserve">
     <value>すべてのコマンドを検索 (Ctrl+K)</value>
   </data>
+  <data name="About_Contact" xml:space="preserve">
+    <value>連絡先</value>
+  </data>
+  <data name="About_SecurityContact" xml:space="preserve">
+    <value>セキュリティの問題</value>
+  </data>
+  <data name="About_CodeContact" xml:space="preserve">
+    <value>コードと貢献</value>
+  </data>
 </root>

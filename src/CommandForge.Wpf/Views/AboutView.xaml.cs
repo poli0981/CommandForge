@@ -6,7 +6,7 @@ using CommandForge.Desktop.Services;
 
 namespace CommandForge.Desktop.Views;
 
-/// <summary>The About content: app name, version, privacy note and links.</summary>
+/// <summary>The About content: app name, version, privacy note, links and contact addresses.</summary>
 public partial class AboutView : UserControl
 {
     private readonly IShellService _shell;
@@ -33,4 +33,8 @@ public partial class AboutView : UserControl
     private void OnUserGuideClick(object sender, RoutedEventArgs e) => _shell.TryOpen(ProductLinks.UserGuide);
 
     private void OnTermsClick(object sender, RoutedEventArgs e) => _showTerms();
+
+    private void OnSecurityEmailClick(object sender, RoutedEventArgs e) => _shell.TryOpen("mailto:" + ProductLinks.SecurityEmail);
+
+    private void OnCodeEmailClick(object sender, RoutedEventArgs e) => _shell.TryOpen("mailto:" + ProductLinks.CodeEmail);
 }

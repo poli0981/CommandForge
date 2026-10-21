@@ -2573,4 +2573,13 @@ Los detalles se escribieron en la carpeta de registros:
   <data name="TitleBar_Search" xml:space="preserve">
     <value>Buscar en todos los comandos (Ctrl+K)</value>
   </data>
+  <data name="About_Contact" xml:space="preserve">
+    <value>Contacto</value>
+  </data>
+  <data name="About_SecurityContact" xml:space="preserve">
+    <value>Problemas de seguridad</value>
+  </data>
+  <data name="About_CodeContact" xml:space="preserve">
+    <value>Código y contribuciones</value>
+  </data>
 </root>

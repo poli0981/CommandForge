@@ -1,6 +1,6 @@
 # Terms of Use (EULA) — CommandForge
 
-> Not legal advice. Last updated: 2026-06-18 · Version 1.1
+> Not legal advice. Last updated: 2026-10-21 · Version 1.1
 >
 > ⚠️ **Important:** CommandForge is licensed under the **GNU GPL v3** (see [LICENSE](LICENSE)).
 > **The GPLv3 governs your rights to the software.** This document does **not** restrict any
@@ -58,3 +58,9 @@ trademark owner mentioned. All trademarks belong to their respective owners. See
 
 By installing and using the software, you acknowledge that you have read, understood, and agree to
 this document and to the terms of the GPLv3.
+
+## 8. Contact
+
+Questions about these terms or licensing: **[legal@poli0981.dev](mailto:legal@poli0981.dev)**.
+For copyright, DMCA and other takedown notices, see
+[DISCLAIMER.md](DISCLAIMER.md#copyright-and-takedown-requests).

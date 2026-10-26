@@ -2582,4 +2582,235 @@
   <data name="Settings_RunModeDev" xml:space="preserve">
     <value>開発ビルド (自動更新なし)</value>
   </data>
+  <data name="Cat_devices" xml:space="preserve">
+    <value>デバイスと周辺機器</value>
+  </data>
+  <data name="Cat_backup-recovery" xml:space="preserve">
+    <value>バックアップと回復</value>
+  </data>
+  <data name="Cat_accounts" xml:space="preserve">
+    <value>アカウントとサインイン</value>
+  </data>
+  <data name="Cmd_device.bluetooth.settings_Title" xml:space="preserve">
+    <value>Bluetooth とデバイスの設定</value>
+  </data>
+  <data name="Cmd_device.bluetooth.settings_Desc" xml:space="preserve">
+    <value>設定を開いて Bluetooth のオン/オフを切り替え、デバイスのペアリング、接続、削除を行います。</value>
+  </data>
+  <data name="Cmd_device.printers.settings_Title" xml:space="preserve">
+    <value>プリンターとスキャナーの設定</value>
+  </data>
+  <data name="Cmd_device.printers.settings_Desc" xml:space="preserve">
+    <value>設定を開いて、プリンターやスキャナーの追加と削除、既定のプリンターの選択、印刷キューの表示を行います。</value>
+  </data>
+  <data name="Cmd_device.display.settings_Title" xml:space="preserve">
+    <value>ディスプレイの設定</value>
+  </data>
+  <data name="Cmd_device.display.settings_Desc" xml:space="preserve">
+    <value>設定を開いて、解像度、拡大縮小、向き、リフレッシュ レートの変更や複数ディスプレイの配置を行います。</value>
+  </data>
+  <data name="Cmd_device.sound.open_Title" xml:space="preserve">
+    <value>サウンド コントロール パネル</value>
+  </data>
+  <data name="Cmd_device.sound.open_Desc" xml:space="preserve">
+    <value>従来のサウンド パネルを開いて、既定の再生デバイスと録音デバイスを選び、形式とレベルを設定します。</value>
+  </data>
+  <data name="Cmd_device.usb.list_Title" xml:space="preserve">
+    <value>USB デバイスを一覧表示</value>
+  </data>
+  <data name="Cmd_device.usb.list_Desc" xml:space="preserve">
+    <value>現在接続されている USB デバイス (ハブ、コントローラー、ストレージ、周辺機器) を状態とともに一覧表示します。</value>
+  </data>
+  <data name="Cmd_device.cameras.list_Title" xml:space="preserve">
+    <value>カメラを一覧表示</value>
+  </data>
+  <data name="Cmd_device.cameras.list_Desc" xml:space="preserve">
+    <value>Windows が検出した Web カメラなどのイメージング デバイスを状態とともに一覧表示します。</value>
+  </data>
+  <data name="Cmd_device.audio.list_Title" xml:space="preserve">
+    <value>オーディオ デバイスを一覧表示</value>
+  </data>
+  <data name="Cmd_device.audio.list_Desc" xml:space="preserve">
+    <value>サウンド カードと再生・録音エンドポイント (スピーカー、ヘッドホン、マイク) を状態とともに一覧表示します。</value>
+  </data>
+  <data name="Cmd_device.bluetooth.list_Title" xml:space="preserve">
+    <value>Bluetooth デバイスを一覧表示</value>
+  </data>
+  <data name="Cmd_device.bluetooth.list_Desc" xml:space="preserve">
+    <value>Bluetooth アダプターと、この PC とペアリングされたデバイスを表示します。</value>
+  </data>
+  <data name="Cmd_device.printers.list_Title" xml:space="preserve">
+    <value>プリンターを一覧表示</value>
+  </data>
+  <data name="Cmd_device.printers.list_Desc" xml:space="preserve">
+    <value>インストール済みのプリンターをドライバー、ポート、共有、状態とともに一覧表示します。Print Spooler サービスが必要です。</value>
+  </data>
+  <data name="Cmd_device.disconnected.list_Title" xml:space="preserve">
+    <value>切断されたデバイスを一覧表示</value>
+  </data>
+  <data name="Cmd_device.disconnected.list_Desc" xml:space="preserve">
+    <value>Windows が記憶しているものの現在は接続されていないデバイス (古い USB ドライブ、ドック、モニターなど) を一覧表示します。</value>
+  </data>
+  <data name="Cmd_device.hardware.scan_Title" xml:space="preserve">
+    <value>ハードウェア変更のスキャン</value>
+  </data>
+  <data name="Cmd_device.hardware.scan_Desc" xml:space="preserve">
+    <value>デバイス マネージャーの [ハードウェア変更のスキャン] と同様に、新しく接続または変更されたハードウェアを Windows に検出させます。</value>
+  </data>
+  <data name="Cmd_recovery.settings.open_Title" xml:space="preserve">
+    <value>回復の設定</value>
+  </data>
+  <data name="Cmd_recovery.settings.open_Desc" xml:space="preserve">
+    <value>設定の [回復] を開きます: この PC をリセット、PC の起動をカスタマイズする、以前のバージョンの Windows に戻す。</value>
+  </data>
+  <data name="Cmd_recovery.winre.status_Title" xml:space="preserve">
+    <value>Windows 回復環境の状態</value>
+  </data>
+  <data name="Cmd_recovery.winre.status_Desc" xml:space="preserve">
+    <value>Windows 回復環境 (WinRE) が有効かどうかと、そのイメージの場所を表示します (reagentc /info)。</value>
+  </data>
+  <data name="Cmd_recovery.winre.enable_Title" xml:space="preserve">
+    <value>Windows 回復環境を有効にする</value>
+  </data>
+  <data name="Cmd_recovery.winre.enable_Desc" xml:space="preserve">
+    <value>Windows 回復環境を再び有効にして (reagentc /enable)、起動時にスタートアップ修復、システムの復元、この PC をリセットを使えるようにします。回復イメージ (Winre.wim) が必要です。</value>
+  </data>
+  <data name="Cmd_recovery.systemprotection.open_Title" xml:space="preserve">
+    <value>システムの保護の設定</value>
+  </data>
+  <data name="Cmd_recovery.systemprotection.open_Desc" xml:space="preserve">
+    <value>[システムのプロパティ] の [システムの保護] を開き、ドライブごとに復元ポイントのオン/オフと使用するディスク領域の上限を設定します。</value>
+  </data>
+  <data name="Cmd_recovery.shadowstorage_Title" xml:space="preserve">
+    <value>復元ポイントのディスク使用量</value>
+  </data>
+  <data name="Cmd_recovery.shadowstorage_Desc" xml:space="preserve">
+    <value>各ドライブで復元ポイント (シャドウ コピー) が使用している、および使用できるディスク領域を表示します。</value>
+  </data>
+  <data name="Cmd_recovery.filehistory.open_Title" xml:space="preserve">
+    <value>ファイル履歴</value>
+  </data>
+  <data name="Cmd_recovery.filehistory.open_Desc" xml:space="preserve">
+    <value>ファイル履歴を開いて、個人用フォルダーを外付けドライブやネットワーク ドライブにバックアップしたり、以前のバージョンのファイルを復元したりします。</value>
+  </data>
+  <data name="Cmd_recovery.backup.settings_Title" xml:space="preserve">
+    <value>バックアップの設定</value>
+  </data>
+  <data name="Cmd_recovery.backup.settings_Desc" xml:space="preserve">
+    <value>設定の [バックアップ] を開きます (Windows 11 では Windows バックアップ、Windows 10 ではファイル履歴のオプション)。</value>
+  </data>
+  <data name="Cmd_recovery.backuprestore.open_Title" xml:space="preserve">
+    <value>バックアップと復元 (Windows 7)</value>
+  </data>
+  <data name="Cmd_recovery.backuprestore.open_Desc" xml:space="preserve">
+    <value>従来の [バックアップと復元] パネルを開いて、システム イメージを作成したり、以前のバックアップからファイルを復元したりします。</value>
+  </data>
+  <data name="Cmd_recovery.drive.create_Title" xml:space="preserve">
+    <value>回復ドライブの作成</value>
+  </data>
+  <data name="Cmd_recovery.drive.create_Desc" xml:space="preserve">
+    <value>回復ドライブ ウィザードを開いて、Windows の修復や再インストールに使う起動可能な USB ドライブを作成します。USB ドライブの内容は消去され、管理者の承認が必要です。</value>
+  </data>
+  <data name="Cmd_account.signin.settings_Title" xml:space="preserve">
+    <value>サインイン オプション</value>
+  </data>
+  <data name="Cmd_account.signin.settings_Desc" xml:space="preserve">
+    <value>設定を開いて、PIN、Windows Hello、パスワード、セキュリティ キー、動的ロックを設定します。</value>
+  </data>
+  <data name="Cmd_account.yourinfo.settings_Title" xml:space="preserve">
+    <value>アカウント情報</value>
+  </data>
+  <data name="Cmd_account.yourinfo.settings_Desc" xml:space="preserve">
+    <value>設定の [ユーザーの情報] を開き、アカウントの種類を確認して、Microsoft アカウントとローカル アカウントを切り替えます。</value>
+  </data>
+  <data name="Cmd_account.otherusers.settings_Title" xml:space="preserve">
+    <value>他のユーザー</value>
+  </data>
+  <data name="Cmd_account.otherusers.settings_Desc" xml:space="preserve">
+    <value>設定を開いて、この PC の他のユーザー アカウントを追加、削除、変更します。</value>
+  </data>
+  <data name="Cmd_account.useraccounts.open_Title" xml:space="preserve">
+    <value>ユーザー アカウント (詳細)</value>
+  </data>
+  <data name="Cmd_account.useraccounts.open_Desc" xml:space="preserve">
+    <value>従来の [ユーザー アカウント] ダイアログ (netplwiz) を開いて、ユーザーとグループ メンバーシップを管理します。管理者の承認が求められます。</value>
+  </data>
+  <data name="Cmd_account.credman.open_Title" xml:space="preserve">
+    <value>資格情報マネージャー</value>
+  </data>
+  <data name="Cmd_account.credman.open_Desc" xml:space="preserve">
+    <value>資格情報マネージャーを開いて、保存されている Windows 資格情報と Web 資格情報を表示、編集、削除します。</value>
+  </data>
+  <data name="Cmd_account.credentials.list_Title" xml:space="preserve">
+    <value>保存された Windows 資格情報を一覧表示</value>
+  </data>
+  <data name="Cmd_account.credentials.list_Desc" xml:space="preserve">
+    <value>Windows 資格情報コンテナーに保存されている接続先とユーザー名を一覧表示します (cmdkey /list)。パスワードは表示されません。</value>
+  </data>
+  <data name="Cmd_account.passwordpolicy_Title" xml:space="preserve">
+    <value>パスワードとロックアウトのポリシー</value>
+  </data>
+  <data name="Cmd_account.passwordpolicy_Desc" xml:space="preserve">
+    <value>ローカルのパスワード規則 (最小の長さ、有効期間、履歴) とアカウント ロックアウトの設定を表示します (net accounts)。</value>
+  </data>
+  <data name="Cmd_account.localgroups_Title" xml:space="preserve">
+    <value>ローカル グループを一覧表示</value>
+  </data>
+  <data name="Cmd_account.localgroups_Desc" xml:space="preserve">
+    <value>この PC のローカル セキュリティ グループを説明とともに一覧表示します。</value>
+  </data>
+  <data name="Cmd_power.sleepstates_Title" xml:space="preserve">
+    <value>利用できるスリープ状態</value>
+  </data>
+  <data name="Cmd_power.sleepstates_Desc" xml:space="preserve">
+    <value>この PC がサポートするスリープ状態 (スリープ、モダン スタンバイ、休止状態、ハイブリッド スリープ) と、その他が利用できない理由を表示します。</value>
+  </data>
+  <data name="Cmd_power.lastwake_Title" xml:space="preserve">
+    <value>最後に PC を復帰させた原因</value>
+  </data>
+  <data name="Cmd_power.lastwake_Desc" xml:space="preserve">
+    <value>最後に PC をスリープから復帰させたデバイスまたはタイマーを表示します (powercfg /lastwake)。</value>
+  </data>
+  <data name="Cmd_power.wake.devices_Title" xml:space="preserve">
+    <value>PC を復帰させられるデバイス</value>
+  </data>
+  <data name="Cmd_power.wake.devices_Desc" xml:space="preserve">
+    <value>マウス、キーボード、ネットワーク アダプターなど、PC をスリープから復帰させることが許可されているデバイスを一覧表示します。</value>
+  </data>
+  <data name="Cmd_info.motherboard_Title" xml:space="preserve">
+    <value>マザーボード情報</value>
+  </data>
+  <data name="Cmd_info.motherboard_Desc" xml:space="preserve">
+    <value>マザーボードのメーカー、モデル、リビジョンを表示します。</value>
+  </data>
+  <data name="Cmd_info.language_Title" xml:space="preserve">
+    <value>言語と地域</value>
+  </data>
+  <data name="Cmd_info.language_Desc" xml:space="preserve">
+    <value>システム ロケール (Unicode 非対応プログラムで使用)、表示言語、地域の形式、国または地域、言語の一覧を表示します。</value>
+  </data>
+  <data name="Cmd_svc.list.disabled_Title" xml:space="preserve">
+    <value>無効なサービスを一覧表示</value>
+  </data>
+  <data name="Cmd_svc.list.disabled_Desc" xml:space="preserve">
+    <value>スタートアップの種類が [無効] のサービスを一覧表示します。チューニング ツールで無効にされたサービスの確認などに使えます。</value>
+  </data>
+  <data name="Cmd_dev.path.list_Title" xml:space="preserve">
+    <value>PATH の項目を一覧表示</value>
+  </data>
+  <data name="Cmd_dev.path.list_Desc" xml:space="preserve">
+    <value>マシンとユーザーの PATH にあるフォルダーを 1 行ずつ一覧表示し、存在しないフォルダーに印を付けます。</value>
+  </data>
+  <data name="Cmd_net.proxy.settings_Title" xml:space="preserve">
+    <value>プロキシの設定</value>
+  </data>
+  <data name="Cmd_net.proxy.settings_Desc" xml:space="preserve">
+    <value>設定を開いて、プロキシ サーバーまたはプロキシの自動構成 (PAC) スクリプトを設定します。</value>
+  </data>
+  <data name="Cmd_net.vpn.settings_Title" xml:space="preserve">
+    <value>VPN の設定</value>
+  </data>
+  <data name="Cmd_net.vpn.settings_Desc" xml:space="preserve">
+    <value>設定を開いて、Windows 組み込みの VPN 接続を追加、接続、削除します。</value>
+  </data>
 </root>

@@ -2582,4 +2582,235 @@ Los detalles se escribieron en la carpeta de registros:
   <data name="Settings_RunModeDev" xml:space="preserve">
     <value>Compilación de desarrollo (no se actualiza)</value>
   </data>
+  <data name="Cat_devices" xml:space="preserve">
+    <value>Dispositivos y periféricos</value>
+  </data>
+  <data name="Cat_backup-recovery" xml:space="preserve">
+    <value>Copia de seguridad y recuperación</value>
+  </data>
+  <data name="Cat_accounts" xml:space="preserve">
+    <value>Cuentas e inicio de sesión</value>
+  </data>
+  <data name="Cmd_device.bluetooth.settings_Title" xml:space="preserve">
+    <value>Configuración de Bluetooth y dispositivos</value>
+  </data>
+  <data name="Cmd_device.bluetooth.settings_Desc" xml:space="preserve">
+    <value>Abre Configuración para activar o desactivar Bluetooth y emparejar, conectar o quitar dispositivos.</value>
+  </data>
+  <data name="Cmd_device.printers.settings_Title" xml:space="preserve">
+    <value>Configuración de impresoras y escáneres</value>
+  </data>
+  <data name="Cmd_device.printers.settings_Desc" xml:space="preserve">
+    <value>Abre Configuración para agregar o quitar impresoras y escáneres, elegir la impresora predeterminada y abrir las colas de impresión.</value>
+  </data>
+  <data name="Cmd_device.display.settings_Title" xml:space="preserve">
+    <value>Configuración de pantalla</value>
+  </data>
+  <data name="Cmd_device.display.settings_Desc" xml:space="preserve">
+    <value>Abre Configuración para cambiar la resolución, la escala, la orientación y la frecuencia de actualización, y organizar varias pantallas.</value>
+  </data>
+  <data name="Cmd_device.sound.open_Title" xml:space="preserve">
+    <value>Panel de control de sonido</value>
+  </data>
+  <data name="Cmd_device.sound.open_Desc" xml:space="preserve">
+    <value>Abre el panel clásico de Sonido para elegir los dispositivos de reproducción y grabación predeterminados y ajustar su formato y niveles.</value>
+  </data>
+  <data name="Cmd_device.usb.list_Title" xml:space="preserve">
+    <value>Listar dispositivos USB</value>
+  </data>
+  <data name="Cmd_device.usb.list_Desc" xml:space="preserve">
+    <value>Enumera los dispositivos USB conectados ahora (concentradores, controladoras, almacenamiento y periféricos) con su estado.</value>
+  </data>
+  <data name="Cmd_device.cameras.list_Title" xml:space="preserve">
+    <value>Listar cámaras</value>
+  </data>
+  <data name="Cmd_device.cameras.list_Desc" xml:space="preserve">
+    <value>Enumera las cámaras web y otros dispositivos de imagen que detecta Windows, con su estado.</value>
+  </data>
+  <data name="Cmd_device.audio.list_Title" xml:space="preserve">
+    <value>Listar dispositivos de audio</value>
+  </data>
+  <data name="Cmd_device.audio.list_Desc" xml:space="preserve">
+    <value>Enumera las tarjetas de sonido y los dispositivos de reproducción y grabación (altavoces, auriculares, micrófonos) con su estado.</value>
+  </data>
+  <data name="Cmd_device.bluetooth.list_Title" xml:space="preserve">
+    <value>Listar dispositivos Bluetooth</value>
+  </data>
+  <data name="Cmd_device.bluetooth.list_Desc" xml:space="preserve">
+    <value>Muestra el adaptador Bluetooth y los dispositivos emparejados con este equipo.</value>
+  </data>
+  <data name="Cmd_device.printers.list_Title" xml:space="preserve">
+    <value>Listar impresoras</value>
+  </data>
+  <data name="Cmd_device.printers.list_Desc" xml:space="preserve">
+    <value>Enumera las impresoras instaladas con su controlador, puerto, uso compartido y estado. Necesita el servicio Cola de impresión.</value>
+  </data>
+  <data name="Cmd_device.disconnected.list_Title" xml:space="preserve">
+    <value>Listar dispositivos desconectados</value>
+  </data>
+  <data name="Cmd_device.disconnected.list_Desc" xml:space="preserve">
+    <value>Enumera los dispositivos que Windows recuerda pero que no están conectados ahora, como unidades USB antiguas, bases o monitores.</value>
+  </data>
+  <data name="Cmd_device.hardware.scan_Title" xml:space="preserve">
+    <value>Buscar cambios de hardware</value>
+  </data>
+  <data name="Cmd_device.hardware.scan_Desc" xml:space="preserve">
+    <value>Pide a Windows que detecte el hardware recién conectado o modificado, como Buscar cambios de hardware en el Administrador de dispositivos.</value>
+  </data>
+  <data name="Cmd_recovery.settings.open_Title" xml:space="preserve">
+    <value>Configuración de recuperación</value>
+  </data>
+  <data name="Cmd_recovery.settings.open_Desc" xml:space="preserve">
+    <value>Abre Configuración → Recuperación: Restablecer este equipo, Inicio avanzado y volver a la versión anterior de Windows.</value>
+  </data>
+  <data name="Cmd_recovery.winre.status_Title" xml:space="preserve">
+    <value>Estado del Entorno de recuperación de Windows</value>
+  </data>
+  <data name="Cmd_recovery.winre.status_Desc" xml:space="preserve">
+    <value>Muestra si el Entorno de recuperación de Windows (WinRE) está habilitado y dónde está su imagen (reagentc /info).</value>
+  </data>
+  <data name="Cmd_recovery.winre.enable_Title" xml:space="preserve">
+    <value>Habilitar el Entorno de recuperación de Windows</value>
+  </data>
+  <data name="Cmd_recovery.winre.enable_Desc" xml:space="preserve">
+    <value>Vuelve a activar el Entorno de recuperación de Windows (reagentc /enable) para tener Reparación de inicio, Restaurar sistema y Restablecer este equipo al arrancar. Necesita la imagen de recuperación (Winre.wim).</value>
+  </data>
+  <data name="Cmd_recovery.systemprotection.open_Title" xml:space="preserve">
+    <value>Configuración de Protección del sistema</value>
+  </data>
+  <data name="Cmd_recovery.systemprotection.open_Desc" xml:space="preserve">
+    <value>Abre Propiedades del sistema → Protección del sistema para activar o desactivar los puntos de restauración por unidad y limitar el espacio que usan.</value>
+  </data>
+  <data name="Cmd_recovery.shadowstorage_Title" xml:space="preserve">
+    <value>Espacio usado por los puntos de restauración</value>
+  </data>
+  <data name="Cmd_recovery.shadowstorage_Desc" xml:space="preserve">
+    <value>Muestra cuánto espacio en disco usan, y pueden usar, los puntos de restauración (instantáneas) en cada unidad.</value>
+  </data>
+  <data name="Cmd_recovery.filehistory.open_Title" xml:space="preserve">
+    <value>Historial de archivos</value>
+  </data>
+  <data name="Cmd_recovery.filehistory.open_Desc" xml:space="preserve">
+    <value>Abre Historial de archivos para hacer copia de tus carpetas personales en una unidad externa o de red, o restaurar versiones anteriores de archivos.</value>
+  </data>
+  <data name="Cmd_recovery.backup.settings_Title" xml:space="preserve">
+    <value>Configuración de copia de seguridad</value>
+  </data>
+  <data name="Cmd_recovery.backup.settings_Desc" xml:space="preserve">
+    <value>Abre Configuración → Copia de seguridad: Copia de seguridad de Windows en Windows 11, opciones de Historial de archivos en Windows 10.</value>
+  </data>
+  <data name="Cmd_recovery.backuprestore.open_Title" xml:space="preserve">
+    <value>Copias de seguridad y restauración (Windows 7)</value>
+  </data>
+  <data name="Cmd_recovery.backuprestore.open_Desc" xml:space="preserve">
+    <value>Abre el panel clásico de Copias de seguridad y restauración para crear una imagen del sistema o restaurar archivos de una copia anterior.</value>
+  </data>
+  <data name="Cmd_recovery.drive.create_Title" xml:space="preserve">
+    <value>Crear una unidad de recuperación</value>
+  </data>
+  <data name="Cmd_recovery.drive.create_Desc" xml:space="preserve">
+    <value>Abre el asistente Unidad de recuperación para crear una unidad USB de arranque con la que reparar o reinstalar Windows. El asistente borra la unidad USB y pide aprobación de administrador.</value>
+  </data>
+  <data name="Cmd_account.signin.settings_Title" xml:space="preserve">
+    <value>Opciones de inicio de sesión</value>
+  </data>
+  <data name="Cmd_account.signin.settings_Desc" xml:space="preserve">
+    <value>Abre Configuración para configurar un PIN, Windows Hello, una contraseña o una llave de seguridad, y el bloqueo dinámico.</value>
+  </data>
+  <data name="Cmd_account.yourinfo.settings_Title" xml:space="preserve">
+    <value>Información de tu cuenta</value>
+  </data>
+  <data name="Cmd_account.yourinfo.settings_Desc" xml:space="preserve">
+    <value>Abre Configuración → Tu información para ver el tipo de cuenta y cambiar entre una cuenta Microsoft y una cuenta local.</value>
+  </data>
+  <data name="Cmd_account.otherusers.settings_Title" xml:space="preserve">
+    <value>Otros usuarios</value>
+  </data>
+  <data name="Cmd_account.otherusers.settings_Desc" xml:space="preserve">
+    <value>Abre Configuración para agregar, quitar o cambiar las demás cuentas de usuario de este equipo.</value>
+  </data>
+  <data name="Cmd_account.useraccounts.open_Title" xml:space="preserve">
+    <value>Cuentas de usuario (avanzado)</value>
+  </data>
+  <data name="Cmd_account.useraccounts.open_Desc" xml:space="preserve">
+    <value>Abre el cuadro clásico Cuentas de usuario (netplwiz) para administrar usuarios y sus grupos. Windows pide aprobación de administrador.</value>
+  </data>
+  <data name="Cmd_account.credman.open_Title" xml:space="preserve">
+    <value>Administrador de credenciales</value>
+  </data>
+  <data name="Cmd_account.credman.open_Desc" xml:space="preserve">
+    <value>Abre el Administrador de credenciales para ver, editar o quitar las credenciales de Windows y web guardadas.</value>
+  </data>
+  <data name="Cmd_account.credentials.list_Title" xml:space="preserve">
+    <value>Listar credenciales de Windows guardadas</value>
+  </data>
+  <data name="Cmd_account.credentials.list_Desc" xml:space="preserve">
+    <value>Enumera los destinos y nombres de usuario guardados en tu almacén de credenciales de Windows (cmdkey /list). Nunca muestra contraseñas.</value>
+  </data>
+  <data name="Cmd_account.passwordpolicy_Title" xml:space="preserve">
+    <value>Directiva de contraseñas y bloqueo</value>
+  </data>
+  <data name="Cmd_account.passwordpolicy_Desc" xml:space="preserve">
+    <value>Muestra las reglas de contraseñas locales (longitud mínima, vigencia e historial) y la configuración de bloqueo de cuentas (net accounts).</value>
+  </data>
+  <data name="Cmd_account.localgroups_Title" xml:space="preserve">
+    <value>Listar grupos locales</value>
+  </data>
+  <data name="Cmd_account.localgroups_Desc" xml:space="preserve">
+    <value>Enumera los grupos de seguridad locales de este equipo con su descripción.</value>
+  </data>
+  <data name="Cmd_power.sleepstates_Title" xml:space="preserve">
+    <value>Estados de suspensión disponibles</value>
+  </data>
+  <data name="Cmd_power.sleepstates_Desc" xml:space="preserve">
+    <value>Muestra qué estados de suspensión admite este equipo (suspensión, Modern Standby, hibernación, suspensión híbrida) y por qué los demás no están disponibles.</value>
+  </data>
+  <data name="Cmd_power.lastwake_Title" xml:space="preserve">
+    <value>Qué reactivó el equipo por última vez</value>
+  </data>
+  <data name="Cmd_power.lastwake_Desc" xml:space="preserve">
+    <value>Muestra el dispositivo o temporizador que reactivó el equipo de la suspensión por última vez (powercfg /lastwake).</value>
+  </data>
+  <data name="Cmd_power.wake.devices_Title" xml:space="preserve">
+    <value>Dispositivos que pueden reactivar el equipo</value>
+  </data>
+  <data name="Cmd_power.wake.devices_Desc" xml:space="preserve">
+    <value>Enumera los dispositivos que pueden reactivar el equipo de la suspensión, como el mouse, el teclado o el adaptador de red.</value>
+  </data>
+  <data name="Cmd_info.motherboard_Title" xml:space="preserve">
+    <value>Información de la placa base</value>
+  </data>
+  <data name="Cmd_info.motherboard_Desc" xml:space="preserve">
+    <value>Muestra el fabricante, el modelo y la revisión de la placa base.</value>
+  </data>
+  <data name="Cmd_info.language_Title" xml:space="preserve">
+    <value>Idioma y región</value>
+  </data>
+  <data name="Cmd_info.language_Desc" xml:space="preserve">
+    <value>Muestra la configuración regional del sistema (para programas no Unicode), el idioma de presentación, el formato regional, la ubicación y tu lista de idiomas.</value>
+  </data>
+  <data name="Cmd_svc.list.disabled_Title" xml:space="preserve">
+    <value>Listar servicios deshabilitados</value>
+  </data>
+  <data name="Cmd_svc.list.disabled_Desc" xml:space="preserve">
+    <value>Enumera los servicios cuyo tipo de inicio es Deshabilitado, por ejemplo para detectar los que apagó una herramienta de optimización.</value>
+  </data>
+  <data name="Cmd_dev.path.list_Title" xml:space="preserve">
+    <value>Listar entradas de PATH</value>
+  </data>
+  <data name="Cmd_dev.path.list_Desc" xml:space="preserve">
+    <value>Enumera las carpetas del PATH del equipo y del usuario, una por línea, y marca las que ya no existen.</value>
+  </data>
+  <data name="Cmd_net.proxy.settings_Title" xml:space="preserve">
+    <value>Configuración de proxy</value>
+  </data>
+  <data name="Cmd_net.proxy.settings_Desc" xml:space="preserve">
+    <value>Abre Configuración para configurar un servidor proxy o un script de configuración automática de proxy (PAC).</value>
+  </data>
+  <data name="Cmd_net.vpn.settings_Title" xml:space="preserve">
+    <value>Configuración de VPN</value>
+  </data>
+  <data name="Cmd_net.vpn.settings_Desc" xml:space="preserve">
+    <value>Abre Configuración para agregar, conectar o quitar las conexiones VPN integradas de Windows.</value>
+  </data>
 </root>

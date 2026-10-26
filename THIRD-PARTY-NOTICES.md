@@ -11,7 +11,7 @@ versions.
 |---|---|---|---|
 | WPF-UI (+ WPF-UI.Abstractions) | 4.3.0 | MIT | https://github.com/lepoco/wpfui |
 | CommunityToolkit.Mvvm | 8.4.2 | MIT | https://github.com/CommunityToolkit/dotnet |
-| Microsoft.Extensions.DependencyInjection (+ .Abstractions) | 10.0.13 | MIT | https://github.com/dotnet/runtime |
+| Microsoft.Extensions.DependencyInjection (+ .Abstractions) | 10.0.14 | MIT | https://github.com/dotnet/runtime |
 | Serilog | 4.4.0 | Apache-2.0 | https://github.com/serilog/serilog |
 | Serilog.Sinks.File | 7.0.0 | Apache-2.0 | https://github.com/serilog/serilog-sinks-file |
 | Serilog.Sinks.Async | 2.1.0 | Apache-2.0 | https://github.com/serilog/serilog-sinks-async |
@@ -25,8 +25,9 @@ and the Fluent System Icons (below); see the `ThirdPartyNotices.txt` in the WPF-
 
 | Component | Version | License | Project |
 |---|---|---|---|
-| Microsoft.Windows.CsWin32 | 0.3.366 | MIT | https://github.com/microsoft/CsWin32 |
+| Microsoft.Windows.CsWin32 | 0.3.367 | MIT | https://github.com/microsoft/CsWin32 |
 | SonarAnalyzer.CSharp | 10.35.0.4138 | SONAR Source-Available License v1.0 | https://github.com/SonarSource/sonar-dotnet |
+| dotnet-sonarscanner (SonarScanner for .NET, CI only) | 12.0.0 | LGPL-3.0 | https://github.com/SonarSource/sonar-scanner-msbuild |
 | vpk (Velopack CLI) | 1.2.161 | MIT | https://github.com/velopack/velopack |
 | xunit.v3 (`xunit.v3.mtp-off`) | 4.0.2 | Apache-2.0 | https://github.com/xunit/xunit |
 | xunit.runner.visualstudio | 4.0.1 | Apache-2.0 | https://github.com/xunit/visualstudio.xunit |

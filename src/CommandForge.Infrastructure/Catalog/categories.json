@@ -10,5 +10,8 @@
   { "id": "security-privacy",   "titleKey": "Cat_security-privacy",   "icon": "ShieldLock", "order": 9 },
   { "id": "developer",          "titleKey": "Cat_developer",          "icon": "CodeBraces", "order": 10 },
   { "id": "storage",            "titleKey": "Cat_storage",            "icon": "Harddisk", "order": 11 },
-  { "id": "services-startup",   "titleKey": "Cat_services-startup",   "icon": "Cog", "order": 12 }
+  { "id": "services-startup",   "titleKey": "Cat_services-startup",   "icon": "Cog", "order": 12 },
+  { "id": "devices",            "titleKey": "Cat_devices",            "icon": "Devices", "order": 13 },
+  { "id": "backup-recovery",    "titleKey": "Cat_backup-recovery",    "icon": "BackupRestore", "order": 14 },
+  { "id": "accounts",           "titleKey": "Cat_accounts",           "icon": "AccountMultiple", "order": 15 }
 ]

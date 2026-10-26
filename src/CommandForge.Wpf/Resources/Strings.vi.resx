@@ -2582,4 +2582,235 @@ Chi tiết đã được ghi vào thư mục log:
   <data name="Settings_RunModeDev" xml:space="preserve">
     <value>Bản phát triển (không tự cập nhật)</value>
   </data>
+  <data name="Cat_devices" xml:space="preserve">
+    <value>Thiết bị &amp; Ngoại vi</value>
+  </data>
+  <data name="Cat_backup-recovery" xml:space="preserve">
+    <value>Sao lưu &amp; Khôi phục</value>
+  </data>
+  <data name="Cat_accounts" xml:space="preserve">
+    <value>Tài khoản &amp; Đăng nhập</value>
+  </data>
+  <data name="Cmd_device.bluetooth.settings_Title" xml:space="preserve">
+    <value>Cài đặt Bluetooth &amp; thiết bị</value>
+  </data>
+  <data name="Cmd_device.bluetooth.settings_Desc" xml:space="preserve">
+    <value>Mở Cài đặt để bật/tắt Bluetooth và ghép đôi, kết nối hoặc gỡ thiết bị.</value>
+  </data>
+  <data name="Cmd_device.printers.settings_Title" xml:space="preserve">
+    <value>Cài đặt máy in &amp; máy quét</value>
+  </data>
+  <data name="Cmd_device.printers.settings_Desc" xml:space="preserve">
+    <value>Mở Cài đặt để thêm hoặc gỡ máy in, máy quét, chọn máy in mặc định và mở hàng đợi in.</value>
+  </data>
+  <data name="Cmd_device.display.settings_Title" xml:space="preserve">
+    <value>Cài đặt màn hình</value>
+  </data>
+  <data name="Cmd_device.display.settings_Desc" xml:space="preserve">
+    <value>Mở Cài đặt để đổi độ phân giải, tỷ lệ, hướng, tần số quét và sắp xếp nhiều màn hình.</value>
+  </data>
+  <data name="Cmd_device.sound.open_Title" xml:space="preserve">
+    <value>Bảng điều khiển Âm thanh</value>
+  </data>
+  <data name="Cmd_device.sound.open_Desc" xml:space="preserve">
+    <value>Mở bảng Âm thanh cổ điển để chọn thiết bị phát và thu mặc định, đặt định dạng và mức âm lượng.</value>
+  </data>
+  <data name="Cmd_device.usb.list_Title" xml:space="preserve">
+    <value>Liệt kê thiết bị USB</value>
+  </data>
+  <data name="Cmd_device.usb.list_Desc" xml:space="preserve">
+    <value>Liệt kê các thiết bị USB đang kết nối (hub, bộ điều khiển, ổ lưu trữ, thiết bị ngoại vi) kèm trạng thái.</value>
+  </data>
+  <data name="Cmd_device.cameras.list_Title" xml:space="preserve">
+    <value>Liệt kê camera</value>
+  </data>
+  <data name="Cmd_device.cameras.list_Desc" xml:space="preserve">
+    <value>Liệt kê webcam và các thiết bị hình ảnh khác mà Windows nhận diện, kèm trạng thái.</value>
+  </data>
+  <data name="Cmd_device.audio.list_Title" xml:space="preserve">
+    <value>Liệt kê thiết bị âm thanh</value>
+  </data>
+  <data name="Cmd_device.audio.list_Desc" xml:space="preserve">
+    <value>Liệt kê card âm thanh và các thiết bị phát, thu (loa, tai nghe, micro) kèm trạng thái.</value>
+  </data>
+  <data name="Cmd_device.bluetooth.list_Title" xml:space="preserve">
+    <value>Liệt kê thiết bị Bluetooth</value>
+  </data>
+  <data name="Cmd_device.bluetooth.list_Desc" xml:space="preserve">
+    <value>Hiển thị bộ điều hợp Bluetooth và các thiết bị đã ghép đôi với máy.</value>
+  </data>
+  <data name="Cmd_device.printers.list_Title" xml:space="preserve">
+    <value>Liệt kê máy in</value>
+  </data>
+  <data name="Cmd_device.printers.list_Desc" xml:space="preserve">
+    <value>Liệt kê máy in đã cài kèm driver, cổng, chia sẻ và trạng thái. Cần dịch vụ Print Spooler đang chạy.</value>
+  </data>
+  <data name="Cmd_device.disconnected.list_Title" xml:space="preserve">
+    <value>Liệt kê thiết bị đã ngắt kết nối</value>
+  </data>
+  <data name="Cmd_device.disconnected.list_Desc" xml:space="preserve">
+    <value>Liệt kê các thiết bị Windows vẫn ghi nhớ nhưng hiện không kết nối, như ổ USB cũ, dock hay màn hình.</value>
+  </data>
+  <data name="Cmd_device.hardware.scan_Title" xml:space="preserve">
+    <value>Quét thay đổi phần cứng</value>
+  </data>
+  <data name="Cmd_device.hardware.scan_Desc" xml:space="preserve">
+    <value>Yêu cầu Windows phát hiện phần cứng mới kết nối hoặc đã thay đổi, giống lệnh Quét thay đổi phần cứng trong Trình quản lý thiết bị.</value>
+  </data>
+  <data name="Cmd_recovery.settings.open_Title" xml:space="preserve">
+    <value>Cài đặt khôi phục</value>
+  </data>
+  <data name="Cmd_recovery.settings.open_Desc" xml:space="preserve">
+    <value>Mở Cài đặt → Khôi phục: Đặt lại PC này, Khởi động nâng cao và quay về phiên bản Windows trước.</value>
+  </data>
+  <data name="Cmd_recovery.winre.status_Title" xml:space="preserve">
+    <value>Trạng thái Windows Recovery Environment</value>
+  </data>
+  <data name="Cmd_recovery.winre.status_Desc" xml:space="preserve">
+    <value>Cho biết Windows Recovery Environment (WinRE) có đang bật không và ảnh của nó nằm ở đâu (reagentc /info).</value>
+  </data>
+  <data name="Cmd_recovery.winre.enable_Title" xml:space="preserve">
+    <value>Bật Windows Recovery Environment</value>
+  </data>
+  <data name="Cmd_recovery.winre.enable_Desc" xml:space="preserve">
+    <value>Bật lại Windows Recovery Environment (reagentc /enable) để có Startup Repair, System Restore và Đặt lại PC này khi khởi động. Cần có ảnh khôi phục (Winre.wim).</value>
+  </data>
+  <data name="Cmd_recovery.systemprotection.open_Title" xml:space="preserve">
+    <value>Cài đặt Bảo vệ hệ thống</value>
+  </data>
+  <data name="Cmd_recovery.systemprotection.open_Desc" xml:space="preserve">
+    <value>Mở Thuộc tính hệ thống → Bảo vệ hệ thống để bật/tắt điểm khôi phục cho từng ổ và giới hạn dung lượng chúng dùng.</value>
+  </data>
+  <data name="Cmd_recovery.shadowstorage_Title" xml:space="preserve">
+    <value>Dung lượng điểm khôi phục</value>
+  </data>
+  <data name="Cmd_recovery.shadowstorage_Desc" xml:space="preserve">
+    <value>Hiển thị dung lượng ổ đĩa mà điểm khôi phục (shadow copy) đang dùng và được phép dùng trên từng ổ.</value>
+  </data>
+  <data name="Cmd_recovery.filehistory.open_Title" xml:space="preserve">
+    <value>Lịch sử tệp</value>
+  </data>
+  <data name="Cmd_recovery.filehistory.open_Desc" xml:space="preserve">
+    <value>Mở Lịch sử tệp để sao lưu thư mục cá nhân sang ổ ngoài hoặc ổ mạng, hoặc khôi phục phiên bản cũ của tệp.</value>
+  </data>
+  <data name="Cmd_recovery.backup.settings_Title" xml:space="preserve">
+    <value>Cài đặt sao lưu</value>
+  </data>
+  <data name="Cmd_recovery.backup.settings_Desc" xml:space="preserve">
+    <value>Mở Cài đặt → Sao lưu: Windows Backup trên Windows 11, tùy chọn Lịch sử tệp trên Windows 10.</value>
+  </data>
+  <data name="Cmd_recovery.backuprestore.open_Title" xml:space="preserve">
+    <value>Sao lưu và khôi phục (Windows 7)</value>
+  </data>
+  <data name="Cmd_recovery.backuprestore.open_Desc" xml:space="preserve">
+    <value>Mở bảng Sao lưu và khôi phục cổ điển để tạo ảnh hệ thống hoặc khôi phục tệp từ bản sao lưu cũ.</value>
+  </data>
+  <data name="Cmd_recovery.drive.create_Title" xml:space="preserve">
+    <value>Tạo ổ khôi phục</value>
+  </data>
+  <data name="Cmd_recovery.drive.create_Desc" xml:space="preserve">
+    <value>Mở trình hướng dẫn Recovery Drive để tạo ổ USB khởi động dùng sửa chữa hoặc cài lại Windows. Trình hướng dẫn sẽ xóa sạch ổ USB và cần quyền quản trị.</value>
+  </data>
+  <data name="Cmd_account.signin.settings_Title" xml:space="preserve">
+    <value>Tùy chọn đăng nhập</value>
+  </data>
+  <data name="Cmd_account.signin.settings_Desc" xml:space="preserve">
+    <value>Mở Cài đặt để thiết lập PIN, Windows Hello, mật khẩu hoặc khóa bảo mật và khóa động.</value>
+  </data>
+  <data name="Cmd_account.yourinfo.settings_Title" xml:space="preserve">
+    <value>Thông tin tài khoản</value>
+  </data>
+  <data name="Cmd_account.yourinfo.settings_Desc" xml:space="preserve">
+    <value>Mở Cài đặt → Thông tin của bạn để xem loại tài khoản và chuyển giữa tài khoản Microsoft và tài khoản cục bộ.</value>
+  </data>
+  <data name="Cmd_account.otherusers.settings_Title" xml:space="preserve">
+    <value>Người dùng khác</value>
+  </data>
+  <data name="Cmd_account.otherusers.settings_Desc" xml:space="preserve">
+    <value>Mở Cài đặt để thêm, xóa hoặc thay đổi các tài khoản người dùng khác trên máy.</value>
+  </data>
+  <data name="Cmd_account.useraccounts.open_Title" xml:space="preserve">
+    <value>Tài khoản người dùng (nâng cao)</value>
+  </data>
+  <data name="Cmd_account.useraccounts.open_Desc" xml:space="preserve">
+    <value>Mở hộp thoại User Accounts cổ điển (netplwiz) để quản lý người dùng và nhóm của họ. Windows sẽ hỏi quyền quản trị.</value>
+  </data>
+  <data name="Cmd_account.credman.open_Title" xml:space="preserve">
+    <value>Trình quản lý thông tin xác thực</value>
+  </data>
+  <data name="Cmd_account.credman.open_Desc" xml:space="preserve">
+    <value>Mở Trình quản lý thông tin xác thực để xem, sửa hoặc xóa thông tin đăng nhập Windows và web đã lưu.</value>
+  </data>
+  <data name="Cmd_account.credentials.list_Title" xml:space="preserve">
+    <value>Liệt kê thông tin đăng nhập đã lưu</value>
+  </data>
+  <data name="Cmd_account.credentials.list_Desc" xml:space="preserve">
+    <value>Liệt kê đích và tên người dùng lưu trong kho thông tin xác thực Windows của bạn (cmdkey /list). Không bao giờ hiện mật khẩu.</value>
+  </data>
+  <data name="Cmd_account.passwordpolicy_Title" xml:space="preserve">
+    <value>Chính sách mật khẩu &amp; khóa tài khoản</value>
+  </data>
+  <data name="Cmd_account.passwordpolicy_Desc" xml:space="preserve">
+    <value>Hiển thị quy tắc mật khẩu cục bộ (độ dài tối thiểu, thời hạn, lịch sử) và cài đặt khóa tài khoản (net accounts).</value>
+  </data>
+  <data name="Cmd_account.localgroups_Title" xml:space="preserve">
+    <value>Liệt kê nhóm cục bộ</value>
+  </data>
+  <data name="Cmd_account.localgroups_Desc" xml:space="preserve">
+    <value>Liệt kê các nhóm bảo mật cục bộ trên máy kèm mô tả.</value>
+  </data>
+  <data name="Cmd_power.sleepstates_Title" xml:space="preserve">
+    <value>Các trạng thái ngủ khả dụng</value>
+  </data>
+  <data name="Cmd_power.sleepstates_Desc" xml:space="preserve">
+    <value>Cho biết máy hỗ trợ trạng thái ngủ nào (Sleep, Modern Standby, Hibernate, Hybrid Sleep) và vì sao các trạng thái khác không dùng được.</value>
+  </data>
+  <data name="Cmd_power.lastwake_Title" xml:space="preserve">
+    <value>Nguồn đánh thức máy gần nhất</value>
+  </data>
+  <data name="Cmd_power.lastwake_Desc" xml:space="preserve">
+    <value>Hiển thị thiết bị hoặc bộ hẹn giờ đã đánh thức máy khỏi chế độ ngủ lần gần nhất (powercfg /lastwake).</value>
+  </data>
+  <data name="Cmd_power.wake.devices_Title" xml:space="preserve">
+    <value>Thiết bị có thể đánh thức máy</value>
+  </data>
+  <data name="Cmd_power.wake.devices_Desc" xml:space="preserve">
+    <value>Liệt kê các thiết bị được phép đánh thức máy khỏi chế độ ngủ, như chuột, bàn phím hay card mạng.</value>
+  </data>
+  <data name="Cmd_info.motherboard_Title" xml:space="preserve">
+    <value>Thông tin bo mạch chủ</value>
+  </data>
+  <data name="Cmd_info.motherboard_Desc" xml:space="preserve">
+    <value>Hiển thị nhà sản xuất, mẫu và phiên bản của bo mạch chủ.</value>
+  </data>
+  <data name="Cmd_info.language_Title" xml:space="preserve">
+    <value>Ngôn ngữ &amp; vùng</value>
+  </data>
+  <data name="Cmd_info.language_Desc" xml:space="preserve">
+    <value>Hiển thị locale hệ thống (dùng cho chương trình không Unicode), ngôn ngữ hiển thị, định dạng vùng, vị trí và danh sách ngôn ngữ của bạn.</value>
+  </data>
+  <data name="Cmd_svc.list.disabled_Title" xml:space="preserve">
+    <value>Liệt kê dịch vụ bị vô hiệu hóa</value>
+  </data>
+  <data name="Cmd_svc.list.disabled_Desc" xml:space="preserve">
+    <value>Liệt kê các dịch vụ có kiểu khởi động Disabled, ví dụ để tìm dịch vụ bị công cụ tinh chỉnh tắt đi.</value>
+  </data>
+  <data name="Cmd_dev.path.list_Title" xml:space="preserve">
+    <value>Liệt kê các mục PATH</value>
+  </data>
+  <data name="Cmd_dev.path.list_Desc" xml:space="preserve">
+    <value>Liệt kê từng thư mục trong PATH của máy và của người dùng, mỗi mục một dòng, và đánh dấu thư mục không còn tồn tại.</value>
+  </data>
+  <data name="Cmd_net.proxy.settings_Title" xml:space="preserve">
+    <value>Cài đặt proxy</value>
+  </data>
+  <data name="Cmd_net.proxy.settings_Desc" xml:space="preserve">
+    <value>Mở Cài đặt để thiết lập máy chủ proxy hoặc script cấu hình proxy tự động (PAC).</value>
+  </data>
+  <data name="Cmd_net.vpn.settings_Title" xml:space="preserve">
+    <value>Cài đặt VPN</value>
+  </data>
+  <data name="Cmd_net.vpn.settings_Desc" xml:space="preserve">
+    <value>Mở Cài đặt để thêm, kết nối hoặc xóa kết nối VPN tích hợp của Windows.</value>
+  </data>
 </root>

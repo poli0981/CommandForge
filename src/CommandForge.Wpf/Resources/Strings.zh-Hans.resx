@@ -2582,4 +2582,235 @@
   <data name="Settings_RunModeDev" xml:space="preserve">
     <value>开发版本（不自动更新）</value>
   </data>
+  <data name="Cat_devices" xml:space="preserve">
+    <value>设备与外设</value>
+  </data>
+  <data name="Cat_backup-recovery" xml:space="preserve">
+    <value>备份与恢复</value>
+  </data>
+  <data name="Cat_accounts" xml:space="preserve">
+    <value>帐户与登录</value>
+  </data>
+  <data name="Cmd_device.bluetooth.settings_Title" xml:space="preserve">
+    <value>蓝牙和设备设置</value>
+  </data>
+  <data name="Cmd_device.bluetooth.settings_Desc" xml:space="preserve">
+    <value>打开设置以开关蓝牙，并配对、连接或删除设备。</value>
+  </data>
+  <data name="Cmd_device.printers.settings_Title" xml:space="preserve">
+    <value>打印机和扫描仪设置</value>
+  </data>
+  <data name="Cmd_device.printers.settings_Desc" xml:space="preserve">
+    <value>打开设置以添加或删除打印机和扫描仪、选择默认打印机并打开打印队列。</value>
+  </data>
+  <data name="Cmd_device.display.settings_Title" xml:space="preserve">
+    <value>显示设置</value>
+  </data>
+  <data name="Cmd_device.display.settings_Desc" xml:space="preserve">
+    <value>打开设置以更改分辨率、缩放、方向和刷新率，并排列多个显示器。</value>
+  </data>
+  <data name="Cmd_device.sound.open_Title" xml:space="preserve">
+    <value>声音控制面板</value>
+  </data>
+  <data name="Cmd_device.sound.open_Desc" xml:space="preserve">
+    <value>打开经典声音面板，选择默认播放和录制设备，并设置格式和音量级别。</value>
+  </data>
+  <data name="Cmd_device.usb.list_Title" xml:space="preserve">
+    <value>列出 USB 设备</value>
+  </data>
+  <data name="Cmd_device.usb.list_Desc" xml:space="preserve">
+    <value>列出当前连接的 USB 设备（集线器、控制器、存储设备和外设）及其状态。</value>
+  </data>
+  <data name="Cmd_device.cameras.list_Title" xml:space="preserve">
+    <value>列出摄像头</value>
+  </data>
+  <data name="Cmd_device.cameras.list_Desc" xml:space="preserve">
+    <value>列出 Windows 检测到的网络摄像头和其他图像设备及其状态。</value>
+  </data>
+  <data name="Cmd_device.audio.list_Title" xml:space="preserve">
+    <value>列出音频设备</value>
+  </data>
+  <data name="Cmd_device.audio.list_Desc" xml:space="preserve">
+    <value>列出声卡以及播放和录制终结点（扬声器、耳机、麦克风）及其状态。</value>
+  </data>
+  <data name="Cmd_device.bluetooth.list_Title" xml:space="preserve">
+    <value>列出蓝牙设备</value>
+  </data>
+  <data name="Cmd_device.bluetooth.list_Desc" xml:space="preserve">
+    <value>显示蓝牙适配器以及与此电脑配对的设备。</value>
+  </data>
+  <data name="Cmd_device.printers.list_Title" xml:space="preserve">
+    <value>列出打印机</value>
+  </data>
+  <data name="Cmd_device.printers.list_Desc" xml:space="preserve">
+    <value>列出已安装的打印机及其驱动程序、端口、共享和状态。需要 Print Spooler 服务。</value>
+  </data>
+  <data name="Cmd_device.disconnected.list_Title" xml:space="preserve">
+    <value>列出已断开的设备</value>
+  </data>
+  <data name="Cmd_device.disconnected.list_Desc" xml:space="preserve">
+    <value>列出 Windows 仍记得但当前未连接的设备，例如旧的 U 盘、扩展坞或显示器。</value>
+  </data>
+  <data name="Cmd_device.hardware.scan_Title" xml:space="preserve">
+    <value>扫描检测硬件改动</value>
+  </data>
+  <data name="Cmd_device.hardware.scan_Desc" xml:space="preserve">
+    <value>让 Windows 检测新连接或已更改的硬件，相当于设备管理器中的“扫描检测硬件改动”。</value>
+  </data>
+  <data name="Cmd_recovery.settings.open_Title" xml:space="preserve">
+    <value>恢复设置</value>
+  </data>
+  <data name="Cmd_recovery.settings.open_Desc" xml:space="preserve">
+    <value>打开“设置”→“恢复”：重置此电脑、高级启动以及回退到以前版本的 Windows。</value>
+  </data>
+  <data name="Cmd_recovery.winre.status_Title" xml:space="preserve">
+    <value>Windows 恢复环境状态</value>
+  </data>
+  <data name="Cmd_recovery.winre.status_Desc" xml:space="preserve">
+    <value>显示 Windows 恢复环境 (WinRE) 是否已启用及其映像位置 (reagentc /info)。</value>
+  </data>
+  <data name="Cmd_recovery.winre.enable_Title" xml:space="preserve">
+    <value>启用 Windows 恢复环境</value>
+  </data>
+  <data name="Cmd_recovery.winre.enable_Desc" xml:space="preserve">
+    <value>重新启用 Windows 恢复环境 (reagentc /enable)，以便在启动时使用启动修复、系统还原和重置此电脑。需要恢复映像 (Winre.wim)。</value>
+  </data>
+  <data name="Cmd_recovery.systemprotection.open_Title" xml:space="preserve">
+    <value>系统保护设置</value>
+  </data>
+  <data name="Cmd_recovery.systemprotection.open_Desc" xml:space="preserve">
+    <value>打开“系统属性”→“系统保护”，按驱动器开启或关闭还原点并限制其占用的磁盘空间。</value>
+  </data>
+  <data name="Cmd_recovery.shadowstorage_Title" xml:space="preserve">
+    <value>还原点磁盘占用</value>
+  </data>
+  <data name="Cmd_recovery.shadowstorage_Desc" xml:space="preserve">
+    <value>显示每个驱动器上还原点（卷影副本）已使用和最多可使用的磁盘空间。</value>
+  </data>
+  <data name="Cmd_recovery.filehistory.open_Title" xml:space="preserve">
+    <value>文件历史记录</value>
+  </data>
+  <data name="Cmd_recovery.filehistory.open_Desc" xml:space="preserve">
+    <value>打开文件历史记录，将个人文件夹备份到外部或网络驱动器，或还原文件的早期版本。</value>
+  </data>
+  <data name="Cmd_recovery.backup.settings_Title" xml:space="preserve">
+    <value>备份设置</value>
+  </data>
+  <data name="Cmd_recovery.backup.settings_Desc" xml:space="preserve">
+    <value>打开“设置”→“备份”：Windows 11 上为 Windows 备份，Windows 10 上为文件历史记录选项。</value>
+  </data>
+  <data name="Cmd_recovery.backuprestore.open_Title" xml:space="preserve">
+    <value>备份和还原(Windows 7)</value>
+  </data>
+  <data name="Cmd_recovery.backuprestore.open_Desc" xml:space="preserve">
+    <value>打开经典的“备份和还原”面板，创建系统映像或从旧备份中还原文件。</value>
+  </data>
+  <data name="Cmd_recovery.drive.create_Title" xml:space="preserve">
+    <value>创建恢复驱动器</value>
+  </data>
+  <data name="Cmd_recovery.drive.create_Desc" xml:space="preserve">
+    <value>打开恢复驱动器向导，创建用于修复或重新安装 Windows 的可启动 U 盘。向导会清除 U 盘上的数据，并需要管理员批准。</value>
+  </data>
+  <data name="Cmd_account.signin.settings_Title" xml:space="preserve">
+    <value>登录选项</value>
+  </data>
+  <data name="Cmd_account.signin.settings_Desc" xml:space="preserve">
+    <value>打开设置以设置 PIN、Windows Hello、密码或安全密钥以及动态锁。</value>
+  </data>
+  <data name="Cmd_account.yourinfo.settings_Title" xml:space="preserve">
+    <value>你的帐户信息</value>
+  </data>
+  <data name="Cmd_account.yourinfo.settings_Desc" xml:space="preserve">
+    <value>打开“设置”→“你的信息”，查看帐户类型并在 Microsoft 帐户和本地帐户之间切换。</value>
+  </data>
+  <data name="Cmd_account.otherusers.settings_Title" xml:space="preserve">
+    <value>其他用户</value>
+  </data>
+  <data name="Cmd_account.otherusers.settings_Desc" xml:space="preserve">
+    <value>打开设置以添加、删除或更改此电脑上的其他用户帐户。</value>
+  </data>
+  <data name="Cmd_account.useraccounts.open_Title" xml:space="preserve">
+    <value>用户帐户(高级)</value>
+  </data>
+  <data name="Cmd_account.useraccounts.open_Desc" xml:space="preserve">
+    <value>打开经典的“用户帐户”对话框 (netplwiz)，管理用户及其组成员身份。Windows 会请求管理员批准。</value>
+  </data>
+  <data name="Cmd_account.credman.open_Title" xml:space="preserve">
+    <value>凭据管理器</value>
+  </data>
+  <data name="Cmd_account.credman.open_Desc" xml:space="preserve">
+    <value>打开凭据管理器，查看、编辑或删除已保存的 Windows 凭据和 Web 凭据。</value>
+  </data>
+  <data name="Cmd_account.credentials.list_Title" xml:space="preserve">
+    <value>列出已保存的 Windows 凭据</value>
+  </data>
+  <data name="Cmd_account.credentials.list_Desc" xml:space="preserve">
+    <value>列出 Windows 凭据保管库中保存的目标和用户名 (cmdkey /list)。不会显示密码。</value>
+  </data>
+  <data name="Cmd_account.passwordpolicy_Title" xml:space="preserve">
+    <value>密码和锁定策略</value>
+  </data>
+  <data name="Cmd_account.passwordpolicy_Desc" xml:space="preserve">
+    <value>显示本地密码规则（最短长度、期限和历史记录）以及帐户锁定设置 (net accounts)。</value>
+  </data>
+  <data name="Cmd_account.localgroups_Title" xml:space="preserve">
+    <value>列出本地组</value>
+  </data>
+  <data name="Cmd_account.localgroups_Desc" xml:space="preserve">
+    <value>列出此电脑上的本地安全组及其说明。</value>
+  </data>
+  <data name="Cmd_power.sleepstates_Title" xml:space="preserve">
+    <value>可用的睡眠状态</value>
+  </data>
+  <data name="Cmd_power.sleepstates_Desc" xml:space="preserve">
+    <value>显示此电脑支持哪些睡眠状态（睡眠、新式待机、休眠、混合睡眠）以及其他状态不可用的原因。</value>
+  </data>
+  <data name="Cmd_power.lastwake_Title" xml:space="preserve">
+    <value>上次唤醒电脑的来源</value>
+  </data>
+  <data name="Cmd_power.lastwake_Desc" xml:space="preserve">
+    <value>显示上次将电脑从睡眠中唤醒的设备或定时器 (powercfg /lastwake)。</value>
+  </data>
+  <data name="Cmd_power.wake.devices_Title" xml:space="preserve">
+    <value>可唤醒电脑的设备</value>
+  </data>
+  <data name="Cmd_power.wake.devices_Desc" xml:space="preserve">
+    <value>列出允许将电脑从睡眠中唤醒的设备，例如鼠标、键盘或网络适配器。</value>
+  </data>
+  <data name="Cmd_info.motherboard_Title" xml:space="preserve">
+    <value>主板信息</value>
+  </data>
+  <data name="Cmd_info.motherboard_Desc" xml:space="preserve">
+    <value>显示主板的制造商、型号和版本。</value>
+  </data>
+  <data name="Cmd_info.language_Title" xml:space="preserve">
+    <value>语言和区域</value>
+  </data>
+  <data name="Cmd_info.language_Desc" xml:space="preserve">
+    <value>显示系统区域设置（用于非 Unicode 程序）、显示语言、区域格式、国家或地区以及你的语言列表。</value>
+  </data>
+  <data name="Cmd_svc.list.disabled_Title" xml:space="preserve">
+    <value>列出已禁用的服务</value>
+  </data>
+  <data name="Cmd_svc.list.disabled_Desc" xml:space="preserve">
+    <value>列出启动类型为“禁用”的服务，例如用于找出被优化工具关闭的服务。</value>
+  </data>
+  <data name="Cmd_dev.path.list_Title" xml:space="preserve">
+    <value>列出 PATH 条目</value>
+  </data>
+  <data name="Cmd_dev.path.list_Desc" xml:space="preserve">
+    <value>逐行列出计算机和用户 PATH 中的文件夹，并标出已不存在的文件夹。</value>
+  </data>
+  <data name="Cmd_net.proxy.settings_Title" xml:space="preserve">
+    <value>代理设置</value>
+  </data>
+  <data name="Cmd_net.proxy.settings_Desc" xml:space="preserve">
+    <value>打开设置以设置代理服务器或自动代理配置 (PAC) 脚本。</value>
+  </data>
+  <data name="Cmd_net.vpn.settings_Title" xml:space="preserve">
+    <value>VPN 设置</value>
+  </data>
+  <data name="Cmd_net.vpn.settings_Desc" xml:space="preserve">
+    <value>打开设置以添加、连接或删除 Windows 内置的 VPN 连接。</value>
+  </data>
 </root>

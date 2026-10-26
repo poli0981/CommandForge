@@ -89,7 +89,7 @@ public partial class MainWindow : FluentWindow
         RootNavigation.MenuItems.Add(Item("SidebarRecipes", SymbolRegular.TaskListSquareLtr24, NavigationKeys.Recipes, typeof(RecipesView)));
         RootNavigation.MenuItems.Add(Item("SidebarUserCommands", SymbolRegular.CodeTextEdit20, NavigationKeys.UserCommands, typeof(UserCommandsView)));
 
-        // Last, so expanding its twelve categories never pushes the other pages out of view.
+        // Last, so expanding its categories never pushes the other pages out of view.
         var catalog = Item("Nav_Catalog", SymbolRegular.Apps24, NavigationKeys.Catalog, typeof(CatalogView));
         foreach (var category in _viewModel.Catalog.Categories.Where(c => c.Id is not null))
         {

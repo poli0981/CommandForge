@@ -42,7 +42,7 @@ You'll be asked again only if the terms change.
     shortcuts**, **User guide**, **Report a bug**, **Terms & Privacy** and **About CommandForge**.
 - **Navigation pane** (left)
   - Home, Favorites, History, Recipes and My commands.
-  - **Command catalog**, with its 12 categories and the number of commands in each.
+  - **Command catalog**, with its 15 categories and the number of commands in each.
   - Log viewer, Debug panel and Settings, at the bottom.
   - `Ctrl+B` shows or hides the pane.
 - The window can be resized (down to a minimum size) and maximized. It reopens where you left it.

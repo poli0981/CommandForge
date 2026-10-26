@@ -2582,4 +2582,235 @@ Details were written to the log folder:
   <data name="Settings_RunModeDev" xml:space="preserve">
     <value>Development build (doesn't update)</value>
   </data>
+  <data name="Cat_devices" xml:space="preserve">
+    <value>Devices &amp; Peripherals</value>
+  </data>
+  <data name="Cat_backup-recovery" xml:space="preserve">
+    <value>Backup &amp; Recovery</value>
+  </data>
+  <data name="Cat_accounts" xml:space="preserve">
+    <value>Accounts &amp; Sign-in</value>
+  </data>
+  <data name="Cmd_device.bluetooth.settings_Title" xml:space="preserve">
+    <value>Bluetooth &amp; devices settings</value>
+  </data>
+  <data name="Cmd_device.bluetooth.settings_Desc" xml:space="preserve">
+    <value>Open Settings to turn Bluetooth on or off and pair, connect or remove devices.</value>
+  </data>
+  <data name="Cmd_device.printers.settings_Title" xml:space="preserve">
+    <value>Printers &amp; scanners settings</value>
+  </data>
+  <data name="Cmd_device.printers.settings_Desc" xml:space="preserve">
+    <value>Open Settings to add or remove printers and scanners, choose the default printer and open print queues.</value>
+  </data>
+  <data name="Cmd_device.display.settings_Title" xml:space="preserve">
+    <value>Display settings</value>
+  </data>
+  <data name="Cmd_device.display.settings_Desc" xml:space="preserve">
+    <value>Open Settings to change the resolution, scale, orientation and refresh rate, and arrange multiple displays.</value>
+  </data>
+  <data name="Cmd_device.sound.open_Title" xml:space="preserve">
+    <value>Sound control panel</value>
+  </data>
+  <data name="Cmd_device.sound.open_Desc" xml:space="preserve">
+    <value>Open the classic Sound panel to choose the default playback and recording devices and set their format and levels.</value>
+  </data>
+  <data name="Cmd_device.usb.list_Title" xml:space="preserve">
+    <value>List USB devices</value>
+  </data>
+  <data name="Cmd_device.usb.list_Desc" xml:space="preserve">
+    <value>List the USB devices connected now (hubs, controllers, storage and peripherals) with their status.</value>
+  </data>
+  <data name="Cmd_device.cameras.list_Title" xml:space="preserve">
+    <value>List cameras</value>
+  </data>
+  <data name="Cmd_device.cameras.list_Desc" xml:space="preserve">
+    <value>List the webcams and other imaging devices Windows detects, with their status.</value>
+  </data>
+  <data name="Cmd_device.audio.list_Title" xml:space="preserve">
+    <value>List audio devices</value>
+  </data>
+  <data name="Cmd_device.audio.list_Desc" xml:space="preserve">
+    <value>List sound cards and the playback and recording endpoints (speakers, headphones, microphones) with their status.</value>
+  </data>
+  <data name="Cmd_device.bluetooth.list_Title" xml:space="preserve">
+    <value>List Bluetooth devices</value>
+  </data>
+  <data name="Cmd_device.bluetooth.list_Desc" xml:space="preserve">
+    <value>Show the Bluetooth adapter and the devices paired with this PC.</value>
+  </data>
+  <data name="Cmd_device.printers.list_Title" xml:space="preserve">
+    <value>List printers</value>
+  </data>
+  <data name="Cmd_device.printers.list_Desc" xml:space="preserve">
+    <value>List the installed printers with their driver, port, sharing and status. Needs the Print Spooler service.</value>
+  </data>
+  <data name="Cmd_device.disconnected.list_Title" xml:space="preserve">
+    <value>List disconnected devices</value>
+  </data>
+  <data name="Cmd_device.disconnected.list_Desc" xml:space="preserve">
+    <value>List devices Windows still remembers but that aren't connected now, such as old USB drives, docks or monitors.</value>
+  </data>
+  <data name="Cmd_device.hardware.scan_Title" xml:space="preserve">
+    <value>Scan for hardware changes</value>
+  </data>
+  <data name="Cmd_device.hardware.scan_Desc" xml:space="preserve">
+    <value>Ask Windows to detect newly connected or changed hardware, like Scan for hardware changes in Device Manager.</value>
+  </data>
+  <data name="Cmd_recovery.settings.open_Title" xml:space="preserve">
+    <value>Recovery settings</value>
+  </data>
+  <data name="Cmd_recovery.settings.open_Desc" xml:space="preserve">
+    <value>Open Settings → Recovery: Reset this PC, Advanced startup and going back to the previous version of Windows.</value>
+  </data>
+  <data name="Cmd_recovery.winre.status_Title" xml:space="preserve">
+    <value>Windows Recovery Environment status</value>
+  </data>
+  <data name="Cmd_recovery.winre.status_Desc" xml:space="preserve">
+    <value>Show whether the Windows Recovery Environment (WinRE) is enabled and where its image is (reagentc /info).</value>
+  </data>
+  <data name="Cmd_recovery.winre.enable_Title" xml:space="preserve">
+    <value>Enable Windows Recovery Environment</value>
+  </data>
+  <data name="Cmd_recovery.winre.enable_Desc" xml:space="preserve">
+    <value>Turn the Windows Recovery Environment back on (reagentc /enable) so Startup Repair, System Restore and Reset this PC are available at boot. Needs the recovery image (Winre.wim).</value>
+  </data>
+  <data name="Cmd_recovery.systemprotection.open_Title" xml:space="preserve">
+    <value>System Protection settings</value>
+  </data>
+  <data name="Cmd_recovery.systemprotection.open_Desc" xml:space="preserve">
+    <value>Open System Properties → System Protection to turn restore points on or off per drive and limit the disk space they use.</value>
+  </data>
+  <data name="Cmd_recovery.shadowstorage_Title" xml:space="preserve">
+    <value>Restore point disk usage</value>
+  </data>
+  <data name="Cmd_recovery.shadowstorage_Desc" xml:space="preserve">
+    <value>Show how much disk space restore points (shadow copies) use, and may use, on each drive.</value>
+  </data>
+  <data name="Cmd_recovery.filehistory.open_Title" xml:space="preserve">
+    <value>File History</value>
+  </data>
+  <data name="Cmd_recovery.filehistory.open_Desc" xml:space="preserve">
+    <value>Open File History to back up your personal folders to an external or network drive, or restore earlier versions of files.</value>
+  </data>
+  <data name="Cmd_recovery.backup.settings_Title" xml:space="preserve">
+    <value>Backup settings</value>
+  </data>
+  <data name="Cmd_recovery.backup.settings_Desc" xml:space="preserve">
+    <value>Open Settings → Backup: Windows Backup on Windows 11, File History options on Windows 10.</value>
+  </data>
+  <data name="Cmd_recovery.backuprestore.open_Title" xml:space="preserve">
+    <value>Backup and Restore (Windows 7)</value>
+  </data>
+  <data name="Cmd_recovery.backuprestore.open_Desc" xml:space="preserve">
+    <value>Open the classic Backup and Restore panel to create a system image or restore files from an older backup.</value>
+  </data>
+  <data name="Cmd_recovery.drive.create_Title" xml:space="preserve">
+    <value>Create a recovery drive</value>
+  </data>
+  <data name="Cmd_recovery.drive.create_Desc" xml:space="preserve">
+    <value>Open the Recovery Drive wizard to make a bootable USB drive for repairing or reinstalling Windows. The wizard erases the USB drive and asks for administrator approval.</value>
+  </data>
+  <data name="Cmd_account.signin.settings_Title" xml:space="preserve">
+    <value>Sign-in options</value>
+  </data>
+  <data name="Cmd_account.signin.settings_Desc" xml:space="preserve">
+    <value>Open Settings to set up a PIN, Windows Hello, a password or a security key, and dynamic lock.</value>
+  </data>
+  <data name="Cmd_account.yourinfo.settings_Title" xml:space="preserve">
+    <value>Your account info</value>
+  </data>
+  <data name="Cmd_account.yourinfo.settings_Desc" xml:space="preserve">
+    <value>Open Settings → Your info to see the account type and switch between a Microsoft account and a local account.</value>
+  </data>
+  <data name="Cmd_account.otherusers.settings_Title" xml:space="preserve">
+    <value>Other users</value>
+  </data>
+  <data name="Cmd_account.otherusers.settings_Desc" xml:space="preserve">
+    <value>Open Settings to add, remove or change the other user accounts on this PC.</value>
+  </data>
+  <data name="Cmd_account.useraccounts.open_Title" xml:space="preserve">
+    <value>User Accounts (advanced)</value>
+  </data>
+  <data name="Cmd_account.useraccounts.open_Desc" xml:space="preserve">
+    <value>Open the classic User Accounts dialog (netplwiz) to manage users and their group membership. Windows asks for administrator approval.</value>
+  </data>
+  <data name="Cmd_account.credman.open_Title" xml:space="preserve">
+    <value>Credential Manager</value>
+  </data>
+  <data name="Cmd_account.credman.open_Desc" xml:space="preserve">
+    <value>Open Credential Manager to view, edit or remove saved Windows and web credentials.</value>
+  </data>
+  <data name="Cmd_account.credentials.list_Title" xml:space="preserve">
+    <value>List saved Windows credentials</value>
+  </data>
+  <data name="Cmd_account.credentials.list_Desc" xml:space="preserve">
+    <value>List the targets and user names stored in your Windows credential vault (cmdkey /list). Passwords are never shown.</value>
+  </data>
+  <data name="Cmd_account.passwordpolicy_Title" xml:space="preserve">
+    <value>Password &amp; lockout policy</value>
+  </data>
+  <data name="Cmd_account.passwordpolicy_Desc" xml:space="preserve">
+    <value>Show the local password rules (minimum length, age and history) and the account lockout settings (net accounts).</value>
+  </data>
+  <data name="Cmd_account.localgroups_Title" xml:space="preserve">
+    <value>List local groups</value>
+  </data>
+  <data name="Cmd_account.localgroups_Desc" xml:space="preserve">
+    <value>List the local security groups on this PC with their descriptions.</value>
+  </data>
+  <data name="Cmd_power.sleepstates_Title" xml:space="preserve">
+    <value>Available sleep states</value>
+  </data>
+  <data name="Cmd_power.sleepstates_Desc" xml:space="preserve">
+    <value>Show which sleep states this PC supports (Sleep, Modern Standby, Hibernate, Hybrid Sleep) and why the others aren't available.</value>
+  </data>
+  <data name="Cmd_power.lastwake_Title" xml:space="preserve">
+    <value>What woke the PC last</value>
+  </data>
+  <data name="Cmd_power.lastwake_Desc" xml:space="preserve">
+    <value>Show the device or timer that last woke the PC from sleep (powercfg /lastwake).</value>
+  </data>
+  <data name="Cmd_power.wake.devices_Title" xml:space="preserve">
+    <value>Devices that can wake the PC</value>
+  </data>
+  <data name="Cmd_power.wake.devices_Desc" xml:space="preserve">
+    <value>List the devices allowed to wake the PC from sleep, such as the mouse, keyboard or network adapter.</value>
+  </data>
+  <data name="Cmd_info.motherboard_Title" xml:space="preserve">
+    <value>Motherboard information</value>
+  </data>
+  <data name="Cmd_info.motherboard_Desc" xml:space="preserve">
+    <value>Show the motherboard manufacturer, model and revision.</value>
+  </data>
+  <data name="Cmd_info.language_Title" xml:space="preserve">
+    <value>Language &amp; region</value>
+  </data>
+  <data name="Cmd_info.language_Desc" xml:space="preserve">
+    <value>Show the system locale (used by non-Unicode programs), display language, regional format, home location and your language list.</value>
+  </data>
+  <data name="Cmd_svc.list.disabled_Title" xml:space="preserve">
+    <value>List disabled services</value>
+  </data>
+  <data name="Cmd_svc.list.disabled_Desc" xml:space="preserve">
+    <value>List the services whose startup type is Disabled, for example to spot ones turned off by tweaking tools.</value>
+  </data>
+  <data name="Cmd_dev.path.list_Title" xml:space="preserve">
+    <value>List PATH entries</value>
+  </data>
+  <data name="Cmd_dev.path.list_Desc" xml:space="preserve">
+    <value>List the folders in the machine and user PATH, one per line, and flag the ones that no longer exist.</value>
+  </data>
+  <data name="Cmd_net.proxy.settings_Title" xml:space="preserve">
+    <value>Proxy settings</value>
+  </data>
+  <data name="Cmd_net.proxy.settings_Desc" xml:space="preserve">
+    <value>Open Settings to set up a proxy server or an automatic proxy configuration (PAC) script.</value>
+  </data>
+  <data name="Cmd_net.vpn.settings_Title" xml:space="preserve">
+    <value>VPN settings</value>
+  </data>
+  <data name="Cmd_net.vpn.settings_Desc" xml:space="preserve">
+    <value>Open Settings to add, connect to or remove the built-in Windows VPN connections.</value>
+  </data>
 </root>

@@ -7,6 +7,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.1.0] — 2026-10-26
+
+Three new categories and 37 new commands (the catalog grows from 261 to 298), the October 2026
+.NET security update, and test coverage in SonarCloud.
+
+### Added
+- **Devices & Peripherals** (11 commands): Bluetooth, printer and display settings, the classic
+  Sound panel; lists of USB devices, cameras, audio devices, paired Bluetooth devices, printers and
+  disconnected devices Windows still remembers; and **Scan for hardware changes**.
+- **Backup & Recovery** (9 commands): Recovery settings, the Windows Recovery Environment status
+  and **Enable Windows Recovery Environment**, System Protection, restore point disk usage, File
+  History, Backup settings, Backup and Restore (Windows 7) and the Recovery Drive wizard.
+- **Accounts & Sign-in** (8 commands): Sign-in options, your account info, other users, User
+  Accounts (netplwiz), Credential Manager, saved Windows credentials (`cmdkey /list`, no
+  passwords), the password and lockout policy, and local groups.
+- **9 commands in existing categories:** available sleep states, what woke the PC last and the
+  devices allowed to wake it (Power); motherboard and language & region (System Info); disabled
+  services (Services & Startup); PATH entries with missing folders flagged (Developer); proxy and
+  VPN settings (Network).
+
 ### Changed
 - Settings → Advanced and Portable info now say whether this copy updates itself ("Installed or
   portable" / "Development build") instead of "Installed" / "Portable / dev": the portable zip
@@ -277,7 +297,8 @@ Initial public release.
   checksums (and an optional VirusTotal scan). No telemetry — the only network use is checking
   GitHub for updates.
 
-[Unreleased]: https://github.com/poli0981/CommandForge/compare/v2.0.0...HEAD
+[Unreleased]: https://github.com/poli0981/CommandForge/compare/v2.1.0...HEAD
+[2.1.0]: https://github.com/poli0981/CommandForge/compare/v2.0.0...v2.1.0
 [2.0.0]: https://github.com/poli0981/CommandForge/compare/v1.5.1...v2.0.0
 [1.5.1]: https://github.com/poli0981/CommandForge/compare/v1.5.0...v1.5.1
 [1.5.0]: https://github.com/poli0981/CommandForge/compare/v1.4.0...v1.5.0

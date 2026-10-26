@@ -14,6 +14,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Releases: the notes come from this changelog and list the VirusTotal reports; the provenance
   attestations now also cover the portable zip, and `checksums.txt` lists exactly the files you
   can download.
+- Code quality: SonarCloud now analyzes `main` and every pull request from CI, with test coverage
+  (SonarScanner for .NET 12, OpenCover reports), instead of Automatic Analysis. New code must be
+  at least 80% covered to pass the quality gate.
+- Dependencies: Microsoft.Extensions.DependencyInjection 10.0.14, CsWin32 0.3.367, CodeQL action
+  4.39.1.
+
+### Security
+- Built with the .NET 10.0.403 SDK, so the app ships the .NET 10.0.14 runtime (the October 2026
+  security update).
 
 ## [2.0.0] — 2026-10-21
 

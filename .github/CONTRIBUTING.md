@@ -31,12 +31,15 @@ See [BUILD.md](../BUILD.md) for packaging and CI.
 - Keep PRs **focused and small**; one logical change per PR.
 - Match existing style; run `dotnet format` and keep the build at **0 warnings** (analyzers,
   including SonarAnalyzer, run as part of the build).
-- **Don't delete or disable tests** to make CI pass; add tests for new behavior.
+- **Don't delete or disable tests** to make CI pass; add tests for new behavior. SonarCloud's
+  quality gate expects at least 80% test coverage on new code (XAML code-behind excepted), so put
+  logic in view models and helpers that tests can reach.
 - **Sign your commits** (GPG, SSH or S/MIME) — `main` only accepts verified signatures. Commit
   messages follow [Conventional Commits](https://www.conventionalcommits.org/)
   (`fix(catalog): …`, `feat(ui): …`).
 - PRs need the required checks to pass: `build`, `package`, CodeQL (`Analyze (csharp)`,
-  `Analyze (actions)`) and `dependency-review`.
+  `Analyze (actions)`) and `dependency-review`. The SonarCloud quality gate is reported on PRs from
+  this repository too (fork PRs don't get the analysis token).
 - **Dependencies:** package versions live in each `.csproj` (GitHub's dependency graph doesn't read
   `Directory.Packages.props`). Discuss a new package before adding it; runtime dependencies must be
   GPLv3-compatible (dependency review enforces a license allow-list).

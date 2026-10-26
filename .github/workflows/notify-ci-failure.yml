@@ -1,11 +1,11 @@
 name: Notify CI Failure
 
-# Posts a Discord alert when the Build workflow fails on main (reuses the shared workflow in
-# poli0981/.github). Requires repo secret DISCORD_CI_WEBHOOK.
+# Posts a Discord alert when the Build or SonarCloud workflow fails on main (reuses the shared
+# workflow in poli0981/.github). Requires repo secret DISCORD_CI_WEBHOOK.
 
 on:
   workflow_run:
-    workflows: ["Build"]
+    workflows: ["Build", "SonarCloud"]
     types: [completed]
 
 # The reusable workflow requests actions: read; without granting it here every run was a
@@ -16,7 +16,7 @@ permissions:
 
 jobs:
   notify:
-    # Build only runs on `push` for main, so this limits alerts to main without trusting
+    # Both workflows only run on `push` for main, so this limits alerts to main without trusting
     # forgeable values (branch names, actor logins) — and skips pull-request runs (including
     # Dependabot's), which have no access to the webhook secret anyway.
     if: >-

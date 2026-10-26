@@ -22,8 +22,9 @@ updates:
         patterns: ["Velopack", "vpk"]
       testing:
         patterns: ["xunit*", "Microsoft.NET.Test.Sdk", "coverlet.*"]
+      # Includes the SonarScanner CLI pinned in .config/dotnet-tools.json.
       build-tooling:
-        patterns: ["SonarAnalyzer.CSharp", "Microsoft.Windows.CsWin32"]
+        patterns: ["SonarAnalyzer.CSharp", "dotnet-sonarscanner", "Microsoft.Windows.CsWin32"]
 
   - package-ecosystem: dotnet-sdk
     directory: "/"

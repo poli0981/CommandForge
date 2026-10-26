@@ -56,7 +56,8 @@ input; the upload step then creates the `vX.Y.Z` tag.
 | `VT_API_KEY` | VirusTotal scan + links | optional (step skipped if unset) |
 | `DISCORD_RELEASES_WEBHOOK` (or `DISCORD_REPO_WEBHOOK`) | Release announcement to Discord | optional |
 | `DISCORD_PING_ROLE_ID` | Role ping on stable releases | optional |
-| `DISCORD_CI_WEBHOOK` | Build-failure alerts to Discord | optional |
+| `DISCORD_CI_WEBHOOK` | Build/SonarCloud failure alerts to Discord | optional |
+| `SONAR_TOKEN` | SonarCloud analysis and coverage (`sonarcloud.yml`) | for the SonarCloud workflow (runs without it are skipped) |
 
 > `poli0981` is a user account (not an org), so secrets are set **per repository**
 > (Settings → Secrets and variables → Actions).

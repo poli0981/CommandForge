@@ -21,9 +21,10 @@ clear danger level, a confirmation for anything risky, and an optional System Re
 
 ## Features
 
-- **261 vetted commands in 12 categories** — System & Maintenance, Updates & Packages, Tweaks &
+- **298 vetted commands in 15 categories** — System & Maintenance, Updates & Packages, Tweaks &
   Shortcuts, Network, Cleanup, Power, System Info, Diagnostics, Security & Privacy, Developer,
-  Storage, and Services & Startup. Commands that don't apply to your Windows build are hidden.
+  Storage, Services & Startup, Devices & Peripherals, Backup & Recovery, and Accounts & Sign-in.
+  Commands that don't apply to your Windows build are hidden.
 - **Fluent design** — a Windows 11-style window (Mica, navigation pane, in-window dialogs) that
   follows your light/dark theme, accent color and High Contrast. It is resizable and remembers its
   size and position.

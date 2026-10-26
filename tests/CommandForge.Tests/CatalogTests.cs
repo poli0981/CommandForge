@@ -22,15 +22,57 @@ public sealed class CatalogTests
     [Fact]
     public void Catalog_HasCategoriesAndCommands()
     {
-        Assert.Equal(12, Catalog.Categories.Count);
+        string[] expected =
+        [
+            "system-maintenance", "updates-packages", "tweaks-shortcuts", "network", "cleanup", "power",
+            "system-info", "diagnostics", "security-privacy", "developer", "storage", "services-startup",
+            "devices", "backup-recovery", "accounts",
+        ];
+
+        Assert.Equal(expected, Catalog.Categories.OrderBy(c => c.Order).Select(c => c.Id));
         Assert.True(Catalog.Commands.Count >= 20, $"Expected >= 20 commands, got {Catalog.Commands.Count}.");
     }
 
     [Fact]
-    public void Catalog_HasStorageCategory_WithCommands()
+    public void Catalog_CategoryOrder_RunsFromOneWithoutGaps()
+        => Assert.Equal(Enumerable.Range(1, Catalog.Categories.Count), Catalog.Categories.Select(c => c.Order).Order());
+
+    [Theory]
+    [InlineData(19045)] // Windows 10 22H2
+    [InlineData(22631)] // Windows 11 23H2
+    [InlineData(26100)] // Windows 11 24H2
+    public void Catalog_EveryCategory_HasCommandsOnEverySupportedBuild(int build)
     {
-        Assert.Contains(Catalog.Categories, c => c.Id == "storage");
-        Assert.Contains(Catalog.Commands, c => c.CategoryId == "storage");
+        // The navigation pane hides commands for other builds, so an empty category would show 0.
+        var empty = Catalog.Categories
+            .Where(category => !Catalog.Commands.Any(c => c.CategoryId == category.Id && c.AppliesToOsBuild(build)))
+            .Select(category => category.Id)
+            .ToList();
+        Assert.True(empty.Count == 0, $"Categories without commands on build {build}: {string.Join(", ", empty)}.");
+    }
+
+    [Fact]
+    public void Catalog_CommandLines_AreUnique()
+    {
+        var duplicates = Catalog.Commands
+            .GroupBy(c => (c.Executable.ToLowerInvariant(), c.ArgsTemplate))
+            .Where(g => g.Count() > 1)
+            .Select(g => string.Join(" = ", g.Select(c => c.Id)))
+            .ToList();
+        Assert.True(duplicates.Count == 0, $"Commands with the same command line: {string.Join("; ", duplicates)}.");
+    }
+
+    [Fact]
+    public void Catalog_ShellLaunches_OpenOnlySettingsPagesAndControlPanelItems()
+    {
+        // explorer and control are launchers: they must open a settings URI, shell folder or Control
+        // Panel item, never a file or program path.
+        var offenders = Catalog.Commands
+            .Where(c => (c.Executable == "explorer" && !Regex.IsMatch(c.ArgsTemplate, "^(ms-settings:|shell:|windowsdefender:|ms-windows-store:)", RegexOptions.None, TimeSpan.FromSeconds(1)))
+                || (c.Executable == "control" && !Regex.IsMatch(c.ArgsTemplate, @"^([a-z]+\.cpl|/name Microsoft\.[A-Za-z]+)$", RegexOptions.None, TimeSpan.FromSeconds(1))))
+            .Select(c => $"{c.Id} ({c.Executable} {c.ArgsTemplate})")
+            .ToList();
+        Assert.True(offenders.Count == 0, $"Unexpected launcher arguments: {string.Join(", ", offenders)}.");
     }
 
     [Fact]

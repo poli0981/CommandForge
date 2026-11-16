@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- Code quality: JetBrains Qodana for .NET now inspects `main` and every pull request from CI, next
+  to SonarCloud: Rider's C#, XAML and resource inspections and JetBrains' security rules, run
+  natively on Windows. The gate is zero problems.
+- Dependencies: Microsoft.Extensions.DependencyInjection 10.0.15, CsWin32 0.3.371, SonarAnalyzer
+  10.36, SonarScanner for .NET 12.1.0, xUnit v3 4.0.3, Microsoft.NET.Test.Sdk 18.12.0, coverlet
+  10.1.1; in CI, setup-dotnet 6.1.0 and CodeQL action 4.39.3.
+- Dependabot no longer proposes new major versions of .NET or Microsoft.Extensions: moving to a
+  new .NET major is a deliberate migration, done by hand.
+
+### Security
+- Built with the .NET 10.0.404 SDK, so the app ships the .NET 10.0.15 runtime (the November 2026
+  security update).
+
 ## [2.1.0] — 2026-10-26
 
 Three new categories and 37 new commands (the catalog grows from 261 to 298), the October 2026

@@ -1,6 +1,8 @@
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using CommandForge.Application;
+using CommandForge.Application.Ports;
+using CommandForge.Desktop.Services;
 using CommandForge.Desktop.ViewModels;
 
 namespace CommandForge.Tests;
@@ -63,6 +65,23 @@ public sealed partial class ReportBugTemplateTests
         Assert.Contains("truncated", Query(url)["what-happened"], StringComparison.Ordinal);
     }
 
+    [Fact]
+    public void ReportingACrashOpensTheBugFormForThisAppAndWindows()
+    {
+        var shell = new RecordingShell();
+        var report = new ReportBugViewModel(new NoLogs(), new NoDialogs(), new NoFiles(), shell, errorCode: "240101-000000-ABCD", errorDetails: "it broke");
+
+        report.OpenIssueCommand.Execute(null);
+
+        var url = Assert.Single(shell.Opened);
+        var fields = Query(url);
+        Assert.StartsWith(ProductLinks.NewIssue + "?template=bug_report.yml&", url, StringComparison.Ordinal);
+        Assert.Equal("[Crash 240101-000000-ABCD] ", fields["title"]);
+        Assert.Equal(ReportBugViewModel.BuildWhatHappened("it broke", "240101-000000-ABCD"), fields["what-happened"]);
+        Assert.Contains(fields["app-version"], report.EnvironmentText, StringComparison.Ordinal);
+        Assert.StartsWith(RuntimeInformation.OSDescription, fields["windows-version"], StringComparison.Ordinal);
+    }
+
     private static Dictionary<string, string> Query(string url)
         => new Uri(url).Query.TrimStart('?').Split('&')
             .Select(pair => pair.Split('=', 2))
@@ -83,4 +102,44 @@ public sealed partial class ReportBugTemplateTests
 
     [GeneratedRegex(@"^\s+id:\s*(?<id>[a-z0-9-]+)\s*$", RegexOptions.Multiline | RegexOptions.CultureInvariant, matchTimeoutMilliseconds: 2000)]
     private static partial Regex FieldId();
+
+    private sealed class RecordingShell : IShellService
+    {
+        public List<string> Opened { get; } = [];
+
+        public bool TryOpen(string target)
+        {
+            Opened.Add(target);
+            return true;
+        }
+
+        public bool TryRestartWindows() => false;
+    }
+
+    private sealed class NoLogs : ILogMaintenance
+    {
+        public string LogsDirectoryPath => string.Empty;
+
+        public long GetLogsSizeBytes() => 0;
+
+        public Task ExportZipAsync(string destinationZipPath, CancellationToken cancellationToken = default) => Task.CompletedTask;
+
+        public void DeleteRolledLogFiles()
+        {
+        }
+    }
+
+    private sealed class NoDialogs : IDialogService
+    {
+        public Task<bool> ConfirmAsync(string title, string message, DialogKind kind = DialogKind.Warning) => Task.FromResult(false);
+
+        public Task ShowMessageAsync(string title, string message, DialogKind kind = DialogKind.Information) => Task.CompletedTask;
+    }
+
+    private sealed class NoFiles : IFileDialogService
+    {
+        public string? PickSaveFile(string title, string filter, string defaultFileName) => null;
+
+        public string? PickOpenFile(string title, string filter) => null;
+    }
 }

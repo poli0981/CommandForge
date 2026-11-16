@@ -55,6 +55,46 @@ exclude:
       - .claude
       - .idea
       - .vs
+  # JETBRAINS' SECURITY RULES (the OpenGrep plugin) stay on, and the files their results were READ in
+  # are listed here - so a new file that starts a process is reported. "A process started with
+  # something that is not a literal" fired 11 times on the first run (2026-11-16): starting processes
+  # is what CommandForge is for. What each file starts, and where its path and arguments come from,
+  # is in tests/CommandForge.Tests/ProcessStartSitesTests.cs, which also fails on a new file. The
+  # name is the plugin's one inspection, not a rule's: a rule's own id is honoured nowhere, so a
+  # listed file is left out of all of the plugin's rules - the price.
+  - name: OpenGrepInspection
+    paths:
+      - src/CommandForge.Infrastructure/Execution/SystemProcessRunner.cs
+      - src/CommandForge.Infrastructure/Elevation/BrokerElevationService.cs
+      - src/CommandForge.Wpf/Services/ShellService.cs
+      # The tests start what they test (a read-only PowerShell, the echo of the executor test).
+      - tests
+  # THE LINTER'S OWN FAULT, not the file's: resolving PInvoke.CreateJobObject(null, null) - CsWin32's
+  # null-to-PCWSTR conversion - the engine loses the constructor and reports its locals, its field,
+  # the class and the file's usings as unused. The compiler builds the file with warnings as errors
+  # (IDE0005 fails a redundant using). The same engine fault is known from PInvoke.EnumDisplaySettings
+  # (null, ...). To be removed when a linter build reads the file.
+  - name: RedundantUsingDirective
+    paths:
+      - src/CommandForge.Infrastructure/Execution/ProcessJob.cs
+  - name: UnusedVariable.Compiler
+    paths:
+      - src/CommandForge.Infrastructure/Execution/ProcessJob.cs
+  - name: NotAccessedField.Compiler
+    paths:
+      - src/CommandForge.Infrastructure/Execution/ProcessJob.cs
+  - name: UnusedField.Compiler
+    paths:
+      - src/CommandForge.Infrastructure/Execution/ProcessJob.cs
+  - name: ClassCannotBeInstantiated
+    paths:
+      - src/CommandForge.Infrastructure/Execution/ProcessJob.cs
+  # The cancellation callback's token source: the registration that captures it is declared after
+  # it, so it is disposed first, and disposing a registration waits for a callback that is running -
+  # the source is never used after its disposal.
+  - name: AccessToDisposedClosure
+    paths:
+      - src/CommandForge.Infrastructure/Elevation/BrokerElevationService.cs
 
 # The gate: no problem at all. What the linter reports is settled where it is found — fixed, or its
 # inspection switched off with the reason beside it — so a count above zero is something new.

@@ -32,3 +32,73 @@ indent_size = 2
 # Generated files: relax style enforcement
 [*.{g,g.i,Designer}.cs]
 generated_code = true
+
+# --- ReSharper inspections: what Qodana reads (qodana.yaml, .github/workflows/qodana.yml) ---
+# Qodana for .NET runs ReSharper's engine, and the engine reads these keys; so does Rider or ReSharper in the editor,
+# which is why they are here and not in qodana.yaml: the same list everywhere. An inspection is off only where it
+# argues with a choice this project made; each line says which. Everything else it reports is fixed. (What is NOT
+# ReSharper's - a whole severity, the IntelliJ platform's inspections, JetBrains' security rules, a file the engine
+# itself misreads - is in qodana.yaml.)
+[*.{cs,xaml}]
+# A code-behind class names its base so that the type reads whole without the half XAML generates.
+resharper_redundant_extends_list_entry_highlighting = none
+# An argument that repeats a default says which value the call relies on (updateAccent: true, Mica, Hide(None)).
+resharper_redundant_argument_default_value_highlighting = none
+# `partial void OnXChanged(T value)`: the signature is CommunityToolkit.Mvvm's generator's, used or not.
+resharper_unused_parameter_in_partial_method_highlighting = none
+# WPF UI's implicit styles (BasedOn {x:Type ui:Button}, ui:Card) arrive with ui:ControlsDictionary at run time, from
+# a package's compiled resources the inspection does not read. A key that does not exist fails as the page loads.
+resharper_xaml_static_resource_not_resolved_highlighting = none
+# Pages get their DataContext in code (ShellPageProvider) and item templates bind to view-models the XAML does not
+# declare, so the engine cannot resolve those bindings; it would ask for design-time types on every page. The
+# accessibility tests check what the bindings must provide (names for every control and list item).
+resharper_xaml_binding_with_context_not_resolved_highlighting = none
+# Proposals, not findings - ReSharper's suggestions for a style this project did not take. Its style is this file,
+# `dotnet format` and the analyzers the build treats as errors (SonarAnalyzer included).
+resharper_convert_to_primary_constructor_highlighting = none
+resharper_merge_into_pattern_highlighting = none
+resharper_use_utf8_string_literal_highlighting = none
+resharper_arrange_object_creation_when_type_evident_highlighting = none
+resharper_convert_closure_to_method_group_highlighting = none
+resharper_use_collection_expression_highlighting = none
+resharper_convert_to_auto_property_highlighting = none
+# The streams and pipes these name are closed synchronously on purpose; `await using` would add a ConfigureAwait to
+# every one without closing them any sooner.
+resharper_use_await_using_highlighting = none
+# A member's accessibility is what its type offers, not a count of today's callers.
+resharper_member_can_be_private_global_highlighting = none
+resharper_property_can_be_made_init_only_global_highlighting = none
+resharper_auto_property_can_be_made_get_only_global_highlighting = none
+# "Never used" across the solution is not what decides for a member other code can reach: a view-model's properties
+# and commands are read by XAML bindings the engine cannot resolve (above), the product links by x:Static, and a
+# model's members by System.Text.Json. The private kind (.Local) stays on.
+resharper_unused_member_global_highlighting = none
+resharper_unused_auto_property_accessor_global_highlighting = none
+resharper_unused_method_return_value_global_highlighting = none
+resharper_unused_parameter_global_highlighting = none
+resharper_class_never_instantiated_global_highlighting = none
+resharper_event_never_subscribed_to_global_highlighting = none
+resharper_collection_never_queried_global_highlighting = none
+# The compiler's nullable analysis is the gate (warnings are errors). These three go further and call a guard
+# redundant because an annotation promises non-null - where a JSON file read from disk, a dependency property or a
+# WPF event hands over null all the same (the corrupt-file tests rely on those guards).
+resharper_null_coalescing_condition_is_always_not_null_according_to_api_contract_highlighting = none
+resharper_conditional_access_qualifier_is_non_nullable_according_to_api_contract_highlighting = none
+resharper_condition_is_always_true_or_false_according_to_nullable_api_contract_highlighting = none
+# A record's positional property is part of its equality and of what it prints, and XAML binds to it by name.
+resharper_not_accessed_positional_property_global_highlighting = none
+resharper_not_accessed_positional_property_local_highlighting = none
+# `default: break;` is how a switch says the rest is left alone on purpose (and Sonar S131 asks for the default).
+resharper_redundant_empty_switch_section_highlighting = none
+# Async void only for event handlers (CLAUDE.md), which is what these are.
+resharper_async_void_event_handler_method_highlighting = none
+
+[*.resx]
+# A vi, ja, zh-Hans or es value that equals the English one is deliberate: product, tool and command names (winget,
+# DISM, SFC), units and format strings are not translated.
+resharper_overridden_with_same_value_highlighting = none
+
+[tests/**/*.cs]
+# A test's lambda runs inside the `using` scope it captures from, and reads a variable the test changes on purpose.
+resharper_access_to_disposed_closure_highlighting = none
+resharper_access_to_modified_closure_highlighting = none

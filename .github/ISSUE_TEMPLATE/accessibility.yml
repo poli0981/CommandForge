@@ -1,0 +1,102 @@
+# ACCESSIBILITY.md sends every accessibility barrier here. It is its own form rather than part of the
+# bug report because a barrier needs different facts: what the reporter uses to read or operate the
+# screen, and how far it stops them. Nothing here asks about the reporter themself.
+name: Accessibility problem
+description: Something in CommandForge can't be reached, read or seen — with the keyboard, a screen reader, a contrast theme, Magnifier, a larger text size or another aid
+labels: ["accessibility"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for telling us. **You never need to tell us anything about yourself or a disability** — what you use
+        and what happened is enough. Screenshots and recordings help but are optional. Accessibility fixes are always
+        in scope.
+
+        If you couldn't read or answer a **Caution or Dangerous confirmation**, say so below: it is a safety problem
+        too, and it is handled first.
+
+        Rather not use GitHub, or not post in public? Write to **accessibility@poli0981.dev** instead. What CommandForge
+        aims for and what it can't do yet: [ACCESSIBILITY.md](../blob/main/ACCESSIBILITY.md).
+
+  - type: textarea
+    id: task
+    attributes:
+      label: What were you trying to do?
+      placeholder: "e.g. run a command from the catalog, read a command's output, change the theme"
+    validations:
+      required: true
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened instead?
+      description: What you heard, saw or could not do — and what you expected.
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: How to get there
+      placeholder: |
+        1. Open the catalog (Ctrl+F)
+        2. Tab to …
+        3. …
+
+  - type: input
+    id: app-version
+    attributes:
+      label: CommandForge version
+      description: More (⋯) → About, or Settings → About
+    validations:
+      required: true
+
+  - type: input
+    id: os
+    attributes:
+      label: Windows version
+      placeholder: "Windows 11 24H2 (26100) — run winver"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: aid
+    attributes:
+      label: What do you use?
+      multiple: true
+      options:
+        - Keyboard only
+        - Narrator
+        - NVDA
+        - JAWS
+        - Windows Magnifier
+        - A Windows contrast theme
+        - A larger text size or display scaling
+        - Voice Access or other speech input
+        - Something else (say below)
+    validations:
+      required: true
+
+  - type: input
+    id: aid-version
+    attributes:
+      label: Its version, if you know it
+      placeholder: "e.g. NVDA 2026.1"
+
+  - type: dropdown
+    id: severity
+    attributes:
+      label: How much does it stop you?
+      description: Optional — the maintainer sets it when reading the report (ACCESSIBILITY.md, "How serious it is").
+      options:
+        - Not sure
+        - Critical — I can't do the task at all
+        - Serious — only with great difficulty or a workaround
+        - Moderate — it is tiring or inconsistent
+        - Minor — it barely gets in the way
+
+  - type: textarea
+    id: more
+    attributes:
+      label: Anything else
+      description: A screenshot, a recording, or the log file from More (⋯) → Report a bug (you review it before attaching).

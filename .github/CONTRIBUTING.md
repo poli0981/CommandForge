@@ -4,6 +4,32 @@ Thanks for your interest! CommandForge is a GPLv3, offline-first Windows tool th
 system-level commands, so **safety and clarity matter more than speed**. Please read this before
 opening an issue or pull request.
 
+## Maintenance mode: what we accept
+
+**CommandForge is stable and in maintenance mode** since version 2.2.0 (November 2026). It does
+what it set out to do — run vetted Windows maintenance commands from a safe, categorized window —
+so the work now goes into keeping it secure, correct and accessible, not into new features.
+
+**Still done:**
+
+1. **Dependency updates**, regularly.
+2. **Security fixes.** A High or Critical vulnerability in a dependency or in the toolchain — for
+   example the .NET runtime the app ships with, or Node.js, which the build's GitHub Actions run
+   on — gets an urgent patch release; a Moderate one goes into the next routine update. A new
+   feature is added only when it is genuinely necessary, for example to keep the app safe or
+   working on a new Windows build.
+3. **Major platform updates**, such as moving to a newer .NET.
+4. **Issues and pull requests** that add or remove catalog commands; fix bugs, UI/UX problems or
+   accessibility barriers; or fix commands that are outdated, use the wrong syntax or could be
+   harmful (a harmful one is reported privately, see [SECURITY.md](SECURITY.md)).
+5. **Translation fixes** for English, Vietnamese, Japanese, Simplified Chinese and Spanish: wording
+   that doesn't suit the culture or the local tone, and spelling that could mislead.
+
+**Not accepted:** issues and pull requests for new features, unless the feature clearly fits the
+project and is genuinely necessary; others are closed with a link to this section. Ideas are welcome
+in [Discussions › Ideas](https://github.com/poli0981/CommandForge/discussions/categories/ideas),
+without any commitment.
+
 ## Quick start
 
 Requires Windows 10 22H2 / 11 and the .NET 10 SDK.
@@ -19,12 +45,17 @@ See [BUILD.md](../BUILD.md) for packaging and CI.
 
 ## Reporting issues
 
-- Use the issue templates (Bug report / Feature request).
+- Use the issue forms: **Bug report**, **Command — add, fix or remove**, **Translation fix**,
+  **Accessibility problem**, and **Feature request** (within the policy above).
 - **Get straight to the point**: what you expected, what happened, exact steps, your Windows
   version/build and the app version (**More → About** in the app).
 - For **security vulnerabilities, do NOT open a public issue** — see [SECURITY.md](SECURITY.md).
-- Questions and ideas: [Discussions](https://github.com/poli0981/CommandForge/discussions), or
-  email [code@poli0981.dev](mailto:code@poli0981.dev).
+- Questions: [Discussions](https://github.com/poli0981/CommandForge/discussions); ideas:
+  [Discussions › Ideas](https://github.com/poli0981/CommandForge/discussions/categories/ideas),
+  without commitment; or email [code@poli0981.dev](mailto:code@poli0981.dev).
+- An accessibility barrier can also go to
+  [accessibility@poli0981.dev](mailto:accessibility@poli0981.dev) — see
+  [ACCESSIBILITY.md](../ACCESSIBILITY.md).
 
 ## Pull requests
 
@@ -48,6 +79,11 @@ See [BUILD.md](../BUILD.md) for packaging and CI.
   languages: `Strings.resx` (English), `Strings.vi.resx`, `Strings.ja.resx`, `Strings.zh-Hans.resx`
   and `Strings.es.resx`. A test fails when a key the UI uses is missing from any of them.
   Machine-translated text is fine if you say so; native-speaker fixes are very welcome.
+- **Accessibility:** every control that shows no text gets an `AutomationProperties.Name` from the
+  `.resx`; list items are named by what they show (an `ItemContainerStyle`); icons are
+  `ctl:DecorativeIcon`, which keeps their glyphs from screen readers; nothing is shown by colour
+  alone. The accessibility tests check most of this; say in the PR what you tried with the keyboard
+  alone and with Narrator ([ACCESSIBILITY.md](../ACCESSIBILITY.md#for-contributors)).
 - **Disclose AI assistance.** AI-assisted contributions are welcome — just say so in the PR
   description.
 

@@ -1,5 +1,17 @@
 # CommandForge
 
+[![Latest release](https://img.shields.io/github/v/release/poli0981/CommandForge?sort=semver)](https://github.com/poli0981/CommandForge/releases/latest)
+[![Status: stable, maintenance only](https://img.shields.io/badge/status-stable%20%C2%B7%20maintenance%20only-blue)](#project-status)
+[![Build status](https://github.com/poli0981/CommandForge/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/poli0981/CommandForge/actions/workflows/build.yml)
+[![CodeQL status](https://github.com/poli0981/CommandForge/actions/workflows/codeql.yml/badge.svg?branch=main)](https://github.com/poli0981/CommandForge/actions/workflows/codeql.yml)
+[![SonarCloud quality gate](https://sonarcloud.io/api/project_badges/measure?project=poli0981_CommandForge&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=poli0981_CommandForge)
+[![SonarCloud test coverage](https://sonarcloud.io/api/project_badges/measure?project=poli0981_CommandForge&metric=coverage)](https://sonarcloud.io/summary/new_code?id=poli0981_CommandForge)
+[![Qodana status](https://github.com/poli0981/CommandForge/actions/workflows/qodana.yml/badge.svg?branch=main)](https://github.com/poli0981/CommandForge/actions/workflows/qodana.yml)
+[![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/poli0981/CommandForge/badge)](https://scorecard.dev/viewer/?uri=github.com/poli0981/CommandForge)
+[![Accessibility: WCAG 2.2 AA target](https://img.shields.io/badge/accessibility-WCAG%202.2%20AA%20target-2ea44f)](ACCESSIBILITY.md)
+![Platform: Windows 10 and 11](https://img.shields.io/badge/platform-Windows%2010%20%7C%2011-0078D6)
+[![License: GPL v3](https://img.shields.io/github/license/poli0981/CommandForge)](LICENSE)
+
 > Run powerful Windows maintenance commands from a clean, categorized GUI — no need to
 > memorize syntax.
 
@@ -16,6 +28,20 @@ clear danger level, a confirmation for anything risky, and an optional System Re
 
 > Built by a solo developer with AI assistance — see the [Disclaimer](DISCLAIMER.md) and the
 > AI disclosure below.
+
+---
+
+## Project status
+
+**Stable, maintenance only** since version 2.2.0 (November 2026). CommandForge does what it set
+out to do, so the work now goes into keeping it secure, correct and accessible: dependency and
+security updates (a High or Critical vulnerability gets an urgent patch release), major platform
+updates such as a newer .NET, catalog commands added, fixed or removed, bug, UI/UX and
+accessibility fixes, and translation fixes. A new feature is added only when it is genuinely
+necessary. The whole policy is in
+[CONTRIBUTING.md](.github/CONTRIBUTING.md#maintenance-mode-what-we-accept); ideas are welcome in
+[Discussions › Ideas](https://github.com/poli0981/CommandForge/discussions/categories/ideas),
+without commitment.
 
 ---
 
@@ -47,6 +73,9 @@ clear danger level, a confirmation for anything risky, and an optional System Re
   restart.
 - **Diagnostics** — Log Viewer, Debug panel, local logs with retention, and a crash dialog with a
   "Report a bug" flow that never sends anything by itself.
+- **Accessible** — everything works with the keyboard alone (`F6` moves between the navigation
+  pane, the page and the console), Narrator hears what each command does and how it ended, and the
+  app follows Windows contrast themes and Text size. See [ACCESSIBILITY.md](ACCESSIBILITY.md).
 
 New here? Read the **[user guide](USAGE.md)**.
 
@@ -59,8 +88,8 @@ New here? Read the **[user guide](USAGE.md)**.
 2. Run it. The app installs per-user (no admin rights needed) and updates itself from future
    releases.
 
-Already on 1.x? The app offers 2.0 as a normal update; your settings, favorites, history, recipes
-and commands carry over.
+Already installed? The app offers each new release as a normal update; your settings, favorites,
+history, recipes and commands carry over.
 
 ### "Unknown publisher" and verifying your download
 
@@ -108,6 +137,7 @@ See [BUILD.md](BUILD.md) for packaging and CI, and [UPDATES.md](UPDATES.md) for 
 | Topic | File |
 |---|---|
 | User guide | [USAGE.md](USAGE.md) |
+| Accessibility | [ACCESSIBILITY.md](ACCESSIBILITY.md) |
 | Release history | [CHANGELOG.md](CHANGELOG.md) |
 | Build, test, publish, release | [BUILD.md](BUILD.md) · [RELEASING.md](RELEASING.md) |
 | Update mechanism (Velopack) | [UPDATES.md](UPDATES.md) |
@@ -124,13 +154,15 @@ See [BUILD.md](BUILD.md) for packaging and CI, and [UPDATES.md](UPDATES.md) for 
 
 ## Contact
 
-Bugs and feature requests go to [GitHub Issues](https://github.com/poli0981/CommandForge/issues),
-and questions to [Discussions](https://github.com/poli0981/CommandForge/discussions). For
-everything else:
+Bugs, catalog commands, translations and accessibility problems go to
+[GitHub Issues](https://github.com/poli0981/CommandForge/issues/new/choose) (see
+[Project status](#project-status) for what is accepted), and questions and ideas to
+[Discussions](https://github.com/poli0981/CommandForge/discussions). For everything else:
 
 | Topic | Address |
 |---|---|
 | Security vulnerabilities (private) | security@poli0981.dev, or [private vulnerability reporting](https://github.com/poli0981/CommandForge/security/advisories/new) |
+| Accessibility barriers | accessibility@poli0981.dev, or the [Accessibility problem form](https://github.com/poli0981/CommandForge/issues/new?template=accessibility.yml) |
 | Privacy | privacy@poli0981.dev |
 | Terms, licensing and other legal questions | legal@poli0981.dev |
 | Copyright questions and permissions | copyright@poli0981.dev |

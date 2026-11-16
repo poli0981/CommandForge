@@ -20,6 +20,9 @@ public sealed partial class ReportBugViewModel : ObservableObject
     // Browsers and GitHub cap URL length; the body beyond this is left for the user to paste.
     private const int MaxBodyCharsInUrl = 4000;
 
+    /// <summary>The issue form the report opens (its file name under .github/ISSUE_TEMPLATE).</summary>
+    public const string BugReportForm = "bug_report.yml";
+
     private readonly ILogMaintenance _maintenance;
     private readonly IDialogService _dialogs;
     private readonly IFileDialogService _files;
@@ -82,9 +85,42 @@ public sealed partial class ReportBugViewModel : ObservableObject
 
     [RelayCommand]
     private void OpenIssue()
+        => _shell.TryOpen(BuildIssueUrl(
+            BuildTitle(),
+            AppVersion(),
+            $"{RuntimeInformation.OSDescription} ({RuntimeInformation.OSArchitecture})",
+            Description,
+            _errorCode));
+
+    /// <summary>
+    /// Pure: the address of a new issue on the Bug report form (.github/ISSUE_TEMPLATE/bug_report.yml),
+    /// its fields filled in by their ids. GitHub ignores a plain <c>body</c> in a repository with
+    /// issue forms, and shows anyone who isn't a collaborator the list of forms instead.
+    /// </summary>
+    public static string BuildIssueUrl(string title, string appVersion, string windowsVersion, string? userDescription, string? errorCode)
     {
-        var body = TruncateForUrl(BuildIssueBody(EnvironmentText, Description, _errorCode));
-        _shell.TryOpen($"{ProductLinks.NewIssue}?title={Uri.EscapeDataString(BuildTitle())}&body={Uri.EscapeDataString(body)}");
+        ArgumentNullException.ThrowIfNull(title);
+        ArgumentNullException.ThrowIfNull(appVersion);
+        ArgumentNullException.ThrowIfNull(windowsVersion);
+        (string Field, string Value)[] fields =
+        [
+            ("template", BugReportForm),
+            ("title", title),
+            ("what-happened", TruncateForUrl(BuildWhatHappened(userDescription, errorCode))),
+            ("app-version", appVersion),
+            ("windows-version", windowsVersion),
+            ("logs", "_Attach the exported .zip here. Review its contents first — it may contain command output._"),
+        ];
+        return ProductLinks.NewIssue + "?" + string.Join('&', fields.Select(field => field.Field + "=" + Uri.EscapeDataString(field.Value)));
+    }
+
+    /// <summary>Pure: the form's "What happened?" text: the user's words (or a prompt) and a crash's error code.</summary>
+    public static string BuildWhatHappened(string? userDescription, string? errorCode)
+    {
+        var text = string.IsNullOrWhiteSpace(userDescription) ? "_Describe what happened._" : userDescription.Trim();
+        return string.IsNullOrWhiteSpace(errorCode)
+            ? text
+            : text + Environment.NewLine + Environment.NewLine + "Error code: " + errorCode;
     }
 
     /// <summary>Pure: keeps a prefilled issue body within URL limits (a full stack trace can exceed them).</summary>
@@ -106,29 +142,6 @@ public sealed partial class ReportBugViewModel : ObservableObject
         builder.AppendLine($"App version: {appVersion}");
         builder.AppendLine($"OS: {osDescription}");
         builder.AppendLine($"Architecture: {osArchitecture}");
-        return builder.ToString();
-    }
-
-    /// <summary>Pure: assembles the GitHub issue body template (testable).</summary>
-    public static string BuildIssueBody(string environment, string? userDescription, string? errorCode = null)
-    {
-        var builder = new StringBuilder();
-        builder.AppendLine("## Description");
-        builder.AppendLine(string.IsNullOrWhiteSpace(userDescription) ? "_Describe what happened._" : userDescription);
-        builder.AppendLine();
-        if (!string.IsNullOrWhiteSpace(errorCode))
-        {
-            builder.AppendLine($"Error code: {errorCode}");
-            builder.AppendLine();
-        }
-
-        builder.AppendLine("## Environment");
-        builder.AppendLine("```");
-        builder.Append(environment);
-        builder.AppendLine("```");
-        builder.AppendLine();
-        builder.AppendLine("## Logs");
-        builder.AppendLine("_Attach the exported .zip here. Review its contents first — it may contain command output._");
         return builder.ToString();
     }
 

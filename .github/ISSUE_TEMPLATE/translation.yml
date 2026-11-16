@@ -1,0 +1,64 @@
+name: Translation fix
+description: Wording that doesn't suit the culture or the local tone, or spelling that could mislead
+labels: ["translation"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        CommandForge is shown in English, Vietnamese, Japanese, Simplified Chinese and Spanish. The
+        text other than English is AI-translated, so corrections from people who speak the language
+        are very welcome.
+  - type: dropdown
+    id: language
+    attributes:
+      label: Language
+      options:
+        - English
+        - Tiếng Việt
+        - 日本語
+        - 简体中文
+        - Español
+    validations:
+      required: true
+  - type: input
+    id: where
+    attributes:
+      label: Where in the app
+      placeholder: e.g. Settings › Appearance, or the confirmation of a Dangerous command
+    validations:
+      required: true
+  - type: textarea
+    id: current
+    attributes:
+      label: Text today
+    validations:
+      required: true
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: Suggested text
+    validations:
+      required: true
+  - type: dropdown
+    id: reason
+    attributes:
+      label: What is wrong with it?
+      options:
+        - It doesn't suit the culture or the local tone
+        - The spelling or wording could mislead
+        - The meaning is wrong
+        - Something else
+    validations:
+      required: true
+  - type: textarea
+    id: more
+    attributes:
+      label: Anything else
+      description: Why the suggested text is better, or other places with the same wording.
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Confirmations
+      options:
+        - label: I'm using the latest release (the text may have changed already).
+          required: true

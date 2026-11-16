@@ -1,8 +1,14 @@
 blank_issues_enabled: false
 contact_links:
-  - name: Security vulnerability (private)
+  - name: Security vulnerability or harmful command (private)
     url: https://github.com/poli0981/CommandForge/security/advisories/new
-    about: Report security vulnerabilities privately — do NOT open a public issue.
+    about: Report security vulnerabilities, and catalog commands that could cause harm, privately — do NOT open a public issue.
+  - name: Idea (no commitment)
+    url: https://github.com/poli0981/CommandForge/discussions/categories/ideas
+    about: CommandForge is in maintenance mode; ideas are welcome in Discussions, without commitment.
   - name: Question / discussion
     url: https://github.com/poli0981/CommandForge/discussions
-    about: Ask a question or discuss ideas before filing an issue.
+    about: Ask a question before filing an issue.
+  - name: Accessibility statement
+    url: https://github.com/poli0981/CommandForge/blob/main/ACCESSIBILITY.md
+    about: What works with the keyboard, screen readers and larger text, and the known limitations.

@@ -108,7 +108,9 @@ documents — the user guide, this page, the legal texts — are in English.
   and with Narrator on Windows 11 in November 2026 and found no major problem. Version 2.2.0 then
   fixed everything a review of every screen found — the result of a command was not announced, the
   console could not be read line by line, the Command Palette's highlight was silent, and some lists
-  read a program type instead of their text, among others.
+  read a program type instead of their text, among others. The 2.2.0 build was checked the same way
+  before its release, and with a Windows contrast theme, a larger Text size and Animation effects
+  off.
 - **Not tested yet**: NVDA, JAWS, Voice Access, touch, and Windows 10. They should work through the
   same Windows interface Narrator uses, but nobody has checked.
 

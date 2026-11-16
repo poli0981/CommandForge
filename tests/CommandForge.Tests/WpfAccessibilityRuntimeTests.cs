@@ -251,7 +251,7 @@ public sealed class WpfAccessibilityRuntimeTests
         {
             if (child.GetAutomationControlType() == AutomationControlType.Text)
             {
-                yield return child.GetName();
+                yield return child.GetName() ?? string.Empty;
             }
 
             foreach (var text in TextsIn(child))

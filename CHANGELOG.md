@@ -44,7 +44,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   Run again; the catalog's splitters move with the arrow keys; every window and dialog starts with
   the keyboard inside it, and a Caution confirmation on Cancel.
 - **Unnamed controls** got names: the navigation pane's toggle and its two lists, the title bar's
-  buttons, a search box's clear button, the Settings cards and expanders, the Debug panel's tabs and
+  buttons (Maximize is read as Restore down while the window is maximized), a search box's clear
+  button, the Settings cards and expanders, the Debug panel's tabs and
   the four "Read on GitHub" links; the Dangerous confirmation also reads the command's ID, and
   Settings' theme and font size choices are read as groups. The log level list is translated.
 - **Icons are no longer read** as stray symbols: they only decorate the word beside them, so a

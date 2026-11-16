@@ -1,3 +1,4 @@
+using System.Windows;
 using CommandForge.Application.Settings;
 using Microsoft.Win32;
 
@@ -21,16 +22,52 @@ public sealed class FontScaleService : IFontScaleService, IDisposable
 
     private const double PaneWidth = 290;
 
+    private readonly Func<double> _readTextScale;
+    private readonly Func<ResourceDictionary?> _resources;
     private FontScale _scale = FontScale.Medium;
     private double _textScale = WindowsTextScale.Minimum;
     private bool _subscribed;
+
+    /// <summary>Rewrites the application's resources, with Windows' own Text size.</summary>
+    public FontScaleService()
+        : this(WindowsTextScale.Read, static () => System.Windows.Application.Current?.Resources)
+    {
+    }
+
+    /// <summary>
+    /// Rewrites the resources <paramref name="resources"/> returns (none: nothing to do), with the text
+    /// size factor <paramref name="readTextScale"/> returns.
+    /// </summary>
+    public FontScaleService(Func<double> readTextScale, Func<ResourceDictionary?> resources)
+    {
+        ArgumentNullException.ThrowIfNull(readTextScale);
+        ArgumentNullException.ThrowIfNull(resources);
+        _readTextScale = readTextScale;
+        _resources = resources;
+    }
 
     /// <inheritdoc />
     public void Apply(FontScale scale)
     {
         _scale = scale;
-        _textScale = WindowsTextScale.Read();
+        _textScale = _readTextScale();
         Subscribe();
+        ApplyResources();
+    }
+
+    /// <summary>
+    /// Re-reads Windows' text size and rescales only when it changed: when Windows reports a
+    /// preference change, and when the app comes back to the foreground.
+    /// </summary>
+    public void Refresh()
+    {
+        var factor = _readTextScale();
+        if (Math.Abs(factor - _textScale) < 0.001)
+        {
+            return;
+        }
+
+        _textScale = factor;
         ApplyResources();
     }
 
@@ -60,13 +97,12 @@ public sealed class FontScaleService : IFontScaleService, IDisposable
 
     private void ApplyResources()
     {
-        if (System.Windows.Application.Current is not { } app)
+        if (_resources() is not { } resources)
         {
             return;
         }
 
         var body = BodySize(_scale, _textScale);
-        var resources = app.Resources;
         resources[ResourceKey] = body;
         resources["ControlContentThemeFontSize"] = body;
         resources["AppFontSizeCaption"] = body - 2;
@@ -74,19 +110,6 @@ public sealed class FontScaleService : IFontScaleService, IDisposable
         resources["AppFontSizeTitle"] = body * 2;
         resources["AppFontSizeConsole"] = body - 1.5;
         resources[PaneWidthKey] = NavigationPaneWidth(body);
-    }
-
-    /// <summary>Re-reads Windows' text size and rescales only when it changed.</summary>
-    private void Refresh()
-    {
-        var factor = WindowsTextScale.Read();
-        if (Math.Abs(factor - _textScale) < 0.001)
-        {
-            return;
-        }
-
-        _textScale = factor;
-        ApplyResources();
     }
 
     private void Subscribe()

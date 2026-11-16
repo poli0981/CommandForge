@@ -28,34 +28,51 @@ public static class ScreenReader
             return;
         }
 
-        app.Dispatcher.InvokeAsync(() => Raise(app, message, important));
+        app.Dispatcher.InvokeAsync(() => RaiseOnActiveWindow(app.Windows.OfType<Window>(), app.MainWindow, message, important));
     }
 
-    private static void Raise(System.Windows.Application app, string message, bool important)
+    /// <summary>
+    /// When a screen reader listens, raises the notification on the active window of
+    /// <paramref name="windows"/>, else on <paramref name="mainWindow"/>. False when nothing was raised.
+    /// </summary>
+    public static bool RaiseOnActiveWindow(IEnumerable<Window> windows, Window? mainWindow, string message, bool important)
     {
-        if (!AutomationPeer.ListenerExists(AutomationEvents.Notification))
-        {
-            return;
-        }
+        ArgumentNullException.ThrowIfNull(windows);
+        return AutomationPeer.ListenerExists(AutomationEvents.Notification)
+            && Raise(windows.FirstOrDefault(w => w.IsActive) ?? mainWindow, message, important);
+    }
 
-        var window = app.Windows.OfType<Window>().FirstOrDefault(w => w.IsActive) ?? app.MainWindow;
+    /// <summary>
+    /// Raises the notification on <paramref name="window"/>'s automation peer, on its thread. False when
+    /// there is no window or no peer, or UI Automation refused it.
+    /// </summary>
+    public static bool Raise(Window? window, string message, bool important)
+    {
+        ArgumentException.ThrowIfNullOrWhiteSpace(message);
         if (window is null)
         {
-            return;
+            return false;
         }
 
         try
         {
             var peer = UIElementAutomationPeer.FromElement(window) ?? UIElementAutomationPeer.CreatePeerForElement(window);
-            peer?.RaiseNotificationEvent(
+            if (peer is null)
+            {
+                return false;
+            }
+
+            peer.RaiseNotificationEvent(
                 important ? AutomationNotificationKind.ActionCompleted : AutomationNotificationKind.Other,
                 important ? AutomationNotificationProcessing.ImportantMostRecent : AutomationNotificationProcessing.MostRecent,
                 message,
                 ActivityId);
+            return true;
         }
         catch (Exception ex) when (ex is InvalidOperationException or NotSupportedException)
         {
             Log.Debug(ex, "Could not raise a screen-reader notification.");
+            return false;
         }
     }
 }

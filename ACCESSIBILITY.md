@@ -97,7 +97,9 @@ documents — the user guide, this page, the legal texts — are in English.
   items of a list are named by what they show, not by a program type; every page title is a
   heading; the app declares that it follows each screen's scaling; no colour is written into a
   screen; every icon is kept out of a screen reader's way; this page's links work and it never
-  claims conformance. The key every name uses must exist in all five languages.
+  claims conformance. The key every name uses must exist in all five languages. Other tests run the
+  fixes on real controls of the WPF-UI library the app is built with, so a library update that
+  renames one of their parts is caught before a release.
 - **By an automated scan**: Axe.Windows, Microsoft's UI Automation rules (the engine of Accessibility
   Insights for Windows), over every page of the running app, the first-start terms and the console
   after a command, in the light and the dark theme and at Windows' largest Text size. Version 2.2.0

@@ -168,4 +168,142 @@ public sealed class AccessibilityHelpersTests
         Assert.Equal("Warning: Not vetted.", WpfUiAccessibility.InfoBarText("Warning", "{0}: {1}", "Not vetted.", string.Empty));
         Assert.Equal("Information", WpfUiAccessibility.InfoBarText("Information", "{0}: {1}", null, " "));
     }
+
+    [Fact]
+    public void TheFontSizesFollowTheChoiceAndWindowsTextSize()
+    {
+        var resources = new ResourceDictionary();
+        var textScale = 1d;
+        using var fonts = new FontScaleService(() => textScale, () => resources);
+
+        fonts.Apply(FontScale.Large);
+        Assert.Equal(16d, resources[FontScaleService.ResourceKey]);
+        Assert.Equal(16d, resources["ControlContentThemeFontSize"]);
+        Assert.Equal(14d, resources["AppFontSizeCaption"]);
+        Assert.Equal(32d, resources["AppFontSizeTitle"]);
+        Assert.Equal(290d, resources[FontScaleService.PaneWidthKey]);
+
+        // Windows' Text size changes while the app runs: re-read when the app is back in front.
+        textScale = 2.25;
+        fonts.Refresh();
+        Assert.Equal(36d, resources[FontScaleService.ResourceKey]);
+        Assert.Equal(497d, resources[FontScaleService.PaneWidthKey]);
+
+        // Unchanged: nothing is rewritten.
+        resources.Clear();
+        fonts.Refresh();
+        Assert.False(resources.Contains(FontScaleService.ResourceKey));
+    }
+
+    [Fact]
+    public void WithoutResourcesTheFontSizesAreLeftAlone()
+    {
+        using var fonts = new FontScaleService(() => 1.5, () => null);
+        using var defaults = new FontScaleService(); // the app's resources: none in a test
+
+        fonts.Apply(FontScale.Small);
+        fonts.Refresh();
+        defaults.Apply(FontScale.Medium);
+        defaults.Refresh();
+
+        Assert.Throws<ArgumentNullException>(() => new FontScaleService(null!, () => null));
+        Assert.Throws<ArgumentNullException>(() => new FontScaleService(() => 1, null!));
+    }
+
+    [Fact]
+    public void WindowsTextSizeIsReadAsAFactorTheAppSupports()
+        => Assert.InRange(WindowsTextScale.Read(), WindowsTextScale.Minimum, 2.25);
+
+    [Fact]
+    public void AContrastThemeDrawsDimmedTextAtFullStrength()
+    {
+        var resources = new ResourceDictionary();
+
+        ThemeService.ApplyDimming(resources, highContrast: true);
+        Assert.Equal(1d, resources["AppDimOpacity"]);
+        Assert.Equal(1d, resources["AppBadgeOpacity"]);
+
+        ThemeService.ApplyDimming(resources, highContrast: false);
+        Assert.Equal(0.78d, resources["AppDimOpacity"]);
+        Assert.Equal(0.75d, resources["AppBadgeOpacity"]);
+        Assert.Throws<ArgumentNullException>(() => ThemeService.ApplyDimming(null!, highContrast: true));
+    }
+
+    [Fact]
+    public void ALocalizedBindingFollowsTheLanguage()
+    {
+        var binding = LocalizationManager.Bind("A11y_Close");
+
+        Assert.Equal("[A11y_Close]", binding.Path.Path);
+        Assert.Same(LocalizationManager.Instance, binding.Source);
+        Assert.Equal(System.Windows.Data.BindingMode.OneWay, binding.Mode);
+    }
+
+    [Fact]
+    public void ACommandRowsStatusIsRaisedWhenItChanges()
+    {
+        var command = new CommandDefinition
+        {
+            Id = "t.tweak",
+            CategoryId = "c",
+            TitleKey = "A11y_Close",
+            DescriptionKey = "A11y_Close",
+            Executable = "x",
+            DangerLevel = DangerLevel.Caution,
+            RequiresAdmin = true,
+            RevertCommandId = "t.tweak.undo",
+        };
+        var row = new CommandItemViewModel(command, "Tweak", "A tweak.");
+        var changed = new List<string?>();
+        row.PropertyChanged += (_, e) => changed.Add(e.PropertyName);
+
+        Assert.Equal(CommandItemViewModel.StatusText(DangerLevel.Caution, true, false, true, false), row.AccessibleStatus);
+        Assert.Contains(Strings.Get("A11y_CanUndo"), row.AccessibleStatus, StringComparison.Ordinal);
+
+        row.IsFavorite = true;
+        Assert.Contains(nameof(CommandItemViewModel.AccessibleStatus), changed);
+        Assert.Contains(Strings.Get("A11y_Favorite"), row.AccessibleStatus, StringComparison.Ordinal);
+
+        changed.Clear();
+        row.Refresh();
+        Assert.Contains(nameof(CommandItemViewModel.AccessibleStatus), changed);
+    }
+
+    [Fact]
+    public void ANotificationIsShownAndReadOrOnlyRead()
+    {
+        // No application in a test: nothing is shown or said, and nothing fails.
+        var notifications = new SnackbarNotificationService(new Wpf.Ui.SnackbarService());
+
+        notifications.Show("Saved to C:\\Temp\\output.txt", NotificationKind.Success);
+        notifications.Show("Cancelled", NotificationKind.Warning, announce: false);
+        notifications.Announce("System uptime: Success", important: true);
+
+        Assert.Throws<ArgumentNullException>(() => notifications.Announce(null!));
+    }
+
+    [Fact]
+    public void TheConvertersAreOneWayAndTheirOwnMarkup()
+    {
+        var format = new FormatConverter();
+        var level = new LogLevelToTextConverter();
+        var blank = new BlankToBooleanConverter();
+        var rowAction = new RowActionNameConverter { LabelKey = "Favorite_Add" };
+
+        Assert.Same(format, format.ProvideValue(null!));
+        Assert.Same(level, level.ProvideValue(null!));
+        Assert.Same(blank, blank.ProvideValue(null!));
+        Assert.Throws<NotSupportedException>(() => format.ConvertBack("x", [typeof(string)], null, CultureInfo.InvariantCulture));
+        Assert.Throws<NotSupportedException>(() => level.ConvertBack("x", typeof(LogLevel), null, CultureInfo.InvariantCulture));
+        Assert.Throws<NotSupportedException>(() => blank.ConvertBack(true, typeof(string), null, CultureInfo.InvariantCulture));
+        Assert.Throws<NotSupportedException>(() => rowAction.ConvertBack("x", typeof(string), null, CultureInfo.InvariantCulture));
+
+        Assert.Equal(LogLevelToTextConverter.Text(LogLevel.Warning), level.Convert(LogLevel.Warning, typeof(string), null, CultureInfo.InvariantCulture));
+        Assert.Equal(Strings.Get("LogLevel_Error"), LogLevelToTextConverter.Text(LogLevel.Fatal));
+        Assert.Equal(string.Empty, level.Convert("Warning", typeof(string), null, CultureInfo.InvariantCulture));
+        Assert.Equal(
+            RowActionNameConverter.Format(Strings.Get("Favorite_Add"), "Flush DNS cache"),
+            rowAction.Convert("Flush DNS cache", typeof(string), null, CultureInfo.InvariantCulture));
+        Assert.Equal(Strings.Get("Favorite_Add"), rowAction.Convert(null, typeof(string), null, CultureInfo.InvariantCulture));
+    }
 }

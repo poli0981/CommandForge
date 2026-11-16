@@ -22,9 +22,22 @@ namespace CommandForge.Desktop.Behaviors;
 /// </summary>
 public static class WpfUiAccessibility
 {
+    /// <summary>The controls <see cref="Apply"/> fixes.</summary>
+    private static readonly Type[] HandledTypes =
+    [
+        typeof(NavigationView), typeof(TitleBar), typeof(Wpf.Ui.Controls.TextBox), typeof(CardExpander),
+        typeof(NavigationViewItem), typeof(CheckBox), typeof(InfoBar),
+    ];
+
     private static bool _registered;
 
-    /// <summary>Registers the handlers for every window the app opens. Call once, before the first window.</summary>
+    /// <summary>
+    /// Registers the handlers for every window the app opens. Call once, before the first window.
+    /// <see cref="Apply"/> runs when one of the controls loads and whenever its size changes. Loaded
+    /// alone is not enough: WPF raises it only on elements that have a Loaded handler of their own, and
+    /// some WPF-UI controls (CardExpander) have none, so a class handler never hears it. SizeChanged is
+    /// raised on every element after its first layout, when its template is applied.
+    /// </summary>
     public static void Register()
     {
         if (_registered)
@@ -33,40 +46,47 @@ public static class WpfUiAccessibility
         }
 
         _registered = true;
-        Handle<NavigationView>(NameNavigationParts);
-        Handle<TitleBar>(control =>
+        var handler = new RoutedEventHandler((sender, _) => Apply(sender));
+        foreach (var type in HandledTypes)
         {
-            NamePart(control, "PART_MinimizeButton", "A11y_Minimize");
-            NamePart(control, "PART_MaximizeButton", "A11y_Maximize");
-            NamePart(control, "PART_RestoreButton", "A11y_Restore");
-            NamePart(control, "PART_CloseButton", "A11y_Close");
-        });
-        Handle<Wpf.Ui.Controls.TextBox>(control => NamePart(control, "ClearButton", "A11y_ClearText"));
-        Handle<CardExpander>(NameExpanderHeader);
-        Handle<NavigationViewItem>(item => HideGlyph(item, "ChevronIcon"));
-        Handle<CheckBox>(box => HideGlyph(box, "ControlIcon"));
-        Handle<InfoBar>(NameSeverityIcon);
+            EventManager.RegisterClassHandler(type, FrameworkElement.LoadedEvent, handler);
+            EventManager.RegisterClassHandler(type, FrameworkElement.SizeChangedEvent, handler);
+        }
     }
 
     /// <summary>
-    /// Runs <paramref name="apply"/> when a control loads and whenever its size changes. Loaded alone is
-    /// not enough: WPF raises it only on elements that have a Loaded handler of their own, and some WPF-UI
-    /// controls (CardExpander) have none, so a class handler never hears it. SizeChanged is raised on every
-    /// element after its first layout, when its template is applied. Each step of <paramref name="apply"/>
-    /// does nothing when the part is already named.
+    /// Names the parts of <paramref name="element"/>'s template, or keeps its glyph out of the
+    /// automation tree, when it is one of the WPF-UI controls this class fixes; does nothing for
+    /// anything else, or for a part already fixed. Its template must be applied (it is by layout).
     /// </summary>
-    private static void Handle<TControl>(Action<TControl> apply)
-        where TControl : Control
+    public static void Apply(object? element)
     {
-        var handler = new RoutedEventHandler((sender, _) =>
+        switch (element)
         {
-            if (sender is TControl control)
-            {
-                apply(control);
-            }
-        });
-        EventManager.RegisterClassHandler(typeof(TControl), FrameworkElement.LoadedEvent, handler);
-        EventManager.RegisterClassHandler(typeof(TControl), FrameworkElement.SizeChangedEvent, handler);
+            case NavigationView navigation:
+                NameNavigationParts(navigation);
+                break;
+            case TitleBar titleBar:
+                NamePart(titleBar, "PART_MinimizeButton", "A11y_Minimize");
+                NameMaximizeButton(titleBar);
+                NamePart(titleBar, "PART_CloseButton", "A11y_Close");
+                break;
+            case Wpf.Ui.Controls.TextBox textBox:
+                NamePart(textBox, "ClearButton", "A11y_ClearText");
+                break;
+            case CardExpander expander:
+                NameExpanderHeader(expander);
+                break;
+            case NavigationViewItem item:
+                HideGlyph(item, "ChevronIcon");
+                break;
+            case CheckBox box:
+                HideGlyph(box, "ControlIcon");
+                break;
+            case InfoBar bar:
+                NameSeverityIcon(bar);
+                break;
+        }
     }
 
     private static void NameNavigationParts(NavigationView navigation)
@@ -94,6 +114,22 @@ public static class WpfUiAccessibility
         if (withToolTip)
         {
             part.SetBinding(FrameworkElement.ToolTipProperty, LocalizationManager.Bind(key));
+        }
+    }
+
+    /// <summary>
+    /// WPF-UI has one button for Maximize and Restore down: it draws Restore while the window is
+    /// maximized, and its name follows.
+    /// </summary>
+    private static void NameMaximizeButton(TitleBar titleBar)
+    {
+        if (FindPart(titleBar, "PART_MaximizeButton") is { } button && !BindingOperations.IsDataBound(button, AutomationProperties.NameProperty))
+        {
+            var name = new MultiBinding { Converter = MaximizeNameConverter.Instance };
+            name.Bindings.Add(new Binding(nameof(TitleBar.IsMaximized)) { Source = titleBar });
+            name.Bindings.Add(LocalizationManager.Bind("A11y_Maximize"));
+            name.Bindings.Add(LocalizationManager.Bind("A11y_Restore"));
+            button.SetBinding(AutomationProperties.NameProperty, name);
         }
     }
 
@@ -164,6 +200,25 @@ public static class WpfUiAccessibility
     {
         control.ApplyTemplate();
         return control.Template?.FindName(partName, control) as FrameworkElement;
+    }
+
+    /// <summary>The values: whether the window is maximized; the translated Maximize and Restore down.</summary>
+    private sealed class MaximizeNameConverter : IMultiValueConverter
+    {
+        public static readonly MaximizeNameConverter Instance = new();
+
+        public object Convert(object[] values, Type targetType, object? parameter, CultureInfo culture)
+        {
+            if (values is not [bool maximized, string maximize, string restore])
+            {
+                return string.Empty;
+            }
+
+            return maximized ? restore : maximize;
+        }
+
+        public object[] ConvertBack(object value, Type[] targetTypes, object? parameter, CultureInfo culture)
+            => throw new NotSupportedException();
     }
 
     /// <summary>

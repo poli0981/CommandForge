@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.2.0] — 2026-11-16
+
+CommandForge is now **stable and in maintenance mode** (see
+[Project status](https://github.com/poli0981/CommandForge#project-status)). This release brings an
+accessibility review of every screen, the November 2026 .NET security update and Qodana code
+analysis.
+
 ### Added
 - **Accessibility statement**: [ACCESSIBILITY.md](https://github.com/poli0981/CommandForge/blob/main/ACCESSIBILITY.md)
   says what works with the keyboard, screen readers, contrast themes and larger text, what doesn't
@@ -17,6 +24,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   top of its own Small / Medium / Large.
 
 ### Changed
+- **Maintenance mode**: the work now goes into security, dependency and platform updates, catalog
+  commands, and bug, UI/UX, accessibility and translation fixes; a new feature only when it is
+  genuinely necessary. The policy is in
+  [CONTRIBUTING.md](https://github.com/poli0981/CommandForge/blob/main/.github/CONTRIBUTING.md#maintenance-mode-what-we-accept),
+  and the issue forms follow it, with two new ones: *Command — add, fix or remove* and
+  *Translation fix*.
 - Code quality: JetBrains Qodana for .NET now inspects `main` and every pull request from CI, next
   to SonarCloud: Rider's C#, XAML and resource inspections and JetBrains' security rules, run
   natively on Windows. The gate is zero problems. Its first report also fixed a process object that
@@ -60,6 +73,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   filters and a command's badges wrap instead of running off the edge, and the title bar's search
   box ends in "…" with its full text as a tooltip.
 - **Ctrl+Q** no longer closes the app while you are typing in a text box (a search box excepted).
+- **Report a bug** opens GitHub's *Bug report* form with the description, the crash code and the
+  versions filled in. Before, GitHub showed anyone who isn't a collaborator the list of forms
+  instead, and what the app had filled in was lost.
 
 ### Security
 - Built with the .NET 10.0.404 SDK, so the app ships the .NET 10.0.15 runtime (the November 2026
@@ -358,7 +374,8 @@ Initial public release.
   checksums (and an optional VirusTotal scan). No telemetry — the only network use is checking
   GitHub for updates.
 
-[Unreleased]: https://github.com/poli0981/CommandForge/compare/v2.1.0...HEAD
+[Unreleased]: https://github.com/poli0981/CommandForge/compare/v2.2.0...HEAD
+[2.2.0]: https://github.com/poli0981/CommandForge/compare/v2.1.0...v2.2.0
 [2.1.0]: https://github.com/poli0981/CommandForge/compare/v2.0.0...v2.1.0
 [2.0.0]: https://github.com/poli0981/CommandForge/compare/v1.5.1...v2.0.0
 [1.5.1]: https://github.com/poli0981/CommandForge/compare/v1.5.0...v1.5.1

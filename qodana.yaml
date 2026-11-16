@@ -1,0 +1,103 @@
+# Qodana's settings for .github/workflows/qodana.yml.
+#
+# The linter is Qodana for .NET (`qodana-dotnet`: Rider's engine) in NATIVE mode, on the job's own
+# Windows runner with the .NET SDK that global.json names: the WPF projects (net10.0-windows) load
+# only on Windows. It needs the Ultimate licence of the Qodana Cloud project; the token is the
+# QODANA_TOKEN repository secret.
+#
+# Everything a run needs is here and nothing is an action argument, so `qodana scan` in the
+# repository root of a developer's PC (with QODANA_TOKEN set) reads the same settings. The linter's
+# version is the action's: the workflow pins the action, the action its CLI, the CLI its linter.
+version: "1.0"
+linter: qodana-dotnet
+withinDocker: false
+
+# WHERE AN INSPECTION IS SWITCHED OFF: one of ReSharper's (C#, XAML, .resx) in .editorconfig
+# (`resharper_*_highlighting`), where Rider and ReSharper read it too. Here only what has no key
+# there: a whole severity, and the IntelliJ platform's own inspections (Markdown, XML). Each one with
+# its reason above it.
+profile:
+  base:
+    name: qodana.recommended
+  groups:
+    # A HINT is what the editor offers without underlining anything (ReSharper's lowest level; this
+    # linter files it as TYPO, Qodana as Low): "invert if", "convert to LINQ", a trailing comma, and
+    # every Roslyn analyzer message below the level this build makes an error. They are suggestions,
+    # not problems, and the build already fails on every warning.
+    - groupId: Hints
+      groups:
+        - "severity:TYPO"
+  inspections:
+    - group: Hints
+      enabled: false
+    # Windows application manifests: the linter has no schema for urn:schemas-microsoft-com:asm.v1
+    # and reports every element of the file as undeclared.
+    - inspection: XmlHighlighting
+      ignore:
+        - "src/CommandForge.Wpf/app.manifest"
+        - "helper/CommandForge.Elevator/app.manifest"
+
+dotnet:
+  solution: CommandForge.slnx
+  configuration: Release
+
+# What is not CommandForge's code, or not in the repository: build, package and test output, local
+# tool caches, and the git-ignored local folders a developer's PC has (internal notes, IDE state).
+exclude:
+  - name: All
+    paths:
+      - Releases
+      - publish
+      - TestResults
+      - .nuget
+      - .sonarqube
+      - docs
+      - .claude
+      - .idea
+      - .vs
+  # JETBRAINS' SECURITY RULES (the OpenGrep plugin) stay on, and the files their results were READ in
+  # are listed here - so a new file that starts a process is reported. "A process started with
+  # something that is not a literal" fired 11 times on the first run (2026-11-16): starting processes
+  # is what CommandForge is for. What each file starts, and where its path and arguments come from,
+  # is in tests/CommandForge.Tests/ProcessStartSitesTests.cs, which also fails on a new file. The
+  # name is the plugin's one inspection, not a rule's: a rule's own id is honoured nowhere, so a
+  # listed file is left out of all of the plugin's rules - the price.
+  - name: OpenGrepInspection
+    paths:
+      - src/CommandForge.Infrastructure/Execution/SystemProcessRunner.cs
+      - src/CommandForge.Infrastructure/Elevation/BrokerElevationService.cs
+      - src/CommandForge.Wpf/Services/ShellService.cs
+      # The tests start what they test (a read-only PowerShell, the echo of the executor test).
+      - tests
+  # THE LINTER'S OWN FAULT, not the file's: resolving PInvoke.CreateJobObject(null, null) - CsWin32's
+  # null-to-PCWSTR conversion - the engine loses the constructor and reports its locals, its field,
+  # the class and the file's usings as unused. The compiler builds the file with warnings as errors
+  # (IDE0005 fails a redundant using). The same engine fault is known from PInvoke.EnumDisplaySettings
+  # (null, ...). To be removed when a linter build reads the file.
+  - name: RedundantUsingDirective
+    paths:
+      - src/CommandForge.Infrastructure/Execution/ProcessJob.cs
+  - name: UnusedVariable.Compiler
+    paths:
+      - src/CommandForge.Infrastructure/Execution/ProcessJob.cs
+  - name: NotAccessedField.Compiler
+    paths:
+      - src/CommandForge.Infrastructure/Execution/ProcessJob.cs
+  - name: UnusedField.Compiler
+    paths:
+      - src/CommandForge.Infrastructure/Execution/ProcessJob.cs
+  - name: ClassCannotBeInstantiated
+    paths:
+      - src/CommandForge.Infrastructure/Execution/ProcessJob.cs
+  # The cancellation callback's token source: the registration that captures it is declared after
+  # it, so it is disposed first, and disposing a registration waits for a callback that is running -
+  # the source is never used after its disposal.
+  - name: AccessToDisposedClosure
+    paths:
+      - src/CommandForge.Infrastructure/Elevation/BrokerElevationService.cs
+
+# The gate: no problem at all. What the linter reports is settled where it is found — fixed, or its
+# inspection switched off with the reason beside it — so a count above zero is something new.
+failureConditions:
+  severityThresholds:
+    any: 0

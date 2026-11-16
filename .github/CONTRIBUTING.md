@@ -38,8 +38,9 @@ See [BUILD.md](../BUILD.md) for packaging and CI.
   messages follow [Conventional Commits](https://www.conventionalcommits.org/)
   (`fix(catalog): …`, `feat(ui): …`).
 - PRs need the required checks to pass: `build`, `package`, CodeQL (`Analyze (csharp)`,
-  `Analyze (actions)`) and `dependency-review`. The SonarCloud quality gate is reported on PRs from
-  this repository too (fork PRs don't get the analysis token).
+  `Analyze (actions)`) and `dependency-review`. The SonarCloud quality gate and the Qodana report
+  (zero problems expected) are shown on PRs from this repository too (fork PRs don't get the
+  analysis tokens).
 - **Dependencies:** package versions live in each `.csproj` (GitHub's dependency graph doesn't read
   `Directory.Packages.props`). Discuss a new package before adding it; runtime dependencies must be
   GPLv3-compatible (dependency review enforces a license allow-list).

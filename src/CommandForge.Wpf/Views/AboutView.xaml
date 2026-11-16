@@ -34,11 +34,11 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <TextBlock Text="{res:Loc About_SecurityContact}" Style="{StaticResource SecondaryTextStyle}"
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="{res:Loc About_SecurityContact}" Style="{StaticResource SecondaryTextStyle}"
                        VerticalAlignment="Center" Margin="0,0,12,0" />
-            <ui:HyperlinkButton Grid.Column="1" Content="{x:Static app:ProductLinks.SecurityEmail}" Click="OnSecurityEmailClick"
+            <ui:HyperlinkButton Grid.Row="0" Grid.Column="1" Content="{x:Static app:ProductLinks.SecurityEmail}" Click="OnSecurityEmailClick"
                                 HorizontalAlignment="Left" AutomationProperties.HelpText="{res:Loc About_SecurityContact}" />
-            <TextBlock Grid.Row="1" Text="{res:Loc About_CodeContact}" Style="{StaticResource SecondaryTextStyle}"
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="{res:Loc About_CodeContact}" Style="{StaticResource SecondaryTextStyle}"
                        VerticalAlignment="Center" Margin="0,0,12,0" />
             <ui:HyperlinkButton Grid.Row="1" Grid.Column="1" Content="{x:Static app:ProductLinks.CodeEmail}" Click="OnCodeEmailClick"
                                 HorizontalAlignment="Left" AutomationProperties.HelpText="{res:Loc About_CodeContact}" />

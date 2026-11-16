@@ -93,7 +93,8 @@ and some antivirus engines may show false positives (common for admin tools). In
 - The code is **not obfuscated** (obfuscation is a leading cause of false positives), and the
   source is public under the GPLv3.
 - CI runs **CodeQL** (C# and GitHub Actions), **dependency review**, **OpenSSF Scorecard**,
-  **SonarCloud** and **Snyk**; every restore audits direct and transitive NuGet packages;
+  **SonarCloud**, **Qodana** (JetBrains' inspections and security rules) and **Snyk**; every
+  restore audits direct and transitive NuGet packages;
   Dependabot keeps dependencies and the SHA-pinned actions current; `main` only accepts pull
   requests that pass the required checks.
 

@@ -34,25 +34,27 @@ internal sealed class SystemProcessRunner : IProcessRunner
     {
         ArgumentNullException.ThrowIfNull(output);
 
-        using var process = new Process
+        // The start info is built first: if resolving the executable throws, there is no Process yet
+        // to leak (an object initializer would run after `new Process()` and outside the `using`).
+        var startInfo = new ProcessStartInfo
         {
-            StartInfo = new ProcessStartInfo
-            {
-                FileName = ExecutableResolver.Resolve(fileName),
-                Arguments = arguments,
-                RedirectStandardOutput = true,
-                RedirectStandardError = true,
-                // Redirect stdin so we can close it immediately: a process that reads input (e.g. an
-                // interactive "cmd" with no /c) gets EOF and exits instead of hanging forever.
-                RedirectStandardInput = true,
-                UseShellExecute = false,
-                CreateNoWindow = true,
-                // Pin the working directory to System32 so nothing is resolved from an
-                // attacker-controlled current directory — this runner also serves elevated commands.
-                WorkingDirectory = SystemPaths.System32,
-            },
+            FileName = ExecutableResolver.Resolve(fileName),
+            Arguments = arguments,
+            RedirectStandardOutput = true,
+            RedirectStandardError = true,
+            // Redirect stdin so we can close it immediately: a process that reads input (e.g. an
+            // interactive "cmd" with no /c) gets EOF and exits instead of hanging forever.
+            RedirectStandardInput = true,
+            UseShellExecute = false,
+            CreateNoWindow = true,
+            // Pin the working directory to System32 so nothing is resolved from an
+            // attacker-controlled current directory — this runner also serves elevated commands.
+            WorkingDirectory = SystemPaths.System32,
         };
-        _configureEnvironment?.Invoke(process.StartInfo.Environment);
+        _configureEnvironment?.Invoke(startInfo.Environment);
+
+        using var process = new Process();
+        process.StartInfo = startInfo;
 
         try
         {

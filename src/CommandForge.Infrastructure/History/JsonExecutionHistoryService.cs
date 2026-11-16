@@ -29,7 +29,15 @@ public sealed class JsonExecutionHistoryService : IExecutionHistoryService
     }
 
     /// <inheritdoc />
-    public IReadOnlyList<ExecutionRecord> GetRecent() => _records;
+    public IReadOnlyList<ExecutionRecord> GetRecent()
+    {
+        // The list is replaced, never changed, under the gate; reading the reference under it too
+        // makes the newest one visible to every thread.
+        lock (_gate)
+        {
+            return _records;
+        }
+    }
 
     /// <inheritdoc />
     public void Record(ExecutionRecord record)

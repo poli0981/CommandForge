@@ -1,0 +1,112 @@
+name: Qodana
+
+# JetBrains Qodana for .NET (`qodana-dotnet`, Rider's engine, on the Ultimate licence of the Qodana
+# Cloud project): ReSharper's C#, XAML and .resx inspections, the IntelliJ platform's Markdown and XML
+# inspections and JetBrains' security rules, over the whole solution. Results go to Qodana Cloud, to
+# annotations and a summary comment on the pull request, and to the run's `qodana-report` artifact
+# (SARIF and the linter's logs, for a reader without a Qodana Cloud account).
+#
+# - Native mode on a Windows runner (qodana.yaml: `withinDocker: false`): WPF (net10.0-windows) only
+#   loads on Windows, and the linter reads the projects with the SDK this job installs from
+#   global.json. Every setting is in qodana.yaml; nothing is an action argument.
+# - The solution is built first, so a build that fails is one red step with the compiler's own
+#   message rather than a report of unresolved symbols.
+# - `pr-mode: false`: the whole solution every time, so a pull request and `main` are judged by the
+#   same list. The gate (qodana.yaml) is zero problems.
+# - Advisory: not a required check of the `main` ruleset, so a finding, a Qodana Cloud outage or a
+#   lapsed licence is a red job beside a green build, never a blocked merge.
+# - No `contents: write`: the job never pushes quick-fixes.
+# Requires the repository secret QODANA_TOKEN.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+env:
+  DOTNET_NOLOGO: true
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
+
+jobs:
+  token:
+    # Pull requests from forks and from Dependabot get no repository secrets. Checking for the token
+    # skips those runs without trusting actor or repository names from the event.
+    name: Check for QODANA_TOKEN
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions: {}
+    outputs:
+      available: ${{ steps.check.outputs.available }}
+    steps:
+      - name: Check for QODANA_TOKEN
+        id: check
+        env:
+          QODANA_TOKEN: ${{ secrets.QODANA_TOKEN }}
+        run: |
+          if [ -n "$QODANA_TOKEN" ]; then
+            echo "available=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "available=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::QODANA_TOKEN is not available to this run (fork or Dependabot pull request); skipping the analysis."
+          fi
+
+  qodana:
+    name: Qodana
+    needs: token
+    if: needs.token.outputs.available == 'true'
+    # WPF (net10.0-windows) only builds on Windows, and the linter runs natively beside the SDK.
+    runs-on: windows-latest
+    timeout-minutes: 60
+    permissions:
+      contents: read
+      checks: write # the annotations
+      pull-requests: write # the summary comment
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          # The pull request's own commit, not its merge commit (empty on a push or a dispatch, which
+          # then check out the commit that started them).
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0 # full history: Qodana's reports are VCS-aware
+          persist-credentials: false
+
+      - uses: actions/setup-dotnet@0f4a354dd5547a28c70b7853dbd95d5b67886e73 # v6.1.0
+        with:
+          global-json-file: global.json
+
+      # Outside the workspace: the linter reads every file under the repository root.
+      - name: Cache NuGet packages
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: ~/.nuget/packages
+          key: nuget-qodana-${{ runner.os }}-${{ hashFiles('global.json', 'Directory.Build.props', '**/*.csproj') }}
+          restore-keys: nuget-qodana-${{ runner.os }}-
+
+      - name: Restore
+        run: dotnet restore CommandForge.slnx
+
+      - name: Build what the linter loads
+        run: dotnet build CommandForge.slnx -c Release --no-restore
+
+      # Caches are saved from `main` only (a pull request reads them), under keys of this job's own.
+      - name: Qodana Scan
+        uses: JetBrains/qodana-action@3e8d76ff0e0241618abd808682f426afe84bab3f # v2026.2.2
+        with:
+          pr-mode: false
+          upload-result: true
+          artifact-name: qodana-report
+          cache-default-branch-only: true
+          primary-cache-key: qodana-${{ github.ref_name }}-${{ github.sha }}
+          additional-cache-key: qodana-main
+        env:
+          QODANA_TOKEN: ${{ secrets.QODANA_TOKEN }}
+          QODANA_ENDPOINT: https://qodana.cloud

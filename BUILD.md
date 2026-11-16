@@ -54,7 +54,9 @@ dotnet test CommandForge.slnx --collect "XPlat Code Coverage;Format=opencover"
   `Directory.Packages.props`.
 - Every restore runs a **NuGet audit** of direct and transitive packages; moderate or higher
   advisories fail the build.
-- Dependabot groups updates (Velopack and the `vpk` tool move together) with a cooldown.
+- Dependabot groups updates (Velopack and the `vpk` tool move together) with a cooldown. It skips
+  new major versions of the .NET SDK and of `Microsoft.Extensions.*`: moving to a new .NET major is
+  a deliberate migration, done by hand.
 
 ## Publish (self-contained) + package
 
@@ -98,10 +100,11 @@ All workflows pin actions to full commit SHAs and use least-privilege permission
 | `build.yml` | `build`: restore, `dotnet format --verify-no-changes`, Release build, tests (results and coverage uploaded). `package`: publish and `vpk pack` exactly like a release. |
 | `codeql.yml` | CodeQL for C# (Windows, manual build) and for the workflows themselves (`actions`). |
 | `sonarcloud.yml` | SonarCloud analysis with test coverage: the SonarScanner for .NET (pinned in `.config/dotnet-tools.json`) wraps a Release build and an OpenCover test run, and the SonarCloud app reports the quality gate on the PR. Needs the `SONAR_TOKEN` secret, so PRs from forks and Dependabot are skipped. |
+| `qodana.yml` | JetBrains Qodana for .NET (Rider's inspections, native mode on Windows) over the whole solution, after a Release build; settings in `qodana.yaml`, and the gate is zero problems. Results go to Qodana Cloud, to annotations and a comment on the PR, and to the `qodana-report` artifact. Advisory (not a required check). Needs the `QODANA_TOKEN` secret, so PRs from forks and Dependabot are skipped. |
 | `dependency-review.yml` | Fails a PR that adds a dependency with a moderate+ vulnerability or a license outside the GPLv3-compatible allow-list. |
 | `scorecard.yml` | OpenSSF Scorecard, reported to code scanning. |
 | `release.yml` | Tag-triggered release — see [RELEASING.md](RELEASING.md). |
-| `notify-ci-failure.yml` | Posts a Discord alert when the Build or SonarCloud workflow fails on `main` (needs the `DISCORD_CI_WEBHOOK` secret). |
+| `notify-ci-failure.yml` | Posts a Discord alert when the Build, SonarCloud or Qodana workflow fails on `main` (needs the `DISCORD_CI_WEBHOOK` secret). |
 
 The SonarCloud quality gate ("Sonar way") expects new code to be at least 80% covered by tests,
 with no new issues. XAML code-behind and the two entry points (`Program.cs` of the app and of the

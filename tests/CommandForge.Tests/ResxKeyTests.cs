@@ -2,6 +2,7 @@ using System.Globalization;
 using System.Resources;
 using System.Text.RegularExpressions;
 using CommandForge.Desktop.Resources;
+using CommandForge.Domain;
 using CommandForge.Infrastructure.Catalog;
 
 namespace CommandForge.Tests;
@@ -255,8 +256,8 @@ public sealed partial class ResxKeyTests
     public void DynamicKeys_ExistInResx_AllCultures()
     {
         // Keys built at runtime from enum names: Danger_{level}, Estimate_{duration}.
-        var keys = Enum.GetNames<CommandForge.Domain.DangerLevel>().Select(level => "Danger_" + level)
-            .Concat(Enum.GetNames<CommandForge.Domain.EstimatedDuration>().Select(duration => "Estimate_" + duration));
+        var keys = Enum.GetNames<DangerLevel>().Select(level => "Danger_" + level)
+            .Concat(Enum.GetNames<EstimatedDuration>().Select(duration => "Estimate_" + duration));
 
         AssertKeysExist(keys);
     }

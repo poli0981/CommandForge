@@ -1,10 +1,15 @@
 using System.Runtime.InteropServices;
+using System.Text.RegularExpressions;
+using CommandForge.Application;
 using CommandForge.Desktop.ViewModels;
 
 namespace CommandForge.Tests;
 
-/// <summary>Tests the pure bug-report builders (environment block + issue body + URL escaping).</summary>
-public sealed class ReportBugTemplateTests
+/// <summary>
+/// Tests the pure bug-report builders: the environment block, the "What happened?" text and the
+/// address that opens the Bug report issue form with its fields filled in.
+/// </summary>
+public sealed partial class ReportBugTemplateTests
 {
     [Fact]
     public void BuildEnvironment_IncludesVersionOsAndArchitecture()
@@ -16,21 +21,66 @@ public sealed class ReportBugTemplateTests
     }
 
     [Fact]
-    public void BuildIssueBody_ContainsEnvironmentDescriptionCodeAndAttachmentNote()
+    public void WhatHappened_IsTheDescriptionAndTheCrashCode()
     {
-        var body = ReportBugViewModel.BuildIssueBody("App version: 1.0", "it broke", "240101-000000-ABCD");
-        Assert.Contains("App version: 1.0", body, StringComparison.Ordinal);
-        Assert.Contains("it broke", body, StringComparison.Ordinal);
-        Assert.Contains("240101-000000-ABCD", body, StringComparison.Ordinal);
-        Assert.Contains("## Environment", body, StringComparison.Ordinal);
-        Assert.Contains("Attach the exported", body, StringComparison.Ordinal);
+        var text = ReportBugViewModel.BuildWhatHappened("  it broke  ", "240101-000000-ABCD");
+        Assert.StartsWith("it broke", text, StringComparison.Ordinal);
+        Assert.EndsWith("Error code: 240101-000000-ABCD", text, StringComparison.Ordinal);
+
+        Assert.Equal("_Describe what happened._", ReportBugViewModel.BuildWhatHappened(" ", errorCode: null));
     }
 
     [Fact]
-    public void BuildIssueBody_UrlEscapingRoundTrips()
+    public void IssueUrl_OpensTheBugFormWithItsFieldsFilledIn()
     {
-        var body = ReportBugViewModel.BuildIssueBody("env", "spaces and #hash & more", errorCode: null);
-        var escaped = Uri.EscapeDataString(body);
-        Assert.Equal(body, Uri.UnescapeDataString(escaped));
+        var url = ReportBugViewModel.BuildIssueUrl("[Crash 240101-000000-ABCD] ", "2.2.0", "Microsoft Windows 10.0.26100 (X64)", "spaces and #hash & more", "240101-000000-ABCD");
+        var fields = Query(url);
+
+        Assert.StartsWith(ProductLinks.NewIssue + "?template=bug_report.yml&", url, StringComparison.Ordinal);
+        Assert.Equal("[Crash 240101-000000-ABCD] ", fields["title"]);
+        Assert.Equal(ReportBugViewModel.BuildWhatHappened("spaces and #hash & more", "240101-000000-ABCD"), fields["what-happened"]);
+        Assert.Equal("2.2.0", fields["app-version"]);
+        Assert.Equal("Microsoft Windows 10.0.26100 (X64)", fields["windows-version"]);
+        Assert.Contains("exported .zip", fields["logs"], StringComparison.Ordinal);
     }
+
+    [Fact]
+    public void IssueUrl_FillsOnlyFieldsTheFormHas()
+    {
+        var form = File.ReadAllText(Path.Combine(FindRepositoryRoot(), ".github", "ISSUE_TEMPLATE", ReportBugViewModel.BugReportForm));
+        var ids = FieldId().Matches(form).Select(match => match.Groups["id"].Value).ToHashSet(StringComparer.Ordinal);
+
+        var filled = Query(ReportBugViewModel.BuildIssueUrl("[Bug] ", "2.2.0", "Windows", null, null)).Keys
+            .Where(field => field is not "template" and not "title");
+
+        Assert.All(filled, field => Assert.Contains(field, ids));
+    }
+
+    [Fact]
+    public void IssueUrl_KeepsALongDescriptionWithinUrlLimits()
+    {
+        var url = ReportBugViewModel.BuildIssueUrl("[Bug] ", "2.2.0", "Windows", new string('x', 20_000), null);
+        Assert.Contains("truncated", Query(url)["what-happened"], StringComparison.Ordinal);
+    }
+
+    private static Dictionary<string, string> Query(string url)
+        => new Uri(url).Query.TrimStart('?').Split('&')
+            .Select(pair => pair.Split('=', 2))
+            .ToDictionary(pair => pair[0], pair => Uri.UnescapeDataString(pair[1]), StringComparer.Ordinal);
+
+    private static string FindRepositoryRoot()
+    {
+        for (var directory = new DirectoryInfo(AppContext.BaseDirectory); directory is not null; directory = directory.Parent)
+        {
+            if (File.Exists(Path.Combine(directory.FullName, "CommandForge.slnx")))
+            {
+                return directory.FullName;
+            }
+        }
+
+        throw new InvalidOperationException("Could not find the repository root (CommandForge.slnx) above " + AppContext.BaseDirectory);
+    }
+
+    [GeneratedRegex(@"^\s+id:\s*(?<id>[a-z0-9-]+)\s*$", RegexOptions.Multiline | RegexOptions.CultureInvariant, matchTimeoutMilliseconds: 2000)]
+    private static partial Regex FieldId();
 }

@@ -12,5 +12,8 @@ public partial class ErrorDialog : FluentWindow
         InitializeComponent();
         DataContext = viewModel;
         viewModel.CloseRequested += Close;
+
+        // Start on Close, the default answer, so the keyboard is in the window at once.
+        Loaded += (_, _) => CloseButton.Focus();
     }
 }

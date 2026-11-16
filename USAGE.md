@@ -1,7 +1,7 @@
 # CommandForge user guide
 
 CommandForge runs Windows maintenance commands for you: pick a command, read what it will do, and
-run it. This guide covers version 2.0. For installing and verifying downloads, see the
+run it. This guide covers version 2.2. For installing and verifying downloads, see the
 [README](README.md#install).
 
 - [First start](#first-start)
@@ -15,6 +15,7 @@ run it. This guide covers version 2.0. For installing and verifying downloads, s
 - [Settings](#settings)
 - [Log viewer and Debug panel](#log-viewer-and-debug-panel)
 - [Keyboard shortcuts](#keyboard-shortcuts)
+- [Accessibility](#accessibility)
 - [Updates](#updates)
 - [Your data and uninstalling](#your-data-and-uninstalling)
 - [Troubleshooting](#troubleshooting)
@@ -181,7 +182,7 @@ Under **My commands** you can save your own command lines, such as a `ping` you 
 
 | Section | Options |
 |---|---|
-| **Appearance** | Theme (System, Light, Dark), Language, Font size (Small, Medium, Large). |
+| **Appearance** | Theme (System, Light, Dark), Language, Font size (Small, Medium, Large; Windows' own Text size enlarges it further). |
 | **Behavior & Safety** | Collapse the navigation pane by default; show Admin/Restart badges in lists; confirm before Caution commands; confirm before Dangerous commands (always on); tick "create a restore point" by default for risky admin commands; auto-scroll the console; warn before closing while a command is running. |
 | **Updates** | Check for updates on startup, the current version, the last check and **Check now**. |
 | **Backup & profiles** | **Export…** / **Import…** your appearance, behavior and favorites as a `.json` file, and save named profiles (for example "Gaming PC" or "Office") that you can **Apply** or **Delete**. |
@@ -211,17 +212,35 @@ Theme, language and font size change immediately; no restart needed.
 | `Ctrl+F` | Search the current list |
 | `Ctrl+H` | Home |
 | `Ctrl+B` | Show or hide the navigation pane |
+| `F6` / `Shift+F6` | Move between the navigation pane, the page and the console |
 | `Ctrl+,` | Settings |
 | `Ctrl+L` | Log viewer |
 | `F5` | Check for updates |
 | `Ctrl+Q` | Exit |
-| `↑` / `↓` | Move the selection (lists and palette) |
-| `Enter` | Open the selected command |
+| `↑` / `↓` | Move the selection (lists and palette); `Tab` then reaches the buttons of the selected row |
+| `Enter` | Open the selected command: in the catalog, go to its **Run** button; in History, open it in the catalog; in the palette, open it |
 | `Esc` | Close a dialog or cancel |
 
 Shortcuts are paused while a dialog is open, and `AltGr` combinations never trigger them, so
-typing characters like `@` on international keyboards is safe. The list is also under **More →
-Keyboard shortcuts**.
+typing characters like `@` on international keyboards is safe. `Ctrl+Q` does nothing while you are
+typing in a text box (other than a search box), so a slip can't close the app mid-edit. The list is
+also under **More → Keyboard shortcuts**.
+
+## Accessibility
+
+- **Keyboard:** everything works without a mouse. After `Ctrl+H`, `Ctrl+,`, `Ctrl+L` or choosing a
+  page in the navigation pane, the keyboard moves into that page; `F6` jumps between the pane, the
+  page and the console. The console and the Log viewer can be read line by line with the arrow
+  keys.
+- **Screen readers:** Narrator (and other screen readers) hear when a command starts, needs
+  administrator permission, finishes (with its result and whether Windows must restart), how many
+  commands a search found, and each notification.
+- **Seeing the screen:** the app follows Windows' contrast themes, its light/dark setting and its
+  **Text size** setting (Settings › Accessibility › Text size), on top of the app's own font size.
+  Risk levels are always shown with words or icons, never by color alone.
+
+What works, what doesn't yet, and how to report a barrier:
+[ACCESSIBILITY.md](ACCESSIBILITY.md).
 
 ## Updates
 

@@ -28,6 +28,12 @@ public static class ProductLinks
     /// <summary>Questions about the code and contributions.</summary>
     public const string CodeEmail = "code@poli0981.dev";
 
+    /// <summary>The accessibility statement: what works, the known limitations, how to report a barrier.</summary>
+    public const string AccessibilityStatement = Repository + "/blob/main/ACCESSIBILITY.md";
+
+    /// <summary>Accessibility barriers by email (the alternative to the issue form).</summary>
+    public const string AccessibilityEmail = "accessibility@poli0981.dev";
+
     /// <summary>Full text of the GNU GPL v3.</summary>
     public const string License = "https://www.gnu.org/licenses/gpl-3.0.html";
 }

@@ -4,13 +4,17 @@
              xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
              xmlns:res="clr-namespace:CommandForge.Desktop.Resources"
              xmlns:conv="clr-namespace:CommandForge.Desktop.Converters"
+             xmlns:ctl="clr-namespace:CommandForge.Desktop.Controls"
              Foreground="{DynamicResource TextFillColorPrimaryBrush}">
     <UserControl.Resources>
         <conv:EnumToBooleanConverter x:Key="EnumBool" />
 
-        <!-- Spacing between the setting cards of one group. -->
+        <!-- Spacing between the setting cards of one group. A card is a frame, not a control: Tab goes
+             to the switch, list or button inside it (WPF-UI's card would otherwise be a nameless stop). -->
         <Style TargetType="ui:CardControl" BasedOn="{StaticResource {x:Type ui:CardControl}}">
             <Setter Property="Margin" Value="0,0,0,4" />
+            <Setter Property="Focusable" Value="False" />
+            <Setter Property="IsTabStop" Value="False" />
         </Style>
         <Style TargetType="ui:CardExpander" BasedOn="{StaticResource {x:Type ui:CardExpander}}">
             <Setter Property="Margin" Value="0,0,0,4" />
@@ -25,16 +29,17 @@
         </Style>
     </UserControl.Resources>
 
-    <ScrollViewer VerticalScrollBarVisibility="Auto">
+    <!-- Not a Tab stop of its own: the arrow and page keys scroll it from any control on the page. -->
+    <ScrollViewer VerticalScrollBarVisibility="Auto" Focusable="False">
         <StackPanel Margin="24,12,24,24" MaxWidth="1000">
             <TextBlock Text="{res:Loc SidebarSettings}" Style="{StaticResource PageTitleTextStyle}" />
 
             <!-- ===== Appearance ===== -->
             <TextBlock Text="{res:Loc Settings_Appearance}" Style="{StaticResource SectionHeaderTextStyle}" />
 
-            <ui:CardControl>
+            <ui:CardControl AutomationProperties.Name="{res:Loc Settings_Theme}">
                 <ui:CardControl.Icon>
-                    <ui:SymbolIcon Symbol="DarkTheme24" />
+                    <ctl:DecorativeIcon Symbol="DarkTheme24" />
                 </ui:CardControl.Icon>
                 <ui:CardControl.Header>
                     <StackPanel>
@@ -42,19 +47,19 @@
                         <TextBlock Text="{res:Loc Settings_ThemeDesc}" Style="{StaticResource CardDescriptionStyle}" />
                     </StackPanel>
                 </ui:CardControl.Header>
-                <StackPanel Orientation="Horizontal">
+                <ctl:LabeledGroup Orientation="Horizontal" AutomationProperties.Name="{res:Loc Settings_Theme}">
                     <RadioButton Content="{res:Loc Settings_ThemeSystem}" GroupName="Theme" Margin="0,0,12,0" MinWidth="0"
                                  IsChecked="{Binding SelectedTheme, Converter={StaticResource EnumBool}, ConverterParameter=System}" />
                     <RadioButton Content="{res:Loc Settings_ThemeLight}" GroupName="Theme" Margin="0,0,12,0" MinWidth="0"
                                  IsChecked="{Binding SelectedTheme, Converter={StaticResource EnumBool}, ConverterParameter=Light}" />
                     <RadioButton Content="{res:Loc Settings_ThemeDark}" GroupName="Theme" MinWidth="0"
                                  IsChecked="{Binding SelectedTheme, Converter={StaticResource EnumBool}, ConverterParameter=Dark}" />
-                </StackPanel>
+                </ctl:LabeledGroup>
             </ui:CardControl>
 
-            <ui:CardControl>
+            <ui:CardControl AutomationProperties.Name="{res:Loc Settings_Language}">
                 <ui:CardControl.Icon>
-                    <ui:SymbolIcon Symbol="LocalLanguage24" />
+                    <ctl:DecorativeIcon Symbol="LocalLanguage24" />
                 </ui:CardControl.Icon>
                 <ui:CardControl.Header>
                     <StackPanel>
@@ -63,12 +68,18 @@
                     </StackPanel>
                 </ui:CardControl.Header>
                 <ComboBox MinWidth="200" ItemsSource="{Binding Languages}" DisplayMemberPath="DisplayName"
-                          SelectedItem="{Binding SelectedLanguage}" AutomationProperties.Name="{res:Loc Settings_Language}" />
+                          SelectedItem="{Binding SelectedLanguage}" AutomationProperties.Name="{res:Loc Settings_Language}">
+                    <ComboBox.ItemContainerStyle>
+                        <Style TargetType="ComboBoxItem" BasedOn="{StaticResource {x:Type ComboBoxItem}}">
+                            <Setter Property="AutomationProperties.Name" Value="{Binding DisplayName}" />
+                        </Style>
+                    </ComboBox.ItemContainerStyle>
+                </ComboBox>
             </ui:CardControl>
 
-            <ui:CardControl>
+            <ui:CardControl AutomationProperties.Name="{res:Loc Settings_FontSize}">
                 <ui:CardControl.Icon>
-                    <ui:SymbolIcon Symbol="TextFontSize24" />
+                    <ctl:DecorativeIcon Symbol="TextFontSize24" />
                 </ui:CardControl.Icon>
                 <ui:CardControl.Header>
                     <StackPanel>
@@ -76,19 +87,19 @@
                         <TextBlock Text="{res:Loc Settings_FontSizeDesc}" Style="{StaticResource CardDescriptionStyle}" />
                     </StackPanel>
                 </ui:CardControl.Header>
-                <StackPanel Orientation="Horizontal">
+                <ctl:LabeledGroup Orientation="Horizontal" AutomationProperties.Name="{res:Loc Settings_FontSize}">
                     <RadioButton Content="{res:Loc Settings_FontSmall}" GroupName="Font" Margin="0,0,12,0" MinWidth="0"
                                  IsChecked="{Binding SelectedFontSize, Converter={StaticResource EnumBool}, ConverterParameter=Small}" />
                     <RadioButton Content="{res:Loc Settings_FontMedium}" GroupName="Font" Margin="0,0,12,0" MinWidth="0"
                                  IsChecked="{Binding SelectedFontSize, Converter={StaticResource EnumBool}, ConverterParameter=Medium}" />
                     <RadioButton Content="{res:Loc Settings_FontLarge}" GroupName="Font" MinWidth="0"
                                  IsChecked="{Binding SelectedFontSize, Converter={StaticResource EnumBool}, ConverterParameter=Large}" />
-                </StackPanel>
+                </ctl:LabeledGroup>
             </ui:CardControl>
 
-            <ui:CardControl>
+            <ui:CardControl AutomationProperties.Name="{res:Loc Settings_CollapseSidebar}">
                 <ui:CardControl.Icon>
-                    <ui:SymbolIcon Symbol="PanelLeft24" />
+                    <ctl:DecorativeIcon Symbol="PanelLeft24" />
                 </ui:CardControl.Icon>
                 <ui:CardControl.Header>
                     <StackPanel>
@@ -99,9 +110,9 @@
                 <ui:ToggleSwitch IsChecked="{Binding CollapseSidebarByDefault}" AutomationProperties.Name="{res:Loc Settings_CollapseSidebar}" />
             </ui:CardControl>
 
-            <ui:CardControl>
+            <ui:CardControl AutomationProperties.Name="{res:Loc Settings_ShowBadges}">
                 <ui:CardControl.Icon>
-                    <ui:SymbolIcon Symbol="Shield24" />
+                    <ctl:DecorativeIcon Symbol="Shield24" />
                 </ui:CardControl.Icon>
                 <ui:CardControl.Header>
                     <StackPanel>
@@ -115,9 +126,9 @@
             <!-- ===== Behavior & safety ===== -->
             <TextBlock Text="{res:Loc Settings_Behavior}" Style="{StaticResource SectionHeaderTextStyle}" />
 
-            <ui:CardControl>
+            <ui:CardControl AutomationProperties.Name="{res:Loc Settings_ConfirmCaution}">
                 <ui:CardControl.Icon>
-                    <ui:SymbolIcon Symbol="Warning24" />
+                    <ctl:DecorativeIcon Symbol="Warning24" />
                 </ui:CardControl.Icon>
                 <ui:CardControl.Header>
                     <StackPanel>
@@ -129,9 +140,9 @@
             </ui:CardControl>
 
             <!-- A fixed safety floor (golden rule #8): shown on and locked, at full contrast rather than greyed out. -->
-            <ui:CardControl ToolTip="{res:Loc Settings_DangerousLockedTooltip}">
+            <ui:CardControl ToolTip="{res:Loc Settings_DangerousLockedTooltip}" AutomationProperties.Name="{res:Loc Settings_ConfirmDangerous}">
                 <ui:CardControl.Icon>
-                    <ui:SymbolIcon Symbol="LockClosed24" />
+                    <ctl:DecorativeIcon Symbol="LockClosed24" />
                 </ui:CardControl.Icon>
                 <ui:CardControl.Header>
                     <StackPanel>
@@ -144,9 +155,9 @@
                                  AutomationProperties.HelpText="{res:Loc Settings_DangerousLockedTooltip}" />
             </ui:CardControl>
 
-            <ui:CardControl>
+            <ui:CardControl AutomationProperties.Name="{res:Loc Settings_AutoRestorePoint}">
                 <ui:CardControl.Icon>
-                    <ui:SymbolIcon Symbol="History24" />
+                    <ctl:DecorativeIcon Symbol="History24" />
                 </ui:CardControl.Icon>
                 <ui:CardControl.Header>
                     <StackPanel>
@@ -157,9 +168,9 @@
                 <ui:ToggleSwitch IsChecked="{Binding AutoCreateRestorePoint}" AutomationProperties.Name="{res:Loc Settings_AutoRestorePoint}" />
             </ui:CardControl>
 
-            <ui:CardControl>
+            <ui:CardControl AutomationProperties.Name="{res:Loc Settings_AutoScroll}">
                 <ui:CardControl.Icon>
-                    <ui:SymbolIcon Symbol="ArrowAutofitDown24" />
+                    <ctl:DecorativeIcon Symbol="ArrowAutofitDown24" />
                 </ui:CardControl.Icon>
                 <ui:CardControl.Header>
                     <StackPanel>
@@ -170,9 +181,9 @@
                 <ui:ToggleSwitch IsChecked="{Binding AutoScrollConsole}" AutomationProperties.Name="{res:Loc Settings_AutoScroll}" />
             </ui:CardControl>
 
-            <ui:CardControl>
+            <ui:CardControl AutomationProperties.Name="{res:Loc Settings_WarnOnCancel}">
                 <ui:CardControl.Icon>
-                    <ui:SymbolIcon Symbol="Dismiss24" />
+                    <ctl:DecorativeIcon Symbol="Dismiss24" />
                 </ui:CardControl.Icon>
                 <ui:CardControl.Header>
                     <StackPanel>
@@ -186,9 +197,9 @@
             <!-- ===== Updates ===== -->
             <TextBlock Text="{res:Loc Settings_Updates}" Style="{StaticResource SectionHeaderTextStyle}" />
 
-            <ui:CardControl>
+            <ui:CardControl AutomationProperties.Name="{res:Loc Settings_AutoCheckUpdates}">
                 <ui:CardControl.Icon>
-                    <ui:SymbolIcon Symbol="ArrowSyncCircle24" />
+                    <ctl:DecorativeIcon Symbol="ArrowSyncCircle24" />
                 </ui:CardControl.Icon>
                 <ui:CardControl.Header>
                     <StackPanel>
@@ -199,9 +210,9 @@
                 <ui:ToggleSwitch IsChecked="{Binding AutoCheckForUpdates}" AutomationProperties.Name="{res:Loc Settings_AutoCheckUpdates}" />
             </ui:CardControl>
 
-            <ui:CardControl>
+            <ui:CardControl AutomationProperties.Name="{res:Loc Settings_CurrentVersion}">
                 <ui:CardControl.Icon>
-                    <ui:SymbolIcon Symbol="Info24" />
+                    <ctl:DecorativeIcon Symbol="Info24" />
                 </ui:CardControl.Icon>
                 <ui:CardControl.Header>
                     <StackPanel>
@@ -219,9 +230,9 @@
             <!-- ===== Backup & profiles ===== -->
             <TextBlock Text="{res:Loc Settings_Profiles}" Style="{StaticResource SectionHeaderTextStyle}" />
 
-            <ui:CardControl>
+            <ui:CardControl AutomationProperties.Name="{res:Loc Settings_ExportImport}">
                 <ui:CardControl.Icon>
-                    <ui:SymbolIcon Symbol="ArrowExportLtr24" />
+                    <ctl:DecorativeIcon Symbol="ArrowExportLtr24" />
                 </ui:CardControl.Icon>
                 <ui:CardControl.Header>
                     <StackPanel>
@@ -235,9 +246,9 @@
                 </StackPanel>
             </ui:CardControl>
 
-            <ui:CardExpander>
+            <ui:CardExpander AutomationProperties.Name="{res:Loc Settings_SavedProfiles}">
                 <ui:CardExpander.Icon>
-                    <ui:SymbolIcon Symbol="PeopleSettings24" />
+                    <ctl:DecorativeIcon Symbol="PeopleSettings24" />
                 </ui:CardExpander.Icon>
                 <ui:CardExpander.Header>
                     <StackPanel>
@@ -266,9 +277,9 @@
             <!-- ===== Logs ===== -->
             <TextBlock Text="{res:Loc Settings_Logs}" Style="{StaticResource SectionHeaderTextStyle}" />
 
-            <ui:CardControl>
+            <ui:CardControl AutomationProperties.Name="{res:Loc Settings_LogLevel}">
                 <ui:CardControl.Icon>
-                    <ui:SymbolIcon Symbol="DocumentText24" />
+                    <ctl:DecorativeIcon Symbol="DocumentText24" />
                 </ui:CardControl.Icon>
                 <ui:CardControl.Header>
                     <StackPanel>
@@ -277,12 +288,23 @@
                     </StackPanel>
                 </ui:CardControl.Header>
                 <ComboBox MinWidth="160" ItemsSource="{Binding LogLevels}" SelectedItem="{Binding SelectedLogLevel}"
-                          AutomationProperties.Name="{res:Loc Settings_LogLevel}" />
+                          AutomationProperties.Name="{res:Loc Settings_LogLevel}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Converter={conv:LogLevelToTextConverter}}" />
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                    <ComboBox.ItemContainerStyle>
+                        <Style TargetType="ComboBoxItem" BasedOn="{StaticResource {x:Type ComboBoxItem}}">
+                            <Setter Property="AutomationProperties.Name" Value="{Binding Converter={conv:LogLevelToTextConverter}}" />
+                        </Style>
+                    </ComboBox.ItemContainerStyle>
+                </ComboBox>
             </ui:CardControl>
 
-            <ui:CardExpander>
+            <ui:CardExpander AutomationProperties.Name="{res:Loc Settings_LogsSize}">
                 <ui:CardExpander.Icon>
-                    <ui:SymbolIcon Symbol="Folder24" />
+                    <ctl:DecorativeIcon Symbol="Folder24" />
                 </ui:CardExpander.Icon>
                 <ui:CardExpander.Header>
                     <StackPanel>
@@ -300,9 +322,9 @@
             <!-- ===== Advanced ===== -->
             <TextBlock Text="{res:Loc Settings_Advanced}" Style="{StaticResource SectionHeaderTextStyle}" />
 
-            <ui:CardExpander>
+            <ui:CardExpander AutomationProperties.Name="{res:Loc Settings_RunMode}">
                 <ui:CardExpander.Icon>
-                    <ui:SymbolIcon Symbol="Wrench24" />
+                    <ctl:DecorativeIcon Symbol="Wrench24" />
                 </ui:CardExpander.Icon>
                 <ui:CardExpander.Header>
                     <StackPanel>
@@ -329,9 +351,9 @@
             <!-- ===== About ===== -->
             <TextBlock Text="{res:Loc Settings_About}" Style="{StaticResource SectionHeaderTextStyle}" />
 
-            <ui:CardControl>
+            <ui:CardControl AutomationProperties.Name="{res:Loc Settings_About}">
                 <ui:CardControl.Icon>
-                    <ui:SymbolIcon Symbol="WindowConsole20" />
+                    <ctl:DecorativeIcon Symbol="WindowConsole20" />
                 </ui:CardControl.Icon>
                 <ui:CardControl.Header>
                     <StackPanel>

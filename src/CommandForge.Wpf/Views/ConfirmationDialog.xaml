@@ -3,6 +3,7 @@
                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                   xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
                   xmlns:res="clr-namespace:CommandForge.Desktop.Resources"
+                  xmlns:conv="clr-namespace:CommandForge.Desktop.Converters"
                   xmlns:views="clr-namespace:CommandForge.Desktop.Views"
                   Title="{Binding Title}"
                   PrimaryButtonText="{res:Loc Detail_Run}"
@@ -28,10 +29,18 @@
 
         <StackPanel Margin="0,0,0,12" Visibility="{Binding IsDangerous, Converter={StaticResource BoolToVis}}">
             <TextBlock Text="{res:Loc Confirm_TypeToConfirm}" TextWrapping="Wrap" Margin="0,0,0,6" />
+            <!-- The ID is also the box's help text: a placeholder is not read by screen readers. -->
             <ui:TextBox x:Name="ConfirmationInputBox"
                         Text="{Binding ConfirmationInput, UpdateSourceTrigger=PropertyChanged}"
                         PlaceholderText="{Binding CommandId}"
-                        AutomationProperties.Name="{res:Loc Confirm_TypeToConfirm}" />
+                        AutomationProperties.Name="{res:Loc Confirm_TypeToConfirm}">
+                <AutomationProperties.HelpText>
+                    <MultiBinding Converter="{conv:FormatConverter}">
+                        <Binding Source="{x:Static res:LocalizationManager.Instance}" Path="[A11y_CommandId]" />
+                        <Binding Path="CommandId" />
+                    </MultiBinding>
+                </AutomationProperties.HelpText>
+            </ui:TextBox>
         </StackPanel>
 
         <CheckBox IsChecked="{Binding CreateRestorePoint}"

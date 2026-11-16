@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- **Accessibility statement**: [ACCESSIBILITY.md](https://github.com/poli0981/CommandForge/blob/main/ACCESSIBILITY.md)
+  says what works with the keyboard, screen readers, contrast themes and larger text, what doesn't
+  yet, and how to report a barrier: an *Accessibility problem* issue form or
+  accessibility@poli0981.dev. In the app: More (⋯) → About CommandForge → Accessibility.
+- **F6 / Shift+F6** move between the navigation pane, the page and the console.
+- **Windows' Text size** (Settings › Accessibility › Text size) now enlarges the app's text too, on
+  top of its own Small / Medium / Large.
+
 ### Changed
 - Code quality: JetBrains Qodana for .NET now inspects `main` and every pull request from CI, next
   to SonarCloud: Rider's C#, XAML and resource inspections and JetBrains' security rules, run
@@ -18,6 +27,39 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   10.1.1; in CI, setup-dotnet 6.1.0 and CodeQL action 4.39.3.
 - Dependabot no longer proposes new major versions of .NET or Microsoft.Extensions: moving to a
   new .NET major is a deliberate migration, done by hand.
+
+### Fixed
+- **Screen readers** (Narrator, NVDA, JAWS) now hear what appears: a command starting, waiting for
+  administrator permission and finishing — with its result, exit code, time and whether Windows must
+  restart —, how many commands a search found, the Command Palette's highlighted result and its
+  position, every notification, and an update's progress.
+- **The console and the Log viewer** can be read line by line with the arrow keys; an error line is
+  read as an error and has a bar at its left, not only a colour.
+- **Lists, options and buttons** are read by their text instead of a program type name (the language
+  lists, the Recipes command list, My commands, the Log viewer, the shortcuts list), commands with
+  their risk level and badges, and a button repeated on every row names its row ("Undo: …").
+- **Keyboard**: after Ctrl+H, Ctrl+, or Ctrl+L, or choosing a page in the pane, the keyboard moves
+  into that page; a command opened from Home, History or the palette gets the focus in the catalog;
+  Enter opens the selected command in the catalog and in History; Tab reaches a row's star, Undo and
+  Run again; the catalog's splitters move with the arrow keys; every window and dialog starts with
+  the keyboard inside it, and a Caution confirmation on Cancel.
+- **Unnamed controls** got names: the navigation pane's toggle and its two lists, the title bar's
+  buttons (Maximize is read as Restore down while the window is maximized), a search box's clear
+  button, the Settings cards and expanders, the Debug panel's tabs and
+  the four "Read on GitHub" links; the Dangerous confirmation also reads the command's ID, and
+  Settings' theme and font size choices are read as groups. The log level list is translated.
+- **Icons are no longer read** as stray symbols: they only decorate the word beside them, so a
+  screen reader skips them. A notice on a page is read in full with its kind ("Warning: These
+  commands are not part of the vetted catalog…"); before, a screen reader could not reach its text.
+  A blank line in the console is read as "Blank line", and the frame around each page is no longer
+  an empty stop for Tab.
+- **Seeing the screen**: dimmed text and badge icons are drawn at full strength under a Windows
+  contrast theme, low-contrast grey text is darker, cut-off text shows in full as a tooltip, page
+  transitions follow Windows' Animation effects setting, and lists and cards no longer clip larger
+  text. At the largest text sizes the navigation pane widens to fit its labels, the catalog's
+  filters and a command's badges wrap instead of running off the edge, and the title bar's search
+  box ends in "…" with its full text as a tooltip.
+- **Ctrl+Q** no longer closes the app while you are typing in a text box (a search box excepted).
 
 ### Security
 - Built with the .NET 10.0.404 SDK, so the app ships the .NET 10.0.15 runtime (the November 2026

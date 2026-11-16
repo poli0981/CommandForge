@@ -2,9 +2,13 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+             xmlns:ctl="clr-namespace:CommandForge.Desktop.Controls"
              xmlns:res="clr-namespace:CommandForge.Desktop.Resources"
+             xmlns:conv="clr-namespace:CommandForge.Desktop.Converters"
              xmlns:beh="clr-namespace:CommandForge.Desktop.Behaviors">
-    <!-- The shared console (DataContext: ExecutionViewModel): virtualized output, status, result, actions. -->
+    <!-- The shared console (DataContext: ExecutionViewModel): virtualized output, status, result, actions.
+         Screen readers hear the run's start, wait and result from ExecutionViewModel (WPF raises nothing
+         for a LiveSetting by itself). -->
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVis" />
     </UserControl.Resources>
@@ -24,8 +28,9 @@
 
                 <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="12,0" VerticalAlignment="Center"
                             Visibility="{Binding IsRunning, Converter={StaticResource BoolToVis}}">
-                    <ProgressBar IsIndeterminate="True" Width="72" VerticalAlignment="Center" Margin="0,0,10,0" />
-                    <TextBlock VerticalAlignment="Center" AutomationProperties.LiveSetting="Polite">
+                    <ProgressBar IsIndeterminate="True" Width="72" VerticalAlignment="Center" Margin="0,0,10,0"
+                                 AutomationProperties.Name="{res:Loc Console_Running}" />
+                    <TextBlock VerticalAlignment="Center">
                         <TextBlock.Style>
                             <Style TargetType="TextBlock" BasedOn="{StaticResource CaptionTextStyle}">
                                 <Setter Property="Text" Value="{res:Loc Console_Running}" />
@@ -44,11 +49,11 @@
                                Visibility="{Binding IsRunning, Converter={StaticResource BoolToVis}}" />
                     <ui:Button Style="{StaticResource IconButtonStyle}" Command="{Binding CopyOutputCommand}"
                                ToolTip="{res:Loc Console_CopyAll}" AutomationProperties.Name="{res:Loc Console_CopyAll}">
-                        <ui:SymbolIcon Symbol="Copy24" />
+                        <ctl:DecorativeIcon Symbol="Copy24" />
                     </ui:Button>
                     <ui:Button Style="{StaticResource IconButtonStyle}" Command="{Binding SaveOutputCommand}"
                                ToolTip="{res:Loc Console_Save}" AutomationProperties.Name="{res:Loc Console_Save}">
-                        <ui:SymbolIcon Symbol="Save24" />
+                        <ctl:DecorativeIcon Symbol="Save24" />
                     </ui:Button>
                 </StackPanel>
             </Grid>
@@ -56,10 +61,10 @@
             <!-- Result -->
             <Grid DockPanel.Dock="Bottom" Margin="0,8,0,0"
                   Visibility="{Binding HasResult, Converter={StaticResource BoolToVis}}">
-                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" AutomationProperties.LiveSetting="Polite">
-                    <ui:SymbolIcon FontSize="16" Margin="0,0,6,0" VerticalAlignment="Center">
-                        <ui:SymbolIcon.Style>
-                            <Style TargetType="ui:SymbolIcon">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <ctl:DecorativeIcon FontSize="16" Margin="0,0,6,0" VerticalAlignment="Center">
+                        <ctl:DecorativeIcon.Style>
+                            <Style TargetType="ctl:DecorativeIcon">
                                 <Setter Property="Symbol" Value="ErrorCircle24" />
                                 <Setter Property="Foreground" Value="{DynamicResource SystemFillColorCriticalBrush}" />
                                 <Style.Triggers>
@@ -73,8 +78,8 @@
                                     </DataTrigger>
                                 </Style.Triggers>
                             </Style>
-                        </ui:SymbolIcon.Style>
-                    </ui:SymbolIcon>
+                        </ctl:DecorativeIcon.Style>
+                    </ctl:DecorativeIcon>
                     <TextBlock Text="{Binding StatusText}" Style="{StaticResource BodyStrongTextStyle}" VerticalAlignment="Center" />
                     <TextBlock Text="{res:Loc Result_ExitCode}" Style="{StaticResource SecondaryTextStyle}" Margin="14,0,4,0" VerticalAlignment="Center" />
                     <TextBlock Text="{Binding ExitCode}" Style="{StaticResource SecondaryTextStyle}" VerticalAlignment="Center" />
@@ -84,7 +89,7 @@
                            Command="{Binding RestartWindowsCommand}"
                            Visibility="{Binding RequiresRestart, Converter={StaticResource BoolToVis}}">
                     <ui:Button.Icon>
-                        <ui:SymbolIcon Symbol="ArrowClockwise24" />
+                        <ctl:DecorativeIcon Symbol="ArrowClockwise24" />
                     </ui:Button.Icon>
                 </ui:Button>
             </Grid>
@@ -93,7 +98,8 @@
             <TextBlock DockPanel.Dock="Top" Text="{Binding DroppedLinesText}" Style="{StaticResource CaptionTextStyle}"
                        Margin="0,0,0,4" Visibility="{Binding HasDroppedLines, Converter={StaticResource BoolToVis}}" />
 
-            <!-- Output: virtualized, so even huge outputs stay responsive -->
+            <!-- Output: virtualized, so even huge outputs stay responsive. Tab reaches it and the arrow keys
+                 move line by line; each line is read by its text, an error line with an "Error" prefix. -->
             <ListBox ItemsSource="{Binding OutputLines}"
                      Background="Transparent" BorderThickness="0" Padding="0"
                      VirtualizingPanel.IsVirtualizing="True"
@@ -104,7 +110,8 @@
                      AutomationProperties.Name="{res:Loc PaneConsole}">
                 <ListBox.ItemContainerStyle>
                     <Style TargetType="ListBoxItem">
-                        <Setter Property="Focusable" Value="False" />
+                        <Setter Property="FocusVisualStyle" Value="{DynamicResource DefaultControlFocusVisualStyle}" />
+                        <Setter Property="AutomationProperties.Name" Value="{Binding Text}" />
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate TargetType="ListBoxItem">
@@ -112,11 +119,29 @@
                                 </ControlTemplate>
                             </Setter.Value>
                         </Setter>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsError}" Value="True">
+                                <Setter Property="AutomationProperties.Name">
+                                    <Setter.Value>
+                                        <MultiBinding Converter="{conv:FormatConverter}">
+                                            <Binding Source="{x:Static res:LocalizationManager.Instance}" Path="[Console_ErrorLine]" />
+                                            <Binding Path="Text" />
+                                        </MultiBinding>
+                                    </Setter.Value>
+                                </Setter>
+                            </DataTrigger>
+                            <!-- A blank line has no text to read: say so instead of the line's type name. -->
+                            <DataTrigger Binding="{Binding Text, Converter={conv:BlankToBooleanConverter}}" Value="True">
+                                <Setter Property="AutomationProperties.Name" Value="{res:Loc A11y_BlankLine}" />
+                            </DataTrigger>
+                        </Style.Triggers>
                     </Style>
                 </ListBox.ItemContainerStyle>
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding Text}" Style="{StaticResource ConsoleLineTextStyle}" />
+                        <Border Style="{StaticResource ConsoleLineBorderStyle}">
+                            <TextBlock Text="{Binding Text}" Style="{StaticResource ConsoleLineTextStyle}" />
+                        </Border>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>

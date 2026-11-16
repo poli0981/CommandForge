@@ -14,5 +14,8 @@ public partial class LegalGateWindow : FluentWindow
 
         // Setting DialogResult closes a window opened with ShowDialog().
         viewModel.CloseRequested += result => DialogResult = result;
+
+        // Start in the language list: the terms below are read in the language chosen there.
+        Loaded += (_, _) => LanguageBox.Focus();
     }
 }

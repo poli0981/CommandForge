@@ -1,5 +1,6 @@
 using System.Windows;
 using System.Windows.Controls;
+using CommandForge.Desktop.Controls;
 using CommandForge.Desktop.Resources;
 using Wpf.Ui.Controls;
 
@@ -72,7 +73,7 @@ public sealed class FluentDialogService : IDialogService
             _ => (SymbolRegular.Info24, "AccentTextFillColorPrimaryBrush"),
         };
 
-        var icon = new SymbolIcon(symbol, 24, filled: false)
+        var icon = new DecorativeIcon(symbol, 24)
         {
             VerticalAlignment = VerticalAlignment.Top,
             Margin = new Thickness(0, 0, 12, 0),

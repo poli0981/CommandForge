@@ -9,8 +9,15 @@
     <sys:Double x:Key="AppFontSizeSubtitle">20</sys:Double>
     <sys:Double x:Key="AppFontSizeTitle">28</sys:Double>
     <sys:Double x:Key="AppFontSizeConsole">12.5</sys:Double>
+    <!-- The navigation pane's open width: FontScaleService widens it when the text is very large. -->
+    <sys:Double x:Key="AppNavigationPaneWidth">290</sys:Double>
 
     <FontFamily x:Key="ConsoleFontFamily">Cascadia Mono, Consolas, Courier New</FontFamily>
+
+    <!-- How much dimmed text and badge icons fade. ThemeService sets both to 1 under a Windows
+         contrast theme, where blending colors is not allowed. -->
+    <sys:Double x:Key="AppDimOpacity">0.78</sys:Double>
+    <sys:Double x:Key="AppBadgeOpacity">0.75</sys:Double>
 
     <!-- ===== Text ===== -->
 
@@ -52,10 +59,12 @@
         <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}" />
     </Style>
 
-    <!-- Selectable, read-only monospace text (command lines, paths, environment details). -->
+    <!-- Selectable, read-only monospace text (command lines, paths, environment details). Its bare
+         template has no border, so keyboard focus is drawn with WPF-UI's focus rectangle. -->
     <Style x:Key="ReadOnlyCodeTextBoxStyle" TargetType="TextBox">
         <Setter Property="IsReadOnly" Value="True" />
         <Setter Property="IsReadOnlyCaretVisible" Value="False" />
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource DefaultControlFocusVisualStyle}" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
@@ -113,6 +122,20 @@
         </Style.Triggers>
     </Style>
 
+    <!-- A console line's frame: an error (stderr) line also gets a bar on its left, so it is not told
+         apart by color alone. -->
+    <Style x:Key="ConsoleLineBorderStyle" TargetType="Border">
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Padding" Value="0" />
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding IsError}" Value="True">
+                <Setter Property="BorderThickness" Value="3,0,0,0" />
+                <Setter Property="BorderBrush" Value="{DynamicResource SystemFillColorCautionBrush}" />
+                <Setter Property="Padding" Value="6,0,0,0" />
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
     <Style x:Key="ConsoleBorderStyle" TargetType="Border">
         <Setter Property="Background" Value="{DynamicResource ControlAltFillColorSecondaryBrush}" />
         <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}" />
@@ -122,19 +145,32 @@
 
     <!-- ===== Lists ===== -->
 
-    <!-- Row text in command lists: title + one-line description. -->
+    <!-- Row text in command lists: title + one-line description. Cut-off text shows in full as a
+         tooltip (screen readers get the full text anyway). -->
     <Style x:Key="ListTitleTextStyle" TargetType="TextBlock">
         <Setter Property="FontSize" Value="{DynamicResource AppFontSize}" />
         <Setter Property="FontWeight" Value="SemiBold" />
         <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+        <Setter Property="ToolTip" Value="{Binding Text, RelativeSource={RelativeSource Self}}" />
+        <Style.Triggers>
+            <Trigger Property="Text" Value="">
+                <Setter Property="ToolTip" Value="{x:Null}" />
+            </Trigger>
+        </Style.Triggers>
     </Style>
 
     <!-- Dimmed rather than recolored: it keeps the row's own text color, so it stays readable on a
-         selected (accent) row in both themes. -->
+         selected (accent) row in both themes; full strength under a contrast theme. -->
     <Style x:Key="ListDescriptionTextStyle" TargetType="TextBlock">
         <Setter Property="FontSize" Value="{DynamicResource AppFontSizeCaption}" />
-        <Setter Property="Opacity" Value="0.78" />
+        <Setter Property="Opacity" Value="{DynamicResource AppDimOpacity}" />
         <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+        <Setter Property="ToolTip" Value="{Binding Text, RelativeSource={RelativeSource Self}}" />
+        <Style.Triggers>
+            <Trigger Property="Text" Value="">
+                <Setter Property="ToolTip" Value="{x:Null}" />
+            </Trigger>
+        </Style.Triggers>
     </Style>
 
     <!-- Placeholder shown in an empty list. -->

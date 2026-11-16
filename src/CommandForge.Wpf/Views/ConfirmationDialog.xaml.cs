@@ -1,3 +1,4 @@
+using System.Windows;
 using System.Windows.Input;
 using CommandForge.Desktop.ViewModels;
 using Wpf.Ui.Controls;
@@ -20,11 +21,19 @@ public partial class ConfirmationDialog : ContentDialog
         DataContext = viewModel;
         PrimaryButtonAppearance = viewModel.IsDangerous ? ControlAppearance.Danger : ControlAppearance.Primary;
 
-        // For Dangerous commands start in the type-to-confirm box; otherwise focus stays on Cancel.
-        if (viewModel.IsDangerous)
+        // For Dangerous commands start in the type-to-confirm box; otherwise on Cancel. WPF-UI would
+        // otherwise focus the first focusable control in the content: the command-line box.
+        Opened += (_, _) =>
         {
-            Opened += (_, _) => Keyboard.Focus(ConfirmationInputBox);
-        }
+            if (viewModel.IsDangerous)
+            {
+                Keyboard.Focus(ConfirmationInputBox);
+            }
+            else if (GetTemplateChild("CloseButton") is IInputElement cancel)
+            {
+                Keyboard.Focus(cancel);
+            }
+        };
     }
 
     protected override void OnButtonClick(ContentDialogButton button)

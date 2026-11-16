@@ -2,8 +2,10 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+             xmlns:ctl="clr-namespace:CommandForge.Desktop.Controls"
              xmlns:res="clr-namespace:CommandForge.Desktop.Resources"
              xmlns:beh="clr-namespace:CommandForge.Desktop.Behaviors"
+             xmlns:conv="clr-namespace:CommandForge.Desktop.Converters"
              Foreground="{DynamicResource TextFillColorPrimaryBrush}">
     <UserControl.Resources>
         <!-- Level colors from the theme; the level tag is always shown too (never color alone). -->
@@ -21,11 +23,12 @@
                 <DataTrigger Binding="{Binding Level}" Value="Fatal">
                     <Setter Property="Foreground" Value="{DynamicResource SystemFillColorCriticalBrush}" />
                 </DataTrigger>
+                <!-- Secondary, not tertiary: tertiary text falls below 4.5:1 in the Light theme. -->
                 <DataTrigger Binding="{Binding Level}" Value="Debug">
-                    <Setter Property="Foreground" Value="{DynamicResource TextFillColorTertiaryBrush}" />
+                    <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}" />
                 </DataTrigger>
                 <DataTrigger Binding="{Binding Level}" Value="Verbose">
-                    <Setter Property="Foreground" Value="{DynamicResource TextFillColorTertiaryBrush}" />
+                    <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}" />
                 </DataTrigger>
             </Style.Triggers>
         </Style>
@@ -51,13 +54,20 @@
             <ComboBox Grid.Column="0" MinWidth="150" VerticalAlignment="Center"
                       AutomationProperties.Name="{res:Loc LogViewer_Level}"
                       ItemsSource="{Binding LevelOptions}" DisplayMemberPath="DisplayName"
-                      SelectedValuePath="Value" SelectedValue="{Binding SelectedLevel}" />
+                      SelectedValuePath="Value" SelectedValue="{Binding SelectedLevel}">
+                <ComboBox.ItemContainerStyle>
+                    <Style TargetType="ComboBoxItem" BasedOn="{StaticResource {x:Type ComboBoxItem}}">
+                        <Setter Property="AutomationProperties.Name" Value="{Binding DisplayName}" />
+                    </Style>
+                </ComboBox.ItemContainerStyle>
+            </ComboBox>
             <ui:TextBox Grid.Column="1" Margin="8,0" VerticalAlignment="Center" MaxWidth="480" HorizontalAlignment="Stretch"
                         PlaceholderText="{res:Loc LogViewer_FilterHint}" ClearButtonEnabled="True"
                         AutomationProperties.Name="{res:Loc LogViewer_FilterHint}"
+                        beh:ShortcutScope.AllowExit="True"
                         Text="{Binding FilterText, UpdateSourceTrigger=PropertyChanged}">
                 <ui:TextBox.Icon>
-                    <ui:SymbolIcon Symbol="Filter24" />
+                    <ctl:DecorativeIcon Symbol="Filter24" />
                 </ui:TextBox.Icon>
             </ui:TextBox>
             <CheckBox Grid.Column="2" VerticalAlignment="Center" Margin="0,0,8,0"
@@ -65,20 +75,21 @@
             <StackPanel Grid.Column="3" Orientation="Horizontal">
                 <ui:Button Style="{StaticResource IconButtonStyle}" Command="{Binding OpenFolderCommand}"
                            ToolTip="{res:Loc LogViewer_OpenFolder}" AutomationProperties.Name="{res:Loc LogViewer_OpenFolder}">
-                    <ui:SymbolIcon Symbol="FolderOpen24" />
+                    <ctl:DecorativeIcon Symbol="FolderOpen24" />
                 </ui:Button>
                 <ui:Button Style="{StaticResource IconButtonStyle}" Command="{Binding ExportZipCommand}"
                            ToolTip="{res:Loc LogViewer_Export}" AutomationProperties.Name="{res:Loc LogViewer_Export}">
-                    <ui:SymbolIcon Symbol="ArrowExportLtr24" />
+                    <ctl:DecorativeIcon Symbol="ArrowExportLtr24" />
                 </ui:Button>
                 <ui:Button Style="{StaticResource IconButtonStyle}" Command="{Binding ClearCommand}"
                            ToolTip="{res:Loc LogViewer_Clear}" AutomationProperties.Name="{res:Loc LogViewer_Clear}">
-                    <ui:SymbolIcon Symbol="Delete24" />
+                    <ctl:DecorativeIcon Symbol="Delete24" />
                 </ui:Button>
             </StackPanel>
         </Grid>
 
-        <!-- Entries (virtualized) -->
+        <!-- Entries (virtualized). Tab reaches them and the arrow keys move entry by entry; each is read
+             as its level, time and message. -->
         <Border Grid.Row="2" Style="{StaticResource ConsoleBorderStyle}" Padding="10,6">
             <ListBox ItemsSource="{Binding View}"
                      Background="Transparent" BorderThickness="0"
@@ -90,7 +101,17 @@
                      AutomationProperties.Name="{res:Loc LogViewer_Title}">
                 <ListBox.ItemContainerStyle>
                     <Style TargetType="ListBoxItem">
-                        <Setter Property="Focusable" Value="False" />
+                        <Setter Property="FocusVisualStyle" Value="{DynamicResource DefaultControlFocusVisualStyle}" />
+                        <Setter Property="AutomationProperties.Name">
+                            <Setter.Value>
+                                <MultiBinding Converter="{conv:FormatConverter}">
+                                    <Binding Source="{x:Static res:LocalizationManager.Instance}" Path="[A11y_LogEntry]" />
+                                    <Binding Path="LevelTag" />
+                                    <Binding Path="Time" />
+                                    <Binding Path="Message" />
+                                </MultiBinding>
+                            </Setter.Value>
+                        </Setter>
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate TargetType="ListBoxItem">
@@ -111,7 +132,7 @@
                             <TextBlock Grid.Column="0" Text="{Binding Time}" Margin="0,0,10,0"
                                        FontFamily="{StaticResource ConsoleFontFamily}" FontSize="{DynamicResource AppFontSizeConsole}"
                                        Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
-                            <TextBlock Grid.Column="1" Text="{Binding LevelTag}" Width="34" FontWeight="SemiBold" Margin="0,0,10,0"
+                            <TextBlock Grid.Column="1" Text="{Binding LevelTag}" MinWidth="34" FontWeight="SemiBold" Margin="0,0,10,0"
                                        Style="{StaticResource LogLineStyle}" />
                             <TextBlock Grid.Column="2" Text="{Binding Message}" TextWrapping="Wrap" Style="{StaticResource LogLineStyle}" />
                         </Grid>

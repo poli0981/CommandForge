@@ -323,7 +323,14 @@ public sealed partial class MainViewModel : ObservableObject
     {
         Catalog.SelectCommandById(commandId);
         CurrentSection = ShellSection.Catalog;
+        CommandOpened?.Invoke(this, EventArgs.Empty);
     }
+
+    /// <summary>
+    /// Raised after a command was opened in the catalog from elsewhere (Home, History, the palette),
+    /// so the window can move keyboard focus to its row: the control that opened it is gone.
+    /// </summary>
+    public event EventHandler? CommandOpened;
 
     private void OnSettingsChanged(object? sender, PropertyChangedEventArgs e)
     {

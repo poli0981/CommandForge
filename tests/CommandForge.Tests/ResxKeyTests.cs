@@ -275,7 +275,12 @@ public sealed partial class ResxKeyTests
         throw new InvalidOperationException("Could not find the repository root (CommandForge.slnx) above " + AppContext.BaseDirectory);
     }
 
-    // {res:Loc Key} in XAML, Strings.Get("Key") / Localized("Key") in code.
-    [GeneratedRegex(@"(?:res:Loc\s+|Strings\.Get\(""|Localized\("")(?<key>[A-Za-z][A-Za-z0-9_]*)(?:""|[\s}])", RegexOptions.CultureInvariant, matchTimeoutMilliseconds: 2000)]
+    // {res:Loc Key} and Path="[Key]" (a MultiBinding to LocalizationManager) and LabelKey="Key" (a
+    // RowActionNameConverter) in XAML; Strings.Get("Key"), Localized("Key"), LocalizationManager.Bind("Key")
+    // and NamePart(control, "PART_X", "Key") in code.
+    [GeneratedRegex(
+        @"(?:res:Loc\s+|Strings\.Get\(""|Localized\(""|Bind\(""|Path=""\[|LabelKey=""|NamePart\([^,]+,\s*""[^""]+"",\s*"")(?<key>[A-Za-z][A-Za-z0-9_]*)(?:""|\]|[\s}])",
+        RegexOptions.CultureInvariant,
+        matchTimeoutMilliseconds: 2000)]
     private static partial Regex UiKeyPattern();
 }

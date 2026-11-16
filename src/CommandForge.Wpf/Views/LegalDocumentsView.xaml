@@ -4,6 +4,11 @@
              xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
              xmlns:res="clr-namespace:CommandForge.Desktop.Resources"
              xmlns:conv="clr-namespace:CommandForge.Desktop.Converters">
+    <UserControl.Resources>
+        <!-- "Read on GitHub: EULA": the link's text, then the document it opens. -->
+        <conv:RowActionNameConverter x:Key="ReadOnGitHubName" LabelKey="LegalGateReadOnGitHub" />
+    </UserControl.Resources>
+
     <!-- Each document: a short summary and a link to the full text on GitHub (Tag = URL). -->
     <TabControl AutomationProperties.Name="{res:Loc LegalViewer_Title}">
         <TabItem Header="{res:Loc TabEula}">
@@ -11,15 +16,8 @@
                 <StackPanel Margin="4,16,4,4">
                     <TextBlock Text="{res:Loc Legal_EulaSummary}" TextWrapping="Wrap" />
                     <ui:HyperlinkButton Content="{res:Loc LegalGateReadOnGitHub}" Margin="-8,12,0,0" Click="OnLinkClick"
-                                        Tag="https://github.com/poli0981/CommandForge/blob/main/EULA.md">
-                        <AutomationProperties.Name>
-                            <MultiBinding Converter="{conv:FormatConverter}">
-                                <Binding Source="{x:Static res:LocalizationManager.Instance}" Path="[A11y_RowAction]" />
-                                <Binding Source="{x:Static res:LocalizationManager.Instance}" Path="[LegalGateReadOnGitHub]" />
-                                <Binding Source="{x:Static res:LocalizationManager.Instance}" Path="[TabEula]" />
-                            </MultiBinding>
-                        </AutomationProperties.Name>
-                    </ui:HyperlinkButton>
+                                        Tag="https://github.com/poli0981/CommandForge/blob/main/EULA.md"
+                                        AutomationProperties.Name="{Binding [TabEula], Source={x:Static res:LocalizationManager.Instance}, Converter={StaticResource ReadOnGitHubName}}" />
                 </StackPanel>
             </ScrollViewer>
         </TabItem>
@@ -28,15 +26,8 @@
                 <StackPanel Margin="4,16,4,4">
                     <TextBlock Text="{res:Loc Legal_GplSummary}" TextWrapping="Wrap" />
                     <ui:HyperlinkButton Content="{res:Loc LegalGateReadOnGitHub}" Margin="-8,12,0,0" Click="OnLinkClick"
-                                        Tag="https://github.com/poli0981/CommandForge/blob/main/LICENSE">
-                        <AutomationProperties.Name>
-                            <MultiBinding Converter="{conv:FormatConverter}">
-                                <Binding Source="{x:Static res:LocalizationManager.Instance}" Path="[A11y_RowAction]" />
-                                <Binding Source="{x:Static res:LocalizationManager.Instance}" Path="[LegalGateReadOnGitHub]" />
-                                <Binding Source="{x:Static res:LocalizationManager.Instance}" Path="[TabGpl]" />
-                            </MultiBinding>
-                        </AutomationProperties.Name>
-                    </ui:HyperlinkButton>
+                                        Tag="https://github.com/poli0981/CommandForge/blob/main/LICENSE"
+                                        AutomationProperties.Name="{Binding [TabGpl], Source={x:Static res:LocalizationManager.Instance}, Converter={StaticResource ReadOnGitHubName}}" />
                 </StackPanel>
             </ScrollViewer>
         </TabItem>
@@ -45,15 +36,8 @@
                 <StackPanel Margin="4,16,4,4">
                     <TextBlock Text="{res:Loc Legal_DisclaimerSummary}" TextWrapping="Wrap" />
                     <ui:HyperlinkButton Content="{res:Loc LegalGateReadOnGitHub}" Margin="-8,12,0,0" Click="OnLinkClick"
-                                        Tag="https://github.com/poli0981/CommandForge/blob/main/DISCLAIMER.md">
-                        <AutomationProperties.Name>
-                            <MultiBinding Converter="{conv:FormatConverter}">
-                                <Binding Source="{x:Static res:LocalizationManager.Instance}" Path="[A11y_RowAction]" />
-                                <Binding Source="{x:Static res:LocalizationManager.Instance}" Path="[LegalGateReadOnGitHub]" />
-                                <Binding Source="{x:Static res:LocalizationManager.Instance}" Path="[TabDisclaimer]" />
-                            </MultiBinding>
-                        </AutomationProperties.Name>
-                    </ui:HyperlinkButton>
+                                        Tag="https://github.com/poli0981/CommandForge/blob/main/DISCLAIMER.md"
+                                        AutomationProperties.Name="{Binding [TabDisclaimer], Source={x:Static res:LocalizationManager.Instance}, Converter={StaticResource ReadOnGitHubName}}" />
                 </StackPanel>
             </ScrollViewer>
         </TabItem>
@@ -62,15 +46,8 @@
                 <StackPanel Margin="4,16,4,4">
                     <TextBlock Text="{res:Loc Legal_PrivacySummary}" TextWrapping="Wrap" />
                     <ui:HyperlinkButton Content="{res:Loc LegalGateReadOnGitHub}" Margin="-8,12,0,0" Click="OnLinkClick"
-                                        Tag="https://github.com/poli0981/CommandForge/blob/main/PRIVACY.md">
-                        <AutomationProperties.Name>
-                            <MultiBinding Converter="{conv:FormatConverter}">
-                                <Binding Source="{x:Static res:LocalizationManager.Instance}" Path="[A11y_RowAction]" />
-                                <Binding Source="{x:Static res:LocalizationManager.Instance}" Path="[LegalGateReadOnGitHub]" />
-                                <Binding Source="{x:Static res:LocalizationManager.Instance}" Path="[TabPrivacy]" />
-                            </MultiBinding>
-                        </AutomationProperties.Name>
-                    </ui:HyperlinkButton>
+                                        Tag="https://github.com/poli0981/CommandForge/blob/main/PRIVACY.md"
+                                        AutomationProperties.Name="{Binding [TabPrivacy], Source={x:Static res:LocalizationManager.Instance}, Converter={StaticResource ReadOnGitHubName}}" />
                 </StackPanel>
             </ScrollViewer>
         </TabItem>

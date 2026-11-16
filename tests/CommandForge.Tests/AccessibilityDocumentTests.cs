@@ -1,4 +1,5 @@
 using System.Text.RegularExpressions;
+using CommandForge.Application;
 
 namespace CommandForge.Tests;
 
@@ -37,7 +38,7 @@ public sealed partial class AccessibilityDocumentTests
     {
         Assert.Contains("issues/new?template=accessibility.yml", Statement, StringComparison.Ordinal);
         Assert.True(File.Exists(Path.Combine(Root, ".github", "ISSUE_TEMPLATE", "accessibility.yml")));
-        Assert.Contains(CommandForge.Application.ProductLinks.AccessibilityEmail, Statement, StringComparison.Ordinal);
+        Assert.Contains(ProductLinks.AccessibilityEmail, Statement, StringComparison.Ordinal);
     }
 
     private static string FindRepositoryRoot()

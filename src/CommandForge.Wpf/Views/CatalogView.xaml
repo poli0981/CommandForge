@@ -110,16 +110,19 @@
         <!-- Natural-language suggestion (local; shown when a phrase maps to a keyword) -->
         <ui:Button Grid.Row="2" HorizontalAlignment="Left" Appearance="Transparent" Margin="0,0,0,8" Padding="8,4"
                    Command="{Binding ApplySuggestionCommand}">
-            <AutomationProperties.Name>
-                <MultiBinding Converter="{conv:FormatConverter}">
-                    <Binding Source="{x:Static res:LocalizationManager.Instance}" Path="[A11y_LabelValue]" />
-                    <Binding Source="{x:Static res:LocalizationManager.Instance}" Path="[Search_Suggestion]" />
-                    <Binding Path="SearchSuggestion" />
-                </MultiBinding>
-            </AutomationProperties.Name>
             <ui:Button.Style>
                 <Style TargetType="ui:Button" BasedOn="{StaticResource {x:Type ui:Button}}">
                     <Setter Property="Visibility" Value="Visible" />
+                    <!-- Read as it reads: "Did you mean: dns" -->
+                    <Setter Property="AutomationProperties.Name">
+                        <Setter.Value>
+                            <MultiBinding Converter="{conv:FormatConverter}">
+                                <Binding Source="{x:Static res:LocalizationManager.Instance}" Path="[A11y_LabelValue]" />
+                                <Binding Source="{x:Static res:LocalizationManager.Instance}" Path="[Search_Suggestion]" />
+                                <Binding Path="SearchSuggestion" />
+                            </MultiBinding>
+                        </Setter.Value>
+                    </Setter>
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding SearchSuggestion}" Value="{x:Null}">
                             <Setter Property="Visibility" Value="Collapsed" />

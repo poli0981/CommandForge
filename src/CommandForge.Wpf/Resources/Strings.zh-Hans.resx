@@ -1287,7 +1287,7 @@
     <value>移动选择（列表与面板）</value>
   </data>
   <data name="Shortcuts_OpenSelected" xml:space="preserve">
-    <value>打开所选命令</value>
+    <value>打开所选命令（命令目录、历史记录、命令面板）</value>
   </data>
   <data name="Shortcuts_CloseDialog" xml:space="preserve">
     <value>关闭对话框 / 取消</value>
@@ -2812,5 +2812,119 @@
   </data>
   <data name="Cmd_net.vpn.settings_Desc" xml:space="preserve">
     <value>打开设置以添加、连接或删除 Windows 内置的 VPN 连接。</value>
+  </data>
+  <data name="A11y_RunStarted" xml:space="preserve">
+    <value>正在运行 {0}</value>
+  </data>
+  <data name="A11y_RunResult" xml:space="preserve">
+    <value>{0}：{1}。退出代码 {2}，{3}。</value>
+  </data>
+  <data name="A11y_RestartRequired" xml:space="preserve">
+    <value>请重启 Windows 以完成。</value>
+  </data>
+  <data name="A11y_CanUndo" xml:space="preserve">
+    <value>可撤消</value>
+  </data>
+  <data name="A11y_Favorite" xml:space="preserve">
+    <value>已收藏</value>
+  </data>
+  <data name="A11y_ResultCount" xml:space="preserve">
+    <value>找到 {0} 个命令</value>
+  </data>
+  <data name="A11y_ResultCountOne" xml:space="preserve">
+    <value>找到 1 个命令</value>
+  </data>
+  <data name="A11y_PaletteItem" xml:space="preserve">
+    <value>{0}，{1}，第 {2} 个，共 {3} 个</value>
+  </data>
+  <data name="A11y_Percent" xml:space="preserve">
+    <value>已下载 {0}%</value>
+  </data>
+  <data name="A11y_Minimize" xml:space="preserve">
+    <value>最小化</value>
+  </data>
+  <data name="A11y_Maximize" xml:space="preserve">
+    <value>最大化</value>
+  </data>
+  <data name="A11y_Restore" xml:space="preserve">
+    <value>向下还原</value>
+  </data>
+  <data name="A11y_Close" xml:space="preserve">
+    <value>关闭</value>
+  </data>
+  <data name="A11y_ClearText" xml:space="preserve">
+    <value>清除</value>
+  </data>
+  <data name="A11y_RowAction" xml:space="preserve">
+    <value>{0}：{1}</value>
+  </data>
+  <data name="A11y_LabelValue" xml:space="preserve">
+    <value>{0}{1}</value>
+  </data>
+  <data name="A11y_LogEntry" xml:space="preserve">
+    <value>{0}，{1}：{2}</value>
+  </data>
+  <data name="A11y_HistoryEntry" xml:space="preserve">
+    <value>{0}，{1}，{2}</value>
+  </data>
+  <data name="A11y_SplitterList" xml:space="preserve">
+    <value>调整命令列表大小</value>
+  </data>
+  <data name="A11y_SplitterConsole" xml:space="preserve">
+    <value>调整控制台大小</value>
+  </data>
+  <data name="A11y_RecipeSteps" xml:space="preserve">
+    <value>配方步骤</value>
+  </data>
+  <data name="A11y_CommandId" xml:space="preserve">
+    <value>命令 ID：{0}</value>
+  </data>
+  <data name="Console_ErrorLine" xml:space="preserve">
+    <value>错误：{0}</value>
+  </data>
+  <data name="Favorite_Add" xml:space="preserve">
+    <value>添加到收藏</value>
+  </data>
+  <data name="Favorite_Remove" xml:space="preserve">
+    <value>从收藏中移除</value>
+  </data>
+  <data name="LogLevel_Verbose" xml:space="preserve">
+    <value>详细</value>
+  </data>
+  <data name="Shortcuts_Regions" xml:space="preserve">
+    <value>在导航窗格、页面和控制台之间切换</value>
+  </data>
+  <data name="About_Accessibility" xml:space="preserve">
+    <value>辅助功能</value>
+  </data>
+  <data name="About_AccessibilityContact" xml:space="preserve">
+    <value>辅助功能问题</value>
+  </data>
+  <data name="A11y_CurrentPage" xml:space="preserve">
+    <value>当前页面</value>
+  </data>
+  <data name="A11y_BlankLine" xml:space="preserve">
+    <value>空行</value>
+  </data>
+  <data name="A11y_NavigationPages" xml:space="preserve">
+    <value>页面</value>
+  </data>
+  <data name="A11y_NavigationFooter" xml:space="preserve">
+    <value>工具和设置</value>
+  </data>
+  <data name="A11y_SeverityInfo" xml:space="preserve">
+    <value>信息</value>
+  </data>
+  <data name="A11y_SeveritySuccess" xml:space="preserve">
+    <value>成功</value>
+  </data>
+  <data name="A11y_SeverityWarning" xml:space="preserve">
+    <value>警告</value>
+  </data>
+  <data name="A11y_SeverityError" xml:space="preserve">
+    <value>错误</value>
+  </data>
+  <data name="A11y_InfoBar" xml:space="preserve">
+    <value>{0}：{1}</value>
   </data>
 </root>

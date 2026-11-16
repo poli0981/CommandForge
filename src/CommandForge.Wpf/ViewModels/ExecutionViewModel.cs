@@ -35,6 +35,7 @@ public sealed partial class ExecutionViewModel : ObservableObject
     private readonly INotificationService _notifications;
     private readonly ILogger _log = Log.ForContext<ExecutionViewModel>();
     private CancellationTokenSource? _cancellation;
+    private bool _droppedLinesAnnounced;
 
     public ExecutionViewModel(
         RunCommandUseCase run,
@@ -318,8 +319,10 @@ public sealed partial class ExecutionViewModel : ObservableObject
     private CancellationToken Begin()
     {
         OutputLines.Clear();
+        _droppedLinesAnnounced = false;
         HasResult = false;
         IsRunning = true;
+        _notifications.Announce(string.Format(CultureInfo.CurrentCulture, Strings.Get("A11y_RunStarted"), LastRunTitle));
         _cancellation = new CancellationTokenSource();
         return _cancellation.Token;
     }
@@ -340,6 +343,24 @@ public sealed partial class ExecutionViewModel : ObservableObject
         RequiresRestart = result.RequiresRestart;
         DurationText = FormatDuration(result.Duration);
         HasResult = true;
+
+        // The console shows the result; screen readers hear it (WPF raises nothing for it by itself).
+        _notifications.Announce(ResultAnnouncement(LastRunTitle, StatusText, ExitCode, DurationText, RequiresRestart), important: true);
+    }
+
+    /// <summary>Pure: what a screen reader hears when a run ends ("Flush DNS: Succeeded. Exit code 0, 0.4 s.").</summary>
+    public static string ResultAnnouncement(string title, string status, int exitCode, string duration, bool requiresRestart)
+    {
+        var text = string.Format(CultureInfo.CurrentCulture, Strings.Get("A11y_RunResult"), title, status, exitCode, duration);
+        return requiresRestart ? text + " " + Strings.Get("A11y_RestartRequired") : text;
+    }
+
+    partial void OnIsWaitingForElevationChanged(bool value)
+    {
+        if (value)
+        {
+            _notifications.Announce(Strings.Get("Console_WaitingForAdmin"));
+        }
     }
 
     private void LogSummary(CommandDefinition command, ExecutionResult result)
@@ -428,6 +449,13 @@ public sealed partial class ExecutionViewModel : ObservableObject
         {
             OnPropertyChanged(nameof(HasDroppedLines));
             OnPropertyChanged(nameof(DroppedLinesText));
+
+            // Once per run: the caption above the console appears silently otherwise.
+            if (HasDroppedLines && !_droppedLinesAnnounced)
+            {
+                _droppedLinesAnnounced = true;
+                _notifications.Announce(DroppedLinesText);
+            }
         }
     }
 

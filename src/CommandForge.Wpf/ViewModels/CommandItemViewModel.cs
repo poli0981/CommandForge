@@ -38,12 +38,47 @@ public sealed partial class CommandItemViewModel : ObservableObject
 
     /// <summary>Whether this command is pinned to Favorites (drives the star icon's filled/outline state).</summary>
     [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(AccessibleStatus))]
     private bool _isFavorite;
+
+    /// <summary>
+    /// What a screen reader hears after the title (the row's UI Automation ItemStatus): the risk
+    /// level and the badges a sighted user sees as a colored dot and icons.
+    /// </summary>
+    public string AccessibleStatus => StatusText(DangerLevel, RequiresAdmin, RequiresRestart, IsRevertable, IsFavorite);
 
     /// <summary>Re-resolves the localized title/description (after a culture change).</summary>
     public void Refresh()
     {
         Title = Strings.Get(Command.TitleKey);
         Description = Strings.Get(Command.DescriptionKey);
+        OnPropertyChanged(nameof(AccessibleStatus));
+    }
+
+    /// <summary>Pure: "Caution, Requires admin, May require restart, Can be undone, Favorite".</summary>
+    public static string StatusText(DangerLevel level, bool requiresAdmin, bool requiresRestart, bool revertable, bool favorite)
+    {
+        var parts = new List<string>(5) { Strings.Get($"Danger_{level}") };
+        if (requiresAdmin)
+        {
+            parts.Add(Strings.Get("Detail_RequiresAdmin"));
+        }
+
+        if (requiresRestart)
+        {
+            parts.Add(Strings.Get("Detail_MayRestart"));
+        }
+
+        if (revertable)
+        {
+            parts.Add(Strings.Get("A11y_CanUndo"));
+        }
+
+        if (favorite)
+        {
+            parts.Add(Strings.Get("A11y_Favorite"));
+        }
+
+        return string.Join(", ", parts);
     }
 }

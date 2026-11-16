@@ -15,6 +15,7 @@ public partial class KeyboardShortcutsView : UserControl
             new Shortcut("Ctrl+F", Strings.Get("Shortcuts_Search")),
             new Shortcut("Ctrl+H", Strings.Get("SidebarHome")),
             new Shortcut("Ctrl+B", Strings.Get("MenuToggleSidebar")),
+            new Shortcut("F6 / Shift+F6", Strings.Get("Shortcuts_Regions")),
             new Shortcut("Ctrl+,", Strings.Get("Menu_OpenSettings")),
             new Shortcut("Ctrl+L", Strings.Get("Menu_LogViewer")),
             new Shortcut("F5", Strings.Get("Menu_CheckForUpdates")),

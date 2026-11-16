@@ -1287,7 +1287,7 @@ Tiếp tục?</value>
     <value>Di chuyển lựa chọn (danh sách &amp; palette)</value>
   </data>
   <data name="Shortcuts_OpenSelected" xml:space="preserve">
-    <value>Mở lệnh đang chọn</value>
+    <value>Mở lệnh đang chọn (danh mục lệnh, Lịch sử, Command Palette)</value>
   </data>
   <data name="Shortcuts_CloseDialog" xml:space="preserve">
     <value>Đóng hộp thoại / hủy</value>
@@ -2812,5 +2812,119 @@ Chi tiết đã được ghi vào thư mục log:
   </data>
   <data name="Cmd_net.vpn.settings_Desc" xml:space="preserve">
     <value>Mở Cài đặt để thêm, kết nối hoặc xóa kết nối VPN tích hợp của Windows.</value>
+  </data>
+  <data name="A11y_RunStarted" xml:space="preserve">
+    <value>Đang chạy {0}</value>
+  </data>
+  <data name="A11y_RunResult" xml:space="preserve">
+    <value>{0}: {1}. Mã thoát {2}, {3}.</value>
+  </data>
+  <data name="A11y_RestartRequired" xml:space="preserve">
+    <value>Hãy khởi động lại Windows để hoàn tất.</value>
+  </data>
+  <data name="A11y_CanUndo" xml:space="preserve">
+    <value>Có thể hoàn tác</value>
+  </data>
+  <data name="A11y_Favorite" xml:space="preserve">
+    <value>Yêu thích</value>
+  </data>
+  <data name="A11y_ResultCount" xml:space="preserve">
+    <value>Tìm thấy {0} lệnh</value>
+  </data>
+  <data name="A11y_ResultCountOne" xml:space="preserve">
+    <value>Tìm thấy 1 lệnh</value>
+  </data>
+  <data name="A11y_PaletteItem" xml:space="preserve">
+    <value>{0}, {1}, {2} trên {3}</value>
+  </data>
+  <data name="A11y_Percent" xml:space="preserve">
+    <value>Đã tải {0}%</value>
+  </data>
+  <data name="A11y_Minimize" xml:space="preserve">
+    <value>Thu nhỏ</value>
+  </data>
+  <data name="A11y_Maximize" xml:space="preserve">
+    <value>Phóng to</value>
+  </data>
+  <data name="A11y_Restore" xml:space="preserve">
+    <value>Khôi phục kích thước</value>
+  </data>
+  <data name="A11y_Close" xml:space="preserve">
+    <value>Đóng</value>
+  </data>
+  <data name="A11y_ClearText" xml:space="preserve">
+    <value>Xóa</value>
+  </data>
+  <data name="A11y_RowAction" xml:space="preserve">
+    <value>{0}: {1}</value>
+  </data>
+  <data name="A11y_LabelValue" xml:space="preserve">
+    <value>{0} {1}</value>
+  </data>
+  <data name="A11y_LogEntry" xml:space="preserve">
+    <value>{0}, {1}: {2}</value>
+  </data>
+  <data name="A11y_HistoryEntry" xml:space="preserve">
+    <value>{0}, {1}, {2}</value>
+  </data>
+  <data name="A11y_SplitterList" xml:space="preserve">
+    <value>Đổi kích thước danh sách lệnh</value>
+  </data>
+  <data name="A11y_SplitterConsole" xml:space="preserve">
+    <value>Đổi kích thước bảng điều khiển</value>
+  </data>
+  <data name="A11y_RecipeSteps" xml:space="preserve">
+    <value>Các bước của chuỗi lệnh</value>
+  </data>
+  <data name="A11y_CommandId" xml:space="preserve">
+    <value>ID lệnh: {0}</value>
+  </data>
+  <data name="Console_ErrorLine" xml:space="preserve">
+    <value>Lỗi: {0}</value>
+  </data>
+  <data name="Favorite_Add" xml:space="preserve">
+    <value>Thêm vào yêu thích</value>
+  </data>
+  <data name="Favorite_Remove" xml:space="preserve">
+    <value>Bỏ khỏi yêu thích</value>
+  </data>
+  <data name="LogLevel_Verbose" xml:space="preserve">
+    <value>Chi tiết</value>
+  </data>
+  <data name="Shortcuts_Regions" xml:space="preserve">
+    <value>Chuyển giữa ngăn điều hướng, trang và bảng điều khiển</value>
+  </data>
+  <data name="About_Accessibility" xml:space="preserve">
+    <value>Trợ năng</value>
+  </data>
+  <data name="About_AccessibilityContact" xml:space="preserve">
+    <value>Vấn đề trợ năng</value>
+  </data>
+  <data name="A11y_CurrentPage" xml:space="preserve">
+    <value>Trang hiện tại</value>
+  </data>
+  <data name="A11y_BlankLine" xml:space="preserve">
+    <value>Dòng trống</value>
+  </data>
+  <data name="A11y_NavigationPages" xml:space="preserve">
+    <value>Các trang</value>
+  </data>
+  <data name="A11y_NavigationFooter" xml:space="preserve">
+    <value>Công cụ và cài đặt</value>
+  </data>
+  <data name="A11y_SeverityInfo" xml:space="preserve">
+    <value>Thông tin</value>
+  </data>
+  <data name="A11y_SeveritySuccess" xml:space="preserve">
+    <value>Thành công</value>
+  </data>
+  <data name="A11y_SeverityWarning" xml:space="preserve">
+    <value>Cảnh báo</value>
+  </data>
+  <data name="A11y_SeverityError" xml:space="preserve">
+    <value>Lỗi</value>
+  </data>
+  <data name="A11y_InfoBar" xml:space="preserve">
+    <value>{0}: {1}</value>
   </data>
 </root>

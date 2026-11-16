@@ -22,6 +22,10 @@ public sealed class LocalizationManager : INotifyPropertyChanged
     /// <summary>Resolves <paramref name="key"/> for the current UI culture.</summary>
     public string this[string key] => Strings.Get(key);
 
+    /// <summary>A one-way binding to <paramref name="key"/>'s text that follows culture changes (the C# twin of <see cref="LocExtension"/>).</summary>
+    public static System.Windows.Data.Binding Bind(string key)
+        => new($"[{key}]") { Source = Instance, Mode = System.Windows.Data.BindingMode.OneWay };
+
     /// <summary>The active UI culture.</summary>
     public CultureInfo CurrentCulture { get; private set; } = CultureInfo.CurrentUICulture;
 

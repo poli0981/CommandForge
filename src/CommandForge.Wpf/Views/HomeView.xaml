@@ -2,6 +2,7 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+             xmlns:ctl="clr-namespace:CommandForge.Desktop.Controls"
              xmlns:res="clr-namespace:CommandForge.Desktop.Resources"
              xmlns:conv="clr-namespace:CommandForge.Desktop.Converters"
              Foreground="{DynamicResource TextFillColorPrimaryBrush}">
@@ -9,6 +10,12 @@
         <conv:IconNameToSymbolConverter x:Key="IconConverter" />
         <conv:DangerLevelToTextConverter x:Key="DangerText" />
         <BooleanToVisibilityConverter x:Key="BoolToVis" />
+        <conv:RowActionNameConverter x:Key="RowActionOpen" LabelKey="Maint_Open" />
+
+        <!-- Items of a plain ItemsControl are read by their container's name, else by a type name. -->
+        <Style x:Key="CommandItemContainerStyle" TargetType="ContentPresenter">
+            <Setter Property="AutomationProperties.Name" Value="{Binding Title}" />
+        </Style>
 
         <!-- A clickable command row shared by the Recent and Favorites lists. The button names itself
              from its content (title + description), so screen readers get the same context. -->
@@ -17,9 +24,10 @@
                            Command="{Binding DataContext.OpenCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
                            CommandParameter="{Binding}"
                            AutomationProperties.Name="{Binding Title}"
-                           AutomationProperties.HelpText="{Binding Description}">
+                           AutomationProperties.HelpText="{Binding Description}"
+                           AutomationProperties.ItemStatus="{Binding AccessibleStatus}">
                 <ui:CardAction.Icon>
-                    <ui:SymbolIcon Symbol="{Binding Icon, Converter={StaticResource IconConverter}}" />
+                    <ctl:DecorativeIcon Symbol="{Binding Icon, Converter={StaticResource IconConverter}}" />
                 </ui:CardAction.Icon>
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -39,12 +47,15 @@
         <!-- One read-only status tile. -->
         <Style x:Key="StatusCardStyle" TargetType="ui:Card" BasedOn="{StaticResource {x:Type ui:Card}}">
             <Setter Property="Margin" Value="0,0,12,12" />
-            <Setter Property="Width" Value="230" />
+            <!-- A minimum, not a fixed width: the value grows with large text sizes instead of clipping. -->
+            <Setter Property="MinWidth" Value="230" />
+            <Setter Property="MaxWidth" Value="480" />
             <Setter Property="Padding" Value="16,12" />
         </Style>
     </UserControl.Resources>
 
-    <ScrollViewer VerticalScrollBarVisibility="Auto">
+    <!-- Not a Tab stop of its own: the arrow and page keys scroll it from any control on the page. -->
+    <ScrollViewer VerticalScrollBarVisibility="Auto" Focusable="False">
         <StackPanel Margin="24,12,24,24" MaxWidth="1040" HorizontalAlignment="Left">
             <TextBlock Text="{res:Loc SidebarHome}" Style="{StaticResource PageTitleTextStyle}" />
 
@@ -54,7 +65,7 @@
                 <ui:Card Style="{StaticResource StatusCardStyle}">
                     <StackPanel>
                         <StackPanel Orientation="Horizontal">
-                            <ui:SymbolIcon Symbol="WindowApps24" FontSize="18" Foreground="{DynamicResource AccentTextFillColorPrimaryBrush}" />
+                            <ctl:DecorativeIcon Symbol="WindowApps24" FontSize="18" Foreground="{DynamicResource AccentTextFillColorPrimaryBrush}" />
                             <TextBlock Text="{res:Loc Home_StatusOs}" Style="{StaticResource SecondaryTextStyle}" Margin="8,0,0,0" VerticalAlignment="Center" />
                         </StackPanel>
                         <TextBlock Text="{Binding OsValue}" Style="{StaticResource BodyStrongTextStyle}" Margin="0,6,0,0" TextWrapping="Wrap" />
@@ -63,7 +74,7 @@
                 <ui:Card Style="{StaticResource StatusCardStyle}">
                     <StackPanel>
                         <StackPanel Orientation="Horizontal">
-                            <ui:SymbolIcon Symbol="DataUsage24" FontSize="18" Foreground="{DynamicResource AccentTextFillColorPrimaryBrush}" />
+                            <ctl:DecorativeIcon Symbol="DataUsage24" FontSize="18" Foreground="{DynamicResource AccentTextFillColorPrimaryBrush}" />
                             <TextBlock Text="{res:Loc Home_StatusMemory}" Style="{StaticResource SecondaryTextStyle}" Margin="8,0,0,0" VerticalAlignment="Center" />
                         </StackPanel>
                         <TextBlock Text="{Binding MemoryValue}" Style="{StaticResource BodyStrongTextStyle}" Margin="0,6,0,0" TextWrapping="Wrap" />
@@ -72,7 +83,7 @@
                 <ui:Card Style="{StaticResource StatusCardStyle}">
                     <StackPanel>
                         <StackPanel Orientation="Horizontal">
-                            <ui:SymbolIcon Symbol="HardDrive20" FontSize="18" Foreground="{DynamicResource AccentTextFillColorPrimaryBrush}" />
+                            <ctl:DecorativeIcon Symbol="HardDrive20" FontSize="18" Foreground="{DynamicResource AccentTextFillColorPrimaryBrush}" />
                             <TextBlock Text="{res:Loc Home_StatusDisk}" Style="{StaticResource SecondaryTextStyle}" Margin="8,0,0,0" VerticalAlignment="Center" />
                         </StackPanel>
                         <TextBlock Text="{Binding DiskValue}" Style="{StaticResource BodyStrongTextStyle}" Margin="0,6,0,0" TextWrapping="Wrap" />
@@ -81,7 +92,7 @@
                 <ui:Card Style="{StaticResource StatusCardStyle}">
                     <StackPanel>
                         <StackPanel Orientation="Horizontal">
-                            <ui:SymbolIcon Symbol="Clock24" FontSize="18" Foreground="{DynamicResource AccentTextFillColorPrimaryBrush}" />
+                            <ctl:DecorativeIcon Symbol="Clock24" FontSize="18" Foreground="{DynamicResource AccentTextFillColorPrimaryBrush}" />
                             <TextBlock Text="{res:Loc Home_StatusUptime}" Style="{StaticResource SecondaryTextStyle}" Margin="8,0,0,0" VerticalAlignment="Center" />
                         </StackPanel>
                         <TextBlock Text="{Binding UptimeValue}" Style="{StaticResource BodyStrongTextStyle}" Margin="0,6,0,0" TextWrapping="Wrap" />
@@ -93,10 +104,16 @@
             <StackPanel Visibility="{Binding HasSuggestions, Converter={StaticResource BoolToVis}}">
                 <TextBlock Text="{res:Loc Home_Suggestions}" Style="{StaticResource SectionHeaderTextStyle}" />
                 <ItemsControl ItemsSource="{Binding Suggestions}">
+                    <ItemsControl.ItemContainerStyle>
+                        <Style TargetType="ContentPresenter">
+                            <Setter Property="AutomationProperties.Name" Value="{Binding Reason}" />
+                        </Style>
+                    </ItemsControl.ItemContainerStyle>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <ui:InfoBar Title="{Binding Reason}" IsOpen="True" IsClosable="False" Severity="Informational" Margin="0,0,0,6">
                                 <ui:Button Content="{res:Loc Maint_Open}" Margin="0,4,0,0"
+                                           AutomationProperties.Name="{Binding Reason, Converter={StaticResource RowActionOpen}}"
                                            Visibility="{Binding CanOpen, Converter={StaticResource BoolToVis}}"
                                            Command="{Binding DataContext.OpenCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                            CommandParameter="{Binding Command}" />
@@ -110,6 +127,8 @@
             <TextBlock Text="{res:Loc Home_Recent}" Style="{StaticResource SectionHeaderTextStyle}" />
             <Grid>
                 <ItemsControl ItemsSource="{Binding Recent}" ItemTemplate="{StaticResource HomeCommandItem}"
+                              ItemContainerStyle="{StaticResource CommandItemContainerStyle}"
+                              AutomationProperties.Name="{res:Loc Home_Recent}"
                               Visibility="{Binding HasRecent, Converter={StaticResource BoolToVis}}" />
                 <TextBlock Text="{res:Loc Home_NoRecent}" Style="{StaticResource SecondaryTextStyle}"
                            Visibility="{Binding HasRecent, Converter={conv:InverseBooleanToVisibilityConverter}}" />
@@ -119,6 +138,8 @@
             <TextBlock Text="{res:Loc SidebarFavorites}" Style="{StaticResource SectionHeaderTextStyle}" />
             <Grid>
                 <ItemsControl ItemsSource="{Binding Favorites}" ItemTemplate="{StaticResource HomeCommandItem}"
+                              ItemContainerStyle="{StaticResource CommandItemContainerStyle}"
+                              AutomationProperties.Name="{res:Loc SidebarFavorites}"
                               Visibility="{Binding HasFavorites, Converter={StaticResource BoolToVis}}" />
                 <TextBlock Text="{res:Loc Home_NoFavorites}" Style="{StaticResource SecondaryTextStyle}"
                            Visibility="{Binding HasFavorites, Converter={conv:InverseBooleanToVisibilityConverter}}" />

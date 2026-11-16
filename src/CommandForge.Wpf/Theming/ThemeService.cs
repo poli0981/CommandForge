@@ -34,8 +34,25 @@ public sealed class ThemeService : IThemeService, IDisposable
                 updateAccent: true);
         }
 
+        ApplyDimming(SystemParameters.HighContrast);
+
         // Keep listening in every mode: High Contrast can be switched on while the app runs.
         Subscribe();
+    }
+
+    /// <summary>
+    /// Dimmed text (list descriptions) and badge icons blend the colors under them, which a Windows
+    /// contrast theme forbids: there they are drawn at full strength (see AppStyles.xaml).
+    /// </summary>
+    private static void ApplyDimming(bool highContrast)
+    {
+        if (System.Windows.Application.Current is not { } app)
+        {
+            return;
+        }
+
+        app.Resources["AppDimOpacity"] = highContrast ? 1d : 0.78d;
+        app.Resources["AppBadgeOpacity"] = highContrast ? 1d : 0.75d;
     }
 
     /// <inheritdoc />

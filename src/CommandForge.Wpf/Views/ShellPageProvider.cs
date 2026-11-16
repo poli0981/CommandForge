@@ -24,19 +24,21 @@ internal sealed class ShellPageProvider : INavigationViewPageProvider
     public object? GetPage(Type pageType)
     {
         ArgumentNullException.ThrowIfNull(pageType);
-        if (_pages.TryGetValue(pageType, out var page))
+        if (!_pages.TryGetValue(pageType, out var page))
         {
-            return page;
+            page = Create(pageType);
+            if (page is not null)
+            {
+                _pages[pageType] = page;
+            }
         }
 
-        page = Create(pageType);
-        if (page is not null)
-        {
-            _pages[pageType] = page;
-        }
-
+        Current = page;
         return page;
     }
+
+    /// <summary>The page most recently handed to the navigation view (the one on screen).</summary>
+    public FrameworkElement? Current { get; private set; }
 
     /// <summary>The page already created for <typeparamref name="TPage"/>, if any.</summary>
     public TPage? Find<TPage>()

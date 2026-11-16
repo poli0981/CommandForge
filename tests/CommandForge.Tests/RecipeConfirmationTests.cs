@@ -223,9 +223,14 @@ public sealed class RecipeConfirmationTests : IDisposable
 
     private sealed class NoNotifications : INotificationService
     {
-        public void Show(string message, NotificationKind kind = NotificationKind.Information)
+        public void Show(string message, NotificationKind kind = NotificationKind.Information, bool announce = true)
         {
             // Not shown in tests.
+        }
+
+        public void Announce(string message, bool important = false)
+        {
+            // Not read in tests.
         }
     }
 }

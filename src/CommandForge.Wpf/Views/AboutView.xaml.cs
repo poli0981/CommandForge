@@ -34,7 +34,11 @@ public partial class AboutView : UserControl
 
     private void OnTermsClick(object sender, RoutedEventArgs e) => _showTerms();
 
+    private void OnAccessibilityClick(object sender, RoutedEventArgs e) => _shell.TryOpen(ProductLinks.AccessibilityStatement);
+
     private void OnSecurityEmailClick(object sender, RoutedEventArgs e) => _shell.TryOpen("mailto:" + ProductLinks.SecurityEmail);
 
     private void OnCodeEmailClick(object sender, RoutedEventArgs e) => _shell.TryOpen("mailto:" + ProductLinks.CodeEmail);
+
+    private void OnAccessibilityEmailClick(object sender, RoutedEventArgs e) => _shell.TryOpen("mailto:" + ProductLinks.AccessibilityEmail);
 }

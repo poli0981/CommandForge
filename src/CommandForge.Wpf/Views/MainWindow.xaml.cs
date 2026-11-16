@@ -7,9 +7,11 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Interop;
+using System.Windows.Media;
 using System.Windows.Shell;
 using System.Windows.Threading;
 using CommandForge.Application.Ports;
+using CommandForge.Desktop.Controls;
 using CommandForge.Desktop.Converters;
 using CommandForge.Desktop.Resources;
 using CommandForge.Desktop.Services;
@@ -40,6 +42,9 @@ public partial class MainWindow : FluentWindow
     private readonly INotificationService _notifications;
     private readonly ShellPageProvider _pages;
     private bool _closeConfirmed;
+
+    // True while the pane is being synced to the view-model (not a user's choice of page).
+    private bool _syncingNavigation;
 
     public MainWindow(
         MainViewModel viewModel,
@@ -74,7 +79,25 @@ public partial class MainWindow : FluentWindow
         RootNavigation.SelectionChanged += OnNavigationSelectionChanged;
         viewModel.PropertyChanged += OnViewModelPropertyChanged;
         viewModel.Execution.PropertyChanged += OnExecutionPropertyChanged;
-        Loaded += (_, _) => SyncNavigation(force: true);
+        viewModel.CommandOpened += OnCommandOpened;
+        Loaded += (_, _) =>
+        {
+#if DEBUG
+            // A developer's accessibility scan opens a given page without sending keys or clicks.
+            if (Environment.GetEnvironmentVariable("COMMANDFORGE_START_PAGE") is { Length: > 0 } startPage)
+            {
+                _viewModel.Navigate(startPage);
+            }
+#endif
+            SyncNavigation(force: true);
+
+            // Start with the keyboard in the first page, not on the window frame.
+            FocusPageSoon(announce: false);
+        };
+
+        ApplyAnimationPreference();
+        SystemParameters.StaticPropertyChanged += OnSystemParametersChanged;
+        Closed += (_, _) => SystemParameters.StaticPropertyChanged -= OnSystemParametersChanged;
 
         RestorePlacement();
     }
@@ -83,7 +106,7 @@ public partial class MainWindow : FluentWindow
 
     private void BuildNavigation()
     {
-        RootNavigation.MenuItems.Add(Item("SidebarHome", SymbolRegular.Home24, NavigationKeys.Home, typeof(HomeView)));
+        RootNavigation.MenuItems.Add(Item("SidebarHome", SymbolRegular.Home24, NavigationKeys.Home, typeof(HomeView), "Ctrl+H"));
         RootNavigation.MenuItems.Add(Item("SidebarFavorites", SymbolRegular.Star24, NavigationKeys.Favorites, typeof(CatalogView)));
         RootNavigation.MenuItems.Add(Item("SidebarHistory", SymbolRegular.History24, NavigationKeys.History, typeof(HistoryView)));
         RootNavigation.MenuItems.Add(Item("SidebarRecipes", SymbolRegular.TaskListSquareLtr24, NavigationKeys.Recipes, typeof(RecipesView)));
@@ -98,21 +121,27 @@ public partial class MainWindow : FluentWindow
 
         RootNavigation.MenuItems.Add(catalog);
 
-        RootNavigation.FooterMenuItems.Add(Item("Menu_LogViewer", SymbolRegular.DocumentText24, NavigationKeys.Logs, typeof(LogViewerView)));
+        RootNavigation.FooterMenuItems.Add(Item("Menu_LogViewer", SymbolRegular.DocumentText24, NavigationKeys.Logs, typeof(LogViewerView), "Ctrl+L"));
         RootNavigation.FooterMenuItems.Add(Item("Menu_DebugPanel", SymbolRegular.Bug24, NavigationKeys.Debug, typeof(DebugView)));
-        RootNavigation.FooterMenuItems.Add(Item("SidebarSettings", SymbolRegular.Settings24, NavigationKeys.Settings, typeof(SettingsView)));
+        RootNavigation.FooterMenuItems.Add(Item("SidebarSettings", SymbolRegular.Settings24, NavigationKeys.Settings, typeof(SettingsView), "Ctrl+,"));
     }
 
-    private static NavigationViewItem Item(string titleKey, SymbolRegular icon, string key, Type pageType)
+    private static NavigationViewItem Item(string titleKey, SymbolRegular icon, string key, Type pageType, string? shortcut = null)
     {
         var item = new NavigationViewItem
         {
-            Icon = new SymbolIcon { Symbol = icon },
+            Icon = new DecorativeIcon { Symbol = icon },
             TargetPageTag = key,
             TargetPageType = pageType,
         };
         item.SetBinding(ContentControl.ContentProperty, Localized(titleKey));
         item.SetBinding(AutomationProperties.NameProperty, Localized(titleKey));
+        if (shortcut is not null)
+        {
+            // Screen readers announce it with the item ("Home, Ctrl+H").
+            AutomationProperties.SetAcceleratorKey(item, shortcut);
+        }
+
         return item;
     }
 
@@ -122,12 +151,13 @@ public partial class MainWindow : FluentWindow
         title.SetBinding(TextBlock.TextProperty, new Binding(nameof(CategoryViewModel.Title)) { Source = category });
 
         var count = new TextBlock { Text = category.Count.ToString(CultureInfo.CurrentCulture), Margin = new Thickness(8, 0, 0, 0) };
-        count.SetResourceReference(TextBlock.ForegroundProperty, "TextFillColorTertiaryBrush");
+        // Secondary, not tertiary: tertiary text falls below 4.5:1 in the Light theme.
+        count.SetResourceReference(TextBlock.ForegroundProperty, "TextFillColorSecondaryBrush");
 
         var item = new NavigationViewItem
         {
             Content = new StackPanel { Orientation = Orientation.Horizontal, Children = { title, count } },
-            Icon = new SymbolIcon { Symbol = IconMap.Resolve(category.Icon) },
+            Icon = new DecorativeIcon { Symbol = IconMap.Resolve(category.Icon) },
             TargetPageTag = NavigationKeys.Category(categoryId),
             TargetPageType = typeof(CatalogView),
         };
@@ -140,9 +170,16 @@ public partial class MainWindow : FluentWindow
 
     private void OnNavigationSelectionChanged(NavigationView sender, RoutedEventArgs args)
     {
+        MarkCurrentPage(sender.SelectedItem as NavigationViewItem);
         if (sender.SelectedItem is NavigationViewItem { TargetPageTag: { Length: > 0 } key })
         {
             _viewModel.Navigate(key);
+
+            // A page chosen from the keyboard takes the keyboard with it; the pane item is left behind.
+            if (!_syncingNavigation && InputManager.Current.MostRecentInputDevice is KeyboardDevice)
+            {
+                FocusPageSoon(announce: true);
+            }
         }
     }
 
@@ -165,7 +202,134 @@ public partial class MainWindow : FluentWindow
             return;
         }
 
-        RootNavigation.Navigate(key);
+        _syncingNavigation = true;
+        try
+        {
+            RootNavigation.Navigate(key);
+        }
+        finally
+        {
+            _syncingNavigation = false;
+        }
+    }
+
+    /// <summary>
+    /// WPF UI exposes the pane's items to screen readers without their selection state, so the
+    /// current page's item says so in its status ("Settings, Current page").
+    /// </summary>
+    private void MarkCurrentPage(NavigationViewItem? current)
+    {
+        foreach (var item in RootNavigation.MenuItems.OfType<NavigationViewItem>()
+                     .SelectMany(i => i.MenuItems.OfType<NavigationViewItem>().Prepend(i))
+                     .Concat(RootNavigation.FooterMenuItems.OfType<NavigationViewItem>()))
+        {
+            if (ReferenceEquals(item, current))
+            {
+                item.SetBinding(AutomationProperties.ItemStatusProperty, Localized("A11y_CurrentPage"));
+            }
+            else
+            {
+                BindingOperations.ClearBinding(item, AutomationProperties.ItemStatusProperty);
+            }
+        }
+    }
+
+    /// <summary>
+    /// Moves the keyboard into the page on screen once it is laid out, so Tab continues from there and
+    /// a screen reader reads where it landed; <paramref name="announce"/> also says the page's name.
+    /// </summary>
+    private void FocusPageSoon(bool announce)
+        => Dispatcher.BeginInvoke(DispatcherPriority.Loaded, () => FocusPage(announce));
+
+    private void FocusPage(bool announce)
+    {
+        if (_pages.Current is not { IsVisible: true } page)
+        {
+            return;
+        }
+
+        if (!page.IsKeyboardFocusWithin)
+        {
+            page.MoveFocus(new TraversalRequest(FocusNavigationDirection.First));
+        }
+
+        if (announce && RootNavigation.SelectedItem is NavigationViewItem item)
+        {
+            ScreenReader.Announce(AutomationProperties.GetName(item));
+        }
+    }
+
+    // A command opened from Home, History or the palette: the control that opened it is gone.
+    private void OnCommandOpened(object? sender, EventArgs e)
+        => Dispatcher.BeginInvoke(DispatcherPriority.Loaded, () => _pages.Find<CatalogView>()?.FocusSelectedCommand());
+
+    /// <summary>F6 / Shift+F6: the navigation pane, the page, and the console when one is shown.</summary>
+    private void CycleFocusRegion(bool backwards)
+    {
+        var regions = new List<FrameworkElement>(3);
+        if (RootNavigation.SelectedItem is FrameworkElement selected && selected.IsVisible)
+        {
+            regions.Add(selected);
+        }
+
+        if (_pages.Current is { IsVisible: true } page)
+        {
+            regions.Add(page);
+            if (FindVisibleConsole(page) is { } console)
+            {
+                regions.Add(console);
+            }
+        }
+
+        if (regions.Count == 0)
+        {
+            return;
+        }
+
+        // The console sits inside the page, so the innermost region that holds the keyboard wins.
+        var current = regions.FindLastIndex(r => r.IsKeyboardFocusWithin);
+        var target = regions[FocusCycle.Next(current, regions.Count, backwards)];
+        if (target is NavigationViewItem)
+        {
+            target.Focus();
+        }
+        else
+        {
+            target.MoveFocus(new TraversalRequest(FocusNavigationDirection.First));
+        }
+    }
+
+    private static ConsoleView? FindVisibleConsole(DependencyObject root)
+    {
+        for (var i = 0; i < VisualTreeHelper.GetChildrenCount(root); i++)
+        {
+            var child = VisualTreeHelper.GetChild(root, i);
+            if (child is ConsoleView { IsVisible: true } console)
+            {
+                return console;
+            }
+
+            if (FindVisibleConsole(child) is { } nested)
+            {
+                return nested;
+            }
+        }
+
+        return null;
+    }
+
+    // ===== Animations =====
+
+    /// <summary>Page transitions follow Windows' "Animation effects" setting (off: pages switch instantly).</summary>
+    private void ApplyAnimationPreference()
+        => RootNavigation.TransitionDuration = SystemParameters.ClientAreaAnimation ? 150 : 0;
+
+    private void OnSystemParametersChanged(object? sender, PropertyChangedEventArgs e)
+    {
+        if (e.PropertyName == nameof(SystemParameters.ClientAreaAnimation))
+        {
+            Dispatcher.InvokeAsync(ApplyAnimationPreference);
+        }
     }
 
     // ===== Keyboard =====
@@ -181,6 +345,13 @@ public partial class MainWindow : FluentWindow
         if (e.Key == Key.F5 && Keyboard.Modifiers == ModifierKeys.None)
         {
             _viewModel.CheckForUpdatesCommand.Execute(null);
+            e.Handled = true;
+            return;
+        }
+
+        if (e.Key == Key.F6 && Keyboard.Modifiers is ModifierKeys.None or ModifierKeys.Shift)
+        {
+            CycleFocusRegion(backwards: Keyboard.Modifiers == ModifierKeys.Shift);
             e.Handled = true;
             return;
         }
@@ -202,17 +373,26 @@ public partial class MainWindow : FluentWindow
                 break;
             case Key.OemComma:
                 _viewModel.ShowSettingsCommand.Execute(null);
+                FocusPageSoon(announce: true);
                 break;
             case Key.L:
                 _viewModel.ShowLogViewerCommand.Execute(null);
+                FocusPageSoon(announce: true);
                 break;
             case Key.H:
                 _viewModel.ShowHomeCommand.Execute(null);
+                FocusPageSoon(announce: true);
                 break;
             case Key.B:
                 _viewModel.ToggleSidebarCommand.Execute(null);
                 break;
             case Key.Q:
+                // Not while something is being typed: a slip would discard it (search boxes opt in).
+                if (!Behaviors.ShortcutScope.CanExitFrom(Keyboard.FocusedElement))
+                {
+                    return;
+                }
+
                 Close();
                 break;
             default:
@@ -312,7 +492,8 @@ public partial class MainWindow : FluentWindow
             CultureInfo.CurrentCulture,
             Strings.Get(execution.Success ? "Run_Finished" : "Run_FinishedFailed"),
             execution.LastRunTitle);
-        _notifications.Show(message, execution.Success ? NotificationKind.Success : NotificationKind.Error);
+        // Shown only: the execution view model has already read the result to screen readers.
+        _notifications.Show(message, execution.Success ? NotificationKind.Success : NotificationKind.Error, announce: false);
 
         if (!IsActive)
         {

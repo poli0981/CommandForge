@@ -80,6 +80,9 @@ public partial class App : System.Windows.Application
         _services.GetRequiredService<CrashHandlingService>().Hook();
         _guard?.StartListening(OnActivationRequested);
 
+        // Before the first window: names WPF-UI's unnamed template parts for screen readers.
+        Behaviors.WpfUiAccessibility.Register();
+
         ApplyUserPreferences();
 
         var legalGate = _services.GetRequiredService<LegalGateService>();

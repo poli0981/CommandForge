@@ -11,6 +11,12 @@
 - **Chỉ Windows 10 (22H2) và 11**, x64 (ARM64 nếu được).
 - **Open-source, GPLv3.**
 - Cài & cập nhật bằng **Velopack** (unpackaged, không qua Store).
+- **Trạng thái: ổn định, chế độ bảo trì** từ v2.2.0 (2026-11-16). Chỉ nhận: cập nhật dependency;
+  vá bảo mật (High/Critical → bản vá khẩn, Moderate → đợt cập nhật định kỳ kế tiếp); nâng cấp nền
+  tảng lớn (.NET mới); thêm/bớt/sửa lệnh catalog (lỗi thời, sai cú pháp, có thể gây hại — loại gây
+  hại báo riêng qua Security Advisory); sửa lỗi, UI/UX, accessibility; sửa bản dịch. Tính năng mới
+  chỉ khi thật sự phù hợp và cần thiết. Nguồn chuẩn của chính sách:
+  `.github/CONTRIBUTING.md#maintenance-mode-what-we-accept`.
 
 ---
 
@@ -75,6 +81,11 @@ Phát hành thật: tag ký GPG `vX.Y.Z` trên `main` → `release.yml` (xem `RE
 
 - Code, định danh, comment kỹ thuật: **tiếng Anh**. Chuỗi hiển thị cho người dùng: **`.resx` (EN/VI/JA/zh-Hans/ES)** — không hardcode chuỗi UI; mỗi key phải có ở cả 5 file (test `ResxKeyTests` quét UI để kiểm tra).
 - Namespace tầng giao diện là `CommandForge.Desktop` (project/assembly/exe vẫn tên `CommandForge.Wpf`): namespace `CommandForge.Wpf` che namespace gốc `Wpf` của WPF-UI trong code XAML sinh ra.
+- **Accessibility** (xem `ACCESSIBILITY.md`): control không có chữ phải có `AutomationProperties.Name`
+  từ `.resx`; item của danh sách được đặt tên qua `ItemContainerStyle`; icon dùng `ctl:DecorativeIcon`
+  (không dùng `ui:SymbolIcon`/`new SymbolIcon` — glyph vùng Unicode riêng bị Narrator đọc); không
+  truyền thông tin chỉ bằng màu; thông báo cho Narrator qua `INotificationService.Announce`.
+  `AccessibilityTests` và `WpfAccessibilityRuntimeTests` (STA, template WPF-UI thật) kiểm tra.
 - WPF-UI: mỗi trang (UserControl trong NavigationView) phải đặt `Foreground="{DynamicResource TextFillColorPrimaryBrush}"` ở gốc (Frame không truyền màu chữ xuống); lớp con của `ContentDialog` phải gọi `SetResourceReference(StyleProperty, typeof(ContentDialog))` — `XamlConventionsTests` kiểm tra cả hai. Cỡ chữ dùng `DynamicResource AppFontSize*`.
 - Version package đặt trong **từng `.csproj`** (không dùng Central Package Management — dependency graph của GitHub không đọc `Directory.Packages.props`).
 - Nullable reference types **bật**; `TreatWarningsAsErrors` **bật**; analyzers **bật**.
@@ -113,6 +124,6 @@ Phát hành thật: tag ký GPG `vX.Y.Z` trên `main` → `release.yml` (xem `RE
 
 > ⚠️ Thư mục `docs/` nằm trong `.gitignore` (tài liệu nội bộ, chỉ có trên máy).
 
-**Tài liệu công khai (ở gốc repo, được commit):** `README.md`, `USAGE.md` (hướng dẫn người dùng — link "User guide" trong app), `CHANGELOG.md`, `BUILD.md`, `RELEASING.md`, `UPDATES.md`, `PRIVACY.md`, `EULA.md`, `DISCLAIMER.md`, `THIRD-PARTY-NOTICES.md`, `MAINTAINERS.md`, `LICENSE`, và trong `.github/`: `SECURITY.md`, `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`. Legal Gate trỏ tới EULA/PRIVACY/DISCLAIMER/LICENSE công khai.
+**Tài liệu công khai (ở gốc repo, được commit):** `README.md`, `ACCESSIBILITY.md` (tuyên bố trợ năng — mục tiêu WCAG 2.2 AA, không phải tuyên bố tuân thủ; link "Accessibility" trong About), `USAGE.md` (hướng dẫn người dùng — link "User guide" trong app), `CHANGELOG.md`, `BUILD.md`, `RELEASING.md`, `UPDATES.md`, `PRIVACY.md`, `EULA.md`, `DISCLAIMER.md`, `THIRD-PARTY-NOTICES.md`, `MAINTAINERS.md`, `LICENSE`, và trong `.github/`: `SECURITY.md`, `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`. Legal Gate trỏ tới EULA/PRIVACY/DISCLAIMER/LICENSE công khai.
 
-**Email liên hệ (@poli0981.dev):** `security@` (lỗ hổng, cùng GitHub private vulnerability reporting) · `privacy@` · `legal@` · `copyright@` / `dmca@` / `takedown@` (bản quyền, DMCA, yêu cầu gỡ bỏ khác) · `code@` (mã nguồn, đóng góp, báo cáo Code of Conduct) · `collab@` · `press@` · `sponsor@`. Không dùng `games@` cho dự án này.
+**Email liên hệ (@poli0981.dev):** `security@` (lỗ hổng, cùng GitHub private vulnerability reporting) · `accessibility@` (rào cản trợ năng, cùng form *Accessibility problem*) · `privacy@` · `legal@` · `copyright@` / `dmca@` / `takedown@` (bản quyền, DMCA, yêu cầu gỡ bỏ khác) · `code@` (mã nguồn, đóng góp, báo cáo Code of Conduct) · `collab@` · `press@` · `sponsor@`. Không dùng `games@` cho dự án này.

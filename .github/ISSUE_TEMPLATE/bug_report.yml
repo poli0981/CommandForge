@@ -9,6 +9,10 @@ body:
         closed (see [CONTRIBUTING.md](../blob/main/.github/CONTRIBUTING.md)).
         **Do not report security vulnerabilities here** — use
         [private reporting](../security/advisories/new) instead.
+
+        A catalog command that is outdated or uses the wrong syntax has its own form (**Command — add,
+        fix or remove**), and so does a barrier for the keyboard, a screen reader or larger text
+        (**Accessibility problem**). In the app, **More (⋯) → Report a bug** fills this form in.
   - type: textarea
     id: what-happened
     attributes:
@@ -30,7 +34,7 @@ body:
     id: app-version
     attributes:
       label: CommandForge version
-      description: More (⋯) → About, or Settings → About (e.g. 2.0.0)
+      description: More (⋯) → About CommandForge (e.g. 2.2.0)
     validations:
       required: true
   - type: input
@@ -45,8 +49,8 @@ body:
     attributes:
       label: Logs (optional)
       description: |
-        Optionally attach exported logs (Tools → Export logs). **Review them first** — they may
-        contain machine-specific paths/names. Do not paste secrets.
+        Optionally attach the log from **More (⋯) → Report a bug → Export log (.zip)**. **Review it
+        first** — it may contain machine-specific paths and names. Do not paste secrets.
   - type: checkboxes
     id: checks
     attributes:

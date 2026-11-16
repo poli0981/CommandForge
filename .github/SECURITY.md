@@ -6,10 +6,15 @@ CommandForge runs system-level commands, some as administrator, so security is a
 
 | Version | Supported |
 |---|---|
-| 2.0.x (latest) | ✅ |
-| < 2.0 | ❌ — please update |
+| 2.2.x (latest) | ✅ |
+| < 2.2 | ❌ — please update |
 
 Only the **latest release** receives security fixes. Please update before reporting.
+
+CommandForge is in **maintenance mode** since 2.2.0, and security work goes on: a High or Critical
+vulnerability in CommandForge, a dependency or the toolchain (the .NET runtime it ships with, for
+example) gets an urgent patch release; a Moderate one goes into the next routine update. A catalog
+command that could cause harm is reported here too, privately.
 
 ## Reporting a vulnerability
 

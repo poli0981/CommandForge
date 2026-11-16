@@ -1,0 +1,83 @@
+name: Command — add, fix or remove
+description: Propose a catalog command, or report one that is outdated or uses the wrong syntax
+labels: ["catalog"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Every command in CommandForge is a vetted entry of its read-only catalog. A request is checked
+        against Microsoft's documentation and tried before it ships — see
+        [Adding a command](../blob/main/.github/CONTRIBUTING.md#adding-a-command).
+
+        **A command that could cause harm** — it deletes what it shouldn't, weakens security, or does
+        something other than it says — is a security problem: report it
+        [privately](../security/advisories/new), not here.
+  - type: dropdown
+    id: request
+    attributes:
+      label: What should change?
+      options:
+        - Add a command
+        - Fix a command (outdated, wrong syntax, wrong danger level)
+        - Remove a command
+    validations:
+      required: true
+  - type: input
+    id: command
+    attributes:
+      label: Command (to fix or remove)
+      description: Its title as the app shows it, or its ID from the command's details.
+      placeholder: e.g. Flush DNS cache (net.flushdns)
+  - type: textarea
+    id: command-line
+    attributes:
+      label: Command line
+      description: The exact command line it should run (for a new or fixed command).
+      render: shell
+  - type: textarea
+    id: purpose
+    attributes:
+      label: What it does and why
+      description: What the command does and who needs it; for a fix, what goes wrong today.
+    validations:
+      required: true
+  - type: dropdown
+    id: danger-level
+    attributes:
+      label: Danger level
+      description: |
+        Safe: read-only or undone the way it was made. Caution: changes system state, recoverable.
+        Dangerous: may lose data or leave Windows unstable.
+      options:
+        - Safe
+        - Caution
+        - Dangerous
+        - Not sure
+  - type: dropdown
+    id: admin
+    attributes:
+      label: Needs administrator rights?
+      options:
+        - "Yes"
+        - "No"
+        - Not sure
+  - type: input
+    id: windows-versions
+    attributes:
+      label: Windows versions
+      description: Where it works, or where it stopped working.
+      placeholder: e.g. Windows 11 24H2 and later
+  - type: textarea
+    id: sources
+    attributes:
+      label: Sources
+      description: Microsoft's documentation, or another reliable reference for the command and its syntax.
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Confirmations
+      options:
+        - label: The command is a tool that comes with Windows (nothing downloaded from elsewhere).
+          required: true
+        - label: It is not a command that could cause harm (those go through private reporting).
+          required: true

@@ -1,13 +1,24 @@
 name: Feature request
-description: Suggest a feature or a new command for the catalog
+description: A new feature, only when it fits the project and is genuinely necessary (maintenance mode)
 labels: ["enhancement"]
 body:
   - type: markdown
     attributes:
       value: |
-        Thanks for the idea. Keep it concise and specific. For a **new command**, note that every
-        command must be a vetted, read-only catalog entry (no arbitrary execution) — see
-        [CONTRIBUTING.md](../blob/main/.github/CONTRIBUTING.md).
+        **CommandForge is in maintenance mode.** A new feature is added only when it clearly fits the
+        project and is genuinely necessary — for example, to keep the app safe or working on a new
+        Windows build. Other requests are closed with a link to
+        [the policy](../blob/main/.github/CONTRIBUTING.md#maintenance-mode-what-we-accept).
+
+        - A catalog command to add, fix or remove has its own form: **Command — add, fix or remove**.
+        - An idea to share, without commitment: [Discussions › Ideas](../discussions/categories/ideas).
+  - type: checkboxes
+    id: scope
+    attributes:
+      label: Maintenance mode
+      options:
+        - label: I have read the maintenance-mode policy, and this is not a catalog command.
+          required: true
   - type: textarea
     id: problem
     attributes:
@@ -16,10 +27,17 @@ body:
     validations:
       required: true
   - type: textarea
+    id: necessity
+    attributes:
+      label: Why is it necessary?
+      description: What breaks, or stays unsafe or out of reach, without it? An idea that is nice to have belongs in Discussions › Ideas.
+    validations:
+      required: true
+  - type: textarea
     id: proposal
     attributes:
       label: Proposed solution
-      description: What should CommandForge do? For a new command, give the exact command line and its danger level.
+      description: What should CommandForge do?
     validations:
       required: true
   - type: textarea

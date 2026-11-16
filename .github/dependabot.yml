@@ -8,10 +8,16 @@ updates:
     open-pull-requests-limit: 5
     commit-message:
       prefix: "deps"
-    labels: ["dependencies", "nuget"]
+    # Labels that exist in the repository (a missing label is silently dropped).
+    labels: ["dependencies", ".NET"]
     cooldown:
       default-days: 3
       semver-major-days: 14
+    # The app stays on the .NET 10 LTS line: Microsoft.Extensions.* majors follow .NET majors, and
+    # moving to a new .NET major is a deliberate migration done by hand, not a Dependabot bump.
+    ignore:
+      - dependency-name: "Microsoft.Extensions.*"
+        update-types: ["version-update:semver-major"]
     groups:
       microsoft-extensions:
         patterns: ["Microsoft.Extensions.*"]
@@ -33,7 +39,11 @@ updates:
       day: monday
     commit-message:
       prefix: "build"
-    labels: ["dependencies", "dotnet-sdk"]
+    labels: ["dependencies", ".NET"]
+    # Patch and feature-band SDKs only; a new .NET major (11, 12…) is moved to by hand.
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
 
   - package-ecosystem: github-actions
     directory: "/"
@@ -43,7 +53,7 @@ updates:
     open-pull-requests-limit: 5
     commit-message:
       prefix: "ci"
-    labels: ["dependencies", "github-actions"]
+    labels: ["dependencies", "github_actions"]
     cooldown:
       default-days: 3
     groups:

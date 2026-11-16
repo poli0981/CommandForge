@@ -1,4 +1,4 @@
-using System.Collections.Specialized;
+using CommandForge.Application.Logging;
 using CommandForge.Application.Settings;
 using CommandForge.Application.UserCommands;
 using CommandForge.Desktop;
@@ -29,7 +29,7 @@ public sealed class WpfHelpersTests
     {
         var buffer = new OutputBuffer();
         var notifications = 0;
-        ((INotifyCollectionChanged)buffer).CollectionChanged += (_, _) => notifications++;
+        buffer.CollectionChanged += (_, _) => notifications++;
 
         buffer.Append(Enumerable.Range(0, 500).Select(i => new OutputLine(i.ToString(System.Globalization.CultureInfo.InvariantCulture), false)).ToList());
         buffer.Add(new OutputLine("one more", true));
@@ -42,7 +42,7 @@ public sealed class WpfHelpersTests
     public void OutputBuffer_ClearResetsTheDroppedCount()
     {
         var buffer = new OutputBuffer(capacity: 10);
-        buffer.Append(Enumerable.Range(0, 30).Select(i => new OutputLine("x", false)).ToList());
+        buffer.Append(Enumerable.Range(0, 30).Select(_ => new OutputLine("x", false)).ToList());
 
         buffer.Clear();
 
@@ -101,7 +101,7 @@ public sealed class WpfHelpersTests
             Assert.Equal(AppTheme.System, settings.Theme);
             Assert.Equal(string.Empty, settings.Language);
             Assert.Empty(settings.FavoriteCommandIds);
-            Assert.Equal(CommandForge.Application.Logging.LogLevel.Warning, settings.LogLevel);
+            Assert.Equal(LogLevel.Warning, settings.LogLevel);
         }
         finally
         {

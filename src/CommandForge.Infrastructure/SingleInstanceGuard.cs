@@ -86,7 +86,7 @@ public sealed class SingleInstanceGuard : IDisposable
 
     private void ListenLoop(Action onActivateRequested)
     {
-        var handles = new WaitHandle[] { _activateEvent, _stopEvent.WaitHandle };
+        WaitHandle[] handles = [_activateEvent, _stopEvent.WaitHandle];
         while (true)
         {
             if (WaitHandle.WaitAny(handles) == 1)
